@@ -26,28 +26,28 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.cafe24.dmsthch" />
-
+<!-- 
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/kinderdb?useUnicode=true&amp;characterEncoding=UTF-8"/>
         <beans:property name="username" value="kinderid"/>
         <beans:property name="password" value="kinderpw"/>
     </beans:bean>
-    
+   
   	 <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-      <!-- mybatis 세션생성시 사용할 dataSource주입 -->
+      mybatis 세션생성시 사용할 dataSource주입
       <beans:property name="dataSource" ref="dataSource" />
-      <!-- mybatis 세션생성후 쿼리를 실행시킬때 사용할 쿼리위치(메퍼)설정 -->
+      mybatis 세션생성후 쿼리를 실행시킬때 사용할 쿼리위치(메퍼)설정
         <beans:property name="mapperLocations">
             <beans:list>
-                <beans:value>classpath:l/c/r/service/BoardMapper.xml</beans:value> <!-- 매핑주소 수정해야함. -->
+                <beans:value>classpath:l/c/r/service/BoardMapper.xml</beans:value> 매핑주소 수정해야함.
             </beans:list>
         </beans:property>
     </beans:bean>
-
+ 
 	<beans:bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <beans:constructor-arg index="0" ref="sqlSessionFactory" />
     </beans:bean>	
-	
+	 -->
 	
 </beans:beans>
