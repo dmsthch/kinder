@@ -1,0 +1,147 @@
+@import "https://fonts.googleapis.com/css?family=Oswald:700";
+
+body{
+  background: black;	
+}
+#clock {
+  background: black;
+  margin-bottom: -20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100vh;
+}
+
+.App {
+  margin-left: 12%;
+  margin-top: -15%;
+  width: 80vw;/* 100vw */
+  height: 156px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: black;
+  position: relative;
+  font-family: 'Oswald';
+  font-weight: 700;
+}
+
+.text-overlay {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 160px;
+  box-sizing: border-box;
+}
+.text-overlay div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  width: 25%;
+}
+
+.Column {
+  height: 156px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  position: relative;
+  mix-blend-mode: multiply;
+  z-index: 2;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.Marker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #019CDF;
+  opacity: 1;
+  border-radius: 2px;
+  overflow: hidden;
+  -webkit-animation: hueylewisandthenews 10s infinite;
+          animation: hueylewisandthenews 10s infinite;
+}
+.Marker--seconds {
+  -webkit-transition: height 1s linear;
+  transition: height 1s linear;
+}
+.Marker::before {
+  height: 20px;
+  width: calc(760px * 2);
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/557257/wave.jpg);
+  position: absolute;
+  top: 0px;
+  content: '';
+  -webkit-animation: wave 10s infinite linear;
+          animation: wave 10s infinite linear;
+}
+
+@-webkit-keyframes wave {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -760px;
+  }
+}
+
+@keyframes wave {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -760px;
+  }
+}
+@-webkit-keyframes hueylewisandthenews {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+  50% {
+    -webkit-filter: hue-rotate(-30deg);
+            filter: hue-rotate(-30deg);
+  }
+  100% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+}
+@keyframes hueylewisandthenews {
+  0% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+  50% {
+    -webkit-filter: hue-rotate(-30deg);
+            filter: hue-rotate(-30deg);
+  }
+  100% {
+    -webkit-filter: hue-rotate(0deg);
+            filter: hue-rotate(0deg);
+  }
+}
