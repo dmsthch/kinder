@@ -20,7 +20,7 @@ public class TeacherDao {
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.login", teacher);
 	}
 	
-	public int OneSelectTeacher(int t_no) {
+	public Teacher OneSelectTeacher(int t_no) {
 		System.out.println("교원 한명 조회 메서드");
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.OneSelectTeacher", t_no);
 	}
