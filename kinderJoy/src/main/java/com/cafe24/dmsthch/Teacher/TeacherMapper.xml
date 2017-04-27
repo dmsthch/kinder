@@ -32,6 +32,36 @@ VALUES
 )
 </insert>
 
+<select id="login" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="int">
 
+SELECT 
+	teacher_no 
+	FROM 
+	teacher
+	WHERE 
+	teacher_id = #{teacher_id}
+	AND 
+	teacher_pw = #{teacher_pw}
+
+</select>
+
+<select id="OneSelectTeacher" parameterType="int" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+
+SELECT 
+	teacher_id
+	,license_kindergarten
+	,teacher_level
+	,teacher_name
+	,teacher_id
+	,teacher_pw
+	,teacher_add_day
+	,teacher_phone
+	,teacher_bank
+	,teacher_account
+	,teacher_paystep
+FROM teacher
+WHERE teacher_no = #{teacher_no}
+
+</select>
 
 </mapper>
