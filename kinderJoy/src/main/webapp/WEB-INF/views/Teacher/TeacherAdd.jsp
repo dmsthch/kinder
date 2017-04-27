@@ -14,7 +14,7 @@
 
 <div class="container">
   <h2>회원가입</h2>
-  <form id="AddForm" action="${pageContext.request.contextPath}/insert" class="form-horizontal" method="post">
+  <form action="${pageContext.request.contextPath}/insert" class="form-horizontal" method="post">
     <div class="form-group">
       <label class="control-label col-sm-2">라이센스:</label>
       <div class="col-sm-10">

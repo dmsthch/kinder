@@ -14,6 +14,7 @@ public class Teacher {
 	private String teacher_paystep;
 	
 	public int getTeacher_no() {
+		System.out.println("전역변수 동작확인_넘버만");
 		return teacher_no;
 	}
 	public void setTeacher_no(int teacher_no) {
