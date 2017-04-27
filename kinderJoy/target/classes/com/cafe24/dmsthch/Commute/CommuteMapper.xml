@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.cafe24.dmsthch.Commute.CommuteMapper">
+	
+	<!-- 오늘날짜 출근부 체크 -->
+	<select id="attendanceCheck" parameterType="java.util.Map" resultType="java.util.Map">
+		select
+			teacher_attendance.attendance_start as attendanceStart,
+			teacher_attendance.attendance_day as attendanceDay,
+			teacher.teacher_name as teacherName
+		from teacher_attendance
+		left join teacher
+		on teacher_attendance.attendance_no = teacher.teacher_no
+		where teacher_attendance.teacher_no = #{teacherNo}
+		and teacher_attendance.attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d');
+	</select>
+	
+	<!-- 오늘날짜 출근 등록 -->
+	<insert id="commute" parameterType="int">
+		INSERT INTO teacher_attendance (
+			teacher_no, 
+			attendance_start, 
+			attendance_day
+		)VALUES (
+			#{teacherNo}, 
+			DATE_FORMAT(NOW(),'%H:%I:%s'),
+			DATE_FORMAT(NOW(),'%Y-%m-%d')
+		);
+	</insert>
+
+</mapper>
