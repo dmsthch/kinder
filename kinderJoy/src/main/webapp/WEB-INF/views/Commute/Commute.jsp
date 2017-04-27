@@ -29,7 +29,7 @@
 	<!-- 로그인이 되어있는 경우 -->
 	<c:if test="${teacherNo != 0 && !commuteCheck }">
 		<h1>${teacherName}님 출근등록 하시겠습니까?</h1><br>
-		<button class="btn btn-default btn-lg">출근등록</button>
+		<a href="${pageContext.request.contextPath}/GoCommute?teacherNo=${teacherNo}"><button class="btn btn-default btn-lg">출근등록</button></a>
 	</c:if>
 	<c:if test="${teacherNo != 0 && commuteCheck }">
 		<h1>${teacherName}님 출근등록 되셨습니다</h1><br>
@@ -38,17 +38,17 @@
 
 	<!-- 로그인이 안되어 있는 경우 -->
 	<c:if test="${teacherNo == 0}">
-		<form class="form-horizontal" action="" method="post">
+		<form class="form-horizontal" action="${pageContext.request.contextPath}/GoCommute" method="post">
 			<div class="form-group">
 				<label class="control-label col-sm-offset-2 col-sm-2" for="id">ID:</label>
 				<div class="col-sm-5">
-					<input type="text" class="form-control" id="id" required placeholder="Enter id">
+					<input type="text" class="form-control" id="id" name="teacher_id" required placeholder="Enter id">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-offset-2 col-sm-2" for="passWord">PassWord:</label>
 				<div class="col-sm-5">
-					<input type="password" class="form-control" id="passWord" required placeholder="Enter passWord">
+					<input type="password" class="form-control" id="passWord" name="teacher_pw" required placeholder="Enter passWord">
 				</div>
 			</div><br/>
 			<div class="form-group"> 
