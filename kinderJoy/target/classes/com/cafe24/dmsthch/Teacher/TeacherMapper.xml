@@ -59,9 +59,19 @@ SELECT
 	,teacher_bank
 	,teacher_account
 	,teacher_paystep
-FROM teacher
-WHERE teacher_no = #{teacher_no}
+	FROM 
+		teacher
+	WHERE 
+		teacher_no = #{teacher_no}
 
 </select>
+
+<!-- 회원 아이디 중복 체크 -->
+ <select id="logincheck" resultType="int">
+ SELECT
+ count(*)
+ FROM teacher
+ WHERE teacher_id = #{teacher_id}
+ </select>
 
 </mapper>

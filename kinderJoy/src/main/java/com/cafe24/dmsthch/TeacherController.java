@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
@@ -35,7 +34,7 @@ public class TeacherController {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		TDao.LoginTeacher(teacher);
 		System.out.println(TDao+" <--TDao 동작 확인");
-		return "redirect:/";
+		return "Teacher/state";
 	}
 	
 	
@@ -43,5 +42,12 @@ public class TeacherController {
 	public String Login() {
 		System.out.println("로그인화면");
 		return "Teacher/TeacherLogin";
+	}	
+	
+	@RequestMapping(value="/logincheck", method=RequestMethod.GET)
+	public String logincheck() {
+		System.out.println("로그인 체크 폼 호출");
+		return "Teacher/logincheck";
 	}
+	
 }
