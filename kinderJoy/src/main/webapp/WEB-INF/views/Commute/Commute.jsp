@@ -27,18 +27,24 @@
 <div class="text-center">
 
 	<!-- 로그인이 되어있는 경우 -->
+	<!-- 출근등록을 안한 상태 -->
 	<c:if test="${teacherNo != 0 && !commuteCheck }">
 		<h1>${teacherName}님 출근등록 하시겠습니까?</h1><br>
-		<a href="${pageContext.request.contextPath}/GoCommute?teacherNo=${teacherNo}"><button class="btn btn-default btn-lg">출근등록</button></a>
+		<a href="${pageContext.request.contextPath}/CommuteIn?teacherNo=${teacherNo}"><button class="btn btn-default btn-lg">출근등록</button></a>
 	</c:if>
+	<!-- 출근등록을 한 상태 -->
 	<c:if test="${teacherNo != 0 && commuteCheck }">
 		<h1>${teacherName}님 출근등록 되셨습니다</h1><br>
-		<h1>출근시간 : ${commuteTime}</h1><br>
+		<h1>출근시간 : ${commuteTime}</h1><br><br>
+		<div class="row">
+			<div class="col-sm-offset-4 col-sm-2"><button type="button" class="btn btn-default btn-lg">외출/복귀</button></div>
+			<div class="col-sm-2"><a href="${pageContext.request.contextPath}/CommuteOut?teacherNo=${teacherNo}"><button type="button" class="btn btn-danger btn-lg">퇴근하기</button></a></div>
+		</div>
 	</c:if>
 
 	<!-- 로그인이 안되어 있는 경우 -->
 	<c:if test="${teacherNo == 0}">
-		<form class="form-horizontal" action="${pageContext.request.contextPath}/GoCommute" method="post">
+		<form class="form-horizontal" action="${pageContext.request.contextPath}/CommuteIn" method="post">
 			<div class="form-group">
 				<label class="control-label col-sm-offset-2 col-sm-2" for="id">ID:</label>
 				<div class="col-sm-5">
@@ -53,7 +59,7 @@
 			</div><br/>
 			<div class="form-group"> 
 				<div class="col-sm-offset-1 col-sm-10">
-					<button type="submit" class="btn btn-default">Submit</button>
+					<button type="submit" class="btn btn-default">출근하기</button>
 				</div>
 			</div>
 		</form>
@@ -61,13 +67,12 @@
 		
 </div>
 
-<!-- 정보 출력 공간
+<!-- 정보 출력 공간 -->
 <div class="col-sm-offset-1 col-sm-5">
-	<c:if test="${info != null}">
-		<p style="font-size: 25px; color: white">info : ${info }</p>
+	<c:if test="${param.notice != null}">
+		<p style="font-size: 25px; color: white">notice : ${param.notice}</p>
 	</c:if>
 </div>
- -->
  
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>

@@ -18,16 +18,27 @@
 	</select>
 	
 	<!-- 오늘날짜 출근 등록 -->
-	<insert id="commute" parameterType="int">
+	<insert id="commuteIn" parameterType="int">
 		INSERT INTO teacher_attendance (
 			teacher_no, 
 			attendance_start, 
 			attendance_day
 		)VALUES (
 			#{teacherNo}, 
-			DATE_FORMAT(NOW(),'%H:%I:%s'),
+			DATE_FORMAT(NOW(),'%H:%i:%s'),
 			DATE_FORMAT(NOW(),'%Y-%m-%d')
 		);
 	</insert>
+	
+	<!-- 퇴근 -->
+	<update id="commuteOut" parameterType="int">
+		UPDATE
+			teacher_attendance
+		SET 
+			attendance_end=DATE_FORMAT(NOW(),'%H:%i:%s')
+		WHERE 
+			teacher_no=#{teacherNo} and attendance_day=DATE_FORMAT(NOW(),'%Y-%m-%d');
+	</update>
+
 
 </mapper>
