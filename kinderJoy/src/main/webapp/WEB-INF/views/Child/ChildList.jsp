@@ -25,6 +25,7 @@
                 <th>생년월일</th>
                 <th>주소</th>
                 <th>보호자번호</th>
+                <th>보호자예비번호</th>
                 <th>주의사항</th>
                 <th>성별</th>
                 <th>통학방법</th>
@@ -34,9 +35,11 @@
         <tbody>
             <c:forEach var="c" items="${list}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/ChildView?=${c.kid_no}">${c.kid_birth}</a></td>
+                    <td><a href="${pageContext.request.contextPath}/ChildView?=${c.kid_no}">${c.kid_name}</a></td>
+                    <td>${c.kid_birth}</td>
                     <td>${c.kid_address}</td>
                     <td>${c.kid_protector_phone}</td>
+                    <td>${c.kid_protector_phone_reserve}</td>
                     <td>${c.kid_precautions}</td>
                     <td>${c.kid_gender}</td>
                     <td>${c.kid_commuting}</td>

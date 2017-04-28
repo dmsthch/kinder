@@ -4,7 +4,7 @@
   
   <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
   
-  <select id="getChildList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child">
+  <select id="getChildList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
   	SELECT 
   		kid_no 
   		, kid_name
@@ -24,28 +24,32 @@
   </select>
   
   <insert id="insertChild" parameterType="com.cafe24.dmsthch.Child.Child">
-  	INSERT INTO kid(
-  		license_kindergarten
-  		, kid_name
-  		, kid_birth
-  		, kid_address
-  		, kid_protector_phone
-  		, kid_protector_phone_reserve
-  		, kid_precautions
-  		, kid_gender
-  		, kid_commuting
-  		) 
-  	VALUES(
-  		# {license_kindergarten}
-  		, #{kid_name}
-  		, #{kid_birth}
-  		, #{kid_address}
-  		, #{kid_protector_phone}
-  		, #{kid_protector_phone_reserve}
-  		, #{kid_precautions}
-  		, #{kid_gender}
-  		, #{kid_commuting}
-  	)
+  	
+  	INSERT INTO kid (
+  		license_kindergarten,
+  		kid_name,
+  		kid_birth,
+  		kid_address,
+  		kid_protector_phone,
+  		kid_protector_phone_reserve,
+  		kid_precautions,
+  		kid_gender,
+  		kid_commuting,
+  		kid_entrance_day)
+  	VALUES (
+  		#{license_kindergarten},
+  		#{kid_name},
+  		#{kid_birth},
+  		#{kid_address},
+  		#{kid_protector_phone},
+  		#{kid_protector_phone_reserve},
+  		#{kid_precautions},
+  		#{kid_gender},
+  		#{kid_commuting},
+  		DATE_FORMAT(NOW(),'%Y-%m-%d')
+  	);
+  	
+  	
   </insert>
   
   </mapper>

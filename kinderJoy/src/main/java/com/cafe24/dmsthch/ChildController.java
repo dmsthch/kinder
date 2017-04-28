@@ -41,11 +41,25 @@ public class ChildController {
 			System.out.println("ChildAdd Æû ¿äÃ»");
 			return "Child/ChildAdd";
 		}
+		
 		@RequestMapping(value="/ChildAdd" , method=RequestMethod.POST)
 		public String ChildAdd(Child child) {
+			
+
+			System.out.println(child.getLicense_kindergarten());
+			System.out.println(child.getKid_name());
+			System.out.println(child.getKid_birth());
+			System.out.println(child.getKid_address());
+			System.out.println(child.getKid_protector_phone());
+			System.out.println(child.getKid_precautions());
+			System.out.println(child.getKid_gender());
+			System.out.println(child.getKid_commuting());
+			System.out.println(child.getKid_protector_phone_reserve());
+			
+			
 			childDao.insertChild(child);
 			System.out.println(child);
-			return "redirect:Child/ChildList";
+			return "redirect:/ChildList";
 		}
 
 }
