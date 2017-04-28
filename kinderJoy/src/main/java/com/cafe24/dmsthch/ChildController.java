@@ -20,14 +20,14 @@ public class ChildController {
 	
 	//리스트 요청
 		@RequestMapping(value="/ChildList" , method=RequestMethod.GET)
-		public String boardList(Model model 
+		public String ChildList(Model model 
 								, @RequestParam(value="currentPage", required=false, defaultValue="1")int currentPage) {
-			int boardCount = childDao.getChildCount();
+			int ChildCount = childDao.getChildCount();
 			int pagePerRow = 10;
-			int lastPage = (int)(Math.ceil(boardCount/currentPage));
+			int lastPage = (int)(Math.ceil(ChildCount/currentPage));
 			List<Object> list = childDao.getChildList(currentPage, pagePerRow);
 			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("boardCount", boardCount);
+			model.addAttribute("ChildCount", ChildCount);
 			model.addAttribute("pagePerRow", pagePerRow);
 			model.addAttribute("lastPage", lastPage);
 			model.addAttribute("list", list);
@@ -41,11 +41,25 @@ public class ChildController {
 			System.out.println("ChildAdd 폼 요청");
 			return "Child/ChildAdd";
 		}
+		
 		@RequestMapping(value="/ChildAdd" , method=RequestMethod.POST)
 		public String ChildAdd(Child child) {
+			
+
+			System.out.println(child.getLicense_kindergarten());
+			System.out.println(child.getKid_name());
+			System.out.println(child.getKid_birth());
+			System.out.println(child.getKid_address());
+			System.out.println(child.getKid_protector_phone());
+			System.out.println(child.getKid_precautions());
+			System.out.println(child.getKid_gender());
+			System.out.println(child.getKid_commuting());
+			System.out.println(child.getKid_protector_phone_reserve());
+			
+			
 			childDao.insertChild(child);
 			System.out.println(child);
-			return "redirect:Child/ChildList";
+			return "redirect:/ChildList";
 		}
 
 }

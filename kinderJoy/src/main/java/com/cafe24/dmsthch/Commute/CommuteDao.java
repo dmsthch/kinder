@@ -1,6 +1,5 @@
 package com.cafe24.dmsthch.Commute;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,10 +20,22 @@ public class CommuteDao {
 		return sqlSessionTemplate.selectOne(sql+"attendanceCheck", teacherNo);
 	}
 	
-	//출석체크 메서드
-	public int commute(int teacherNo){
-		System.out.println("commute() run");
-		return sqlSessionTemplate.insert(sql+"commute", teacherNo);
+	//출근등록 메서드
+	public int commuteIn(int teacherNo){
+		System.out.println("commuteIn() run");
+		return sqlSessionTemplate.insert(sql+"commuteIn", teacherNo);
+	}
+	
+	//퇴근등록 메서드
+	public int commuteOut(int teacherNo){
+		System.out.println("commuteOut() run");
+		return sqlSessionTemplate.update(sql+"commuteOut", teacherNo);
+	}
+	
+	public String commuteOutCheck(int teacherNo){
+		System.out.println("commuteOutCheck() run");
+		
+		return sqlSessionTemplate.selectOne(sql+"commuteOutCheck", teacherNo);
 	}
 	
 
