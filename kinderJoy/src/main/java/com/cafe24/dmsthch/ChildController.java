@@ -20,14 +20,14 @@ public class ChildController {
 	
 	//리스트 요청
 		@RequestMapping(value="/ChildList" , method=RequestMethod.GET)
-		public String boardList(Model model 
+		public String ChildList(Model model 
 								, @RequestParam(value="currentPage", required=false, defaultValue="1")int currentPage) {
-			int boardCount = childDao.getChildCount();
+			int ChildCount = childDao.getChildCount();
 			int pagePerRow = 10;
-			int lastPage = (int)(Math.ceil(boardCount/currentPage));
+			int lastPage = (int)(Math.ceil(ChildCount/currentPage));
 			List<Object> list = childDao.getChildList(currentPage, pagePerRow);
 			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("boardCount", boardCount);
+			model.addAttribute("ChildCount", ChildCount);
 			model.addAttribute("pagePerRow", pagePerRow);
 			model.addAttribute("lastPage", lastPage);
 			model.addAttribute("list", list);
