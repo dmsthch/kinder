@@ -67,11 +67,23 @@ SELECT
 </select>
 
 <!-- 회원 아이디 중복 체크 -->
- <select id="logincheck" resultType="int">
+ <select id="logincheck" parameterType="java.lang.String" resultType="int">
  SELECT
  count(*)
  FROM teacher
  WHERE teacher_id = #{teacher_id}
  </select>
 
+<!-- 세션에 값 등록 -->
+<select id="input_session" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+select 
+	license_kindergarten
+	,teacher_level
+	,teacher_name
+	,teacher_id 
+from 
+	teacher
+WHERE 
+	teacher_id = #{teacher_id};
+</select>
 </mapper>
