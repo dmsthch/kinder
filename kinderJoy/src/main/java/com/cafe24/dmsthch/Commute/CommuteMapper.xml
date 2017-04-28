@@ -8,6 +8,7 @@
 	<select id="attendanceCheck" parameterType="java.util.Map" resultType="java.util.Map">
 		select
 			teacher_attendance.attendance_start as attendanceStart,
+			teacher_attendance.attendance_end as attendanceEnd,
 			teacher_attendance.attendance_day as attendanceDay,
 			teacher.teacher_name as teacherName
 		from teacher_attendance
@@ -40,7 +41,17 @@
 			teacher_no=#{teacherNo} and attendance_day=DATE_FORMAT(NOW(),'%Y-%m-%d');
 	</update>
 	
-	<!-- 오늘날짜 퇴근 체크 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 오늘날짜 퇴근 체크 안씀!!!!! -->
 	<select id="commuteOutCheck" parameterType="int" resultType="java.lang.String">
 		select
 			attendance_end
