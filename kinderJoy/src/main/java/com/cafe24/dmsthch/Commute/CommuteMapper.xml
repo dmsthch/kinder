@@ -39,6 +39,18 @@
 		WHERE 
 			teacher_no=#{teacherNo} and attendance_day=DATE_FORMAT(NOW(),'%Y-%m-%d');
 	</update>
+	
+	<!-- 오늘날짜 퇴근 체크 -->
+	<select id="commuteOutCheck" parameterType="int" resultType="java.lang.String">
+		select
+			attendance_end
+		from
+			teacher_attendance
+		where
+			teacher_no = #{teacherNo}
+		and
+			attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+	</select>
 
 
 </mapper>

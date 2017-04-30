@@ -41,13 +41,21 @@ public class CommuteController {
 				System.out.println("출근등록을 안한상태");
 				model.addAttribute("teacherNo", teacherNo);
 				model.addAttribute("teacherName", teacher.getTeacher_name()); //이름 등록
-				model.addAttribute("commuteCheck", false); //출근 등록을 안한 상태
+				model.addAttribute("commuteCheck", "미출근"); //출근 등록을 안한 상태
 			}else{ //출근등록을 한상태
 				System.out.println("출근등록을 한상태");
 				model.addAttribute("teacherNo", teacherNo); //번호 셋팅
 				model.addAttribute("teacherName", teacher.getTeacher_name()); //이름 셋팅
-				model.addAttribute("commuteTime", map.get("attendanceStart")); //출근시간 셋팅
-				model.addAttribute("commuteCheck", true); //출근 등록한 상태
+				
+				String commuteOutTime = cDao.commuteOutCheck(teacherNo); //퇴근한지 체크 후 퇴근시간 가져오기
+				
+				if(commuteOutTime == null){
+					model.addAttribute("commuteCheck", "출근"); //출근 등록한 상태
+					model.addAttribute("commuteTime", map.get("attendanceStart")); //출근시간 셋팅
+				}else{
+					model.addAttribute("commuteCheck", "퇴근"); //출근 등록한 상태
+					model.addAttribute("commuteTime", commuteOutTime); //출근시간 셋팅
+				}
 			}
 			
 		}else{ // 로그인 안된경우
@@ -72,18 +80,14 @@ public class CommuteController {
 	public String commute(Teacher teacher){
 		System.out.println("/CommuteIn(unlogin) Controller");
 		
-		String returnUri = "";
-		
 		int teacherNo = tDao.LoginTeacher(teacher); // id pw 확인 메서드 교원번호 return
-		
 		System.out.println(teacherNo);
 			
 		if(teacherNo > 0){ //로그인 성공
 			teacher = tDao.OneSelectTeacher(teacherNo);
 			cDao.commuteIn(teacherNo); //출근 등록 메서드 실행
-			returnUri = "redirect:/Commute?teacherNo="+teacherNo; //출첵 유무를 띄워주기 위해 teacherNo를 들고 출첵 화면으로 이동
 		}
-		return returnUri;
+		return "redirect:/Commute?teacherNo="+teacherNo; //출첵 유무를 띄워주기 위해 teacherNo를 들고 출첵 화면으로 이동
 	}
 	
 	//로그인 되어있는 상태에서 퇴근하기
@@ -101,8 +105,15 @@ public class CommuteController {
 	public String CommuteOut(Teacher teacher){
 		System.out.println("/CommuteOut(login) Controller");
 		
+		int teacherNo = tDao.LoginTeacher(teacher); // id pw 확인 메서드 교원번호 return
+		System.out.println(teacherNo);
 		
-		return "";
+		if(teacherNo > 0){ //로그인 성공
+			teacher = tDao.OneSelectTeacher(teacherNo);
+			cDao.commuteOut(teacherNo); //퇴근 등록 메서드 실행
+		}
+		
+		return "redirect:/Commute?teacherNo="+teacherNo;
 	}
 	
 	
