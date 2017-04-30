@@ -36,12 +36,7 @@ public class TeacherDao {
 		//리턴데이터타입을 말함  resultType="int"
 		//리턴데이터타입이 int인 이유는 쿼리 실행 시 사용자가 입력한 아이디와 동일한 값이 있다면 카운트가 1 없으면 0이 되기 때문이다
 		System.out.println("로그인 체크 메서드 호출 _DAO");
-		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.logincheck", 중복체크);
-	}
-	
-	//세션등록 메서드
-	public Teacher input_session(Teacher teacher) {
-		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.input_session", teacher);
+		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.sign_up_id_check", 중복체크);
 	}
 	
 }

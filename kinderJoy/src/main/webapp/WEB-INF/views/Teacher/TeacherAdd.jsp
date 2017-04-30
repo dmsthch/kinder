@@ -14,15 +14,41 @@
 <script>
 	//사용자가 입력한 값과 DB에 저장된 값을 비교하여 중복하는지 체크한다
 	
-	$(document).ready(function(){
+//클릭방식
+/* 	$(document).ready(function(){
 		$("#idcheckbutton").click(function(){
 			var gogo="teacher_ajax_id="+$("#teacher_ajax_id").val();
 			$.ajax({
 				type : "post",
-				url  : "${pageContext.request.contextPath}/logincheck",
+				url  : "${pageContext.request.contextPath}/sign_up_id_check",
 				data : gogo,
 				success : function(data){
-					$("jeon").html(data);
+					if (data == 0){
+						$("jeon").html("사용가능")
+						}else{
+						$("jeon").html("사용불가")
+					}
+				}
+			})
+		});
+	}); */
+	
+//키업방식
+$(document).ready(function(){
+		$("#teacher_ajax_id").keyup(function(){
+			var gogo="teacher_ajax_id="+$("#teacher_ajax_id").val();
+			$.ajax({
+				type : "post",
+				url  : "${pageContext.request.contextPath}/sign_up_id_check",
+				data : gogo,
+				success : function(data){
+					if (data == 0){
+						if($("#teacher_ajax_id").val().length > 5 || $("#teacher_ajax_id").val() == ""){
+						$("jeon").html("사용가능")
+						}else{
+						$("jeon").html("사용불가")
+						}
+					}
 				}
 			})
 		});
@@ -64,13 +90,13 @@
     
     <div class="form-group">
       <label class="control-label col-sm-2">아이디:</label>
-      <div class="col-sm-10">          
+      <div class="col-sm-10">
         <input type="text" class="form-control" id="teacher_ajax_id" name="teacher_id" placeholder="아이디를 입력하세요">
-        <input type="button" id="idcheckbutton" value="아이디체크" id="result"/>
-        DB에 있는 아이디의 수 : <jeon />
+        <input type="button" id="idcheckbutton" value="아이디체크"/>
+        사용가능여부 : <jeon />
       </div>
     </div>
- 
+ 	<!-- 아이디는 # 클래스는 . 태그는 태그명만 적으면 사용가능 -->
     
     <div class="form-group">
       <label class="control-label col-sm-2">Password:</label>
