@@ -1,6 +1,6 @@
 package com.cafe24.dmsthch;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,21 +57,29 @@ public class TeacherController {
 		return "Teacher/TeacherLogin";
 	}
 	
-	
+	//session만 쓰면 
 	@RequestMapping(value="/Login" , method = RequestMethod.GET)
-	public String Login() {
+	public String Login(HttpSession session) {
 		System.out.println("로그인화면");
-		return "Teacher/TeacherLogin";
+		if(session.getAttribute("teacherId") == null){
+			return "Teacher/TeacherLogin";
+		}else{
+			return "Teacher/TeacherModify";
+		}
 	}
 	
 	
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
-	public String Login(Model model,HttpServletRequest request,Teacher teacher) {
+	public String Login(Model model,Teacher teacher) {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
 		System.out.println(TDao+" <--TDao 동작 확인");
 		
-		
+		if(model == null){
+			return "Teacher/TeacherLogin";
+		}
+		else
+		{
 		model.addAttribute("teacherNo",saveSession.getTeacher_no());
 		System.out.println(saveSession.getTeacher_no() +" <-- 세션에 저장될 넘버 값 세션");
 		
@@ -90,7 +98,7 @@ public class TeacherController {
 		//매개변수 : HttpSessionEvent se
 		//HttpSession getsession = se.getSession();
 		//System.out.println("생성된 세션값 "+getsession.getId());
-		
+		}
 		return "Teacher/TeacherModify";
 	}
 }
