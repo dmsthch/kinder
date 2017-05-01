@@ -66,13 +66,18 @@ public class TeacherController {
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
 	public String Login(Model model, Teacher teacher) {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
-		TDao.LoginTeacher(teacher);
+		Teacher teacher_save_session = TDao.LoginTeacher(teacher);
 		System.out.println(TDao+" <--TDao 동작 확인");
 		
-		model.addAttribute("id", teacher.getTeacher_id());
-		System.out.println(teacher.getTeacher_id() +"<-- 세션에 저장될 아디 값");
-		//model.addAttribute("name", teacher.getTeacher_name());
-		System.out.println(teacher.getTeacher_name() + "<-- 세션에 저장된 네임");
+		model.addAttribute("id", teacher_save_session.getTeacher_id());
+		System.out.println(teacher_save_session.getTeacher_id() +"<-- 세션에 저장될 아디 값");
+		
+		model.addAttribute("name", teacher_save_session.getTeacher_name());
+		System.out.println(teacher_save_session.getTeacher_name() + "<-- 세션에 저장된 네임");
+		
+		model.addAttribute("level" ,teacher_save_session.getTeacher_level());
+		System.out.println(teacher_save_session.getTeacher_level() + " <--세션에 저장된 레벨");
+		
 		//매개변수 : HttpSessionEvent se
 		//HttpSession getsession = se.getSession();
 		//System.out.println("생성된 세션값 "+getsession.getId());

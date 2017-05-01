@@ -1,5 +1,7 @@
 package com.cafe24.dmsthch.Teacher;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,7 +19,7 @@ public class TeacherDao {
 	}
 	
 	//로그인 메서드
-	public int LoginTeacher(Teacher teacher) {
+	public Teacher LoginTeacher(Teacher teacher) {
 		System.out.println("로그인 확인");
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.login", teacher);
 	}
