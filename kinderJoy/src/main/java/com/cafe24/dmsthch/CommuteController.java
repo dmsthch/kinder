@@ -35,7 +35,7 @@ public class CommuteController {
 		
 		if(teacherNo != 0){ //로그인이 되어있는지 체크 로그인 된 경우
 			
-			Teacher teacher = tDao.OneSelectTeacher(teacherNo); //해당 교원 검색
+			Teacher teacher = tDao.OneSelectTeacher(teacherNo); //해당 교원 검색 (이름 사용 위해)
 			
 			if(map == null){ //출근등록을 안한상태
 				System.out.println("출근등록을 안한상태");
@@ -46,13 +46,13 @@ public class CommuteController {
 				System.out.println("출근등록을 한상태");
 				model.addAttribute("teacherNo", teacherNo); //번호 셋팅
 				model.addAttribute("teacherName", teacher.getTeacher_name()); //이름 셋팅
+
+				String commuteOutTime = map.get("attendanceEnd")+""; //퇴근시간 가져오기
 				
-				String commuteOutTime = cDao.commuteOutCheck(teacherNo); //퇴근한지 체크 후 퇴근시간 가져오기
-				
-				if(commuteOutTime == null){
+				if(commuteOutTime.equals("null")){ //퇴근을 안한 상태
 					model.addAttribute("commuteCheck", "출근"); //출근 등록한 상태
 					model.addAttribute("commuteTime", map.get("attendanceStart")); //출근시간 셋팅
-				}else{
+				}else{ //퇴근한 상태
 					model.addAttribute("commuteCheck", "퇴근"); //출근 등록한 상태
 					model.addAttribute("commuteTime", commuteOutTime); //출근시간 셋팅
 				}
