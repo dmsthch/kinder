@@ -30,8 +30,8 @@
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/kinderdb?useUnicode=true&amp;characterEncoding=UTF-8"/>
-        <beans:property name="username" value="kinderid"/>
-        <beans:property name="password" value="kinderpw"/>
+        <beans:property name="username" value="root"/>
+        <beans:property name="password" value="java0000"/>
     </beans:bean>
    
   	 <beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -41,6 +41,8 @@
         <beans:property name="mapperLocations">
             <beans:list>
                 <beans:value>classpath:com/cafe24/dmsthch/Teacher/TeacherMapper.xml</beans:value> <!-- 맵핑주소 수정해야함. -->
+                <beans:value>classpath:com/cafe24/dmsthch/Commute/CommuteMapper.xml</beans:value> <!-- 한솔이꺼 -->
+                <beans:value>classpath:com/cafe24/dmsthch/Child/ChildMapper.xml</beans:value>
             </beans:list>
         </beans:property>
     </beans:bean>

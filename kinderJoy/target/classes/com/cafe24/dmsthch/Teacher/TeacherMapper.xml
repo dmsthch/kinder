@@ -3,10 +3,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cafe24.dmsthch.Teacher.TeacherMapper">
+
 <insert id="insert" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
 INSERT INTO teacher 
 	(
-	license_kindergarten
+	teacher_no
+	,license_kindergarten
 	,teacher_level
 	,teacher_name
 	,teacher_id
@@ -18,8 +20,8 @@ INSERT INTO teacher
 	,teacher_paystep
 	)
 VALUES 
-	(
-	#{license_kindergarten}
+	(#{teacher_no}
+	,#{license_kindergarten}
 	,#{teacher_level}
 	,#{teacher_name}
 	,#{teacher_id}
@@ -45,7 +47,7 @@ SELECT
 
 </select>
 
-<select id="OneSelectTeacher" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="int">
+<select id="OneSelectTeacher" parameterType="int" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 
 SELECT 
 	teacher_id
@@ -59,9 +61,19 @@ SELECT
 	,teacher_bank
 	,teacher_account
 	,teacher_paystep
-FROM teacher
-WHERE teacher_no = #{teacher_no}
+	FROM 
+		teacher
+	WHERE 
+		teacher_no = #{teacher_no}
 
 </select>
+
+<!-- 회원 아이디 중복 체크 -->
+ <select id="sign_up_id_check" parameterType="java.lang.String" resultType="int">
+ SELECT
+ count(*)
+ FROM teacher
+ WHERE teacher_id = #{teacher_id}
+ </select>
 
 </mapper>

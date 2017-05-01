@@ -1,0 +1,56 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.cafe24.dmsthch.Commute.CommuteMapper">
+	
+	<!-- 오늘날짜 출근부 체크 -->
+	<select id="attendanceCheck" parameterType="java.util.Map" resultType="java.util.Map">
+		select
+			teacher_attendance.attendance_start as attendanceStart,
+			teacher_attendance.attendance_day as attendanceDay,
+			teacher.teacher_name as teacherName
+		from teacher_attendance
+		left join teacher
+		on teacher_attendance.attendance_no = teacher.teacher_no
+		where teacher_attendance.teacher_no = #{teacherNo}
+		and teacher_attendance.attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d');
+	</select>
+	
+	<!-- 오늘날짜 출근 등록 -->
+	<insert id="commuteIn" parameterType="int">
+		INSERT INTO teacher_attendance (
+			teacher_no, 
+			attendance_start, 
+			attendance_day
+		)VALUES (
+			#{teacherNo}, 
+			DATE_FORMAT(NOW(),'%H:%i:%s'),
+			DATE_FORMAT(NOW(),'%Y-%m-%d')
+		);
+	</insert>
+	
+	<!-- 퇴근 -->
+	<update id="commuteOut" parameterType="int">
+		UPDATE
+			teacher_attendance
+		SET 
+			attendance_end=DATE_FORMAT(NOW(),'%H:%i:%s')
+		WHERE 
+			teacher_no=#{teacherNo} and attendance_day=DATE_FORMAT(NOW(),'%Y-%m-%d');
+	</update>
+	
+	<!-- 오늘날짜 퇴근 체크 -->
+	<select id="commuteOutCheck" parameterType="int" resultType="java.lang.String">
+		select
+			attendance_end
+		from
+			teacher_attendance
+		where
+			teacher_no = #{teacherNo}
+		and
+			attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+	</select>
+
+
+</mapper>

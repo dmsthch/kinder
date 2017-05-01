@@ -8,5 +8,6 @@
 </head>
 <body>
 
+세션에 저장된 아이디값 : ${id}
 </body>
 </html>
