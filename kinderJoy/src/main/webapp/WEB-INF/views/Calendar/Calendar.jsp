@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,15 +11,23 @@
 <script src="js/LCR/Calendar/lib/moment.min.js"></script>
 <script src="js/LCR/Calendar/lib/jquery.min.js"></script>
 <script src="js/LCR/Calendar/fullcalendar.min.js"></script>
-<script>
+<script type="text/javascript">
 $(document).ready(function() {
-	var allSchedule = ${allSchedule};
+	var allSchedule = new Array();
+	allSchedule = ${allSchedule};
+	console.log(allSchedule);
+<c:forEach>
+	
+</c:forEach>
+	
+	
 	$('#calendar').fullCalendar({
 		header: {
 			left: 'prev,next today',
 			center: 'title',
 			right: 'month,agendaWeek,agendaDay'
 		},
+
 		defaultDate: '2017-04-12',
 		navLinks: true, // can click day/week names to navigate views
 		selectable: true,
@@ -38,8 +48,9 @@ $(document).ready(function() {
 		editable: true,
 		eventLimit: true, // allow "more" link when too many events
 		
+		//이부분이 데이터 표시해주는 부분.
 		events: [
-			$(allSchedule).each(function(i){
+			$(allSchedule).each(function(){
 				{id : ${schedule_no}, title : ${schedule_title}, start : ${schedule_start_day}, end :${schedule_end_day} }
 			})
 			

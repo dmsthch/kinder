@@ -12,6 +12,8 @@ public class CalendarDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	public List<Schedule> selectAllSchedule(String license_kindergarten){
+		System.out.println(license_kindergarten);
+		System.out.println(sqlSessionTemplate + "sql zzzzz");
 		return 	sqlSessionTemplate.selectList("com.cafe24.dmsthch.Calendar.CalendarMapper.selectAllSchedule",license_kindergarten);		
 	}
 	
