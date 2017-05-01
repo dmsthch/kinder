@@ -18,6 +18,24 @@ public class ChildController {
 	@Autowired
 	private ChildDao childDao;
 	
+	
+	
+	//수정 폼 요청
+		@RequestMapping(value="/ChildModify", method=RequestMethod.GET)
+		public String ChildModify(Model model 
+								 , @RequestParam(value="kid_no" ,required=true)int kid_no) {
+			Child child = childDao.getChild(kid_no);
+			child.setKid_no(kid_no);
+			model.addAttribute("child", child);
+			
+			return "Child/ChildModify";
+		}
+		//수정 요청
+		@RequestMapping(value="/ChildModify", method=RequestMethod.POST)
+		public String ChildModify(Child child) {
+			childDao.updateChild(child);
+			return "redirect:/ChildList?kid_no="+child.getKid_no();
+		}
 	//리스트 요청
 		@RequestMapping(value="/ChildList" , method=RequestMethod.GET)
 		public String ChildList(Model model 
@@ -42,6 +60,7 @@ public class ChildController {
 			return "Child/ChildAdd";
 		}
 		
+		//입력 요청
 		@RequestMapping(value="/ChildAdd" , method=RequestMethod.POST)
 		public String ChildAdd(Child child) {
 			

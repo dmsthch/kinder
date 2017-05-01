@@ -35,7 +35,7 @@
         <tbody>
             <c:forEach var="c" items="${list}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/ChildView?=${c.kid_no}">${c.kid_name}</a></td>
+                    <td><a href="${pageContext.request.contextPath}/ChildModify?kid_no=${c.kid_no}">${c.kid_name}</a></td>
                     <td>${c.kid_birth}</td>
                     <td>${c.kid_address}</td>
                     <td>${c.kid_protector_phone}</td>

@@ -14,6 +14,14 @@ public class ChildDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	public int updateChild(Child child) {
+        return sqlSessionTemplate.update("com.cafe24.dmsthch.Child.ChildMapper.updateChild", child);
+    }
+	
+	public Child getChild(int kid_no) {
+	    return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getChild",kid_no);
+	}
+	 
 	public List<Object> getChildList(int currentPage, int pagePerRow) {
 	  	Map<String,Integer> map = new  HashMap<String,Integer>();
 	  	map.put("beginRow", (currentPage-1)*pagePerRow);

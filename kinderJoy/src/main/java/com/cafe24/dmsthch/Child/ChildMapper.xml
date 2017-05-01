@@ -4,6 +4,43 @@
   
   <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
   
+  <update id="updateChild" parameterType="com.cafe24.dmsthch.Child.Child">
+  UPDATE kid SET 
+  	license_kindergarten = #{license_kindergarten}
+  	, kid_name = #{kid_name}
+  	, kid_birth = #{kid_birth}
+  	, kid_address = #{kid_address}
+  	, kid_protector_phone = #{kid_protector_phone}
+  	, kid_protector_phone_reserve = #{kid_protector_phone_reserve}
+  	, kid_precautions = #{kid_precautions} 
+  	, kid_gender = #{kid_gender}
+  	, kid_commuting = #{kid_commuting}
+  	, kid_entrance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+  WHERE  kid_no = #{kid_no}
+  </update>
+  
+  <select id="getChild" parameterType="int" resultType="com.cafe24.dmsthch.Child.Child">
+  	SELECT
+  	
+  	  	license_kindergarten
+	  	, kid_name
+	  	, kid_birth
+	  	, kid_address 
+	  	, kid_protector_phone 
+	  	, kid_protector_phone_reserve 
+	  	, kid_precautions 
+	  	, kid_gender
+	  	, kid_commuting 
+  		, kid_entrance_day
+  		
+  	FROM kid
+  	WHERE kid_no = #{kid_no}
+  	
+  	
+  	
+  </select>
+  
+  
   <select id="getChildList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
   	SELECT 
   		kid_no 
