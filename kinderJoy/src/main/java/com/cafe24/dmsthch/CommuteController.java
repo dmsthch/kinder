@@ -27,6 +27,8 @@ public class CommuteController {
 	public String commuteCheck(@RequestParam(name="teacherNo", required=false, defaultValue="0") int teacherNo
 						,Model model){
 		System.out.println("/Commute Controller");
+
+		System.out.println(teacherNo+"teacherNo");
 		
 		//teacherNo 가 0이 아니면 (로그인상태)
 		//출근한지 확인한 뒤 출근하지 않았을 경우 teacherNo , name 셋팅후 이동
@@ -50,7 +52,10 @@ public class CommuteController {
 				String commuteOutTime = map.get("attendanceEnd")+""; //퇴근시간 가져오기
 				
 				if(commuteOutTime.equals("null")){ //퇴근을 안한 상태
-					model.addAttribute("commuteCheck", "출근"); //출근 등록한 상태
+					System.out.println("퇴근을 안한 상태");
+					model.addAttribute("commuteCheck", "출근"); //출근 등록한 상태 셋팅
+					Map absence = cDao.absenceCheck((Integer) map.get("attendanceNo"));
+					System.out.println(absence);
 					model.addAttribute("commuteTime", map.get("attendanceStart")); //출근시간 셋팅
 				}else{ //퇴근한 상태
 					model.addAttribute("commuteCheck", "퇴근"); //출근 등록한 상태

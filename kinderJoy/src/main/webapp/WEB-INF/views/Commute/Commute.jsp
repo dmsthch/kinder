@@ -123,6 +123,8 @@
 <div class="col-sm-offset-1 col-sm-5">
 	<c:if test="${param.notice != null}">
 		<p style="font-size: 25px; color: white">notice : ${param.notice}</p>
+		<p style="font-size: 25px; color: white">notice : ${teacherNo}</p>
+		
 	</c:if>
 </div>
  
