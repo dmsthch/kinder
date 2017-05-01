@@ -137,6 +137,7 @@
 	<c:if test="${param.notice != null}">
 		<p style="font-size: 25px; color: white">notice : ${param.notice}</p>
 	</c:if>
+	<a href="${pageContext.request.contextPath}/hsLogout"><button class="btn btn-default">임시 로그아웃</button></a>
 </div>
  
 <!-- footer -->

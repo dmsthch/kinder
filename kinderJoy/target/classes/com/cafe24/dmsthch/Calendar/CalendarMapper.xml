@@ -13,7 +13,7 @@
   		,schedule_content
   		,schedule_start_day
   		,schedule_end_day
-  		,scheduel_title
+  		,schedule_title
   		,schedule_time
   	FROM schedule
   	WHERE license_kindergarten = #{license_kindergarten}

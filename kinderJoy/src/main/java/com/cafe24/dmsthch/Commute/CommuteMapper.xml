@@ -6,23 +6,25 @@
 	
 	
 	<!-- 복귀 등록 -->
-	<update id="absenceReturn" parameterType="int">
+	<update id="absenceReturn" parameterType="java.lang.String">
 		UPDATE 
 			teacher_absence
 		SET 
 			absence_end = DATE_FORMAT(NOW(),'%H:%i:%s')
-		WHERE attendance_no = #{attendanceNo};
+		WHERE absence_no = #{absenceNo};
 	</update>
 	
 	<!-- 외출 등록 -->
-	<insert id="absence" parameterType="int">
+	<insert id="absence" parameterType="java.util.Map">
 		INSERT INTO teacher_absence (
 			attendance_no,
+			license_kindergarten,
 			category_no,
 			absence_start,
 			absence_day)
 		VALUES (
 			#{attendanceNo}, 
+			#{licenseKindergarten},
 			'1', 
 			DATE_FORMAT(NOW(),'%H:%i:%s'),
 			DATE_FORMAT(NOW(),'%Y-%m-%d')
@@ -47,26 +49,28 @@
 	<!-- 오늘날짜 출근부 체크 -->
 	<select id="attendanceCheck" parameterType="int" resultType="java.util.Map">
 		select
-			teacher_attendance.attendance_no as attendanceNo,
-			teacher_attendance.attendance_start as attendanceStart,
-			teacher_attendance.attendance_end as attendanceEnd,
-			teacher_attendance.attendance_day as attendanceDay,
-			teacher.teacher_name as teacherName
+			teacher_attendance.attendance_no AS attendanceNo,
+			teacher_attendance.license_kindergarten AS licenseKindergarten,
+			teacher_attendance.attendance_start AS attendanceStart,
+			teacher_attendance.attendance_end AS attendanceEnd,
+			teacher.teacher_name AS attendanceName
 		from teacher_attendance
-		left join teacher
-		on teacher_attendance.attendance_no = teacher.teacher_no
-		where teacher_attendance.teacher_no = #{teacherNo}
-		and teacher_attendance.attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d');
+		inner join teacher
+		where teacher.teacher_no = teacher_attendance.teacher_no
+		and teacher_attendance.attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+		and teacher.teacher_no = #{teacher_no}
 	</select>
 	
 	<!-- 오늘날짜 출근 등록 -->
-	<insert id="commuteIn" parameterType="int">
+	<insert id="commuteIn" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
 		INSERT INTO teacher_attendance (
-			teacher_no, 
-			attendance_start, 
+			teacher_no,
+			license_kindergarten,
+			attendance_start,
 			attendance_day
 		)VALUES (
-			#{teacherNo}, 
+			#{teacher_no},
+			#{license_kindergarten},
 			DATE_FORMAT(NOW(),'%H:%i:%s'),
 			DATE_FORMAT(NOW(),'%Y-%m-%d')
 		);
@@ -82,27 +86,5 @@
 			teacher_no=#{teacherNo} and attendance_day=DATE_FORMAT(NOW(),'%Y-%m-%d');
 	</update>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<!-- 오늘날짜 퇴근 체크 안씀!!!!! -->
-	<select id="commuteOutCheck" parameterType="int" resultType="java.lang.String">
-		select
-			attendance_end
-		from
-			teacher_attendance
-		where
-			teacher_no = #{teacherNo}
-		and
-			attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
-	</select>
-
 
 </mapper>
