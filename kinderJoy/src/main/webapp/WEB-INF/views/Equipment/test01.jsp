@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>Title</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
 	<meta name="description" content="">
@@ -26,10 +26,10 @@
 
 
 <!-- navbar -->
-<c:import url="../module/navbar.jsp"></c:import>
+<jsp:include page="../module/navbar.jsp"></jsp:include>
 
 <!-- home section -->
-	<br><br><br><br><br>
+	<br><br><br><br><br><br><br>
 <style>
 	.nav-tabs li a{color: #000;}
 	.nav-tabs li{width: 50px !important;}
@@ -39,37 +39,39 @@
   <!-- Nav tabs -->
   <div class="col-sm-2">
 	  <ul id="tablist" class="nav nav-stacked nav-pills" role="tablist">
-	    <li role="presentation" class="active"><a href="#TeachingMaterial" aria-controls="TeachingMaterial" role="tab" data-toggle="tab">背犁,背备</a></li>
-	    <li role="presentation"><a href="#OfficeSupplies" aria-controls="OfficeSupplies" role="tab" data-toggle="tab">荤公侩前</a></li>
-	    <li role="presentation"><a href="#PhysicalApparatus" aria-controls="PhysicalApparatus" role="tab" data-toggle="tab">眉腊侩前</a></li>
-	    <li role="presentation"><a href="#BookList" aria-controls="BookList" role="tab" data-toggle="tab">档辑格废</a></li>
-	   	<li role="presentation"><a href="#Etc" aria-controls="Etc" role="tab" data-toggle="tab">扁鸥侩前</a></li>
+	    <li role="presentation" class="active"><a href="#TeachingMaterial" aria-controls="TeachingMaterial" role="tab" data-toggle="tab">甑愳灛,甑愱惮</a></li>
+	    <li role="presentation"><a href="#OfficeSupplies" aria-controls="OfficeSupplies" role="tab" data-toggle="tab">靷鞖╉拡</a></li>
+	    <li role="presentation"><a href="#PhysicalApparatus" aria-controls="PhysicalApparatus" role="tab" data-toggle="tab">觳挫湣鞖╉拡</a></li>
+	    <li role="presentation"><a href="#BookList" aria-controls="BookList" role="tab" data-toggle="tab">霃勳劀氇╇</a></li>
+	   	<li role="presentation"><a href="#Etc" aria-controls="Etc" role="tab" data-toggle="tab">旮绊儉鞖╉拡</a></li>
 	  </ul>
   </div>
 
+	<c:import url="../module/sheetjs.jsp"></c:import>
+	
 <div class="col-sm-10">
 	  <!-- Tab panes --> 
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane active" id="TeachingMaterial">
-	    	<%@ include file="../Equipment/Hansol.jsp" %>
+	    	<jsp:include page="../Equipment/Hansol.jsp"></jsp:include>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="OfficeSupplies">
-	    	.b.
+	    	<jsp:include page="../Equipment/Hansol2.jsp"></jsp:include>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="PhysicalApparatus">
-	    	.d..	
+	    	<jsp:include page="../Equipment/Hansol3.jsp"></jsp:include>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="BookList">
-	   		.d..
+	   		<jsp:include page="../Equipment/Hansol4.jsp"></jsp:include>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="Etc">
-	    	.e..
-	    </div>
+	    	<jsp:include page="../Equipment/Hansol5.jsp"></jsp:include>
+	    </div>	
 	  </div>
 </div>
 
 </div>
-
+<br><br><br><br><br>
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>
 

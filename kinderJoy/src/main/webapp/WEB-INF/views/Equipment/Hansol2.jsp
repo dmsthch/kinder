@@ -3,11 +3,11 @@
 
 	<button id="btTest">bt</button>
 	<div class="wrapper" style="margin-top: 20px;">
-		<div id="example1"></div>
+		<div id="example2"></div>
 	</div>
 	
-<script data-jsfiddle="example1">
-	var container = document.getElementById('example1'),hot;
+<script data-jsfiddle="example2">
+	var container = document.getElementById('example2'),hot;
 	var dataArray;
 	
 	var testData = [ {0:1 ,1:2} , {0:1 ,1:2} 	, {0:1 ,1:2} ]; //데이터
