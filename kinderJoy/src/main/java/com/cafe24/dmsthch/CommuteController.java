@@ -1,5 +1,6 @@
 package com.cafe24.dmsthch;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -94,12 +95,16 @@ public class CommuteController {
 		System.out.println("/CommuteIn(login) Controller");
 		
 		int teacherNo = 0;
+		Teacher teacher = null;
 		if(session.getAttribute("teacherNo") != null){
-			teacherNo = (Integer) session.getAttribute("teacherNo");			
+			teacherNo = (Integer) session.getAttribute("teacherNo");
+			teacher = tDao.OneSelectTeacher(teacherNo);
 		}
+		
 		System.out.println(teacherNo);
 		
-		cDao.commuteIn(teacherNo); //출근 등록 메서드 실행
+		
+		cDao.commuteIn(teacher); //출근 등록 메서드 실행
 		return "redirect:/Commute";
 	}
 	
@@ -113,8 +118,9 @@ public class CommuteController {
 		System.out.println("teacherNo : " + teacherNo);
 		
 		if(teacherNo > 0){ //로그인 성공
-			if(cDao.commuteCheck(teacherNo) == null){
-				cDao.commuteIn(teacherNo); //출근 등록 메서드 실행
+			if(cDao.commuteCheck(teacherNo) == null){ //출근등록이 안되어 있는 경우
+				Teacher inputTeacher = tDao.OneSelectTeacher(teacherNo);
+				cDao.commuteIn(inputTeacher); //출근 등록 메서드 실행
 			}else{
 				System.out.println("출근 등록이 되어있음");
 			}

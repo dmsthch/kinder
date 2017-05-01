@@ -60,13 +60,15 @@
 	</select>
 	
 	<!-- 오늘날짜 출근 등록 -->
-	<insert id="commuteIn" parameterType="int">
+	<insert id="commuteIn" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
 		INSERT INTO teacher_attendance (
-			teacher_no, 
+			teacher_no,
+			license_kindergarten,
 			attendance_start, 
 			attendance_day
 		)VALUES (
-			#{teacherNo}, 
+			#{teacher_no},
+			#{license_kindergarten},
 			DATE_FORMAT(NOW(),'%H:%i:%s'),
 			DATE_FORMAT(NOW(),'%Y-%m-%d')
 		);

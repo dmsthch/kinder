@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.dmsthch.Teacher.Teacher;
+
 @Repository
 public class CommuteDao {
 	
@@ -21,9 +23,9 @@ public class CommuteDao {
 	}
 	
 	//출근등록 메서드
-	public int commuteIn(int teacherNo){
+	public int commuteIn(Teacher teacher){
 		System.out.println("commuteIn() run");
-		return sqlSessionTemplate.insert(sql+"commuteIn", teacherNo);
+		return sqlSessionTemplate.insert(sql+"commuteIn", teacher);
 	}
 	
 	//퇴근등록 메서드
