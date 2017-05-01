@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +15,6 @@ $(document).ready(function() {
 	var allSchedule = new Array();
 	allSchedule = ${allSchedule};
 	console.log(allSchedule);
-<c:forEach>
-	
-</c:forEach>
-	
 	
 	$('#calendar').fullCalendar({
 		header: {
@@ -49,9 +45,9 @@ $(document).ready(function() {
 		
 		//이부분이 데이터 표시해주는 부분.
 		events: [
-			$(allSchedule).each(function(){
+			/* $(allSchedule).each(function(){
 				{id : ${schedule_no}, title : ${schedule_title}, start : ${schedule_start_day}, end :${schedule_end_day} }
-			})
+			}) */
 			
 /* 			{title : 'asdftest', start : '20170501', end : '20170501' },
 			{id: 999, title: 'Repeating Event', start: '2017-04-09T16:00:00'} */
@@ -81,5 +77,10 @@ $(document).ready(function() {
 <body>
 calendarTest
 	<div id='calendar'></div>
+	<div id='getCalendarTest'>
+	<c:forEach items="${allSchedule}" var="allSchedule">
+	id : ${allSchedule.schedule_no}
+	</c:forEach>
+	</div>
 </body>
 </html>
