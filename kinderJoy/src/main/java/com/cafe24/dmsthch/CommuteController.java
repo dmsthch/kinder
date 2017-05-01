@@ -1,5 +1,6 @@
 package com.cafe24.dmsthch;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -23,6 +24,24 @@ public class CommuteController {
 	private CommuteDao cDao;
 	@Autowired
 	private TeacherDao tDao;
+	
+	
+	private Map commuteMap = null;
+	
+//	@Autowired
+//	public CommuteController(HttpSession session) {
+//		
+//		if(session.getAttribute("teacherNo") != null){
+//			int teacherNo = (Integer) session.getAttribute("teacherNo");
+//			commuteMap = cDao.commuteCheck(teacherNo);
+//		}
+//		
+//	}
+//	
+//	@Autowired
+//	public CommuteController() {
+//	}
+	
 
 	//교원 출석체크 페이지
 	@RequestMapping(value="/Commute", method=RequestMethod.GET)
@@ -36,7 +55,7 @@ public class CommuteController {
 		if(session.getAttribute("teacherNo") != null){
 			teacherNo = (Integer) session.getAttribute("teacherNo");
 		}
-		System.out.println(teacherNo);
+		System.out.println("teacherNo : " + teacherNo);
 		
 		//teacherNo 가 0이 아니면 (로그인상태)
 		//출근한지 확인한 뒤 출근하지 않았을 경우 teacherNo , name 셋팅후 이동
@@ -46,32 +65,33 @@ public class CommuteController {
 		
 		if(teacherNo != 0){ //로그인이 되어있는지 체크 로그인 된 경우
 			
-			Teacher teacher = tDao.OneSelectTeacher(teacherNo); //해당 교원 검색 (이름 사용 위해)
-			
 			if(map == null){ //출근등록을 안한상태
 				System.out.println("출근등록을 안한상태");
+				Teacher teacher = tDao.OneSelectTeacher(teacherNo); //해당 교원 검색 (이름 사용 위해)
 				model.addAttribute("teacherNo", teacherNo);
 				model.addAttribute("teacherName", teacher.getTeacher_name()); //이름 등록
 				model.addAttribute("commuteCheck", "미출근"); //출근 등록을 안한 상태
 			}else{ //출근등록을 한상태
 				System.out.println("출근등록을 한상태");
 				model.addAttribute("teacherNo", teacherNo); //번호 셋팅
-				model.addAttribute("teacherName", teacher.getTeacher_name()); //이름 셋팅
+				model.addAttribute("teacherName", (String)map.get("teacherName")); //이름 셋팅
 
 				String commuteOutTime = map.get("attendanceEnd")+""; //퇴근시간 가져오기
 				
 				if(commuteOutTime.equals("null")){ //퇴근을 안한 상태
 					System.out.println("퇴근을 안한 상태");
-					Map absence = cDao.absenceCheck((Integer) map.get("attendanceNo")); //외출정보 검색
+					List<Map<String,Object>> absenceList = cDao.absenceCheck((Integer) map.get("attendanceNo")); //외출정보 검색
+					Map<String, Object> absence = absenceList.get(absenceList.size()-1); //가장 최근 정보
+										
 					if(absence == null){ //외출을 안한상태
 						model.addAttribute("commuteCheck", "출근"); //출근 등록한 상태 셋팅
 						model.addAttribute("commuteTime", map.get("attendanceStart")); //출근시간 셋팅
 					}else{ //외출한 상태
 						if(absence.get("absenceEnd") == null){ // 복귀 안함
-							model.addAttribute("commuteCheck", "외출"); //출근 등록한 상태 셋팅
+							model.addAttribute("commuteCheck", "외출"); //외출 등록한 상태 셋팅
 							model.addAttribute("commuteTime", absence.get("absenceStart")); //외출시간 셋팅
 						}else{// 복귀함
-							model.addAttribute("commuteCheck", "복귀"); //출근 등록한 상태 셋팅
+							model.addAttribute("commuteCheck", "복귀"); //복귀 등록한 상태 셋팅
 							model.addAttribute("commuteTime", absence.get("absenceEnd")); //복귀시간 셋팅
 						}
 					}
@@ -94,16 +114,20 @@ public class CommuteController {
 		System.out.println("/CommuteIn(login) Controller");
 		
 		int teacherNo = 0;
+		Teacher teacher = null;
 		if(session.getAttribute("teacherNo") != null){
-			teacherNo = (Integer) session.getAttribute("teacherNo");			
+			teacherNo = (Integer) session.getAttribute("teacherNo");
+			teacher = tDao.OneSelectTeacher(teacherNo);
+			teacher.setTeacher_no(teacherNo);
 		}
+		
 		System.out.println(teacherNo);
 		
-		cDao.commuteIn(teacherNo); //출근 등록 메서드 실행
+		cDao.commuteIn(teacher); //출근 등록 메서드 실행
 		return "redirect:/Commute";
 	}
 	
-	//로그인이 안되어 있는 상태에서 출석체크
+	//로그인이 안되어 있는 상태에서 출근
 	@RequestMapping(value="/CommuteIn", method=RequestMethod.POST)
 	public String commute(Teacher teacher, Model model){
 		System.out.println("/CommuteIn(unlogin) Controller");
@@ -112,18 +136,20 @@ public class CommuteController {
 		int teacherNo = noTeacher.getTeacher_no();
 		System.out.println("teacherNo : " + teacherNo);
 		
+		Teacher getTeacher = tDao.OneSelectTeacher(teacherNo);
+		getTeacher.setTeacher_no(teacherNo);
+		
 		if(teacherNo > 0){ //로그인 성공
-			if(cDao.commuteCheck(teacherNo) == null){
-				cDao.commuteIn(teacherNo); //출근 등록 메서드 실행
+			if(cDao.commuteCheck(teacherNo) == null){ //출근등록이 안되어 있는 경우
+				cDao.commuteIn(getTeacher); //출근 등록 메서드 실행
 			}else{
 				System.out.println("출근 등록이 되어있음");
 			}
 		}
 		
 		Map<Object, Object> map = cDao.commuteCheck(teacherNo); //오늘날짜 출근부 체크
-		Teacher nameTeacher = tDao.OneSelectTeacher(teacherNo); //해당 교원 검색 (이름 사용 위해)
-						
-		String teacherName = nameTeacher.getTeacher_name();
+		
+		String teacherName = map.get("teacherName")+"";
 		String attendanceStart = map.get("attendanceStart")+"";
 		
 		String notice = teacherName+"님 "+attendanceStart+" 출근등록 되셧습니다";
@@ -180,7 +206,8 @@ public class CommuteController {
 		System.out.println("/absence Controller");
 		
 		Map<Object, Object> map = cDao.commuteCheck((Integer) session.getAttribute("teacherNo")); //오늘날짜 출근부 체크
-		cDao.absence((Integer) map.get("attendanceNo"));
+		
+		cDao.absence(map);
 		
 		return "redirect:/Commute";
 	}
@@ -191,17 +218,49 @@ public class CommuteController {
 		System.out.println("/absenceReturn Controller");
 		
 		Map<Object, Object> map = cDao.commuteCheck((Integer) session.getAttribute("teacherNo")); //오늘날짜 출근부 체크
-		cDao.absenceReturn((Integer) map.get("attendanceNo")); //외출정보 검색
+		List<Map<String,Object>> absenceList = cDao.absenceCheck((Integer) map.get("attendanceNo")); //외출정보 검색
+		Map<String, Object> absence = absenceList.get(absenceList.size()-1); //가장 최근 정보
+		
+		System.out.println(absence);
+		
+		System.out.println(absence.get("absenceNo"));
+		
+		cDao.absenceReturn(absence.get("absenceNo")+""); //복귀 등록
 				
 		return "redirect:/Commute";
 	}
 	
+	
+	//임시 로그아웃
+	@RequestMapping(value="/hsLogout", method=RequestMethod.GET)
+	public String hsLogout(HttpSession session){
+		session.removeAttribute("teacherNo");
+		session.removeAttribute("teacherLicense");
+		session.removeAttribute("teacherId");
+		session.removeAttribute("teacherName");
+		session.removeAttribute("teacherLevel");
+		return "redirect:/Commute";
+	}
+	
+	
+	
+	/*  예외처리 부분  */
 	
 	//NullPointerException 발생시 Commute로 redirect id, pw 불일치
 	@ExceptionHandler(NullPointerException.class)
 	public String handleNullPointerException(Model model){
 		System.out.println("ERROR : NullPointerException 발생");
 		String notice = "ID, PW를 확인해 주세요";
+		model.addAttribute("notice", notice);
+		System.out.println(notice);
+		return "redirect:/Commute";
+	}
+	
+	//tooManyResultsException
+	@ExceptionHandler(org.apache.ibatis.exceptions.TooManyResultsException.class)
+	public String tooManyResultsException(Model model){
+		System.out.println("ERROR : tooManyResultsException 발생");
+		String notice = "tooManyResultsException";
 		model.addAttribute("notice", notice);
 		System.out.println(notice);
 		return "redirect:/Commute";

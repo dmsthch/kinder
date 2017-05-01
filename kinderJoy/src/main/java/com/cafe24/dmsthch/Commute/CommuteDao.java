@@ -1,10 +1,13 @@
 package com.cafe24.dmsthch.Commute;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.cafe24.dmsthch.Teacher.Teacher;
 
 @Repository
 public class CommuteDao {
@@ -21,9 +24,9 @@ public class CommuteDao {
 	}
 	
 	//출근등록 메서드
-	public int commuteIn(int teacherNo){
+	public int commuteIn(Teacher teacher){
 		System.out.println("commuteIn() run");
-		return sqlSessionTemplate.insert(sql+"commuteIn", teacherNo);
+		return sqlSessionTemplate.insert(sql+"commuteIn", teacher);
 	}
 	
 	//퇴근등록 메서드
@@ -33,34 +36,23 @@ public class CommuteDao {
 	}
 	
 	//오늘날짜 외출정보 가져오기
-	public Map absenceCheck(int attendanceNo){
+	public List<Map<String, Object>> absenceCheck(int attendanceNo){
 		System.out.println("absenceCheck() run");
-		return sqlSessionTemplate.selectOne(sql+"absenceCheck", attendanceNo);
+		return sqlSessionTemplate.selectList(sql+"absenceCheck", attendanceNo);
 	}
 	
 	//외출 등록
-	public int absence(int attendanceNo){
+	public int absence(Map map){
 		System.out.println("absence() run");
-		return sqlSessionTemplate.insert(sql+"absence", attendanceNo);
+		return sqlSessionTemplate.insert(sql+"absence", map);
 	}
 	
 	
 	//외출 복귀
-	public int absenceReturn(int attendanceNo){
+	public int absenceReturn(String absenceNo){
 		System.out.println("absenceReturn() run");
-		return sqlSessionTemplate.update(sql+"absenceReturn", attendanceNo);
+		return sqlSessionTemplate.update(sql+"absenceReturn", absenceNo);
 	}
 	
 	
-	
-	
-	
-	
-	//퇴근 체크 메서드  (안씀!!)
-	public String commuteOutCheck(int teacherNo){
-		System.out.println("commuteOutCheck() run");
-		return sqlSessionTemplate.selectOne(sql+"commuteOutCheck", teacherNo);
-	}
-	
-
 }

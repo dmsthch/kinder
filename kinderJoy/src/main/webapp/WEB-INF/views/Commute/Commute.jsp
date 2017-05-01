@@ -137,18 +137,11 @@
 	<c:if test="${param.notice != null}">
 		<p style="font-size: 25px; color: white">notice : ${param.notice}</p>
 	</c:if>
+	<a href="${pageContext.request.contextPath}/hsLogout"><button class="btn btn-default">ìž„ì‹œ ë¡œê·¸ì•„ì›ƒ</button></a>
 </div>
  
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>
-
-
-
-¼¼¼Ç¿¡ ÀúÀåµÈ ¾ÆÀÌµð°ª : ${teacherId}
-³×ÀÓ°ª : ${teacherName} 
-¶óÀÌ¼¾½º°ª : ${teacherLicense}
-·¹º§°ª : ${teacherLevel} 
-³Ñ¹ö°ª : ${teacherNo}
 
 </body>
 </html>
