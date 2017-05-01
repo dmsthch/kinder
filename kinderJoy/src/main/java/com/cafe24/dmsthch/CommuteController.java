@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.cafe24.dmsthch.Commute.CommuteDao;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
 @Controller
+@SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "teacherLicense", "teacherNo" })
 public class CommuteController {
 	
 	@Autowired
@@ -40,11 +42,13 @@ public class CommuteController {
 			if(map == null){ //출근등록을 안한상태
 				System.out.println("출근등록을 안한상태");
 				model.addAttribute("teacherNo", teacherNo);
+				System.out.println(teacherNo+" <--teacherNo_Commute_Controller1");
 				model.addAttribute("teacherName", teacher.getTeacher_name()); //이름 등록
 				model.addAttribute("commuteCheck", "미출근"); //출근 등록을 안한 상태
 			}else{ //출근등록을 한상태
 				System.out.println("출근등록을 한상태");
 				model.addAttribute("teacherNo", teacherNo); //번호 셋팅
+				System.out.println(teacherNo+" <--teacherNo_Commute_Controller2");
 				model.addAttribute("teacherName", teacher.getTeacher_name()); //이름 셋팅
 
 				String commuteOutTime = map.get("attendanceEnd")+""; //퇴근시간 가져오기
