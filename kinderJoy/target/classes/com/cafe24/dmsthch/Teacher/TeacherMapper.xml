@@ -34,13 +34,13 @@ VALUES
 )
 </insert>
 
-<select id="login" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="int">
+<select id="login" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 
 SELECT 
-	teacher_no 
+	teacher_no,teacher_name,teacher_id,teacher_level,license_kindergarten
 	FROM 
 	teacher
-	WHERE 
+	WHERE
 	teacher_id = #{teacher_id}
 	AND 
 	teacher_pw = #{teacher_pw}

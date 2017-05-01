@@ -80,12 +80,13 @@ public class CommuteController {
 	public String commute(Teacher teacher){
 		System.out.println("/CommuteIn(unlogin) Controller");
 		
-		int teacherNo = tDao.LoginTeacher(teacher); // id pw 확인 메서드 교원번호 return
-		System.out.println(teacherNo);
+		Teacher newTeacher = tDao.LoginTeacher(teacher); // id pw 확인 메서드 교원번호 return
+		int teacherNo = newTeacher.getTeacher_no();
+		System.out.println(newTeacher);
 			
 		if(teacherNo > 0){ //로그인 성공
 			teacher = tDao.OneSelectTeacher(teacherNo);
-			cDao.commuteIn(teacherNo); //출근 등록 메서드 실행
+			cDao.commuteIn(teacherNo ); //출근 등록 메서드 실행
 		}
 		return "redirect:/Commute?teacherNo="+teacherNo; //출첵 유무를 띄워주기 위해 teacherNo를 들고 출첵 화면으로 이동
 	}
@@ -100,12 +101,13 @@ public class CommuteController {
 		return "redirect:/Commute?teacherNo="+teacherNo;
 	}
 	
-	//로그인이 안되어 있는 상태에서 출석체크
+	//로그인이 안되어 있는 상태에서 퇴근
 	@RequestMapping(value="/CommuteOut", method=RequestMethod.POST)
 	public String CommuteOut(Teacher teacher){
 		System.out.println("/CommuteOut(login) Controller");
 		
-		int teacherNo = tDao.LoginTeacher(teacher); // id pw 확인 메서드 교원번호 return
+		Teacher newTeacher = tDao.LoginTeacher(teacher); // id pw 확인 메서드 교원번호 return
+		int teacherNo = newTeacher.getTeacher_no();
 		System.out.println(teacherNo);
 		
 		if(teacherNo > 0){ //로그인 성공
