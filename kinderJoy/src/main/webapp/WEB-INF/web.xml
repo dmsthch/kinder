@@ -10,6 +10,10 @@
       <param-value>UTF-8</param-value>
     </init-param>
   </filter>
+  
+  <!-- 필터안에 리스너가 있으면 리스너 사용 불가 등록 위치에 따라 달라지니까 잘 보고 글을 작성하자 -->
+
+  	
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
@@ -30,18 +34,4 @@
   <session-config>
     <session-timeout>1</session-timeout>
   </session-config>
-  <filter>
-    <display-name>CharacterEncodingFilter</display-name>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-    <init-param>
-      <description></description>
-      <param-name>encodingToUTF8</param-name>
-      <param-value>utf-8</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>CharacterEncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
 </web-app>
