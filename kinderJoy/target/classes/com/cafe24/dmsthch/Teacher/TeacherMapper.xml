@@ -3,10 +3,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cafe24.dmsthch.Teacher.TeacherMapper">
+
 <insert id="insert" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
 INSERT INTO teacher 
 	(
-	license_kindergarten
+	teacher_no
+	,license_kindergarten
 	,teacher_level
 	,teacher_name
 	,teacher_id
@@ -18,8 +20,8 @@ INSERT INTO teacher
 	,teacher_paystep
 	)
 VALUES 
-	(
-	#{license_kindergarten}
+	(#{teacher_no}
+	,#{license_kindergarten}
 	,#{teacher_level}
 	,#{teacher_name}
 	,#{teacher_id}
@@ -32,13 +34,13 @@ VALUES
 )
 </insert>
 
-<select id="login" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="int">
+<select id="login" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 
 SELECT 
-	teacher_no 
+	teacher_no,teacher_name,teacher_id,teacher_level,license_kindergarten
 	FROM 
 	teacher
-	WHERE 
+	WHERE
 	teacher_id = #{teacher_id}
 	AND 
 	teacher_pw = #{teacher_pw}
@@ -67,23 +69,11 @@ SELECT
 </select>
 
 <!-- 회원 아이디 중복 체크 -->
- <select id="logincheck" parameterType="java.lang.String" resultType="int">
+ <select id="sign_up_id_check" parameterType="java.lang.String" resultType="int">
  SELECT
  count(*)
  FROM teacher
  WHERE teacher_id = #{teacher_id}
  </select>
 
-<!-- 세션에 값 등록 -->
-<select id="input_session" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
-select 
-	license_kindergarten
-	,teacher_level
-	,teacher_name
-	,teacher_id 
-from 
-	teacher
-WHERE 
-	teacher_id = #{teacher_id};
-</select>
 </mapper>
