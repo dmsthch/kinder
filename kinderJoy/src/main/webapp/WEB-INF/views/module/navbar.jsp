@@ -22,7 +22,7 @@
 				<li><a href="#" class="smoothScroll">비품</a></li>
 				<li><a href="#" class="smoothScroll">교원</a></li>
 				<li><a href="#" class="smoothScroll">자료실</a></li>
-				<li><a href="#" class="smoothScroll">CONTACT</a></li>
+				<li><a href="${pageContext.request.contextPath}/index" class="smoothScroll">로그인</a></li>
 			</ul>
 		</div>
 	</div>
