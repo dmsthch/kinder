@@ -27,7 +27,7 @@ public class TeacherController {
 		return "Teacher/TeacherAdd";
 	}
 	
-	//미완성
+	//미완성 아이디 중복체크 메서드
 	@RequestMapping(value="/sign_up_id_check",method =RequestMethod.POST)
 	@ResponseBody
 	public int logincheck(@RequestParam("teacher_ajax_id") String userid) {
@@ -101,4 +101,12 @@ public class TeacherController {
 		}
 		return "Teacher/TeacherModify";
 	}
+	
+	@RequestMapping(value="/index", method=RequestMethod.GET)
+	public String loginnavbar(){
+		return "Teacher/test";
+	}
+	
+	
+	
 }

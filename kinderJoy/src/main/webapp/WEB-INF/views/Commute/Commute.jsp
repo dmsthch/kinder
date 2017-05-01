@@ -142,13 +142,5 @@
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>
 
-
-
-세션에 저장된 아이디값 : ${teacherId}
-네임값 : ${teacherName} 
-라이센스값 : ${teacherLicense}
-레벨값 : ${teacherLevel} 
-넘버값 : ${teacherNo}
-
 </body>
 </html>
