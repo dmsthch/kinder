@@ -13,7 +13,7 @@ import com.cafe24.dmsthch.Teacher.TeacherDao;
 
 //teacher_id = id teacher_name = name teacher_level = level;
 @Controller
-@SessionAttributes( { "id", "name", "level" })
+@SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "teacherLicense", "teacherNo" })
 public class TeacherController {
 	
 	@Autowired
@@ -69,14 +69,20 @@ public class TeacherController {
 		Teacher teacher_save_session = TDao.LoginTeacher(teacher);
 		System.out.println(TDao+" <--TDao 동작 확인");
 		
-		model.addAttribute("id", teacher_save_session.getTeacher_id());
-		System.out.println(teacher_save_session.getTeacher_id() +"<-- 세션에 저장될 아디 값");
+		model.addAttribute("teacherNo",teacher_save_session.getTeacher_no());
+		System.out.println(teacher_save_session.getTeacher_no() +" <-- 세션에 저장될 넘버 값");
 		
-		model.addAttribute("name", teacher_save_session.getTeacher_name());
-		System.out.println(teacher_save_session.getTeacher_name() + "<-- 세션에 저장된 네임");
+		model.addAttribute("teacherLicense",teacher_save_session.getLicense_kindergarten());
+		System.out.println(teacher_save_session.getLicense_kindergarten() +" <-- 세션에 저장될 라이센스값");
 		
-		model.addAttribute("level" ,teacher_save_session.getTeacher_level());
-		System.out.println(teacher_save_session.getTeacher_level() + " <--세션에 저장된 레벨");
+		model.addAttribute("teacherId", teacher_save_session.getTeacher_id());
+		System.out.println(teacher_save_session.getTeacher_id() +"<-- 세션에 저장될 아이디 값");
+		
+		model.addAttribute("teacherName", teacher_save_session.getTeacher_name());
+		System.out.println(teacher_save_session.getTeacher_name() + "<-- 세션에 저장될 네임값");
+		
+		model.addAttribute("teacherLevel" ,teacher_save_session.getTeacher_level());
+		System.out.println(teacher_save_session.getTeacher_level() + " <--세션에 저장될 레벨값");
 		
 		//매개변수 : HttpSessionEvent se
 		//HttpSession getsession = se.getSession();
