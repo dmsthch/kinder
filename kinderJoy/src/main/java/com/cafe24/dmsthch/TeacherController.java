@@ -1,5 +1,6 @@
 package com.cafe24.dmsthch;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +12,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
+
 //teacher_id = id teacher_name = name teacher_level = level;
 @Controller
-@SessionAttributes( { "id", "name", "level" })
+@SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "teacherLicense", "teacherNo" })
 public class TeacherController {
 	
 	@Autowired
@@ -55,33 +57,48 @@ public class TeacherController {
 		return "Teacher/TeacherLogin";
 	}
 	
-	
+	//session만 쓰면 
 	@RequestMapping(value="/Login" , method = RequestMethod.GET)
-	public String Login() {
+	public String Login(HttpSession session) {
 		System.out.println("로그인화면");
-		return "Teacher/TeacherLogin";
+		if(session.getAttribute("teacherId") == null){
+			return "Teacher/TeacherLogin";
+		}else{
+			return "Teacher/TeacherModify";
+		}
 	}
 	
 	
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
-	public String Login(Model model, Teacher teacher) {
+	public String Login(Model model,Teacher teacher) {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
-		Teacher teacher_save_session = TDao.LoginTeacher(teacher);
+		Teacher saveSession = TDao.LoginTeacher(teacher);
 		System.out.println(TDao+" <--TDao 동작 확인");
 		
-		model.addAttribute("id", teacher_save_session.getTeacher_id());
-		System.out.println(teacher_save_session.getTeacher_id() +"<-- 세션에 저장될 아디 값");
+		if(model == null){
+			return "Teacher/TeacherLogin";
+		}
+		else
+		{
+		model.addAttribute("teacherNo",saveSession.getTeacher_no());
+		System.out.println(saveSession.getTeacher_no() +" <-- 세션에 저장될 넘버 값 세션");
 		
-		model.addAttribute("name", teacher_save_session.getTeacher_name());
-		System.out.println(teacher_save_session.getTeacher_name() + "<-- 세션에 저장된 네임");
+		model.addAttribute("teacherLicense",saveSession.getLicense_kindergarten());
+		System.out.println(saveSession.getLicense_kindergarten() +" <-- 세션에 저장될 라이센스값");
 		
-		model.addAttribute("level" ,teacher_save_session.getTeacher_level());
-		System.out.println(teacher_save_session.getTeacher_level() + " <--세션에 저장된 레벨");
+		model.addAttribute("teacherId", saveSession.getTeacher_id());
+		System.out.println(saveSession.getTeacher_id() +"<-- 세션에 저장될 아이디 값");
+		
+		model.addAttribute("teacherName", saveSession.getTeacher_name());
+		System.out.println(saveSession.getTeacher_name() + "<-- 세션에 저장될 네임값");
+		
+		model.addAttribute("teacherLevel" ,saveSession.getTeacher_level());
+		System.out.println(saveSession.getTeacher_level() + " <--세션에 저장될 레벨값");
 		
 		//매개변수 : HttpSessionEvent se
 		//HttpSession getsession = se.getSession();
 		//System.out.println("생성된 세션값 "+getsession.getId());
-		
+		}
 		return "Teacher/TeacherModify";
 	}
 }

@@ -1,7 +1,7 @@
 
 
 
-	<button id="btTest">bt</button>
+	<button id="btTest">불러오기</button>
 	<div class="wrapper" style="margin-top: 20px;">
 		<div id="example1"></div>
 	</div>

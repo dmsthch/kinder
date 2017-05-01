@@ -4,7 +4,7 @@
 
 
 <!-- navigation section -->
-<section class="navbar navbar-fixed-top custom-navbar" role="navigation">
+<section class="navbar navbar-fixed-top custom-navbar" role="navigation"s>
 	<div class="container">
 		<div class="navbar-header">
 			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

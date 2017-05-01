@@ -4,9 +4,50 @@
   
 <mapper namespace="com.cafe24.dmsthch.Commute.CommuteMapper">
 	
+	
+	<!-- 복귀 등록 -->
+	<update id="absenceReturn" parameterType="int">
+		UPDATE 
+			teacher_absence
+		SET 
+			absence_end = DATE_FORMAT(NOW(),'%H:%i:%s')
+		WHERE attendance_no = #{attendanceNo};
+	</update>
+	
+	<!-- 외출 등록 -->
+	<insert id="absence" parameterType="int">
+		INSERT INTO teacher_absence (
+			attendance_no,
+			category_no,
+			absence_start,
+			absence_day)
+		VALUES (
+			#{attendanceNo}, 
+			'1', 
+			DATE_FORMAT(NOW(),'%H:%i:%s'),
+			DATE_FORMAT(NOW(),'%Y-%m-%d')
+		);
+	</insert>
+	
+	<!-- 오늘날짜 외출정보 가져오기 -->
+	<select id="absenceCheck" parameterType="int" resultType="java.util.Map">
+		select 
+			teacher_absence.absence_no AS absenceNo,
+			teacher_absence.attendance_no AS attendanceNo,
+			teacher_absence.category_no AS categoryNo,
+			teacher_absence.absence_start AS absenceStart,
+			teacher_absence.absence_end AS absenceEnd,
+			teacher_absence.absence_day  AS absenceDay
+		from teacher_absence 
+		inner join teacher_attendance 
+		on teacher_attendance.attendance_no = teacher_absence.attendance_no
+		and teacher_attendance.attendance_no = #{teacherNo}
+	</select>
+	
 	<!-- 오늘날짜 출근부 체크 -->
-	<select id="attendanceCheck" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="attendanceCheck" parameterType="int" resultType="java.util.Map">
 		select
+			teacher_attendance.attendance_no as attendanceNo,
 			teacher_attendance.attendance_start as attendanceStart,
 			teacher_attendance.attendance_end as attendanceEnd,
 			teacher_attendance.attendance_day as attendanceDay,
