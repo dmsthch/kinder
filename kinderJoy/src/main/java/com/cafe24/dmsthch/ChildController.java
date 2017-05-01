@@ -18,6 +18,12 @@ public class ChildController {
 	@Autowired
 	private ChildDao childDao;
 	
+	//발달 폼 요청
+	@RequestMapping(value="/ChildDevelopment" , method=RequestMethod.GET)
+	public String ChildDevelopment() {
+		System.out.println("ChildDevelopment 폼 요청");
+		return "Child/ChildDevelopment";
+	}
 	
 	
 	//수정 폼 요청

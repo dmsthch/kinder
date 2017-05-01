@@ -23,7 +23,7 @@
 			$('#unloginForm').submit();
 		});
 		
-		//출근하기 버튼
+		//퇴근하기 버튼
 		$('#BtcommuteOut').click(function(){
 			$('#unloginForm').removeAttr('action');
 			$('#unloginForm').attr('action','${pageContext.request.contextPath}/CommuteOut');
@@ -64,7 +64,19 @@
 			<h1>${teacherName}님 출근등록 되셨습니다</h1><br>
 			<h1>출근시간 : ${commuteTime}</h1><br><br>
 			<div class="row">
-				<div class="col-sm-offset-4 col-sm-2"><button type="button" class="btn btn-default btn-lg">외출/복귀</button></div>
+				<div class="col-sm-offset-4 col-sm-2 dropup">
+					<button type="button" class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">외출/복귀 <span class="caret"></span></button>
+					<ul class="dropdown-menu">
+						<li class="divider"></li>
+						<c:if test="${commuteCheck == '출근'}">
+							<li class="text-center"><a href="#">외출 등록</a></li>
+						</c:if>
+						<c:if test="${commuteCheck == '외출'}">
+							<li><a href="#">복귀 등록</a></li>
+						</c:if>
+						<li class="divider"></li>
+					</ul>
+				</div>
 				<div class="col-sm-2"><a href="${pageContext.request.contextPath}/CommuteOut?teacherNo=${teacherNo}"><button type="button" class="btn btn-danger btn-lg">퇴근하기</button></a></div>
 			</div>
 		</c:if>
