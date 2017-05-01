@@ -11,6 +11,7 @@
 <script src="js/LCR/Calendar/fullcalendar.min.js"></script>
 <script>
 $(document).ready(function() {
+	var allSchedule = ${allSchedule};
 	$('#calendar').fullCalendar({
 		header: {
 			left: 'prev,next today',
@@ -36,7 +37,14 @@ $(document).ready(function() {
 		},
 		editable: true,
 		eventLimit: true, // allow "more" link when too many events
+		
 		events: [
+			$(allSchedule).each(function(i){
+				{id : ${schedule_no}, title : ${schedule_title}, start : ${schedule_start_day}, end :${schedule_end_day} }
+			})
+			
+/* 			{title : 'asdftest', start : '20170501', end : '20170501' },
+			{id: 999, title: 'Repeating Event', start: '2017-04-09T16:00:00'} */
 		]
 	});
 	
