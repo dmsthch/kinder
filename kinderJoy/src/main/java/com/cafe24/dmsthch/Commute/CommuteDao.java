@@ -32,9 +32,13 @@ public class CommuteDao {
 		return sqlSessionTemplate.update(sql+"commuteOut", teacherNo);
 	}
 	
+	
+	
+	
+	
+	//Åð±Ù Ã¼Å© ¸Þ¼­µå  (¾È¾¸!!)
 	public String commuteOutCheck(int teacherNo){
 		System.out.println("commuteOutCheck() run");
-		
 		return sqlSessionTemplate.selectOne(sql+"commuteOutCheck", teacherNo);
 	}
 	

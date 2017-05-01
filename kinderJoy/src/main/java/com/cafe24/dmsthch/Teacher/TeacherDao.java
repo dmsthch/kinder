@@ -17,7 +17,7 @@ public class TeacherDao {
 	}
 	
 	//로그인 메서드
-	public int LoginTeacher(Teacher teacher) {
+	public Teacher LoginTeacher(Teacher teacher) {
 		System.out.println("로그인 확인");
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.login", teacher);
 	}
