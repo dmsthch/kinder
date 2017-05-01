@@ -32,6 +32,26 @@ public class CommuteDao {
 		return sqlSessionTemplate.update(sql+"commuteOut", teacherNo);
 	}
 	
+	//오늘날짜 외출정보 가져오기
+	public Map absenceCheck(int attendanceNo){
+		System.out.println("absenceCheck() run");
+		return sqlSessionTemplate.selectOne(sql+"absenceCheck", attendanceNo);
+	}
+	
+	//외출 등록
+	public int absence(int attendanceNo){
+		System.out.println("absence() run");
+		return sqlSessionTemplate.insert(sql+"absence", attendanceNo);
+	}
+	
+	
+	//외출 복귀
+	public int absenceReturn(int attendanceNo){
+		System.out.println("absenceReturn() run");
+		return sqlSessionTemplate.update(sql+"absenceReturn", attendanceNo);
+	}
+	
+	
 	
 	
 	
