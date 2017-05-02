@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
@@ -25,11 +25,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-				<h3>���ʷ� / ��Ż� / ���Ѽ� / ������ / ����ö</h3>
-				<h1>Team. �޺��Ƹ�</h1>
+				<h3>임초롬 / 김신삼 / 김한솔 / 양지연 / 전광철</h3>
+				<h1>Team. 햇병아리</h1>
 				<hr>
-				<a href="#" class="smoothScroll btn btn-danger">�α���</a>
-				<a href="${pageContext.request.contextPath}/Commute" class="smoothScroll btn btn-default">�⼮��</a>
+				<a href="#" class="smoothScroll btn btn-danger">로그인</a>
+				<a href="${pageContext.request.contextPath}/Commute" class="smoothScroll btn btn-default">출석부</a>
 			</div>
 		</div>
 	</div>		

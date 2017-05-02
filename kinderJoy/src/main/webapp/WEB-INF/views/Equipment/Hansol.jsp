@@ -58,13 +58,21 @@
 	   
 	});
 	$('#btTest').click(function(){
-		dataArray[dataArray.length] = hot.mergeCells;
+		dataArray[dataArray.length] = hot.mergeCells;	
+		var jArray = new Array();
+		
+		jArray = dataArray;
+		console.log(jArray);
+		
+		var jsonStr = JSON.stringify(jArray);
+		
+		console.log(jsonStr);
 	})
   
 	setTimeout(function(){
 // 		console.log(hot.mergeCells)
 // 		console.log(hot.getCellsMeta())
-// 		console.log(dataArray);
+// 		console.log(dataArray);s
 	},5000)
   
 </script>
