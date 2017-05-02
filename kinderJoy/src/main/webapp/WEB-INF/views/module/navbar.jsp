@@ -23,8 +23,59 @@
 				<li><a href="#" class="smoothScroll">비품</a></li>
 				<li><a href="#" class="smoothScroll">교원</a></li>
 				<li><a href="#" class="smoothScroll">자료실</a></li>
-				<li><a href="#" class="smoothScroll">CONTACT</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#myModal" class="smoothScroll">로그인</a></li>
 			</ul>
 		</div>
 	</div>
 </section>
+
+<body>
+
+<div class="container">
+  <!-- Trigger the modal with a button -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">로그인</h4>
+        </div>
+        <div class="modal-body">
+          
+
+
+
+
+  <form id="LoginForm" action="${pageContext.request.contextPath}/Login" method="post">
+    <div class="form-group">
+      <label>아이디:</label>
+      <input type="text" class="form-control" name="teacher_id" placeholder="아이디를 입력하세요">
+    </div>
+    <div class="form-group">
+      <label>비밀번호:</label>
+      <input type="password" class="form-control" name="teacher_pw" placeholder="비밀번호를 입력하세요">
+    </div>
+    
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+</body>

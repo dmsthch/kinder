@@ -152,8 +152,13 @@ public class CommuteController {
 		
 		Map<Object, Object> map = cDao.commuteCheck(teacherNo); //오늘날짜 출근부 체크
 		
+		System.out.println(map);
+		
 		String teacherName = map.get("teacherName")+"";
 		String attendanceStart = map.get("attendanceStart")+"";
+		
+		System.out.println(teacherName + "treacher naeaweffe");
+		System.out.println(attendanceStart);
 		
 		String notice = teacherName+"님 "+attendanceStart+" 출근등록 되셧습니다";
 		model.addAttribute("notice", notice);
