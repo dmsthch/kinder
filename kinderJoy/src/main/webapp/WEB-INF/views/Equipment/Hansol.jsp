@@ -72,7 +72,7 @@
 	setTimeout(function(){
 // 		console.log(hot.mergeCells)
 // 		console.log(hot.getCellsMeta())
-// 		console.log(dataArray);
+// 		console.log(dataArray);s
 	},5000)
   
 </script>
