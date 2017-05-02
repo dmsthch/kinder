@@ -4395,7 +4395,7 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, {
 
 
 	// Renders a set of rectangles over the given segments of time.
-	// MUST RETURN a subset of segs, the  that were actually rendered.
+	// MUST RETURN a subset of segs, the segs that were actually rendered.
 	// Responsible for populating this.elsByFill. TODO: better API for expressing this requirement
 	renderFill: function(type, segs) {
 		// subclasses must implement
@@ -5452,19 +5452,12 @@ Grid.mixin({
 	// Generic utility for generating the HTML classNames for an event segment's element
 	getSegClasses: function(seg, isDraggable, isResizable) {
 		var view = this.view;
-		if(seg.scheduleCategory==1){
-			var classes = [
-				'fc-event',
-				seg.isStart ? 'fc-start' : 'fc-not-start',
-				seg.isEnd ? 'fc-end' : 'fc-not-end'
-			].concat(this.getSegCustomClasses(seg));
-		}else if(seg.scheduleCategory==2){
-			var classes = [
-				'fc-event-private',
-				seg.isStart ? 'fc-start' : 'fc-not-start',
-				seg.isEnd ? 'fc-end' : 'fc-not-end'
-			].concat(this.getSegCustomClasses(seg));
-		}
+		var classes = [
+			'fc-event',
+			seg.isStart ? 'fc-start' : 'fc-not-start',
+			seg.isEnd ? 'fc-end' : 'fc-not-end'
+		].concat(this.getSegCustomClasses(seg));
+
 		if (isDraggable) {
 			classes.push('fc-draggable');
 		}
@@ -6952,7 +6945,7 @@ DayGrid.mixin({
 		var timeHtml = '';
 		var timeText;
 		var titleHtml;
-		var scheduleCategory;
+		
 
 		classes.unshift('fc-day-grid-event', 'fc-h-event');
 
@@ -14763,7 +14756,7 @@ var AgendaView = FC.AgendaView = View.extend({
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// 이벤트를 뷰에 렌더링하고 뷰의 세그먼트 배열을 채움
+	// Renders events onto the view and populates the View's segment array
 	renderEvents: function(events) {
 		var dayEvents = [];
 		var timedEvents = [];
@@ -14771,7 +14764,7 @@ var AgendaView = FC.AgendaView = View.extend({
 		var timedSegs;
 		var i;
 
-		// 이벤트를 하루 및 시간별로 분리
+		// separate the events into all-day and timed
 		for (i = 0; i < events.length; i++) {
 			if (events[i].allDay) {
 				dayEvents.push(events[i]);
@@ -14781,25 +14774,26 @@ var AgendaView = FC.AgendaView = View.extend({
 			}
 		}
 
-		// 하위 구성 요소의 이벤트를 렌더링
+		// render the events in the subcomponents
 		timedSegs = this.timeGrid.renderEvents(timedEvents);
 		if (this.dayGrid) {
 			daySegs = this.dayGrid.renderEvents(dayEvents);
 		}
-		
-		// 하루 영역은 많은 이벤트가있을 수 있으므로 높이를 이동할수 있도록 한다?.
+
 		// the all-day area is flexible and might have a lot of events, so shift the height
 		this.updateHeight();
 	},
 
-	// 뷰에 렌더링 된 모든 세그먼트 객체를 가져옴
+
+	// Retrieves all segment objects that are rendered in the view
 	getEventSegs: function() {
 		return this.timeGrid.getEventSegs().concat(
 			this.dayGrid ? this.dayGrid.getEventSegs() : []
 		);
 	},
 
-	// 모든 이벤트 요소를 취소하고 내부 세그먼트 데이터를 지웁니다.
+
+	// Unrenders all event elements and clears internal segment data
 	unrenderEvents: function() {
 
 		// unrender the events in the subcomponents
@@ -14816,7 +14810,7 @@ var AgendaView = FC.AgendaView = View.extend({
 	/* Dragging (for events and external elements)
 	------------------------------------------------------------------------------------------------------------------*/
 
-	// 'true'의 반환 값은 모의 "도우미"이벤트가 렌더링되었음을 나타냅니다.
+
 	// A returned value of `true` signals that a mock "helper" event has been rendered.
 	renderDrag: function(dropLocation, seg) {
 		if (dropLocation.start.hasTime()) {
@@ -14840,7 +14834,6 @@ var AgendaView = FC.AgendaView = View.extend({
 	------------------------------------------------------------------------------------------------------------------*/
 
 
-	// 선택 영역의 시각적 표시를 렌더링합니다.
 	// Renders a visual indication of a selection
 	renderSelection: function(span) {
 		if (span.start.hasTime() || span.end.hasTime()) {
@@ -14863,13 +14856,11 @@ var AgendaView = FC.AgendaView = View.extend({
 });
 
 
-//AgendaView의 timeGrid 렌더링 동작을 사용자 정의하는 메소드
 // Methods that will customize the rendering behavior of the AgendaView's timeGrid
 // TODO: move into TimeGrid
 var agendaTimeGridMethods = {
 
 
-	// 요일 머리글 셀 앞에 오는 HTML을 생성합니다.
 	// Generates the HTML that will go before the day-of week header cells
 	renderHeadIntroHtml: function() {
 		var view = this.view;
@@ -14892,7 +14883,6 @@ var agendaTimeGridMethods = {
 	},
 
 
-	// TimeGrid 슬롯 영역의 bg 앞에 오는 HTML을 생성합니다. 긴 세로 열.
 	// Generates the HTML that goes before the bg of the TimeGrid slot area. Long vertical column.
 	renderBgIntroHtml: function() {
 		var view = this.view;
@@ -14975,7 +14965,6 @@ fcViews.agendaWeek = {
 
 /*
 Responsible for the scroller, and forwarding event-related actions into the "grid"
-스크롤러를 담당하고 이벤트 관련 액션을 "그리드"로 전달합니다.
 */
 var ListView = View.extend({
 
@@ -15131,7 +15120,7 @@ var ListViewGrid = Grid.extend({
 		);
 	},
 
-	// 뷰에서 이벤트 세그먼트를 렌더링합니다.
+	// render the event segments in the view
 	renderSegList: function(allSegs) {
 		var segsByDay = this.groupSegsByDay(allSegs); // sparse array
 		var dayIndex;
@@ -15160,8 +15149,6 @@ var ListViewGrid = Grid.extend({
 		this.el.empty().append(tableEl);
 	},
 
-
-	// 배열의 배열을? 반환합니다. segs는 dayIndex로 그룹화됩니다
 	// Returns a sparse array of arrays, segs grouped by their dayIndex
 	groupSegsByDay: function(segs) {
 		var segsByDay = []; // sparse array

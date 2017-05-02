@@ -12,7 +12,7 @@
 <script src="js/LCR/Calendar/fullcalendar.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-		$('#calendar').fullCalendar({
+	$('#calendar').fullCalendar({
 		//맨위에 나오는것들. 왼쪽에는 달 앞뒤로 넘기는거랑 오늘로가기,
 		//가운데는 제목, 오른쪽에는 달, 주, 일별로 보기
 		header: {
@@ -45,19 +45,15 @@ $(document).ready(function() {
 		
 		//이부분이 데이터 표시해주는 부분.
 		events: [
- 		<c:forEach items="${allSchedule}" var="allSchedule">
-				{id : ${allSchedule.schedule_no} ,title : '${allSchedule.schedule_title}' , start : '${allSchedule.schedule_start_day}', end : '${allSchedule.schedule_end_day}' } ,
-		</c:forEach> 
+		<c:forEach items="${allSchedule}" var="allSchedule">
+		{id : ${allSchedule.schedule_no} ,title : '${allSchedule.schedule_title}' , start : '${allSchedule.schedule_start_day}', end : '${allSchedule.schedule_end_day}' } ,
+		</c:forEach>
 	/* 		{id : 2 ,title : '테스트제목2' , start : '2017-05-01', end : '2017-05-05' } ,
 			{id : 3 ,title : '테스트22' , start : '2017-05-01', end : '2017-05-01' } , */
 /* 			{title : 'asdftest', start : '20170501', end : '20170501' },
 			{id: 999, title: 'Repeating Event', start: '2017-04-09T16:00:00'} */
-			
-		
 		]
 	});
-	
-
 	
 });
 
@@ -83,11 +79,5 @@ $(document).ready(function() {
 calendarTest
 	<!-- id를 calendar로 해줘야함! -->
 	<div id='calendar'></div>
-	
-<%-- 	<c:if var="allSchedule" test="${allSchedule.category_no==1}">
-		cat1[cat1Length] = 	${allSchedule.schedule_no}
-		cat1Length++;
-		console.log(cat1.length);
-	</c:if> --%>
 </body>
 </html>
