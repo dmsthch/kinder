@@ -9,7 +9,7 @@ public class Schedule {
 	private String schedule_content;
 	private String schedule_start_day;
 	private String schedule_end_day;
-	private String scheduel_title;
+	private String schedule_title;
 	private String schedule_time;
 	
 	public int getSchedule_no() {
@@ -54,11 +54,11 @@ public class Schedule {
 	public void setSchedule_end_day(String schedule_end_day) {
 		this.schedule_end_day = schedule_end_day;
 	}
-	public String getScheduel_title() {
-		return scheduel_title;
+	public String getSchedule_title() {
+		return schedule_title;
 	}
 	public void setScheduel_title(String scheduel_title) {
-		this.scheduel_title = scheduel_title;
+		this.schedule_title = scheduel_title;
 	}
 	public String getSchedule_time() {
 		return schedule_time;

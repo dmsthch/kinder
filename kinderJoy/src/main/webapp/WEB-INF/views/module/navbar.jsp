@@ -16,15 +16,7 @@
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-<<<<<<< HEAD
-				<li><a href="/home" class="smoothScroll">Ä¶¸°´õ</a></li>
-				<li><a href="#" class="smoothScroll">±³À°°èÈ¹</a></li>
-				<li><a href="#" class="smoothScroll">À¯¾Æ</a></li>
-				<li><a href="#" class="smoothScroll">ºñÇ°</a></li>
-				<li><a href="#" class="smoothScroll">±³¿ø</a></li>
-				<li><a href="#" class="smoothScroll">ÀÚ·á½Ç</a></li>
-				<li><a href="${pageContext.request.contextPath}/index" class="smoothScroll">·Î±×ÀÎ</a></li>
-=======
+
 				<li><a href="/home" class="smoothScroll">ìº˜ë¦°ë”</a></li>
 				<li><a href="#" class="smoothScroll">êµìœ¡ê³„íš</a></li>
 				<li><a href="#" class="smoothScroll">ìœ ì•„</a></li>
@@ -32,7 +24,6 @@
 				<li><a href="#" class="smoothScroll">êµì›</a></li>
 				<li><a href="#" class="smoothScroll">ìë£Œì‹¤</a></li>
 				<li><a href="#" class="smoothScroll">CONTACT</a></li>
->>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 			</ul>
 		</div>
 	</div>
