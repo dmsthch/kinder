@@ -11,10 +11,10 @@ public class CalendarDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	public List<Schedule> selectAllSchedule(String license_kindergarten){
-		System.out.println(license_kindergarten);
+	public List<Schedule> selectAllSchedule(String licenseKindergarten){
+		System.out.println(licenseKindergarten);
 		System.out.println(sqlSessionTemplate + "sql zzzzz");
-		return 	sqlSessionTemplate.selectList("com.cafe24.dmsthch.Calendar.CalendarMapper.selectAllSchedule",license_kindergarten);		
+		return 	sqlSessionTemplate.selectList("com.cafe24.dmsthch.Calendar.CalendarMapper.selectAllSchedule",licenseKindergarten);		
 	}
 	
 	

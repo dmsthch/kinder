@@ -6,17 +6,17 @@
   
   <select id="selectAllSchedule" parameterType="String" resultType="com.cafe24.dmsthch.Calendar.Schedule">
   	SELECT 
-  		schedule_no
-  		,teacher_no
-  		,license_kindergarten
-  		,category_no
-  		,schedule_content
-  		,schedule_start_day
-  		,schedule_end_day
-  		,schedule_title
-  		,schedule_time
+  		schedule_no as scheduleNo 
+  		,teacher_no as teacherNo
+  		,license_kindergarten as licenseKindergarten
+  		,category_no as categoryNo
+  		,schedule_content as scheduleContent
+  		,schedule_start_day as scheduleStartDay
+  		,schedule_end_day as scheduleEndDay
+  		,schedule_title as scheduleTitle
+  		,schedule_time as scheduleTime
   	FROM schedule
-  	WHERE license_kindergarten = #{license_kindergarten}
+  	WHERE license_kindergarten = #{licenseKindergarten}
   </select>
   
   

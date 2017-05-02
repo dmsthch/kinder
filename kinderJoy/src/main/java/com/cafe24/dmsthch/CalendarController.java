@@ -34,11 +34,9 @@ public class CalendarController {
 		return "Calendar/Calendar";
 	}
 	
-
-	@RequestMapping(value = "/romiTest2", method = RequestMethod.GET)
-	public String save(Model model
+	@RequestMapping(value = "/getScheduleContent", method = RequestMethod.GET)
+	public String getScheduleContent(Model model
 			,@RequestParam(value="jsonStr") List<String> jsonStr){
-
 		System.out.println(jsonStr);
 		model.addAttribute("jsonStr", jsonStr);
 		return null;
