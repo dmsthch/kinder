@@ -9,7 +9,7 @@
 <link href="css/LCR/Calendar/fullcalendar.print.min.css" rel="stylesheet" media="print" />
 <script src="js/LCR/Calendar/lib/moment.min.js"></script>
 <script src="js/LCR/Calendar/lib/jquery.min.js"></script>
-<script src="js/LCR/Calendar/fullcalendar.min.js"></script>
+<script src="js/LCR/Calendar/fullcalendar2.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 		$('#calendar').fullCalendar({
@@ -42,11 +42,10 @@ $(document).ready(function() {
 		
 		editable: true,
 		eventLimit: true, // allow "more" link when too many events
-		
 		//이부분이 데이터 표시해주는 부분.
 		events: [
  		<c:forEach items="${allSchedule}" var="allSchedule">
-				{id : ${allSchedule.schedule_no} ,title : '${allSchedule.schedule_title}' , start : '${allSchedule.schedule_start_day}', end : '${allSchedule.schedule_end_day}' } ,
+				{id : ${allSchedule.schedule_no} ,title : '${allSchedule.schedule_title}' , start : '${allSchedule.schedule_start_day}', end : '${allSchedule.schedule_end_day}', cateTest : '${allSchedule.category_no}' } ,
 		</c:forEach> 
 	/* 		{id : 2 ,title : '테스트제목2' , start : '2017-05-01', end : '2017-05-05' } ,
 			{id : 3 ,title : '테스트22' , start : '2017-05-01', end : '2017-05-01' } , */

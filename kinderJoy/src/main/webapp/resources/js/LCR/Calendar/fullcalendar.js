@@ -4460,7 +4460,7 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, {
 
 	fillSegTag: 'div', // subclasses can override
 
-
+	// 하나의 채우기 세그먼트에 필요한 HTML을 작성합니다. 
 	// Builds the HTML needed for one fill segment. Generic enough to work with different types.
 	fillSegHtml: function(type, seg) {
 
@@ -4468,11 +4468,12 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, {
 		var classesMethod = this[type + 'SegClasses'];
 		var cssMethod = this[type + 'SegCss'];
 
+	//클래스들 선언된곳?
 		var classes = classesMethod ? classesMethod.call(this, seg) : [];
 		var css = cssToStr(cssMethod ? cssMethod.call(this, seg) : {});
 
 		return '<' + this.fillSegTag +
-			(classes.length ? ' class="' + classes.join(' ') + '"' : '') +
+			(classes.length ? ' class=" test '+ classes.join(' ') + '"' : '') +
 			(css ? ' style="' + css + '"' : '') +
 			' />';
 	},
@@ -5448,23 +5449,15 @@ Grid.mixin({
 		return '';
 	},
 
-
+	//체크
 	// Generic utility for generating the HTML classNames for an event segment's element
 	getSegClasses: function(seg, isDraggable, isResizable) {
 		var view = this.view;
-		if(seg.scheduleCategory==1){
 			var classes = [
 				'fc-event',
 				seg.isStart ? 'fc-start' : 'fc-not-start',
 				seg.isEnd ? 'fc-end' : 'fc-not-end'
 			].concat(this.getSegCustomClasses(seg));
-		}else if(seg.scheduleCategory==2){
-			var classes = [
-				'fc-event-private',
-				seg.isStart ? 'fc-start' : 'fc-not-start',
-				seg.isEnd ? 'fc-end' : 'fc-not-end'
-			].concat(this.getSegCustomClasses(seg));
-		}
 		if (isDraggable) {
 			classes.push('fc-draggable');
 		}
@@ -6940,6 +6933,20 @@ DayGrid.mixin({
 
 	// Builds the HTML to be used for the default element for an individual segment
 	fgSegHtml: function(seg, disableResizing) {
+/*		var view = this.view;
+		var event = seg.event;
+		var isDraggable = view.isEventDraggable(event);
+		var isResizableFromStart = !disableResizing && event.allDay &&
+			seg.isStart && view.isEventResizableFromStart(event);
+		var isResizableFromEnd = !disableResizing && event.allDay &&
+			seg.isEnd && view.isEventResizableFromEnd(event);
+		var classes = this.getSegClasses(seg, isDraggable, isResizableFromStart || isResizableFromEnd);
+		var skinCss = cssToStr(this.getSegSkinCss(seg));
+		var timeHtml = '';
+		var timeText;
+		var titleHtml;
+		var scheduleCategory;*/
+		
 		var view = this.view;
 		var event = seg.event;
 		var isDraggable = view.isEventDraggable(event);
@@ -6953,9 +6960,9 @@ DayGrid.mixin({
 		var timeText;
 		var titleHtml;
 		var scheduleCategory;
-
+		
 		classes.unshift('fc-day-grid-event', 'fc-h-event');
-
+		//체크!
 		// Only display a timed events time if it is the starting segment
 		if (seg.isStart) {
 			timeText = this.getEventTimeText(event);
@@ -11050,7 +11057,7 @@ var Calendar = FC.Calendar = Class.extend({
 			}
 
 			if (overrides) {
-				overridesChain.unshift(overrides); // view-specific option hashes have options at zero-level
+				overridesChain.(overrides); // view-specific option hashes have options at zero-level
 				durationInput = durationInput || overrides.duration;
 				viewType = viewType || overrides.type;
 			}
@@ -15231,9 +15238,10 @@ var ListViewGrid = Grid.extend({
 			classes.push('fc-has-url');
 		}
 
+		//요놈
 		return '<tr class="' + classes.join(' ') + '">' +
 			(this.displayEventTime ?
-				'<td class="fc-list-item-time ' + view.widgetContentClass + '">' +
+				'<td class="fc-list-item-time test ' + view.widgetContentClass + '">' +
 					(timeHtml || '') +
 				'</td>' :
 				'') +

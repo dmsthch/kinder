@@ -27,20 +27,15 @@ var FC = $.fullCalendar = {
 };
 var fcViews = FC.views = {};
 
-//풀캘린더 
-//옵션들을 받음
+
 $.fn.fullCalendar = function(options) {
-	var args = Array.prototype.slice.call(arguments, 1); // for a possible method call 메서드 호출을위해?
-	var res = this; // what this function will return (this jQuery object by default) 반환할 함수?
-    console.log(options+"<--options");
-	this.each(function(i, _element) { // loop each DOM element involved 반복한다. this를 반복하니까 element에는 option이 들어가나?
+	var args = Array.prototype.slice.call(arguments, 1); // for a possible method call
+	var res = this; // what this function will return (this jQuery object by default)
+
+	this.each(function(i, _element) { // loop each DOM element involved
 		var element = $(_element);
-		console.log(element+"<<-element")
-		var calendar = element.data('fullCalendar'); 
-		console.log(calendar+"<<<calendar")
-		// get the existing calendar object (if any)
-		// 기존 달력 객체를 가져옵니다.
-		var singleRes; // the returned value of this single method call 이 단일의 메소드 호출의 반환 값
+		var calendar = element.data('fullCalendar'); // get the existing calendar object (if any)
+		var singleRes; // the returned value of this single method call
 
 		// a method call
 		if (typeof options === 'string') {
@@ -67,7 +62,6 @@ $.fn.fullCalendar = function(options) {
 
 
 var complexOptions = [ // names of options that are objects whose properties should be combined
-	// 속성을 결합해야하는 객체인 옵션의 이름
 	'header',
 	'footer',
 	'buttonText',
@@ -5458,9 +5452,7 @@ Grid.mixin({
 	// Generic utility for generating the HTML classNames for an event segment's element
 	getSegClasses: function(seg, isDraggable, isResizable) {
 		var view = this.view;
-		//체크!
 		var classes = [
-			'test',
 			'fc-event',
 			seg.isStart ? 'fc-start' : 'fc-not-start',
 			seg.isEnd ? 'fc-end' : 'fc-not-end'
@@ -7447,16 +7439,13 @@ DayGrid.mixin({
 		// delegated-handlers for free. attach event-related handlers to the popover.
 		this.bindSegHandlersToEl(this.segPopover.el);
 	},
-	
-	//체크
-	
+
 
 	// Builds the inner DOM contents of the segment popover
 	renderSegPopoverContent: function(row, col, segs) {
 		var view = this.view;
 		var isTheme = view.opt('theme');
 		var title = this.getCellDate(row, col).format(view.opt('dayPopoverFormat'));
-	
 		var content = $(
 			'<div class="fc-header ' + view.widgetHeaderClass + '">' +
 				'<span class="fc-close ' +
@@ -7471,7 +7460,6 @@ DayGrid.mixin({
 				'<div class="fc-event-container"></div>' +
 			'</div>'
 		);
-		console.log(htmlEscape(title));
 		var segContainer = content.find('.fc-event-container');
 		var i;
 

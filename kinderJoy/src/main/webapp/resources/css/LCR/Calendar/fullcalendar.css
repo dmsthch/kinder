@@ -541,6 +541,13 @@ temporary rendered events).
 	background-color: #3a87ad;
 }
 
+.test{
+	background-color: black;
+}
+
+
+
+
 /* overpower some of bootstrap's and jqui's styles on <a> tags */
 .fc-event,
 .fc-event:hover,
