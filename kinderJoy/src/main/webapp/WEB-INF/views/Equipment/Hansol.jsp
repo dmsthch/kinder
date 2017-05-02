@@ -58,7 +58,15 @@
 	   
 	});
 	$('#btTest').click(function(){
-		dataArray[dataArray.length] = hot.mergeCells;
+		dataArray[dataArray.length] = hot.mergeCells;	
+		var jArray = new Array();
+		
+		jArray = dataArray;
+		console.log(jArray);
+		
+		var jsonStr = JSON.stringify(jArray);
+		
+		console.log(jsonStr);
 	})
   
 	setTimeout(function(){

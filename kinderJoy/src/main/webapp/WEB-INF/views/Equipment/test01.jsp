@@ -56,16 +56,12 @@
 	    	<jsp:include page="../Equipment/Hansol.jsp"></jsp:include>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="OfficeSupplies">
-	    	<jsp:include page="../Equipment/Hansol2.jsp"></jsp:include>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="PhysicalApparatus">
-	    	<jsp:include page="../Equipment/Hansol3.jsp"></jsp:include>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="BookList">
-	   		<jsp:include page="../Equipment/Hansol4.jsp"></jsp:include>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="Etc">
-	    	<jsp:include page="../Equipment/Hansol5.jsp"></jsp:include>
 	    </div>	
 	  </div>
 </div>
