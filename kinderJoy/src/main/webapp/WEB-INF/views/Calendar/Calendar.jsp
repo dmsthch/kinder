@@ -4,12 +4,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- CSS Link -->
+	<c:import url="../module/importCSS.jsp"></c:import>
+	<!-- JS Link -->
+	<c:import url="../module/importJS.jsp"></c:import>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="css/LCR/Calendar/fullcalendar.css" rel="stylesheet" />
 <link href="css/LCR/Calendar/fullcalendar.print.min.css" rel="stylesheet" media="print" />
 <script src="js/LCR/Calendar/lib/moment.min.js"></script>
 <script src="js/LCR/Calendar/lib/jquery.min.js"></script>
 <script src="js/LCR/Calendar/fullcalendar2.js"></script>
+
+
+	
 <script type="text/javascript">
 $(document).ready(function() {
 		$('#calendar').fullCalendar({
@@ -79,6 +86,9 @@ $(document).ready(function() {
 </style>
 </head>
 <body>
+<!-- navbar -->
+<c:import url="../module/navbar.jsp"></c:import>
+
 calendarTest
 	<!-- id를 calendar로 해줘야함! -->
 	<div id='calendar'></div>

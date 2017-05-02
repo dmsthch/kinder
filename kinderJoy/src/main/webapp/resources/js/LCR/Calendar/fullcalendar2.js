@@ -5455,17 +5455,33 @@ Grid.mixin({
 	},
 
 
-	// Generic utility for generating the HTML classNames for an event segment's element
+	/*// Generic utility for generating the HTML classNames for an event segment's element
+	// 이벤트 클래스의 요소에 대한 HTML classNames 생성을위한 일반 유틸리티
 	getSegClasses: function(seg, isDraggable, isResizable) {
 		var view = this.view;
 		//체크!
-		var classes = [
-			'test',
-			'fc-event',
-			seg.isStart ? 'fc-start' : 'fc-not-start',
-			seg.isEnd ? 'fc-end' : 'fc-not-end'
-		].concat(this.getSegCustomClasses(seg));
-
+		console.log(cateTest);
+		if(cateTest==1){
+			var classes = [ 
+				'test',
+				'fc-event',
+				seg.isStart ? 'fc-start' : 'fc-not-start',
+				seg.isEnd ? 'fc-end' : 'fc-not-end'
+			].concat(this.getSegCustomClasses(seg));
+		}else if(ceteTest ==2){
+			var classes = [ 
+				'fc-event',
+				seg.isStart ? 'fc-start' : 'fc-not-start',
+				seg.isEnd ? 'fc-end' : 'fc-not-end'
+			].concat(this.getSegCustomClasses(seg));
+		}else{
+			var classes = [ 
+				'fc-event',
+				seg.isStart ? 'fc-start' : 'fc-not-start',
+				seg.isEnd ? 'fc-end' : 'fc-not-end'
+			].concat(this.getSegCustomClasses(seg));
+			
+		}
 		if (isDraggable) {
 			classes.push('fc-draggable');
 		}
@@ -5479,7 +5495,7 @@ Grid.mixin({
 		}
 
 		return classes;
-	},
+	},*/
 
 
 	// List of classes that were defined by the caller of the API in some way
@@ -6953,6 +6969,10 @@ DayGrid.mixin({
 		var timeHtml = '';
 		var timeText;
 		var titleHtml;
+		var cateTest = htmlEscape(event.cateTest || '');
+		console.log(cateTest);
+		
+		
 		
 
 		classes.unshift('fc-day-grid-event', 'fc-h-event');
@@ -6969,8 +6989,12 @@ DayGrid.mixin({
 			'<span class="fc-title">' +
 				(htmlEscape(event.title || '') || '&nbsp;') + // we always want one line of height
 			'</span>';
-		
-		return '<a class="' + classes.join(' ') + '"' +
+		console.log(htmlEscape(event.title || ''));
+
+		//체크
+/*		var cateTest = htmlEscape(event.cateTest || '');
+		console.log(cateTest+"<<cateTest");*/
+		/*return '<a class="' + classes.join(' ') + '"' +
 				(event.url ?
 					' href="' + htmlEscape(event.url) + '"' :
 					''
@@ -6994,9 +7018,88 @@ DayGrid.mixin({
 					'<div class="fc-resizer fc-end-resizer" />' :
 					''
 					) +
-			'</a>';
+			'</a>';*/
+		//체크
+		if(cateTest==1){
+			return '<a class="' + classes.join(' ') + '"' +
+			(event.url ?
+				' href="' + htmlEscape(event.url) + '"' :
+				''
+				) +
+			(skinCss ?
+				' style="' + skinCss + '"' :
+				''
+				) +
+		'>' +
+			'<div class="fc-content fc-event-private">' +
+				(this.isRTL ?
+					titleHtml + ' ' + timeHtml : // put a natural space in between
+					timeHtml + ' ' + titleHtml   //
+					) +
+			'</div>' +
+			(isResizableFromStart ?
+				'<div class="fc-resizer fc-start-resizer" />' :
+				''
+				) +
+			(isResizableFromEnd ?
+				'<div class="fc-resizer fc-end-resizer" />' :
+				''
+				) +
+		'</a>';
+		}else{
+			return '<a class="' + classes.join(' ') + '"' +
+			(event.url ?
+				' href="' + htmlEscape(event.url) + '"' :
+				''
+				) +
+			(skinCss ?
+				' style="' + skinCss + '"' :
+				''
+				) +
+		'>' +
+			'<div class="fc-content">' +
+				(this.isRTL ?
+					titleHtml + ' ' + timeHtml : // put a natural space in between
+					timeHtml + ' ' + titleHtml   //
+					) +
+			'</div>' +
+			(isResizableFromStart ?
+				'<div class="fc-resizer fc-start-resizer" />' :
+				''
+				) +
+			(isResizableFromEnd ?
+				'<div class="fc-resizer fc-end-resizer" />' :
+				''
+				) +
+		'</a>';
+		}
 	},
 
+	
+	// Generic utility for generating the HTML classNames for an event segment's element
+		// 이벤트 클래스의 요소에 대한 HTML classNames 생성을위한 일반 유틸리티
+		getSegClasses: function(seg, isDraggable, isResizable) {
+			var view = this.view;
+			//체크!
+			var classes = [ 
+				'fc-event',
+				seg.isStart ? 'fc-start' : 'fc-not-start',
+				seg.isEnd ? 'fc-end' : 'fc-not-end'
+			].concat(this.getSegCustomClasses(seg));
+			if (isDraggable) {
+				classes.push('fc-draggable');
+			}
+			if (isResizable) {
+				classes.push('fc-resizable');
+			}
+
+			// event is currently selected? attach a className.
+			if (view.isEventSelected(seg.event)) {
+				classes.push('fc-selected');
+			}
+
+			return classes;
+		},
 
 	// Given a row # and an array of segments all in the same row, render a <tbody> element, a skeleton that contains
 	// the segments. Returns object with a bunch of internal data about how the render was calculated.
@@ -7456,7 +7559,7 @@ DayGrid.mixin({
 		var view = this.view;
 		var isTheme = view.opt('theme');
 		var title = this.getCellDate(row, col).format(view.opt('dayPopoverFormat'));
-	
+	//타이틀은여기있음
 		var content = $(
 			'<div class="fc-header ' + view.widgetHeaderClass + '">' +
 				'<span class="fc-close ' +
@@ -7471,7 +7574,6 @@ DayGrid.mixin({
 				'<div class="fc-event-container"></div>' +
 			'</div>'
 		);
-		console.log(htmlEscape(title));
 		var segContainer = content.find('.fc-event-container');
 		var i;
 
