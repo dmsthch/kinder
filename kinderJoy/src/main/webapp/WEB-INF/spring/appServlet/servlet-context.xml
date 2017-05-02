@@ -44,6 +44,7 @@
                 <beans:value>classpath:com/cafe24/dmsthch/Commute/CommuteMapper.xml</beans:value> <!-- 한솔이꺼 -->
                 <beans:value>classpath:com/cafe24/dmsthch/Calendar/CalendarMapper.xml</beans:value> <!-- 로미꺼 캘린더 -->
                 <beans:value>classpath:com/cafe24/dmsthch/Child/ChildMapper.xml</beans:value>
+                <beans:value>classpath:com/cafe24/dmsthch/Equipment/EquipmentMapper.xml</beans:value>
             </beans:list>
         </beans:property>
     </beans:bean>

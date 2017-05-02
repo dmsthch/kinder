@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
+  	<insert id="addEquipment" parameterType="java.util.Map">
+  		INSERT INTO sheet_value(
+  		 	teacher_no
+  			,license_kindergarten
+  			,sheet_content
+  		) VALUES(
+  		 	#{teacherNo}
+  			,#{teacherLicense}
+  			,#{jsonStr}
+  		);
+  	</insert>
+
+  </mapper>
