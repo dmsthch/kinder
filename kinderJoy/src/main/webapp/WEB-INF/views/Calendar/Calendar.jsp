@@ -16,7 +16,7 @@
 <script src="js/LCR/Calendar/fullcalendar2.js"></script>
 
 
-	
+
 <script type="text/javascript">
 $(document).ready(function() {
 		$('#calendar').fullCalendar({
@@ -85,13 +85,12 @@ $(document).ready(function() {
 
 </style>
 </head>
-<body>
+<body >
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 
-calendarTest
 	<!-- id를 calendar로 해줘야함! -->
-	<div id='calendar'></div>
+	<div id='calendar' style="margin-top: 50px;"></div>
 	
 <%-- 	<c:if var="allSchedule" test="${allSchedule.category_no==1}">
 		cat1[cat1Length] = 	${allSchedule.schedule_no}
