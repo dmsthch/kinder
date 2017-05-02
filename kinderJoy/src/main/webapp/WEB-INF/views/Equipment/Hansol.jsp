@@ -67,12 +67,27 @@
 		var jsonStr = JSON.stringify(jArray);
 		
 		console.log(jsonStr);
-	})
+		
+	    $.ajax({
+	        url:"${pageContext.request.contextPath}/save",
+	        type:'GET',
+	        data: {jsonStr:jsonStr},
+	        success:function(data){
+	            alert("asdf!");
+	            window.opener.location.reload();
+	            self.close();
+	        },
+	        error:function(jqXHR, textStatus, errorThrown){
+	            alert("fdsa~~ \n" + textStatus + " : " + errorThrown);
+	            self.close();
+	        }
+		});
   
 	setTimeout(function(){
 // 		console.log(hot.mergeCells)
 // 		console.log(hot.getCellsMeta())
 // 		console.log(dataArray);s
 	},5000)
+	})
   
 </script>
