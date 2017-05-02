@@ -4,6 +4,7 @@
   
   <mapper namespace="com.cafe24.dmsthch.Calendar.CalendarMapper">
   
+  <!-- 모든스케줄 셀렉트 -->
   <select id="selectAllSchedule" parameterType="String" resultType="com.cafe24.dmsthch.Calendar.Schedule">
   	SELECT 
   		schedule_no as scheduleNo 
@@ -17,6 +18,22 @@
   		,schedule_time as scheduleTime
   	FROM schedule
   	WHERE license_kindergarten = #{licenseKindergarten}
+  </select>
+  
+  <!-- 하나의 스케쥴 셀렉트 -->
+  <select id="selectOneSchedule" parameterType="Integer" resultType="com.cafe24.dmsthch.Calendar.Schedule">
+  	SELECT 
+  		schedule_no as scheduleNo 
+  		,teacher_no as teacherNo
+  		,license_kindergarten as licenseKindergarten
+  		,category_no as categoryNo
+  		,schedule_content as scheduleContent
+  		,schedule_start_day as scheduleStartDay
+  		,schedule_end_day as scheduleEndDay
+  		,schedule_title as scheduleTitle
+  		,schedule_time as scheduleTime
+  	FROM schedule
+  	WHERE schedule_no = #{scheduleNo}
   </select>
   
   

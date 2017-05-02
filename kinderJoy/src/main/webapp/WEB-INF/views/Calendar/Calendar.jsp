@@ -69,7 +69,7 @@ $(document).ready(function() {
 		
 	//모달창열기!!!!!!!!!!!!!!
 	$('.callModal').click(function(){
-		$('#opneModal').trigger('click');
+		
 		//id로 하면 일정이 일주일을 넘어서 다른줄로 넘어갈때 각 개체마다 id를 부여해버려서 안됨.
 		//그래서 scheduleNo를 클래스로 넣어버렸음. schedule_no_숫자  이렇게!
 		//그걸 가져와야함.
@@ -104,14 +104,18 @@ $(document).ready(function() {
 		$.ajax({
 	        url:"${pageContext.request.contextPath}/getScheduleContent",
 	        type:'GET',
-	        data: {she},
+	        data: {"scheduleNo" : getScheduleNo},
+	        dataType:'JSON',
+	        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	        success:function(data){
-	            alert("성공!");
-	            
+	            //alert("성공!")
+	            //alert(data.scheduleContent);
+	            $('.calendarModalTitle').text(data.scheduleTitle);
+	            $('.calendarModalBody').text(data.scheduleContent);
+	            $('#opneModal').trigger('click');
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("실패" + textStatus + " : " + errorThrown);
-	            self.close();
 	        }
 		});
 		
@@ -153,27 +157,27 @@ $(document).ready(function() {
 	
 	
 
-	<!-- 모답버튼! -->
+	<!-- 모달버튼! -->
 <div style="display: none;">
-	<button type="button" id="opneModal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+	<button type="button" id="opneModal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#calendarModal">Open Modal</button>
 </div>
 
 
 
 	<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="calendarModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
+    <div class="modal-content calendarModalContent">
+      <div class="modal-header calendarModalHeader">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"></h4>
+        <h4 class="modal-title calendarModalTitle"></h4>
       </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
+      <div class="modalBody calendarModalBody">
+        Some text in the modal.
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer calendarModalFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
