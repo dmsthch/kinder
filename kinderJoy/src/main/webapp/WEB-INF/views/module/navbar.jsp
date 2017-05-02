@@ -6,7 +6,7 @@
 
 
 <!-- navigation section -->
-<section class="navbar navbar-fixed-top custom-navbar" role="navigation"s>
+<section class="navbar navbar-fixed-top custom-navbar top-nav-collapse" role="navigation"s>
 	<div class="container">
 		<div class="navbar-header">
 			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -19,7 +19,7 @@
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
 
-				<li><a href="#" class="smoothScroll">캘린더</a></li>
+				<li><a href="${pageContext.request.contextPath}/carendarTest" class="smoothScroll">캘린더</a></li>
 				<li><a href="#" class="smoothScroll">교육계획</a></li>
 				<li><a href="#" class="smoothScroll">유아</a></li>
 				<li><a href="#" class="smoothScroll">비품</a></li>
@@ -27,11 +27,11 @@
 				<li><a href="#" class="smoothScroll">자료실</a></li>
 				
 			<c:if test= "${null eq teacherId}">
-	<li><a href="#" data-toggle="modal" data-target="#signIn" class="smoothScroll">로그인</a></li>			
+				<li><a href="#" data-toggle="modal" data-target="#signIn" class="smoothScroll">로그인</a></li>			
 			</c:if>
 
 			<c:if test="${null ne teacherId}">
-	<li><a href="#" data-toggle="modal" data-target="#signOut" class="smoothScroll">로그아웃</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#signOut" class="smoothScroll">로그아웃</a></li>
 			</c:if>
 
 			</ul>
@@ -43,10 +43,7 @@
 
 <!-- ★★★★★ 로그인 모달 시작★★★★★ -->
 <c:import url="/WEB-INF/views/Teacher/modal/login.jsp"></c:import>
-
-
 <!-- ★★★★★권한확인 및 로그아웃 모달 시작★★★★★ -->
 <c:import url="/WEB-INF/views/Teacher/modal/logout.jsp"></c:import>
-
 
 </body>
