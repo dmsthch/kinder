@@ -38,4 +38,9 @@ public class HomeController {
 		return "/home";
 	}
 	
+	@RequestMapping(value="/testFull", method=RequestMethod.GET)
+	public String testView(){
+		return "/test";
+	}
+	
 }
