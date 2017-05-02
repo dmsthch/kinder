@@ -33,7 +33,9 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "/EducationSchedule/EducationScheduleForm";
+		String defaultUri = "/EducationSchedule/EducationScheduleForm";
+		
+		return "/home";
 	}
 	
 }

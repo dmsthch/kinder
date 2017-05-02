@@ -1,14 +1,18 @@
 package com.cafe24.dmsthch;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
@@ -64,13 +68,13 @@ public class TeacherController {
 		if(session.getAttribute("teacherId") == null){
 			return "Teacher/TeacherLogin";
 		}else{
-			return "Teacher/TeacherModify";
+			return "home";
 		}
 	}
 	
 	
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
-	public String Login(Model model,Teacher teacher) {
+	public String Login(HttpServletRequest request, Model model,Teacher teacher) {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
 		System.out.println(TDao+" <--TDao 동작 확인");
@@ -95,11 +99,13 @@ public class TeacherController {
 		model.addAttribute("teacherLevel" ,saveSession.getTeacher_level());
 		System.out.println(saveSession.getTeacher_level() + " <--세션에 저장될 레벨값");
 		
+		//session.setMaxInactiveInterval(1);
+		request.getSession().setAttribute("logOuting",model);
 		//매개변수 : HttpSessionEvent se
 		//HttpSession getsession = se.getSession();
 		//System.out.println("생성된 세션값 "+getsession.getId());
 		}
-		return "Teacher/TeacherModify";
+		return "home";
 	}
 	
 	@RequestMapping(value="/index", method=RequestMethod.GET)
@@ -107,6 +113,15 @@ public class TeacherController {
 		return "Teacher/test";
 	}
 	
-	
+	@RequestMapping(value="/logOut", method=RequestMethod.GET)
+	public String logOut(@ModelAttribute Teacher teacher ,SessionStatus sessionstatus){
+		
+
+		sessionstatus.setComplete();
+
+		
+		System.out.println(sessionstatus);
+		return "redirect:/home";
+	}
 	
 }
