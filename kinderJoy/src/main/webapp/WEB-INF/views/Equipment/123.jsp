@@ -5,15 +5,15 @@
 <head>
 	<meta charset='utf-8'>
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="js/KSS/handsontable.css">
-	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="js/KSS/pikaday/pikaday.css">
-	<script data-jsfiddle="common" src="js/KSS/pikaday/pikaday.js"></script>
-	<script data-jsfiddle="common" src="js/KSS/moment/moment.js"></script>
-	<script data-jsfiddle="common" src="js/KSS/zeroclipboard/ZeroClipboard.js"></script>
-	<script data-jsfiddle="common" src="js/KSS/numbro/numbro.js"></script>
-	<script data-jsfiddle="common" src="js/KSS/numbro/languages.js"></script>
-	<script data-jsfiddle="common" src="js/KSS/handsontable.js"></script>
-	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="js/KSS/samples.css?20140331">
+	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="../dist/handsontable.css">
+	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="../dist/pikaday/pikaday.css">
+	<script data-jsfiddle="common" src="../dist/pikaday/pikaday.js"></script>
+	<script data-jsfiddle="common" src="../dist/moment/moment.js"></script>
+	<script data-jsfiddle="common" src="../dist/zeroclipboard/ZeroClipboard.js"></script>
+	<script data-jsfiddle="common" src="../dist/numbro/numbro.js"></script>
+	<script data-jsfiddle="common" src="../dist/numbro/languages.js"></script>
+	<script data-jsfiddle="common" src="../dist/handsontable.js"></script>
+	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="css/samples.css?20140331">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<title>Insert title here</title>
 </head>
@@ -27,7 +27,7 @@
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
 	
-	var testData = [ {0:1 ,1:2} , {0:1 ,1:2} , {0:1 ,1:2} ]; //ë°ì´í„°
+	var testData = [ {0:1 ,1:2} , {0:1 ,1:2} , {0:1 ,1:2} ]; //µ¥ÀÌÅÍ
 	var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
 	
 	var myMerge = [ {row: 0, col: 0, rowspan: 2, colspan: 2},  {row: 0, col: 2, rowspan: 2, colspan: 2}, 
@@ -53,7 +53,7 @@
 	
 	
 		hot = new Handsontable(container, {
-// 			data: testData,    //ë°ì´í„° ê°€ì ¸ì˜¤ê¸°
+// 			data: testData,    //µ¥ÀÌÅÍ °¡Á®¿À±â
 			startRows: 14,
 			startCols: 15,
 			rowHeaders : true,
@@ -66,14 +66,14 @@
 // 			contextMenuCopyPaste: {
 // 			    swfPath: 'swf/ZeroClipboard.swf'
 // 			},
-			mergeCells: myMerge, //ì…€ë³‘í•© ê°€ì ¸ì˜¤ê¸°
-// 			mergeCells: testMerge, //ì…€ë³‘í•© ê°€ì ¸ì˜¤ê¸°
+			mergeCells: myMerge, //¼¿º´ÇÕ °¡Á®¿À±â
+// 			mergeCells: testMerge, //¼¿º´ÇÕ °¡Á®¿À±â
 			
-			afterChange : function(data, type){ //data{ì—´, í–‰, ì´ì „ê°’, í˜„ì¬ê°’} type="ì´ë²¤íŠ¸ ì¢…ë¥˜"
+			afterChange : function(data, type){ //data{¿­, Çà, ÀÌÀü°ª, ÇöÀç°ª} type="ÀÌº¥Æ® Á¾·ù"
 				console.log(data, type)
 				
 				if(dataArray === undefined){
-					console.log('ì´ˆê¹…í™”')
+					console.log('ÃÊ±ëÈ­')
 					dataArray = [];
 				}
 				
@@ -99,29 +99,47 @@
 	$('#btTest').click(function(){
 // 		dataArray[dataArray.length] = hot.mergeCells;
 		
-		var jArray = myMerge3;
-// 		var jArray = myMerge;
+		var sendData = myMerge3;
+		alert(sendData);
 		
-		var jsonStr = JSON.stringify(jArray);
 		
-		console.log(jsonStr + "JSON.stringify() í›„");
+		var request = $.ajax({
+		    url:"http://localhost:8088/HandsonTableTest/demo/hansol2Test.jsp",
+		    type:"POST",
+		    data:sendData,
+		    dataType:"json",
+		    error : function(error) {
+		    	console.log(data);
+				alert(error);
+		    }
+		   });
 		
-		$.ajax({
-	        url:"${pageContext.request.contextPath}/send",
-	        type:'GET',
-	        data: {jsonStr:jsonStr},
-	        success:function(data){
-	            alert("asdf!");
-// 	            window.opener.location.reload();
-// 	            self.close();
-	        },
-	        error:function(jqXHR, textStatus, errorThrown){
-	            alert("fdsa~~ \n" + textStatus + " : " + errorThrown);
-	            self.close();
-	        }
-		});
-		
-	});
+// 		$.ajax({
+// 		    type : 'POST',
+// 		    url : "http://localhost:8088/HandsonTableTest/demo/hansol2Test.jsp",
+// 		    dataType : "json",
+// 		    headers : {
+// 		    	Accept: "application/json; charset=utf-8",
+// 		        "Content-Type": "application/json; charset=utf-8"
+// 		    },
+// 		    statusCode : {
+// 		        200 : function(data) {
+// 		        	console.log(data);
+// 		        }
+// 		    },
+// 		    contentType : "application/json",
+// 		    data : JSON.stringify(sendData),
+// 		    success:function(data){
+// 		    	console.log(data);
+// 		    	alert(s);
+// 		    },
+// 		    error : function(error) {
+// 		    	console.log(data);
+// 				alert(f);
+// 		    }
+// 		});
+
+	})
   
 	setTimeout(function(){
 // 		console.log(hot.mergeCells)
