@@ -26,21 +26,24 @@ public class CommuteController {
 	private TeacherDao tDao;
 	
 	
-	private Map commuteMap = null;
 	
-//	@Autowired
-//	public CommuteController(HttpSession session) {
-//		
-//		if(session.getAttribute("teacherNo") != null){
-//			int teacherNo = (Integer) session.getAttribute("teacherNo");
-//			commuteMap = cDao.commuteCheck(teacherNo);
-//		}
-//		
-//	}
-//	
-//	@Autowired
-//	public CommuteController() {
-//	}
+	@RequestMapping(value="/hansol2", method=RequestMethod.GET)
+	public String hansolTest(){
+		return "Equipment/Hansol2";
+	}
+	
+	@RequestMapping(value="/send" , method=RequestMethod.GET)
+	public String getJson(Model model,@RequestParam(value="jsonStr") List<String> jsonStr){
+		System.out.println("getJson() Controller Run");
+		
+		System.out.println(jsonStr);
+		model.addAttribute("jsonStr", jsonStr);
+		
+		return "Equipment/solTest";
+	}
+	
+	
+	
 	
 
 	//교원 출석체크 페이지
@@ -81,7 +84,10 @@ public class CommuteController {
 				if(commuteOutTime.equals("null")){ //퇴근을 안한 상태
 					System.out.println("퇴근을 안한 상태");
 					List<Map<String,Object>> absenceList = cDao.absenceCheck((Integer) map.get("attendanceNo")); //외출정보 검색
-					Map<String, Object> absence = absenceList.get(absenceList.size()-1); //가장 최근 정보
+					Map<String, Object> absence = null;
+					if(absenceList.size() != 0){
+						absence = absenceList.get(absenceList.size()-1); //가장 최근 정보						
+					}
 										
 					if(absence == null){ //외출을 안한상태
 						model.addAttribute("commuteCheck", "출근"); //출근 등록한 상태 셋팅
@@ -149,8 +155,13 @@ public class CommuteController {
 		
 		Map<Object, Object> map = cDao.commuteCheck(teacherNo); //오늘날짜 출근부 체크
 		
+		System.out.println(map);
+		
 		String teacherName = map.get("teacherName")+"";
 		String attendanceStart = map.get("attendanceStart")+"";
+		
+		System.out.println(teacherName + "treacher naeaweffe");
+		System.out.println(attendanceStart);
 		
 		String notice = teacherName+"님 "+attendanceStart+" 출근등록 되셧습니다";
 		model.addAttribute("notice", notice);
@@ -219,7 +230,10 @@ public class CommuteController {
 		
 		Map<Object, Object> map = cDao.commuteCheck((Integer) session.getAttribute("teacherNo")); //오늘날짜 출근부 체크
 		List<Map<String,Object>> absenceList = cDao.absenceCheck((Integer) map.get("attendanceNo")); //외출정보 검색
-		Map<String, Object> absence = absenceList.get(absenceList.size()-1); //가장 최근 정보
+		Map<String, Object> absence = null;
+		if(absenceList.size() != 0){
+			absence = absenceList.get(absenceList.size()-1); //가장 최근 정보						
+		}
 		
 		System.out.println(absence);
 		

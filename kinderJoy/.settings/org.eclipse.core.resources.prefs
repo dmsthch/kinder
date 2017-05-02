@@ -1,3 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/Equipment/Hansol.jsp=UTF-8
+<<<<<<< HEAD
+encoding//src/main/webapp/WEB-INF/views/Equipment/Hansol3.jsp=UTF-8
+=======
+encoding//src/main/webapp/WEB-INF/views/Equipment/Hansol2.jsp=UTF-8
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 encoding//src/main/webapp/WEB-INF/views/test.jsp=UTF-8

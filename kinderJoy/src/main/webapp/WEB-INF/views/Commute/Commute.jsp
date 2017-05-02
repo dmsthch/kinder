@@ -98,6 +98,8 @@
 		<c:if test="${commuteCheck == '퇴근'}">
 			<h1>${teacherName}님 퇴근등록 되셨습니다</h1><br>
 			<h1>퇴근시간 : ${commuteTime}</h1><br><br>
+			<a href="${pageContext.request.contextPath}/CommuteOut"><button type="button" class="btn btn-danger btn-lg">퇴근하기</button></a>
+		
 		</c:if>
 		
 	</c:if>
