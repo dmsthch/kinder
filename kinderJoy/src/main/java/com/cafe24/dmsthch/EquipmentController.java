@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.dmsthch.Equipment.EquipmentDao;
+import com.cafe24.dmsthch.Equipment.Sheet;
 
 @Controller
 public class EquipmentController {
@@ -42,7 +43,22 @@ public class EquipmentController {
 		
 		System.out.println("save method 종료");
 		
-		model.addAttribute("sung_gong", sung_gong);
-		return "Equipment/save";
+		if(sung_gong == 1){
+			System.out.println("쿼리 입력 성공");
+		} else {
+			System.out.println("쿼리 입력 실패");
+		}
+		return "Equipment/test01";
+	}
+	@RequestMapping(value = "reroad", method = RequestMethod.POST)
+	public String road(HttpSession session, Model model){
+		
+		int teacherNo = (Integer)session.getAttribute("teacherNo");
+		
+		Sheet sheet = dao.selectEquipment(teacherNo);
+		
+		model.addAttribute("sheet", sheet);
+		
+		return "Equipment/test01";
 	}
 }

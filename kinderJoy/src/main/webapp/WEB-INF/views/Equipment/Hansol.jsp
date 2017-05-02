@@ -1,11 +1,39 @@
 
 
 
-	<button id="btTest">불러오기</button>
+	<button id="btTest">save</button>
+	<button id="reroad">road</button>
 	<div class="wrapper" style="margin-top: 20px;">
 		<div id="example1"></div>
 	</div>
 	
+	
+	<!-- Trigger the modal with a button -->
+	<div style="display : none;">
+	<button type="button" id="roadmodal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+	</div>
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+  		<div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">저장 목록</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+
+  	</div>
+	</div>
+
+
 <script data-jsfiddle="example1">
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
@@ -57,6 +85,29 @@
 		}
 	   
 	});
+ 	$('#reroad').click(function(){
+ 		console.log('더워 미치겠네');
+ 		$('#roadmodal').trigger('click');
+
+ 		$.ajax({
+ 			url : "${pageContext.request.contextPath}/reroad",
+ 			type : 'POST',
+ 			dataType: "json",
+ 			async: false,
+ 			data:Sheet,
+ 			success : function(data){
+
+ 			var jsondata = JSON.stringify(data);
+
+ 			alert(jsondata);
+ 		                        
+ 		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
+ 		     console.log("Status: " + textStatus);
+ 		},timeout: 3000
+ 		});    
+ 	});
+	  	
+	  	
 	$('#btTest').click(function(){
 		dataArray[dataArray.length] = hot.mergeCells;	
 		var jArray = new Array();
@@ -74,15 +125,20 @@
 	        data: {jsonStr:jsonStr},
 	        success:function(data){
 	            alert("asdf!");
-	            window.opener.location.reload();
-	            self.close();
+/* 	            window.opener.location.reload();
+	            window.close();
+	            self.close(); */
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("fdsa~~ \n" + textStatus + " : " + errorThrown);
 	            self.close();
 	        }
 		});
-  
+	    
+
+	    
+	    
+	    
 	setTimeout(function(){
 // 		console.log(hot.mergeCells)
 // 		console.log(hot.getCellsMeta())
@@ -91,3 +147,4 @@
 	})
   
 </script>
+
