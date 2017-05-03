@@ -227,17 +227,18 @@ navigation section
     color: #fff;
     }
 .custom-navbar .nav li a {
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 500;
+    color: #5A5A5A;
+    font-size: 18px;
+    font-weight: bold;
+/*     font-weight: 500; */
     }
 .custom-navbar .nav li a:hover {
   	background: transparent;
-   color: #eeeeee;
+   color: #7E7E7E;
 }
 .custom-navbar .nav > li > a:focus {
   background-color: transparent;
-  color: #ffffff;
+  color: #5A5A5A;
   outline: none;
 }
 .custom-navbar .nav li.active > a {
@@ -260,7 +261,7 @@ navigation section
          }
     .custom-navbar.top-nav-collapse {
             padding: 8px;
-            background: #4B4B4B;
+            background: rgba(248,248,255,0.8);
         }
 }
 

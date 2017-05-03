@@ -33,7 +33,14 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "/EducationSchedule/EducationScheduleForm";
+		String defaultUri = "/EducationSchedule/EducationScheduleForm";
+		
+		return "/home";
+	}
+	
+	@RequestMapping(value="/testFull", method=RequestMethod.GET)
+	public String testView(){
+		return "/test";
 	}
 	
 }

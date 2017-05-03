@@ -53,7 +53,7 @@
 			teacher_attendance.license_kindergarten AS licenseKindergarten,
 			teacher_attendance.attendance_start AS attendanceStart,
 			teacher_attendance.attendance_end AS attendanceEnd,
-			teacher.teacher_name AS attendanceName
+			teacher.teacher_name AS teacherName
 		from teacher_attendance
 		inner join teacher
 		where teacher.teacher_no = teacher_attendance.teacher_no
