@@ -116,6 +116,7 @@ $(document).ready(function() {
 	            $('.calendarModalBody').append(' 일시 : '+data.scheduleStartDay+" - "+data.scheduleEndDay);
 	            $('.calendarModalFooter').html('<a href="${pageContext.request.contextPath}/deleteSchedule?scheduleNo='+data.scheduleNo+'"><button class="btn btn-default">삭제하기</button></a>');
 	            $('#opneModal').trigger('click');
+	            
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("실패" + textStatus + " : " + errorThrown);
