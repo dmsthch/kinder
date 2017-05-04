@@ -36,7 +36,8 @@ $(document).ready(function() {
 		
 		//드래그해서 선택했을때 나오는것
 		select: function(start, end) {
-			var title = prompt('Event Title:');
+			$('#opneModal').trigger('click');
+			//var title = prompt('Event Title:');
 			var eventData;
 			if (title) {
 				eventData = {
@@ -113,7 +114,7 @@ $(document).ready(function() {
 	            //alert(data.scheduleContent);
 	            $('.calendarModalTitle').text(data.scheduleTitle);
 	            $('.calendarModalBody').html(' 내용 : '+data.scheduleContent+'<br/>');
-	            $('.calendarModalBody').append(' 일시 : '+data.scheduleStartDay+" - "+data.scheduleEndDay);
+	            $('.calendarModalBody').append(' 일시 : '+data.scheduleStartDay+" ~ "+data.scheduleEndDay);
 	            $('.calendarModalFooter').html('<a href="${pageContext.request.contextPath}/deleteSchedule?scheduleNo='+data.scheduleNo+'"><button class="btn btn-default">삭제하기</button></a>');
 	            $('#opneModal').trigger('click');
 	            
@@ -150,7 +151,7 @@ $(document).ready(function() {
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 
-	<!-- id를 calendar로 해줘야함! -->
+	<!-- id calendar로  -->
 	<div id='calendar' style="margin-top: 50px;"></div>
 	
 <%-- 	<c:if var="allSchedule" test="${allSchedule.category_no==1}">
@@ -164,6 +165,7 @@ $(document).ready(function() {
 	<!-- 모달버튼! -->
 <div style="display: none;">
 	<button type="button" id="opneModal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#calendarModal">Open Modal</button>
+	<button type="button" id="opneAdd" class="btn btn-info btn-lg" data-toggle="modal" data-target="#calendarAdd">Open Modal</button>
 </div>
 
 
@@ -179,7 +181,7 @@ $(document).ready(function() {
         <h4 class="modal-title calendarModalTitle"></h4>
       </div>
       <div class="modal-body calendarModalBody">
-        Some text in the modal.
+        modal
       </div>
       <div class="modal-footer calendarModalFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -188,5 +190,28 @@ $(document).ready(function() {
 
   </div>
 </div>
+
+	<!-- Modal -->
+<div id="calendarAdd" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content calendarModalContent">
+      <div class="modal-header calendarModalHeader">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title calendarModalTitle"></h4>
+      </div>
+      <div class="modal-body calendarModalBody">
+        modal
+      </div>
+      <div class="modal-footer calendarModalFooter">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 </body>
 </html>
