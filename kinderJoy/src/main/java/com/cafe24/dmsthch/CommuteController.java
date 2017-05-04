@@ -245,7 +245,12 @@ public class CommuteController {
 	}
 	
 	
+	
+	
+	
+	
 	//임시 로그아웃
+	/*  사용 안함
 	@RequestMapping(value="/hsLogout", method=RequestMethod.GET)
 	public String hsLogout(HttpSession session){
 		session.removeAttribute("teacherNo");
@@ -255,7 +260,7 @@ public class CommuteController {
 		session.removeAttribute("teacherLevel");
 		return "redirect:/Commute";
 	}
-	
+	*/
 	
 	
 	/*  예외처리 부분  */
