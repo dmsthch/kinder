@@ -1,12 +1,14 @@
 package com.cafe24.dmsthch;
 
+
+import java.io.File;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,78 +138,16 @@ public class TeacherController {
 	
 	
 	@RequestMapping(value="/li", method=RequestMethod.POST)
-	public char chara(HttpServletRequest request, Teacher teacher) throws Exception {
+	public UUID uuid(String folderPath, String original) throws Exception {
 		
 		System.out.println("라이선스 발급 처리 호출");
 		
-		
-
-		// 로컬 IP취득
-				InetAddress ip = InetAddress.getLocalHost();
-				System.out.println("IP : " + ip.getHostAddress());
-				
-				// 네트워크 인터페이스 취득
-				NetworkInterface netif = NetworkInterface.getByInetAddress(ip);
-
-				// 네트워크 인터페이스가 NULL이 아니면
-				if (netif != null) {
-					// 네트워크 인터페이스 표시명 출력
-					System.out.print(netif.getDisplayName() + " : ");
-					
-					// 맥어드레스 취득
-					byte[] mac = netif.getHardwareAddress();
-					
-					// 맥어드레스 출력
-					for (byte b : mac) {
-						System.out.printf("[%02X]\n", b);
-					}
-					
-					for (byte c : mac) {
-						System.out.println(c);
-					}
-					
-					System.out.println();
-					
-				}
-		
-		Character[] alphabet = {
-			   	  'a','b','c','d'
-				 ,'e','f','g','h','i'
-				 ,'j','k','l','m','n'
-				 ,'o','p','q','r','s'
-				 ,'t','u','v','w','x'
-				 ,'y','z'
-		};
-		
-		Character[] ALPHABET = {
-				 'A','B','C','D'
-				,'E','F','G','H'
-				,'I','J','K','L'
-				,'M','N','O','P'
-				,'Q','R','S','T'
-				,'U','V','W','X'
-				,'Y','Z'
-		};
-		
-		List<Character> alpharrays = Arrays.asList(alphabet);
-		Collections.shuffle(alpharrays);
-		System.out.println(alpharrays.subList(0,2) + "<-- 소문자 캐릭터");
-		
-		List<Character> ALPHARRAYS = Arrays.asList(ALPHABET);
-		Collections.shuffle(ALPHARRAYS);
-		System.out.println(ALPHARRAYS.subList(0,2) + "<-- 대문자 캐릭터");
-		
-		Integer[] in = {1,2,3,4,5,6,7,8,9,0};
-		List<Integer> inte = Arrays.asList(in);
-		Collections.shuffle(inte);
-		System.out.println(inte);
-		
-		
-		if(TDao.LoginTeacher(teacher) == ALPHARRAYS.subList(0, 1) || 
-		   TDao.LoginTeacher(teacher) == alpharrays.subList(0, 1)) {
-			System.out.println("나오냐");
+		UUID uid = UUID.randomUUID();
+		System.out.println(uid +"<--UUID");
+		int uid0 = UUID.randomUUID().hashCode();
+		System.out.println(uid0+" <--UUID hashCode");
+		int uid1 = UUID.randomUUID().version();
+		System.out.println(uid1 +" <--관련 버젼");
+		return uid;
 		}
-		return 0;
 	}
-        
-}
