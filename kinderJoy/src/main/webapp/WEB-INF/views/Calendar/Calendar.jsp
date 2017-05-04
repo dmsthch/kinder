@@ -101,6 +101,7 @@ $(document).ready(function() {
 			console.log('Not Found');
 		}
 		
+		//ajax로 해당 일정 클릭하면 modal에 세부사항 표기해주기
 		$.ajax({
 	        url:"${pageContext.request.contextPath}/getScheduleContent",
 	        type:'GET',
@@ -111,8 +112,11 @@ $(document).ready(function() {
 	            //alert("성공!")
 	            //alert(data.scheduleContent);
 	            $('.calendarModalTitle').text(data.scheduleTitle);
-	            $('.calendarModalBody').text(data.scheduleContent);
+	            $('.calendarModalBody').html(' 내용 : '+data.scheduleContent+'<br/>');
+	            $('.calendarModalBody').append(' 일시 : '+data.scheduleStartDay+" - "+data.scheduleEndDay);
+	            $('.calendarModalFooter').html('<a href="${pageContext.request.contextPath}/deleteSchedule?scheduleNo='+data.scheduleNo+'"><button class="btn btn-default">삭제하기</button></a>');
 	            $('#opneModal').trigger('click');
+	            
 	        },
 	        error:function(jqXHR, textStatus, errorThrown){
 	            alert("실패" + textStatus + " : " + errorThrown);
@@ -174,7 +178,7 @@ $(document).ready(function() {
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title calendarModalTitle"></h4>
       </div>
-      <div class="modalBody calendarModalBody">
+      <div class="modal-body calendarModalBody">
         Some text in the modal.
       </div>
       <div class="modal-footer calendarModalFooter">

@@ -36,5 +36,11 @@
   	WHERE schedule_no = #{scheduleNo}
   </select>
   
+  <!-- 하나의 스케쥴 삭제 -->
+  <delete id="deleteSchedule" parameterType="Integer">
+  	DELETE
+ 	FROM schedule
+ 	WHERE schedule_no = #{scheduleNo} 	
+  </delete>
   
   </mapper>

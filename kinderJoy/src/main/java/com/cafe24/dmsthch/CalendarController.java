@@ -49,10 +49,10 @@ public class CalendarController {
 		return jsonSchedule;
 	}
 	
-	@RequestMapping(value = "/romiTest", method = RequestMethod.GET)
-	public String romitest(@RequestParam(value="testVar", required=true)String testVar){
-		System.out.println(testVar+"<<<testVar");
-		return "home";
+	@RequestMapping(value = "/deleteSchedule", method = RequestMethod.GET)
+	public String deleteSchedule(@RequestParam(value="scheduleNo", required=true)int scheduleNo){
+		calDao.deleteSchedule(scheduleNo);
+		return "redirect:/calendarTest";
 		
 	}
 }
