@@ -1,8 +1,16 @@
 package com.cafe24.dmsthch;
 
+
+import java.io.File;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,10 +55,6 @@ public class TeacherController {
 		}
 		return check;
 	}
-	
-	
-	
-	
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert(Teacher teacher) {//매개변수는 전역변수이다
@@ -125,4 +129,25 @@ public class TeacherController {
 		return "redirect:/home";
 	}
 	
-}
+	@RequestMapping(value="/li", method=RequestMethod.GET)
+	public String chara() {
+		System.out.println("라이선스 발급 페이지 호출");
+		return "Teacher/TeacherLicense";
+	}
+	
+	
+	
+	@RequestMapping(value="/li", method=RequestMethod.POST)
+	public UUID uuid(String folderPath, String original) throws Exception {
+		
+		System.out.println("라이선스 발급 처리 호출");
+		
+		UUID uid = UUID.randomUUID();
+		System.out.println(uid +"<--UUID");
+		int uid0 = UUID.randomUUID().hashCode();
+		System.out.println(uid0+" <--UUID hashCode");
+		int uid1 = UUID.randomUUID().version();
+		System.out.println(uid1 +" <--관련 버젼");
+		return uid;
+		}
+	}
