@@ -1,17 +1,27 @@
 package com.cafe24.dmsthch.Material;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Board {
 	
-	String boardNo;
-	String licenseKindergarten;
-	String boardTitle;
-	int boardCategoryNo;
-	int dataNo;
-	String boardDay;
-	int teacherNo;
-	String boardContent;
+	private String boardNo;
+	private String licenseKindergarten;
+	private String boardTitle;
+	private int boardCategoryNo;
+	private int dataNo;
+	private String boardDay;
+	private int teacherNo;
+	private String boardContent;
+	
+	private MultipartFile file;
 	
 	
+	public MultipartFile getFile(){
+		return file;
+	}
+	public void setFile(MultipartFile file){
+		this.file = file;
+	}
 	public String getBoardNo() {
 		return boardNo;
 	}

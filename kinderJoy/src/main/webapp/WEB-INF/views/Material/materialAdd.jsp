@@ -53,7 +53,7 @@
 </div>
 
 <div class="row">
-	<form action="${pageContext.request.contextPath}/MaterialAdd" method="post">
+	<form action="${pageContext.request.contextPath}/MaterialAdd" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 		    <div class="row">    
 		        <div class="col-xs-8 col-xs-offset-2">
@@ -86,17 +86,16 @@
 			</div>
 		</div>
 		
-		<!-- 파일
+<!-- 		파일 -->
 		<div class="form-group">
 			<div class="row">    
 		        <div class="col-xs-8 col-xs-offset-2">
 			    	<div class="input-group col-sm-12">
-		                <input type="file">
+		                <input type="file" name="file">
 		            </div>
 		        </div>
 			</div>
 		</div>
-		 -->
 		 
 		<div class="form-group">
 			<div class="row">    

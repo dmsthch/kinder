@@ -51,6 +51,7 @@ public class MaterialController {
 		System.out.println("content : "+board.getBoardContent());
 		System.out.println("license : "+board.getLicenseKindergarten());
 		System.out.println("teacherNo : "+board.getTeacherNo());
+		System.out.println("file : "+board.getFile().getOriginalFilename());
 		
 		
 		return "Material/materialSelect";

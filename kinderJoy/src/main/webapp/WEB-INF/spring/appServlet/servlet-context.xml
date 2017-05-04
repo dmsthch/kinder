@@ -53,5 +53,7 @@
         <beans:constructor-arg index="0" ref="sqlSessionFactory" />
     </beans:bean>	
 
+	<!-- multipartResolver 파일 input output에 사용 hs -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
 </beans:beans>
