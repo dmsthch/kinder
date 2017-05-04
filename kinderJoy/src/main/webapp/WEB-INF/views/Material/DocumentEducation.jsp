@@ -12,6 +12,7 @@
 	
 	<!-- 따라다니는 메뉴 -->
 	<script src="js/KHS/RefreshStaticMenu.js"></script>
+	
 	<!-- CSS Link -->
 	<c:import url="../module/importCSS.jsp"></c:import>
 	
@@ -69,14 +70,14 @@
   text-align: center;
   }
 	</style>
-
+	
 </head>
 
 <body class="container" onload="InitializeStaticMenu();">
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 
-<!-- Follow sideNave -->
+<!-- Follow sideNav -->
 <div id="staticMenu">
 	<a href="#" class="smoothScroll btn btn-default myBtn">버튼</a><br/>
 </div>
@@ -91,6 +92,34 @@
 					<h1 class="heading bold">자료실</h1>
 					<hr>
 				</div>
+				
+				<!-- 검색창 -->
+				<div class="container">
+				    <div class="row">    
+				        <div class="col-xs-8 col-xs-offset-2">
+						    <div class="input-group">
+				                <div class="input-group-btn search-panel">
+				                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				                    	<span id="search_concept">전체검색 </span><span class="caret"></span>
+				                    </button>
+				                    <ul class="dropdown-menu" role="menu">
+				                      <li><a href="#all">전체검색</a></li>
+				                      <li class="divider"></li>
+				                      <li><a href="#contains">문서양식</a></li>
+				                      <li><a href="#its_equal">교육자료</a></li>
+				                    </ul>
+				                </div>
+				                <input type="hidden" name="search_param" value="all" id="search_param"><!-- 검색내용을 들고갈 input -->      
+				                <input type="text" class="form-control" name="searchText" placeholder="Search ...">
+				                <span class="input-group-btn">
+				                    <button class="btn btn-default" id="#btnSearch" type="button">검색</button>
+				                </span>
+				            </div>
+				        </div>
+					</div>
+				</div>
+				
+				
 				<!-- ISO section -->
 				<div class="iso-section">
 					<ul class="filter-wrapper clearfix">
@@ -111,7 +140,7 @@
                				 	</a>
                				 </div>
                				 <div class="iso-box col-lg-3 col-md-4 col-sm-6 documentForm">
-               				 	<a href="#">
+               				 	<a href="${pageContext.request.contextPath}/MaterialAdd">
 	               				 	<div class="col-lg-12 col-md-12 col-sm-12 fadeInUp tabContent text-center">
 										<h3>문서 양식 추가</h3>
 										<hr>
@@ -129,7 +158,7 @@
                				 	</a>
                				 </div>
                				 <div class="iso-box col-lg-3 col-md-4 col-sm-6 material">
-               				 	<a href="#">
+               				 	<a href="${pageContext.request.contextPath}/MaterialAdd">
 	               				 	<div class="col-lg-12 col-md-12 col-sm-12 fadeInUp tabContent text-center">
 										<h3>교육 자료 추가</h3>
 										<hr>
@@ -178,6 +207,18 @@
 <!-- JS Link -->
 <c:import url="../module/importJS.jsp"></c:import>
 
+<!-- select button -->
+<script>
+	$(document).ready(function(e){
+	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+			e.preventDefault();
+			var param = $(this).attr("href").replace("#",""); //해당 버튼의 href속성에서 #을 제거한 값
+			var concept = $(this).text(); //해당 버튼의 내용
+			$('.search-panel span#search_concept').text(concept); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
+			$('.input-group #search_param').val(param);
+		});
+	});
+</script>
 
 </body>
 </html>

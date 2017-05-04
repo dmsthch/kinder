@@ -223,7 +223,8 @@ $(document).ready(function() {
       	    	<select class="form-control">
       	    		<option> 기관일정 </option>
       	    		<option> 개인일정 </option>
-      	    	</select> </div>     
+      	    	</select> 
+      	    </div>     
       	</div>
       </div>
       <div class="modal-footer calendarModalFooter">
