@@ -28,7 +28,9 @@
 				<h3>임초롬 / 김신삼 / 김한솔 / 양지연 / 전광철</h3>
 				<h1>Team. 햇병아리</h1>
 				<hr>
+				<c:if test="${null eq teacherId}">
 				<a href="#" class="smoothScroll btn btn-danger">로그인</a>
+				</c:if>
 				<a href="${pageContext.request.contextPath}/Commute" class="smoothScroll btn btn-default">출석부</a>
 			</div>
 		</div>

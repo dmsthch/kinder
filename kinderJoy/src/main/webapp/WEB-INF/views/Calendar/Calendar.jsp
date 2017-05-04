@@ -25,7 +25,8 @@ $(document).ready(function() {
 		header: {
 			left: 'prev,next today',
 			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
+			right: 'month'
+			/* right: 'month,agendaWeek,agendaDay' */
 		},
 		//일이나 주 이름을 클릭해서 탐색할수있다. 
 		navLinks: true,
@@ -36,7 +37,7 @@ $(document).ready(function() {
 		
 		//드래그해서 선택했을때 나오는것
 		select: function(start, end) {
-			$('#opneModal').trigger('click');
+			$('#opneAdd').trigger('click');
 			//var title = prompt('Event Title:');
 			var eventData;
 			if (title) {
@@ -199,10 +200,31 @@ $(document).ready(function() {
     <div class="modal-content calendarModalContent">
       <div class="modal-header calendarModalHeader">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title calendarModalTitle"></h4>
+        <h4 class="modal-title calendarModalTitle">일정 추가</h4>
       </div>
       <div class="modal-body calendarModalBody">
-        modal
+      	<div class="row" style="margin-bottom: 10px; text-align: center;">
+      		<div class="col-sm-2"><label>제 목 :</label></div>
+      		<div class="col-sm-10"><input type="text" class="form-control"> </div>      	
+      	</div>
+      	<div class="row" style="margin-bottom: 10px; text-align: center;">
+      		<div class="col-sm-2"><label>내 용 :</label></div>
+      		<div class="col-sm-10"><textarea class="form-control" rows="5" id="comment"></textarea></div>
+      	</div>
+      	<div class="row" style="margin-bottom: 10px; text-align: center;">
+      		<div class="col-sm-2"><label>기 간 :</label></div>
+      		<div class="col-sm-4"><input type="date" class="form-control"> </div>
+      		<div class="col-sm-1"> ~ </div>
+      		<div class="col-sm-4"><input type="date" class="form-control"> </div>      	
+      	</div>
+       	<div class="row" style="margin-bottom: 10px; text-align: center;">
+      		<div class="col-sm-2"><label>분류 :</label></div>
+      	    <div class="col-sm-10">
+      	    	<select class="form-control">
+      	    		<option> 기관일정 </option>
+      	    		<option> 개인일정 </option>
+      	    	</select> </div>     
+      	</div>
       </div>
       <div class="modal-footer calendarModalFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
