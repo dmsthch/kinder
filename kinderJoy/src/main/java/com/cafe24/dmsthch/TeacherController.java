@@ -1,15 +1,8 @@
 package com.cafe24.dmsthch;
 
-
-import java.io.File;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
@@ -29,10 +23,22 @@ import com.cafe24.dmsthch.Teacher.TeacherDao;
 //teacher_id = id teacher_name = name teacher_level = level;
 @Controller
 @SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "teacherLicense", "teacherNo" })
-public class TeacherController {
+public class TeacherController extends HandlerInterceptorAdapter {
 	
 	@Autowired
 	private TeacherDao TDao;
+	
+
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	     Object session = request.getSession().getAttribute("teacherId");
+	     if (session == null) {
+	      //인터셉터의 preHandle은 컨트롤러가 실행되기전에 실행하는 함수이다.
+	    	 //세션의 값이 null일 경우 홈페이지로 이동한다
+	      }
+		return true;
+    }
+	
 	
 	@RequestMapping(value="/Add", method=RequestMethod.GET)
 	public String Add() {
@@ -79,7 +85,7 @@ public class TeacherController {
 	
 	
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
-	public String Login(HttpServletRequest request, Model model,Teacher teacher) {
+	public String Login(HttpServletRequest request, Model model,Teacher teacher,HttpSession session) {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
 		System.out.println(TDao+" <--TDao 동작 확인");
@@ -103,6 +109,12 @@ public class TeacherController {
 		
 		model.addAttribute("teacherLevel" ,saveSession.getTeacher_level());
 		System.out.println(saveSession.getTeacher_level() + " <--세션에 저장될 레벨값");
+		
+		System.out.println(session.getId() +"<--세션의 아이디값");
+		System.out.println( session.getMaxInactiveInterval()+"<--세션의 유지 시간 / 단위 : 초");
+		
+		session.setMaxInactiveInterval(600);
+		System.out.println(session.getMaxInactiveInterval()+"<-- 재정의된 세션의 유지 시간 / 단위 : 초");
 		
 		//session.setMaxInactiveInterval(1);
 		request.getSession().setAttribute("logOuting",model);
