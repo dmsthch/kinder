@@ -42,6 +42,7 @@
             <beans:list>
                 <beans:value>classpath:com/cafe24/dmsthch/Teacher/TeacherMapper.xml</beans:value> <!-- 맵핑주소 수정해야함. -->
                 <beans:value>classpath:com/cafe24/dmsthch/Commute/CommuteMapper.xml</beans:value> <!-- 한솔이꺼 -->
+                <beans:value>classpath:com/cafe24/dmsthch/Material/MaterialMapper.xml</beans:value> <!-- 한솔이꺼 -->
                 <beans:value>classpath:com/cafe24/dmsthch/Calendar/CalendarMapper.xml</beans:value> <!-- 로미꺼 캘린더 -->
                 <beans:value>classpath:com/cafe24/dmsthch/Child/ChildMapper.xml</beans:value>
                 <beans:value>classpath:com/cafe24/dmsthch/Equipment/EquipmentMapper.xml</beans:value>

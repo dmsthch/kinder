@@ -63,10 +63,9 @@
 		                    	<span id="category">카테고리 </span><span class="caret"></span>
 		                    </button>
 		                    <ul class="dropdown-menu" role="menu">
-		                      <li><a href="#1">문서양식</a></li>
-		                      <li><a href="#2">교육자료</a></li>
-		                      <li class="divider"></li>
-		                      <li><a href="#3">기타</a></li>
+			                    <c:forEach var="boardCategory" items="${boardCategoryList}">
+			                    	<li><a href="${boardCategory.categoryNo}">${boardCategory.categoryName}</a></li>
+			                    </c:forEach>
 		                    </ul>
 		                </div> 
 		        		<input type="hidden" name="boardCategoryNo" value="0" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input --> 
@@ -91,7 +90,7 @@
 			<div class="row">    
 		        <div class="col-xs-8 col-xs-offset-2">
 			    	<div class="input-group col-sm-12">
-		                <input type="file" name="file">
+		                <input type="file" name="files">
 		            </div>
 		        </div>
 			</div>

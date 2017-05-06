@@ -6,7 +6,7 @@
 
 
 <!-- navigation section -->
-<section class="navbar navbar-fixed-top custom-navbar top-nav-collapse" role="navigation"s>
+<section class="navbar navbar-fixed-top custom-navbar top-nav-collapse" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
 			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -14,7 +14,7 @@
 				<span class="icon icon-bar"></span>
 				<span class="icon icon-bar"></span>
 			</button>
-			<a href="/" class="navbar-brand">Team. 햇병아리</a>
+			<a href="${pageContext.request.contextPath}/" class="navbar-brand">Team. 햇병아리</a>
 		</div>
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -32,7 +32,7 @@
 				<li><a href="#" class="smoothScroll">유아</a></li>
 				<li><a href="#" class="smoothScroll">비품</a></li>
 				<li><a href="#" class="smoothScroll">교원</a></li>
-				<li><a href="#" class="smoothScroll">자료실</a></li>
+				<li><a href="${pageContext.request.contextPath}/Material" class="smoothScroll">자료실</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#signOut" class="smoothScroll" data-backdrop="static">로그아웃</a></li>
 			</c:if>
 

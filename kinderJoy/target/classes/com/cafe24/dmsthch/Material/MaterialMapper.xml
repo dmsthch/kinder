@@ -1,0 +1,73 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.cafe24.dmsthch.Material.MaterialMapper">
+	
+	
+	<!-- 게시판 카테고리목록 가져오기 -->
+	<select id="getBoardCategory" resultType="java.util.Map">
+		select 
+			category_no AS categoryNo,
+			category_name AS categoryName
+		from
+			board_data_category
+	</select>
+	
+	<!-- 저장된 파일정보 자료테이블에 입력 -->
+	<insert id="insertBoardData" parameterType="com.cafe24.dmsthch.Material.BoardData">
+		INSERT INTO board_data (
+			license_kindergarten, 
+			teacher_no, 
+			category_no,
+			data_original_name, 
+			data_storage_name, 
+			data_url, 
+			data_size, 
+			data_day
+		) VALUES (
+			#{licenseKindergarten}, 
+			#{teacherNo}, 
+			#{categoryNo}, 
+			#{dataOriginalName}, 
+			#{dataStorageName}, 
+			#{dataUrl}, 
+			#{dataSize}, 
+			DATE_FORMAT(NOW(),'%Y-%m-%d')
+		);
+	</insert>
+	
+	<!-- 자료테이블에서 물리파일명으로 dataNo 가져오기 -->
+	<select id="getDataNo" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select
+			data_no AS dataNo
+		from 
+			board_data 
+		where
+			data_storage_name = #{dataStorageName}
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.cafe24.dmsthch.Material.Board">
+	
+		INSERT INTO board (
+			license_kindergarten, 
+			board_title, 
+			board_category_no, 
+			data_no, 
+			board_day, 
+			teacher_no, 
+			board_content
+		) VALUES (
+			#{licenseKindergarten}, 
+			#{boardTitle}, 
+			#{boardCategoryNo}, 
+			#{dataNo},
+			DATE_FORMAT(NOW(),'%Y-%m-%d'), 
+			#{teacherNo}, 
+			#{boardContent}
+		);
+	
+	</insert>
+	
+	
+</mapper>
