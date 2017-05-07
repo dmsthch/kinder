@@ -50,7 +50,7 @@
 	
 	
 	<c:import url="../module/sheetjs.jsp"></c:import>
-	<jsp:include page="../Equipment/Hansol.jsp"></jsp:include>
+	<jsp:include page="../Equipment/sheet.jsp"></jsp:include>
 
 <br><br><br><br><br>
 <!-- footer -->

@@ -54,7 +54,7 @@
 	    	
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="OfficeSupplies">
-	    	<jsp:include page="../Equipment/Hansol.jsp"></jsp:include>
+	    	<jsp:include page="../Equipment/sheet.jsp"></jsp:include>
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="PhysicalApparatus">
 	    </div>
