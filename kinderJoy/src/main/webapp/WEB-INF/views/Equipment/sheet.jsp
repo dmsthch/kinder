@@ -56,7 +56,7 @@
 	
 	
 		hot = new Handsontable(container, {
- 			data: testData,    //데이터 가져오기
+// 			data: testData,    //데이터 가져오기
 			startRows: 30,
 			startCols: 20,
 			contextMenu : true,

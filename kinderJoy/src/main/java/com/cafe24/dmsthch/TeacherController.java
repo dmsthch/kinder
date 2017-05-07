@@ -57,7 +57,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	}
 	
 	//로그인폼 호출 메서드 ★★★모달형식은 사용할 필요가 없음
-	/*	
+		
 	@RequestMapping(value="/Login" , method = RequestMethod.GET)
 	public String Login(HttpSession session) {
 		System.out.println("로그인화면");
@@ -67,7 +67,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		}else{
 			return "redirect:/home";
 		}
-	}*/
+	}
 	
 	//로그인 처리
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
