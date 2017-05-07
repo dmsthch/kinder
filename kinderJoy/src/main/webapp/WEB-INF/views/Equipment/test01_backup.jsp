@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!doctype html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -30,43 +31,27 @@
 
 <!-- home section -->
 	<br><br><br><br><br><br><br>
-<style>
-	.nav-tabs li a{color: #000;}
-	.nav-tabs li{width: 50px !important;}
-</style>
-<div role="tabpanel">
 
-  <!-- Nav tabs -->
-  <div class="col-sm-2">
-	  <ul id="tablist" class="nav nav-stacked nav-pills" role="tablist">
-	    <li role="presentation" class="active"><a href="#TeachingMaterial" aria-controls="TeachingMaterial" role="tab" data-toggle="tab">교재,교구</a></li>
-	    <li role="presentation"><a href="#OfficeSupplies" aria-controls="OfficeSupplies" role="tab" data-toggle="tab">사무용품</a></li>
-	    <li role="presentation"><a href="#PhysicalApparatus" aria-controls="PhysicalApparatus" role="tab" data-toggle="tab">체육용품</a></li>
-	    <li role="presentation"><a href="#BookList" aria-controls="BookList" role="tab" data-toggle="tab">도서목록</a></li>
-	   	<li role="presentation"><a href="#Etc" aria-controls="Etc" role="tab" data-toggle="tab">기타용품</a></li>
+
+
+	<div class="btn-group">
+	  <button type="button" class="btn btn-primary">:: 비품카테고리 ::</button>
+	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+	    <li><a href="#">교재,교구</a></li>
+	    <li><a href="#">사무용품</a></li>
+	    <li><a href="#">체육용품</a></li>
+	    <li><a href="#">도서목록</a></li>
+	    <li><a href="#">기타</a></li>
 	  </ul>
-  </div>
-
-	<c:import url="../module/sheetjs.jsp"></c:import>
+	</div>
 	
-<div class="col-sm-10">
-	  <!-- Tab panes --> 
-	  <div class="tab-content">
-	    <div role="tabpanel" class="tab-pane active" id="TeachingMaterial">
-	    	<jsp:include page="../Equipment/Hansol.jsp"></jsp:include>
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="OfficeSupplies">
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="PhysicalApparatus">
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="BookList">
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="Etc">
-	    </div>	
-	  </div>
-</div>
+	
+	<c:import url="../module/sheetjs.jsp"></c:import>
+	<jsp:include page="../Equipment/Hansol.jsp"></jsp:include>
 
-</div>
 <br><br><br><br><br>
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>

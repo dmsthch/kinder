@@ -1,6 +1,18 @@
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 
-
-
+	<div class="btn-group">
+	  <button type="button" class="btn btn-primary">:: 비품카테고리 ::</button>
+	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+	    <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+	    <li><a href="#">교재,교구</a></li>
+	    <li><a href="#">사무용품</a></li>
+	    <li><a href="#">체육용품</a></li>
+	    <li><a href="#">도서목록</a></li>
+	    <li><a href="#">기타</a></li>
+	  </ul>
+	</div>
 	<button id="btTest">save</button>
 	<button id="reroad">road</button>
 	<div class="wrapper" style="margin-top: 20px;">
