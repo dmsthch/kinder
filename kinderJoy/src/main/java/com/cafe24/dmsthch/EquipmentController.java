@@ -19,10 +19,10 @@ public class EquipmentController {
 	@Autowired
 	EquipmentDao dao;
 	
-	@RequestMapping(value = "test01", method = RequestMethod.GET)
+	@RequestMapping(value = "Equipment", method = RequestMethod.GET)
 	public String test01(){
 		
-		return "Equipment/test01";
+		return "Equipment/Equipment";
 	}
 	@RequestMapping(value = "test02", method = RequestMethod.GET)
 	public String test02(){
@@ -48,7 +48,7 @@ public class EquipmentController {
 		} else {
 			System.out.println("쿼리 입력 실패");
 		}
-		return "Equipment/test01";
+		return "Equipment/Equipment";
 	}
 	@RequestMapping(value = "reroad", method = RequestMethod.POST)
 	public String road(HttpSession session, Model model){
@@ -59,6 +59,6 @@ public class EquipmentController {
 		
 		model.addAttribute("sheet", sheet);
 		
-		return "Equipment/test01";
+		return "Equipment/Equipment";
 	}
 }

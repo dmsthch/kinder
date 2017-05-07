@@ -11,8 +11,8 @@
   			,sheet_content
   		) VALUES(
   		 	#{teacherNo}
-  			,#{teacherLicense}
-  			,#{jsonStr}
+  			,#{licenseKindergarten}
+  			,#{sheetContent}
   		);
   	</insert>
 
