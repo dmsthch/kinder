@@ -19,25 +19,7 @@
 
 
 <script type="text/javascript">
-
-//yyyy-mm-dd형식으로 바꿔주는것
-function chageDate(date){
-	var Y = date.getFullYear();
-	var M = date.getMonth()+1;
-	var D = date.getDate();
-	if((M+"").length<2){
-		M = "0"+M;
-	}
-	if((D+"").length<2){
-		D = "0"+D;
-	}
-	date = Y+"-"+M+"-"+D;
-	return date;
-}
-
-
 $(document).ready(function() {
-	
 		$('#calendar').fullCalendar({
 		//맨위에 나오는것들. 왼쪽에는 달 앞뒤로 넘기는거랑 오늘로가기,
 		//가운데는 제목, 오른쪽에는 달, 주, 일별로 보기
@@ -48,56 +30,29 @@ $(document).ready(function() {
 			/* right: 'month,agendaWeek,agendaDay' */
 		},
 		//일이나 주 이름을 클릭해서 탐색할수있다. 
-		navLinks: false,
+		navLinks: true,
 		//드래그해서 선택가능하게하는것
 		selectable: true,
+		
+		
 		
 		//드래그해서 선택했을때 나오는것
 		select: function(start, end) {
 			$('#opneAdd').trigger('click');
 			//var title = prompt('Event Title:');
-			var getStart = new Date(start);
-			/* //이걸 엔드에도 해야함.
-			var startY = getStart.getFullYear();
-			var startM = getStart.getMonth()+1;
-			var startD = getStart.getDate();
-			if((startM+"").length<2){
-				startM = "0"+startM;
+			var eventData;
+			if (title) {
+				eventData = {
+					title: title,
+					start: start,
+					end: end
+				};
+				$('#calendar').fullCalendar('renderEvent', eventData, true); // stick이 뭐지?
 			}
-			if((startD+"").length<2){
-				startD = "0"+startD;
-			}
-			getStart = startY+"-"+startM+"-"+startD; */
-			
-			var getEnd = new Date((end-84600000));
-			getStart = chageDate(getStart);
-			getEnd = chageDate(getEnd);
-			console.log(getStart);
-	
-		 	$('#start').val(getStart);
-			$('#end').val(getEnd); 
-			
-			$('#addButton').click(function(){
-				var title, content,category;
-				title =$('#title').val();
-				//console.log(title+"<<<<<<title요거요거")
-				content =$('#content').val();
-				category =$('#category').val();
-				
-				var eventData;
-				if (title) {
-					eventData = {
-						title: title,
-						start: start,
-						end: end
-					};
-					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick이 뭐지?
-				}
-				$('#calendar').fullCalendar('unselect');
-			})
+			$('#calendar').fullCalendar('unselect');
 		},
 		
-		editable: false,
+		editable: true,
 		eventLimit: true, // allow "more" link when too many events
 		//이부분이 데이터 표시해주는 부분.
 		//기존에 있는것에 카테고리를 추가하여, 카테고리별로 다른색을 나타내도록 함!
@@ -109,6 +64,8 @@ $(document).ready(function() {
 			{id : 3 ,title : '테스트22' , start : '2017-05-01', end : '2017-05-01' } , */
 /* 			{title : 'asdftest', start : '20170501', end : '20170501' },
 			{id: 999, title: 'Repeating Event', start: '2017-04-09T16:00:00'} */
+			
+		
 		]
 	});
 	
@@ -178,7 +135,7 @@ $(document).ready(function() {
 <title>Insert title here</title>
 <style>
 
-	.calendarBody {
+	body {
 		margin: 40px 10px;
 		padding: 0;
 		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
@@ -192,7 +149,7 @@ $(document).ready(function() {
 
 </style>
 </head>
-<body class="calendarBody">
+<body >
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 
@@ -249,32 +206,29 @@ $(document).ready(function() {
       <div class="modal-body calendarModalBody">
       	<div class="row" style="margin-bottom: 10px; text-align: center;">
       		<div class="col-sm-2"><label>제 목 :</label></div>
-      		<div class="col-sm-10"><input value="ㅇㅅㅇ" type="text" id="title" class="form-control"> </div>      	
+      		<div class="col-sm-10"><input type="text" class="form-control"> </div>      	
       	</div>
       	<div class="row" style="margin-bottom: 10px; text-align: center;">
       		<div class="col-sm-2"><label>내 용 :</label></div>
-      		<div class="col-sm-10"><textarea class="form-control" id="content" rows="5" ></textarea></div>
+      		<div class="col-sm-10"><textarea class="form-control" rows="5" id="comment"></textarea></div>
       	</div>
       	<div class="row" style="margin-bottom: 10px; text-align: center;">
       		<div class="col-sm-2"><label>기 간 :</label></div>
-      		<div class="col-sm-4">
-      			<input type="date" id="start" class="form-control"/>
-      		</div>
+      		<div class="col-sm-4"><input type="date" class="form-control"> </div>
       		<div class="col-sm-1"> ~ </div>
-      		<div class="col-sm-4"><input type="date" id="end" class="form-control"> </div>      	
+      		<div class="col-sm-4"><input type="date" class="form-control"> </div>      	
       	</div>
        	<div class="row" style="margin-bottom: 10px; text-align: center;">
       		<div class="col-sm-2"><label>분류 :</label></div>
       	    <div class="col-sm-10">
-      	    	<select class="form-control" id="category">
-      	    		<option value="1"> 기관일정 </option>
-      	    		<option value="2"> 개인일정 </option>
+      	    	<select class="form-control">
+      	    		<option> 기관일정 </option>
+      	    		<option> 개인일정 </option>
       	    	</select> 
       	    </div>     
       	</div>
       </div>
       <div class="modal-footer calendarModalFooter">
-      	<button type="button" class="btn btn-default" id="addButton" data-dismiss="modal">추가</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
