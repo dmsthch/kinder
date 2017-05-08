@@ -27,7 +27,7 @@
 		  font-size: 15px;
 		  font-weight: bold;
 		  letter-spacing: 2px;
-		  padding: 5px 35px;
+		  padding: 5px 30px;
 		  margin-top: 5px;
 		  transition: all 0.4s ease-in-out;
 		}
@@ -41,12 +41,12 @@
 
 
 <!-- navbar -->
-<%-- <c:import url="../module/navbar.jsp"></c:import> --%>
+<c:import url="../module/navbar.jsp"></c:import>
 <!-- Follow sideNav -->
 <div id="staticMenu" class="text-right">
-	<a href="${pageContext.request.contextPath}/Material" class="smoothScroll btn btn-default myBtn">자료실</a><br/>
-	<a href="#" class="smoothScroll btn btn-default myBtn">Doc List</a><br/>
-	<a href="#" class="smoothScroll btn btn-default myBtn">Edu List</a><br/>
+	<div>
+		<a href="${pageContext.request.contextPath}/Material" class="smoothScroll btn btn-default myBtn">자료실</a>
+	</div>
 </div>
 
 <div class="section-title text-center">
@@ -113,8 +113,6 @@
 	</form>
 
 </div>
-
-
 
 
 <!-- footer -->
