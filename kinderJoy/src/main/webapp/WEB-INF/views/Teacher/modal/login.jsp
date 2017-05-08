@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 
-<link rel="stylesheet" href="css/JKC/css/default.css">s
+<link rel="stylesheet" href="css/JKC/css/default.css">
 </head>
 <body>
 	

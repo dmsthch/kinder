@@ -10,5 +10,7 @@
 아이디 : ${teacherId}
 이름   : ${teacherName} 
 권한   : ${teacherLevel} 
+라이센스값 : ${teacherLicense}
+유지시간   : ${teacherTime}초
 </body>
 </html>

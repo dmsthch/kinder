@@ -70,12 +70,12 @@ $(document).ready(function(){
     
     
     
-    <div class="form-group">
+<!--     <div class="form-group">
       <label class="control-label col-sm-2">권한:</label>
       <div class="col-sm-10">          
         <input type="text" class="form-control" name="teacher_level" placeholder="권한을 입력하세요">
       </div>
-    </div>
+    </div> -->
     
     
     <div class="form-group">
@@ -120,7 +120,7 @@ $(document).ready(function(){
     </div>
     
     
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label class="control-label col-sm-2">은행:</label>
       <div class="col-sm-10">          
         <input type="text" class="form-control" name="teacher_bank" placeholder="은행을 입력하세요">
@@ -141,7 +141,7 @@ $(document).ready(function(){
       <div class="col-sm-10">          
         <input type="text" class="form-control" name="teacher_paystep" placeholder="호봉을 입력하세요">
       </div>
-    </div>
+    </div> -->
     
     
     <div class="form-group">        

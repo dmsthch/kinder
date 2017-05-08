@@ -43,15 +43,5 @@
 <!-- JS Link -->
 <c:import url="./module/importJS.jsp"></c:import>
 
-
-
-
-세션에 저장된 아이디값 : ${teacherId}
-네임값 : ${teacherName} 
-라이센스값 : ${teacherLicense}
-레벨값 : ${teacherLevel} 
-넘버값 : ${teacherNo}
-으앵    ${teacherId}
-시간    ${teacherTime}
 </body>
 </html>
