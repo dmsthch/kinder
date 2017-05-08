@@ -68,7 +68,10 @@
 	</insert>
 	
 	<!-- 게시글 갯수 가져오기 -->
-	<select id="getBoardCount" resultType="java.lang.Integer">
+	<select id="getCategoryBoardCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(*) from board where board_category_no = #{categoryNo}
+	</select>
+	<select id="getAllBoardCount" resultType="java.lang.Integer">
 		select count(*) from board
 	</select>
 	

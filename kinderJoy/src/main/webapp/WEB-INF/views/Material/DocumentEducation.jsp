@@ -18,7 +18,7 @@
 	
 	<style>
 		body{
-			margin-top: 5%;
+			margin-top: 6%;
 		}
 	</style>
 
@@ -73,7 +73,7 @@
 	
 </head>
 
-<body class="container" onload="InitializeStaticMenu();">
+<body class="container-fluid" onload="InitializeStaticMenu();">
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 

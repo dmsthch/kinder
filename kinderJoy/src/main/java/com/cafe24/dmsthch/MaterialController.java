@@ -93,14 +93,16 @@ public class MaterialController {
 			String license = (String) session.getAttribute("teacherLicense");
 			
 			int pagePerRow = 10;
-			int lastPage = materialService.getLastPage(pagePerRow);
+			int lastPage = materialService.getLastPage(categoryNo, pagePerRow);
 						
 			List<Board> getList = materialDao.getBoardList(license, categoryNo, nowPage, pagePerRow);
-			
+			List<Map<String, Object>> category = materialDao.getBoardCategory();
+						
 			model.addAttribute("getList", getList);
 			model.addAttribute("categoryNo", categoryNo);
 			model.addAttribute("lastPage", lastPage);
 			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("category", category);
 		}
 		
 		return returnUri;

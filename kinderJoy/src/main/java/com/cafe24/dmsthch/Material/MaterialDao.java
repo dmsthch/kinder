@@ -36,8 +36,13 @@ public class MaterialDao {
 	}
 	
 	//게시글 갯수 출력
-	public int getBoardCount(){
-		return sqlSessionTemplate.selectOne(sql+"getBoardCount");
+	public int getBoardCount(int categoryNo){
+		
+		String selectSql = "getCategoryBoardCount";
+		if(categoryNo == 0){
+			selectSql = "getAllBoardCount";
+		}
+		return sqlSessionTemplate.selectOne(sql+selectSql, categoryNo);
 	}
 	
 	//게시글 목록 출력

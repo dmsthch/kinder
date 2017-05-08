@@ -31,13 +31,14 @@
 		  margin-top: 5px;
 		  transition: all 0.4s ease-in-out;
 		}
-		body{
-			margin-top: 5%;
+		#body{
+			margin-top: 6%;
 		}
 	</style>
 	
+	
 </head>
-<body class="container" onload="InitializeStaticMenu();">
+<body id="body" class="container-fluid" onload="InitializeStaticMenu();">
 
 
 <!-- navbar -->
@@ -47,6 +48,7 @@
 	<div>
 		<a href="${pageContext.request.contextPath}/Material" class="smoothScroll btn btn-default myBtn">자료실</a>
 	</div>
+
 </div>
 
 <div class="section-title text-center">

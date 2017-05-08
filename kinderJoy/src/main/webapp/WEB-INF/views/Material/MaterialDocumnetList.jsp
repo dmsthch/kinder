@@ -18,7 +18,28 @@
 	
 	
 	<style>
-		#staticMenu { margin: 0pt; padding: 0pt;  position: absolute; right: 0px; top: 0px;}
+		#staticMenu { 
+			margin: 0pt; 
+			padding: 0pt;  
+			position: absolute; 
+			right: 0px; 
+			top: 0px;
+			position:absolute;
+			z-index:9999;
+			overflow:hidden;
+			border-radius: 13px;
+		}
+		#staticMenu div{
+		  height:100%;
+		  width:100%;
+		  color:#fff;
+		  background:rgba(153,153,153,0.3);
+		  padding:10px;
+		}
+		#staticMenu p{
+		  color: black;
+		}
+		
 		.myBtn {
  		  background: transparent; 
 		  border: 2px solid black;
@@ -30,17 +51,19 @@
 		  padding: 5px 30px;
 		  margin-top: 5px;
 		  transition: all 0.4s ease-in-out;
+		  border-radius: 8px;
 		}
 		.pageBtn{
 			padding: 5px 15px;
+			border-radius: 13px;
 		}
 		#body{
-			margin-top: 5%;
+			margin-top: 6%;
 		}
 	</style>
 	
 </head>
-<body id="body" class="container" onload="InitializeStaticMenu();">
+<body id="body" class="container-fluid" onload="InitializeStaticMenu();">
 
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
@@ -54,10 +77,11 @@
 	</div>
 	<div>
 		<c:if test="${nowPage>1}">
-			<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=${categoryNo}&nowPage=${nowPage-1}" class="smoothScroll btn btn-default myBtn pageBtn">&lt 이전</a>
+			<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=${categoryNo}&nowPage=${nowPage-1}" class="smoothScroll btn btn-default myBtn pageBtn">&lt </a>
 		</c:if>
+		&nbsp&nbsp
 		<c:if test="${nowPage<lastPage}">
-			<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=${categoryNo}&nowPage=${nowPage+1}" class="smoothScroll btn btn-default myBtn pageBtn">다음 &gt</a>
+			<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=${categoryNo}&nowPage=${nowPage+1}" class="smoothScroll btn btn-default myBtn pageBtn"> &gt</a>
 		</c:if>
 	</div>
 </div>
@@ -89,7 +113,11 @@
 				<c:forEach var="board" items="${getList}">
 					<tr>
 						<td>${board.boardNo }</td>
-						<td>${board.boardCategoryNo}</td>
+						<td>
+							<c:forEach var="category" items="${category}">
+								<c:if test="${category.categoryNo == board.boardCategoryNo}">${category.categoryName}</c:if>
+							</c:forEach>	
+						</td>
 						<td><a href="#">${board.boardTitle }</a></td>
 						<td>${board.teacherNo }</td>
 						<td>${board.boardDay }</td>
