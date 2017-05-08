@@ -66,7 +66,7 @@
  			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,	
-			mergeCells : testMerge,
+//			mergeCells : testMerge,
 /* 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			}, */
