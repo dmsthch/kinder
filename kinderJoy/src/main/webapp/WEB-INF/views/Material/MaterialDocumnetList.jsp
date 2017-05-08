@@ -27,33 +27,78 @@
 		  font-size: 15px;
 		  font-weight: bold;
 		  letter-spacing: 2px;
-		  padding: 5px 35px;
+		  padding: 5px 30px;
 		  margin-top: 5px;
 		  transition: all 0.4s ease-in-out;
 		}
-		body{
+		.pageBtn{
+			padding: 5px 15px;
+		}
+		#body{
 			margin-top: 5%;
 		}
 	</style>
 	
 </head>
-<body class="container" onload="InitializeStaticMenu();">
-
+<body id="body" class="container" onload="InitializeStaticMenu();">
 
 <!-- navbar -->
-<%-- <c:import url="../module/navbar.jsp"></c:import> --%>
+<c:import url="../module/navbar.jsp"></c:import>
 <!-- Follow sideNav -->
-<div id="staticMenu">
-	<a href="#" class="smoothScroll btn btn-default myBtn">버튼</a><br/>
+<div id="staticMenu" class="text-center">
+	<div>
+		<a href="${pageContext.request.contextPath}/Material" class="smoothScroll btn btn-default myBtn">자료실</a>
+	</div>
+	<div>
+		<p>현재 페이지 : ${nowPage }</p>
+	</div>
+	<div>
+		<c:if test="${nowPage>1}">
+			<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=${categoryNo}&nowPage=${nowPage-1}" class="smoothScroll btn btn-default myBtn pageBtn">&lt 이전</a>
+		</c:if>
+		<c:if test="${nowPage<lastPage}">
+			<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=${categoryNo}&nowPage=${nowPage+1}" class="smoothScroll btn btn-default myBtn pageBtn">다음 &gt</a>
+		</c:if>
+	</div>
 </div>
 
 <div class="section-title text-center">
-	<h1 class="heading bold">MaterialDocumnetList</h1>
+	<h1 class="heading bold">
+		<c:if test="${categoryNo == 0}">All List</c:if>
+		<c:if test="${categoryNo == 1}">Document List</c:if>
+		<c:if test="${categoryNo == 2}">Material List</c:if>
+	</h1>
 	<hr>
 </div>
 
 <div class="row">
-	
+	<div class="col-sm-8 col-sm-offset-2">
+		<table class="table table-hover">
+		
+			<thead>
+				<tr>
+					 <th>No</th>
+					 <th>카테고리</th>
+					 <th>제목</th>
+					 <th>작성자</th>
+					 <th>작성일</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<c:forEach var="board" items="${getList}">
+					<tr>
+						<td>${board.boardNo }</td>
+						<td>${board.boardCategoryNo}</td>
+						<td><a href="#">${board.boardTitle }</a></td>
+						<td>${board.teacherNo }</td>
+						<td>${board.boardDay }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+			
+		</table>
+	</div>
 </div>
 
 <!-- footer -->

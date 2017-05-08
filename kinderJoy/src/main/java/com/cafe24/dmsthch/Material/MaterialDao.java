@@ -35,14 +35,25 @@ public class MaterialDao {
 		return sqlSessionTemplate.insert(sql+"insertBoard", board);
 	}
 	
+	//게시글 갯수 출력
+	public int getBoardCount(){
+		return sqlSessionTemplate.selectOne(sql+"getBoardCount");
+	}
+	
 	//게시글 목록 출력
-	public List<Board> getBoardList(String license, int categoryNo, int nowPage, int getCount){
+	public List<Board> getBoardList(String license, int categoryNo, int nowPage, int pagePerRow){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("license", license);
 		map.put("categoryNo", categoryNo);
-		map.put("nowPage", nowPage);
-		map.put("getCount", getCount);
-		return sqlSessionTemplate.selectList(sql+"getBoardList", map);
+		map.put("nowPage", (nowPage-1)*10);
+		map.put("getCount", pagePerRow);
+		
+		String selectSql = "getCategoryBoardList";
+		if(categoryNo == 0){
+			selectSql = "getAllBoardList";
+		}
+		
+		return sqlSessionTemplate.selectList(sql+selectSql, map);
 	}
 	
 }
