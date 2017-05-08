@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,9 +22,9 @@
 				data : gogo,
 				success : function(data){
 					if (data == 0){
-						$("jeon").html("��밡��")
+						$("jeon").html("사용가능")
 						}else{
-						$("jeon").html("���Ұ�")
+						$("jeon").html("사용불가")
 					}
 				}
 			})
@@ -36,18 +36,18 @@
 <body>
 	<form action="${pageContext.request.contextPath}/li" method="post">
 	<div class="form-group">
-	<label class="control-label col-sm-2">���̼��� �߱޹ޱ�</label>
+	<label class="control-label col-sm-2">라이센스 발급받기</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="teacher_ajax_id" name="teacher_id" placeholder="���̵� �Է��ϼ���">
-        <input type="button" id="idcheckbutton" value="���̵�üũ"/>
+        <input type="text" class="form-control" id="teacher_ajax_id" name="teacher_id" placeholder="아이디를 입력하세요">
+        <input type="button" id="idcheckbutton" value="아이디체크"/>
       </div>
     </div>
     
     <div class="form-group">
-      <label class="control-label col-sm-2">�߱޵� ���̼��� : </label>
+      <label class="control-label col-sm-2">발급된 라이선스 : </label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" name="license_kindergarten" placeholder="�߱޵� ���̼����� �Է��ϼ���">
-        <button name="license" type="submit" value="li">���̼��� �߱޹ޱ�</button>
+        <input type="text" class="form-control" name="license_kindergarten" placeholder="발급된 라이센스를 입력하세요">
+        <button name="license" type="submit" value="li">라이선스 발급받기</button>
       </div>
     </div>
 	</form>
