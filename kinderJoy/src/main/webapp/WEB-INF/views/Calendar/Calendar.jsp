@@ -16,7 +16,7 @@
 <script src="js/LCR/Calendar/fullcalendar2.js"></script>
 
 
-	
+
 <script type="text/javascript">
 $(document).ready(function() {
 		$('#calendar').fullCalendar({
@@ -25,16 +25,20 @@ $(document).ready(function() {
 		header: {
 			left: 'prev,next today',
 			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
+			right: 'month'
+			/* right: 'month,agendaWeek,agendaDay' */
 		},
 		//일이나 주 이름을 클릭해서 탐색할수있다. 
 		navLinks: true,
 		//드래그해서 선택가능하게하는것
 		selectable: true,
 		
+		
+		
 		//드래그해서 선택했을때 나오는것
 		select: function(start, end) {
-			var title = prompt('Event Title:');
+			$('#opneAdd').trigger('click');
+			//var title = prompt('Event Title:');
 			var eventData;
 			if (title) {
 				eventData = {
@@ -50,9 +54,10 @@ $(document).ready(function() {
 		editable: true,
 		eventLimit: true, // allow "more" link when too many events
 		//이부분이 데이터 표시해주는 부분.
+		//기존에 있는것에 카테고리를 추가하여, 카테고리별로 다른색을 나타내도록 함!
 		events: [
  		<c:forEach items="${allSchedule}" var="allSchedule">
-				{id : ${allSchedule.schedule_no} ,title : '${allSchedule.schedule_title}' , start : '${allSchedule.schedule_start_day}', end : '${allSchedule.schedule_end_day}', cateTest : '${allSchedule.category_no}' } ,
+				{id : ${allSchedule.scheduleNo} , title : '${allSchedule.scheduleTitle}' , start : '${allSchedule.scheduleStartDay}', end : '${allSchedule.scheduleEndDay}', scheduleCategory : '${allSchedule.categoryNo}' , url : 'asdf'} ,
 		</c:forEach> 
 	/* 		{id : 2 ,title : '테스트제목2' , start : '2017-05-01', end : '2017-05-05' } ,
 			{id : 3 ,title : '테스트22' , start : '2017-05-01', end : '2017-05-01' } , */
@@ -63,6 +68,64 @@ $(document).ready(function() {
 		]
 	});
 	
+		
+	//모달창열기!!!!!!!!!!!!!!
+	$('.callModal').click(function(){
+		
+		//id로 하면 일정이 일주일을 넘어서 다른줄로 넘어갈때 각 개체마다 id를 부여해버려서 안됨.
+		//그래서 scheduleNo를 클래스로 넣어버렸음. schedule_no_숫자  이렇게!
+		//그걸 가져와야함.
+		//일단 클릭한것의 class들을 다 가져옴
+		var getClass = $(this).attr('class');
+		console.log(getClass);
+		
+		//그리고 띄어쓰기 단위 기준으로 자름
+		var getClassArray = getClass.split(' ');
+		console.log(getClassArray);
+		
+		var resultIndex;
+		//for문으로 돌리면서  schedule의 위치가 0인곳(딱맞는곳)의 i를 가져옴
+		for(i=0; i<getClassArray.length; i++){
+			if(getClassArray[i].indexOf('schedule') == 0){
+				resultIndex = i;
+			}
+		}
+		
+		//resultIndex의 값이 undefined가 아닐때.
+		if(resultIndex != undefined){
+			console.log(getClassArray[resultIndex]);
+			//배열의 i번째 값을 가져옴
+			var getValue = getClassArray[resultIndex];
+			//값을 가져온것에서 아이디값만 남기고 자름.
+			var getScheduleNo = getValue.substring(getValue.length-1 , getValue.length);
+			console.log('값은!! :'+getScheduleNo);
+		}else{
+			console.log('Not Found');
+		}
+		
+		//ajax로 해당 일정 클릭하면 modal에 세부사항 표기해주기
+		$.ajax({
+	        url:"${pageContext.request.contextPath}/getScheduleContent",
+	        type:'GET',
+	        data: {"scheduleNo" : getScheduleNo},
+	        dataType:'JSON',
+	        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	        success:function(data){
+	            //alert("성공!")
+	            //alert(data.scheduleContent);
+	            $('.calendarModalTitle').text(data.scheduleTitle);
+	            $('.calendarModalBody').html(' 내용 : '+data.scheduleContent+'<br/>');
+	            $('.calendarModalBody').append(' 일시 : '+data.scheduleStartDay+" ~ "+data.scheduleEndDay);
+	            $('.calendarModalFooter').html('<a href="${pageContext.request.contextPath}/deleteSchedule?scheduleNo='+data.scheduleNo+'"><button class="btn btn-default">삭제하기</button></a>');
+	            $('#opneModal').trigger('click');
+	            
+	        },
+	        error:function(jqXHR, textStatus, errorThrown){
+	            alert("실패" + textStatus + " : " + errorThrown);
+	        }
+		});
+		
+	})
 
 	
 });
@@ -85,18 +148,93 @@ $(document).ready(function() {
 
 </style>
 </head>
-<body>
+<body >
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 
-calendarTest
-	<!-- id를 calendar로 해줘야함! -->
-	<div id='calendar'></div>
+	<!-- id calendar로  -->
+	<div id='calendar' style="margin-top: 50px;"></div>
 	
 <%-- 	<c:if var="allSchedule" test="${allSchedule.category_no==1}">
 		cat1[cat1Length] = 	${allSchedule.schedule_no}
 		cat1Length++;
 		console.log(cat1.length);
 	</c:if> --%>
+	
+	
+
+	<!-- 모달버튼! -->
+<div style="display: none;">
+	<button type="button" id="opneModal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#calendarModal">Open Modal</button>
+	<button type="button" id="opneAdd" class="btn btn-info btn-lg" data-toggle="modal" data-target="#calendarAdd">Open Modal</button>
+</div>
+
+
+
+	<!-- Modal -->
+<div id="calendarModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content calendarModalContent">
+      <div class="modal-header calendarModalHeader">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title calendarModalTitle"></h4>
+      </div>
+      <div class="modal-body calendarModalBody">
+        modal
+      </div>
+      <div class="modal-footer calendarModalFooter">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+	<!-- Modal -->
+<div id="calendarAdd" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content calendarModalContent">
+      <div class="modal-header calendarModalHeader">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title calendarModalTitle">일정 추가</h4>
+      </div>
+      <div class="modal-body calendarModalBody">
+      	<div class="row" style="margin-bottom: 10px; text-align: center;">
+      		<div class="col-sm-2"><label>제 목 :</label></div>
+      		<div class="col-sm-10"><input type="text" class="form-control"> </div>      	
+      	</div>
+      	<div class="row" style="margin-bottom: 10px; text-align: center;">
+      		<div class="col-sm-2"><label>내 용 :</label></div>
+      		<div class="col-sm-10"><textarea class="form-control" rows="5" id="comment"></textarea></div>
+      	</div>
+      	<div class="row" style="margin-bottom: 10px; text-align: center;">
+      		<div class="col-sm-2"><label>기 간 :</label></div>
+      		<div class="col-sm-4"><input type="date" class="form-control"> </div>
+      		<div class="col-sm-1"> ~ </div>
+      		<div class="col-sm-4"><input type="date" class="form-control"> </div>      	
+      	</div>
+       	<div class="row" style="margin-bottom: 10px; text-align: center;">
+      		<div class="col-sm-2"><label>분류 :</label></div>
+      	    <div class="col-sm-10">
+      	    	<select class="form-control">
+      	    		<option> 기관일정 </option>
+      	    		<option> 개인일정 </option>
+      	    	</select> 
+      	    </div>     
+      	</div>
+      </div>
+      <div class="modal-footer calendarModalFooter">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 </body>
 </html>

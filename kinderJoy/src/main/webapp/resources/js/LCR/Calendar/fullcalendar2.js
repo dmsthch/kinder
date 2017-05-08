@@ -6969,9 +6969,11 @@ DayGrid.mixin({
 		var timeHtml = '';
 		var timeText;
 		var titleHtml;
-		var cateTest = htmlEscape(event.cateTest || '');
-		console.log(cateTest);
-		
+		var scheduleCategory = event.scheduleCategory;
+		console.log(scheduleCategory);
+		var id = event.id;
+		var inputId = "schedule_no_"+id;
+		console.log(id +"<<--id");
 		
 		
 
@@ -7020,10 +7022,10 @@ DayGrid.mixin({
 					) +
 			'</a>';*/
 		//체크
-		if(cateTest==1){
-			return '<a class="' + classes.join(' ') + '"' +
+		if(scheduleCategory==1){
+			return '<a class="' + classes.join(' ') +' callModal '+ inputId+ '"' +
 			(event.url ?
-				' href="' + htmlEscape(event.url) + '"' :
+				' data-target="#myModal" ' :
 				''
 				) +
 			(skinCss ?
@@ -7047,9 +7049,9 @@ DayGrid.mixin({
 				) +
 		'</a>';
 		}else{
-			return '<a class="' + classes.join(' ') + '"' +
+			return '<a class="' + classes.join(' ') +' callModal '+ inputId+ '"' +
 			(event.url ?
-				' href="' + htmlEscape(event.url) + '"' :
+				' data-target="#myModal" ' :
 				''
 				) +
 			(skinCss ?
@@ -7575,6 +7577,7 @@ DayGrid.mixin({
 			'</div>'
 		);
 		var segContainer = content.find('.fc-event-container');
+		
 		var i;
 
 		// render each seg's `el` and only return the visible segs

@@ -27,15 +27,20 @@ var FC = $.fullCalendar = {
 };
 var fcViews = FC.views = {};
 
-
+//풀캘린더 
+//옵션들을 받음
 $.fn.fullCalendar = function(options) {
-	var args = Array.prototype.slice.call(arguments, 1); // for a possible method call
-	var res = this; // what this function will return (this jQuery object by default)
-
-	this.each(function(i, _element) { // loop each DOM element involved
+	var args = Array.prototype.slice.call(arguments, 1); // for a possible method call 메서드 호출을위해?
+	var res = this; // what this function will return (this jQuery object by default) 반환할 함수?
+    console.log(options+"<--options");
+	this.each(function(i, _element) { // loop each DOM element involved 반복한다. this를 반복하니까 element에는 option이 들어가나?
 		var element = $(_element);
-		var calendar = element.data('fullCalendar'); // get the existing calendar object (if any)
-		var singleRes; // the returned value of this single method call
+		console.log(element+"<<-element")
+		var calendar = element.data('fullCalendar'); 
+		console.log(calendar+"<<<calendar")
+		// get the existing calendar object (if any)
+		// 기존 달력 객체를 가져옵니다.
+		var singleRes; // the returned value of this single method call 이 단일의 메소드 호출의 반환 값
 
 		// a method call
 		if (typeof options === 'string') {
@@ -62,6 +67,7 @@ $.fn.fullCalendar = function(options) {
 
 
 var complexOptions = [ // names of options that are objects whose properties should be combined
+	// 속성을 결합해야하는 객체인 옵션의 이름
 	'header',
 	'footer',
 	'buttonText',
@@ -5449,15 +5455,33 @@ Grid.mixin({
 	},
 
 
-	// Generic utility for generating the HTML classNames for an event segment's element
+	/*// Generic utility for generating the HTML classNames for an event segment's element
+	// 이벤트 클래스의 요소에 대한 HTML classNames 생성을위한 일반 유틸리티
 	getSegClasses: function(seg, isDraggable, isResizable) {
 		var view = this.view;
-		var classes = [
-			'fc-event',
-			seg.isStart ? 'fc-start' : 'fc-not-start',
-			seg.isEnd ? 'fc-end' : 'fc-not-end'
-		].concat(this.getSegCustomClasses(seg));
-
+		//체크!
+		console.log(cateTest);
+		if(cateTest==1){
+			var classes = [ 
+				'test',
+				'fc-event',
+				seg.isStart ? 'fc-start' : 'fc-not-start',
+				seg.isEnd ? 'fc-end' : 'fc-not-end'
+			].concat(this.getSegCustomClasses(seg));
+		}else if(ceteTest ==2){
+			var classes = [ 
+				'fc-event',
+				seg.isStart ? 'fc-start' : 'fc-not-start',
+				seg.isEnd ? 'fc-end' : 'fc-not-end'
+			].concat(this.getSegCustomClasses(seg));
+		}else{
+			var classes = [ 
+				'fc-event',
+				seg.isStart ? 'fc-start' : 'fc-not-start',
+				seg.isEnd ? 'fc-end' : 'fc-not-end'
+			].concat(this.getSegCustomClasses(seg));
+			
+		}
 		if (isDraggable) {
 			classes.push('fc-draggable');
 		}
@@ -5471,7 +5495,7 @@ Grid.mixin({
 		}
 
 		return classes;
-	},
+	},*/
 
 
 	// List of classes that were defined by the caller of the API in some way
@@ -6945,6 +6969,10 @@ DayGrid.mixin({
 		var timeHtml = '';
 		var timeText;
 		var titleHtml;
+		var scheduleCategory = htmlEscape(event.scheduleCategory || '');
+		console.log(scheduleCategory);
+		
+		
 		
 
 		classes.unshift('fc-day-grid-event', 'fc-h-event');
@@ -6961,8 +6989,12 @@ DayGrid.mixin({
 			'<span class="fc-title">' +
 				(htmlEscape(event.title || '') || '&nbsp;') + // we always want one line of height
 			'</span>';
-		
-		return '<a class="' + classes.join(' ') + '"' +
+		console.log(htmlEscape(event.title || ''));
+
+		//체크
+/*		var cateTest = htmlEscape(event.cateTest || '');
+		console.log(cateTest+"<<cateTest");*/
+		/*return '<a class="' + classes.join(' ') + '"' +
 				(event.url ?
 					' href="' + htmlEscape(event.url) + '"' :
 					''
@@ -6986,9 +7018,88 @@ DayGrid.mixin({
 					'<div class="fc-resizer fc-end-resizer" />' :
 					''
 					) +
-			'</a>';
+			'</a>';*/
+		//체크
+		if(scheduleCategory==1){
+			return '<a class="' + classes.join(' ') + '"' +
+			(event.url ?
+				' href="' + htmlEscape(event.url) + '"' :
+				''
+				) +
+			(skinCss ?
+				' style="' + skinCss + '"' :
+				''
+				) +
+		'>' +
+			'<div class="fc-content fc-event-private">' +
+				(this.isRTL ?
+					titleHtml + ' ' + timeHtml : // put a natural space in between
+					timeHtml + ' ' + titleHtml   //
+					) +
+			'</div>' +
+			(isResizableFromStart ?
+				'<div class="fc-resizer fc-start-resizer" />' :
+				''
+				) +
+			(isResizableFromEnd ?
+				'<div class="fc-resizer fc-end-resizer" />' :
+				''
+				) +
+		'</a>';
+		}else{
+			return '<a class="' + classes.join(' ') + '"' +
+			(event.url ?
+				' href="' + htmlEscape(event.url) + '"' :
+				''
+				) +
+			(skinCss ?
+				' style="' + skinCss + '"' :
+				''
+				) +
+		'>' +
+			'<div class="fc-content">' +
+				(this.isRTL ?
+					titleHtml + ' ' + timeHtml : // put a natural space in between
+					timeHtml + ' ' + titleHtml   //
+					) +
+			'</div>' +
+			(isResizableFromStart ?
+				'<div class="fc-resizer fc-start-resizer" />' :
+				''
+				) +
+			(isResizableFromEnd ?
+				'<div class="fc-resizer fc-end-resizer" />' :
+				''
+				) +
+		'</a>';
+		}
 	},
 
+	
+	// Generic utility for generating the HTML classNames for an event segment's element
+		// 이벤트 클래스의 요소에 대한 HTML classNames 생성을위한 일반 유틸리티
+		getSegClasses: function(seg, isDraggable, isResizable) {
+			var view = this.view;
+			//체크!
+			var classes = [ 
+				'fc-event',
+				seg.isStart ? 'fc-start' : 'fc-not-start',
+				seg.isEnd ? 'fc-end' : 'fc-not-end'
+			].concat(this.getSegCustomClasses(seg));
+			if (isDraggable) {
+				classes.push('fc-draggable');
+			}
+			if (isResizable) {
+				classes.push('fc-resizable');
+			}
+
+			// event is currently selected? attach a className.
+			if (view.isEventSelected(seg.event)) {
+				classes.push('fc-selected');
+			}
+
+			return classes;
+		},
 
 	// Given a row # and an array of segments all in the same row, render a <tbody> element, a skeleton that contains
 	// the segments. Returns object with a bunch of internal data about how the render was calculated.
@@ -7439,13 +7550,16 @@ DayGrid.mixin({
 		// delegated-handlers for free. attach event-related handlers to the popover.
 		this.bindSegHandlersToEl(this.segPopover.el);
 	},
-
+	
+	//체크
+	
 
 	// Builds the inner DOM contents of the segment popover
 	renderSegPopoverContent: function(row, col, segs) {
 		var view = this.view;
 		var isTheme = view.opt('theme');
 		var title = this.getCellDate(row, col).format(view.opt('dayPopoverFormat'));
+	//타이틀은여기있음
 		var content = $(
 			'<div class="fc-header ' + view.widgetHeaderClass + '">' +
 				'<span class="fc-close ' +

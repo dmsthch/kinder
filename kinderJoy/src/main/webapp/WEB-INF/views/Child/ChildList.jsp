@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>ChildList(spring mvc ¹æ½Ä)</title>
-<!-- bootstrapÀ» »ç¿ëÇÏ±â À§ÇÑ CDNÁÖ¼Ò -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ChildList(spring mvc ë°©ì‹)</title>
+<!-- bootstrapì„ ì‚¬ìš©í•˜ê¸° ìœ„í•œ CDNì£¼ì†Œ -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
@@ -16,20 +16,20 @@
 </head>
 <body>
 <div class="container">
-    <h1>ChildList(spring mvc ¹æ½Ä)</h1>
-    <div>ÀüÃ¼ÇàÀÇ ¼ö : ${ChildCount}</div>
+    <h1>ChildList(spring mvc ë°©ì‹)</h1>
+    <div>ì „ì²´í–‰ì˜ ìˆ˜ : ${ChildCount}</div>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ÀÌ¸§</th>
-                <th>»ý³â¿ùÀÏ</th>
-                <th>ÁÖ¼Ò</th>
-                <th>º¸È£ÀÚ¹øÈ£</th>
-                <th>º¸È£ÀÚ¿¹ºñ¹øÈ£</th>
-                <th>ÁÖÀÇ»çÇ×</th>
-                <th>¼ºº°</th>
-                <th>ÅëÇÐ¹æ¹ý</th>
-                <th>ÀÔÇÐÀÏ</th>
+                <th>ì´ë¦„</th>
+                <th>ìƒë…„ì›”ì¼</th>
+                <th>ì£¼ì†Œ</th>
+                <th>ë³´í˜¸ìžë²ˆí˜¸</th>
+                <th>ë³´í˜¸ìžì˜ˆë¹„ë²ˆí˜¸</th>
+                <th>ì£¼ì˜ì‚¬í•­</th>
+                <th>ì„±ë³„</th>
+                <th>í†µí•™ë°©ë²•</th>
+                <th>ìž…í•™ì¼</th>
             </tr>
         </thead>
         <tbody>
@@ -50,14 +50,14 @@
     </table>
     <ul class="pager">
         <c:if test="${currentPage > 1}">
-            <li class="previous"><a href="${pageContext.request.contextPath}/ChildList?currentPage=${currentPage-1}">ÀÌÀü</a></li>
+            <li class="previous"><a href="${pageContext.request.contextPath}/ChildList?currentPage=${currentPage-1}">ì´ì „</a></li>
         </c:if>
         <c:if test="${currentPage < lastPage}">
-            <li class="next"><a href="${pageContext.request.contextPath}/ChildList?currentPage=${currentPage+1}">´ÙÀ½</a></li>
+            <li class="next"><a href="${pageContext.request.contextPath}/ChildList?currentPage=${currentPage+1}">ë‹¤ìŒ</a></li>
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildAdd">°Ô½Ã±Û ÀÔ·Â</a>
+        <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildAdd">ê²Œì‹œê¸€ ìž…ë ¥</a>
     </div>
 </div>
 </body>
