@@ -1,67 +1,67 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<!-- bootstrapÀ» »ç¿ëÇÏ±â À§ÇÑ CDNÁÖ¼Ò -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- bootstrapì„ ì‚¬ìš©í•˜ê¸° ìœ„í•œ CDNì£¼ì†Œ -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
  
-<!-- jquery¸¦ »ç¿ëÇÏ±âÀ§ÇÑ CDNÁÖ¼Ò -->
+<!-- jqueryë¥¼ ì‚¬ìš©í•˜ê¸°ìœ„í•œ CDNì£¼ì†Œ -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  
-<!-- bootstrap javascript¼Ò½º¸¦ »ç¿ëÇÏ±â À§ÇÑ CDNÁÖ¼Ò -->
+<!-- bootstrap javascriptì†ŒìŠ¤ë¥¼ ì‚¬ìš©í•˜ê¸° ìœ„í•œ CDNì£¼ì†Œ -->
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  
-<title>ChildDevelopment(spring mvc ¹æ½Ä)</title>
+<title>ChildDevelopment(spring mvc ë°©ì‹)</title>
 </head>
 <body>
 <div class="container">
-    <h1>ChildDevelopment(spring mvc ¹æ½Ä)</h1>
+    <h1>ChildDevelopment(spring mvc ë°©ì‹)</h1>
     <form id="addForm" action="${pageContext.request.contextPath}/ChildDevelopment" method="post">
         <div class="form-group">
-            <label for="development_group">ºÐ·ù :</label>
+            <label for="development_group">ë¶„ë¥˜ :</label>
             <input class="form-control" name="development_group" id="development_group" type="text"/>
         </div>
         <div class="form-group">
-            <label for="development_content">³»¿ë :</label>
+            <label for="development_content">ë‚´ìš© :</label>
             <input class="form-control" name="development_content" id="development_content" type="text"/>
         </div>
          <div class="form-group">
-            <label for="development_details">¼¼ºÎ³»¿ë :</label>
+            <label for="development_details">ì„¸ë¶€ë‚´ìš© :</label>
             <input class="form-control" name="development_details" id="development_details" type="text"/>
         </div>
         <div class="form-group">
-            <label for="development_question">°üÂû¹®Ç× :</label>
+            <label for="development_question">ê´€ì°°ë¬¸í•­ :</label>
             <input class="form-control" name="development_question" id="development_question" type="text"/>
         </div>
         <div class="form-group">
-            <label for="development_standart">°üÂûÁØ°Å :</label>
+            <label for="development_standart">ê´€ì°°ì¤€ê±° :</label>
             <input class="form-control" name="development_standart" id="development_standart" type="text"/>
         </div>
         <div class="form-group">
-            <label for="development_case">°üÂû»ç·Ê :</label>
+            <label for="development_case">ê´€ì°°ì‚¬ë¡€ :</label>
             <input class="form-control" name="development_case" id="development_case" type="text"/>
         </div>
         <div class="form-group">
-            <label for="development_day">°üÂûÀÏ :</label>
+            <label for="development_day">ê´€ì°°ì¼ :</label>
             <textarea class="form-control" name="kidPrecautions" id="kidPrecautions" rows="5" cols="50"></textarea>
         </div>
         <div class="form-group">
-            <label for="development_title">Á¦¸ñ :</label>
+            <label for="development_title">ì œëª© :</label>
             <input class="form-control" name="development_title" id="development_title" type="text"/>
         </div>
          <div class="form-group">
-            <label for="license_kindergarten">À¯Ä¡¿ø¶óÀÌ¼±½º :</label>
+            <label for="license_kindergarten">ìœ ì¹˜ì›ë¼ì´ì„ ìŠ¤ :</label>
             <input class="form-control" name="license_kindergarten" id="license_kindergarten" type="text"/>
         </div>
         <div>
-            <input class="btn btn-default" id="addButton" type="button" value="±ÛÀÔ·Â"/>
-            <input class="btn btn-default" type="reset" value="ÃÊ±âÈ­"/>
-            <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildList">±Û¸ñ·Ï</a>
+            <input class="btn btn-default" id="addButton" type="button" value="ê¸€ìž…ë ¥"/>
+            <input class="btn btn-default" type="reset" value="ì´ˆê¸°í™”"/>
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildList">ê¸€ëª©ë¡</a>
         </div>
     </form>
 </div>
