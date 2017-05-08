@@ -4,7 +4,6 @@
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-
 <!-- navigation section -->
 <section class="navbar navbar-fixed-top custom-navbar top-nav-collapse" role="navigation">
 	<div class="container">
@@ -30,7 +29,7 @@
 			<li><a href="${pageContext.request.contextPath}/calendarTest" class="smoothScroll">캘린더</a></li>
 				<li><a href="#" class="smoothScroll">교육계획</a></li>
 				<li><a href="#" class="smoothScroll">유아</a></li>
-				<li><a href="#" class="smoothScroll">비품</a></li>
+				<li><a href="${pageContext.request.contextPath}/Equipment" class="smoothScroll">비품</a></li>
 				<li><a href="#" class="smoothScroll">교원</a></li>
 				<li><a href="${pageContext.request.contextPath}/Material" class="smoothScroll">자료실</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#signOut" class="smoothScroll" data-backdrop="static">로그아웃</a></li>

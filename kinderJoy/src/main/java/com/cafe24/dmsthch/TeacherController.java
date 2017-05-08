@@ -1,5 +1,6 @@
 package com.cafe24.dmsthch;
 
+import java.sql.SQLException;
 import java.util.UUID;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	}
 	
 	//로그인폼 호출 메서드 ★★★모달형식은 사용할 필요가 없음
-	/*	
+		
 	@RequestMapping(value="/Login" , method = RequestMethod.GET)
 	public String Login(HttpSession session) {
 		System.out.println("로그인화면");
@@ -67,14 +68,21 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		}else{
 			return "redirect:/home";
 		}
-	}*/
+	}
 	
 	//로그인 처리
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
-	public String Login(Model model,Teacher teacher,HttpSession session) {
+	public String Login(Model model,Teacher teacher,HttpSession session,String joongbok) throws SQLException {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
 		System.out.println(TDao+" <--TDao 동작 확인");
+		
+		if(saveSession == null) {
+			System.out.println("teacher.getTeacher_id()");
+		} else if(teacher.getTeacher_id().equals(saveSession.getTeacher_id())) {
+			System.out.println("다름");
+		}
+		
 		
 		if(session.getAttribute("teacherId") == null){
 			
@@ -114,7 +122,8 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		sessionstatus.setComplete();
 
 		
-		System.out.println(sessionstatus);
+		System.out.println(sessionstatus +"\n SessionAttributes만 초기화");
+		System.out.println(" redirect:/home");
 		return "redirect:/home";
 	}
 	

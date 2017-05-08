@@ -1,23 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!doctype html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
 <head>
 	<meta charset="utf-8">
 	<title>Title</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
 	<meta name="description" content="">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<!-- CSS Link -->
-	<c:import url="../module/importCSS.jsp"></c:import>
-	<script>
-	  $( function() {
-	    $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
-	    $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
-	  } );
-	</script>
+<c:import url="../module/importCSS.jsp"></c:import>
+	
 	<style>
 	  .ui-tabs-vertical { width: 55em; }
 	  .ui-tabs-vertical .ui-tabs-nav { padding: .2em .1em .2em .2em; float: left; width: 12em; }
@@ -25,44 +21,59 @@
 	  .ui-tabs-vertical .ui-tabs-nav li a { display:block; }
 	  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active { padding-bottom: 0; padding-right: .1em; border-right-width: 1px; }
 	  .ui-tabs-vertical .ui-tabs-panel { padding: 1em; float: right; width: 40em;}
-  	</style>
+	 </style>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
 
 <!-- navbar -->
-<c:import url="../module/navbar.jsp"></c:import>
-	<center>
-	<br><br><br><br>
-	<h2>∫Ò«∞∞¸∏Æ¥Î¿Â</h2>
-	<div>
-		<div id="tabs">
-		  <ul>
-		    <li><a href="#tabs-1">Nunc tincidunt</a></li>
-		    <li><a href="#tabs-2">Proin dolor</a></li>
-		    <li><a href="#tabs-3">Aenean lacinia</a></li>
-		  </ul>
-		  <div id="tabs-1">
-		    <h2>Content heading 1</h2>
-		    <p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
-		  </div>
-		  <div id="tabs-2">
-		    <h2>Content heading 2</h2>
-		    <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-		  </div>
-		  <div id="tabs-3">
-		    <h2>Content heading 3</h2>
-		    <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-		    <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
-		  </div>
-		</div>
-	</div>
-	</center>
+<jsp:include page="../module/navbar.jsp"></jsp:include>
+
+<!-- home section -->
+	<br><br><br><br><br><br><br>
+<style>
+	.nav-tabs li a{color: #000;}
+	.nav-tabs li{width: 50px !important;}
+</style>
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <div class="col-sm-2">
+	  <ul id="tablist" class="nav nav-stacked nav-pills" role="tablist">
+	    <li role="presentation" class="active"><a href="#TeachingMaterial" aria-controls="TeachingMaterial" role="tab" data-toggle="tab">ÎπÑÌíà Îì±Î°ù</a></li>
+	    <li role="presentation"><a href="#OfficeSupplies" aria-controls="OfficeSupplies" role="tab" data-toggle="tab">ÌíàÏùòÏÑú ÏûëÏÑ±</a></li>
+	  </ul>
+  </div>
+
+	<c:import url="../module/sheetjs.jsp"></c:import>
+	
+<div class="col-sm-10">
+	  <!-- Tab panes --> 
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="TeachingMaterial">
+	    	
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="OfficeSupplies">
+	    	<jsp:include page="../Equipment/sheet.jsp"></jsp:include>
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="PhysicalApparatus">
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="BookList">
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="Etc">
+	    </div>	
+	  </div>
+</div>
+
+</div>
+<br><br><br><br><br>
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>
 
 <!-- JS Link -->
 <c:import url="../module/importJS.jsp"></c:import>
-
+<script type="text/javascript">
+	$('#tablist').tab();
+</script>
 </body>
 </html>
