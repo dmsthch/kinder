@@ -17,42 +17,55 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  
 <title>ChildDevelopment(spring mvc 방식)</title>
+
+<style>
+.mydiv{
+	border: 1px solid black;
+
+}
+
+.mmydiv{
+	border-right: 1px solid black;
+}
+
+</style>
+
 </head>
 
 <body>
 
 <div class="container">
   <h2>Bordered Table</h2>
+  
+  
+	<div class="row">
+		<div class="col-sm-12 row">
+		
+			<div class="col-sm-5 mydiv">
+				<div class="row">
+					<div class="col-sm-4 text-center mmydiv">1 <br/><br/></div>
+					<div class="col-sm-4 text-center mmydiv">1 <br/><br/></div>
+					<div class="col-sm-4 text-center">1 <br/><br/></div>
+				</div>
+			</div>
+			
+			<div class="col-sm-7 ">
+				<div class="row">
+					<div class="col-sm-12 text-center mydiv">1</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 mydiv">1</div>
+					<div class="col-sm-4 mydiv">1</div>
+					<div class="col-sm-4 mydiv">1</div>
+				</div>
+			</div>
+		
+		</div>
+		
+		
+	</div>
           
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>내용</th>
-        <th>세부내용</th>
-        <th>관찰문항<br>(관찰요소)</th>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
-    </tbody>
-  </table>
+ 
 </div>
 
 </body>
