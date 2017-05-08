@@ -2,68 +2,68 @@ package com.cafe24.dmsthch.Calendar;
 
 public class Schedule {
 
-	private int schedule_no;
-	private int teacher_no;
-	private String license_kindergarten;
-	private int category_no;
-	private String schedule_content;
-	private String schedule_start_day;
-	private String schedule_end_day;
-	private String schedule_title;
-	private String schedule_time;
+	private int scheduleNo;
+	private int teacherNo;
+	private String licenseKindergarten;
+	private int categoryNo;
+	private String scheduleContent;
+	private String scheduleStartDay;
+	private String scheduleEndDay;
+	private String scheduleTitle;
+	private String scheduleTime;
+	public int getScheduleNo() {
+		return scheduleNo;
+	}
+	public void setScheduleNo(int scheduleNo) {
+		this.scheduleNo = scheduleNo;
+	}
+	public int getTeacherNo() {
+		return teacherNo;
+	}
+	public void setTeacherNo(int teacherNo) {
+		this.teacherNo = teacherNo;
+	}
+	public String getLicenseKindergarten() {
+		return licenseKindergarten;
+	}
+	public void setLicenseKindergarten(String licenseKindergarten) {
+		this.licenseKindergarten = licenseKindergarten;
+	}
+	public int getCategoryNo() {
+		return categoryNo;
+	}
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+	public String getScheduleContent() {
+		return scheduleContent;
+	}
+	public void setScheduleContent(String scheduleContent) {
+		this.scheduleContent = scheduleContent;
+	}
+	public String getScheduleStartDay() {
+		return scheduleStartDay;
+	}
+	public void setScheduleStartDay(String scheduleStartDay) {
+		this.scheduleStartDay = scheduleStartDay;
+	}
+	public String getScheduleEndDay() {
+		return scheduleEndDay;
+	}
+	public void setScheduleEndDay(String scheduleEndDay) {
+		this.scheduleEndDay = scheduleEndDay;
+	}
+	public String getScheduleTitle() {
+		return scheduleTitle;
+	}
+	public void setScheduleTitle(String scheduleTitle) {
+		this.scheduleTitle = scheduleTitle;
+	}
+	public String getScheduleTime() {
+		return scheduleTime;
+	}
+	public void setScheduleTime(String scheduleTime) {
+		this.scheduleTime = scheduleTime;
+	}
 	
-	public int getSchedule_no() {
-		return schedule_no;
-	}
-	public void setSchedule_no(int schedule_no) {
-		this.schedule_no = schedule_no;
-	}
-	public int getTeacher_no() {
-		return teacher_no;
-	}
-	public void setTeacher_no(int teacher_no) {
-		this.teacher_no = teacher_no;
-	}
-	public String getLicense_kindergarten() {
-		return license_kindergarten;
-	}
-	public void setLicense_kindergarten(String license_kindergarten) {
-		this.license_kindergarten = license_kindergarten;
-	}
-	public int getCategory_no() {
-		return category_no;
-	}
-	public void setCategory_no(int category_no) {
-		this.category_no = category_no;
-	}
-	public String getSchedule_content() {
-		return schedule_content;
-	}
-	public void setSchedule_content(String schedule_content) {
-		this.schedule_content = schedule_content;
-	}
-	public String getSchedule_start_day() {
-		return schedule_start_day;
-	}
-	public void setSchedule_start_day(String schedule_start_day) {
-		this.schedule_start_day = schedule_start_day;
-	}
-	public String getSchedule_end_day() {
-		return schedule_end_day;
-	}
-	public void setSchedule_end_day(String schedule_end_day) {
-		this.schedule_end_day = schedule_end_day;
-	}
-	public String getSchedule_title() {
-		return schedule_title;
-	}
-	public void setScheduel_title(String scheduel_title) {
-		this.schedule_title = scheduel_title;
-	}
-	public String getSchedule_time() {
-		return schedule_time;
-	}
-	public void setSchedule_time(String schedule_time) {
-		this.schedule_time = schedule_time;
-	}
 }

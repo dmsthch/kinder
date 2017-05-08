@@ -7,11 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-세션에 저장된 아이디값 : ${teacherId}
-네임값 : ${teacherName} 
-라이센스값 : ${teacherLicense}
-레벨값 : ${teacherLevel} 
-넘버값 : ${teacherNo}
+아이디 : ${teacherId}
+이름   : ${teacherName} 
+권한   : ${teacherLevel} 
 </body>
 </html>

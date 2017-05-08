@@ -26,21 +26,24 @@ public class CommuteController {
 	private TeacherDao tDao;
 	
 	
-	private Map commuteMap = null;
 	
-//	@Autowired
-//	public CommuteController(HttpSession session) {
-//		
-//		if(session.getAttribute("teacherNo") != null){
-//			int teacherNo = (Integer) session.getAttribute("teacherNo");
-//			commuteMap = cDao.commuteCheck(teacherNo);
-//		}
-//		
-//	}
-//	
-//	@Autowired
-//	public CommuteController() {
-//	}
+	@RequestMapping(value="/hansol2", method=RequestMethod.GET)
+	public String hansolTest(){
+		return "Equipment/Hansol2";
+	}
+	
+	@RequestMapping(value="/send" , method=RequestMethod.GET)
+	public String getJson(Model model,@RequestParam(value="jsonStr") List<String> jsonStr){
+		System.out.println("getJson() Controller Run");
+		
+		System.out.println(jsonStr);
+		model.addAttribute("jsonStr", jsonStr);
+		
+		return "Equipment/solTest";
+	}
+	
+	
+	
 	
 
 	//교원 출석체크 페이지
@@ -242,7 +245,12 @@ public class CommuteController {
 	}
 	
 	
+	
+	
+	
+	
 	//임시 로그아웃
+	/*  사용 안함
 	@RequestMapping(value="/hsLogout", method=RequestMethod.GET)
 	public String hsLogout(HttpSession session){
 		session.removeAttribute("teacherNo");
@@ -252,7 +260,7 @@ public class CommuteController {
 		session.removeAttribute("teacherLevel");
 		return "redirect:/Commute";
 	}
-	
+	*/
 	
 	
 	/*  예외처리 부분  */
