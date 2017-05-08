@@ -48,7 +48,23 @@
           <div class="codeLayout">
             <div class="pad">
 
-              <script data-jsfiddle="hot">
+             
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-text">
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div> <input name="save" type="button" id="save" value="테스트"></div>
+<div id="outside-links-wrapper"></div>
+
+ <script data-jsfiddle="hot">
               
               $(document).ready(function(){
             		
@@ -78,23 +94,24 @@
                   
             		
             	  
-            	   function getData() {
+            	 /*   function getData() {
                        return [
                          ['0','2',null,'3'],
                          ['2008', 10, 11, 12, 13],
                          ['2009', 20, 11, 14, 13],
                          ['2010', 30, 15, 12, 13]
                        ];
-                     }
+                     } */
+                   var  save = $('save');
             	  var dataString;
             	  var dataArray=[];
-             
+					var resultData;
                 // Instead of creating a new Handsontable instance with the container element passed as an argument,
                 // you can simply call .handsontable method on a jQuery DOM object.
                 var $container = $("#hot");
 
-               $container.handsontable({
-                    data: getData(),
+               var conta=$container.handsontable({
+                    //data: getData(),
                     startRows: 10,
                     startCols: 10,
                     minRows: 10,
@@ -113,20 +130,7 @@
                     contextMenu: true,
         			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
         				console.log(data, type+" ++요놈")
-        				console.log(data[0][1]);
-        				  $('#save').click(function(){
-                 				alert('test');
-                 				var jparse=JSON.parse(JSON.stringify(data));
-                 				console.log(jparse);
-                 				
-                 				
-                 				/* console.log(data[0][0]+"<-row");
-                 				console.log(data[0][1]+"<-col");
-                 				console.log(data[0][3]+"<-val");
-                 				dataString = '{ "row" : "'+data[0][0]+'" ,"col" : "'+data[0][1]+'", "val" : "'+data[0][3]+'" }';
-                 				dataArray.push(dataString);
-                 				console.log(dataArray) */
-        				  });
+        				resultData=data;
         				
         			/* 	if(dataArray === undefined){
         					console.log('초깅화')
@@ -160,6 +164,37 @@
         		}
                     
                   });
+               
+              conta.addEvent(save, 'click', function() {
+            	   
+            	   alert('test');
+            	    // save all cell's data
+            	   /*  ajax('scripts/json/save.json', 'GET', JSON.stringify({data: hot.getData()}), function (res) {
+            	      var response = JSON.parse(res.response);
+
+            	      if (response.result === 'ok') {
+            	        exampleConsole.innerText = 'Data saved';
+            	      }
+            	      else {
+            	        exampleConsole.innerText = 'Save error';
+            	      }
+            	    }); */
+            	  });
+
+
+               $('#save').click(function(){
+    				alert('test');
+    				var jparse=JSON.parse(JSON.stringify(resultData));
+    				console.log(jparse);
+    				
+    				
+    				/* console.log(data[0][0]+"<-row");
+    				console.log(data[0][1]+"<-col");
+    				console.log(data[0][3]+"<-val");
+    				dataString = '{ "row" : "'+data[0][0]+'" ,"col" : "'+data[0][1]+'", "val" : "'+data[0][3]+'" }';
+    				dataArray.push(dataString);
+    				console.log(dataArray) */
+			  });
  
 
                 // This way, you can access Handsontable api methods by passing their names as an argument, e.g.:
@@ -170,21 +205,5 @@
     			
               });
               </script>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer-text">
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-<div> <input type="button" id="save" value="테스트"></div>
-<div id="outside-links-wrapper"></div>
-
-
 </body>
 </html>

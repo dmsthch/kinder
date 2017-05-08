@@ -11,7 +11,7 @@ public class EducationProjectController {
 	public String scheduleAllSelect() {
 	
 		
-		return "EducationProject/EducationPfoject";
+		return "EducationProject/EducationPfoject2";
 	}
 
 }
