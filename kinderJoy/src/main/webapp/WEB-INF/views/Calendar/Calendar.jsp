@@ -40,12 +40,17 @@ $(document).ready(function() {
 			$('#opneAdd').trigger('click');
 			//var title = prompt('Event Title:');
 			var eventData;
+			var title = 'test';
 			if (title) {
 				eventData = {
 					title: title,
 					start: start,
 					end: end
+					
 				};
+				console.log(start+"<<<start")//요상한 숫자 13자리?정도 나온다. 찾아보니 유닉스시간? 이것같은데..
+				console.log(end+"<<<end")
+				
 				$('#calendar').fullCalendar('renderEvent', eventData, true); // stick이 뭐지?
 			}
 			$('#calendar').fullCalendar('unselect');
