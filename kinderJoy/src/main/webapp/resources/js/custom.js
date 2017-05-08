@@ -58,16 +58,17 @@ $(window).load(function(){
     $('.preloader').fadeOut(1000); // set duration in brackets    
 });
 
-
+//네비바 투명 , 불투명 전환
 // jQuery to collapse the navbar on scroll //
-$(window).scroll(function() {
-    if ($(".navbar").offset().top > 50) {
-        $(".navbar-fixed-top").addClass("top-nav-collapse");
-    } else {
-        $(".navbar-fixed-top").removeClass("top-nav-collapse");
-    }
-});
+//$(window).scroll(function() {
+//    if ($(".navbar").offset().top > 50) {
+//        $(".navbar-fixed-top").addClass("top-nav-collapse");
+//    } else {
+//        $(".navbar-fixed-top").removeClass("top-nav-collapse");
+//    }
+//});
 
+$(".navbar-fixed-top").addClass("top-nav-collapse");
 
 /* HTML document is loaded. DOM is ready. 
 -------------------------------------------*/
@@ -88,9 +89,9 @@ $(function(){
 
 
   // NIVO LIGHTBOX
-  $('.iso-box-section a').nivoLightbox({
-        effect: 'fadeScale',
-    });
+//  $('.iso-box-section a').nivoLightbox({
+//        effect: 'fadeScale',
+//    });
 
 
   // HOME BACKGROUND SLIDESHOW
@@ -98,8 +99,8 @@ $(function(){
     jQuery(document).ready(function() {
     $('#home').backstretch([
        "images/home-bg-slideshow1.jpg", 
-       "images/home-bg-slideshow2.jpg",
-        ],  {duration: 2000, fade: 750});
+//       "images/home-bg-slideshow2.jpg",
+        ],  {duration: 5000, fade: 750});
     });
   })
 

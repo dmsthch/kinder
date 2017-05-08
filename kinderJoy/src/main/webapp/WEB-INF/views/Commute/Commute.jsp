@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE>
 <html>
@@ -16,14 +16,14 @@
 		
 	$(document).ready(function(){
 		
-		//Ãâ±ÙÇÏ±â ¹öÆ°
+		//ì¶œê·¼í•˜ê¸° ë²„íŠ¼
 		$('#BtcommuteIn').click(function(){
 			$('#unloginForm').removeAttr('action');
 			$('#unloginForm').attr('action','${pageContext.request.contextPath}/CommuteIn');
 			$('#unloginForm').submit();
 		});
 		
-		//Åğ±ÙÇÏ±â ¹öÆ°
+		//í‡´ê·¼í•˜ê¸° ë²„íŠ¼
 		$('#BtcommuteOut').click(function(){
 			$('#unloginForm').removeAttr('action');
 			$('#unloginForm').attr('action','${pageContext.request.contextPath}/CommuteOut');
@@ -50,46 +50,61 @@
 
 <div class="text-center">
 
-	<!-- ·Î±×ÀÎÀÌ µÇ¾îÀÖ´Â °æ¿ì -->
+	<!-- ë¡œê·¸ì¸ì´ ë˜ì–´ìˆëŠ” ê²½ìš° -->
 	<c:if test="${teacherNo != 0}">
 	
-		<!-- Ãâ±Ùµî·ÏÀ» ¾ÈÇÑ »óÅÂ -->
-		<c:if test="${commuteCheck == '¹ÌÃâ±Ù'}">
-			<h1>${teacherName}´Ô Ãâ±Ùµî·Ï ÇÏ½Ã°Ú½À´Ï±î?</h1><br>
-			<a href="${pageContext.request.contextPath}/CommuteIn?teacherNo=${teacherNo}"><button class="btn btn-default btn-lg">Ãâ±Ùµî·Ï</button></a>
+		<!-- ì¶œê·¼ë“±ë¡ì„ ì•ˆí•œ ìƒíƒœ -->
+		<c:if test="${commuteCheck == 'ë¯¸ì¶œê·¼'}">
+			<h1>${teacherName}ë‹˜ ì¶œê·¼ë“±ë¡ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?</h1><br>
+			<a href="${pageContext.request.contextPath}/CommuteIn?teacherNo=${teacherNo}"><button class="btn btn-default btn-lg">ì¶œê·¼ë“±ë¡</button></a>
 		</c:if>
 		
-		<!-- Ãâ±Ùµî·ÏÀ» ÇÑ »óÅÂ -->
-		<c:if test="${commuteCheck == 'Ãâ±Ù'}">
-			<h1>${teacherName}´Ô Ãâ±Ùµî·Ï µÇ¼Ì½À´Ï´Ù</h1><br>
-			<h1>Ãâ±Ù½Ã°£ : ${commuteTime}</h1><br><br>
-			<div class="row">
+		<!-- ì¶œê·¼ë“±ë¡ì„ í•œ ìƒíƒœ -->
+		<c:if test="${commuteCheck == 'ì¶œê·¼' || commuteCheck == 'ì™¸ì¶œ' || commuteCheck == 'ë³µê·€' }">
+			
+			<c:if test="${commuteCheck == 'ì¶œê·¼' }">
+				<h1>${teacherName}ë‹˜ ì¶œê·¼ë“±ë¡ ë˜ì…¨ìŠµë‹ˆë‹¤</h1><br>
+				<h1>ì¶œê·¼ì‹œê°„ : ${commuteTime}</h1><br><br>
+			</c:if>
+			<c:if test="${commuteCheck == 'ì™¸ì¶œ' }">
+				<h1>${teacherName}ë‹˜ ì™¸ì¶œë“±ë¡ ë˜ì…¨ìŠµë‹ˆë‹¤</h1><br>
+				<h1>ì™¸ì¶œì‹œê°„ : ${commuteTime}</h1><br><br>
+			</c:if>
+			<c:if test="${commuteCheck == 'ë³µê·€' }">
+				<h1>${teacherName}ë‹˜ ë³µê·€ë“±ë¡ ë˜ì…¨ìŠµë‹ˆë‹¤</h1><br>
+				<h1>ë³µê·€ì‹œê°„ : ${commuteTime}</h1><br><br>
+			</c:if>
+			
+			
+			<div class="row"> <!-- ì™¸ì¶œ , ë³µê·€ dropdown -->
 				<div class="col-sm-offset-4 col-sm-2 dropup">
-					<button type="button" class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">¿ÜÃâ/º¹±Í <span class="caret"></span></button>
+					<button type="button" class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">ì™¸ì¶œ/ë³µê·€ <span class="caret"></span></button>
 					<ul class="dropdown-menu">
 						<li class="divider"></li>
-						<c:if test="${commuteCheck == 'Ãâ±Ù'}">
-							<li class="text-center"><a href="#">¿ÜÃâ µî·Ï</a></li>
+						<c:if test="${commuteCheck == 'ì¶œê·¼' || commuteCheck == 'ë³µê·€'}">
+							<li class="text-center"><a href="${pageContext.request.contextPath}/absence">ì™¸ì¶œ ë“±ë¡</a></li>
 						</c:if>
-						<c:if test="${commuteCheck == '¿ÜÃâ'}">
-							<li><a href="#">º¹±Í µî·Ï</a></li>
+						<c:if test="${commuteCheck == 'ì™¸ì¶œ'}">
+							<li class="text-center"><a href="${pageContext.request.contextPath}/absenceReturn">ë³µê·€ ë“±ë¡</a></li>
 						</c:if>
 						<li class="divider"></li>
 					</ul>
 				</div>
-				<div class="col-sm-2"><a href="${pageContext.request.contextPath}/CommuteOut?teacherNo=${teacherNo}"><button type="button" class="btn btn-danger btn-lg">Åğ±ÙÇÏ±â</button></a></div>
+				<div class="col-sm-2"><a href="${pageContext.request.contextPath}/CommuteOut"><button type="button" class="btn btn-danger btn-lg">í‡´ê·¼í•˜ê¸°</button></a></div>
 			</div>
 		</c:if>
 		
-		<!-- Åğ±Ùµî·ÏÀ» ÇÑ »óÅÂ -->
-		<c:if test="${commuteCheck == 'Åğ±Ù'}">
-			<h1>${teacherName}´Ô Åğ±Ùµî·Ï µÇ¼Ì½À´Ï´Ù</h1><br>
-			<h1>Åğ±Ù½Ã°£ : ${commuteTime}</h1><br><br>
+		<!-- í‡´ê·¼ë“±ë¡ì„ í•œ ìƒíƒœ -->
+		<c:if test="${commuteCheck == 'í‡´ê·¼'}">
+			<h1>${teacherName}ë‹˜ í‡´ê·¼ë“±ë¡ ë˜ì…¨ìŠµë‹ˆë‹¤</h1><br>
+			<h1>í‡´ê·¼ì‹œê°„ : ${commuteTime}</h1><br><br>
+			<a href="${pageContext.request.contextPath}/CommuteOut"><button type="button" class="btn btn-danger btn-lg">í‡´ê·¼í•˜ê¸°</button></a>
+		
 		</c:if>
 		
 	</c:if>
 	
-	<!-- ·Î±×ÀÎÀÌ ¾ÈµÇ¾î ÀÖ´Â °æ¿ì -->
+	<!-- ë¡œê·¸ì¸ì´ ì•ˆë˜ì–´ ìˆëŠ” ê²½ìš° -->
 	<c:if test="${teacherNo == 0}">
 		<form class="form-horizontal" id="unloginForm" method="post">
 			<div class="form-group">
@@ -107,10 +122,10 @@
 			<div class="form-group"> 
 				<div class="col-sm-offset-1 col-sm-10">
 					<div class="col-sm-offset-4 col-sm-2">
-						<button type="button" id="BtcommuteIn" class="btn btn-default btn-lg">Ãâ±ÙÇÏ±â</button>
+						<button type="button" id="BtcommuteIn" class="btn btn-default btn-lg">ì¶œê·¼í•˜ê¸°</button>
 					</div>
 					<div class="col-sm-2">
-						<button type="button" id="BtcommuteOut" class="btn btn-danger btn-lg">Åğ±ÙÇÏ±â</button>
+						<button type="button" id="BtcommuteOut" class="btn btn-danger btn-lg">í‡´ê·¼í•˜ê¸°</button>
 					</div>
 				</div>
 			</div>
@@ -119,23 +134,16 @@
 		
 </div>
 
-<!-- Á¤º¸ Ãâ·Â °ø°£ -->
+<!-- ì •ë³´ ì¶œë ¥ ê³µê°„ -->
 <div class="col-sm-offset-1 col-sm-5">
 	<c:if test="${param.notice != null}">
 		<p style="font-size: 25px; color: white">notice : ${param.notice}</p>
 	</c:if>
+<%-- 	<a href="${pageContext.request.contextPath}/hsLogout"><button class="btn btn-default">ì„ì‹œ ë¡œê·¸ì•„ì›ƒ</button></a> --%>
 </div>
  
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>
-
-
-
-¼¼¼Ç¿¡ ÀúÀåµÈ ¾ÆÀÌµğ°ª : ${teacherId}
-³×ÀÓ°ª : ${teacherName} 
-¶óÀÌ¼¾½º°ª : ${teacherLicense}
-·¹º§°ª : ${teacherLevel} 
-³Ñ¹ö°ª : ${teacherNo}
 
 </body>
 </html>

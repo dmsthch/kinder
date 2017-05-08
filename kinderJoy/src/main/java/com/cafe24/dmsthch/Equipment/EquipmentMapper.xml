@@ -1,0 +1,30 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
+  	
+  	<insert id="addEquipment" parameterType="com.cafe24.dmsthch.Equipment.Sheet">
+  		INSERT INTO sheet_value(
+  		 	teacher_no
+  			,license_kindergarten
+  			,sheet_content
+  		) VALUES(
+  		 	#{teacherNo}
+  			,#{licenseKindergarten}
+  			,#{sheetContent}
+  		);
+  	</insert>
+
+	<select id="selectEquipment" parameterType="int" resultType="com.cafe24.dmsthch.Equipment.Sheet">
+		SELECT
+		  	 sheet_no AS sheetNo
+		 	,teacher_no AS teacherNo
+		 	,license_kindergarten AS licenseKindergarten
+		 	,sheet_content AS sheetContent
+		FROM
+			sheet_value
+		WHERE
+			teacher_no = #{teacherNo};
+	</select>
+  </mapper>
