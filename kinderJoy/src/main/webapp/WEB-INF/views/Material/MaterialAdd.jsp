@@ -41,10 +41,12 @@
 
 
 <!-- navbar -->
-<c:import url="../module/navbar.jsp"></c:import>
+<%-- <c:import url="../module/navbar.jsp"></c:import> --%>
 <!-- Follow sideNav -->
-<div id="staticMenu">
-	<a href="#" class="smoothScroll btn btn-default myBtn">버튼</a><br/>
+<div id="staticMenu" class="text-right">
+	<a href="${pageContext.request.contextPath}/Material" class="smoothScroll btn btn-default myBtn">자료실</a><br/>
+	<a href="#" class="smoothScroll btn btn-default myBtn">Doc List</a><br/>
+	<a href="#" class="smoothScroll btn btn-default myBtn">Edu List</a><br/>
 </div>
 
 <div class="section-title text-center">
@@ -85,7 +87,7 @@
 			</div>
 		</div>
 		
-<!-- 		파일 -->
+		<!-- 파일 -->
 		<div class="form-group">
 			<div class="row">    
 		        <div class="col-xs-8 col-xs-offset-2">

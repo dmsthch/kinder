@@ -17,6 +17,8 @@ public class MaterialService {
 	@Autowired
 	MaterialDao materialDao;
 	
+	
+	//파일등록 , 게시글 작성
 	public List<Integer> saveBoardData(Board board, HttpSession session) throws IllegalStateException, IOException{
 		System.out.println("saveBoardData() run - MaterialService");
 		

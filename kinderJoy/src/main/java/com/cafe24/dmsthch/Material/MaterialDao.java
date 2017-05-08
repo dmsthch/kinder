@@ -1,5 +1,6 @@
 package com.cafe24.dmsthch.Material;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +33,16 @@ public class MaterialDao {
 	//게시글 입력
 	public int insertBoard(Board board){
 		return sqlSessionTemplate.insert(sql+"insertBoard", board);
+	}
+	
+	//게시글 목록 출력
+	public List<Board> getBoardList(String license, int categoryNo, int nowPage, int getCount){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("license", license);
+		map.put("categoryNo", categoryNo);
+		map.put("nowPage", nowPage);
+		map.put("getCount", getCount);
+		return sqlSessionTemplate.selectList(sql+"getBoardList", map);
 	}
 	
 }

@@ -4,7 +4,6 @@
   
 <mapper namespace="com.cafe24.dmsthch.Material.MaterialMapper">
 	
-	
 	<!-- 게시판 카테고리목록 가져오기 -->
 	<select id="getBoardCategory" resultType="java.util.Map">
 		select 
@@ -47,8 +46,8 @@
 			data_storage_name = #{dataStorageName}
 	</select>
 	
+	<!-- 게시글 입력 -->
 	<insert id="insertBoard" parameterType="com.cafe24.dmsthch.Material.Board">
-	
 		INSERT INTO board (
 			license_kindergarten, 
 			board_title, 
@@ -66,8 +65,28 @@
 			#{teacherNo}, 
 			#{boardContent}
 		);
-	
 	</insert>
+	
+	<!-- 게시글 목록 가져오기 -->
+	<select id="getBoardList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Material.Board">
+		select
+			license_kindergarten AS licenseKindergarten,
+			board_no AS boardNo,
+			board_title AS boardTitle,
+			board_category_no AS boardCategoryNo,
+			data_no AS dataNo,
+			board_day AS boardDay,
+			teacher_no AS teacherNo,
+			board_content AS boardContent
+		from 
+			board
+		where
+			license_kindergarten = #{license}
+		and
+			board_category_no = #{categoryNo}
+		order by board_no desc
+		limit #{nowPage},#{getCount}
+	</select>
 	
 	
 </mapper>

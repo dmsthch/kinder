@@ -66,16 +66,16 @@
 		color: white;
 	}
 	#portfolio {
-  background-color: transparent;
-  text-align: center;
-  }
+	  background-color: transparent;
+	  text-align: center;
+	}
 	</style>
 	
 </head>
 
 <body class="container" onload="InitializeStaticMenu();">
 <!-- navbar -->
-<c:import url="../module/navbar.jsp"></c:import>
+<%-- <c:import url="../module/navbar.jsp"></c:import> --%>
 
 <!-- Follow sideNav -->
 <div id="staticMenu">
@@ -132,7 +132,7 @@
 							 
 							 <!-- DocumentForm -->
                				 <div class="iso-box col-lg-3 col-md-4 col-sm-6 documentForm">
-               				 	<a href="#">
+               				 	<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=1">
 	               				 	<div class="col-lg-12 col-md-12 col-sm-12 fadeInUp tabContent text-center">
 										<h3>문서 양식 리스트</h3>
 										<hr>
