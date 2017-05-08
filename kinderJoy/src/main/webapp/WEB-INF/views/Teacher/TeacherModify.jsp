@@ -7,10 +7,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-아이디 : ${teacherId}
-이름   : ${teacherName} 
-권한   : ${teacherLevel} 
-라이센스값 : ${teacherLicense}
-유지시간   : ${teacherTime}초
+<!-- jsp로 받을 땐 값이 담겨있는 name값과 name안에 있는 value값을 적어줘야 한다 .으로 구분 -->
+<!-- 세션에 담겨있는  -->
+
+	${kyoteacher.teacher_no},
+	${kyoteacher.teacher_id},
+	${kyoteacher.license_kindergarten},
+	${kyoteacher.teacher_level},
+	${kyoteacher.teacher_name},
+	${kyoteacher.teacher_pw},
+	${kyoteacher.teacher_add_day},
+	${kyoteacher.teacher_phone},
+	${kyoteacher.teacher_bank},
+	${kyoteacher.teacher_account},
+	${kyoteacher.teacher_paystep}
+
+
 </body>
 </html>
