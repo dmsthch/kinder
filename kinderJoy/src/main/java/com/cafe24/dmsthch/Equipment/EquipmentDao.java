@@ -20,6 +20,7 @@ public class EquipmentDao {
 		sheet.setLicenseKindergarten(teacherLicense);
 		sheet.setSheetContent(jsonStr);
 		
+		System.out.println(sheet);
 		System.out.println("save method 내용 종료");
 		System.out.println(sqlSessionTemplate);
         return sqlSessionTemplate.insert("com.cafe24.dmsthch.Equipment.EquipmentMapper.addEquipment", sheet);

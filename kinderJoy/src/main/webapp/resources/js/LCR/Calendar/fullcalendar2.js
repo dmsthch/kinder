@@ -2829,12 +2829,13 @@ var DragListener = FC.DragListener = Class.extend(ListenerMixin, {
 		this.stopListeningTo($(document)); // for isGeneric
 	},
 
-
+//드래그 여기!
 	// Drag (high-level)
 	// -----------------------------------------------------------------------------------------------------------------
 
 
 	// extraOptions ignored if drag already started
+	//드래그가 이미 시작된 경우 extraOptions가 무시됩니다.
 	startDrag: function(ev, extraOptions) {
 		this.startInteraction(ev, extraOptions); // ensure interaction began
 
@@ -3276,8 +3277,8 @@ var HitDragListener = DragListener.extend({
 		}
 	},
 
-
 	// Called when dragging has been stopped
+	// 드래그가 정지했을 때에 호출.
 	handleDragEnd: function() {
 		this.handleHitDone();
 		DragListener.prototype.handleDragEnd.apply(this, arguments); // call the super-method
@@ -3285,11 +3286,11 @@ var HitDragListener = DragListener.extend({
 
 
 	// Called when a the mouse has just moved over a new hit
+	// 마우스가 새로운 히트 위에 막 움직였을 때 호출됩니다.
 	handleHitOver: function(hit) {
 		var isOrig = isHitsEqual(hit, this.origHit);
-
+		console.log(hit+"<hit히트다히트")
 		this.hit = hit;
-
 		this.trigger('hitOver', this.hit, isOrig, this.origHit);
 	},
 
@@ -3642,6 +3643,7 @@ var MouseFollower = Class.extend(ListenerMixin, {
 
 
 	// Causes the element to start following the mouse
+	//요소가 마우스를 따라 시작하도록합니다
 	start: function(ev) {
 		if (!this.isFollowing) {
 			this.isFollowing = true;
@@ -3705,9 +3707,10 @@ var MouseFollower = Class.extend(ListenerMixin, {
 
 
 	// Gets the tracking element. Create it if necessary
+	//추적 요소를 가져옵니다. 필요한 경우 생성하십시오.
 	getEl: function() {
 		var el = this.el;
-
+		
 		if (!el) {
 			el = this.el = this.sourceEl.clone()
 				.addClass(this.options.additionalClass || '')
@@ -3729,8 +3732,9 @@ var MouseFollower = Class.extend(ListenerMixin, {
 			el.addClass('fc-unselectable');
 
 			el.appendTo(this.parentEl);
+		
 		}
-
+		
 		return el;
 	},
 
@@ -4073,7 +4077,7 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, {
 	/* Handlers
 	------------------------------------------------------------------------------------------------------------------*/
 
-
+	//드래그스타트?
 	// Binds DOM handlers to elements that reside outside the grid, such as the document
 	bindGlobalHandlers: function() {
 		this.listenTo($(document), {
@@ -4146,9 +4150,11 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, {
 			scroll: view.opt('dragScroll'),
 			interactionStart: function() {
 				dayClickHit = dragListener.origHit;
+				
 			},
 			hitOver: function(hit, isOrig, origHit) {
 				// if user dragged to another cell at any point, it can no longer be a dayClick
+				//사용자가 언제든지 다른 셀로 드래그하면 더 이상 dayClick 될 수 없습니다.
 				if (!isOrig) {
 					dayClickHit = null;
 				}
@@ -4161,25 +4167,28 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, {
 
 				if (!isCancelled && dayClickHit) {
 					hitSpan = _this.getSafeHitSpan(dayClickHit);
-
+					
 					if (hitSpan) {
 						view.triggerDayClick(hitSpan, _this.getHitEl(dayClickHit), ev);
 					}
 				}
 			}
+			
 		});
+		
 
 		// because dayClickListener won't be called with any time delay, "dragging" will begin immediately,
 		// which will kill any touchmoving/scrolling. Prevent this.
 		dragListener.shouldCancelTouchScroll = false;
 
 		dragListener.scrollAlwaysKills = true;
-
+		
 		return dragListener;
 	},
 
 
 	// Creates a listener that tracks the user's drag across day elements, for day selecting.
+	//날을 선택하기 위해서 요소를 가로 지르는???? 유저의 드래그를 추적하는 리스너 생성합니다.
 	buildDaySelectListener: function() {
 		var _this = this;
 		var view = this.view;
@@ -4191,7 +4200,9 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, {
 				selectionSpan = null;
 			},
 			dragStart: function() {
-				view.unselect(); // since we could be rendering a new selection, we want to clear any old one
+				view.unselect();
+				console.log(view.unselect()+"<<<요놈체크");
+				// since we could be rendering a new selection, we want to clear any old one
 			},
 			hitOver: function(hit, isOrig, origHit) {
 				var origHitSpan;
@@ -4222,7 +4233,9 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, {
 				_this.unrenderSelection();
 			},
 			hitDone: function() { // called after a hitOut OR before a dragEnd
+				console.log("<<<요놈?");
 				enableCursor();
+				//드래그에 관련된건 맞는데 단순히 클래스만 지우는 기능을 하고있는듯 하다. 
 			},
 			interactionEnd: function(ev, isCancelled) {
 				if (!isCancelled && selectionSpan) {
@@ -12665,9 +12678,11 @@ function EventManager() { // assumed to be a calendar
 	);
 
 
-
+//여기여기
 	function requestEvents(start, end) {
+		
 		if (!t.options.lazyFetching || isFetchNeeded(start, end)) {
+			
 			return fetchEvents(start, end);
 		}
 		else {
@@ -13370,7 +13385,8 @@ function EventManager() { // assumed to be a calendar
 
 		start = input.start || input.date; // "date" is an alias for "start"
 		end = input.end;
-
+		
+		//스타트, 엔드!!
 		// parse as a time (Duration) if applicable
 		if (isTimeString(start)) {
 			start = moment.duration(start);
@@ -13416,6 +13432,7 @@ function EventManager() { // assumed to be a calendar
 			}
 
 			assignDatesToEvent(start, end, allDay, out);
+			
 		}
 
 		t.normalizeEvent(out); // hook for external use. a prototype method
@@ -13612,6 +13629,7 @@ function EventManager() { // assumed to be a calendar
 
 		// compute the delta for moving the start date
 		startDelta = diffDates(newProps.start, oldProps.start);
+		
 
 		// compute the delta for moving the end date
 		if (newProps.end) {
@@ -13760,7 +13778,6 @@ Calendar.prototype.normalizeEvent = function(event) {
 Calendar.prototype.spanContainsSpan = function(outerSpan, innerSpan) {
 	var eventStart = outerSpan.start.clone().stripZone();
 	var eventEnd = this.getEventEnd(outerSpan).stripZone();
-
 	return innerSpan.start >= eventStart && innerSpan.end <= eventEnd;
 };
 

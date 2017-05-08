@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,11 +7,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- jspë¡œ ë°›ì„ ë• ê°’ì´ ë‹´ê²¨ìˆëŠ” nameê°’ê³¼ nameì•ˆì— ìˆëŠ” valueê°’ì„ ì ì–´ì¤˜ì•¼ í•œë‹¤ .ìœ¼ë¡œ êµ¬ë¶„ -->
+<!-- ì„¸ì…˜ì— ë‹´ê²¨ìˆëŠ”  -->
 
-¼¼¼Ç¿¡ ÀúÀåµÈ ¾ÆÀÌµğ°ª : ${teacherId}
-³×ÀÓ°ª : ${teacherName} 
-¶óÀÌ¼¾½º°ª : ${teacherLicense}
-·¹º§°ª : ${teacherLevel} 
-³Ñ¹ö°ª : ${teacherNo}
+	${kyoteacher.teacher_no},
+	${kyoteacher.teacher_id},
+	${kyoteacher.license_kindergarten},
+	${kyoteacher.teacher_level},
+	${kyoteacher.teacher_name},
+	${kyoteacher.teacher_pw},
+	${kyoteacher.teacher_add_day},
+	${kyoteacher.teacher_phone},
+	${kyoteacher.teacher_bank},
+	${kyoteacher.teacher_account},
+	${kyoteacher.teacher_paystep}
+
+
 </body>
 </html>

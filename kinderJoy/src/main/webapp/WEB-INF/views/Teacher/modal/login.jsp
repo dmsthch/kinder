@@ -1,49 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="css/JKC/css/default.css">
 </head>
 <body>
 	
-	<!-- °⁄°⁄°⁄°⁄°⁄ ∑Œ±◊¿Œ ∏¥ﬁ Ω√¿€°⁄°⁄°⁄°⁄°⁄ -->
+	<!-- ‚òÖ‚òÖ‚òÖ‚òÖ‚òÖ Î°úÍ∑∏Ïù∏ Î™®Îã¨ ÏãúÏûë‚òÖ‚òÖ‚òÖ‚òÖ‚òÖ -->
 <div class="container">
   <!-- Trigger the modal with a button -->
 
   <!-- Modal -->
   <div class="modal fade" id="signIn" role="dialog">
-    <div class="modal-dialog">
+    <!-- <div class="modal-dialog">
     
       <!-- Modal content-->
-      <div class="modal-content">
+      <!-- <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">∑Œ±◊¿Œ</h4>
+          <h4 class="modal-title">Î°úÍ∑∏Ïù∏</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body"> -->
         
-<!-- πŸµΩ√¿€ -->
+<!-- Î∞îÎîîÏãúÏûë -->
 
-  <form id="LoginForm" action="${pageContext.request.contextPath}/Login" method="post">
-    <div class="form-group">
-      <label>æ∆¿Ãµ:</label>
-      <input type="text" class="form-control" name="teacher_id" placeholder="æ∆¿Ãµ∏¶ ¿‘∑¬«œººø‰">
+<div id="site-container">
+	<div class="siteColorBg">	
+															<!-- Ïù¥ÎØ∏ÏßÄ -->
+    <div class="siteAnimationBg active" style="background-image: url(&quot;images/JKC/kid.jpg&quot;);">
     </div>
-    <div class="form-group">
-      <label>∫Òπ–π¯»£:</label>
-      <input type="password" class="form-control" name="teacher_pw" placeholder="∫Òπ–π¯»£∏¶ ¿‘∑¬«œººø‰">
-    </div>
-    
-    <button type="submit" class="btn btn-default">Submit</button>
-  </form>
+</div>
+<div class="siteCover"></div>    
+<div class="be-cover">
+    <div class="befrozen-container befrozen-wrap">
+        <form id="LoginForm" action="${pageContext.request.contextPath}/Login" method="post" class="befrozen-login">
+
+            <h1>Î°úÍ∑∏Ïù∏</h1>
+            <fieldset>
+                <div class="form-item">
+                    <input type="text" class="form-text" name="teacher_id" value="test01" placeholder="ÏïÑÏù¥ÎîîÎ•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî"></div>
+                <div class="form-item">
+                    <input type="password" class="form-text" name="teacher_pw" value="test01" placeholder="ÎπÑÎ∞ÄÎ≤àÌò∏Î•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî">
+                </div>
+                
+                <div class="form-item"><button type="submit" class="vanellope rp-font vanellope-pascal">login</button></div>
+     			<button type="button" class="btn btn-default" data-dismiss="modal">Îã´Í∏∞</button>
+            </fieldset>
+        	</form>
+	      </div>
+	      </div>
+      </div>
   
-<!-- πŸµø£µÂ -->
+<!-- Î∞îÎîîÏóîÎìú -->
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">¥›±‚</button>
         </div>
       </div>
       
