@@ -27,10 +27,10 @@
 
 			<c:if test="${null ne teacherId}"> <!-- teacherId값이 null이 아니라면 -->
 			<li><a href="${pageContext.request.contextPath}/calendarTest" class="smoothScroll">캘린더</a></li>
-				<li><a href="#" class="smoothScroll">교육계획</a></li>
-				<li><a href="#" class="smoothScroll">유아</a></li>
+				<li><a href="#" class="smoothScroll">계획안</a></li>
+				<li><a href="${pageContext.request.contextPath}/ChildList" class="smoothScroll">유아</a></li>
 				<li><a href="${pageContext.request.contextPath}/Equipment" class="smoothScroll">비품</a></li>
-				<li><a href="#" class="smoothScroll">교원</a></li>
+				<li><a href="${pageContext.request.contextPath}/kyo" class="smoothScroll">교원</a></li>
 				<li><a href="${pageContext.request.contextPath}/Material" class="smoothScroll">자료실</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#signOut" class="smoothScroll" data-backdrop="static">로그아웃</a></li>
 			</c:if>

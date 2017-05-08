@@ -30,6 +30,13 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		return "Teacher/TeacherAdd";
 	}
 	
+	//교원
+	@RequestMapping(value="kyo", method=RequestMethod.GET)
+	public String kyowon() {
+		System.out.println("교원폼 호출_TeacherController.java");
+		return "Teacher/TeacherModify";
+	}
+	
 	//아이디 중복체크 메서드
 	@RequestMapping(value="/sign_up_id_check",method =RequestMethod.POST)
 	@ResponseBody
