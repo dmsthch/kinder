@@ -33,7 +33,7 @@ public class ChildController {
 		public String ChildModify(Model model 
 								 , @RequestParam(value="kid_no" ,required=true)int kid_no) {
 			Child child = childDao.getChild(kid_no);
-			child.setKid_no(kid_no);
+			child.setKidNo(kid_no);
 			model.addAttribute("child", child);
 			
 			return "Child/ChildModify";
@@ -42,7 +42,7 @@ public class ChildController {
 		@RequestMapping(value="/ChildModify", method=RequestMethod.POST)
 		public String ChildModify(Child child) {
 			childDao.updateChild(child);
-			return "redirect:/ChildList?kid_no="+child.getKid_no();
+			return "redirect:/ChildList?kid_no="+child.getKidNo();
 		}
 		//리스트 요청
 				@RequestMapping(value="/ChildList" , method=RequestMethod.GET)
@@ -61,7 +61,7 @@ public class ChildController {
 					int ChildCount = childDao.getChildCount();
 					int pagePerRow = 10;
 					int lastPage = (int)(Math.ceil(ChildCount/currentPage));
-//					List<Object> list = childDao.getChildList(currentPage, pagePerRow);
+				//	List<Object> list = childDao.getChildList(currentPage, pagePerRow);
 
 					List<Child> list = childDao.getSeveralList(license, teacherNo, currentPage, pagePerRow);
 					model.addAttribute("currentPage", currentPage);
@@ -92,15 +92,15 @@ public class ChildController {
 		public String ChildAdd(Child child) {
 			
 
-			System.out.println(child.getLicense_kindergarten());
-			System.out.println(child.getKid_name());
-			System.out.println(child.getKid_birth());
-			System.out.println(child.getKid_address());
-			System.out.println(child.getKid_protector_phone());
-			System.out.println(child.getKid_precautions());
-			System.out.println(child.getKid_gender());
-			System.out.println(child.getKid_commuting());
-			System.out.println(child.getKid_protector_phone_reserve());
+			System.out.println(child.getLicenseKindergarten());
+			System.out.println(child.getKidName());
+			System.out.println(child.getKidBirth());
+			System.out.println(child.getKidAddress());
+			System.out.println(child.getKidProtectorPhone());
+			System.out.println(child.getKidPrecautions());
+			System.out.println(child.getKidGender());
+			System.out.println(child.getKidCommuting());
+			System.out.println(child.getKidProtectorPhoneReserve());
 			
 			
 			childDao.insertChild(child);

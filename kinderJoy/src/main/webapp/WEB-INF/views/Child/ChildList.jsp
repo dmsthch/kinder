@@ -58,15 +58,15 @@
         <tbody>
             <c:forEach var="c" items="${list}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/ChildModify?kid_no=${c.kid_no}">${c.kid_name}</a></td>
-                    <td>${c.kid_birth}</td>
-                    <td>${c.kid_address}</td>
-                    <td>${c.kid_protector_phone}</td>
-                    <td>${c.kid_protector_phone_reserve}</td>
-                    <td>${c.kid_precautions}</td>
-                    <td>${c.kid_gender}</td>
-                    <td>${c.kid_commuting}</td>
-                    <td>${c.kid_entrance_day}</td>
+                    <td><a href="${pageContext.request.contextPath}/ChildModify?kid_no=${c.kidNo}">${c.kidName}</a></td>
+                    <td>${c.kidBirth}</td>
+                    <td>${c.kidAddress}</td>
+                    <td>${c.kidProtectorPhone}</td>
+                    <td>${c.kidProtectorPhoneReserve}</td>
+                    <td>${c.kidPrecautions}</td>
+                    <td>${c.kidGender}</td>
+                    <td>${c.kidCommuting}</td>
+                    <td>${c.kidEntranceDay}</td>
                 </tr>
             </c:forEach>
         </tbody>

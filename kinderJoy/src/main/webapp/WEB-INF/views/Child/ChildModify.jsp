@@ -34,46 +34,46 @@
 <div class="container">
     <form id="modifyForm" action="${pageContext.request.contextPath}/ChildModify" method="post">
         <div class="form-group">kid_no :
-            <input class="form-control" name="kid_no" value="${child.kid_no}" type="text" readonly="readonly"/>
+            <input class="form-control" name="kid_no" value="${child.kidNo}" type="text" readonly="readonly"/>
         </div>
         <div class="form-group">
             <label for="license_kindergarten">유치원 :</label>
-            <input class="form-control" value="${child.license_kindergarten}" name="license_kindergarten" id="license_kindergarten" type="text"/>
+            <input class="form-control" value="${child.licenseKindergarten}" name="license_kindergarten" id="license_kindergarten" type="text"/>
         </div>
          <div class="form-group">
             <label for="kid_name">이름 :</label>
-            <input class="form-control" value="${child.kid_name}" name="kid_name" id="kid_name" type="text"/>
+            <input class="form-control" value="${child.kidName}" name="kid_name" id="kid_name" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_birth">생년월일 :</label>
-            <input class="form-control" value="${child.kid_birth}" name="kid_birth" id="kid_birth" type="text"/>
+            <input class="form-control" value="${child.kidBirth}" name="kid_birth" id="kid_birth" type="text"/>
         </div>    
         <div class="form-group">
             <label for="kid_address">주소 :</label>
-            <input class="form-control" value="${child.kid_address}" name="kid_address" id="kid_address" type="text"/>
+            <input class="form-control" value="${child.kidAddress}" name="kid_address" id="kid_address" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_protector_phone">보호자 번호 :</label>
-            <input class="form-control" value="${child.kid_protector_phone}" name="kid_protector_phone" id="kid_protector_phone" type="text"/>
+            <input class="form-control" value="${child.kidProtectorPhone}" name="kid_protector_phone" id="kid_protector_phone" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_protector_phone_reserve">보호자 예비번호 :</label>
-            <input class="form-control" value="${child.kid_protector_phone_reserve}" name="kid_protector_phone_reserve" id="kid_protector_phone_reserve" type="text"/>
+            <input class="form-control" value="${child.kidProtectorPhoneReserve}" name="kid_protector_phone_reserve" id="kid_protector_phone_reserve" type="text"/>
         </div>
         <div class="form-group">주의사항 :
-            <textarea class="form-control" id="kid_precautions" name="kid_precautions" rows="5" cols="50">${child.kid_precautions}</textarea>
+            <textarea class="form-control" id="kid_precautions" name="kid_precautions" rows="5" cols="50">${child.kidPrecautions}</textarea>
         </div>
         <div class="form-group">
             <label for="kid_gender">성별 :</label>
-            <input class="form-control" value="${child.kid_gender}" name="kid_gender" id="kid_gender" type="text"/>
+            <input class="form-control" value="${child.kidGender}" name="kid_gender" id="kid_gender" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_commuting">통학방법 :</label>
-            <input class="form-control" value="${child.kid_commuting}" name="kid_commuting" id="kid_commuting" type="text"/>
+            <input class="form-control" value="${child.kidCommuting}" name="kid_commuting" id="kid_commuting" type="text"/>
         </div>
          <div class="form-group">
             <label for="kid_commuting">입학일 :</label>
-            <input class="form-control" value="${child.kid_entrance_day}" name="kid_entrance_day" id="kid_entrance_day" type="text" readonly="readonly"/>
+            <input class="form-control" value="${child.kidEntranceDay}" name="kid_entrance_day" id="kid_entrance_day" type="text" readonly="readonly"/>
         </div>
         <div>
         
