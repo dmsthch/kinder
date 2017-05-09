@@ -70,7 +70,8 @@
               
               
               
-              var dataArray=[];
+              var dataArray = [];
+            	var data = [[[1,5,null,"wef"]],[[4,1,null,"we"]],[[4,0,null,"f"]],[[2,0,null,"wef"]],[[2,1,null,"ewf"]]];
                 var
                   $ = function(id) {
                       return document.getElementById(id);
@@ -84,6 +85,7 @@
                   hot;
 
                 hot = new Handsontable(container, {
+                	data : data,
                 	startRows: 10,
                     startCols: 10,
                     minRows: 10,
@@ -100,8 +102,12 @@
                     manualRowMove: true,
                     manualRowResize: true,
                     contextMenu: true,
+                    
                   afterChange: function (change, source) {
-                	dataArray.push(change);
+                	if(change!=null){
+                		console.log(change);
+                		dataArray.push(change);
+                	}
                     if (source === 'loadData') {
                       return; //don't save this change
                     }

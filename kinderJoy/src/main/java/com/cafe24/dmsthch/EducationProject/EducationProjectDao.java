@@ -12,7 +12,7 @@ public class EducationProjectDao {
 	
 	public void test(String val, String licenseKindergarten){		
 		Education edu = new Education();
-		edu.setLicenseKindergarten(licenseKindergarten);;
+		edu.setLicenseKindergarten(licenseKindergarten);
 		edu.setVal(val);
 		
 		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.test", edu);

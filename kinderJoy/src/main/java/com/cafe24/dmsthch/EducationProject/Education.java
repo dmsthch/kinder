@@ -6,6 +6,7 @@ public class Education {
 	
 	private String val;
 	private String licenseKindergarten;
+	
 	public int getEducationProjectNo() {
 		return educationProjectNo;
 	}
@@ -18,7 +19,6 @@ public class Education {
 	public void setEducationOnepageNo(int educationOnepageNo) {
 		this.educationOnepageNo = educationOnepageNo;
 	}
-
 	public String getVal() {
 		return val;
 	}
@@ -31,6 +31,7 @@ public class Education {
 	public void setLicenseKindergarten(String licenseKindergarten) {
 		this.licenseKindergarten = licenseKindergarten;
 	}
+
 	
 
 }

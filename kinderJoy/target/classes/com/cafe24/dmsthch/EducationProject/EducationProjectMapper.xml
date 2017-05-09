@@ -6,15 +6,15 @@
   
   <!-- 테스트 -->
   <insert id="test" parameterType="com.cafe24.dmsthch.EducationProject.Education">
-  	INSERT INTO education_project
+  	INSERT INTO education_project(
   		education_onepage_no
   		,val
   		,license_kindergarten
   		
-  	WHERE VALUES(
+  	)VALUES(
   		1
   		,#{val}
-  		,#{licensekindergarten}
+  		,#{licenseKindergarten}
   	)  	
   </insert>
   

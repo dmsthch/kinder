@@ -21,13 +21,14 @@ public class EducationProjectController {
 	public String scheduleAllSelect() {
 	
 		
-		return "EducationProject/EducationPfoject2";
+		return "EducationProject/Hansol";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/romiSaveTest", method = RequestMethod.POST)
 	public String scheduleSave(HttpSession session ,
 								@RequestParam(value="dataArray") String dataArray) {
+		System.out.println("È®ÀÎ¿ë");
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(licenseKindergarten+"<<licenseKindergarten");
 		String val = dataArray;
