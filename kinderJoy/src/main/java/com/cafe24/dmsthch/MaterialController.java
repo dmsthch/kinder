@@ -155,7 +155,7 @@ public class MaterialController {
 		return returnUri;
 	}
 	
-	
+	//파일 다운로드
 	@RequestMapping(value="/FileDownload", method=RequestMethod.GET)
 	public void fileDownload(HttpServletResponse response,
 							   @RequestParam(value="dataNo", required=true) int dataNo) throws IOException{
@@ -177,6 +177,32 @@ public class MaterialController {
 	     
 	    response.getOutputStream().flush();
 	    response.getOutputStream().close();
+	}
+	
+	//게시글 수정
+	@RequestMapping(value="/MaterialModify", method=RequestMethod.GET)
+	public String materialModify(@RequestParam(value="boardNo", required=true) int boardNo,
+								 HttpSession session,Model model){
+		System.out.println("MaterialModify() run MaterialController");
+		
+		boolean isLogin = (session.getAttribute("teacherNo") != null) ? true : false;
+		if(isLogin){
+			String license = (String) session.getAttribute("licenseKindergarten");
+			
+			Board board = materialDao.getBoard(license, boardNo);
+			List<Map<String, Object>> boardCategoryList = materialDao.getBoardCategory();
+			
+			if(board.getDataNo() != 0){
+				BoardData boardData = materialDao.getBoardData(board.getDataNo());
+				String originalName = boardData.getDataOriginalName();
+				model.addAttribute("originalName", originalName);				
+			}
+			
+			model.addAttribute("board", board);
+			model.addAttribute("boardCategoryList", boardCategoryList);
+		}
+		
+		return "Material/MaterialModify";
 	}
 	
 }

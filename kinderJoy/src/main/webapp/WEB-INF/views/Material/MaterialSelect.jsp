@@ -128,7 +128,8 @@
 	<div class="form-group">
 		<div class="row">    
 	        <div class="col-xs-8 col-xs-offset-2 text-right">
-				<button type="button" class="btn btn-default">글목록</button>
+	        	<a href="${pageContext.request.contextPath}/MaterialModify?boardNo=${board.boardNo}"><button type="button" class="btn btn-default">글수정</button></a>
+				<a href="${pageContext.request.contextPath}/MaterialDocumnetList"><button type="button" class="btn btn-default">글목록</button></a>
 	        </div>
 		</div>
 	</div>
