@@ -33,14 +33,26 @@
  </script>
  
 <title>ChildAdd(spring mvc 방식)</title>
+<!-- CSS Link -->
+<c:import url="../module/importCSS.jsp"></c:import>
+<!-- JS Link -->
+<c:import url="../module/importCSS.jsp"></c:import>
+
+	<style>
+		#body{
+			margin-top:5%;
+		}
+	</style>
 </head>
-<body>
+<body id="body">
+<!-- navbar -->
+<c:import url="../module/navbar.jsp"></c:import>
 <div class="container">
     <h1>ChildAdd(spring mvc 방식)</h1>
     <form id="addForm" action="${pageContext.request.contextPath}/ChildAdd" method="post">
         <div class="form-group">
             <label for="license_kindergarten">유치원 :</label>
-            <input class="form-control" name="license_kindergarten" id="license_kindergarten" type="text"/>
+            <input class="form-control" name="license_kindergarten" value="${teacherLicense }" id="license_kindergarten" type="text" readonly/>
         </div>
         <div class="form-group">
             <label for="kid_name">이름 :</label>
@@ -68,7 +80,12 @@
         </div>
         <div class="form-group">
             <label for="kid_gender">성별 :</label>
-            <input class="form-control" name="kid_gender" id="kid_gender" type="text"/>
+            <label class="radio-inline">
+		      <input type="radio" name="kid_gender" value="1">남자
+		    </label>
+		    <label class="radio-inline">
+		      <input type="radio" name="kid_gender" value="2">여자
+		    </label>
         </div>
          <div class="form-group">
             <label for="kid_commuting">통학방법 :</label>
@@ -81,8 +98,7 @@
         </div>
     </form>
 </div>
+<!-- footer -->
+<c:import url="../module/footer.jsp"></c:import>
 </body>
 </html>
-
-
-

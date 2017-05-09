@@ -89,4 +89,26 @@
   	
   </insert>
   
+  <!-- 여러가지 조건으로 select -->
+  <select id="severalSelect" resultType="com.cafe24.dmsthch.Child.Child" parameterType="java.util.Map">
+  	select
+		kid.kid_name,
+		kid.kid_birth,
+		kid.kid_address,
+		kid.kid_protector_phone,
+		kid.kid_protector_phone_reserve,
+		kid.kid_precautions,
+		kid.kid_gender,
+		kid.kid_commuting,
+		kid.kid_entrance_day
+	from teacher_formation inner join kid_formation
+	inner join kid
+	where teacher_formation.class_no = kid_formation.class_no 
+	and teacher_formation.license_kindergarten = kid_formation.license_kindergarten 
+	and kid_formation.kid_no = kid.kid_no
+	and teacher_formation.license_kindergarten = #{license} and teacher_formation.teacher_no = #{teacherNo}
+	LIMIT  #{beginRow}, #{pagePerRow}
+		  	
+  </select>
+  
   </mapper>

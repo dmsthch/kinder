@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +16,22 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <title>Child Modify Form(spring mvc 방식)</title>
+
+<!-- CSS Link -->
+<c:import url="../module/importCSS.jsp"></c:import>
+<!-- JS Link -->
+<c:import url="../module/importJS.jsp"></c:import>
+	
+ <style>
+	 #body{
+	 	margin-top: 5%;
+	 }
+ </style>
 </head>
-<body>
+<body id="body">
+<!-- navbar -->
+<c:import url="../module/navbar.jsp"></c:import>
 <div class="container">
-    <h1>Child Modify Form(spring mvc 방식)</h1> 
     <form id="modifyForm" action="${pageContext.request.contextPath}/ChildModify" method="post">
         <div class="form-group">kid_no :
             <input class="form-control" name="kid_no" value="${child.kid_no}" type="text" readonly="readonly"/>
@@ -70,5 +83,7 @@
         </div>
     </form>
 </div>
+<!-- footer -->
+<c:import url="../module/footer.jsp"></c:import>
 </body>
 </html>
