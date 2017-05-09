@@ -17,4 +17,9 @@ public class EducationProjectDao {
 		
 		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.test", edu);
 	}
+	
+	public String selectTest(){
+		
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.selectTest");
+	}
 }

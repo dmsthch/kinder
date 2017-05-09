@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset='utf-8'>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	 <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/handsontable.css">
   <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/pikaday/pikaday.css">
   <script src="js/LCR/EducationProject/pikaday/pikaday.js"></script>
@@ -19,7 +19,6 @@
 </head>
 <body>
 	<button id="btTest">bt</button>
-	<button name="save" id="save">Save</button>
 	<div class="wrapper" style="margin-top: 20px;">
 		<div id="example1"></div>
 	</div>
@@ -27,34 +26,14 @@
 <script data-jsfiddle="example1">
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
-	var dataTest;
-	if(${dataTest}){
-		dataTest = ${dataTest};
+	
+	var testData = [{0:"",1:"",2:""},{0:1 ,1:2} , {0:1 ,1:2} , {0:1 ,1:2} ]; //µ¥ÀÌÅÍ
 		
-	}else{
-		dataTest = [{"0":"123","1":"234","2":"adsf"}];
-	}
-
-	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //ë°ì´í„° */
-// {1:"", 2:"" }	
-	var colCount = 10;
-	if(dataTest[0]==null){
-		dataTest[0]={ };
-		console.log(dataTest);
-		for(i=0 ; i<colCount; i++){
-			dataTest[0][i] ='';
-			console.log("ã…‡ã……ã…‡! ->> "+ i);
-		}
-	}
-	
-	console.log(dataTest[0]);
-	
-	
 	var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
 	
 	
 		hot = new Handsontable(container, {
- 			data: dataTest,    //ë°ì´í„° ê°€ì ¸ì˜¤ê¸°
+// 			data: testData,    //µ¥ÀÌÅÍ °¡Á®¿À±â
 			startRows: 30,
 			startCols: 20,
 			rowHeaders : true,
@@ -67,13 +46,13 @@
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
-// 			mergeCells: testMerge, //ì…€ë³‘í•© ê°€ì ¸ì˜¤ê¸°
+// 			mergeCells: testMerge, //¼¿º´ÇÕ °¡Á®¿À±â
 			
-			afterChange : function(data, type){ //data{ì—´, í–‰, ì´ì „ê°’, í˜„ì¬ê°’} type="ì´ë²¤íŠ¸ ì¢…ë¥˜"
+			afterChange : function(data, type){ //data{¿­, Çà, ÀÌÀü°ª, ÇöÀç°ª} type="ÀÌº¥Æ® Á¾·ù"
 				console.log(data, type)
 				
 				if(dataArray === undefined){
-					console.log('ì´ˆê¹…í™”')
+					console.log('ÃÊ±ëÈ­')
 					dataArray = [];
 				}
 				
@@ -99,25 +78,6 @@
 	$('#btTest').click(function(){
 		dataArray[dataArray.length] = hot.mergeCells;
 	})
-	$('#save').click(function(){
-		alert('test');
-		var jparse=JSON.stringify(dataArray);
-		console.log(jparse);
-      
-      $.ajax({
-			url : "${pageContext.request.contextPath}/romiSaveTest",
-			type : 'POST',
-			dataType: 'JSON',
-			async: false,
-			data: {"dataArray": jparse},
-			success : function(data){
-			alert('success');
-		                        
-   		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
-   		     console.log("Status: " + textStatus);
-   		},timeout: 3000
-   		});    
-	})
   
 	setTimeout(function(){
 // 		console.log(hot.mergeCells)
@@ -126,9 +86,6 @@
 	},5000)
   
 </script>
-
-
-
 
 </body>
 </html>

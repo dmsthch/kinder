@@ -32,17 +32,19 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		return "Teacher/TeacherAdd";
 	}
 	
-	//교원
+	//교원폼 수정폼
 	@RequestMapping(value="/kyo", method=RequestMethod.GET)
 	public String kyowon(HttpSession httpsession,Model model) {
-		System.out.println("교원폼 호출_TeacherController.java");
-		
+		System.out.println("교원폼 호출_TeacherController.java");	
 		Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
-
 		model.addAttribute("kyoteacher",teacher);
-		
-		
-		return "Teacher/TeacherModify";
+		return "Teacher/TeacherModifyForm";
+	}
+	
+	//교원 수정 수정
+	@RequestMapping(value="/kyosoo", method=RequestMethod.POST)
+	public String kyowon() {
+		return "";
 	}
 	
 	//아이디 중복체크 메서드
