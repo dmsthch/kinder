@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.cafe24.dmsthch.Material.Board;
 import com.cafe24.dmsthch.Material.MaterialDao;
 import com.cafe24.dmsthch.Material.MaterialService;
+import com.cafe24.dmsthch.Teacher.Teacher;
+import com.cafe24.dmsthch.Teacher.TeacherDao;
 
 @Controller //자료실!
 public class MaterialController {
@@ -25,7 +27,8 @@ public class MaterialController {
 	MaterialDao materialDao;
 	@Autowired
 	MaterialService materialService;
-	
+	@Autowired
+	TeacherDao teacherDao;
 	
 	//자료실 메인
 	@RequestMapping(value="/Material", method=RequestMethod.GET)
@@ -109,10 +112,24 @@ public class MaterialController {
 	}
 	
 	@RequestMapping(value="/MaterialSelect", method=RequestMethod.GET)
-	public String materialSelect(Board board){
+	public String materialSelect(@RequestParam(value="boardNo", required=true) int boardNo, HttpSession session, Model model){
 		
+		//로그인 확인
+		boolean isLogin = (session.getAttribute("teacherNo") != null) ? true : false;
+		String returnUri = "redirect:/";
 		
-		return "Material/MaterialSelect";
+		if(isLogin){
+			returnUri = "Material/MaterialSelect";
+			String license = (String) session.getAttribute("teacherLicense");
+			
+			Board board = materialDao.getBoard(license, boardNo);
+			Teacher teacher = teacherDao.OneSelectTeacher(board.getTeacherNo());
+			
+			model.addAttribute("board", board);
+			model.addAttribute("teacher", teacher);
+		}
+		
+		return returnUri;
 	}
 	
 }

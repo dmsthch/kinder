@@ -61,4 +61,12 @@ public class MaterialDao {
 		return sqlSessionTemplate.selectList(sql+selectSql, map);
 	}
 	
+	//게시글 하나 가져오기
+	public Board getBoard(String license, int boardNo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("license", license);
+		map.put("boardNo", boardNo);
+		return sqlSessionTemplate.selectOne(sql+"getBoard", map);
+	}
+	
 }
