@@ -24,7 +24,7 @@ public class TeacherDao {
 	
 	//선생 한명 조회
 	public Teacher OneSelectTeacher(int t_no) {
-		System.out.println("교원 한명 조회 메서드");
+		System.out.println("교원 한명 정보 조회 메서드");
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.OneSelectTeacher", t_no);
 	}
 	

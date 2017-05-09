@@ -18,7 +18,7 @@
 	
 	<style>
 		body{
-			margin-top: 5%;
+			margin-top: 6%;
 		}
 	</style>
 
@@ -73,14 +73,14 @@
 	
 </head>
 
-<body class="container" onload="InitializeStaticMenu();">
+<body class="container-fluid" onload="InitializeStaticMenu();">
 <!-- navbar -->
-<%-- <c:import url="../module/navbar.jsp"></c:import> --%>
+<c:import url="../module/navbar.jsp"></c:import>
 
 <!-- Follow sideNav -->
-<div id="staticMenu">
-	<a href="#" class="smoothScroll btn btn-default myBtn">버튼</a><br/>
-</div>
+<!-- <div id="staticMenu"> -->
+<!-- 	<a href="#" class="smoothScroll btn btn-default myBtn">버튼</a><br/> -->
+<!-- </div> -->
 
 <!-- content -->
 <div>
@@ -130,6 +130,16 @@
                		<div class="iso-box-section wow fadeIn" data-wow-delay="0.5s">
                			<div class="iso-box-wrapper col4-iso-box">
 							 
+               				 
+               				 <div class="iso-box col-lg-3 col-md-4 col-sm-6 all">
+               				 	<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=0">
+	               				 	<div class="col-lg-12 col-md-12 col-sm-12 fadeInUp tabContent text-center">
+										<h3>전체 리스트</h3>
+										<hr>
+									</div>
+               				 	</a>
+               				 </div>               				 
+               				 
 							 <!-- DocumentForm -->
                				 <div class="iso-box col-lg-3 col-md-4 col-sm-6 documentForm">
                				 	<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=1">
@@ -139,28 +149,20 @@
 									</div>
                				 	</a>
                				 </div>
-               				 <div class="iso-box col-lg-3 col-md-4 col-sm-6 documentForm">
-               				 	<a href="${pageContext.request.contextPath}/MaterialAdd">
-	               				 	<div class="col-lg-12 col-md-12 col-sm-12 fadeInUp tabContent text-center">
-										<h3>문서 양식 추가</h3>
-										<hr>
-									</div>
-               				 	</a>
-               				 </div>
-               				 
                				 
                				 <div class="iso-box col-lg-3 col-md-4 col-sm-6 material">
-               				 	<a href="#">
+               				 	<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=2">
 	               				 	<div class="col-lg-12 col-md-12 col-sm-12 fadeInUp tabContent text-center">
 										<h3>교육 자료 리스트</h3>
 										<hr>
 									</div>
                				 	</a>
                				 </div>
-               				 <div class="iso-box col-lg-3 col-md-4 col-sm-6 material">
+               				 
+               				 <div class="iso-box col-lg-3 col-md-4 col-sm-6 material documentForm">
                				 	<a href="${pageContext.request.contextPath}/MaterialAdd">
 	               				 	<div class="col-lg-12 col-md-12 col-sm-12 fadeInUp tabContent text-center">
-										<h3>교육 자료 추가</h3>
+										<h3>자료 추가</h3>
 										<hr>
 									</div>
                				 	</a>

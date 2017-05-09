@@ -40,8 +40,8 @@
   <!-- Nav tabs -->
   <div class="col-sm-2">
 	  <ul id="tablist" class="nav nav-stacked nav-pills" role="tablist">
-	    <li role="presentation" class="active"><a href="#TeachingMaterial" aria-controls="TeachingMaterial" role="tab" data-toggle="tab">비품 등록</a></li>
-	    <li role="presentation"><a href="#OfficeSupplies" aria-controls="OfficeSupplies" role="tab" data-toggle="tab">품의서 작성</a></li>
+	    <li role="presentation" class="active"><a href="#TeachingMaterial" aria-controls="TeachingMaterial" role="tab" data-toggle="tab">품의서 작성</a></li>
+	    <li role="presentation"><a href="#OfficeSupplies" aria-controls="OfficeSupplies" role="tab" data-toggle="tab">비품 등록</a></li>
 	  </ul>
   </div>
 
@@ -51,17 +51,11 @@
 	  <!-- Tab panes --> 
 	  <div class="tab-content">
 	    <div role="tabpanel" class="tab-pane active" id="TeachingMaterial">
-	    	
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="OfficeSupplies">
 	    	<jsp:include page="../Equipment/sheet.jsp"></jsp:include>
 	    </div>
-	    <div role="tabpanel" class="tab-pane" id="PhysicalApparatus">
+	    <div role="tabpanel" class="tab-pane" id="OfficeSupplies">
+	    	
 	    </div>
-	    <div role="tabpanel" class="tab-pane" id="BookList">
-	    </div>
-	    <div role="tabpanel" class="tab-pane" id="Etc">
-	    </div>	
 	  </div>
 </div>
 

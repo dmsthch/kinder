@@ -75,15 +75,15 @@ public class MaterialController {
 		//게시글 입력
 		materialDao.insertBoard(board);
 		
-		return "redirect:/MaterialDocumnetList";
+		return "redirect:/MaterialSelect";
 	}
 	
 	
 	@RequestMapping(value="/MaterialDocumnetList", method=RequestMethod.GET)
 	public String materialDocumnetList(HttpSession session,
 									   Model model,
-									   @RequestParam(value="categoryNo", required=true) int categoryNo,
-									   @RequestParam(value="nowPage", required=false, defaultValue="0") int nowPage ){
+									   @RequestParam(value="categoryNo", required=false, defaultValue="0") int categoryNo,
+									   @RequestParam(value="nowPage", required=false, defaultValue="1") int nowPage ){
 		String returnUri = "redirect:/";
 		
 		//로그인 확인
@@ -91,9 +91,18 @@ public class MaterialController {
 		if(isLogin){
 			returnUri = "Material/MaterialDocumnetList";
 			String license = (String) session.getAttribute("teacherLicense");
-			List<Board> getList = materialDao.getBoardList(license, categoryNo, nowPage, 10);
 			
+			int pagePerRow = 10;
+			int lastPage = materialService.getLastPage(categoryNo, pagePerRow);
+						
+			List<Board> getList = materialDao.getBoardList(license, categoryNo, nowPage, pagePerRow);
+			List<Map<String, Object>> category = materialDao.getBoardCategory();
+						
 			model.addAttribute("getList", getList);
+			model.addAttribute("categoryNo", categoryNo);
+			model.addAttribute("lastPage", lastPage);
+			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("category", category);
 		}
 		
 		return returnUri;

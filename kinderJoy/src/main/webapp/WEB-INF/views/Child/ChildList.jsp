@@ -31,8 +31,16 @@
 <body id="body">
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
-<div class="container">
-    <div>전체행의 수 : ${ChildCount}</div>
+
+<div class="col-md-1">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="<c:url value="/home" />">Home</a></li>
+        <li><a href="<c:url value="/ChildAdd" />">전체 반</a></li>
+        <li><a href="<c:url value="/" />">반 1</a></li>
+        <li><a href="<c:url value="/" />">반 2</a></li>
+      </ul>
+</div>
+<div class="col-md-11">
     <table class="table table-striped">
         <thead>
             <tr>

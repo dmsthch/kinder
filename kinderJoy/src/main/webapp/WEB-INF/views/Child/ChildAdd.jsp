@@ -48,7 +48,7 @@
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 <div class="container">
-    <h1>ChildAdd(spring mvc 방식)</h1>
+    
     <form id="addForm" action="${pageContext.request.contextPath}/ChildAdd" method="post">
         <div class="form-group">
             <label for="license_kindergarten">유치원 :</label>

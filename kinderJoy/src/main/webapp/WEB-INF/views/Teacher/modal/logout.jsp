@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,7 +8,7 @@
 </head>
 <body>
 	
-	<!-- �ڡڡڡڡڱ���Ȯ�� �� �α׾ƿ� ��� ���ۡڡڡڡڡ� -->
+	<!-- ★★★★★권한확인 및 로그아웃 모달 시작★★★★★ -->
 
 <div class="container">
   <!-- Trigger the modal with a button -->
@@ -21,19 +21,19 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">�α� �ƿ�</h4>
+          <h4 class="modal-title">로그 아웃</h4>
         </div>
         <div class="modal-body">
         
-<!-- �ٵ���� -->
+<!-- 바디시작 -->
 <form id="LoginForm" action="${pageContext.request.contextPath}/Login" method="post">
-		<div class="text-center">�α׾ƿ� �Ͻðڽ��ϱ�?</div>
+		<div class="text-center">로그아웃 하시겠습니까?</div>
   </form>  
-<!-- �ٵ𿣵� -->
+<!-- 바디엔드 -->
 
         </div>
         <div class="modal-footer">
-        <a href="${pageContext.request.contextPath}/logOut"><button type="button" class="btn btn-default">�α׾ƿ�</button></a>
+        <a href="${pageContext.request.contextPath}/logOut"><button type="button" class="btn btn-default">로그아웃</button></a>
         </div>
       </div>
       

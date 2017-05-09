@@ -87,9 +87,9 @@
 
 					var meats = hot.getCellMeta(row,col);
 					
-//					console.log(hot.mergeCells.mergedCellInfoCollection.getInfo(row, col));
+					console.log(hot.mergeCells.mergedCellInfoCollection.getInfo(row, col));
 //					console.log(hot.mergeCells);
-//					console.log(meats.borders)
+					console.log(meats.borders)
 
 					if(val !== null){
  						//console.log(row, col, val)
