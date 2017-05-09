@@ -56,6 +56,21 @@ $(document).ready(function() {
 		select: function(start, end) {
 			$('#opneAdd').trigger('click');
 			//var title = prompt('Event Title:');
+<<<<<<< HEAD
+			var eventData;
+			var title = 'test';
+			if (title) {
+				eventData = {
+					title: title,
+					start: start,
+					end: end
+					
+				};
+				console.log(start+"<<<start")//요상한 숫자 13자리?정도 나온다. 찾아보니 유닉스시간? 이것같은데..
+				console.log(end+"<<<end")
+				
+				$('#calendar').fullCalendar('renderEvent', eventData, true); // stick이 뭐지?
+=======
 			var getStart = new Date(start);
 			/* //이걸 엔드에도 해야함.
 			var startY = getStart.getFullYear();
@@ -63,6 +78,7 @@ $(document).ready(function() {
 			var startD = getStart.getDate();
 			if((startM+"").length<2){
 				startM = "0"+startM;
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 			}
 			if((startD+"").length<2){
 				startD = "0"+startD;

@@ -61,12 +61,14 @@ $(document).ready(function(){
 <div class="container">
   <h2>회원가입</h2>
   <form action="${pageContext.request.contextPath}/insert" class="form-horizontal" method="post">
-    <div class="form-group">
+    
+    
+<!--     <div class="form-group">
       <label class="control-label col-sm-2">라이센스:</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" name="license_kindergarten" placeholder="발급된 라이센스를 입력하세요">
       </div>
-    </div>
+    </div> -->
     
     
     

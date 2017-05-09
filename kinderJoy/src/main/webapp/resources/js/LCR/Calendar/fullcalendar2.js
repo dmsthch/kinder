@@ -1264,7 +1264,8 @@ newMomentProto.time = function(time) {
 		return oldMomentProto.time.apply(this, arguments);
 	}
 
-	if (time == null) { // getter
+	if (time == null) { // getter\
+	
 		return moment.duration({
 			hours: this.hours(),
 			minutes: this.minutes(),
@@ -1408,6 +1409,7 @@ newMomentProto.utcOffset = function(tzo) {
 // -------------------------------------------------------------------------------------------------
 
 newMomentProto.format = function() {
+	
 	if (this._fullCalendar && arguments[0]) { // an enhanced moment? and a format string provided?
 		return formatDate(this, arguments[0]); // our extended formatting
 	}
@@ -1421,6 +1423,7 @@ newMomentProto.format = function() {
 };
 
 newMomentProto.toISOString = function() {
+	
 	if (this._ambigTime) {
 		return oldMomentFormat(this, 'YYYY-MM-DD');
 	}
@@ -1497,6 +1500,7 @@ var largeTokenMap = {
 Formats `date` with a Moment formatting string, but allow our non-zero areas and special token
 */
 function formatDate(date, formatStr) {
+	
 	return renderFakeFormatString(
 		getParsedFormatString(formatStr).fakeFormatString,
 		date
@@ -13230,11 +13234,12 @@ function EventManager() { // assumed to be a calendar
 
 	// returns the expanded events that were created
 	function renderEvents(eventInputs, stick) {
+		
 		var renderedEvents = [];
 		var renderableEvents;
 		var abstractEvent;
 		var i, j, event;
-
+//랜더체크
 		for (i = 0; i < eventInputs.length; i++) {
 			abstractEvent = buildEventFromInput(eventInputs[i]);
 
@@ -13348,7 +13353,7 @@ function EventManager() { // assumed to be a calendar
 		var out = {};
 		var start, end;
 		var allDay;
-
+//기간체크
 		if (t.options.eventDataTransform) {
 			input = t.options.eventDataTransform(input);
 		}
@@ -13397,11 +13402,14 @@ function EventManager() { // assumed to be a calendar
 			out.start = start ? moment.duration(start) : null; // will be a Duration or null
 			out.end = end ? moment.duration(end) : null; // will be a Duration or null
 			out._recurring = true; // our internal marker
+			
 		}
 		else {
 
 			if (start) {
+				
 				start = t.moment(start);
+				console.log(start+"<<<start 테스트!!!!!요놈!!");
 				if (!start.isValid()) {
 					return false;
 				}
@@ -13531,6 +13539,7 @@ function EventManager() { // assumed to be a calendar
 
 						if (startTime) {
 							start = start.time(startTime);
+							
 						}
 						if (endTime) {
 							end = date.clone().time(endTime);
