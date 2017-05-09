@@ -56,7 +56,19 @@ public class MaterialService {
         }
 		
 		return dataNo;
+	}
+	
+	// 마지막 페이지 구하기
+	public int getLastPage(int categoryNo, int pagePerRow){
+		int lastPage = 1;
+		int boardCount = materialDao.getBoardCount(categoryNo);
 		
+		if(boardCount%pagePerRow == 0){
+			lastPage = boardCount/pagePerRow;
+		}else{
+			lastPage = (boardCount/pagePerRow)+1;
+		}		
+		return lastPage;
 	}
 
 }

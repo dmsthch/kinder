@@ -20,8 +20,8 @@
 
 				
 				
-			<c:if test= "${null eq teacherId}"> <!-- teacherId값이 null 이라면 -->
-				<li><a href="#" data-toggle="modal" data-target="#signIn" class="smoothScroll" data-backdrop="static">로그인</a></li>
+			<c:if test= "${null eq teacherId}"> <!-- teacherId값이 null 이라면 --> <!-- 모달 영역 밖 클릭 시 닫힘 방지 //data-backdrop="static" -->
+				<li><a href="#" data-toggle="modal" data-target="#signIn" class="smoothScroll">로그인</a></li>
 				<li><a href="${pageContext.request.contextPath}/Add" class="smoothScroll">회원가입</a></li>
 			</c:if>
 
@@ -32,7 +32,7 @@
 				<li><a href="${pageContext.request.contextPath}/Equipment" class="smoothScroll">비품</a></li>
 				<li><a href="${pageContext.request.contextPath}/kyo" class="smoothScroll">교원</a></li>
 				<li><a href="${pageContext.request.contextPath}/Material" class="smoothScroll">자료실</a></li>
-				<li><a href="#" data-toggle="modal" data-target="#signOut" class="smoothScroll" data-backdrop="static">로그아웃</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#signOut" class="smoothScroll">로그아웃</a></li>
 			</c:if>
 
 			</ul>

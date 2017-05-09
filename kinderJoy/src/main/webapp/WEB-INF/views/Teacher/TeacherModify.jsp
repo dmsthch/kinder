@@ -1,17 +1,57 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="js/JKC/animated_overlay.js"></script>
+<link href="css/JKC/animated_overlayed.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
+<!-- jspë¡œ ë°›ì„ ë• ê°’ì´ ë‹´ê²¨ìˆëŠ” nameê³¼ nameì•ˆì— ìˆëŠ” valueê°’ì„ ì ì–´ì¤˜ì•¼ í•œë‹¤ .ìœ¼ë¡œ êµ¬ë¶„ -->
+<!-- ì„¸ì…˜ì— ë‹´ê²¨ìˆëŠ”  -->
 
-¼¼¼Ç¿¡ ÀúÀåµÈ ¾ÆÀÌµğ°ª : ${teacherId}
-³×ÀÓ°ª : ${teacherName} 
-¶óÀÌ¼¾½º°ª : ${teacherLicense}
-·¹º§°ª : ${teacherLevel} 
-³Ñ¹ö°ª : ${teacherNo}
+ë„˜ë²„		${kyoteacher.teacher_no}
+ì•„ì´ë””	${kyoteacher.teacher_id}
+ë¼ì´ì„ ìŠ¤	${kyoteacher.license_kindergarten}
+ê¶Œí•œ		${kyoteacher.teacher_level}
+ì´ë¦„		${kyoteacher.teacher_name}
+ë¹„ë°€ë²ˆí˜¸	${kyoteacher.teacher_pw}
+ìƒì„±ì¼	${kyoteacher.teacher_add_day}
+ë²ˆí˜¸		${kyoteacher.teacher_phone}
+ì€í–‰		${kyoteacher.teacher_bank}
+ê³„ì¢Œ		${kyoteacher.teacher_account}
+í˜¸ë´‰		${kyoteacher.teacher_paystep}
+
+<div class="container" id="form">
+
+  <div class="panel panel-default showcase">
+    <div class="panel-body">
+      <div class="form-group -animated">
+        <label for="#form-control-2">Example 2</label>
+        <input class="form-control" id="form-control-2" type="text">
+      </div>
+      
+      
+      
+      
+          <div class="panel-body">
+      <div class="form-group -animated">
+        <label for="#form-control-2">Example 2</label>
+        <input class="form-control" id="form-control-2" type="text">
+      </div>
+    </div>
+    
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
