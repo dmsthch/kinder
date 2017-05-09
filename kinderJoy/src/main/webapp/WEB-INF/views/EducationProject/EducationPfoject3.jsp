@@ -58,8 +58,7 @@
             <div class="pad">
              
               <script data-jsfiddle="example1">
-                var
-                  $ = function(id) {
+                var $ = function(id) {
                       return document.getElementById(id);
                   },
                   container = $('example1'),
