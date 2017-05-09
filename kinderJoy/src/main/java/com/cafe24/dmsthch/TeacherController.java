@@ -20,7 +20,7 @@ import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
 @Controller
-@SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "teacherLicense", "teacherNo", "teacherTime" })
+@SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "licenseKindergarten", "teacherNo", "teacherTime" })
 public class TeacherController extends HandlerInterceptorAdapter {
 	
 	@Autowired
@@ -37,9 +37,9 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	public String kyowon(HttpSession httpsession,Model model) {
 		System.out.println("교원폼 호출_TeacherController.java");
 		
-		Teacher kyoteacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
+		Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
 
-		model.addAttribute("kyoteacher",kyoteacher);
+		model.addAttribute("kyoteacher",teacher);
 		
 		
 		return "Teacher/TeacherModify";
@@ -98,7 +98,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 				model.addAttribute("teacherNo",saveSession.getTeacher_no());
 				System.out.println(saveSession.getTeacher_no() +" <-- 세션에 저장될 넘버 값 세션");
 				
-				model.addAttribute("teacherLicense",saveSession.getLicense_kindergarten());
+				model.addAttribute("licenseKindergarten",saveSession.getLicense_kindergarten());
 				System.out.println(saveSession.getLicense_kindergarten() +" <-- 세션에 저장될 라이센스값");
 				
 				model.addAttribute("teacherId", saveSession.getTeacher_id());
