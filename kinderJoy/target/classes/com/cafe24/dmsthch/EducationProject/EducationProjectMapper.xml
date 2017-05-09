@@ -1,0 +1,23 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.cafe24.dmsthch.EducationProject.EducationProjectMapper">
+  
+  <!-- 테스트 -->
+  <insert id="test" parameterType="com.cafe24.dmsthch.EducationProject.Education">
+  	INSERT INTO education_project(
+  		education_onepage_no
+  		,val
+  		,license_kindergarten
+  		
+  	)VALUES(
+  		1
+  		,#{val}
+  		,#{licenseKindergarten}
+  	)  	
+  </insert>
+  
+ 
+  
+  </mapper>

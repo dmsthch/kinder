@@ -5,16 +5,16 @@
 <head>
 	<meta charset='utf-8'>
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="../dist/handsontable.css">
-	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="../dist/pikaday/pikaday.css">
-	<script data-jsfiddle="common" src="../dist/pikaday/pikaday.js"></script>
-	<script data-jsfiddle="common" src="../dist/moment/moment.js"></script>
-	<script data-jsfiddle="common" src="../dist/zeroclipboard/ZeroClipboard.js"></script>
-	<script data-jsfiddle="common" src="../dist/numbro/numbro.js"></script>
-	<script data-jsfiddle="common" src="../dist/numbro/languages.js"></script>
-	<script data-jsfiddle="common" src="../dist/handsontable.js"></script>
-	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="css/samples.css?20140331">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	 <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/handsontable.css">
+  <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/pikaday/pikaday.css">
+  <script src="js/LCR/EducationProject/pikaday/pikaday.js"></script>
+  <script src="js/LCR/EducationProject/moment/moment.js"></script>
+  <script src="js/LCR/EducationProject/zeroclipboard/ZeroClipboard.js"></script>
+  <script src="js/LCR/EducationProject/numbro/numbro.js"></script>
+  <script src="js/LCR/EducationProject/numbro/languages.js"></script>
+  <script src="js/LCR/EducationProject/handsontable.js"></script>
+  <script src="js/jquery.js"></script>
+
 	<title>Insert title here</title>
 </head>
 <body>
@@ -27,7 +27,8 @@
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
 	
-	var testData = [ {0:1 ,1:2} , {0:1 ,1:2} , {0:1 ,1:2} ]; //데이터
+	var testData = [{0:"",1:"",2:""},{0:1 ,1:2} , {0:1 ,1:2} , {0:1 ,1:2} ]; //데이터
+		
 	var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
 	
 	

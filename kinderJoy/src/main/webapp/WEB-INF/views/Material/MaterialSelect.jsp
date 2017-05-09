@@ -85,7 +85,7 @@
 			    <div class="input-group">
 	                <div class="input-group-btn search-panel">
 	                    <button type="button" class="btn btn-default">
-	                    	<span id="category">카테고리 </span>
+	                    	<span id="category">${category } </span>
 	                    </button>
 	                </div> 
 	        		<input type="text" name="boardTitle" class="form-control" value="${board.boardTitle }" style="background-color:white;" readonly>
@@ -99,10 +99,15 @@
 	    	<div class="col-xs-3 col-xs-offset-2">
 <%-- 	        	<input type="text" name="boardTeacher" class="form-control" value="첨부파일 : ${board.boardDay }" style="background-color:white;" readonly> --%>
 				
-				<span>첨부파일 : <a href="">someone@example.com</a></span> 
+				<span>첨부파일 : 
+					<c:if test="${boardData == null}">없음</c:if>
+					<c:if test="${boardData != null }">
+						<a href="${pageContext.request.contextPath}/FileDownload?dataNo=${board.dataNo}">${boardData.dataOriginalName }</a>
+					</c:if>
+				</span> 
             </div> 
 	        <div class="col-xs-2">
-	        	<input type="text" name="boardTeacher" class="form-control" value="작성자 : ${}" style="background-color:white;" readonly>
+	        	<input type="text" name="boardTeacher" class="form-control" value="작성자 : ${teacher.teacher_name}" style="background-color:white;" readonly>
             </div>
 	        <div class="col-xs-2 col-xs-offset-1">
         		<input type="text" name="boardDay" class="form-control" value="작성일 : ${board.boardDay }" style="background-color:white;" readonly>

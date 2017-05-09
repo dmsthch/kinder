@@ -115,6 +115,7 @@
 		limit #{nowPage},#{getCount}
 	</select>
 	
+	<!-- 게시글하나 가져오기 -->
 	<select id="getBoard" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Material.Board">
 		select 
 			license_kindergarten AS licenseKindergarten,
@@ -129,6 +130,22 @@
 			board 
 		where board_no = #{boardNo}
 		and license_kindergarten = #{license}
+	</select>
+	
+	<!-- 파일하나 가져오기 -->
+	<select id="getBoardData" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Material.BoardData">
+		select 
+			license_kindergarten AS licenseKindergarten,
+			data_no AS dataNo,
+			teacher_no AS teacherNo,
+			category_no AS categoryNo,
+			data_original_name AS dataOriginalName,
+			data_storage_name AS dataStorageName,
+			data_url AS dataUrl,
+			data_size AS dataSize,
+			data_day AS dataDay
+		from 
+			board_data where data_no = #{dataNo}
 	</select>
 	
 </mapper>

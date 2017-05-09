@@ -69,4 +69,9 @@ public class MaterialDao {
 		return sqlSessionTemplate.selectOne(sql+"getBoard", map);
 	}
 	
+	//자료게시판 파일 가져오기
+	public BoardData getBoardData(int dataNo){
+		return sqlSessionTemplate.selectOne(sql+"getBoardData", dataNo);
+	}
+	
 }
