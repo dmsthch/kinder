@@ -4,6 +4,43 @@
   
   <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
   
+  <update id="updateChild" parameterType="com.cafe24.dmsthch.Child.Child">
+  UPDATE kid SET 
+  	license_kindergarten = #{licenseKindergarten}
+  	, kid_name = #{kidName}
+  	, kid_birth = #{kidBirth}
+  	, kid_address = #{kidAddress}
+  	, kid_protector_phone = #{kidProtectorPhone}
+  	, kid_protector_phone_reserve = #{kidProtectorPhoneReserve}
+  	, kid_precautions = #{kidPrecautions} 
+  	, kid_gender = #{kidGender}
+  	, kid_commuting = #{kidCommuting}
+  	, kid_entrance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+  WHERE  kid_no = #{kidNo}
+  </update>
+  
+  <select id="getChild" parameterType="int" resultType="com.cafe24.dmsthch.Child.Child">
+  	SELECT
+  	
+  	  	license_kindergarten
+	  	, kid_name
+	  	, kid_birth
+	  	, kid_address 
+	  	, kid_protector_phone 
+	  	, kid_protector_phone_reserve 
+	  	, kid_precautions 
+	  	, kid_gender
+	  	, kid_commuting 
+  		, kid_entrance_day
+  		
+  	FROM kid
+  	WHERE kid_no = #{kidNo}
+  	
+  	
+  	
+  </select>
+  
+  
   <select id="getChildList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
   	SELECT 
   		kid_no 
@@ -37,19 +74,41 @@
   		kid_commuting,
   		kid_entrance_day)
   	VALUES (
-  		#{license_kindergarten},
-  		#{kid_name},
-  		#{kid_birth},
-  		#{kid_address},
-  		#{kid_protector_phone},
-  		#{kid_protector_phone_reserve},
-  		#{kid_precautions},
-  		#{kid_gender},
-  		#{kid_commuting},
+  		#{licenseKindergarten},
+  		#{kidName},
+  		#{kidBirth},
+  		#{kidAddress},
+  		#{kidProtectorPhone},
+  		#{kidProtectorPhoneReserve},
+  		#{kidPrecautions},
+  		#{kidGender},
+  		#{kidCommuting},
   		DATE_FORMAT(NOW(),'%Y-%m-%d')
   	);
   	
   	
   </insert>
+  
+  <!-- 여러가지 조건으로 select -->
+  <select id="severalSelect" resultType="com.cafe24.dmsthch.Child.Child" parameterType="java.util.Map">
+  	select
+		kid.kid_name,
+		kid.kid_birth,
+		kid.kid_address,
+		kid.kid_protector_phone,
+		kid.kid_protector_phone_reserve,
+		kid.kid_precautions,
+		kid.kid_gender,
+		kid.kid_commuting,
+		kid.kid_entrance_day
+	from teacher_formation inner join kid_formation
+	inner join kid
+	where teacher_formation.class_no = kid_formation.class_no 
+	and teacher_formation.license_kindergarten = kid_formation.license_kindergarten 
+	and kid_formation.kid_no = kid.kid_no
+	and teacher_formation.license_kindergarten = #{license} and teacher_formation.teacher_no = #{teacherNo}
+	LIMIT  #{beginRow}, #{pagePerRow}
+		  	
+  </select>
   
   </mapper>

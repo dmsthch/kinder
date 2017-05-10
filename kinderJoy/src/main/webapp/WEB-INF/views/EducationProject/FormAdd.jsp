@@ -20,6 +20,7 @@
 <body>
 	<button id="btTest">bt</button>
 	<button name="save" id="save">Save</button>
+	<button name="test" id="test">Test</button>
 	<div class="wrapper" style="margin-top: 20px;">
 		<div id="example1"></div>
 	</div>
@@ -27,17 +28,17 @@
 <script data-jsfiddle="example1">
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
-	var dataTest;
+	//var testBorders = [{"className":"border_row5col4","border":{"width":1,"color":"#000","cornerVisible":false},"row":5,"col":4,"top":{"width":1,"color":"#000"},"right":{"hide":true},"bottom":{"hide":true},"left":{"hide":true}}];
+/* 	var dataTest;
 	if(${dataTest}){
 		dataTest = ${dataTest};
-		
 	}else{
 		dataTest = [{"0":"123","1":"234","2":"adsf"}];
-	}
+	} */
 
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 // {1:"", 2:"" }	
-	var colCount = 10;
+/* 	var colCount = 10;
 	if(dataTest[0]==null){
 		dataTest[0]={ };
 		console.log(dataTest);
@@ -45,16 +46,16 @@
 			dataTest[0][i] ='';
 			console.log("ㅇㅅㅇ! ->> "+ i);
 		}
-	}
+	} */
 	
-	console.log(dataTest[0]);
+	//console.log(dataTest[0]);
 	
 	
-	var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
+	//var testMerge = [{"row":2,"col":1,"rowspan":2,"colspan":3},{"row":5,"col":2,"rowspan":3,"colspan":3}];
 	
 	
 		hot = new Handsontable(container, {
- 			data: dataTest,    //데이터 가져오기
+ 			//data: dataTest,    //데이터 가져오기
 			startRows: 30,
 			startCols: 20,
 			rowHeaders : true,
@@ -63,8 +64,8 @@
 // 			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
+//			customBorders: testBorders,
 			contextMenu : true,
-			//mergeCells : testMerge, <--병합 값 가져오는것
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
@@ -87,6 +88,7 @@
 					console.log(meats.borders)
 
 					if(val !== null){
+						console.log('체크체크');
 // 						console.log(row, col, val)
 						if(dataArray[row] === undefined){
 							dataArray[row] = {};							
@@ -97,20 +99,56 @@
 		}
 	   
 	});
-	$('#btTest').click(function(){
-		dataArray[dataArray.length] = hot.mergeCells;
+	$('#test').click(function(){
+/* 		console.log(dataArray);
+		var jparse=JSON.stringify(dataArray);
+		console.log(jparse+"<<<<jparse");
+		console.log(JSON.stringify(hot.mergeCells.mergedCellInfoCollection)); */
+		//console.log(JSON.stringify(hot.getCellMeta(1,1).borders));
+		var borderArray;
+		var allCells = hot.getCellsMeta().borders;
+		console.log(allCells);
+		//console.log(hot.countRows()); 행수 구하기
+		//console.log(hot.countCols());열수구하기
+		var borderArray=[];
+		for(var i = 0 ; i<hot.countRows(); i++){
+			for(var j = 0; j<hot.countCols(); j++){
+				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
+					console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
+					var borders = JSON.stringify(hot.getCellMeta(i,j).borders);
+					borderArray.push(borders);
+				}
+			}
+		}
+		
+		console.log(borderArray);
+		
 	})
 	$('#save').click(function(){
 		alert('test');
 		var jparse=JSON.stringify(dataArray);
-		console.log(jparse);
+		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
+		console.log(jparse+"<<<<jparse");
+		console.log(mergeparse);
+		var borderArray=[];
+		for(var i = 0 ; i<hot.countRows(); i++){
+			for(var j = 0; j<hot.countCols(); j++){
+				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
+					console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
+					var borders = JSON.stringify(hot.getCellMeta(i,j).borders);
+					borderArray.push(borders);
+				}
+			}
+		}
+		
+		console.log(borderArray);
       
       $.ajax({
-			url : "${pageContext.request.contextPath}/romiSaveTest",
+			url : "${pageContext.request.contextPath}/educationProjectFormAdd",
 			type : 'POST',
 			dataType: 'JSON',
 			async: false,
-			data: {"dataArray": jparse},
+			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderArray },
 			success : function(data){
 			alert('success');
 		                        
@@ -122,13 +160,11 @@
   
 	setTimeout(function(){
 // 		console.log(hot.mergeCells)
-// 		console.log(hot.getCellsMeta())
+//		console.log(hot.getCellsMeta())
+ 		
 // 		console.log(dataArray);
 	},5000)
-
-	
-	
-	//console.log(hot.mergeCells.mergedCellInfoCollection.getInfo(row, col)); <<-병합 값 가져오기
+  
 </script>
 
 
