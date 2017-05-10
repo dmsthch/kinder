@@ -2,7 +2,6 @@ package com.cafe24.dmsthch;
 
 import java.sql.SQLException;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,15 +114,15 @@ public class TeacherController extends HandlerInterceptorAdapter {
 				model.addAttribute("teacherLevel" ,saveSession.getTeacher_level());
 				System.out.println(saveSession.getTeacher_level() + " <--세션에 저장될 레벨값");
 				
-				session.setMaxInactiveInterval(600);
+				session.setMaxInactiveInterval(7200);
 				System.out.println("재정의된 세션의 유지 시간 : "+session.getMaxInactiveInterval()+"초");
 				
 				//시간설정을 모델객체안에 담음
 				model.addAttribute("teacherTime", session.getMaxInactiveInterval());
 				System.out.println("생성된 세션의 아이디 : "+session.getId());
-				System.out.println("세션의 유지 시간 : "+session.getMaxInactiveInterval()+"초");
+				System.out.println("현재 세션의 유지 시간 : "+session.getMaxInactiveInterval()+"초");
 				
-				System.out.println(session.isNew()+" <-- 처음 생성 되었을 시 true 아닐 시 false");
+				System.out.println(session.isNew()+" <-- 처음 생성 되었을 시 true 아닐 시 false\n");
 				
 				}
 			} else {
@@ -151,18 +150,19 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		System.out.println("라이선스 발급 페이지 호출");
 		return "Teacher/TeacherLicense";
 	}
+	
 	//라이센스 라이선스 처리
 	@RequestMapping(value="/li", method=RequestMethod.POST)
-	public UUID uuid(String folderPath, String original) throws Exception {
+	public String uuid(Model model) throws Exception {
 		
-		System.out.println("라이선스 발급 처리 호출");
+		//UUID에 대해 자세한 사항은 http://hyeonjae.github.io/uuid/2015/03/17/uuid.html 참고
 		
-		UUID uid = UUID.randomUUID();
-		System.out.println(uid +"<--UUID");
-		int uid0 = UUID.randomUUID().hashCode();
-		System.out.println(uid0+" <--UUID hashCode");
-		int uid1 = UUID.randomUUID().version();
-		System.out.println(uid1 +" <--관련 버젼");
-		return uid;
-		}
+		System.out.println("\n 라이선스 발급 처리 호출");
+		String licenseKey = UUID.randomUUID().toString();
+
+		model.addAttribute("licenseKey",licenseKey);
+		System.out.println(licenseKey +"<--생성된 UUID\n");
+		
+		return "Teacher/TeacherLicense";
+	}
 }

@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Administrator
 Build-Jdk: 1.8.0_31
+=======
+Built-By: 201-15
+Build-Jdk: 1.8.0_121
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 Created-By: Maven Integration for Eclipse
 
