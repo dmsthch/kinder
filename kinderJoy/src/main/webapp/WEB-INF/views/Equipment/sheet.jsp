@@ -51,12 +51,13 @@
 	var dataArray;
 	var dataArray2;
 	
-	var testData = [null,null,null,null,[4,8,"123"],null,null,[7,5,"123"],null,null,null,null,[12,7,"123"],{"mergedCellInfoCollection":[]}]	; //데이터
-	var testMerge = [{"row":5,"col":4,"rowspan":3,"colspan":3},{"row":11,"col":4,"rowspan":5,"colspan":3},{"row":6,"col":8,"rowspan":6,"colspan":3}];
+	var testData = [null,null,null,null,{"row":4,"col":7,"val":"1234"},{"row":5,"col":4,"val":"4321"},{"row":6,"col":10,"val":"2134"},null,null,null,{"row":10,"col":7,"val":"4321"},null,null,{"row":13,"col":6,"val":"1234"},{"mergedCellInfoCollection":[]}]; //데이터
+	var testMerge = [{"row":5,"col":2,"rowspan":5,"colspan":3},{"row":10,"col":4,"rowspan":5,"colspan":5}];
 	
-	
+	  
 		hot = new Handsontable(container, {
 // 			data: testData,    //데이터 가져오기
+			colWidths: [47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47],
 			startRows: 30,
 			startCols: 20,
 			contextMenu : true,
@@ -66,7 +67,7 @@
  			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,	
-//			mergeCells : testMerge,
+			mergeCells : testMerge,
 /* 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			}, */
@@ -77,30 +78,38 @@
 				if(dataArray === undefined){
 					console.log('초깅화')
 					dataArray = [];
-					dataArray2 = [];
 				}
 				
-				if(data !== undefined && data !== null){
+				if(data != undefined && data != null){
+					console.log('data 확인' + data[0][0]);
 					var row = data[0][0];
 					var col = data[0][1];
 					var val = data[0][3];
 
 					var meats = hot.getCellMeta(row,col);
 					
+					console.log('확인' + hot.mergeCells)
 					console.log(hot.mergeCells.mergedCellInfoCollection.getInfo(row, col));
-//					console.log(hot.mergeCells);
+					console.log('테두리 확인');
 					console.log(meats.borders)
 
-					if(val !== null){
- 						//console.log(row, col, val)
+					if(row !== null){
+ 						console.log(row, col, val)
 
- 						if(dataArray[row] === undefined){
-							//dataArray[row] = {};							
+ 						if(dataArray[row] === null){
+							dataArray[row] = {};							
 						}
- 						dataArray[row] = [row, col, val];
+ 						console.log(row + "row확인");
+ 						if(row !== null){
+  						dataArray[row] = {row, col};
+ 						dataArray[row] = hot.mergeCells.mergedCellInfoCollection.getInfo(row, col);
+ 						console.log(dataArray + 'dataArray[row] 확인');
+						}
 					/*	dataArray[row][col] = val;
 						dataArray2 = hot.mergeCells.mergedCellInfoCollection.getInfo(row, col) */
 					}
+		
+
 				}			
 		}
 	   
@@ -129,21 +138,16 @@
 	  	
 	  	
 	$('#btTest').click(function(){
-		dataArray[dataArray.length] = hot.mergeCells;	
+/* 		dataArray[dataArray.length] = hot.mergeCells;	 */
 		var jArray = new Array();
-		var jArray2 = new Array();
-		
+					
 		jArray = dataArray;
-		jArray2 = dataArray;
-		
-		console.log(jArray);
-		console.log('====구분====');
-		console.log(jArray2);
-		
+					
+		console.log(jArray);		
 		var jsonStr = JSON.stringify(jArray);
-		
+					
 		console.log(jsonStr);
-		
+					
 	    $.ajax({
 	        url:"${pageContext.request.contextPath}/save",
 	        type:'GET',
@@ -158,10 +162,7 @@
 	            alert("저장실패~~ \n" + textStatus + " : " + errorThrown);
 	            self.close();
 	        }
-		});
-	    
-
-	    
+		});    
 	    
 	    
 	setTimeout(function(){

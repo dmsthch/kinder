@@ -15,42 +15,14 @@
 
 </head>
 <body>
-<!-- jsp로 받을 땐 값이 담겨있는 name과 name안에 있는 value값을 적어줘야 한다 .으로 구분 -->
-<!-- 세션에 담겨있는  -->
-
-넘버		${kyoteacher.teacher_no}
-아이디	${kyoteacher.teacher_id}
-라이선스	${kyoteacher.license_kindergarten}
-권한		${kyoteacher.teacher_level}
-이름		${kyoteacher.teacher_name}
-비밀번호	${kyoteacher.teacher_pw}
-생성일	${kyoteacher.teacher_add_day}
-번호		${kyoteacher.teacher_phone}
-은행		${kyoteacher.teacher_bank}
-계좌		${kyoteacher.teacher_account}
-호봉		${kyoteacher.teacher_paystep}
 
 <div class="container" id="form">
-
-  <div class="panel panel-default showcase">
-    <div class="panel-body">
-      <div class="form-group -animated">
-        <label for="#form-control-2">Example 2</label>
-        <input class="form-control" id="form-control-2" type="text">
-      </div>
-      
-      
-      
-      
-          <div class="panel-body">
-      <div class="form-group -animated">
-        <label for="#form-control-2">Example 2</label>
-        <input class="form-control" id="form-control-2" type="text">
-      </div>
-    </div>
-    
-    </div>
-  </div>
+		<div class="panel-body">
+			<div class="form-group -animated">
+			<label for="#form-control-2">Example 2</label>
+			<input class="form-control" id="form-control-2" type="text" readonly>
+		</div>
+	</div>
 </div>
 
 </body>

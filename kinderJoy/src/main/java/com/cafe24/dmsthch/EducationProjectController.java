@@ -18,12 +18,22 @@ public class EducationProjectController {
 	@Autowired
 	EducationProjectDao dao;
 	
-	@RequestMapping(value = "/romiEduTest", method = RequestMethod.GET)
-	public String scheduleAllSelect() {
-	
-		
-		return "EducationProject/Hansol";
+	@RequestMapping(value = "/educationProject", method = RequestMethod.GET)
+	public String educationMain() {
+		return "EducationProject/EducationProject";
 	}
+	
+	@RequestMapping(value = "/educationProjectAdd", method = RequestMethod.GET)
+	public String educationAdd(HttpSession session
+								, Model model) {
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		System.out.println(licenseKindergarten+"<<licenseKindergarten");
+		
+		
+		return "EducationProject/FormAdd";
+	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "/romiSaveTest", method = RequestMethod.POST)

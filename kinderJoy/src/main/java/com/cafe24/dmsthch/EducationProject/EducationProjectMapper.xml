@@ -27,6 +27,8 @@
   	<!-- AND education_onepage_no=1
   	AND license_kindergarten = ${licenseKindergarten} --> 	
   </select>
+  <!-- 테스트끝 -->
+  
   
  
   
