@@ -9,7 +9,7 @@
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Material Dashboard by Creative Tim</title>
+	<title>1TEAM</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -41,8 +41,8 @@
 			-->
 
 			<div class="logo">
-				<a href="#" class="simple-text">
-					1Team
+				<a href="${pageContext.request.contextPath}/" class="simple-text">
+					햇병아리
 				</a>
 			</div>
 

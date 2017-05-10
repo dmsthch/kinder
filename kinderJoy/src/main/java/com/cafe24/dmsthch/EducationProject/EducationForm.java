@@ -5,7 +5,14 @@ public class EducationForm {
 	private int formOrder;
 	private String licenseKindergarten;
 	private String formVal;
+	private String formMerge;
 	
+	public String getFormMerge() {
+		return formMerge;
+	}
+	public void setFormMerge(String formMerge) {
+		this.formMerge = formMerge;
+	}
 	public int getFormNo() {
 		return formNo;
 	}

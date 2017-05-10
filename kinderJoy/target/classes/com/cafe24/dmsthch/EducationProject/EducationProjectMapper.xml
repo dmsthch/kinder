@@ -32,10 +32,11 @@
   
   	<!-- 폼 추가하기 -->
 	<insert id="formAdd" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm">
-		INSERT INTO education_project_form(
+	INSERT INTO education_project_form(
   		form_order
   		,license_kindergarten
   		,form_val
+  		,form_merge
   	)VALUES(
   		(
   			SELECT * FROM
@@ -46,11 +47,19 @@
   		) + 1
   		,#{licenseKindergarten}
   		,#{formVal}
+  		,#{formMerge}
   	)
 	</insert>
-  
-  
-  
- 
+	
+	<!-- 로드하기 -->
+	<select id="formLoad" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm" resultType="com.cafe24.dmsthch.EducationProject.EducationForm">
+		SELECT
+			form_val AS formVal
+			,form_merge AS formMerge
+		FROM education_project_form
+		WHERE license_kindergarten = #{licenseKindergarten}
+		AND form_order = #{formOrder}
+	</select>
+
   
   </mapper>

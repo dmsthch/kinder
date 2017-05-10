@@ -20,7 +20,6 @@
 <body>
 	<button id="btTest">bt</button>
 	<button name="save" id="save">Save</button>
-	<button name="test" id="test">Test</button>
 	<div class="wrapper" style="margin-top: 20px;">
 		<div id="example1"></div>
 	</div>
@@ -28,34 +27,29 @@
 <script data-jsfiddle="example1">
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
-	//var testBorders = [{"className":"border_row5col4","border":{"width":1,"color":"#000","cornerVisible":false},"row":5,"col":4,"top":{"width":1,"color":"#000"},"right":{"hide":true},"bottom":{"hide":true},"left":{"hide":true}}];
-/* 	var dataTest;
-	if(${dataTest}){
-		dataTest = ${dataTest};
-	}else{
-		dataTest = [{"0":"123","1":"234","2":"adsf"}];
-	} */
+	var dataValue = ${resultData.formVal};
+	var dataMerge = ${resultData.formMerge};
 
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 // {1:"", 2:"" }	
-/* 	var colCount = 10;
-	if(dataTest[0]==null){
-		dataTest[0]={ };
-		console.log(dataTest);
+	var colCount = 20;
+	if(dataValue[0]==null){
+		dataValue[0]={ };
+		console.log(dataValue);
 		for(i=0 ; i<colCount; i++){
-			dataTest[0][i] ='';
+			dataValue[0][i] ='';
 			console.log("ㅇㅅㅇ! ->> "+ i);
 		}
-	} */
+	}
 	
-	//console.log(dataTest[0]);
+	console.log(dataValue[0]);
 	
 	
-	//var testMerge = [{"row":2,"col":1,"rowspan":2,"colspan":3},{"row":5,"col":2,"rowspan":3,"colspan":3}];
+	//var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
 	
 	
 		hot = new Handsontable(container, {
- 			//data: dataTest,    //데이터 가져오기
+ 			data: dataValue,    //데이터 가져오기
 			startRows: 30,
 			startCols: 20,
 			rowHeaders : true,
@@ -64,12 +58,11 @@
 // 			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
-//			customBorders: testBorders,
 			contextMenu : true,
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
-// 			mergeCells: testMerge, //셀병합 가져오기
+ 			mergeCells: dataMerge, //셀병합 가져오기
 			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
 				console.log(data, type)
@@ -88,7 +81,6 @@
 					console.log(meats.borders)
 
 					if(val !== null){
-						console.log('체크체크');
 // 						console.log(row, col, val)
 						if(dataArray[row] === undefined){
 							dataArray[row] = {};							
@@ -99,56 +91,20 @@
 		}
 	   
 	});
-	$('#test').click(function(){
-/* 		console.log(dataArray);
-		var jparse=JSON.stringify(dataArray);
-		console.log(jparse+"<<<<jparse");
-		console.log(JSON.stringify(hot.mergeCells.mergedCellInfoCollection)); */
-		//console.log(JSON.stringify(hot.getCellMeta(1,1).borders));
-		var borderArray;
-		var allCells = hot.getCellsMeta().borders;
-		console.log(allCells);
-		//console.log(hot.countRows()); 행수 구하기
-		//console.log(hot.countCols());열수구하기
-		var borderArray=[];
-		for(var i = 0 ; i<hot.countRows(); i++){
-			for(var j = 0; j<hot.countCols(); j++){
-				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
-					console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
-					var borders = JSON.stringify(hot.getCellMeta(i,j).borders);
-					borderArray.push(borders);
-				}
-			}
-		}
-		
-		console.log(borderArray);
-		
+	$('#btTest').click(function(){
+		dataArray[dataArray.length] = hot.mergeCells;
 	})
 	$('#save').click(function(){
 		alert('test');
 		var jparse=JSON.stringify(dataArray);
-		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
-		console.log(jparse+"<<<<jparse");
-		console.log(mergeparse);
-		var borderArray=[];
-		for(var i = 0 ; i<hot.countRows(); i++){
-			for(var j = 0; j<hot.countCols(); j++){
-				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
-					console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
-					var borders = JSON.stringify(hot.getCellMeta(i,j).borders);
-					borderArray.push(borders);
-				}
-			}
-		}
-		
-		console.log(borderArray);
+		console.log(jparse);
       
       $.ajax({
-			url : "${pageContext.request.contextPath}/educationProjectFormAdd",
+			url : "${pageContext.request.contextPath}/romiSaveTest",
 			type : 'POST',
 			dataType: 'JSON',
 			async: false,
-			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderArray },
+			data: {"dataArray": jparse},
 			success : function(data){
 			alert('success');
 		                        
@@ -160,8 +116,7 @@
   
 	setTimeout(function(){
 // 		console.log(hot.mergeCells)
-//		console.log(hot.getCellsMeta())
- 		
+// 		console.log(hot.getCellsMeta())
 // 		console.log(dataArray);
 	},5000)
   
