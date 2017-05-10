@@ -1,6 +1,9 @@
 package com.cafe24.dmsthch;
 
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cafe24.dmsthch.Equipment.Equipment;
 import com.cafe24.dmsthch.Equipment.EquipmentDao;
 import com.cafe24.dmsthch.Equipment.Sheet;
 
@@ -25,8 +29,10 @@ public class EquipmentController {
 		return "Equipment/Equipment";
 	}
 	@RequestMapping(value = "test01", method = RequestMethod.GET)
-	public String test02(){
-		
+	public String test02(Model model){
+		List<Map<String, Object>> getCategory = dao.selectCategory();
+		System.out.println(getCategory + "getCategory »Æ¿Œ");
+		model.addAttribute("getCategory", getCategory);
 		return "Equipment/NewFile";
 	}
 	@RequestMapping(value = "save", method = RequestMethod.GET)

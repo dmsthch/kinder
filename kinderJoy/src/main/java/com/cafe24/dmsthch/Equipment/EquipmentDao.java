@@ -1,5 +1,8 @@
 package com.cafe24.dmsthch.Equipment;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,5 +34,11 @@ public class EquipmentDao {
 
 		Sheet sheet = (Sheet)sqlSessionTemplate.selectList("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectEquipment", teacherNo);
 		return sheet;
+	}
+	
+	// 비품 카테고리 로드하기
+	public List<Map<String, Object>> selectCategory() {
+				
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectEquipmentCategory");
 	}
 }

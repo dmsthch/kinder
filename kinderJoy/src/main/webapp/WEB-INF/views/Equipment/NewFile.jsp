@@ -40,9 +40,25 @@
 	$(document).on('focusout','.test1',function(){
 		$('.test1').attr('readonly','readonly');
 	});
-
+	$(document).on('click','.plus',function(){
+		console.log($('.testNote').val());
+		if($('.testNote').val() == ''){
+			var testvalue = $('.testValue').val();
+			var testvalue2 = parseInt(testvalue) + parseInt(1);
+			$('.testValue').val(testvalue2);
+			console.log('완료');
+		}else{
+			console.log('실패');
+		}
+	});
+/* 	$(document).on('','',function(){});
+	$(document).on('','',function(){});
+	$(documnen).on('','',function(){});123
+	$(document).on('','',function(){}); asdf*/
 </script>
-<input id="button" type="button" value="추가"/>
+
+<input class="btn btn-default dropdown-toggle" id="button" type="button" value="추가"/>
+
 <table id="table" border="1">
 	<thead>
 		<tr>
@@ -56,29 +72,37 @@
 	<tbody>
 		<tr>
 			<td>	
-				<select>
-					<option>교재, 교구</option>
-					<option>사무용품</option>
-					<option>체육용품</option>
-					<option>도서목록</option>
-					<option>기타</option>
-				</select>
+				<div class="input-group-btn search-panel">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						<span id="category">카테고리 </span><span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<c:forEach var="a" items="${getCategory}">
+							<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
+						</c:forEach>
+					</ul>
+				</div>
 			</td>
 			<td>
-				<input class="test1" type="text" readonly/>
+				<input class="form-control test1" type="text" style="width : 400px" value="test" readonly/>
 			</td>
 			<td>
-				<input type="text" readonly/>
+				<input class="form-control testValue" type="text" style="width : 100px" value="50" readonly/>
 			</td>
 			<td>
-				<span><input type="text"/></span>
-				<button><span class="glyphicon glyphicon-plus"></span></button>
-				<button><span class="glyphicon glyphicon-minus"></span></button>
+				<div class="form-inline">
+					<div class="form-group">
+						<input  class="form-control testNote" type="text" style="width : 50px"/>
+					</div>
+					<div class="form-group">
+						<button class="glyphicon glyphicon-plus plus" style="whdth:42px; height:33px"></button>
+						<button class="glyphicon glyphicon-minus minus" style="whdth:42px; height:33px"></button>
+					</div>
+				</div>
 			</td>
 			<td>
-				<button>저장</button>
+				<button class="btn btn-default dropdown-toggle">저장</button>
 			</td>
-
 		</tr>
 		
 	</tbody>
@@ -87,32 +111,45 @@
 
 
 <table id="copyTargetTable" style="display:none">
-	<tr>
-		<td>	
-			<select>
-				<option>교재, 교구</option>
-				<option>사무용품</option>
-				<option>체육용품</option>
-				<option>도서목록</option>
-				<option>기타</option>
-			</select>
-		</td>
-		<td>
-			<input id="test1" type="text" readonly/>
-		</td>
-		<td>
-			<input type="text" readonly/>
-		</td>
-		<td>
-			<span><input type="text"/></span>
-			<button><span class="glyphicon glyphicon-plus"></span></button>
-			<button><span class="glyphicon glyphicon-minus"></span></button>
-		</td>
-		<td>
-			<button>저장</button>
-		</td>
-	</tr>
+		<tr>
+			<td>	
+				<div class="input-group-btn search-panel">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						<span id="category">카테고리 </span><span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<c:forEach var="a" items="${getCategory}">
+							<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
+						</c:forEach>
+					</ul>
+				</div>
+			</td>
+			<td>
+				<input class="form-control test1" type="text" style="width : 400px" value="test" readonly/>
+			</td>
+			<td>
+				<input  class="form-control" type="text" style="width : 100px" value="50" readonly/>
+			</td>
+			<td>
+				<div class="form-inline">
+					<div class="form-group">
+						<input  class="form-control" type="text" style="width : 50px"/>
+					</div>
+					<div class="form-group">
+						<button class="glyphicon glyphicon-plus" style="whdth:42px; height:33px"></button>
+						<button class="glyphicon glyphicon-minus" style="whdth:42px; height:33px"></button>
+					</div>
+				</div>
+			</td>
+			<td>
+				<button class="btn btn-default dropdown-toggle">저장</button>
+			</td>
+		</tr>
 </table>
+
+
+
+
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>
 
