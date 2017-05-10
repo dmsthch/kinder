@@ -22,9 +22,9 @@ public class TeacherDao {
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.login", teacher);
 	}
 	
-	//선생 한명 조회
+	//교원 한명 조회
 	public Teacher OneSelectTeacher(int t_no) {
-		System.out.println("교원 한명 정보 조회 메서드");
+		System.out.println("교원 한명 정보 조회 메서드 실행_TeacherDao.java");
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.OneSelectTeacher", t_no);
 	}
 	

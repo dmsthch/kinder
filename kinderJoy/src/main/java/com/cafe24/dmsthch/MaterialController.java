@@ -3,6 +3,7 @@ package com.cafe24.dmsthch;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,10 +38,26 @@ public class MaterialController {
 	
 	//자료실 메인
 	@RequestMapping(value="/Material", method=RequestMethod.GET)
-	public String materialMain(){
+	public String materialMain(HttpSession session, Model model){
 		System.out.println("materialMain() Controller run");
 		
-		return "Material/DocumentEducation";
+		String returnUri = "redirect:/";
+		//로그인상태인지 확인
+		boolean isLogin = (session.getAttribute("teacherNo") != null) ? true : false;
+		if(isLogin){
+			returnUri = "Material/DocumentEducation";
+			String license = (String) session.getAttribute("licenseKindergarten");
+			
+			List<Map<String, Object>> boardCategoryList = materialDao.getBoardCategory();
+			List<Board> documentList = materialDao.getBoardList(license, 1, 1, 10);
+			List<Board> materialList = materialDao.getBoardList(license, 2, 1, 10);
+			
+			model.addAttribute("boardCategoryList", boardCategoryList);
+			model.addAttribute("documentList", documentList);
+			model.addAttribute("educationList", materialList);
+		}
+		
+		return returnUri;
 	}
 	
 	//입력폼
@@ -155,7 +172,7 @@ public class MaterialController {
 		return returnUri;
 	}
 	
-	
+	//파일 다운로드
 	@RequestMapping(value="/FileDownload", method=RequestMethod.GET)
 	public void fileDownload(HttpServletResponse response,
 							   @RequestParam(value="dataNo", required=true) int dataNo) throws IOException{
@@ -177,6 +194,95 @@ public class MaterialController {
 	     
 	    response.getOutputStream().flush();
 	    response.getOutputStream().close();
+	}
+	
+	//게시글 수정폼
+	@RequestMapping(value="/MaterialModify", method=RequestMethod.GET)
+	public String materialModify(@RequestParam(value="boardNo", required=true) int boardNo,
+								 HttpSession session,Model model){
+		System.out.println("MaterialModify() run MaterialController");
+		
+		boolean isLogin = (session.getAttribute("teacherNo") != null) ? true : false;
+		if(isLogin){
+			String license = (String) session.getAttribute("licenseKindergarten");
+			
+			Board board = materialDao.getBoard(license, boardNo);
+			List<Map<String, Object>> boardCategoryList = materialDao.getBoardCategory();
+			
+			//첨부파일
+			if(board.getDataNo() != 0){
+				BoardData boardData = materialDao.getBoardData(board.getDataNo());
+				String originalName = boardData.getDataOriginalName();
+				model.addAttribute("originalName", originalName);				
+			}
+			
+			model.addAttribute("board", board);
+			model.addAttribute("boardCategoryList", boardCategoryList);
+		}
+		return "Material/MaterialModify";
+	}
+	
+	//게시글 수정 처리
+	@RequestMapping(value="/MaterialModify", method=RequestMethod.POST)
+	public String materialModify(Board board){
+		System.out.println("materialModify(post) run MaterialController");
+		
+		String returnUrl = "redirect:/MaterialModify?boardNo="+board.getBoardNo();
+		if(materialDao.boardModify(board) == 1){
+			returnUrl = "redirect:/MaterialSelect?boardNo="+board.getBoardNo();
+		}
+		return returnUrl;
+	}
+	
+	//검색
+	@RequestMapping(value="/MaterialSearch", method=RequestMethod.POST)
+	public String materialSearch(Board board, HttpSession session, Model model){
+		System.out.println("MaterialModify(post) run MaterialController");
+		
+		boolean isLogin = (session.getAttribute("teacherNo") != null) ? true : false;
+		String returnUri = "redirect:/";
+		
+		if(isLogin){
+			
+			int categoryNo = board.getBoardCategoryNo();
+			String txtSearch = board.getBoardContent();
+			String license = (String) session.getAttribute("licenseKindergarten");
+						
+			if(txtSearch.equals("")){
+				returnUri = "Material/MaterialDocumnetList";
+				
+				System.out.println("공백임");
+			}else{
+				returnUri = "Material/MaterialSearch";
+
+				List<Map<String,Object>> getCategory = materialDao.getBoardCategory();
+				ArrayList<List<Board>> allList = new ArrayList<List<Board>>();
+				
+				String[] pageName = new String[getCategory.size()];
+				pageName[0] = "통합 검색";
+				for(int i=1; i<pageName.length; i++){
+					pageName[i] = getCategory.get(i).get("categoryName") + " 검색";
+				}
+				
+				List<Board> unifiedList = materialDao.materialAllSearch(license, txtSearch, 1);
+				allList.add(unifiedList);
+				
+				for(int i=1; i<getCategory.size(); i++){
+					System.out.println("반복문!~ " + i);
+					List<Board> catList = materialDao.materialCategorySearch(license, i, txtSearch, 1);
+					allList.add(catList);
+				}
+				System.out.println(allList.size());
+				
+				model.addAttribute("getCategory", getCategory);
+				model.addAttribute("allList", allList);
+			}
+			
+			
+		}
+		
+		return returnUri;
+		
 	}
 	
 }

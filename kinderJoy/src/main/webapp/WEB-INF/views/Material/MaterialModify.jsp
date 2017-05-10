@@ -69,12 +69,12 @@
 </div>
 
 <div class="section-title text-center">
-	<h1 class="heading bold">게시글 입력</h1>
+	<h1 class="heading bold">게시글 수정</h1>
 	<hr>
 </div>
 
 <div class="row">
-	<form action="${pageContext.request.contextPath}/MaterialAdd" method="post" enctype="multipart/form-data">
+	<form action="${pageContext.request.contextPath}/MaterialModify" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 		    <div class="row">    
 		        <div class="col-xs-8 col-xs-offset-2">
@@ -88,9 +88,13 @@
 			                    	<li><a href="${boardCategory.categoryNo}">${boardCategory.categoryName}</a></li>
 			                    </c:forEach>
 		                    </ul>
-		                </div> 
-		        		<input type="hidden" name="boardCategoryNo" value="0" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input --> 
-		                <input type="text" name="boardTitle" class="form-control" placeholder="제목을 입력하세요 ...">
+		                </div>
+		                <input type="text" name="boardTitle" value="${board.boardTitle}" class="form-control" placeholder="제목을 입력하세요 ...">
+		                <input type="hidden" name="licenseKindergarten" value="${board.licenseKindergarten }" id="licenseKindergarten" readonly>
+		                <input type="hidden" name="boardNo" value="${board.boardNo }" id="boardNo" readonly>
+		        		<input type="hidden" name="teacherNo" value="${board.teacherNo}" id="teacherNo" readonly>
+		        		<input type="hidden" name="boardCategoryNo" value="${board.boardCategoryNo }" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input --> 
+		                
 		            </div>
 		        </div>
 			</div>
@@ -100,7 +104,7 @@
 			<div class="row">    
 		        <div class="col-xs-8 col-xs-offset-2">
 			    	<div class="input-group col-sm-12">
-		                <textarea name="boardContent" rows="15" class="form-control"></textarea>
+		                <textarea name="boardContent" rows="15" class="form-control">${board.boardContent}</textarea>
 		            </div>
 		        </div>
 			</div>
@@ -109,9 +113,9 @@
 		<!-- 파일 -->
 		<div class="form-group">
 			<div class="row">    
-		        <div class="col-xs-8 col-xs-offset-2">
+		        <div class="col-xs-3 col-xs-offset-2">
 			    	<div class="input-group col-sm-12">
-		                <input type="file" name="files">
+		                <input type="text" value="file : ${originalName }" readonly >
 		            </div>
 		        </div>
 			</div>
@@ -143,6 +147,8 @@
 <!-- select button -->
 <script>
 	$(document).ready(function(e){
+		var categoryNo = $('#boardCategoryNo').val()-1; //넘어온 카테고리번호 저장
+		
 	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
 			e.preventDefault();
 			var param = $(this).attr("href").replace("#",""); //해당 버튼의 href속성에서 #을 제거한 값
@@ -150,6 +156,9 @@
 			$('.search-panel span#category').text(category); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
 			$('.input-group #boardCategoryNo').val(param);
 		});
+
+		$('.search-panel .dropdown-menu').find('a').eq(categoryNo).click(); //카테고리번호 셋팅
+	    
 	});
 </script>
 
