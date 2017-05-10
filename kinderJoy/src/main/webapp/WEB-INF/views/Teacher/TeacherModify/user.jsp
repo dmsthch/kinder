@@ -9,7 +9,7 @@
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Material Dashboard by Creative Tim</title>
+	<title>1TEAM</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -27,6 +27,7 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+
 </head>
 
 <body>
@@ -34,7 +35,8 @@
 	<div class="wrapper">
 	
 	<!-- 사이드메뉴바 BEGIN -->
-	    <div class="sidebar" data-color="blue" data-image="../assets/img/sidebar-1.jpg">
+	
+	<div class="sidebar" data-color="blue" data-image="../assets/img/sidebar-1.jpg">
 			<!--
 		        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -42,8 +44,8 @@
 		    -->	    
 
 			<div class="logo">
-				<a href="#" class="simple-text">
-					1Team
+				<a href="${pageContext.request.contextPath}/" class="simple-text">
+					햇병아리
 				</a>
 			</div>
 
@@ -64,6 +66,8 @@
 	            </ul>
 	    	</div>
 	    </div>
+	    
+	    <%-- <c:import url="./side.jsp"></c:import> --%>
 	<!-- 사이드메뉴바 END -->
 	
 	
@@ -124,7 +128,7 @@
 												</div>
 	                                        </div>
 	                                    </div>
-
+										
 	                                    <div class="row">
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
