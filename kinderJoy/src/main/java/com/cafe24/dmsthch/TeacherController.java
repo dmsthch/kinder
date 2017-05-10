@@ -28,21 +28,26 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	
 	@RequestMapping(value="/Add", method=RequestMethod.GET)
 	public String Add() {
-		System.out.println("GET방식으로 TeacherAdd로 포워드");
+		System.out.println("GET방식으로 TeacherAdd로 포워드\n");
 		return "Teacher/TeacherAdd";
 	}
 	
-	//교원
+	//교원폼 수정폼 호출 메서드 //User Profile
 	@RequestMapping(value="/kyo", method=RequestMethod.GET)
 	public String kyowon(HttpSession httpsession,Model model) {
-		System.out.println("교원폼 호출_TeacherController.java");
-		
 		Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
-
 		model.addAttribute("kyoteacher",teacher);
-		
-		
-		return "Teacher/TeacherModify";
+		System.out.println("user Profile호출___Teacher/TeacherModify/user로 포워드\n");	
+		return "Teacher/TeacherModify/user";
+	}
+	
+	//교원목록 테이블폼 호출 메서드 //Table List
+	@RequestMapping(value="/kyotable", method=RequestMethod.GET)
+	public String kyowon1(HttpSession httpsession,Model model) {
+		Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
+		model.addAttribute("kyoteacher",teacher);
+		System.out.println("Table List폼 호출___/Teacher/TeacherModify/table로 포워드\n");
+		return "Teacher/TeacherModify/table";
 	}
 	
 	//아이디 중복체크 메서드

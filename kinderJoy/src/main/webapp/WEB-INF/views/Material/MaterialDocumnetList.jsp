@@ -118,7 +118,7 @@
 								<c:if test="${category.categoryNo == board.boardCategoryNo}">${category.categoryName}</c:if>
 							</c:forEach>	
 						</td>
-						<td><a href="#">${board.boardTitle }</a></td>
+						<td><a href="${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}">${board.boardTitle }</a></td>
 						<td>${board.teacherNo }</td>
 						<td>${board.boardDay }</td>
 					</tr>
