@@ -24,10 +24,10 @@ public class EquipmentController {
 		
 		return "Equipment/Equipment";
 	}
-	@RequestMapping(value = "test02", method = RequestMethod.GET)
+	@RequestMapping(value = "test01", method = RequestMethod.GET)
 	public String test02(){
 		
-		return "Equipment/Hansol";
+		return "Equipment/NewFile";
 	}
 	@RequestMapping(value = "save", method = RequestMethod.GET)
 	public String save(Model model

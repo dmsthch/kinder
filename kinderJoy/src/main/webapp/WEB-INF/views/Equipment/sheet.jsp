@@ -67,7 +67,7 @@
  			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,	
-			mergeCells : testMerge,
+//			mergeCells : testMerge,
 /* 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			}, */
@@ -166,7 +166,7 @@
 	    
 	    
 	setTimeout(function(){
-// 		console.log(hot.mergeCells)
+//		console.log(hot.mergeCells)
 // 		console.log(hot.getCellsMeta())
 // 		console.log(dataArray);sdf
 	},5000)
