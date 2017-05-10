@@ -4,6 +4,14 @@
   
   <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
   	
+  	<select id="selectEquipmentCategory" resultType="java.util.Map">
+  		SELECT
+  		 	category_no AS categoryNo,
+			category_name AS categoryName
+  		FROM
+  			 equipment_category;
+  	</select>
+  	
   	<insert id="addEquipment" parameterType="com.cafe24.dmsthch.Equipment.Sheet">
   		INSERT INTO sheet_value(
   		 	teacher_no
