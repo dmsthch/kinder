@@ -158,7 +158,6 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		System.out.println("라이선스 발급 처리 호출");
 		
 		String uid = UUID.randomUUID().toString();
-		
 		System.out.println(uid +"<--UUID");
 		int uid0 = UUID.randomUUID().hashCode();
 		System.out.println(uid0+" <--UUID hashCode");
