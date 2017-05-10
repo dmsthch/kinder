@@ -51,6 +51,17 @@
 			console.log('실패');
 		}
 	});
+	$(document).on('click','.minus',function(){
+		console.log($('.testNote').val());
+		if($('.testNote').val() == ''){
+			var testvalue = $('.testValue').val();
+			var testvalue2 = parseInt(testvalue) - parseInt(1);
+			$('.testValue').val(testvalue2);
+			console.log('완료');
+		}else{
+			console.log('실패');
+		}
+	});
 /* 	$(document).on('','',function(){});
 	$(document).on('','',function(){});
 	$(documnen).on('','',function(){});123
