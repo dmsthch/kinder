@@ -18,7 +18,24 @@
 	
 	
 	<style>
-		#staticMenu { margin: 0pt; padding: 0pt;  position: absolute; right: 0px; top: 0px;}
+		#staticMenu { 
+			margin: 0pt; 
+			padding: 0pt;  
+			position: absolute; 
+			right: 0px; 
+			top: 0px;
+			position:absolute;
+			z-index:9999;
+			overflow:hidden;
+			border-radius: 13px;
+		}
+		#staticMenu div{
+		  height:100%;
+		  width:100%;
+		  color:#fff;
+		  background:rgba(153,153,153,0.3);
+		  padding:10px;
+		}
 		.myBtn {
  		  background: transparent; 
 		  border: 2px solid black;
@@ -27,26 +44,28 @@
 		  font-size: 15px;
 		  font-weight: bold;
 		  letter-spacing: 2px;
-		  padding: 5px 35px;
+		  padding: 5px 30px;
 		  margin-top: 5px;
 		  transition: all 0.4s ease-in-out;
 		}
-		body{
-			margin-top: 5%;
+		#body{
+			margin-top: 6%;
 		}
 	</style>
 	
+	
 </head>
-<body class="container" onload="InitializeStaticMenu();">
+<body id="body" class="container-fluid" onload="InitializeStaticMenu();">
 
 
 <!-- navbar -->
-<%-- <c:import url="../module/navbar.jsp"></c:import> --%>
+<c:import url="../module/navbar.jsp"></c:import>
 <!-- Follow sideNav -->
 <div id="staticMenu" class="text-right">
-	<a href="${pageContext.request.contextPath}/Material" class="smoothScroll btn btn-default myBtn">자료실</a><br/>
-	<a href="#" class="smoothScroll btn btn-default myBtn">Doc List</a><br/>
-	<a href="#" class="smoothScroll btn btn-default myBtn">Edu List</a><br/>
+	<div>
+		<a href="${pageContext.request.contextPath}/Material" class="smoothScroll btn btn-default myBtn">자료실</a>
+	</div>
+
 </div>
 
 <div class="section-title text-center">
@@ -113,8 +132,6 @@
 	</form>
 
 </div>
-
-
 
 
 <!-- footer -->

@@ -15,22 +15,16 @@ INSERT INTO teacher
 	,teacher_pw
 	,teacher_add_day
 	,teacher_phone
-	,teacher_bank
-	,teacher_account
-	,teacher_paystep
 	)
 VALUES 
 	(#{teacher_no}
-	,#{license_kindergarten}
+	,"GUEST"
 	,#{teacher_level}
 	,#{teacher_name}
 	,#{teacher_id}
 	,#{teacher_pw}
 	,#{teacher_add_day}
 	,#{teacher_phone}
-	,#{teacher_bank}
-	,#{teacher_account}
-	,#{teacher_paystep}
 )
 </insert>
 
@@ -47,24 +41,13 @@ SELECT
 
 </select>
 
+<!-- teacher_no는 int타입이니  parameterType="int"가 되겠고 반환값은 여러개니까 Teacher전역변수가 된다-->
 <select id="OneSelectTeacher" parameterType="int" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 
-SELECT 
-	teacher_id
-	,license_kindergarten
-	,teacher_level
-	,teacher_name
-	,teacher_id
-	,teacher_pw
-	,teacher_add_day
-	,teacher_phone
-	,teacher_bank
-	,teacher_account
-	,teacher_paystep
-	FROM 
-		teacher
-	WHERE 
-		teacher_no = #{teacher_no}
+SELECT * 
+FROM Teacher 
+WHERE 
+teacher_no = #{teacher_no}
 
 </select>
 

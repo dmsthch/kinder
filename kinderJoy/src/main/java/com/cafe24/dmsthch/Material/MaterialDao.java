@@ -35,14 +35,43 @@ public class MaterialDao {
 		return sqlSessionTemplate.insert(sql+"insertBoard", board);
 	}
 	
+	//게시글 갯수 출력
+	public int getBoardCount(int categoryNo){
+		
+		String selectSql = "getCategoryBoardCount";
+		if(categoryNo == 0){
+			selectSql = "getAllBoardCount";
+		}
+		return sqlSessionTemplate.selectOne(sql+selectSql, categoryNo);
+	}
+	
 	//게시글 목록 출력
-	public List<Board> getBoardList(String license, int categoryNo, int nowPage, int getCount){
+	public List<Board> getBoardList(String license, int categoryNo, int nowPage, int pagePerRow){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("license", license);
 		map.put("categoryNo", categoryNo);
-		map.put("nowPage", nowPage);
-		map.put("getCount", getCount);
-		return sqlSessionTemplate.selectList(sql+"getBoardList", map);
+		map.put("nowPage", (nowPage-1)*10);
+		map.put("getCount", pagePerRow);
+		
+		String selectSql = "getCategoryBoardList";
+		if(categoryNo == 0){
+			selectSql = "getAllBoardList";
+		}
+		
+		return sqlSessionTemplate.selectList(sql+selectSql, map);
+	}
+	
+	//게시글 하나 가져오기
+	public Board getBoard(String license, int boardNo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("license", license);
+		map.put("boardNo", boardNo);
+		return sqlSessionTemplate.selectOne(sql+"getBoard", map);
+	}
+	
+	//자료게시판 파일 가져오기
+	public BoardData getBoardData(int dataNo){
+		return sqlSessionTemplate.selectOne(sql+"getBoardData", dataNo);
 	}
 	
 }

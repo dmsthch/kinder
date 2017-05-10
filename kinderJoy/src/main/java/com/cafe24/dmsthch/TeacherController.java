@@ -2,6 +2,8 @@ package com.cafe24.dmsthch;
 
 import java.sql.SQLException;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +20,7 @@ import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
 @Controller
-@SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "teacherLicense", "teacherNo", "teacherTime" })
+@SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "licenseKindergarten", "teacherNo", "teacherTime" })
 public class TeacherController extends HandlerInterceptorAdapter {
 	
 	@Autowired
@@ -28,6 +30,21 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	public String Add() {
 		System.out.println("GET방식으로 TeacherAdd로 포워드");
 		return "Teacher/TeacherAdd";
+	}
+	
+	//교원폼 수정폼
+	@RequestMapping(value="/kyo", method=RequestMethod.GET)
+	public String kyowon(HttpSession httpsession,Model model) {
+		System.out.println("교원폼 호출_TeacherController.java");	
+		Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
+		model.addAttribute("kyoteacher",teacher);
+		return "Teacher/TeacherModifyForm";
+	}
+	
+	//교원 수정 수정
+	@RequestMapping(value="/kyosoo", method=RequestMethod.POST)
+	public String kyowon() {
+		return "";
 	}
 	
 	//아이디 중복체크 메서드
@@ -72,24 +89,18 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	
 	//로그인 처리
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
-	public String Login(Model model,Teacher teacher,HttpSession session,String joongbok) throws SQLException {
+	public String Login(HttpServletRequest request,Model model,Teacher teacher,HttpSession session,String joongbok) throws SQLException {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
 		System.out.println(TDao+" <--TDao 동작 확인");
-		
-		if(saveSession == null) {
-			System.out.println("teacher.getTeacher_id()");
-		} else if(teacher.getTeacher_id().equals(saveSession.getTeacher_id())) {
-			System.out.println("다름");
-		}
-		
-		
-		if(session.getAttribute("teacherId") == null){
-			
+
+		if(saveSession != null) {
+			if(session.getAttribute("teacherId") == null){
+				
 				model.addAttribute("teacherNo",saveSession.getTeacher_no());
 				System.out.println(saveSession.getTeacher_no() +" <-- 세션에 저장될 넘버 값 세션");
 				
-				model.addAttribute("teacherLicense",saveSession.getLicense_kindergarten());
+				model.addAttribute("licenseKindergarten",saveSession.getLicense_kindergarten());
 				System.out.println(saveSession.getLicense_kindergarten() +" <-- 세션에 저장될 라이센스값");
 				
 				model.addAttribute("teacherId", saveSession.getTeacher_id());
@@ -111,7 +122,11 @@ public class TeacherController extends HandlerInterceptorAdapter {
 				
 				System.out.println(session.isNew()+" <-- 처음 생성 되었을 시 true 아닐 시 false");
 				
-		}	
+				}
+			} else {
+				model.addAttribute("nogin","로그인실패");
+			return "home";
+		}
 		return "redirect:/home";
 	}
 	

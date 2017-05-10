@@ -1,0 +1,248 @@
+@CHARSET "UTF-8";
+.form-control {
+  display: block;
+  width: 100%;
+  height: 50px;
+  font-size: 14px;
+  color: #262732;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #66B0CB;
+  border-radius: 3px;
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -moz-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+textarea {
+  max-width: 100%;
+}
+
+label {
+  margin-bottom: 0;
+  font-weight: 700;
+  color: #7BCC70;
+  text-align: center;
+  display: block;
+  font-size: 16px;
+  line-height: 19px;
+  margin-bottom: 11px;
+}
+
+.form-control {
+  text-align: center;
+  font-size: 16px;
+  z-index: 1;
+  position: relative;
+  border-width: 2px;
+}
+.form-control, .form-control:focus {
+  box-shadow: none;
+}
+
+.form-group {
+  position: relative;
+}
+.form-group label,
+.form-group .form-control {
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+.form-group label {
+  position: relative;
+  -webkit-transition-property: -webkit-transform, color;
+  -moz-transition-property: -moz-transform, color;
+  transition-property: transform, color;
+}
+.form-group .form-control {
+  -webkit-transition-property: border-width, background-color;
+  -moz-transition-property: border-width, background-color;
+  transition-property: border-width, background-color;
+}
+.form-group.-active .form-control, .form-group.-focus .form-control {
+  border-width: 1px;
+  background-color: white;
+}
+.form-group.-animated {
+  padding-top: 30px;
+}
+.form-group.-animated label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 0;
+  margin-bottom: 0;
+  color: #66B0CB;
+  -webkit-transform: translateY(45.5px);
+  -moz-transform: translateY(45.5px);
+  -ms-transform: translateY(45.5px);
+  -o-transform: translateY(45.5px);
+  transform: translateY(45.5px);
+}
+.form-group.-animated.-active label, .form-group.-animated.-focus label {
+  color: #7BCC70;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+.form-group.-overlayed:before {
+  content: "";
+  position: fixed;
+  background-color: black;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  transition-timing-function: ease;
+}
+.form-group.-overlayed.-focus:before {
+  z-index: 1050;
+}
+.form-group.-overlayed.-focus:before {
+  visibility: visible;
+  opacity: 0.5;
+}
+.form-group.-overlayed.-focus label,
+.form-group.-overlayed.-focus .form-control {
+  z-index: 1051;
+}
+
+.form-caption {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  background-repeat: no-repeat;
+  color: white;
+  max-width: 410px;
+  font-size: 12px;
+  font-style: italic;
+}
+.form-caption, .form-caption.-topLeft, .form-caption.-leftTop, .form-caption.-topRight, .form-caption.-rightTop {
+  top: 49px;
+  bottom: auto;
+  padding-bottom: 41px;
+  padding-top: 0;
+  background-position: center bottom;
+}
+.form-caption.-bottomRight, .form-caption.-rightBottom, .form-caption.-bottomLeft, .form-caption.-leftBottom {
+  bottom: 11px;
+  top: auto;
+  padding-top: 41px;
+  padding-bottom: 0;
+  background-position: center top;
+}
+.form-caption, .form-caption.-topLeft, .form-caption.-leftTop, .form-caption.-bottomLeft, .form-caption.-leftBottom {
+  left: -30px;
+  right: auto;
+}
+.form-caption.-topRight, .form-caption.-rightTop, .form-caption.-bottomRight, .form-caption.-rightBottom {
+  right: -30px;
+  left: auto;
+}
+.form-caption, .form-caption.-topLeft, .form-caption.-leftTop {
+  -webkit-transform: translateX(-50%) translateY(-100%);
+  -moz-transform: translateX(-50%) translateY(-100%);
+  -ms-transform: translateX(-50%) translateY(-100%);
+  -o-transform: translateX(-50%) translateY(-100%);
+  transform: translateX(-50%) translateY(-100%);
+}
+.form-caption.-topRight, .form-caption.-rightTop {
+  -webkit-transform: translateX(50%) translateY(-100%);
+  -moz-transform: translateX(50%) translateY(-100%);
+  -ms-transform: translateX(50%) translateY(-100%);
+  -o-transform: translateX(50%) translateY(-100%);
+  transform: translateX(50%) translateY(-100%);
+}
+.form-caption.-bottomRight, .form-caption.-rightBottom {
+  -webkit-transform: translateX(50%) translateY(100%);
+  -moz-transform: translateX(50%) translateY(100%);
+  -ms-transform: translateX(50%) translateY(100%);
+  -o-transform: translateX(50%) translateY(100%);
+  transform: translateX(50%) translateY(100%);
+}
+.form-caption.-bottomLeft, .form-caption.-leftBottom {
+  -webkit-transform: translateX(-50%) translateY(100%);
+  -moz-transform: translateX(-50%) translateY(100%);
+  -ms-transform: translateX(-50%) translateY(100%);
+  -o-transform: translateX(-50%) translateY(100%);
+  transform: translateX(-50%) translateY(100%);
+}
+@media (max-width: 991px) {
+  .form-caption, .form-caption.-touchTop, .form-caption.-touchBottom, .form-caption.-topLeft, .form-caption.-topLeft.-touchTop, .form-caption.-topLeft.-touchBottom, .form-caption.-leftTop, .form-caption.-leftTop.-touchTop, .form-caption.-leftTop.-touchBottom, .form-caption.-topRight, .form-caption.-topRight.-touchTop, .form-caption.-topRight.-touchBottom, .form-caption.-rightTop
+  .form-caption.-bottomRight, .form-caption.-rightTop
+  .form-caption.-bottomRight.-touchTop, .form-caption.-rightTop
+  .form-caption.-bottomRight.-touchBottom, .form-caption.-rightBottom, .form-caption.-rightBottom.-touchTop, .form-caption.-rightBottom.-touchBottom, .form-caption.-bottomLeft, .form-caption.-bottomLeft.-touchTop, .form-caption.-bottomLeft.-touchBottom, .form-caption.-leftBottom, .form-caption.-leftBottom.-touchTop, .form-caption.-leftBottom.-touchBottom {
+    left: 50%;
+    right: auto;
+  }
+  .form-caption, .form-caption.-touchTop, .form-caption.-topLeft, .form-caption.-topLeft.-touchTop, .form-caption.-leftTop, .form-caption.-leftTop.-touchTop, .form-caption.-topRight, .form-caption.-topRight.-touchTop, .form-caption.-rightTop
+  .form-caption.-bottomRight, .form-caption.-rightTop
+  .form-caption.-bottomRight.-touchTop, .form-caption.-rightBottom, .form-caption.-rightBottom.-touchTop, .form-caption.-bottomLeft, .form-caption.-bottomLeft.-touchTop, .form-caption.-leftBottom, .form-caption.-leftBottom.-touchTop {
+    top: -19px;
+    bottom: auto;
+    padding-bottom: 41px;
+    padding-top: 0;
+    -webkit-transform: translateX(-50%) translateY(-100%);
+    -moz-transform: translateX(-50%) translateY(-100%);
+    -ms-transform: translateX(-50%) translateY(-100%);
+    -o-transform: translateX(-50%) translateY(-100%);
+    transform: translateX(-50%) translateY(-100%);
+    background-position: center bottom;
+  }
+  .form-caption.-touchBottom, .form-caption.-topLeft.-touchBottom, .form-caption.-leftTop.-touchBottom, .form-caption.-topRight.-touchBottom, .form-caption.-rightTop
+  .form-caption.-bottomRight.-touchBottom, .form-caption.-rightBottom.-touchBottom, .form-caption.-bottomLeft.-touchBottom, .form-caption.-leftBottom.-touchBottom {
+    bottom: -19px;
+    top: auto;
+    padding-bottom: 0;
+    padding-top: 41px;
+    -webkit-transform: translateX(-50%) translateY(100%);
+    -moz-transform: translateX(-50%) translateY(100%);
+    -ms-transform: translateX(-50%) translateY(100%);
+    -o-transform: translateX(-50%) translateY(100%);
+    transform: translateX(-50%) translateY(100%);
+    background-position: center top;
+  }
+}
+
+.form-group.-focus .form-caption {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1050;
+}
+
+.panel-footer pre {
+  padding: 0;
+  border-width: 0;
+  margin-bottom: 0;
+}
+.panel-footer pre + pre {
+  margin-top: 20px;
+}
+
+.showcase {
+  margin-bottom: 60px;
+}
+.showcase .form-group {
+  margin-bottom: 0;
+}
+.showcase .form-group + .form-group {
+  margin-top: 50px;
+}
