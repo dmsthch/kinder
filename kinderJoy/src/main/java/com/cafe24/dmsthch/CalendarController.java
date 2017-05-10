@@ -24,7 +24,8 @@ public class CalendarController {
 	@RequestMapping(value = "/calendarTest", method = RequestMethod.GET)
 	public String scheduleAllSelect(HttpSession session
 									,Model model) {
-		String licenseKindergarten=(String)session.getAttribute("teacherLicense");
+		System.out.println("üũ");
+		String licenseKindergarten=(String)session.getAttribute("licenseKindergarten");
 		List<Schedule> allSchedule = calDao.selectAllSchedule(licenseKindergarten);
 		System.out.println(allSchedule);
 		model.addAttribute("allSchedule",allSchedule);

@@ -254,7 +254,7 @@ public class CommuteController {
 	@RequestMapping(value="/hsLogout", method=RequestMethod.GET)
 	public String hsLogout(HttpSession session){
 		session.removeAttribute("teacherNo");
-		session.removeAttribute("teacherLicense");
+		session.removeAttribute("licenseKindergarten");
 		session.removeAttribute("teacherId");
 		session.removeAttribute("teacherName");
 		session.removeAttribute("teacherLevel");

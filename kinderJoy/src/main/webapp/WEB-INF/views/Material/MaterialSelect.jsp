@@ -18,7 +18,28 @@
 	
 	
 	<style>
-		#staticMenu { margin: 0pt; padding: 0pt;  position: absolute; right: 0px; top: 0px;}
+		#staticMenu { 
+			margin: 0pt; 
+			padding: 0pt;  
+			position: absolute; 
+			right: 0px; 
+			top: 0px;
+			position:absolute;
+			z-index:9999;
+			overflow:hidden;
+			border-radius: 13px;
+		}
+		#staticMenu div{
+		  height:100%;
+		  width:100%;
+		  color:#fff;
+		  background:rgba(153,153,153,0.3);
+		  padding:10px;
+		}
+		#staticMenu p{
+		  color: black;
+		}
+		
 		.myBtn {
  		  background: transparent; 
 		  border: 2px solid black;
@@ -27,36 +48,96 @@
 		  font-size: 15px;
 		  font-weight: bold;
 		  letter-spacing: 2px;
-		  padding: 5px 35px;
+		  padding: 5px 30px;
 		  margin-top: 5px;
 		  transition: all 0.4s ease-in-out;
+		  border-radius: 8px;
 		}
-		body{
-			margin-top: 5%;
+		.pageBtn{
+			padding: 5px 15px;
+			border-radius: 13px;
+		}
+		#body{
+			margin-top: 6%;
 		}
 	</style>
 	
 </head>
-<body class="container" onload="InitializeStaticMenu();">
-
+<body id="body" class="container-fluid" onload="InitializeStaticMenu();">
 
 <!-- navbar -->
-<%-- <c:import url="../module/navbar.jsp"></c:import> --%>
+<c:import url="../module/navbar.jsp"></c:import>
 <!-- Follow sideNav -->
-<div id="staticMenu" class="text-right">
-	<a href="${pageContext.request.contextPath}/Material" class="smoothScroll btn btn-default myBtn">자료실</a><br/>
-	<a href="#" class="smoothScroll btn btn-default myBtn">Doc List</a><br/>
-	<a href="#" class="smoothScroll btn btn-default myBtn">Edu List</a><br/>
+<div id="staticMenu" class="text-center">
+	<div>
+		<a href="${pageContext.request.contextPath}/Material" class="smoothScroll btn btn-default myBtn">자료실</a>
+	</div>
 </div>
-
 <div class="section-title text-center">
-	<h1 class="heading bold">MaterialSelect</h1>
+	<h1 class="heading bold">게시글 상세보기</h1>
 	<hr>
 </div>
 
 <div class="row">
+	<div class="form-group">
+	    <div class="row">    
+	        <div class="col-xs-8 col-xs-offset-2">
+			    <div class="input-group">
+	                <div class="input-group-btn search-panel">
+	                    <button type="button" class="btn btn-default">
+	                    	<span id="category">${category } </span>
+	                    </button>
+	                </div> 
+	        		<input type="text" name="boardTitle" class="form-control" value="${board.boardTitle }" style="background-color:white;" readonly>
+	            </div>
+	        </div>
+		</div>
+	</div>
 	
+	<div class="form-group">
+	    <div class="row">   
+	    	<div class="col-xs-3 col-xs-offset-2">
+<%-- 	        	<input type="text" name="boardTeacher" class="form-control" value="첨부파일 : ${board.boardDay }" style="background-color:white;" readonly> --%>
+				
+				<span>첨부파일 : 
+					<c:if test="${boardData == null}">없음</c:if>
+					<c:if test="${boardData != null }">
+						<a href="${pageContext.request.contextPath}/FileDownload?dataNo=${board.dataNo}">${boardData.dataOriginalName }</a>
+					</c:if>
+				</span> 
+            </div> 
+	        <div class="col-xs-2">
+	        	<input type="text" name="boardTeacher" class="form-control" value="작성자 : ${teacher.teacher_name}" style="background-color:white;" readonly>
+            </div>
+	        <div class="col-xs-2 col-xs-offset-1">
+        		<input type="text" name="boardDay" class="form-control" value="작성일 : ${board.boardDay }" style="background-color:white;" readonly>
+            </div>
+        </div>
+	</div>
+	
+	<div class="form-group">
+		<div class="row">    
+	        <div class="col-xs-8 col-xs-offset-2">
+		    	<div class="input-group col-sm-12">
+	                <textarea readonly name="boardContent" style="background-color:white;" rows="15" class="form-control">${board.boardContent }</textarea>
+	            </div>
+	        </div>
+		</div>
+	</div>
+	 
+	<div class="form-group">
+		<div class="row">    
+	        <div class="col-xs-8 col-xs-offset-2 text-right">
+	        	<a href="${pageContext.request.contextPath}/MaterialModify?boardNo=${board.boardNo}"><button type="button" class="btn btn-default">글수정</button></a>
+				<a href="${pageContext.request.contextPath}/MaterialDocumnetList"><button type="button" class="btn btn-default">글목록</button></a>
+	        </div>
+		</div>
+	</div>
+
 </div>
+
+
+
 
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>

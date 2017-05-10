@@ -5,23 +5,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="js/JKC/animated_overlay.js"></script>
+<link href="css/JKC/animated_overlayed.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body>
-<!-- jsp로 받을 땐 값이 담겨있는 name값과 name안에 있는 value값을 적어줘야 한다 .으로 구분 -->
-<!-- 세션에 담겨있는  -->
 
-	${kyoteacher.teacher_no},
-	${kyoteacher.teacher_id},
-	${kyoteacher.license_kindergarten},
-	${kyoteacher.teacher_level},
-	${kyoteacher.teacher_name},
-	${kyoteacher.teacher_pw},
-	${kyoteacher.teacher_add_day},
-	${kyoteacher.teacher_phone},
-	${kyoteacher.teacher_bank},
-	${kyoteacher.teacher_account},
-	${kyoteacher.teacher_paystep}
-
+<div class="container" id="form">
+		<div class="panel-body">
+			<div class="form-group -animated">
+			<label for="#form-control-2">Example 2</label>
+			<input class="form-control" id="form-control-2" type="text" readonly>
+		</div>
+	</div>
+</div>
 
 </body>
 </html>
