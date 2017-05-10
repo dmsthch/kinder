@@ -18,8 +18,10 @@
       <div class="col-sm-10">              
         <input type="submit" id="licensecheckbutton" value="라이선스"/>
       </div>
-	
-      	${uid}		
+      
+      <c:if test="${null != licenseKey}">
+      <c:out value="발급된 라이선스 : ${licenseKey}"></c:out>
+      </c:if>      		
 
     </div>
 	</form>
