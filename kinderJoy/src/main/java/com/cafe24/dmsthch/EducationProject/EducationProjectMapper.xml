@@ -37,6 +37,7 @@
   		,license_kindergarten
   		,form_val
   		,form_merge
+  		,form_borders
   	)VALUES(
   		(
   			SELECT * FROM
@@ -48,6 +49,7 @@
   		,#{licenseKindergarten}
   		,#{formVal}
   		,#{formMerge}
+  		,#{formBorders}
   	)
 	</insert>
 	
@@ -56,6 +58,7 @@
 		SELECT
 			form_val AS formVal
 			,form_merge AS formMerge
+			,form_borders AS formBorders
 		FROM education_project_form
 		WHERE license_kindergarten = #{licenseKindergarten}
 		AND form_order = #{formOrder}

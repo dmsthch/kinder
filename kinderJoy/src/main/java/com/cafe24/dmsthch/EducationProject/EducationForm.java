@@ -6,7 +6,14 @@ public class EducationForm {
 	private String licenseKindergarten;
 	private String formVal;
 	private String formMerge;
+	private String formBorders;
 	
+	public String getFormBorders() {
+		return formBorders;
+	}
+	public void setFormBorders(String formBorders) {
+		this.formBorders = formBorders;
+	}
 	public String getFormMerge() {
 		return formMerge;
 	}

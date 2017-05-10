@@ -121,7 +121,7 @@
 			}
 		}
 		
-		console.log(borderArray);
+		
 		
 	})
 	$('#save').click(function(){
@@ -135,20 +135,20 @@
 			for(var j = 0; j<hot.countCols(); j++){
 				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
 					console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
-					var borders = JSON.stringify(hot.getCellMeta(i,j).borders);
+					var borders = hot.getCellMeta(i,j).borders;
 					borderArray.push(borders);
 				}
 			}
 		}
-		
-		console.log(borderArray);
+		var borderparse=JSON.stringify(borderArray);
+		console.log(borderparse+"<<<borderparse");
       
       $.ajax({
 			url : "${pageContext.request.contextPath}/educationProjectFormAdd",
 			type : 'POST',
 			dataType: 'JSON',
 			async: false,
-			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderArray },
+			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse },
 			success : function(data){
 			alert('success');
 		                        

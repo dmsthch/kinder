@@ -10,11 +10,12 @@ public class EducationProjectDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//폼 추가할때
-	public void formAdd(String formVal,String formMerge, String licenseKindergarten){		
+	public void formAdd(String formVal,String formMerge,String formBorders, String licenseKindergarten){		
 		EducationForm eduForm = new EducationForm();
 		eduForm.setLicenseKindergarten(licenseKindergarten);
 		eduForm.setFormVal(formVal);
 		eduForm.setFormMerge(formMerge);
+		eduForm.setFormBorders(formBorders);
 		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formAdd", eduForm);
 	}
 	
@@ -25,6 +26,12 @@ public class EducationProjectDao {
 		eduForm.setFormOrder(formOrder);
 		EducationForm resultForm = sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formLoad", eduForm);
 		System.out.println(resultForm+"<<<<체크");
+		if(resultForm.getFormBorders()==null){
+			resultForm.setFormBorders("''");
+		}
+		if(resultForm.getFormMerge()==null){
+			resultForm.setFormMerge("''");
+		}
 		return resultForm;
 	}
 	
