@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ChildList(spring mvc 방식)</title>
@@ -12,12 +13,34 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<!-- CSS Link -->
+<c:import url="../module/importCSS.jsp"></c:import>
+<!-- JS Link -->
+<c:import url="../module/importJS.jsp"></c:import>
+	
+ <style>
+	 #body{
+	 	margin-top: 5%;
+	 }
+ </style>
+ 
  
 </head>
-<body>
-<div class="container">
-    <h1>ChildList(spring mvc 방식)</h1>
-    <div>전체행의 수 : ${ChildCount}</div>
+
+<body id="body">
+<!-- navbar -->
+<c:import url="../module/navbar.jsp"></c:import>
+
+<div class="col-md-1">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="<c:url value="/home" />">Home</a></li>
+        <li><a href="<c:url value="/ChildAdd" />">전체 반</a></li>
+        <li><a href="<c:url value="/" />">반 1</a></li>
+        <li><a href="<c:url value="/" />">반 2</a></li>
+      </ul>
+</div>
+<div class="col-md-11">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -35,15 +58,15 @@
         <tbody>
             <c:forEach var="c" items="${list}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/ChildView?=${c.kid_no}">${c.kid_name}</a></td>
-                    <td>${c.kid_birth}</td>
-                    <td>${c.kid_address}</td>
-                    <td>${c.kid_protector_phone}</td>
-                    <td>${c.kid_protector_phone_reserve}</td>
-                    <td>${c.kid_precautions}</td>
-                    <td>${c.kid_gender}</td>
-                    <td>${c.kid_commuting}</td>
-                    <td>${c.kid_entrance_day}</td>
+                    <td><a href="${pageContext.request.contextPath}/ChildModify?kid_no=${c.kidNo}">${c.kidName}</a></td>
+                    <td>${c.kidBirth}</td>
+                    <td>${c.kidAddress}</td>
+                    <td>${c.kidProtectorPhone}</td>
+                    <td>${c.kidProtectorPhoneReserve}</td>
+                    <td>${c.kidPrecautions}</td>
+                    <td>${c.kidGender}</td>
+                    <td>${c.kidCommuting}</td>
+                    <td>${c.kidEntranceDay}</td>
                 </tr>
             </c:forEach>
         </tbody>
@@ -60,5 +83,9 @@
         <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildAdd">게시글 입력</a>
     </div>
 </div>
+
+<!-- footer -->
+<c:import url="../module/footer.jsp"></c:import>
+
 </body>
 </html>

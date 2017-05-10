@@ -23,15 +23,22 @@ public class EducationProjectController {
 		return "EducationProject/EducationProject";
 	}
 	
-	@RequestMapping(value = "/educationProjectAdd", method = RequestMethod.GET)
-	public String educationAdd(HttpSession session
-								, Model model) {
-		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
-		System.out.println(licenseKindergarten+"<<licenseKindergarten");
-		
-		
+	@RequestMapping(value = "/educationProjectAddPage", method = RequestMethod.GET)
+	public String educationAddPage() {
 		return "EducationProject/FormAdd";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/educationProjectAdd", method = RequestMethod.POST)
+	public String educationAdd(HttpSession session
+								, @RequestParam(value="dataArray") String dataArray) {
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		String formVal = dataArray;
+		System.out.println(formVal+"<<<formval");
+		dao.formAdd(formVal, licenseKindergarten);
+		return "";
+	}
+	
 	
 	
 	
@@ -44,7 +51,7 @@ public class EducationProjectController {
 		System.out.println(licenseKindergarten+"<<licenseKindergarten");
 		String val = dataArray;
 		System.out.println(val);
-		dao.test(val, licenseKindergarten);
+		dao.formAdd(val, licenseKindergarten);
 		return "";
 	}
 	

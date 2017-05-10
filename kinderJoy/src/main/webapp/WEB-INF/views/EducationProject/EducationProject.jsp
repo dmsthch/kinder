@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<a href="">계획안 양식추가</a>
-<a href="">1번 양식 불러오기</a>
-<a href="">2번 양식 불러오기</a>
+<a href="${pageContext.request.contextPath}/educationProjectAddPage">계획안 양식추가</a>
+<a href="${pageContext.request.contextPath}/">1번 양식 불러오기</a>
+<a href="${pageContext.request.contextPath}">2번 양식 불러오기</a>
 
 </body>
 </html>

@@ -17,9 +17,60 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  
 <title>ChildDevelopment(spring mvc 방식)</title>
+<<<<<<< HEAD
+
+<style>
+.mydiv{
+	border: 1px solid black;
+
+}
+
+.mmydiv{
+	border-right: 1px solid black;
+}
+
+</style>
+
+=======
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 </head>
+
 <body>
+
 <div class="container">
+<<<<<<< HEAD
+  <h2>Bordered Table</h2>
+  
+  
+	<div class="row">
+		<div class="col-sm-12 row">
+		
+			<div class="col-sm-5 mydiv">
+				<div class="row">
+					<div class="col-sm-4 text-center mmydiv">1 <br/><br/></div>
+					<div class="col-sm-4 text-center mmydiv">1 <br/><br/></div>
+					<div class="col-sm-4 text-center">1 <br/><br/></div>
+				</div>
+			</div>
+			
+			<div class="col-sm-7 ">
+				<div class="row">
+					<div class="col-sm-12 text-center mydiv">1</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4 mydiv">1</div>
+					<div class="col-sm-4 mydiv">1</div>
+					<div class="col-sm-4 mydiv">1</div>
+				</div>
+			</div>
+		
+		</div>
+		
+		
+	</div>
+          
+ 
+=======
     <h1>ChildDevelopment(spring mvc 방식)</h1>
     <form id="addForm" action="${pageContext.request.contextPath}/ChildDevelopment" method="post">
         <div class="form-group">
@@ -64,6 +115,8 @@
             <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildList">글목록</a>
         </div>
     </form>
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 </div>
+
 </body>
 </html>

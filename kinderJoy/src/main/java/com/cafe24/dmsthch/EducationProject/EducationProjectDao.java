@@ -10,12 +10,11 @@ public class EducationProjectDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	
-	public void test(String val, String licenseKindergarten){		
-		Education edu = new Education();
-		edu.setLicenseKindergarten(licenseKindergarten);
-		edu.setVal(val);
-		
-		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.test", edu);
+	public void formAdd(String formVal, String licenseKindergarten){		
+		EducationForm eduForm = new EducationForm();
+		eduForm.setLicenseKindergarten(licenseKindergarten);
+		eduForm.setFormVal(formVal);
+		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formAdd", eduForm);
 	}
 	
 	public String selectTest(){
