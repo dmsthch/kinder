@@ -155,19 +155,14 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	@RequestMapping(value="/li", method=RequestMethod.POST)
 	public String uuid(Model model) throws Exception {
 		
-		System.out.println("라이선스 발급 처리 호출");
+		//UUID에 대해 자세한 사항은 http://hyeonjae.github.io/uuid/2015/03/17/uuid.html 참고
 		
-		String uid = UUID.randomUUID().toString();
-		System.out.println(uid +"<--UUID");
-		int uid0 = UUID.randomUUID().hashCode();
-		System.out.println(uid0+" <--UUID hashCode");
-		int uid1 = UUID.randomUUID().version();
-		System.out.println(uid1 +" <--관련 버젼");
-		
-		model.addAttribute("uid",uid);
-		System.out.println(uid+"<--모델객체에 담은 uid");
+		System.out.println("\n 라이선스 발급 처리 호출");
+		String licenseKey = UUID.randomUUID().toString();
+
+		model.addAttribute("licenseKey",licenseKey);
+		System.out.println(licenseKey +"<--생성된 UUID\n");
 		
 		return "Teacher/TeacherLicense";
-
 	}
 }
