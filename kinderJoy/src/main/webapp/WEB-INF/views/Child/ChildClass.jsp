@@ -35,7 +35,6 @@
 <div class="col-md-1">
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="<c:url value="/home" />">Home</a></li>
-        <li><a href="<c:url value="/ChildClass" />">전체 반</a></li>
         <li><a href="<c:url value="/" />">반 1</a></li>
         <li><a href="<c:url value="/" />">반 2</a></li>
       </ul>
@@ -44,43 +43,35 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>이름</th>
-                <th>생년월일</th>
-                <th>주소</th>
-                <th>보호자번호</th>
-                <th>보호자예비번호</th>
-                <th>주의사항</th>
-                <th>성별</th>
-                <th>통학방법</th>
-                <th>입학일</th>
+                <th>유치원라이센스</th>
+                <th>반이름</th>
+                <th>운영년도</th>
+                <th>반번호</th>
+                <th>반편성</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach var="c" items="${list}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/ChildModify?kid_no=${c.kidNo}">${c.kidName}</a></td>
-                    <td>${c.kidBirth}</td>
-                    <td>${c.kidAddress}</td>
-                    <td>${c.kidProtectorPhone}</td>
-                    <td>${c.kidProtectorPhoneReserve}</td>
-                    <td>${c.kidPrecautions}</td>
-                    <td>${c.kidGender}</td>
-                    <td>${c.kidCommuting}</td>
-                    <td>${c.kidEntranceDay}</td>
+                    <td>${c.licenseKindergarten}</td>
+                    <td><a href="${pageContext.request.contextPath}/ChildModify2?class_no=${c.classNo}">${c.className}</a></td>
+                    <td>${c.classYear}</td>
+                    <td>${c.classAge}</td>
+                    <td><a href="${pageContext.request.contextPath}/ChildFormation"><button>반편성</button></a></td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
     <ul class="pager">
         <c:if test="${currentPage > 1}">
-            <li class="previous"><a href="${pageContext.request.contextPath}/ChildList?currentPage=${currentPage-1}">이전</a></li>
+            <li class="previous"><a href="${pageContext.request.contextPath}/ChildClass?currentPage=${currentPage-1}">이전</a></li>
         </c:if>
         <c:if test="${currentPage < lastPage}">
-            <li class="next"><a href="${pageContext.request.contextPath}/ChildList?currentPage=${currentPage+1}">다음</a></li>
+            <li class="next"><a href="${pageContext.request.contextPath}/ChildClass?currentPage=${currentPage+1}">다음</a></li>
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildAdd">게시글 입력</a>
+        <a class="btn btn-default" href="${pageContext.request.contextPath}/ClassAdd">반 입력</a>
     </div>
 </div>
 
