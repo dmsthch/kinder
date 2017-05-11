@@ -14,7 +14,6 @@
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-
     <!-- Bootstrap core CSS     -->
     <link href="css/JKC/modiassets/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -27,7 +26,7 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 </head>
 
 <body>
@@ -63,6 +62,12 @@
 	                        <p>Table List</p>
 	                    </a>
 	                </li>
+	                <li>
+	                    <a href="${pageContext.request.contextPath}/takeForm">
+	                        <i class="material-icons">people</i>
+	                        <p>Take Form</p>
+	                    </a>
+	                </li>
 	            </ul>
 	    	</div>
 	    </div>
@@ -76,8 +81,13 @@
 	        <div class="content">
 	            <div class="container-fluid">
 	                <div class="row">
-	                    <div class="col-md-8">
+	                
+	                <!-- 가로크기 -->
+	                    <div class="col-md-12">
+	                    
+	                     <!-- 상자모양 설정 현재는 카드 -->
 	                        <div class="card">
+	                        
 	                            <div class="card-header" data-background-color="blue">
 	                                <h4 class="title">회원 정보 수정</h4>
 									<p class="category">자신의 회원정보를 수정하세요.</p>
@@ -85,6 +95,8 @@
 	                            <div class="card-content">
 	                                <form>
 	                                    <div class="row">
+	                                    
+	                                    <!-- 인풋상자의 상 하 간격조절 -->
 	                                        <div class="col-md-5">
 												<div class="form-group label-floating">
 													<label class="control-label">아이디</label>
@@ -168,22 +180,12 @@
 	                            </div>
 	                        </div>
 	                    </div>
-						<div class="col-md-4">
-    						<div class="card card-profile">
-    							<div class="card-avatar">
-    							</div>
-
-    						</div>
-		    			</div>
 	                </div>
 	            </div>
-	        </div>
-	        
+	        </div>    
 		<c:import url="./footer.jsp"></c:import>
-		
 	    </div>
 	</div>
-
 </body>
 
 	<!--   Core JS Files   -->
