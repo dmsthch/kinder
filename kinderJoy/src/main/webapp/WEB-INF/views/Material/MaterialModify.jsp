@@ -88,9 +88,13 @@
 			                    	<li><a href="${boardCategory.categoryNo}">${boardCategory.categoryName}</a></li>
 			                    </c:forEach>
 		                    </ul>
-		                </div> 
-		        		<input type="hidden" name="boardCategoryNo" value="${board.boardCategoryNo }" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input --> 
+		                </div>
 		                <input type="text" name="boardTitle" value="${board.boardTitle}" class="form-control" placeholder="제목을 입력하세요 ...">
+		                <input type="hidden" name="licenseKindergarten" value="${board.licenseKindergarten }" id="licenseKindergarten" readonly>
+		                <input type="hidden" name="boardNo" value="${board.boardNo }" id="boardNo" readonly>
+		        		<input type="hidden" name="teacherNo" value="${board.teacherNo}" id="teacherNo" readonly>
+		        		<input type="hidden" name="boardCategoryNo" value="${board.boardCategoryNo }" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input --> 
+		                
 		            </div>
 		        </div>
 			</div>

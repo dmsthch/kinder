@@ -239,6 +239,8 @@ var WalkontableBorder = function WalkontableBorder(wotInstance, settings) {
     }
     this.eventManager.addEventListener(document.body, 'mousemove', handler);
   },
+  
+  //체크
   createBorders: function(settings) {
     this.main = document.createElement('div');
     var borderDivs = ['top', 'left', 'bottom', 'right', 'corner'];
@@ -6052,6 +6054,8 @@ Handsontable.Core = function Core(rootElement, userSettings) {
     Handsontable.hooks.run(instance, 'afterGetCellMeta', row, col, cellProperties);
     return cellProperties;
   };
+  
+  
   this.getCellMetaAtRow = function(row) {
     return priv.cellSettings[row];
   };

@@ -24,7 +24,7 @@
 
 
 	<style type="text/css">
-	#staticMenu { margin: 0pt; padding: 0pt;  position: absolute; right: 0px; top: 0px;}
+/* 	#staticMenu { margin: 0pt; padding: 0pt;  position: absolute; right: 0px; top: 0px;} */
 	.myBtn {
 	  background: transparent;
 	  border: 2px solid white;
@@ -73,7 +73,7 @@
 	
 </head>
 
-<body class="container-fluid" onload="InitializeStaticMenu();">
+<body class="container-fluid">
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 
@@ -94,6 +94,7 @@
 				</div>
 				
 				<!-- 검색창 -->
+				<form action="${pageContext.request.contextPath}/MaterialSearch" method="post">
 				<div class="container">
 				    <div class="row">    
 				        <div class="col-xs-8 col-xs-offset-2">
@@ -103,22 +104,23 @@
 				                    	<span id="search_concept">전체검색 </span><span class="caret"></span>
 				                    </button>
 				                    <ul class="dropdown-menu" role="menu">
-				                      <li><a href="#all">전체검색</a></li>
+				                      <li><a href="#0">전체검색</a></li>
 				                      <li class="divider"></li>
-				                      <li><a href="#contains">문서양식</a></li>
-				                      <li><a href="#its_equal">교육자료</a></li>
+						                  <c:forEach var="boardCategory" items="${boardCategoryList}">
+							             	 <li><a href="${boardCategory.categoryNo}">${boardCategory.categoryName}</a></li>
+							              </c:forEach>
 				                    </ul>
 				                </div>
-				                <input type="hidden" name="search_param" value="all" id="search_param"><!-- 검색내용을 들고갈 input -->      
-				                <input type="text" class="form-control" name="searchText" placeholder="Search ...">
+				                <input type="hidden" name="boardCategoryNo" value="0" id="search_param"><!-- 검색내용을 들고갈 input -->      
+				                <input type="text" class="form-control" name="boardContent" placeholder="Search ...">
 				                <span class="input-group-btn">
-				                    <button class="btn btn-default" id="#btnSearch" type="button">검색</button>
+				                    <button class="btn btn-default" id="#btnSearch" type="submit">검색</button>
 				                </span>
 				            </div>
 				        </div>
 					</div>
 				</div>
-				
+				</form>
 				
 				<!-- ISO section -->
 				<div class="iso-section">
@@ -178,23 +180,59 @@
 </div>
 
 
-<div class="row">
-	<div class="col-sm-6 text-center" style="border:1px solid white">
-		<h1>문서양식 리스트</h1>
-		<p>문서양식 리스트</p>
-		<p>문서양식 리스트</p>
-		<p>문서양식 리스트</p>
-		<p>문서양식 리스트</p>
-		<p>문서양식 리스트</p>
+<div class="row" style="margin-top: -5%;">
+	<div class="col-sm-4 col-sm-offset-1" style="">
+		<br/><h1 class="text-center">문서양식</h1><br/>
+		<table class="table" style="color:white">
+		
+			<thead class="text-center">
+				<tr>
+					 <th>No</th>
+					 <th>제목</th>
+					 <th>작성자</th>
+					 <th>작성일</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<c:forEach var="board" items="${documentList}">
+					<tr onClick="location.href='${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}'" style="cursor:pointer;">
+						<td>${board.boardNo }</td>
+						<td>${board.boardTitle }</td>
+						<td>${board.teacherNo }</td>
+						<td>${board.boardDay }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+			
+		</table>
 	</div>
 	
-	<div class="col-sm-6 text-center" style="border:1px solid white">
-		<h1>교육자료 리스트</h1>
-		<p>교육자료 리스트</p>
-		<p>교육자료 리스트</p>
-		<p>교육자료 리스트</p>
-		<p>교육자료 리스트</p>
-		<p>교육자료 리스트</p>
+	<div class="col-sm-4 col-sm-offset-1" style="">
+		<br/><h1 class="text-center">교육자료</h1><br/>
+		<table class="table" style="color:white">
+		
+			<thead class="text-center">
+				<tr>
+					 <th>No</th>
+					 <th>제목</th>
+					 <th>작성자</th>
+					 <th>작성일</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<c:forEach var="board" items="${educationList}">
+					<tr onClick="location.href='${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}'" style="cursor:pointer;">
+						<td>${board.boardNo }</td>
+						<td>${board.boardTitle }</td>
+						<td>${board.teacherNo }</td>
+						<td>${board.boardDay }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+			
+		</table>
 	</div>
 	
 </div>
