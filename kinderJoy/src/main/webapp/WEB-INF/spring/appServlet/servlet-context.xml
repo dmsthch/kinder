@@ -29,7 +29,7 @@
 
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <beans:property name="url" value="jdbc:mysql://dmsthch.cafe24.com/dmsthch?useUnicode=true&amp;characterEncoding=UTF-8"/>
+        <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/dmsthch?useUnicode=true&amp;characterEncoding=UTF-8"/>
         <beans:property name="username" value="dmsthch"/>
         <beans:property name="password" value="ksmart@23"/>
     </beans:bean>
