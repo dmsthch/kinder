@@ -72,7 +72,7 @@
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/ClassAdd">반 입력</a>
+        <a class="btn btn-default" href="${pageContext.request.contextPath}/ClassAdd">반입력</a>
     </div>
 </div>
 
