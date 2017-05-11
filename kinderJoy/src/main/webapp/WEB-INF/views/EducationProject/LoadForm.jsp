@@ -31,8 +31,8 @@
 	var dataMerge = ${resultData.formMerge};
 	var dataBorders = ${resultData.formBorders};
 	//
-	var rowCount = 30;
-	var colCount = 20;
+	var countRow = ${resultData.formCountRow};
+	var countCol = ${resultData.formCountCol};
 
 
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
@@ -41,7 +41,7 @@
 	if(dataValue[0]==null){
 		dataValue[0]={ };
 		console.log(dataValue);
-		for(i=0 ; i<colCount; i++){
+		for(i=0 ; i<countCol; i++){
 			dataValue[0][i] ='';
 			console.log("ㅇㅅㅇ! ->> "+ i);
 		}
@@ -55,10 +55,12 @@
 	
 		hot = new Handsontable(container, {
  			data: dataValue,    //데이터 가져오기
-			startRows: rowCount,
-			startCols: colCount,
+			startRows: countRow,
+			startCols: countCol,
 			rowHeaders : true,
 			colHeaders : true,
+			minRows: countRow,
+			minCols: countCol,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
@@ -69,6 +71,7 @@
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
  			mergeCells: dataMerge, //셀병합 가져오기
+ 			minSpareRows: 1, //여유 행
 			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
 				console.log(data, type)

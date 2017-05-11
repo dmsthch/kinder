@@ -38,6 +38,8 @@
   		,form_val
   		,form_merge
   		,form_borders
+  		,form_count_row
+  		,form_count_col
   	)VALUES(
   		(
   			SELECT * FROM
@@ -50,15 +52,20 @@
   		,#{formVal}
   		,#{formMerge}
   		,#{formBorders}
+  		,#{formCountRow}
+  		,#{formCountCol}
   	)
 	</insert>
 	
 	<!-- 로드하기 -->
 	<select id="formLoad" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm" resultType="com.cafe24.dmsthch.EducationProject.EducationForm">
 		SELECT
-			form_val AS formVal
+			form_no AS formNo 
+			,form_val AS formVal
 			,form_merge AS formMerge
 			,form_borders AS formBorders
+			,form_count_row AS formCountRow
+			,form_count_col AS formCountCol
 		FROM education_project_form
 		WHERE license_kindergarten = #{licenseKindergarten}
 		AND form_order = #{formOrder}

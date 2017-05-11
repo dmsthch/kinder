@@ -37,11 +37,13 @@ public class EducationProjectController {
 	public String educationAdd(HttpSession session
 								, @RequestParam(value="dataArray") String formVal
 								, @RequestParam(value="mergeArray", required=false, defaultValue="") String formMerge
-								, @RequestParam(value="borderArray",required=false, defaultValue="") String formBorders) {
+								, @RequestParam(value="borderArray",required=false, defaultValue="") String formBorders
+								, @RequestParam(value="countRow",required=false, defaultValue="") int formCountRow
+								, @RequestParam(value="countCol",required=false, defaultValue="") int formCountCol) {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(formVal+"<<<formval");
 		System.out.println(formBorders+"<<<<formBorders");
-		dao.formAdd(formVal,formMerge,formBorders,licenseKindergarten);
+		dao.formAdd(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten);
 		return "";
 	}
 	
@@ -54,9 +56,12 @@ public class EducationProjectController {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		EducationForm result = dao.formLoad(licenseKindergarten, formOrder);
 		//System.out.println(isMerge+"<<isMerge   ,"+ isBorders+"<<isBorders");
-		System.out.println(result.getFormMerge()+"<<<<체크체크 머지");
+		//System.out.println(result.getFormMerge()+"<<<<체크체크 머지");
+		//System.out.println(result.getFormCountCol()+"<<체크체크 카운트");
+		if(result==null){
+			return "EducationProject/EducationProject";
+		}
 		model.addAttribute("resultData",result);
-		
 		return "EducationProject/LoadForm";
 	}
 	
