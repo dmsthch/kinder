@@ -54,7 +54,7 @@ public class ChildController {
 					String license = "";
 					if(session.getAttribute("teacherNo") != null){
 						teacherNo = (Integer) session.getAttribute("teacherNo");
-						license = (String) session.getAttribute("teacherLicense");
+						license = (String) session.getAttribute("licenseKindergarten");
 					}
 					
 					
@@ -71,6 +71,25 @@ public class ChildController {
 					model.addAttribute("list", list);
 					
 					return "Child/ChildList";
+				}
+	
+				//리스트 요청
+				@RequestMapping(value="/ChildClass" , method=RequestMethod.GET)
+				public String ChildClass(Model model 
+										, @RequestParam(value="currentPage", required=false, defaultValue="1")int currentPage) {
+					
+					int ChildCount = childDao.getChildCount();
+					int pagePerRow = 10;
+					int lastPage = (int)(Math.ceil(ChildCount/currentPage));
+					List<Object> list = childDao.getClass(currentPage, pagePerRow);
+
+					model.addAttribute("currentPage", currentPage);
+					model.addAttribute("ChildCount", ChildCount);
+					model.addAttribute("pagePerRow", pagePerRow);
+					model.addAttribute("lastPage", lastPage);
+					model.addAttribute("list", list);
+					
+					return "Child/ChildClass";
 				}
 	
 				//입력 폼 요청
@@ -107,5 +126,18 @@ public class ChildController {
 			System.out.println(child);
 			return "redirect:/ChildList";
 		}
+		
+		@RequestMapping(value="/ChildFormation" , method=RequestMethod.GET)
+		public String ChildFormation() {
+			System.out.println("ChildFormation 폼 요청");
+			return "Child/ChildFormation";
+		}
+		
+		@RequestMapping(value="/ClassAdd" , method=RequestMethod.GET)
+		public String ClassAdd() {
+			System.out.println("ClassAdd 폼 요청");
+			return "Child/ClassAdd";
+		}
+		
 
 }

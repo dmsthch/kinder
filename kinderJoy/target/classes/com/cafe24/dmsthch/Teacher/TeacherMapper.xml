@@ -45,7 +45,7 @@ SELECT
 <select id="OneSelectTeacher" parameterType="int" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 
 SELECT * 
-FROM Teacher 
+FROM teacher 
 WHERE 
 teacher_no = #{teacher_no}
 
