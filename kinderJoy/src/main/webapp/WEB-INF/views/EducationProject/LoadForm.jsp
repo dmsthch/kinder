@@ -29,10 +29,15 @@
 	var dataArray;
 	var dataValue = ${resultData.formVal};
 	var dataMerge = ${resultData.formMerge};
+	var dataBorders = ${resultData.formBorders};
+	//
+	var rowCount = 30;
+	var colCount = 20;
+
 
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 // {1:"", 2:"" }	
-	var colCount = 20;
+	
 	if(dataValue[0]==null){
 		dataValue[0]={ };
 		console.log(dataValue);
@@ -50,14 +55,15 @@
 	
 		hot = new Handsontable(container, {
  			data: dataValue,    //데이터 가져오기
-			startRows: 30,
-			startCols: 20,
+			startRows: rowCount,
+			startCols: colCount,
 			rowHeaders : true,
 			colHeaders : true,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
+			customBorders: dataBorders,
 			contextMenu : true,
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
