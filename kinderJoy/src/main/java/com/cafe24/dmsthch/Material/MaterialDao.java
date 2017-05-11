@@ -74,4 +74,27 @@ public class MaterialDao {
 		return sqlSessionTemplate.selectOne(sql+"getBoardData", dataNo);
 	}
 	
+	//게시글 수정
+	public int boardModify(Board board){
+		return sqlSessionTemplate.update(sql+"boardModify", board);
+	}
+	
+	//전체 검색
+	public List<Board> materialAllSearch(String license, String txtSearch, int nowPage){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("license", license);
+		map.put("txtSearch", txtSearch+"%");
+		map.put("nowPage", (nowPage-1)*10);
+		return sqlSessionTemplate.selectList(sql+"materialAllSearch", map);
+	}
+	//카테고리별 검색
+	public List<Board> materialCategorySearch(String license, int categoryNo, String txtSearch, int nowPage){
+		System.out.println("cat : "+categoryNo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("license", license);
+		map.put("categoryNo", categoryNo);
+		map.put("txtSearch", txtSearch+"%");
+		map.put("nowPage", (nowPage-1)*10);
+		return sqlSessionTemplate.selectList(sql+"materialCategorySearch", map);
+	}
 }

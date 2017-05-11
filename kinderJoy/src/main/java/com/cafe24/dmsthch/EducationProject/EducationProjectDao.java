@@ -9,15 +9,34 @@ public class EducationProjectDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	
-	public void test(String val, String licenseKindergarten){		
-		Education edu = new Education();
-		edu.setLicenseKindergarten(licenseKindergarten);
-		edu.setVal(val);
-		
-		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.test", edu);
+	//폼 추가할때
+	public void formAdd(String formVal,String formMerge,String formBorders, String licenseKindergarten){		
+		EducationForm eduForm = new EducationForm();
+		eduForm.setLicenseKindergarten(licenseKindergarten);
+		eduForm.setFormVal(formVal);
+		eduForm.setFormMerge(formMerge);
+		eduForm.setFormBorders(formBorders);
+		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formAdd", eduForm);
 	}
 	
+	//폼 불러올때
+	public EducationForm formLoad(String licenseKindergarten, int formOrder){
+		EducationForm eduForm = new EducationForm();
+		eduForm.setLicenseKindergarten(licenseKindergarten);
+		eduForm.setFormOrder(formOrder);
+		EducationForm resultForm = sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formLoad", eduForm);
+		System.out.println(resultForm+"<<<<체크");
+		if(resultForm.getFormBorders()==null){
+			resultForm.setFormBorders("''");
+		}
+		if(resultForm.getFormMerge()==null){
+			resultForm.setFormMerge("''");
+		}
+		return resultForm;
+	}
+	
+	
+	//테스트용
 	public String selectTest(){
 		
 		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.selectTest");

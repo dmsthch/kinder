@@ -1,8 +1,10 @@
 package com.cafe24.dmsthch;
 
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,7 +54,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	//아이디 중복체크 메서드
 	@RequestMapping(value="/sign_up_id_check",method =RequestMethod.POST)
 	@ResponseBody
-	public int logincheck(@RequestParam("teacher_ajax_id") String userid) {
+	public int logincheck(HttpServletResponse response, @RequestParam("teacher_ajax_id") String userid) throws Exception {
 		System.out.println("로그인체크메서드 호출_Controller");
 		System.out.println("사용자가 입력한 아이디는? : " + userid);
 		int check = TDao.logincheck(userid);
@@ -62,6 +64,10 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		}else{
 			System.out.println("DB에 중복되는 값이 있습니다_TeacherController");
 		}
+		
+		
+		PrintWriter out = response.getWriter();
+		out.flush(); // 종료
 		return check;
 	}
 	
@@ -76,7 +82,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		return "redirect:/home";
 	}
 	
-	//로그인폼 호출 메서드 ★★★모달형식은 사용할 필요가 없음
+/*	//로그인폼 호출 메서드 ★★★모달형식은 사용할 필요가 없음
 		
 	@RequestMapping(value="/Login" , method = RequestMethod.GET)
 	public String Login(HttpSession session) {
@@ -87,11 +93,11 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		}else{
 			return "redirect:/home";
 		}
-	}
+	}*/
 	
 	//로그인 처리
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
-	public String Login(HttpServletRequest request,Model model,Teacher teacher,HttpSession session,String joongbok) throws SQLException {
+	public String Login(SessionStatus sessionstatus,HttpServletRequest request,Model model,Teacher teacher,HttpSession session,String joongbok) throws SQLException {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
 		System.out.println(TDao+" <--TDao 동작 확인");
@@ -115,19 +121,15 @@ public class TeacherController extends HandlerInterceptorAdapter {
 				System.out.println(saveSession.getTeacher_level() + " <--세션에 저장될 레벨값");
 				
 				session.setMaxInactiveInterval(7200);
-				System.out.println("재정의된 세션의 유지 시간 : "+session.getMaxInactiveInterval()+"초");
-				
+
 				//시간설정을 모델객체안에 담음
 				model.addAttribute("teacherTime", session.getMaxInactiveInterval());
-				System.out.println("생성된 세션의 아이디 : "+session.getId());
-				System.out.println("현재 세션의 유지 시간 : "+session.getMaxInactiveInterval()+"초");
-				
-				System.out.println(session.isNew()+" <-- 처음 생성 되었을 시 true 아닐 시 false\n");
-				
+				System.out.println("세션의 유지 시간 : "+session.getMaxInactiveInterval()+"초");
+
 				}
 			} else {
 				model.addAttribute("nogin","로그인실패");
-			return "home";
+				return "redirect:/home";
 		}
 		return "redirect:/home";
 	}

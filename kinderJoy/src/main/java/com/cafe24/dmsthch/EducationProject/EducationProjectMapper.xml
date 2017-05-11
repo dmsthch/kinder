@@ -27,7 +27,42 @@
   	<!-- AND education_onepage_no=1
   	AND license_kindergarten = ${licenseKindergarten} --> 	
   </select>
+  <!-- 테스트끝 -->
   
- 
+  
+  	<!-- 폼 추가하기 -->
+	<insert id="formAdd" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm">
+	INSERT INTO education_project_form(
+  		form_order
+  		,license_kindergarten
+  		,form_val
+  		,form_merge
+  		,form_borders
+  	)VALUES(
+  		(
+  			SELECT * FROM
+	  		(SELECT COUNT(form_no)
+	  		FROM education_project_form
+	  		WHERE license_kindergarten = #{licenseKindergarten}) 
+	  		as temp
+  		) + 1
+  		,#{licenseKindergarten}
+  		,#{formVal}
+  		,#{formMerge}
+  		,#{formBorders}
+  	)
+	</insert>
+	
+	<!-- 로드하기 -->
+	<select id="formLoad" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm" resultType="com.cafe24.dmsthch.EducationProject.EducationForm">
+		SELECT
+			form_val AS formVal
+			,form_merge AS formMerge
+			,form_borders AS formBorders
+		FROM education_project_form
+		WHERE license_kindergarten = #{licenseKindergarten}
+		AND form_order = #{formOrder}
+	</select>
+
   
   </mapper>
