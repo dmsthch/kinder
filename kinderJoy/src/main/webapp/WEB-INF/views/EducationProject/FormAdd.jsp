@@ -142,13 +142,16 @@
 		}
 		var borderparse=JSON.stringify(borderArray);
 		console.log(borderparse+"<<<borderparse");
+		
+		var countRow =hot.countRows(); 
+		var countCol =hot.countCols(); 
       
       $.ajax({
 			url : "${pageContext.request.contextPath}/educationProjectFormAdd",
 			type : 'POST',
 			dataType: 'JSON',
 			async: false,
-			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse },
+			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol },
 			success : function(data){
 			alert('success');
 		                        

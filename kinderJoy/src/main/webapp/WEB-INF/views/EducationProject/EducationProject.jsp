@@ -11,6 +11,8 @@
 <a href="${pageContext.request.contextPath}/educationProjectAddPage">계획안 양식추가</a>
 <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=1">1번 양식 불러오기</a>
 <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=2">2번 양식 불러오기</a>
+<br>
 
+<a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&date=20170511">저장된 계획안 불러오기 테스트 // 날짜 : 20170511</a>
 </body>
 </html>
