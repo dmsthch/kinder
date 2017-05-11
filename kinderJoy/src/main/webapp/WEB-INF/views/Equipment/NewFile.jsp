@@ -139,16 +139,16 @@
 				<input class="form-control test1" type="text" style="width : 400px" value="test" readonly/>
 			</td>
 			<td>
-				<input  class="form-control" type="text" style="width : 100px" value="50" readonly/>
+				<input class="form-control testValue" type="text" style="width : 100px" value="50" readonly/>
 			</td>
 			<td>
 				<div class="form-inline">
 					<div class="form-group">
-						<input  class="form-control" type="text" style="width : 50px"/>
+						<input  class="form-control testNote" type="text" style="width : 50px"/>
 					</div>
 					<div class="form-group">
-						<button class="glyphicon glyphicon-plus" style="whdth:42px; height:33px"></button>
-						<button class="glyphicon glyphicon-minus" style="whdth:42px; height:33px"></button>
+						<button class="glyphicon glyphicon-plus plus" style="whdth:42px; height:33px"></button>
+						<button class="glyphicon glyphicon-minus minus" style="whdth:42px; height:33px"></button>
 					</div>
 				</div>
 			</td>
