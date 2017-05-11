@@ -61,7 +61,7 @@
 			console.log('실패');
 		}
 	});
-/* 	$(document).on('','',function(){});
+/* 	$(document).on('','',function(){});123123
 	$(document).on('','',function(){});123
 	$(documnen).on('','',function(){});123123
 	$(document).on('','',function(){}); asdf*/
