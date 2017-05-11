@@ -32,15 +32,16 @@
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 
-<div class="col-md-1">
+<div class="col-md-2">
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="<c:url value="/home" />">Home</a></li>
         <li><a href="<c:url value="/ChildClass" />">전체 반</a></li>
         <li><a href="<c:url value="/" />">반 1</a></li>
         <li><a href="<c:url value="/" />">반 2</a></li>
+        <li><a href="<c:url value="/ClassAdd"/>">반 입력</a></li>
       </ul>
 </div>
-<div class="col-md-11">
+<div class="col-md-10">
     <table class="table table-striped">
         <thead>
             <tr>
