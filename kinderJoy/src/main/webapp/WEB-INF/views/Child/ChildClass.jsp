@@ -44,7 +44,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>유치원라이센스</th>
+                <th>유치원 라이센스</th>
                 <th>반이름</th>
                 <th>운영년도</th>
                 <th>반번호</th>
