@@ -68,7 +68,7 @@
       <label for="class_age">반 연령:</label>
       <input type="password" class="form-control" id="class_age" name="class_age" style="width:300px;">
     </div>
-  
+  <br><br>
     <div align ="center">
            <input class="btn btn-default" id="addButton" type="button" value="글입력"/>
            <input class="btn btn-default" type="reset" value="초기화"/>
