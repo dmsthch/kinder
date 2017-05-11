@@ -17,6 +17,18 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  
+<script>
+ 	$(document).ready(function(){
+ 		
+ 		$('#addButton').click(function(){
+ 			
+ 			$('#addForm').submit();
+ 		});
+ 		
+ 		
+ 	});
+ 
+ </script>
 
 <title>ClassAdd</title>
 <!-- CSS Link -->
@@ -34,29 +46,41 @@
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 
-<div class="col-md-1">
+<div class="col-md-2">
       <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="<c:url value="/home" />">Home</a></li>
-        <li><a href="<c:url value="/ChildClass" />">전체 반</a></li>
+        <li><a href="<c:url value="/ChildList" />">Home</a></li>
+        <li><a href="<c:url value="/ChildClass"/>">전체 반</a></li>
         <li><a href="<c:url value="/" />">반 1</a></li>
         <li><a href="<c:url value="/" />">반 2</a></li>
+        <li class="active"><a href="<c:url value="/ClassAdd"/>">반 입력</a></li>
       </ul>
 </div>
-<div class="container">
-    
-    <form id="addForm" action="${pageContext.request.contextPath}/ClassAdd" method="post">
-        <div class="form-group">
-            <label for="class_name">반 이름 :</label>
-            <input class="form-control" name="class_name" id="class_name" type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="class_age">반 연령대:</label>
-            <input class="form-control" name="class_age" id="class_age" type="text"/>
-        </div>
-        
- 
-    </form>
-</div>
+<form id="addForm" action="${pageContext.request.contextPath}/ClassAdd" method="post">
+<div class="col-md-10">
+<div class="form-inline">
+	<div align="center" class="container">
+  		<form class="form-inline" action="/action_page.php">
+    	<div class="form-group">
+      	<label for="class_name">반 이름:</label>
+      	<input type="email" class="form-control" id="class_name" name="class_name" style="width:300px;">
+    </div>
+    <div class="form-group">
+      <label for="class_age">반 연령:</label>
+      <input type="password" class="form-control" id="class_age" name="class_age" style="width:300px;">
+    </div>
+  <br><br>
+    <div align ="center">
+           <input class="btn btn-default" id="addButton" type="button" value="글입력"/>
+           <input class="btn btn-default" type="reset" value="초기화"/>
+           <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildClass">목록</a>
+    </div>
+  		</form>
+  	</div>
+  </div>
+  </div>
+ </form>
+
+
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>
 </body>

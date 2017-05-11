@@ -38,7 +38,6 @@ SELECT
 	teacher_id = #{teacher_id}
 	AND 
 	teacher_pw = #{teacher_pw}
-
 </select>
 
 <!-- teacher_no는 int타입이니  parameterType="int"가 되겠고 반환값은 여러개니까 Teacher전역변수가 된다-->
@@ -58,5 +57,34 @@ teacher_no = #{teacher_no}
  FROM teacher
  WHERE teacher_id = #{teacher_id}
  </select>
+
+<!-- 전체 선생님 정보 조회 --> <!-- ★ SOT ★ = Select All Teacher -->
+<!-- WHERE절의 값이 level의 선생님이다 그러므로 parameterType은 String형이 되고 그에 따른 결과는 여러개니까 Teacher가 된다.-->
+<select id="SAT" parameterType="java.lang.String" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+SELECT 
+  teacher_no
+, license_kindergarten
+, teacher_name
+, teacher_level
+FROM
+  teacher 
+WHERE
+  teacher_level = "선생님";
+</select>
+
+<!-- 전체 반 정보 조회 --> <!-- ★SAC★ Select All Class -->
+<select id="SAC" parameterType="int" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+
+SELECT
+  class_no
+, class_name
+, class_year
+, class_age
+FROM
+  kid_class
+WHERE
+  class_no;
+
+</select>
 
 </mapper>

@@ -32,6 +32,13 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		System.out.println("GET방식으로 TeacherAdd로 포워드\n");
 		return "Teacher/TeacherAdd";
 	}
+	//편성표폼 호출
+	@RequestMapping(value="/takeForm", method=RequestMethod.GET)
+	public String takeForm() {
+		System.out.println("편성표 폼 호출__Teacher/TeacherModify/takeForm으로 포워드\n");
+		return "Teacher/TeacherModify/takeForm";
+	}
+	
 	
 	//교원폼 수정폼 호출 메서드 //User Profile
 	@RequestMapping(value="/kyo", method=RequestMethod.GET)
