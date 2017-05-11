@@ -30,26 +30,25 @@
 			var getCopyObject = $('#copyTargetTable tbody').clone();			
 			$('#table tbody').append(getCopyObject.html())
 			console.log('성공');
-			
-/* 			$('#tr_clone').clone().insertAfter('#tr_clone')
-			console.log('성공'); */
-	})
+	});
 	$(document).on('dblclick','.test1',function(){
-		$('.test1').removeAttr('readonly');
+		$(this).removeAttr('readonly');
 	});
 	$(document).on('focusout','.test1',function(){
-		$('.test1').attr('readonly','readonly');
+		$(this).attr('readonly','readonly');
 	});
 	$(document).on('click','.plus',function(){
-		console.log($('.testNote').val());
+/* 		console.log($('.testNote').val());
 		if($('.testNote').val() == ''){
 			var testvalue = $('.testValue').val();
 			var testvalue2 = parseInt(testvalue) + parseInt(1);
 			$('.testValue').val(testvalue2);
 			console.log('완료');
 		}else{
-			console.log('실패');
-		}
+			console.log('실패');as
+		} */
+		var textNote = $(this).closest('tr');
+		console.log(textNote);
 	});
 	$(document).on('click','.minus',function(){
 		console.log($('.testNote').val());
@@ -62,9 +61,9 @@
 			console.log('실패');
 		}
 	});
-/* 	$(document).on('','',function(){});
-	$(document).on('','',function(){});
-	$(documnen).on('','',function(){});123
+/* 	$(document).on('','',function(){});123123
+	$(document).on('','',function(){});123
+	$(documnen).on('','',function(){});123123
 	$(document).on('','',function(){}); asdf*/
 </script>
 
@@ -139,16 +138,16 @@
 				<input class="form-control test1" type="text" style="width : 400px" value="test" readonly/>
 			</td>
 			<td>
-				<input  class="form-control" type="text" style="width : 100px" value="50" readonly/>
+				<input class="form-control testValue" type="text" style="width : 100px" value="50" readonly/>
 			</td>
 			<td>
 				<div class="form-inline">
 					<div class="form-group">
-						<input  class="form-control" type="text" style="width : 50px"/>
+						<input  class="form-control testNote" type="text" style="width : 50px"/>
 					</div>
 					<div class="form-group">
-						<button class="glyphicon glyphicon-plus" style="whdth:42px; height:33px"></button>
-						<button class="glyphicon glyphicon-minus" style="whdth:42px; height:33px"></button>
+						<button class="glyphicon glyphicon-plus plus" style="whdth:42px; height:33px"></button>
+						<button class="glyphicon glyphicon-minus minus" style="whdth:42px; height:33px"></button>
 					</div>
 				</div>
 			</td>
