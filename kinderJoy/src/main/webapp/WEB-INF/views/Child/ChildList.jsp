@@ -5,7 +5,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ChildList(spring mvc 방식)</title>
+<title>ChildList</title>
 <!-- bootstrap을 사용하기 위한 CDN주소 -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -35,7 +35,7 @@
 <div class="col-md-1">
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="<c:url value="/home" />">Home</a></li>
-        <li><a href="<c:url value="/ChildAdd" />">전체 반</a></li>
+        <li><a href="<c:url value="/ChildClass" />">전체 반</a></li>
         <li><a href="<c:url value="/" />">반 1</a></li>
         <li><a href="<c:url value="/" />">반 2</a></li>
       </ul>
