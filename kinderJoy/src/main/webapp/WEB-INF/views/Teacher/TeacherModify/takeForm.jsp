@@ -3,6 +3,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 <head>
 
 	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
@@ -26,7 +27,18 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+	
+	
+	<script src="js/jquery.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+		$('#takeForm').attr('class','active');
+		$('#sidetakeForm').attr('style','background-color:green');
+		
+	});
+	</script>
+	
 </head>
 
 <body>
@@ -34,44 +46,8 @@
 	<div class="wrapper">
 	
 	<!-- 사이드메뉴바 BEGIN -->
-	    <div class="sidebar" data-color="green">
-			<!--
-	        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-		    Tip 2: you can also add an image using data-image tag
-
-			-->
-
-			<div class="logo">
-				<a href="${pageContext.request.contextPath}/" class="simple-text">
-					햇병아리
-				</a>
-			</div>
-
-
-	    	<div class="sidebar-wrapper">
-				<ul class="nav">
-	                <li>
-	                    <a href="${pageContext.request.contextPath}/kyo">
-	                        <i class="material-icons">person</i>
-	                        <p>User Profile</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="${pageContext.request.contextPath}/kyotable">
-	                        <i class="material-icons">content_paste</i>
-	                        <p>Table List</p>
-	                    </a>
-	                </li>
-	                 <li class="active">
-	                    <a href="${pageContext.request.contextPath}/takeForm">
-	                        <i class="material-icons">people</i>
-	                        <p>Take Form</p>
-	                    </a>
-	                </li>
-	            </ul>
-	    	</div>
-		</div>
-<!-- 사이드메뉴바 END -->
+	<c:import url="./side.jsp"></c:import>
+	<!-- 사이드메뉴바 END -->
 
 
 	    <div class="main-panel">
