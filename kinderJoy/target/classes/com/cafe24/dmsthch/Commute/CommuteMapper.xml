@@ -1,0 +1,90 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.cafe24.dmsthch.Commute.CommuteMapper">
+	
+	
+	<!-- 복귀 등록 -->
+	<update id="absenceReturn" parameterType="java.lang.String">
+		UPDATE 
+			teacher_absence
+		SET 
+			absence_end = DATE_FORMAT(NOW(),'%H:%i:%s')
+		WHERE absence_no = #{absenceNo};
+	</update>
+	
+	<!-- 외출 등록 -->
+	<insert id="absence" parameterType="java.util.Map">
+		INSERT INTO teacher_absence (
+			attendance_no,
+			license_kindergarten,
+			category_no,
+			absence_start,
+			absence_day)
+		VALUES (
+			#{attendanceNo}, 
+			#{licenseKindergarten},
+			'1', 
+			DATE_FORMAT(NOW(),'%H:%i:%s'),
+			DATE_FORMAT(NOW(),'%Y-%m-%d')
+		);
+	</insert>
+	
+	<!-- 오늘날짜 외출정보 가져오기 -->
+	<select id="absenceCheck" parameterType="int" resultType="java.util.Map">
+		select 
+			teacher_absence.absence_no AS absenceNo,
+			teacher_absence.attendance_no AS attendanceNo,
+			teacher_absence.category_no AS categoryNo,
+			teacher_absence.absence_start AS absenceStart,
+			teacher_absence.absence_end AS absenceEnd,
+			teacher_absence.absence_day  AS absenceDay
+		from teacher_absence 
+		inner join teacher_attendance 
+		on teacher_attendance.attendance_no = teacher_absence.attendance_no
+		and teacher_attendance.attendance_no = #{teacherNo}
+	</select>
+	
+	<!-- 오늘날짜 출근부 체크 -->
+	<select id="attendanceCheck" parameterType="int" resultType="java.util.Map">
+		select
+			teacher_attendance.attendance_no AS attendanceNo,
+			teacher_attendance.license_kindergarten AS licenseKindergarten,
+			teacher_attendance.attendance_start AS attendanceStart,
+			teacher_attendance.attendance_end AS attendanceEnd,
+			teacher.teacher_name AS teacherName
+		from teacher_attendance
+		inner join teacher
+		where teacher.teacher_no = teacher_attendance.teacher_no
+		and teacher_attendance.attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+		and teacher.teacher_no = #{teacher_no}
+	</select>
+	
+	<!-- 오늘날짜 출근 등록 -->
+	<insert id="commuteIn" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
+		INSERT INTO teacher_attendance (
+			teacher_no,
+			license_kindergarten,
+			attendance_start,
+			attendance_day
+		)VALUES (
+			#{teacher_no},
+			#{license_kindergarten},
+			DATE_FORMAT(NOW(),'%H:%i:%s'),
+			DATE_FORMAT(NOW(),'%Y-%m-%d')
+		);
+	</insert>
+	
+	<!-- 퇴근 -->
+	<update id="commuteOut" parameterType="int">
+		UPDATE
+			teacher_attendance
+		SET 
+			attendance_end=DATE_FORMAT(NOW(),'%H:%i:%s')
+		WHERE 
+			teacher_no=#{teacherNo} and attendance_day=DATE_FORMAT(NOW(),'%Y-%m-%d');
+	</update>
+	
+
+</mapper>

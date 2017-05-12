@@ -1,0 +1,118 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.cafe24.dmsthch.EducationProject.EducationProjectMapper">
+  
+  <!-- 테스트 -->
+  <insert id="test" parameterType="com.cafe24.dmsthch.EducationProject.Education">
+  	INSERT INTO education_project(
+  		education_onepage_no
+  		,val
+  		,license_kindergarten
+  		
+  	)VALUES(
+  		1
+  		,#{val}
+  		,#{licenseKindergarten}
+  	)  	
+  </insert>
+  
+  <select id="selectTest" parameterType="com.cafe24.dmsthch.EducationProject.Education" resultType="String">
+  	SELECT
+  		val
+  	FROM education_project
+  	WHERE 
+  		education_project_no = 22
+  	<!-- AND education_onepage_no=1
+  	AND license_kindergarten = ${licenseKindergarten} --> 	
+  </select>
+  <!-- 테스트끝 -->
+  
+  
+  	<!-- 폼 추가하기 -->
+	<insert id="formAdd" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm">
+	INSERT INTO education_project_form(
+  		form_order
+  		,license_kindergarten
+  		,form_val
+  		,form_merge
+  		,form_borders
+  		,form_count_row
+  		,form_count_col
+  	)VALUES(
+  		(
+  			SELECT * FROM
+	  		(SELECT COUNT(form_no)
+	  		FROM education_project_form
+	  		WHERE license_kindergarten = #{licenseKindergarten}) 
+	  		as temp
+  		) + 1
+  		,#{licenseKindergarten}
+  		,#{formVal}
+  		,#{formMerge}
+  		,#{formBorders}
+  		,#{formCountRow}
+  		,#{formCountCol}
+  	)
+	</insert>
+	
+	<!-- 로드하기 -->
+	<select id="formLoad" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm" resultType="com.cafe24.dmsthch.EducationProject.EducationForm">
+		SELECT
+			form_no AS formNo 
+			,form_val AS formVal
+			,form_merge AS formMerge
+			,form_borders AS formBorders
+			,form_count_row AS formCountRow
+			,form_count_col AS formCountCol
+		FROM education_project_form
+		WHERE license_kindergarten = #{licenseKindergarten}
+		AND form_order = #{formOrder}
+	</select>
+	
+	<!-- 계획안 저장하기 -->
+	<insert id="educationProjectAdd" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm">
+		INSERT INTO education_project(
+			val
+			,borders
+			,merge
+			,license_kindergarten
+			,count_row
+			,count_col
+			,add_date
+			,category_no
+		)VALUES(
+			#{val}
+			,#{borders}
+			,#{merge}
+			,#{licenseKindergarten}
+			,#{countRow}
+			,#{countCol}
+			,curdate()
+			,1
+		)
+	</insert>
+	
+	<!-- 계획안 불러오기 -->
+	<select id="educationProjectLoad" parameterType="com.cafe24.dmsthch.EducationProject.Education" resultType="com.cafe24.dmsthch.EducationProject.Education">
+		SELECT
+			 e.education_project_no AS educationProjectNo 
+			,e.val
+			,e.merge
+			,e.borders
+			,e.count_row AS countRow
+			,e.count_col AS countCol
+			,e.add_date AS addDate
+			,c.category_name AS categoryNo
+		FROM education_project e
+		INNER JOIN education_category c
+		ON e.category_no = c.category_no
+		WHERE license_kindergarten = #{licenseKindergarten}
+		AND add_date = #{addDate}
+	
+	</select>
+	
+
+  
+  </mapper>

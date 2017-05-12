@@ -1,0 +1,62 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
+  	
+  	<insert id="addEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
+  		INSERT INTO equipment(
+  			  license_kindergarten
+  			, equipment_name
+  			, teacher_no
+  			, category_no
+  			, equipment_cost
+  			, equipment_amount
+  			, equipment_customer
+  			, equipment_state
+  			, equipment_day
+  		) VALUES(
+  			 #{licenseKindergarten}
+  			,#{equipmentName}
+  			,#{teacherNo}
+  			,#{categoryNo}
+  			,#{equipmentCost}
+  			,#{equipmentAmount}
+  			,#{equipmentCustomer}
+  			,#{equipmentState}
+  			,now()
+  		);
+  	</insert>
+  	
+  	<select id="selectEquipmentCategory" resultType="java.util.Map">
+  		SELECT
+  		 	category_no AS categoryNo,
+			category_name AS categoryName
+  		FROM
+  			 equipment_category;
+  	</select>
+  	
+  	<insert id="addEquipmentSheet" parameterType="com.cafe24.dmsthch.Equipment.Sheet">
+  		INSERT INTO sheet_value(
+  		 	teacher_no
+  			,license_kindergarten
+  			,sheet_content
+  		) VALUES(
+  		 	#{teacherNo}
+  			,#{licenseKindergarten}
+  			,#{sheetContent}
+  		);
+  	</insert>
+
+	<select id="selectEquipment" parameterType="int" resultType="com.cafe24.dmsthch.Equipment.Sheet">
+		SELECT
+		  	 sheet_no AS sheetNo
+		 	,teacher_no AS teacherNo
+		 	,license_kindergarten AS licenseKindergarten
+		 	,sheet_content AS sheetContent
+		FROM
+			sheet_value
+		WHERE
+			teacher_no = #{teacherNo};
+	</select>
+  </mapper>

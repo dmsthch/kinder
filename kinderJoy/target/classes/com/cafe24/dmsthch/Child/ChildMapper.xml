@@ -1,0 +1,123 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
+  
+  <update id="updateChild" parameterType="com.cafe24.dmsthch.Child.Child">
+  UPDATE kid SET 
+  	license_kindergarten = #{licenseKindergarten}
+  	, kid_name = #{kidName}
+  	, kid_birth = #{kidBirth}
+  	, kid_address = #{kidAddress}
+  	, kid_protector_phone = #{kidProtectorPhone}
+  	, kid_protector_phone_reserve = #{kidProtectorPhoneReserve}
+  	, kid_precautions = #{kidPrecautions} 
+  	, kid_gender = #{kidGender}
+  	, kid_commuting = #{kidCommuting}
+  	, kid_entrance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+  WHERE  kid_no = #{kidNo}
+  </update>
+  
+  <select id="getChild" parameterType="int" resultType="com.cafe24.dmsthch.Child.Child">
+  	SELECT
+  	
+  	  	license_kindergarten
+	  	, kid_name
+	  	, kid_birth
+	  	, kid_address 
+	  	, kid_protector_phone 
+	  	, kid_protector_phone_reserve 
+	  	, kid_precautions 
+	  	, kid_gender
+	  	, kid_commuting 
+  		, kid_entrance_day
+  		
+  	FROM kid
+  	WHERE kid_no = #{kidNo}
+  	
+  </select>
+  
+  <select id="getClass" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
+  	SELECT
+  		class_no AS classNo
+  	  	, license_kindergarten AS licenseKindergarten 
+	  	, class_name AS className
+	  	, class_year AS classYear
+	  	, class_age AS classAge
+
+  	FROM kid_class
+  	LIMIT  #{beginRow}, #{pagePerRow}  	
+  </select>
+  	
+  <select id="getChildList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
+  	SELECT 
+  		kid_no 
+  		, kid_name
+  		, kid_birth
+  		, kid_address
+  		, kid_protector_phone
+  		, kid_precautions
+  		, kid_gender
+  		, kid_commuting
+  		, kid_entrance_day
+  	FROM kid 
+  	LIMIT  #{beginRow}, #{pagePerRow}
+  </select>
+  
+  <select id="getChildCount" resultType="int">
+  	SELECT COUNT(*) FROM kid
+  </select>
+  
+  <insert id="insertChild" parameterType="com.cafe24.dmsthch.Child.Child">
+  	
+  	INSERT INTO kid (
+  		license_kindergarten,
+  		kid_name,
+  		kid_birth,
+  		kid_address,
+  		kid_protector_phone,
+  		kid_protector_phone_reserve,
+  		kid_precautions,
+  		kid_gender,
+  		kid_commuting,
+  		kid_entrance_day)
+  	VALUES (
+  		#{licenseKindergarten},
+  		#{kidName},
+  		#{kidBirth},
+  		#{kidAddress},
+  		#{kidProtectorPhone},
+  		#{kidProtectorPhoneReserve},
+  		#{kidPrecautions},
+  		#{kidGender},
+  		#{kidCommuting},
+  		DATE_FORMAT(NOW(),'%Y-%m-%d')
+  	);
+  	
+  	
+  </insert>
+  
+  <!-- 여러가지 조건으로 select -->
+  <select id="severalSelect" resultType="com.cafe24.dmsthch.Child.Child" parameterType="java.util.Map">
+  	select
+		kid.kid_name AS kidName,
+		kid.kid_birth AS kidBirth ,
+		kid.kid_address AS kidAddress,
+		kid.kid_protector_phone AS kidProtectorPhone,
+		kid.kid_protector_phone_reserve AS kidProtectorPhoneReserve,
+		kid.kid_precautions AS kidPrecautions,
+		kid.kid_gender AS kidGender,
+		kid.kid_commuting AS kidCommuting,
+		kid.kid_entrance_day AS kidEntranceDay
+	from teacher_formation inner join kid_formation
+	inner join kid
+	where teacher_formation.class_no = kid_formation.class_no 
+	and teacher_formation.license_kindergarten = kid_formation.license_kindergarten 
+	and kid_formation.kid_no = kid.kid_no
+	and teacher_formation.license_kindergarten = #{license} and teacher_formation.teacher_no = #{teacherNo}
+	LIMIT  #{beginRow}, #{pagePerRow}
+		  	
+  </select>
+  
+  </mapper>
