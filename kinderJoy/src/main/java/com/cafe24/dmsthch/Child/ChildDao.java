@@ -22,6 +22,12 @@ public class ChildDao {
 	    return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getChild",kid_no);
 	}
 	 
+	public List<Object> getClass(int currentPage, int pagePerRow) {
+		Map<String,Integer> map = new  HashMap<String,Integer>();
+	  	map.put("beginRow", (currentPage-1)*pagePerRow);
+	   	map.put("pagePerRow", pagePerRow);
+	    return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getClass", map);
+	}
 	public List<Object> getChildList(int currentPage, int pagePerRow) {
 	  	Map<String,Integer> map = new  HashMap<String,Integer>();
 	  	map.put("beginRow", (currentPage-1)*pagePerRow);

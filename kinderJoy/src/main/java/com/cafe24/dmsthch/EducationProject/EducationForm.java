@@ -6,7 +6,28 @@ public class EducationForm {
 	private String licenseKindergarten;
 	private String formVal;
 	private String formMerge;
+	private String formBorders;
+	private int formCountRow;
+	private int formCountCol;
 	
+	public int getFormCountRow() {
+		return formCountRow;
+	}
+	public void setFormCountRow(int formCountRow) {
+		this.formCountRow = formCountRow;
+	}
+	public int getFormCountCol() {
+		return formCountCol;
+	}
+	public void setFormCountCol(int formCountCol) {
+		this.formCountCol = formCountCol;
+	}
+	public String getFormBorders() {
+		return formBorders;
+	}
+	public void setFormBorders(String formBorders) {
+		this.formBorders = formBorders;
+	}
 	public String getFormMerge() {
 		return formMerge;
 	}

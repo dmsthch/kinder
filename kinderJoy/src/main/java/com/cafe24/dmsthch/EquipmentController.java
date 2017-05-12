@@ -67,4 +67,22 @@ public class EquipmentController {
 		
 		return "Equipment/Equipment";
 	}
-}
+	@RequestMapping(value = "testSave", method = RequestMethod.POST)
+	public String test03(@RequestParam(value="equipmentCategorySelect") String equipmentCategorySelect
+						,@RequestParam(value="test1") String test1
+						,@RequestParam(value="testTotalPrice") String testTotalPrice
+						,@RequestParam(value="testValue") String testValue
+						,@RequestParam(value="testCustomer") String testCustomer
+						,@RequestParam(value="testState") String testState){
+		System.out.println("넘어왔당");
+		System.out.println(equipmentCategorySelect);
+		System.out.println(test1);
+		System.out.println(testTotalPrice);
+		System.out.println(testValue);
+		System.out.println(testCustomer);
+		System.out.println(testState);
+		
+
+		return "Equipment/NewFile";
+	}
+}	

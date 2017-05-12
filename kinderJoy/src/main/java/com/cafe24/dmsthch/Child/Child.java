@@ -1,6 +1,7 @@
 package com.cafe24.dmsthch.Child;
 
 public class Child {
+	
 	private int kidNo;
 	private String licenseKindergarten;
 	private String kidName;
@@ -13,6 +14,7 @@ public class Child {
 	private String kidCommuting;
 	private String kidEntranceDay;
 	private String kidFinishDay;
+
 	public int getKidNo() {
 		return kidNo;
 	}

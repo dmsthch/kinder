@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
  
  </script>
  
-<title>ChildAdd(spring mvc 방식)</title>
+<title>ChildAdd</title>
 <!-- CSS Link -->
 <c:import url="../module/importCSS.jsp"></c:import>
 <!-- JS Link -->
