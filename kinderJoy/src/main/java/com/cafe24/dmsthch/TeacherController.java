@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
 @Controller
 @SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "licenseKindergarten", "teacherNo", "teacherTime" })
-public class TeacherController extends HandlerInterceptorAdapter {
+public class TeacherController {
 	
 	@Autowired
 	private TeacherDao TDao;
@@ -32,6 +31,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		System.out.println("GET방식으로 TeacherAdd로 포워드\n");
 		return "Teacher/TeacherAdd";
 	}
+	
 	//편성표폼 호출
 	@RequestMapping(value="/takeForm", method=RequestMethod.GET)
 	public String takeForm() {
@@ -61,7 +61,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	//아이디 중복체크 메서드
 	@RequestMapping(value="/sign_up_id_check",method =RequestMethod.POST)
 	@ResponseBody
-	public int logincheck(HttpServletResponse response, @RequestParam("teacher_ajax_id") String userid) throws Exception {
+	public int logincheck(HttpServletResponse response, @RequestParam("teacher_ajax_id") String userid) {
 		System.out.println("로그인체크메서드 호출_Controller");
 		System.out.println("사용자가 입력한 아이디는? : " + userid);
 		int check = TDao.logincheck(userid);
@@ -71,10 +71,6 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		}else{
 			System.out.println("DB에 중복되는 값이 있습니다_TeacherController");
 		}
-		
-		
-		PrintWriter out = response.getWriter();
-		out.flush(); // 종료
 		return check;
 	}
 	
