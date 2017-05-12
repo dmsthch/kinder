@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,40 +15,58 @@
   <script src="js/LCR/EducationProject/numbro/languages.js"></script>
   <script src="js/LCR/EducationProject/handsontable.js"></script>
   <script src="js/jquery.js"></script>
-
+  
+<c:import url="./nav/SideNav.jsp"></c:import>
+<c:import url="../module/importCSS.jsp"></c:import>
+<c:import url="../module/navbar.jsp"></c:import>
 	<title>Insert title here</title>
+	<script>
+	$(document).ready(function(){
+		$('#educationProjectFormLoad').attr('class','active');
+	})
+	</script>
 </head>
-<body>
-	<button id="btTest">bt</button>
-	<button name="save" id="save">Save</button>
-	<div class="wrapper" style="margin-top: 20px;">
-		<div id="example1"></div>
+<body class="components-page">
+	<div class="wrapper">
+		<div class="main-panel">
+			<div class="content">
+				<button name="save" id="save">계획안 저장</button>
+				<div class="wrapper" style="margin-top: 20px;">
+					<div id="example1"></div>
+				</div>
+			</div>
+		</div>
 	</div>
-	
 <script data-jsfiddle="example1">
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
 	var dataValue = ${resultData.formVal};
+	console.log(dataValue);
+	console.log("======================!!!===================");
 	var dataMerge = ${resultData.formMerge};
 	var dataBorders = ${resultData.formBorders};
 	//
-	var rowCount = 30;
-	var colCount = 20;
-
+	var countRow = ${resultData.formCountRow};
+	var countCol = ${resultData.formCountCol};
+	var dataForSave = ${resultData.formVal};
 
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 // {1:"", 2:"" }	
-	
-	if(dataValue[0]==null){
-		dataValue[0]={ };
-		console.log(dataValue);
-		for(i=0 ; i<colCount; i++){
-			dataValue[0][i] ='';
-			console.log("ㅇㅅㅇ! ->> "+ i);
-		}
+	for(j=0; j<dataValue.length;j++){
+		if(dataValue[j]==null){
+			dataValue[j]={ };
+			console.log(dataValue);
+			for(i=0 ; i<countCol; i++){
+				dataValue[j][i] ='';
+				console.log("ㅇㅅㅇ! ->> "+ i);
+			}
+		}	
 	}
 	
-	console.log(dataValue[0]);
+	
+	console.log(dataValue);
+	console.log('===============================');
+	console.log(dataForSave);
 	
 	
 	//var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
@@ -55,10 +74,12 @@
 	
 		hot = new Handsontable(container, {
  			data: dataValue,    //데이터 가져오기
-			startRows: rowCount,
-			startCols: colCount,
+			startRows: countRow,
+			startCols: countCol,
 			rowHeaders : true,
 			colHeaders : true,
+			minRows: countRow,
+			minCols: countCol,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
@@ -69,7 +90,8 @@
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
  			mergeCells: dataMerge, //셀병합 가져오기
-			
+ 			minSpareRows: 1, //여유 행
+ 			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
 				console.log(data, type)
 				
@@ -87,11 +109,8 @@
 					console.log(meats.borders)
 
 					if(val !== null){
-// 						console.log(row, col, val)
-						if(dataArray[row] === undefined){
-							dataArray[row] = {};							
-						}
-						dataArray[row][col] = val;
+						dataForSave[row][col] = val;
+						dataArray=dataForSave;
 					}
 				}			
 		}
@@ -100,17 +119,37 @@
 	$('#btTest').click(function(){
 		dataArray[dataArray.length] = hot.mergeCells;
 	})
+	
 	$('#save').click(function(){
 		alert('test');
 		var jparse=JSON.stringify(dataArray);
-		console.log(jparse);
+		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
+		var inputDate = $('#date').val();
+		console.log(jparse+"<<<<jparse");
+		console.log(mergeparse);
+		var borderArray=[];
+		for(var i = 0 ; i<hot.countRows(); i++){
+			for(var j = 0; j<hot.countCols(); j++){
+				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
+					console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
+					var borders = hot.getCellMeta(i,j).borders;
+					borderArray.push(borders);
+				}
+			}
+		}
+		var borderparse=JSON.stringify(borderArray);
+		console.log(borderparse+"<<<borderparse");
+		
+		
+		var countRow =hot.countRows(); 
+		var countCol =hot.countCols(); 
       
       $.ajax({
-			url : "${pageContext.request.contextPath}/romiSaveTest",
+			url : "${pageContext.request.contextPath}/educationProjectAdd",
 			type : 'POST',
 			dataType: 'JSON',
 			async: false,
-			data: {"dataArray": jparse},
+			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol },
 			success : function(data){
 			alert('success');
 		                        

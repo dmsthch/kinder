@@ -244,23 +244,16 @@ public class CommuteController {
 		return "redirect:/Commute";
 	}
 	
-	
-	
-	
-	
-	
-	//임시 로그아웃
-	/*  사용 안함
-	@RequestMapping(value="/hsLogout", method=RequestMethod.GET)
-	public String hsLogout(HttpSession session){
-		session.removeAttribute("teacherNo");
-		session.removeAttribute("licenseKindergarten");
-		session.removeAttribute("teacherId");
-		session.removeAttribute("teacherName");
-		session.removeAttribute("teacherLevel");
-		return "redirect:/Commute";
+	//출석 현황
+	@RequestMapping(value="/CommuteInfo", method=RequestMethod.GET)
+	public String commuteInfo(HttpSession session){
+		
+		return "Commute/CommuteInfo";
 	}
-	*/
+	
+	
+	
+	
 	
 	
 	/*  예외처리 부분  */

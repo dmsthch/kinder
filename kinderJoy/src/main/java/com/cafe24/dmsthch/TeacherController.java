@@ -16,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
 @Controller
 @SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "licenseKindergarten", "teacherNo", "teacherTime" })
-public class TeacherController extends HandlerInterceptorAdapter {
+public class TeacherController {
 	
 	@Autowired
 	private TeacherDao TDao;
@@ -32,6 +31,14 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		System.out.println("GET방식으로 TeacherAdd로 포워드\n");
 		return "Teacher/TeacherAdd";
 	}
+	
+	//편성표폼 호출
+	@RequestMapping(value="/takeForm", method=RequestMethod.GET)
+	public String takeForm() {
+		System.out.println("편성표 폼 호출__Teacher/TeacherModify/takeForm으로 포워드\n");
+		return "Teacher/TeacherModify/takeForm";
+	}
+	
 	
 	//교원폼 수정폼 호출 메서드 //User Profile
 	@RequestMapping(value="/kyo", method=RequestMethod.GET)
@@ -54,7 +61,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	//아이디 중복체크 메서드
 	@RequestMapping(value="/sign_up_id_check",method =RequestMethod.POST)
 	@ResponseBody
-	public int logincheck(HttpServletResponse response, @RequestParam("teacher_ajax_id") String userid) throws Exception {
+	public int logincheck(HttpServletResponse response, @RequestParam("teacher_ajax_id") String userid) {
 		System.out.println("로그인체크메서드 호출_Controller");
 		System.out.println("사용자가 입력한 아이디는? : " + userid);
 		int check = TDao.logincheck(userid);
@@ -64,10 +71,6 @@ public class TeacherController extends HandlerInterceptorAdapter {
 		}else{
 			System.out.println("DB에 중복되는 값이 있습니다_TeacherController");
 		}
-		
-		
-		PrintWriter out = response.getWriter();
-		out.flush(); // 종료
 		return check;
 	}
 	
@@ -100,6 +103,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	public String Login(SessionStatus sessionstatus,HttpServletRequest request,Model model,Teacher teacher,HttpSession session,String joongbok) throws SQLException {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
+		System.out.println(teacher.getTeacher_id() +"<--티쳐겟아이디");
 		System.out.println(TDao+" <--TDao 동작 확인");
 
 		if(saveSession != null) {

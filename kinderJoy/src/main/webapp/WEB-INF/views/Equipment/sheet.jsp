@@ -1,5 +1,15 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 
+<!-- 	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="js/KSS/handsontable.css">
+	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="js/KSS/pikaday/pikaday.css">
+	<script data-jsfiddle="common" src="js/KSS/pikaday/pikaday.js"></script>
+	<script data-jsfiddle="common" src="js/KSS/moment/moment.js"></script>
+	<script data-jsfiddle="common" src="js/KSS/zeroclipboard/ZeroClipboard.js"></script>
+	<script data-jsfiddle="common" src="js/KSS/numbro/numbro.js"></script>
+	<script data-jsfiddle="common" src="js/KSS/numbro/languages.js"></script>
+	<script data-jsfiddle="common" src="js/KSS/handsontable.js" type="text/javascript"></script>
+	<link data-jsfiddle="common" rel="stylesheet" media="screen" href="js/KSS/samples.css?20140331"> -->
+	
 	<div class="btn-group">
 	  <button type="button" class="btn btn-primary">:: 비품카테고리 ::</button>
 	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -20,7 +30,7 @@
 	</div>
 	
 	
-	<!-- Trigger the modal with a button -->
+	<!-- Trigger the modal with a button123 -->
 	<div style="display : none;">
 	<button type="button" id="roadmodal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 	</div>
@@ -173,4 +183,3 @@
 	})
   
 </script>
-

@@ -3,6 +3,7 @@ package com.cafe24.dmsthch.Equipment;
 public class Equipment {
 	private int equipmentNo;
 	private String licenseKindergarten;
+	private String equipmentName;
 	private int teacherNo;
 	private int categoryNo;
 	private int equipmentCost;
@@ -21,6 +22,12 @@ public class Equipment {
 	}
 	public void setLicenseKindergarten(String licenseKindergarten) {
 		this.licenseKindergarten = licenseKindergarten;
+	}
+	public String getEquipmentName() {
+		return equipmentName;
+	}
+	public void setEquipmentName(String equipmentName) {
+		this.equipmentName = equipmentName;
 	}
 	public int getTeacherNo() {
 		return teacherNo;

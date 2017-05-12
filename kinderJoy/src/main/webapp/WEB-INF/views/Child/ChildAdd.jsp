@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
  
  </script>
  
-<title>ChildAdd(spring mvc 방식)</title>
+<title>ChildAdd</title>
 <!-- CSS Link -->
 <c:import url="../module/importCSS.jsp"></c:import>
 <!-- JS Link -->
@@ -56,43 +57,43 @@
         </div>
         <div class="form-group">
             <label for="kid_name">이름 :</label>
-            <input class="form-control" name="kid_name" id="kid_name" type="text"/>
+            <input class="form-control" name="kidName" id="kidName" type="text"/>
         </div>
          <div class="form-group">
             <label for="kid_birth">생년월일 :</label>
-            <input class="form-control" name="kid_birth" id="kid_birth" type="text"/>
+            <input class="form-control" name="kidBirth" id="kidBirth" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_address">주소 :</label>
-            <input class="form-control" name="kid_address" id="kid_address" type="text"/>
+            <input class="form-control" name="kidAddress" id="kidAddress" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_protector_phone">보호자번호 :</label>
-            <input class="form-control" name="kid_protector_phone" id="kid_protector_phone" type="text"/>
+            <input class="form-control" name="kidProtectorPhone" id="kidProtectorPhone" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_protector_phone_reserve">보호자예비번호 :</label>
-            <input class="form-control" name="kid_protector_phone_reserve" id="kid_protector_phone_reserve" type="text"/>
+            <input class="form-control" name="kidProtectorPhoneReserve" id="kidProtectorPhoneReserve" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_precautions">주의사항 :</label>
-            <textarea class="form-control" name="kid_precautions" id="kid_precautions" rows="5" cols="50"></textarea>
+            <textarea class="form-control" name="kidPrecautions" id="kidPrecautions" rows="5" cols="50"></textarea>
         </div>
         <div class="form-group">
             <label for="kid_gender">성별 :</label>
             <label class="radio-inline">
-		      <input type="radio" name="kid_gender" value="1">남자
+		      <input type="radio" name="kidGender" value="1">남자
 		    </label>
 		    <label class="radio-inline">
-		      <input type="radio" name="kid_gender" value="2">여자
+		      <input type="radio" name="kidGender" value="2">여자
 		    </label>
         </div>
          <div class="form-group">
             <label for="kid_commuting">통학방법 :</label>
-            <input class="form-control" name="kid_commuting" id="kid_commuting" type="text"/>
+            <input class="form-control" name="kidCommuting" id="kidCommuting" type="text"/>
         </div>
         <div>
-            <input class="btn btn-default" id="addButton" type="button" value="글입력"/>
+            <input class="btn btn-default" type="submit" id="addButton" type="button" value="글입력"/>
             <input class="btn btn-default" type="reset" value="초기화"/>
             <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildList">글목록</a>
         </div>

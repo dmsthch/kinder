@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+
 <html>
 <head>
 
@@ -13,7 +16,6 @@
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-
 
     <!-- Bootstrap core CSS     -->
     <link href="css/JKC/modiassets/css/bootstrap.min.css" rel="stylesheet" />
@@ -27,7 +29,16 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-
+	
+	<script src="js/jquery.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+		$('#kyo').attr('class','active');
+		$('#sidekyo').attr('style','background-color:#3DB7CC');	
+	});
+	</script>
+	
 </head>
 
 <body>
@@ -35,39 +46,7 @@
 	<div class="wrapper">
 	
 	<!-- 사이드메뉴바 BEGIN -->
-	
-	<div class="sidebar" data-color="blue" data-image="../assets/img/sidebar-1.jpg">
-			<!--
-		        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-
-		        Tip 2: you can also add an image using data-image tag
-		    -->	    
-
-			<div class="logo">
-				<a href="${pageContext.request.contextPath}/" class="simple-text">
-					햇병아리
-				</a>
-			</div>
-
-	    	<div class="sidebar-wrapper">
-				<ul class="nav">
-	                <li class="active">
-	                    <a href="${pageContext.request.contextPath}/kyo">
-	                        <i class="material-icons">person</i>
-	                        <p>User Profile</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="${pageContext.request.contextPath}/kyotable">
-	                        <i class="material-icons">content_paste</i>
-	                        <p>Table List</p>
-	                    </a>
-	                </li>
-	            </ul>
-	    	</div>
-	    </div>
-	    
-	    <%-- <c:import url="./side.jsp"></c:import> --%>
+	<c:import url="./side.jsp"></c:import>
 	<!-- 사이드메뉴바 END -->
 	
 	
@@ -76,8 +55,13 @@
 	        <div class="content">
 	            <div class="container-fluid">
 	                <div class="row">
-	                    <div class="col-md-8">
+	                
+	                <!-- 가로크기 -->
+	                    <div class="col-md-12">
+	                    
+	                     <!-- 상자모양 설정 현재는 카드 -->
 	                        <div class="card">
+	                        
 	                            <div class="card-header" data-background-color="blue">
 	                                <h4 class="title">회원 정보 수정</h4>
 									<p class="category">자신의 회원정보를 수정하세요.</p>
@@ -85,6 +69,8 @@
 	                            <div class="card-content">
 	                                <form>
 	                                    <div class="row">
+	                                    
+	                                    <!-- 인풋상자의 상 하 간격조절 -->
 	                                        <div class="col-md-5">
 												<div class="form-group label-floating">
 													<label class="control-label">아이디</label>
@@ -168,22 +154,12 @@
 	                            </div>
 	                        </div>
 	                    </div>
-						<div class="col-md-4">
-    						<div class="card card-profile">
-    							<div class="card-avatar">
-    							</div>
-
-    						</div>
-		    			</div>
 	                </div>
 	            </div>
-	        </div>
-	        
+	        </div>    
 		<c:import url="./footer.jsp"></c:import>
-		
 	    </div>
 	</div>
-
 </body>
 
 	<!--   Core JS Files   -->

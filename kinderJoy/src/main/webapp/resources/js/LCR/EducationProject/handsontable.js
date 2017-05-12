@@ -6665,6 +6665,7 @@ function DataMap(instance, priv, GridSettings) {
   this.priv = priv;
   this.GridSettings = GridSettings;
   this.dataSource = this.instance.getSettings().data;
+  //체크
   this.cachedLength = null;
   this.skipCache = false;
   this.latestSourceRowsCount = 0;
@@ -7016,6 +7017,11 @@ DataMap.prototype.getCopyable = function(row, prop) {
 DataMap.prototype.set = function(row, prop, value, source) {
   row = Handsontable.hooks.run(this.instance, 'modifyRow', row, source || 'datamapGet');
   var dataRow = this.dataSource[row];
+  console.log(dataRow+"<<dataRow 체크")
+  console.log(row+"<<row 체크")
+  console.log(this.dataSource)
+  console.log(this.dataSource[row]+"<<this.dataSource[row] 체크")
+  //row는 멀쩡함. this.dataSource에서 문제인듯.
   var modifiedRowData = Handsontable.hooks.run(this.instance, 'modifyRowData', row);
   dataRow = isNaN(modifiedRowData) ? modifiedRowData : dataRow;
   if (Handsontable.hooks.has('modifyData', this.instance)) {
@@ -7041,7 +7047,15 @@ DataMap.prototype.set = function(row, prop, value, source) {
   } else if (typeof prop === 'function') {
     prop(this.dataSource.slice(row, row + 1)[0], value);
   } else {
-    dataRow[prop] = value;
+	  //여기 저장된값 LOAD 한 후에 그 시트에서 값 고치면 자꾸 에러뜨는 곳
+	console.log(value+"<<<<<<요놈체크");
+	console.log(prop);
+	console.log(dataRow);
+	//이상하게 어떤행은 되고 어떤행은 dataRow가 null됨
+	console.log(dataRow[prop]);
+	
+	dataRow[prop] = value;
+    
   }
 };
 DataMap.prototype.physicalRowsToLogical = function(index, amount) {

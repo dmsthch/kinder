@@ -16,12 +16,6 @@
 	<!-- CSS Link -->
 	<c:import url="../module/importCSS.jsp"></c:import>
 	
-	<style>
-		body{
-			margin-top: 6%;
-		}
-	</style>
-
 
 	<style type="text/css">
 /* 	#staticMenu { margin: 0pt; padding: 0pt;  position: absolute; right: 0px; top: 0px;} */
@@ -42,16 +36,17 @@
 	  border-color: transparent;
 	}
 	body{
-	  background-color: #3B3B3B;
+	  margin-top: 6%;
+	  background-color: white;
 	}
 	p{
-	  color: white;
+	  color: black;
 	}
 	h1{
-	  color: white;
+	  color: black;
 	}
 	h3 {
-		color: white;
+		color: black;
 	}
 	.tabContent {
 	  padding: 28px;
@@ -59,11 +54,11 @@
 	  transition: all 0.4s ease-in-out;
 	}
 	.tabContent:hover {
-	  background-color: #646464;
+	  background-color: #BDBDBD;
 	  box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.20);
 	}
 	i {
-		color: white;
+		color: black;
 	}
 	#portfolio {
 	  background-color: transparent;
@@ -111,8 +106,8 @@
 							              </c:forEach>
 				                    </ul>
 				                </div>
-				                <input type="hidden" name="boardCategoryNo" value="0" id="search_param"><!-- 검색내용을 들고갈 input -->      
-				                <input type="text" class="form-control" name="boardContent" placeholder="Search ...">
+				                <input type="hidden" name="boardCategoryNo" value="0" id="search_param">     
+				                <input type="text" class="form-control" name="boardContent" placeholder="Search ..."><!-- 검색내용을 들고갈 input --> 
 				                <span class="input-group-btn">
 				                    <button class="btn btn-default" id="#btnSearch" type="submit">검색</button>
 				                </span>
@@ -179,12 +174,10 @@
 	</div>
 </div>
 
-
 <div class="row" style="margin-top: -5%;">
 	<div class="col-sm-4 col-sm-offset-1" style="">
 		<br/><h1 class="text-center">문서양식</h1><br/>
-		<table class="table" style="color:white">
-		
+		<table class="table">
 			<thead class="text-center">
 				<tr>
 					 <th>No</th>
@@ -208,10 +201,9 @@
 		</table>
 	</div>
 	
-	<div class="col-sm-4 col-sm-offset-1" style="">
+	<div class="col-sm-4 col-sm-offset-1">
 		<br/><h1 class="text-center">교육자료</h1><br/>
-		<table class="table" style="color:white">
-		
+		<table class="table">
 			<thead class="text-center">
 				<tr>
 					 <th>No</th>
