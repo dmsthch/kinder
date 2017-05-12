@@ -123,9 +123,11 @@
  	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
  	        dataType: 'html',
  	        success: function (result) {
- 	            if (result){
+ 	            if (result == 1){
  	                console.log('데이터 보내기 성공');
- 	                console.log(result);
+ 	                alert('저장되었습니다.');
+ 	            }else{
+ 	            	alert('저장에 실패하였습니다.');
  	            }
  	        }
  	    });
@@ -259,9 +261,11 @@
 				<input class="form-control testTotalPrice" name="testTotalPrice" type="text" style="width : 100px" readonly/>
 			</td>
 			<td>
-				
+				<input class="form-control testCustomer" name="testCustomer" type="text" style="width : 100px" value="집" readonly/>
 			</td>
-			<td></td>
+			<td>
+				<input class="form-control testState" name="testState" type="text" style="width : 200px" value="집돌이" readonly/>
+			</td>
 			<td>
 				<input type="button" class="btn btn-default dropdown-toggle save" value="저장"/>
 			</td>
