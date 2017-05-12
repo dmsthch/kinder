@@ -60,7 +60,7 @@ public class EducationProjectDao {
 	}
 	
 	//°èÈ¹¾È ºÒ·¯¿À±â
-	public Education educationProjectLoad(String categoryNo,String addDate,String licenseKindergarten){
+	public Education educationProjectLoad(String categoryNo,String addDate,String licenseKindergarten,int age, String classNo){
 		Education edu = new Education();
 		System.out.println(addDate +"<<addDate");
 		System.out.println(categoryNo +"<<categoryNo");
@@ -68,7 +68,11 @@ public class EducationProjectDao {
 		edu.setAddDate(addDate);
 		edu.setCategoryNo(categoryNo);
 		edu.setLicenseKindergarten(licenseKindergarten);
-		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectLoad",edu);
+		edu.setAge(age);
+		edu.setClassNo(classNo);
+		edu = sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectLoad",edu);
+		//System.out.println(edu.getVal()+"<<getVal ÃÂÃÂ");
+		return edu;
 	}
 	
 	

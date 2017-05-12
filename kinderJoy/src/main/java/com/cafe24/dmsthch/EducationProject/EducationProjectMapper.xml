@@ -82,6 +82,8 @@
 			,count_col
 			,add_date
 			,category_no
+			,age
+			,class_no
 		)VALUES(
 			#{val}
 			,#{borders}
@@ -91,6 +93,8 @@
 			,#{countCol}
 			,curdate()
 			,1
+			,#{age}
+			,#{class_no}
 		)
 	</insert>
 	
@@ -105,12 +109,18 @@
 			,e.count_col AS countCol
 			,e.add_date AS addDate
 			,c.category_name AS categoryNo
+			,e.age
+			,e.class_no AS classNo
 		FROM education_project e
 		INNER JOIN education_category c
 		ON e.category_no = c.category_no
 		WHERE license_kindergarten = #{licenseKindergarten}
-		AND add_date = #{addDate}
-	
+		<if test="categoryNo == 1">
+		AND (SELECT year(add_date)) = #{addDate}
+		AND age = #{age}
+		</if>
+		
+		
 	</select>
 	
 

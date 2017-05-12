@@ -29,9 +29,12 @@
 				<h1>Team. 햇병아리</h1>
 				<hr>
 				<c:if test="${null eq teacherId}">
-				<a href="#" data-toggle="modal" data-target="#signIn" class="smoothScroll btn btn-danger">로그인</a>
+					<a href="#" data-toggle="modal" data-target="#signIn" class="smoothScroll btn btn-danger">로그인</a>
 				</c:if>
 				<a href="${pageContext.request.contextPath}/Commute" class="smoothScroll btn btn-default">출석부</a>
+				<c:if test="${teacherId != null }">
+					<a href="${pageContext.request.contextPath}/CommuteInfo" class="smoothScroll btn btn-danger">출석현황</a>
+				</c:if>
 			</div>
 		</div>
 	</div>		
