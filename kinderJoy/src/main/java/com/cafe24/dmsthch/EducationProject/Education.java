@@ -10,7 +10,21 @@ public class Education {
 	private int countCol;
 	private String addDate;
 	private String categoryNo;
+	private int age;
+	private String classNo;
 	
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getClassNo() {
+		return classNo;
+	}
+	public void setClassNo(String classNo) {
+		this.classNo = classNo;
+	}
 	public String getCategoryNo() {
 		return categoryNo;
 	}

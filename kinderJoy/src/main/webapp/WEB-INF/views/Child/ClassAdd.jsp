@@ -62,11 +62,11 @@
   		<form class="form-inline" action="/action_page.php">
     	<div class="form-group">
       	<label for="class_name">반 이름:</label>
-      	<input type="email" class="form-control" id="class_name" name="class_name" style="width:300px;">
+      	<input type="text" class="form-control" id="className" name="className" style="width:300px;">
     </div>
     <div class="form-group">
       <label for="class_age">반 연령:</label>
-      <input type="password" class="form-control" id="class_age" name="class_age" style="width:300px;">
+      <input type="text" class="form-control" id="classAge" name="classAge" style="width:300px;">
     </div>
   <br><br>
     <div align ="center">

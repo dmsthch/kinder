@@ -82,10 +82,10 @@
 </div>
 
 <div class="row">
-	<c:forEach var="list" varStatus="0" items="${allList }">
+	<c:forEach var="list" varStatus="status" items="${allList }">
 		<div class="col-sm-8 col-sm-offset-2">
 		
-			<h1 class="heading bold">통합 검색</h1><br/>
+			<h1 class="heading bold">${pageName[status.index]}</h1><br/>
 			
 			<table class="table table-hover">
 				<thead>
@@ -103,7 +103,7 @@
 						<tr>
 							<td>${board.boardNo }</td>
 							<td>
-								<c:forEach var="category" items="${category}">
+								<c:forEach var="category" items="${getCategory}">
 									<c:if test="${category.categoryNo == board.boardCategoryNo}">${category.categoryName}</c:if>
 								</c:forEach>	
 							</td>
@@ -114,7 +114,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			<a href="#" class="text-right"><h4>더보기 &gt&gt</h4></a>
 		</div>
 	</c:forEach>
 </div>

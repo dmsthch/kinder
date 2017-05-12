@@ -1,5 +1,6 @@
 
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- script -->
 <script>
 	// TR태그 복사하기
@@ -115,6 +116,15 @@
 	});
 	// 비품 한줄 저장
  	$(document).on('click','.save',function(){
+ 		var selectValue = $(this).parent().parent().find('.select').val();
+ 		var priceValue = $(this).parent().parent().find('.testTotalPrice').val();
+ 		if(isNaN(selectValue) == true) {
+ 			alert('카테고리를 선택해주세요.');
+ 			$(this).parent().parent().find('.select').focus();
+ 		}else if(priceValue == '') {
+ 			alert('총단가의 가격이 없습니다.');
+ 			$(this).parent().parent().find('.testPrice').focus();
+ 		}
  		var params = $(this).parent().parent().parent().find('.testForm').serialize();
  	    jQuery.ajax({
  	        url: '${pageContext.request.contextPath}/testSave',
@@ -132,8 +142,25 @@
  	        }
  	    });
  	});
- 	/*	$(documnen).on('','',function(){});123112323
-	$(document).on('','',function(){}); asdf*/
+	//비품 리스트 호출하기
+ 	$(documnen).on('load','#table',function(){
+ 	    jQuery.ajax({
+ 	        url: '${pageContext.request.contextPath}/testSave',
+ 	        type: 'POST',
+ 	        data:params,
+ 	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+ 	        dataType: 'html',
+ 	        success: function (result) {
+ 	            if (result == 1){
+ 	                console.log('데이터 보내기 성공');
+ 	                alert('저장되었습니다.');
+ 	            }else{
+ 	            	alert('저장에 실패하였습니다.');
+ 	            }
+ 	        }
+ 	    });
+ 	});
+ 		/*$(document).on('','',function(){}); asdf*/
 </script>
 
 <input class="btn btn-default dropdown-toggle" id="button" type="button" value="추가"/>
@@ -153,6 +180,7 @@
 		</tr>
 	</thead>
 	<tbody>
+		<c:forEach var="equipmentList" items="${equipmentList}">
 		<form class="testForm" method="psot">
 			<tr>
 				<td>	
@@ -176,10 +204,10 @@
 					</select>
 				</td>
 				<td>
-					<input class="form-control test1" name="test1" type="text" style="width : 400px" value="test" readonly/>
+					<input class="form-control test1" name="test1" type="text" style="width : 400px" value="${equipmentList.equipmentName}" readonly/>
 				</td>
 				<td>
-					<input class="form-control testValue" name="testValue" type="text" style="width : 100px" value="50" readonly/>
+					<input class="form-control testValue" name="testValue" type="text" style="width : 100px" value="${equipmentList.equipmnetAmount}" readonly/>
 				</td>
 				<td>
 					<div class="form-inline">
@@ -193,22 +221,23 @@
 					</div>
 				</td>
 				<td>
-					<input class="form-control testPrice" name="testPrice" type="text" style="width : 100px" value="50"/>
+					<input class="form-control testPrice" name="testPrice" type="text" style="width : 100px" value="${equipmentList.equipmentCost}"/>
 				</td>
 				<td>
 					<input class="form-control testTotalPrice" name="testTotalPrice" type="text" style="width : 100px" readonly/>
 				</td>
 				<td>
-					<input class="form-control testCustomer" name="testCustomer" type="text" style="width : 100px" value="집" readonly/>
+					<input class="form-control testCustomer" name="testCustomer" type="text" style="width : 100px" value="${equipmentList.equipmentCustomer}" readonly/>
 				</td>
 				<td>
-					<input class="form-control testState" name="testState" type="text" style="width : 200px" value="집돌이" readonly/>
+					<input class="form-control testState" name="testState" type="text" style="width : 200px" value="${equipmentList.equipmnetState}" readonly/>
 				</td>
 				<td>
 					<input type="button" class="btn btn-default dropdown-toggle save" value="저장"/>
 				</td>
 			</tr>
 		</form>	
+		</c:forEach>
 	</tbody>
 </table>
 

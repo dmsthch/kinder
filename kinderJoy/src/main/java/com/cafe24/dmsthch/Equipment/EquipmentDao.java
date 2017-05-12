@@ -12,6 +12,16 @@ import org.springframework.stereotype.Repository;
 public class EquipmentDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	// 비품 리스트 카운트 구하기
+	public int selectEquipmentCount(Equipment equipmnet) {
+		System.out.println("selectEquipmentCount 메서드 내용 실행");
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectEquipmentCount", equipmnet);
+	}
+	// 비품 리스트 출력하기
+	public List<Equipment> selectEquipment(int equipmnetCount) {
+		System.out.println("selectEquipment 메서드 내용 실행");
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectEquipment", equipmnetCount);
+	}
 	// 비품 한줄 저장하기
 	public int addEquipment(Equipment equipment) {
 		System.out.println("addEquipment 메서드 내용 실행");
