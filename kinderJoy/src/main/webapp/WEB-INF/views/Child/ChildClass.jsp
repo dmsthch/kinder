@@ -37,6 +37,7 @@
         <li><a href="<c:url value="/ChildList" />">Home</a></li>
         <li class="active"><a href="<c:url value="/ChildClass" />">전체 반</a></li>
         <li><a href="<c:url value="/" />">반 1</a></li>
+        <li><a href="<c:url value="/" />">반 2</a></li>
         <li><a href="<c:url value="/ClassAdd"/>">반 입력</a></li>
       </ul>
 </div>

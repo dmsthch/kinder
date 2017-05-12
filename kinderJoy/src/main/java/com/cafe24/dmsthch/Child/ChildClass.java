@@ -6,7 +6,14 @@ public class ChildClass {
 	private String className;
 	private String classYear;
 	private int classAge;
+	private String licenseKindergarten;
 	
+	public String getLicenseKindergarten() {
+		return licenseKindergarten;
+	}
+	public void setLicenseKindergarten(String licenseKindergarten) {
+		this.licenseKindergarten = licenseKindergarten;
+	}
 	public int getClassNo() {
 		return classNo;
 	}
