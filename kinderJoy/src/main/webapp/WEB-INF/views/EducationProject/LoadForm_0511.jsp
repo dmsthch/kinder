@@ -27,14 +27,12 @@
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
 	var dataValue = ${resultData.formVal};
-	console.log(dataValue);
-	console.log("======================!!!===================");
 	var dataMerge = ${resultData.formMerge};
 	var dataBorders = ${resultData.formBorders};
 	//
 	var countRow = ${resultData.formCountRow};
 	var countCol = ${resultData.formCountCol};
-	var dataForSave = ${resultData.formVal};
+
 
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 // {1:"", 2:"" }	
@@ -50,9 +48,7 @@
 	}
 	
 	
-	console.log(dataValue);
-	console.log('===============================');
-	console.log(dataForSave)
+	console.log(dataValue[0]);
 	
 	
 	//var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
@@ -95,8 +91,11 @@
 					console.log(meats.borders)
 
 					if(val !== null){
-						dataForSave[row][col] = val;
-						dataArray=dataForSave;
+// 						console.log(row, col, val)
+						if(dataArray[row] === undefined){
+							dataArray[row] = {};							
+						}
+						dataArray[row][col] = val;
 					}
 				}			
 		}

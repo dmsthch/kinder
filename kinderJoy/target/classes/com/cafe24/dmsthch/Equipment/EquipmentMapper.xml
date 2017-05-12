@@ -4,6 +4,30 @@
   
   <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
   	
+  	<insert id="addEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
+  		INSERT INTO equipment(
+  			  license_kindergarten
+  			, equipment_name
+  			, teacher_no
+  			, category_no
+  			, equipment_cost
+  			, equipment_amount
+  			, equipment_customer
+  			, equipment_state
+  			, equipment_day
+  		) VALUES(
+  			 #{licenseKindergarten}
+  			,#{equipmentName}
+  			,#{teacherNo}
+  			,#{categoryNo}
+  			,#{equipmentCost}
+  			,#{equipmentAmount}
+  			,#{equipmentCustomer}
+  			,#{equipmentState}
+  			,now()
+  		);
+  	</insert>
+  	
   	<select id="selectEquipmentCategory" resultType="java.util.Map">
   		SELECT
   		 	category_no AS categoryNo,
@@ -12,7 +36,7 @@
   			 equipment_category;
   	</select>
   	
-  	<insert id="addEquipment" parameterType="com.cafe24.dmsthch.Equipment.Sheet">
+  	<insert id="addEquipmentSheet" parameterType="com.cafe24.dmsthch.Equipment.Sheet">
   		INSERT INTO sheet_value(
   		 	teacher_no
   			,license_kindergarten

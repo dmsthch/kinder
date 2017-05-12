@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.dmsthch.EducationProject.Education;
 import com.cafe24.dmsthch.EducationProject.EducationForm;
 import com.cafe24.dmsthch.EducationProject.EducationProjectDao;
 
@@ -37,11 +38,13 @@ public class EducationProjectController {
 	public String educationAdd(HttpSession session
 								, @RequestParam(value="dataArray") String formVal
 								, @RequestParam(value="mergeArray", required=false, defaultValue="") String formMerge
-								, @RequestParam(value="borderArray",required=false, defaultValue="") String formBorders) {
+								, @RequestParam(value="borderArray",required=false, defaultValue="") String formBorders
+								, @RequestParam(value="countRow",required=true) int formCountRow
+								, @RequestParam(value="countCol",required=true) int formCountCol) {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(formVal+"<<<formval");
 		System.out.println(formBorders+"<<<<formBorders");
-		dao.formAdd(formVal,formMerge,formBorders,licenseKindergarten);
+		dao.formAdd(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten);
 		return "";
 	}
 	
@@ -54,12 +57,43 @@ public class EducationProjectController {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		EducationForm result = dao.formLoad(licenseKindergarten, formOrder);
 		//System.out.println(isMerge+"<<isMerge   ,"+ isBorders+"<<isBorders");
-		System.out.println(result.getFormMerge()+"<<<<체크체크 머지");
+		//System.out.println(result.getFormMerge()+"<<<<체크체크 머지");
+		//System.out.println(result.getFormCountCol()+"<<체크체크 카운트");
+		if(result==null){
+			return "EducationProject/EducationProject";
+		}
 		model.addAttribute("resultData",result);
-		
 		return "EducationProject/LoadForm";
 	}
 	
+	//계획안 저장하기
+	@ResponseBody
+	@RequestMapping(value = "/educationProjectAdd", method = RequestMethod.POST)
+	public String educationProjectAdd(HttpSession session
+								, @RequestParam(value="dataArray") String val
+								, @RequestParam(value="mergeArray", required=false, defaultValue="") String merge
+								, @RequestParam(value="borderArray",required=false, defaultValue="") String borders
+								, @RequestParam(value="countRow",required=false, defaultValue="") int countRow
+								, @RequestParam(value="countCol",required=false, defaultValue="") int countCol) {
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		System.out.println(val+"<<<formval");
+		System.out.println(borders+"<<<<formBorders");
+		dao.educationProjectAdd(val, merge, borders, countRow, countCol, licenseKindergarten);
+		return "";
+	}
+	
+	//계획안 불러오기
+	@RequestMapping(value = "/EducationProjectLoad", method = RequestMethod.GET)
+	public String EducationProjectLoad(HttpSession session
+										,Model model
+										,@RequestParam(value="categoryNo") String categoryNo
+										,@RequestParam(value="date") String date){
+		System.out.println("계획안 불러오는거 테스트");
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		Education result =dao.educationProjectLoad(categoryNo, date, licenseKindergarten);
+		model.addAttribute("resultData",result);
+		return "EducationProject/EducationProjectLoad";
+	}
 	
 	
 	//테스트용

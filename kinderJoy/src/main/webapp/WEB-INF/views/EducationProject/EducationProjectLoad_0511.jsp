@@ -18,7 +18,9 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	<button name="save" id="save">계획안 저장</button>
+	<!-- <button name="save" id="save">계획안 저장</button> -->
+	날짜 : ${resultData.addDate}<br>
+	번호 : ${resultData.educationProjectNo} 
 	<div class="wrapper" style="margin-top: 20px;">
 		<div id="example1"></div>
 	</div>
@@ -26,15 +28,14 @@
 <script data-jsfiddle="example1">
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
-	var dataValue = ${resultData.formVal};
-	console.log(dataValue);
-	console.log("======================!!!===================");
-	var dataMerge = ${resultData.formMerge};
-	var dataBorders = ${resultData.formBorders};
+	var dataValue = ${resultData.val};
+	var dataMerge = ${resultData.merge};
+	var dataBorders = ${resultData.borders};
 	//
-	var countRow = ${resultData.formCountRow};
-	var countCol = ${resultData.formCountCol};
-	var dataForSave = ${resultData.formVal};
+	var countRow = ${resultData.countRow};
+	var countCol = ${resultData.countCol};
+	var addDate = ${resultData.addDate};
+	var educationProjectNo = ${resultData.educationProjectNo} ;
 
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 // {1:"", 2:"" }	
@@ -50,9 +51,7 @@
 	}
 	
 	
-	console.log(dataValue);
-	console.log('===============================');
-	console.log(dataForSave)
+	console.log(dataValue[0]);
 	
 	
 	//var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
@@ -77,7 +76,7 @@
 			},
  			mergeCells: dataMerge, //셀병합 가져오기
  			minSpareRows: 1, //여유 행
- 			
+			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
 				console.log(data, type)
 				
@@ -95,8 +94,11 @@
 					console.log(meats.borders)
 
 					if(val !== null){
-						dataForSave[row][col] = val;
-						dataArray=dataForSave;
+// 						console.log(row, col, val)
+						if(dataArray[row] === undefined){
+							dataArray[row] = {};							
+						}
+						dataArray[row][col] = val;
 					}
 				}			
 		}
