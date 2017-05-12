@@ -29,6 +29,16 @@ public class EquipmentController {
 		
 		return "Equipment/Equipment";
 	}
+	@RequestMapping(value = "test02", method = RequestMethod.GET)
+	public String test05(){
+		
+		return "Equipment/test02";
+	}
+	@RequestMapping(value = "sheet", method = RequestMethod.GET)
+	public String sheet(){
+		
+		return "Equipment/sheet";
+	}
 	@RequestMapping(value = "test01", method = RequestMethod.GET)
 	public String test02(Model model){
 		List<Map<String, Object>> getCategory = dao.selectCategory();
@@ -68,6 +78,21 @@ public class EquipmentController {
 		
 		return "Equipment/Equipment";
 	}*/
+	@RequestMapping(value = "saveLoad", method = RequestMethod.GET)
+	public String test04(HttpSession session
+						,Model model){
+		Equipment equipmnet = new Equipment();
+		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
+		
+		equipmnet.setLicenseKindergarten(licenseKindergarten);
+		
+		int equipmnetCount = dao.selectEquipmentCount(equipmnet);
+		
+		List<Equipment> equipmentList = dao.selectEquipment(equipmnetCount);
+		
+		model.addAttribute("equipmentList",equipmentList);
+		return "Equipment/NewFile";
+	}
 	@RequestMapping(value = "testSave", method = RequestMethod.POST)
 	@ResponseBody
 	public int test03(@RequestParam(value="equipmentCategorySelect") String equipmentCategorySelect
