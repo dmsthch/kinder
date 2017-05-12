@@ -125,7 +125,7 @@
  	        success: function (result) {
  	            if (result){
  	                console.log('데이터 보내기 성공');
- 	                console.log(params);
+ 	                console.log(result);
  	            }
  	        }
  	    });

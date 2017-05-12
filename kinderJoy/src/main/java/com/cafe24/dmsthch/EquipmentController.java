@@ -45,7 +45,7 @@ public class EquipmentController {
 		
 		System.out.println("save method 실행");
 		
-		int sung_gong = dao.addEquement(jsonStr, teacherNo, teacherLicense);
+		int sung_gong = dao.addEquementSheet(jsonStr, teacherNo, teacherLicense);
 		
 		System.out.println("save method 종료");
 		
@@ -56,7 +56,7 @@ public class EquipmentController {
 		}
 		return "Equipment/Equipment";
 	}
-	@RequestMapping(value = "reroad", method = RequestMethod.POST)
+/*	@RequestMapping(value = "reroad", method = RequestMethod.POST)
 	public String road(HttpSession session, Model model){
 		
 		int teacherNo = (Integer)session.getAttribute("teacherNo");
@@ -66,23 +66,40 @@ public class EquipmentController {
 		model.addAttribute("sheet", sheet);
 		
 		return "Equipment/Equipment";
-	}
+	}*/
 	@RequestMapping(value = "testSave", method = RequestMethod.POST)
 	public String test03(@RequestParam(value="equipmentCategorySelect") String equipmentCategorySelect
 						,@RequestParam(value="test1") String test1
-						,@RequestParam(value="testTotalPrice") String testTotalPrice
+						,@RequestParam(value="testPrice") String testPrice
 						,@RequestParam(value="testValue") String testValue
 						,@RequestParam(value="testCustomer") String testCustomer
-						,@RequestParam(value="testState") String testState){
-		System.out.println("넘어왔당");
+						,@RequestParam(value="testState") String testState
+						,HttpSession session){
+		
+		System.out.println("비품 저장 메서드 실행");
 		System.out.println(equipmentCategorySelect);
 		System.out.println(test1);
-		System.out.println(testTotalPrice);
+		System.out.println(testPrice);
 		System.out.println(testValue);
 		System.out.println(testCustomer);
 		System.out.println(testState);
 		
+		int teacherNo = (Integer)session.getAttribute("teacherNo");
+		String teacherLicense = (String) session.getAttribute("teacherLicense");
+		
+		Equipment equipment = new Equipment();
+		
+		equipment.setLicenseKindergarten(teacherLicense);
+		equipment.setTeacherNo(teacherNo);
+		equipment.setEquipmentName(test1);
+		equipment.setCategoryNo(Integer.parseInt(equipmentCategorySelect));
+		equipment.setEquipmentCost(Integer.parseInt(testPrice));
+		equipment.setEquipmentAmount(Integer.parseInt(testValue));
+		equipment.setEquipmentCustomer(testCustomer);
+		equipment.setEquipmentState(testState);
 
+		int returnValue = dao.addEquipment(equipment);
+		
 		return "Equipment/NewFile";
 	}
 }	
