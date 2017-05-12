@@ -107,6 +107,7 @@ public class TeacherController extends HandlerInterceptorAdapter {
 	public String Login(SessionStatus sessionstatus,HttpServletRequest request,Model model,Teacher teacher,HttpSession session,String joongbok) throws SQLException {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
+		System.out.println(teacher.getTeacher_id() +"<--티쳐겟아이디");
 		System.out.println(TDao+" <--TDao 동작 확인");
 
 		if(saveSession != null) {
