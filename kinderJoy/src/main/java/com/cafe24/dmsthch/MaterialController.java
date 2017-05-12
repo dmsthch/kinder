@@ -118,7 +118,7 @@ public class MaterialController {
 		if(isLogin){
 			returnUri = "Material/MaterialDocumnetList";
 			String license = (String) session.getAttribute("licenseKindergarten");
-						
+			
 			int pagePerRow = 10;
 			int lastPage = materialService.getLastPage(categoryNo, pagePerRow);
 						
@@ -258,22 +258,31 @@ public class MaterialController {
 				List<Map<String,Object>> getCategory = materialDao.getBoardCategory();
 				ArrayList<List<Board>> allList = new ArrayList<List<Board>>();
 				
+				System.out.println(categoryNo + " : catNo");
+				
 				String[] pageName = new String[getCategory.size()];
-				pageName[0] = "통합 검색";
-				for(int i=1; i<pageName.length; i++){
-					pageName[i] = getCategory.get(i).get("categoryName") + " 검색";
-				}
 				
-				List<Board> unifiedList = materialDao.materialAllSearch(license, txtSearch, 1);
-				allList.add(unifiedList);
-				
-				for(int i=1; i<getCategory.size(); i++){
-					System.out.println("반복문!~ " + i);
-					List<Board> catList = materialDao.materialCategorySearch(license, i, txtSearch, 1);
+				if(categoryNo == 0){ //전체검색일때
+					pageName[0] = "통합 검색";
+					for(int i=1; i<pageName.length; i++){
+						pageName[i] = getCategory.get(i-1).get("categoryName")+"";
+					}
+					
+					List<Board> unifiedList = materialDao.materialAllSearch(license, txtSearch, 1);
+					allList.add(unifiedList);
+					
+					for(int i=1; i<getCategory.size(); i++){
+						System.out.println("반복문!~ " + i);
+						List<Board> catList = materialDao.materialCategorySearch(license, i, txtSearch, 1);
+						allList.add(catList);
+					}
+				}else{ // 카테고리별 검색일때
+					pageName[0] = getCategory.get(categoryNo-1).get("categoryName")+"";
+					List<Board> catList = materialDao.materialCategorySearch(license, categoryNo, txtSearch, 1);
 					allList.add(catList);
 				}
-				System.out.println(allList.size());
-				
+								
+				model.addAttribute("pageName", pageName);
 				model.addAttribute("getCategory", getCategory);
 				model.addAttribute("allList", allList);
 			}

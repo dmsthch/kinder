@@ -73,7 +73,7 @@ WHERE
 </select>
 
 <!-- 전체 반 정보 조회 --> <!-- ★SAC★ Select All Class -->
-<select id="SAC" parameterType="int" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+<select id="SAC" parameterType="int" resultType="com.cafe24.dmsthch.Child.ChildClass">
 
 SELECT
   class_no
