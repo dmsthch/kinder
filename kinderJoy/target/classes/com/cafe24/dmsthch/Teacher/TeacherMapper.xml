@@ -58,7 +58,28 @@ teacher_no = #{teacher_no}
  WHERE teacher_id = #{teacher_id}
  </select>
 
-<!-- 전체 선생님 정보 조회 --> <!-- ★ SOT ★ = Select All Teacher -->
+<!-- 전체 교원 조회 table list에 필요 -->
+<!--입력시 요구하는 타입이 teacher_no 이기때문에 int이고 여러값을 result하기 때문에 result는 Teacher이다-->
+<select id="tableList" parameterType="int" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+
+select 
+  teacher_no
+, teacher_id
+, teacher_level
+, teacher_name
+, teacher_add_day
+, teacher_phone
+, teacher_bank
+, teacher_account
+, teacher_paystep
+ from 
+ 	teacher
+ where 
+ 	teacher_no;
+
+</select>
+
+<!-- 전체 선생님 정보 조회 반 배정시 필요--> <!-- ★ SOT ★ = Select All Teacher -->
 <!-- WHERE절의 값이 level의 선생님이다 그러므로 parameterType은 String형이 되고 그에 따른 결과는 여러개니까 Teacher가 된다.-->
 <select id="SAT" parameterType="java.lang.String" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 SELECT 
@@ -86,5 +107,19 @@ WHERE
   class_no;
 
 </select>
+
+<!-- 입력값과 결과값을 생각하고 타입을 지정하자. -->  
+
+<!-- 회원탈퇴 후 삭제된 아이디에 들어갈 쿼리 -->
+<delete id="withdrawal" parameterType="java.lang.String">
+DELETE FROM teacher 
+WHERE teacher_id = ${teacher_id};
+</delete>
+
+<insert id="removeId" parameterType="java.lang.String">
+INSERT INTO remove_id(teacher_id) 
+VALUES(${teacher_id});
+</insert>
+<!-- 회원탈퇴 후 삭제된 아이디에 들어갈 쿼리 END-->
 
 </mapper>

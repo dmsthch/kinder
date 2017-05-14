@@ -1,5 +1,7 @@
 package com.cafe24.dmsthch.Teacher;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,4 +41,8 @@ public class TeacherDao {
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.sign_up_id_check", joongbok);
 	}
 	
+	//전체 교원의 전체 정보 조회 admin전용
+	public List<String> tableList(Teacher teacher) {
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.tableList",teacher);
+	}
 }

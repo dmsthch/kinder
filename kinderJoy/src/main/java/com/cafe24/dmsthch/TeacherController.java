@@ -1,7 +1,7 @@
 package com.cafe24.dmsthch;
 
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +26,14 @@ public class TeacherController {
 	@Autowired
 	private TeacherDao TDao;
 	
+	//계정삭제폼 호출
+	@RequestMapping(value="delete", method = RequestMethod.GET)
+	public String delete() {
+		return "Teacher/TeacherModify/delete";
+	}
+	
+	
+	//회원가입폼 호출
 	@RequestMapping(value="/Add", method=RequestMethod.GET)
 	public String Add() {
 		System.out.println("GET방식으로 TeacherAdd로 포워드\n");
@@ -40,7 +48,7 @@ public class TeacherController {
 	}
 	
 	
-	//교원폼 수정폼 호출 메서드 //User Profile
+	//교원 수정폼 호출 메서드 //User Profile
 	@RequestMapping(value="/kyo", method=RequestMethod.GET)
 	public String kyowon(HttpSession httpsession,Model model) {
 		Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
@@ -51,11 +59,15 @@ public class TeacherController {
 	
 	//교원목록 테이블폼 호출 메서드 //Table List
 	@RequestMapping(value="/kyotable", method=RequestMethod.GET)
-	public String kyowon1(HttpSession httpsession,Model model) {
-		Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
-		model.addAttribute("kyoteacher",teacher);
+	public String kyowon1(Model model, Teacher teacher) {
+		List<String> teacher2 = TDao.tableList(teacher);
+		//폼에 뿌려주려고 모델객체에 담음
+		model.addAttribute("tableList",teacher2);
+		/*Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
+		model.addAttribute("kyoteacher",teacher);*/
 		System.out.println("Table List폼 호출___/Teacher/TeacherModify/table로 포워드\n");
 		return "Teacher/TeacherModify/table";
+		//리턴을 원하는 폼을 적으면 teacher의 주소값이 저기로 간다 or 저기를 가리킨다
 	}
 	
 	//아이디 중복체크 메서드
@@ -151,14 +163,14 @@ public class TeacherController {
 	}
 	
 	//라이센스 라이선스
-	@RequestMapping(value="/li", method=RequestMethod.GET)
+	@RequestMapping(value="/license", method=RequestMethod.GET)
 	public String chara() {
 		System.out.println("라이선스 발급 페이지 호출");
-		return "Teacher/TeacherLicense";
+		return "Teacher/TeacherModify/license";
 	}
 	
 	//라이센스 라이선스 처리
-	@RequestMapping(value="/li", method=RequestMethod.POST)
+	@RequestMapping(value="/license", method=RequestMethod.POST)
 	public String uuid(Model model) throws Exception {
 		
 		//UUID에 대해 자세한 사항은 http://hyeonjae.github.io/uuid/2015/03/17/uuid.html 참고
@@ -169,6 +181,6 @@ public class TeacherController {
 		model.addAttribute("licenseKey",licenseKey);
 		System.out.println(licenseKey +"<--생성된 UUID\n");
 		
-		return "Teacher/TeacherLicense";
+		return "Teacher/TeacherModify/license";
 	}
 }

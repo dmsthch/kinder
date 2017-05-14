@@ -12,7 +12,7 @@
   
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/li" method="post">
+	<form action="${pageContext.request.contextPath}/license" method="post">
 	<div class="form-group">
 	<label class="control-label col-sm-2">라이센스 발급받기</label>
       <div class="col-sm-10">              

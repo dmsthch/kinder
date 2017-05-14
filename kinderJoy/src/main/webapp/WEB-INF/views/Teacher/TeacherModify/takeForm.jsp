@@ -3,17 +3,10 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+	
 <head>
-
-	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-	<title>1TEAM</title>
-
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
 
     <!-- Bootstrap core CSS     -->
     <link href="css/JKC/modiassets/css/bootstrap.min.css" rel="stylesheet" />
@@ -27,16 +20,52 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-	
-	
-	<script src="js/jquery.js"></script>
-	
+
+	<!-- 여기부터 -->
+	  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	  <script type="text/javascript" src="https://johnny.github.io/jquery-sortable/js/jquery-sortable.js"></script>
+	  <link rel="stylesheet" type="text/css" href="https://johnny.github.io/jquery-sortable/css/application.css">
+	<!-- 여기까지 draggable -->
+
 	<script>
 	$(document).ready(function(){
 		$('#takeForm').attr('class','active');
 		$('#sidetakeForm').attr('style','background-color:green');
 		
 	});
+	</script>
+
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		var oldContainer;
+		$("ol.nested_with_switch").sortable({
+		  group: 'nested',
+		  afterMove: function (placeholder, container) {
+		    if(oldContainer != container){
+		      if(oldContainer)
+		        oldContainer.el.removeClass("active");
+		      container.el.addClass("active");
+	
+		      oldContainer = container;
+		    }
+		  },
+		  onDrop: function ($item, container, _super) {
+		    container.el.removeClass("active");
+		    _super($item, container);
+		  }
+		});
+		
+/*
+		온 오프
+ 		$(".switch-container").on("click", ".switch", function  (e) {
+		  var method = $(this).hasClass("active") ? "enable" : "disable";
+		  $(e.delegateTarget).next().sortable(method);
+		}); 
+*/
+		
+	});
+
 	</script>
 	
 </head>
@@ -48,10 +77,8 @@
 	<!-- 사이드메뉴바 BEGIN -->
 	<c:import url="./side.jsp"></c:import>
 	<!-- 사이드메뉴바 END -->
-
-
+	
 	    <div class="main-panel">
-
 	        <div class="content">
 	            <div class="container-fluid">
 	                <div class="row">
@@ -60,119 +87,119 @@
 	                            <div class="card-header" data-background-color="green">
 	                                <h4 class="title">편성표</h4>
 	                                <p class="category">편성표를 작성해주세요.</p>
-	                            </div>
-	                            <div class="card-content table-responsive">
+	                                 <form action="주소" name="이름" method="POST">
+	                                 
+	                                <div class="card-content table-responsive">
+	                               
+	                                
 	                                <table class="table">
-	                                    <thead class="text-primary">
-	                                    	<th>Name</th>
-	                                    	<th>Country</th>
-	                                    	<th>City</th>
-											<th>Salary</th>
-	                                    </thead>
-	                                    <tbody>
-	                                        <tr>
-	                                        	<td>Dakota Rice</td>
-	                                        	<td>Niger</td>
-	                                        	<td>Oud-Turnhout</td>
-												<td class="text-primary">$36,738</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Sage Rodriguez</td>
-	                                        	<td>Netherlands</td>
-	                                        	<td>Baileux</td>
-												<td class="text-primary">$56,142</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Philip Chaney</td>
-	                                        	<td>Korea, South</td>
-	                                        	<td>Overland Park</td>
-												<td class="text-primary">$38,735</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Doris Greene</td>
-	                                        	<td>Malawi</td>
-	                                        	<td>Feldkirchen in Kärnten</td>
-												<td class="text-primary">$63,542</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Mason Porter</td>
-	                                        	<td>Chile</td>
-	                                        	<td>Gloucester</td>
-												<td class="text-primary">$78,615</td>
-	                                        </tr>
-	                                    </tbody>
-	                                </table>
-	                            </div>
+	                                    
+										</table>
+										
+										
+										
+										<div class="span4">
+										
+									              <!-- <div class="switch-container">
+									              온 오프
+									                <div class="switch" data-off="OFF" data-on="ON" data-toggle="switch">
+									                <span class="switch-track"></span>
+									                <span class="switch-thumb" data-on="ON" data-off="OFF"></span>
+									                </div>
+									                
+									              </div> -->
+									              
+									              <ol class="nested_with_switch vertical">
+									              
+									                <li class="" style="">
+									              	1반
+									              	<ol class="">
+									                <li>선생1</li>
+									                <li>선생2</li>
+									                <li>선생3</li>
+									              	</ol>
+									           		</li>
+									           	  
+									           	    <li class="" style="">
+									              	2반
+									              	<ol class="">
+									                <li>선생1</li>
+									                <li>선생2</li>
+									                <li>선생3</li>
+									              	</ol>
+									           		</li>
+									           	  
+									           	    <li class="" style="">
+									              	3반
+									              	<ol class="">
+									                <li>선생1</li>
+									                <li>선생2</li>
+									                <li>선생3</li>
+									              	</ol>
+									           		</li>
+									           	  
+									           	    <li class="" style="">
+									              	4반
+									              	<ol class="">
+									                <li>선생1</li>
+									                <li>선생2</li>
+									                <li>선생3</li>
+									              	</ol>
+									           		</li>
+									           	  
+									           	    <li class="" style="">
+									              	5반
+									              	<ol class="">
+									                <li>선생1</li>
+									                <li>선생2</li>
+									                <li>선생3</li>
+									              	</ol>
+									           		</li>
+
+									           		<li class="" style="">
+									              	5반
+									              	<ol class="">
+									                <li>선생1</li>
+									                <li>선생2</li>
+									                <li>선생3</li>
+									              	</ol>
+									           		</li>
+									        </ol>
+										</div>
+										
+										 <div class="span4">   
+									        <ol class="nested_with_switch vertical">
+										          	 	 <li>
+																    교원 목록
+										             		<ol class="">
+												                <li>교원1</li>
+												                <li>교원2</li>
+												                <li>교원3</li>
+												                <li>교원4</li>
+												                <li>교원5</li>
+											                    <li>교원6</li>
+											                    <li>교원7</li>
+											                    <li>교원8</li>
+											                    <li>교원9</li>
+											                    <li>교원0</li>
+									             			</ol>
+									          			</li>
+									       			</ol>
+												</div>
+	                            			</div>
+	                            		<button type="submit" name="submit">저장하기</button>
+	                            	</form>
+            					</div>
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
-		
 		<c:import url="./footer.jsp"></c:import>
 
 	    </div>
 	</div>
 
 </body>
-
-	<!--   Core JS Files   -->
-	<script src="js/JKC/modiassets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-	<script src="js/JKC/modiassets/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="js/JKC/modiassets/js/material.min.js" type="text/javascript"></script>
-
-	<!--  Charts Plugin -->
-	<script src="js/JKC/modiassets/js/chartist.min.js"></script>
-
-	<!--  Notifications Plugin    -->
-	<script src="js/JKC/modiassets/js/bootstrap-notify.js"></script>
-
-	<!-- Material Dashboard javascript methods -->
-	<script src="js/JKC/modiassets/js/material-dashboard.js"></script>
-
-	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-	<script src="js/JKC/modiassets/js/demo.js"></script>
 
 </html>

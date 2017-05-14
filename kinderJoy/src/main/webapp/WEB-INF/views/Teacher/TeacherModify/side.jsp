@@ -38,6 +38,22 @@
 	                        <p>Take Form</p>
 	                    </a>
 	                </li>
+	                
+	                <li id="license">
+	                    <a id="sideLicense" href="${pageContext.request.contextPath}/license">
+	                        <i class="material-icons">check</i>
+	                        <p>License</p>
+	                    </a>
+	                </li>
+	                
+	                <!--  -->
+	                <li id="delete" class="active-pro">
+                        <a id="sideDelete" href="${pageContext.request.contextPath}/delete">
+	                        <i class="material-icons">delete</i>
+	                        <p>Delete_account</p>
+	                    </a>
+                    </li>
+	                
 	            </ul>
 	    	</div>
 		</div>
