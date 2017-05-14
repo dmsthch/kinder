@@ -80,25 +80,21 @@
 	
 	    <div class="main-panel">
 	        <div class="content">
+	        <div class="card">
 	            <div class="container-fluid">
-	                <div class="row">
-	                    <div class="col-md-12">
-	                        <div class="card">
-	                            <div class="card-header" data-background-color="green">
+	            
+	                <div class="row" >
+	                
+	                    <div class="col-md-10"  data-background-color="green">
+	                            <div class="card-header">
 	                                <h4 class="title">편성표</h4>
 	                                <p class="category">편성표를 작성해주세요.</p>
+            			</div>
+            					
 	                                 <form action="주소" name="이름" method="POST">
-	                                 
 	                                <div class="card-content table-responsive">
-	                               
-	                                
-	                                <table class="table">
-	                                    
-										</table>
-										
-										
-										
-										<div class="span4">
+			
+										<div class="col-md-5" >
 										
 									              <!-- <div class="switch-container">
 									              온 오프
@@ -167,7 +163,8 @@
 									        </ol>
 										</div>
 										
-										 <div class="span4">   
+										<!-- "span4" -->
+										 <div class="col-md-5">   
 									        <ol class="nested_with_switch vertical">
 										          	 	 <li>
 																    교원 목록
@@ -189,7 +186,6 @@
 	                            			</div>
 	                            		<button type="submit" name="submit">저장하기</button>
 	                            	</form>
-            					</div>
 	                        </div>
 	                    </div>
 	                </div>
