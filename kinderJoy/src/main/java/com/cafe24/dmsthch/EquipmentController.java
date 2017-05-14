@@ -25,8 +25,10 @@ public class EquipmentController {
 	EquipmentDao dao;
 	
 	@RequestMapping(value = "Equipment", method = RequestMethod.GET)
-	public String test01(){
-		
+	public String test01(Model model){
+		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
+		System.out.println(getCategory + "getCategory 확인");
+		model.addAttribute("getCategory", getCategory);
 		return "Equipment/Equipment";
 	}
 	@RequestMapping(value = "test02", method = RequestMethod.GET)
@@ -41,12 +43,12 @@ public class EquipmentController {
 	}
 	@RequestMapping(value = "test01", method = RequestMethod.GET)
 	public String test02(Model model){
-		List<Map<String, Object>> getCategory = dao.selectCategory();
+		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
 		System.out.println(getCategory + "getCategory 확인");
 		model.addAttribute("getCategory", getCategory);
 		return "Equipment/NewFile";
 	}
-	@RequestMapping(value = "save", method = RequestMethod.GET)
+/*	@RequestMapping(value = "save", method = RequestMethod.GET)
 	public String save(Model model
 						,@RequestParam(value="jsonStr") String jsonStr
 						,HttpSession session){
@@ -66,6 +68,18 @@ public class EquipmentController {
 			System.out.println("쿼리 입력 실패");
 		}
 		return "Equipment/Equipment";
+	}*/
+	@RequestMapping(value = "save", method = RequestMethod.POST)
+	public String listSave(Model model
+							, @RequestParam(value="dataArray") String dataArray
+							, @RequestParam(value="mergeArray", required=false, defaultValue="") String mergeArray
+							, @RequestParam(value="borderArray", required=false, defaultValue="") String borderArray
+							, @RequestParam(value="countRow") String countRow
+							, @RequestParam(value="countCol") String countCol
+							, @RequestParam(value="sheetName") String sheetName
+							,HttpSession session){
+		
+		return null;
 	}
 /*	@RequestMapping(value = "reroad", method = RequestMethod.POST)
 	public String road(HttpSession session, Model model){
@@ -128,5 +142,13 @@ public class EquipmentController {
 		int returnValue = dao.addEquipment(equipment);
 		
 		return returnValue;
+	}
+	@RequestMapping(value = "asdf", method = RequestMethod.GET)
+	public String sheetList(Model model){
+		System.out.println("시트 리스트 메서드 실행");
+		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
+		model.addAttribute("getCategory", getCategory);
+		
+		return "Equipment/SheetList";
 	}
 }	
