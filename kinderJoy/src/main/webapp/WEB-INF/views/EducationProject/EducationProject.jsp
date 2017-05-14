@@ -6,7 +6,7 @@
 
 
 <script>
-console.log(${year}+"<,,,")
+console.log(${year}+"<,,,");
 </script>
 <c:import url="./nav/SideNav.jsp"></c:import>
 <c:import url="../module/importCSS.jsp"></c:import>

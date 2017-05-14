@@ -51,9 +51,10 @@ public class EquipmentDao {
 		return sheet;
 	}*/
 	
-	// 비품 카테고리 로드하기
-	public List<Map<String, Object>> selectCategory() {
+	// 비품 리스트 카테고리 로드하기
+	public List<Map<String, Object>> selectSheetCategory() {
 				
 		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectEquipmentCategory");
 	}
+
 }
