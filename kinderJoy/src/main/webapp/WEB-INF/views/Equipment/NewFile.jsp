@@ -180,12 +180,12 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="equipmentList" items="${equipmentList}">
+<%-- 		<c:forEach var="equipmentList" items="${equipmentList}"> --%>
 		<form class="testForm" method="psot">
 			<tr>
 				<td>	
-<%-- 					<div class="input-group-btn search-panel">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<div class="input-group-btn search-panel">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100px;">
 							<span id="category">카테고리 </span><span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
@@ -193,15 +193,15 @@
 								<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
 							</c:forEach>
 						</ul>
-					</div> --%>
-					<select class="form-control select" name="equipmentCategorySelect">
+					</div>
+<!-- 					<select class="form-control select" name="equipmentCategorySelect">
 						<option class="option">카테고리<span class="caret"></span></option>
 						<option value="1">교재,교구</option>
 						<option value="2">사무용품</option>
 						<option value="3">체육용품</option>
 						<option value="4">도서목록</option>
 						<option value="5">기타</option>
-					</select>
+					</select> -->
 				</td>
 				<td>
 					<input class="form-control test1" name="test1" type="text" style="width : 400px" value="${equipmentList.equipmentName}" readonly/>
@@ -237,7 +237,7 @@
 				</td>
 			</tr>
 		</form>	
-		</c:forEach>
+<%-- 		</c:forEach> --%>
 	</tbody>
 </table>
 
@@ -247,8 +247,8 @@
 	<form class="testForm" method="psot">
 		<tr>
 			<td>	
-<%-- 					<div class="input-group-btn search-panel">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<div class="input-group-btn search-panel">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100px;">
 							<span id="category">카테고리 </span><span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
@@ -256,15 +256,15 @@
 								<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
 							</c:forEach>
 						</ul>
-					</div> --%>
-				<select class="form-control select" name="equipmentCategorySelect">
+					</div>
+<!-- 				<select class="form-control select" name="equipmentCategorySelect">
 					<option class="option">카테고리<span class="caret"></span></option>
 					<option value="1">교재,교구</option>
 					<option value="2">사무용품</option>
 					<option value="3">체육용품</option>
 					<option value="4">도서목록</option>
 					<option value="5">기타</option>
-				</select>
+				</select> -->
 			</td>
 				<td>
 				<input class="form-control test1" name="test1" type="text" style="width : 400px" value="test" readonly/>
@@ -301,3 +301,15 @@
 		</tr>
 	</form>	
 </table>
+<!-- select button -->
+<script>
+	$(document).ready(function(e){
+	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+			e.preventDefault();
+			var param = $(this).attr("href").replace("#",""); //해당 버튼의 href속성에서 #을 제거한 값
+			var category = $(this).text(); //해당 버튼의 내용
+			$('.search-panel span#category').text(category); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
+			$('.input-group #boardCategoryNo').val(param);
+		});
+	});
+</script>
