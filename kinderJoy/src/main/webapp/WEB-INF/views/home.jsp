@@ -12,7 +12,14 @@
 	
 	<!-- CSS Link -->
 	<c:import url="./module/importCSS.jsp"></c:import>
-	
+	<!-- JS Link -->
+	<c:import url="./module/importJS.jsp"></c:import>
+	<style>
+	#home {
+	background-image: url('images/home-bg-slideshow1.jpg');
+	background-repeat: no-repeat;
+	}
+	</style>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -23,6 +30,7 @@
 <!-- home section -->
 <section id="home">
 	<div class="container">
+	
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
 				<h3>임초롬 / 김신삼 / 김한솔 / 양지연 / 전광철</h3>
@@ -43,8 +51,7 @@
 <!-- footer -->
 <c:import url="./module/footer.jsp"></c:import>
 
-<!-- JS Link -->
-<c:import url="./module/importJS.jsp"></c:import>
+
 
 </body>
 </html>

@@ -13,7 +13,6 @@
 <link href="css/LCR/Calendar/fullcalendar.css" rel="stylesheet" />
 <link href="css/LCR/Calendar/fullcalendar.print.min.css" rel="stylesheet" media="print" />
 <script src="js/LCR/Calendar/lib/moment.min.js"></script>
-<script src="js/LCR/Calendar/lib/jquery.min.js"></script>
 <script src="js/LCR/Calendar/fullcalendar2.js"></script>
 
 

@@ -12,26 +12,34 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	<!-- CSS Link -->
+<c:import url="./EquipmentNav/SideNav.jsp"></c:import>
 <c:import url="../module/importCSS.jsp"></c:import>
-<jsp:include page="../module/navbar.jsp"></jsp:include>
-<jsp:include page="../Equipment/test02.jsp"></jsp:include>
+<c:import url="../module/navbar.jsp"></c:import>
 
-
+<style>
+@font-face{
+	font-family: 'koverwatch';
+	src: url(fonts/koverwatch.ttf) format('truetype');
+}
+body {
+	font-family: koverwatch
+}
+</style>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
-
-<!-- navbar -->
-
-
-<!-- home section -->
-	<br><br><br><br><br><br><br>
-
-<jsp:include page="../Equipment/sheet.jsp"></jsp:include>
-
+ <div class="wrapper">
+	<div class="main-panel">
+		<div class="content">
+			<div class="container-fluid">
+				<jsp:include page="../Equipment/NewFile.jsp"></jsp:include>
+			</div>
+		</div>
+	</div>
+</div>
 <br><br><br><br><br>
 
 
 </body>
-<c:import url="../module/importJS.jsp"></c:import>
+<%-- <c:import url="../module/importJS.jsp"></c:import> --%>
 </html>

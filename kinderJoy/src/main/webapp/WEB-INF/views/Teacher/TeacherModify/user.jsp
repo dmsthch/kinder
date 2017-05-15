@@ -8,14 +8,7 @@
 <html>
 <head>
 
-	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
 	<title>1TEAM</title>
-
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
 
     <!-- Bootstrap core CSS     -->
     <link href="css/JKC/modiassets/css/bootstrap.min.css" rel="stylesheet" />
@@ -148,7 +141,7 @@
 	                                        </div>
 	                                    </div>
 
-	                                    <button type="submit" class="btn btn-primary pull-right">프로필 수정하기</button>
+	                                    <button type="submit" class="btn btn-fault">프로필 수정하기</button>
 	                                    <div class="clearfix"></div>
 	                                </form>
 	                            </div>

@@ -1,11 +1,12 @@
 package com.cafe24.dmsthch.EducationProject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.cafe24.dmsthch.Child.ChildClass;
 
 @Repository
 public class EducationProjectDao {
@@ -75,6 +76,19 @@ public class EducationProjectDao {
 		return edu;
 	}
 	
+	//계획안메인화면 갈때 생성된 반 셀렉트하기
+	public List<ChildClass> selectAllChildClass(String licenseKindergarten, String classYear){
+		ChildClass childclass = new ChildClass();
+		childclass.setLicenseKindergarten(licenseKindergarten);
+		childclass.setClassYear(classYear);
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.selectAllChildClass",childclass);
+	}
+	
+	//계획안 반별로 리스트 불러오기
+	public List<Education> EducationProjectList(String licenseKindergarten,String categoryNo,String classNo){
+		
+		return null;
+	}
 	
 	//테스트용
 	public String selectTest(){

@@ -3,19 +3,12 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+	
 <head>
-
-	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-	<title>1TEAM</title>
-
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-
-    <!-- Bootstrap core CSS     -->
+	
+	<!-- Bootstrap core CSS     -->
     <link href="css/JKC/modiassets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!--  Material Dashboard CSS    -->
@@ -27,10 +20,13 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-	
-	
-	<script src="js/jquery.js"></script>
-	
+
+	<!-- 여기부터 -->
+	  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	  <script type="text/javascript" src="https://johnny.github.io/jquery-sortable/js/jquery-sortable.js"></script>
+	  <link rel="stylesheet" type="text/css" href="https://johnny.github.io/jquery-sortable/css/application.css">
+	<!-- 여기까지 draggable -->
+
 	<script>
 	$(document).ready(function(){
 		$('#takeForm').attr('class','active');
@@ -38,141 +34,116 @@
 		
 	});
 	</script>
+
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		var oldContainer;
+		$("ol.jkc").sortable({
+		  group: 'nested',
+		  afterMove: function (placeholder, container) {
+		    if(oldContainer != container){
+		      if(oldContainer)
+		        oldContainer.el.removeClass("active");
+		      container.el.addClass("active");
+	
+		      oldContainer = container;
+		    }
+		  },
+		  onDrop: function ($item, container, _super) {
+		    container.el.removeClass("active");
+		    _super($item, container);
+		  }
+		});
+		
+/*
+		온 오프
+ 		$(".switch-container").on("click", ".switch", function  (e) {
+		  var method = $(this).hasClass("active") ? "enable" : "disable";
+		  $(e.delegateTarget).next().sortable(method);
+		}); 
+*/
+		
+	});
+	</script>
 	
 </head>
 
 <body>
-
 	<div class="wrapper">
-	
-	<!-- 사이드메뉴바 BEGIN -->
-	<c:import url="./side.jsp"></c:import>
-	<!-- 사이드메뉴바 END -->
-
-
-	    <div class="main-panel">
-
-	        <div class="content">
-	            <div class="container-fluid">
-	                <div class="row">
-	                    <div class="col-md-12">
-	                        <div class="card">
-	                            <div class="card-header" data-background-color="green">
-	                                <h4 class="title">편성표</h4>
-	                                <p class="category">편성표를 작성해주세요.</p>
-	                            </div>
-	                            <div class="card-content table-responsive">
-	                                <table class="table">
-	                                    <thead class="text-primary">
-	                                    	<th>Name</th>
-	                                    	<th>Country</th>
-	                                    	<th>City</th>
-											<th>Salary</th>
-	                                    </thead>
-	                                    <tbody>
-	                                        <tr>
-	                                        	<td>Dakota Rice</td>
-	                                        	<td>Niger</td>
-	                                        	<td>Oud-Turnhout</td>
-												<td class="text-primary">$36,738</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        
-	                                        <tr>
-	                                        	<td>Sage Rodriguez</td>
-	                                        	<td>Netherlands</td>
-	                                        	<td>Baileux</td>
-												<td class="text-primary">$56,142</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Philip Chaney</td>
-	                                        	<td>Korea, South</td>
-	                                        	<td>Overland Park</td>
-												<td class="text-primary">$38,735</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Doris Greene</td>
-	                                        	<td>Malawi</td>
-	                                        	<td>Feldkirchen in Kärnten</td>
-												<td class="text-primary">$63,542</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Mason Porter</td>
-	                                        	<td>Chile</td>
-	                                        	<td>Gloucester</td>
-												<td class="text-primary">$78,615</td>
-	                                        </tr>
-	                                    </tbody>
-	                                </table>
-	                            </div>
+		<!-- 사이드메뉴바 BEGIN -->
+		<c:import url="./side.jsp"></c:import>
+		<!-- 사이드메뉴바 END -->
+	   	 <div class="main-panel">
+	     	<div class="content">
+	     	   <div class="card">
+	        	   <div class="container-fluid">
+	             	  <div class="row" >
+	                  	<div class="col-md-10"  data-background-color="green">
+	            			<div class="card-header">
+	                        	<h4 class="title">편성표</h4>
+	                            <p class="category">편성표를 작성해주세요.</p>
+            				</div>
+            					<form action="주소" name="이름" method="POST">
+	                                <div class="card-content table-responsive">
+										<div class="col-md-5" >
+										<%-- <%if (session.getAttribute("licenseKindergarten") != null) { %>
+										값있음
+										<%}else{ %>
+										값없음
+										<%} %> --%>
+									              <!-- <div class="switch-container">
+									              온 오프
+									                <div class="switch" data-off="OFF" data-on="ON" data-toggle="switch">
+									                <span class="switch-track"></span>
+									                <span class="switch-thumb" data-on="ON" data-off="OFF"></span>
+									                </div>
+									                
+									              </div> -->
+									              
+									              
+									              <%-- <c:forEach var="C" items="${takeClass}"> --%>
+									              <c:forEach begin="3" end="5" var="age">
+									              		${age}살
+										              <c:forEach var="C" items="${takeClass}">
+										              <c:if test="${C.classAge == age}">
+										              
+										              <ol class="jkc vertical">
+										           	    <li class="" style="">
+											              	<ol class="">
+											              	${C.classNo}반
+											              	</ol>
+										           		</li>
+									        	 	 </ol>
+									        	 	 </c:if>
+									        	 	 </c:forEach>
+								        	 	 </c:forEach>
+								        	 	 
+								        	 	 
+											</div>
+											<!-- "span4" -->
+										 	<div class="col-md-5">   
+										 		
+										 		<!-- ★★★★★<ol class="nested_with_switch vertical"> -->
+										 		
+									        	<ol class="jkc vertical">
+									        			교원목록
+									             	<c:forEach var="T" items="${takeTeacher}">
+										        <li>${T.teacher_name}</li>
+											        </c:forEach>
+									       		</ol>
+											</div>
+	                            		</div>
+	                            	<input type="button" value="저장하기" id="send" />
+	                            </form>
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
-		
-		<c:import url="./footer.jsp"></c:import>
-
-	    </div>
+		  <c:import url="./footer.jsp"></c:import>
+	   </div>
 	</div>
-
 </body>
-
-	<!--   Core JS Files   -->
-	<script src="js/JKC/modiassets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-	<script src="js/JKC/modiassets/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="js/JKC/modiassets/js/material.min.js" type="text/javascript"></script>
-
-	<!--  Charts Plugin -->
-	<script src="js/JKC/modiassets/js/chartist.min.js"></script>
-
-	<!--  Notifications Plugin    -->
-	<script src="js/JKC/modiassets/js/bootstrap-notify.js"></script>
-
-	<!-- Material Dashboard javascript methods -->
-	<script src="js/JKC/modiassets/js/material-dashboard.js"></script>
-
-	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-	<script src="js/JKC/modiassets/js/demo.js"></script>
 
 </html>

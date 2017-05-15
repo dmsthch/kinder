@@ -5,16 +5,9 @@
 <html>
 	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 <head>
-	
-	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 	<title>1TEAM</title>
-
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-
+	
     <!-- Bootstrap core CSS     -->
     <link href="css/JKC/modiassets/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -59,53 +52,34 @@
 	                            <div class="card-header" data-background-color="orange">
 	                                <h4 class="title">교원 명단</h4>
 	                                <p class="category">현재 활동중인 교직원 명단입니다.</p>
-	                            </div>
+	                            </div>                            
 	                            <div class="card-content table-responsive">
 	                                <table class="table">
 	                                    <thead class="text-primary">
-	                                    	<th>Name</th>
-	                                    	<th>Country</th>
-	                                    	<th>City</th>
-											<th>Salary</th>
+	                                    	<th>아이디</th>
+	                                    	<th>권한</th>
+	                                    	<th>이름</th>
+											<th>가입일자</th>
+											<th>번호</th>
+											<th>은행</th>
+											<th>계좌</th>
+											<th>호봉</th>
 	                                    </thead>
+	                                    
+	                                    <c:forEach var="t" items="${tableList}">
 	                                    <tbody>
 	                                        <tr>
-	                                        	<td>Dakota Rice</td>
-	                                        	<td>Niger</td>
-	                                        	<td>Oud-Turnhout</td>
-												<td class="text-primary">$36,738</td>
-	                                        </tr>
+	                                        	<td>${t.teacher_id}</td>
+	                                        	<td>${t.teacher_level}</td>
+	                                        	<td>${t.teacher_name}</td>
+	                                        	<td>${t.teacher_add_day}</td>
+	                                        	<td>${t.teacher_phone}</td>
+	                                        	<td>${t.teacher_bank}</td>
+	                                        	<td>${t.teacher_account}</td>
+	                                        	<td>${t.teacher_paystep}</td>
 	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Sage Rodriguez</td>
-	                                        	<td>Netherlands</td>
-	                                        	<td>Baileux</td>
-												<td class="text-primary">$56,142</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Philip Chaney</td>
-	                                        	<td>Korea, South</td>
-	                                        	<td>Overland Park</td>
-												<td class="text-primary">$38,735</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Doris Greene</td>
-	                                        	<td>Malawi</td>
-	                                        	<td>Feldkirchen in Kärnten</td>
-												<td class="text-primary">$63,542</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Mason Porter</td>
-	                                        	<td>Chile</td>
-	                                        	<td>Gloucester</td>
-												<td class="text-primary">$78,615</td>
-	                                        </tr>
 	                                    </tbody>
+	                                   </c:forEach>
 	                                </table>
 
 	                            </div>
