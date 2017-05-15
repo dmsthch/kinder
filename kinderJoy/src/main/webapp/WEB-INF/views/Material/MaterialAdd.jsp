@@ -10,13 +10,17 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	
+	<!-- sideNav -->
+	<c:import url="./nav/SideNav.jsp"></c:import>
+	
 	<!-- 따라다니는 메뉴 -->
 	<script src="js/KHS/RefreshStaticMenu.js"></script>
 	
 	<!-- CSS Link -->
 	<c:import url="../module/importCSS.jsp"></c:import>
 	
-	
+	<!-- navbar -->
+	<c:import url="../module/navbar.jsp"></c:import>
 	<style>
 		#staticMenu { 
 			margin: 0pt; 
@@ -53,13 +57,11 @@
 		}
 	</style>
 	
-	
 </head>
 <body id="body" class="container-fluid" onload="InitializeStaticMenu();">
 
 
-<!-- navbar -->
-<c:import url="../module/navbar.jsp"></c:import>
+
 <!-- Follow sideNav -->
 <div id="staticMenu" class="text-right">
 	<div>
@@ -73,7 +75,7 @@
 	<hr>
 </div>
 
-<div class="row">
+<div class="row col-sm-offset-1">
 	<form action="${pageContext.request.contextPath}/MaterialAdd" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 		    <div class="row">    

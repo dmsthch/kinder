@@ -10,6 +10,9 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	
+	<!-- sideNav -->
+	<c:import url="./nav/SideNav.jsp"></c:import>
+	
 	<!-- 따라다니는 메뉴 -->
 	<script src="js/KHS/RefreshStaticMenu.js"></script>
 	
@@ -18,7 +21,6 @@
 	
 
 	<style type="text/css">
-/* 	#staticMenu { margin: 0pt; padding: 0pt;  position: absolute; right: 0px; top: 0px;} */
 	.myBtn {
 	  background: transparent;
 	  border: 2px solid white;
@@ -82,7 +84,7 @@
 	<div id="portfolio">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 col-sm-12">
+			<div class="col-md-10 col-sm-10 col-sm-offset-2">
 				<div class="section-title text-center">
 					<h1 class="heading bold">자료실</h1>
 					<hr>
@@ -175,7 +177,7 @@
 </div>
 
 <div class="row" style="margin-top: -5%;">
-	<div class="col-sm-4 col-sm-offset-1" style="">
+	<div class="col-sm-4 col-sm-offset-3" style="">
 		<br/><h1 class="text-center">문서양식</h1><br/>
 		<table class="table">
 			<thead class="text-center">
@@ -201,7 +203,7 @@
 		</table>
 	</div>
 	
-	<div class="col-sm-4 col-sm-offset-1">
+	<div class="col-sm-4">
 		<br/><h1 class="text-center">교육자료</h1><br/>
 		<table class="table">
 			<thead class="text-center">

@@ -10,6 +10,9 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	
+	<!-- sideNav -->
+	<c:import url="./nav/SideNav.jsp"></c:import>
+	
 	<!-- 따라다니는 메뉴 -->
 	<script src="js/KHS/RefreshStaticMenu.js"></script>
 	
