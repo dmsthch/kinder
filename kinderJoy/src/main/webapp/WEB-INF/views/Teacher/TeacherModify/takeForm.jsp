@@ -7,8 +7,8 @@
 	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 	
 <head>
-
-    <!-- Bootstrap core CSS     -->
+	
+	<!-- Bootstrap core CSS     -->
     <link href="css/JKC/modiassets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!--  Material Dashboard CSS    -->
@@ -39,7 +39,7 @@
 	
 	$(document).ready(function(){
 		var oldContainer;
-		$("ol.nested_with_switch").sortable({
+		$("ol.jkc").sortable({
 		  group: 'nested',
 		  afterMove: function (placeholder, container) {
 		    if(oldContainer != container){
@@ -65,37 +65,33 @@
 */
 		
 	});
-
 	</script>
 	
 </head>
 
 <body>
-
 	<div class="wrapper">
-	
-	<!-- 사이드메뉴바 BEGIN -->
-	<c:import url="./side.jsp"></c:import>
-	<!-- 사이드메뉴바 END -->
-	
-	    <div class="main-panel">
-	        <div class="content">
-	        <div class="card">
-	            <div class="container-fluid">
-	            
-	                <div class="row" >
-	                
-	                    <div class="col-md-10"  data-background-color="green">
-	                            <div class="card-header">
-	                                <h4 class="title">편성표</h4>
-	                                <p class="category">편성표를 작성해주세요.</p>
-            			</div>
-            					
-	                                 <form action="주소" name="이름" method="POST">
+		<!-- 사이드메뉴바 BEGIN -->
+		<c:import url="./side.jsp"></c:import>
+		<!-- 사이드메뉴바 END -->
+	   	 <div class="main-panel">
+	     	<div class="content">
+	     	   <div class="card">
+	        	   <div class="container-fluid">
+	             	  <div class="row" >
+	                  	<div class="col-md-10"  data-background-color="green">
+	            			<div class="card-header">
+	                        	<h4 class="title">편성표</h4>
+	                            <p class="category">편성표를 작성해주세요.</p>
+            				</div>
+            					<form action="주소" name="이름" method="POST">
 	                                <div class="card-content table-responsive">
-			
 										<div class="col-md-5" >
-										
+										<%-- <%if (session.getAttribute("licenseKindergarten") != null) { %>
+										값있음
+										<%}else{ %>
+										값없음
+										<%} %> --%>
 									              <!-- <div class="switch-container">
 									              온 오프
 									                <div class="switch" data-off="OFF" data-on="ON" data-toggle="switch">
@@ -105,97 +101,49 @@
 									                
 									              </div> -->
 									              
-									              <ol class="nested_with_switch vertical">
 									              
-									                <li class="" style="">
-									              	1반
-									              	<ol class="">
-									                <li>선생1</li>
-									                <li>선생2</li>
-									                <li>선생3</li>
-									              	</ol>
-									           		</li>
-									           	  
-									           	    <li class="" style="">
-									              	2반
-									              	<ol class="">
-									                <li>선생1</li>
-									                <li>선생2</li>
-									                <li>선생3</li>
-									              	</ol>
-									           		</li>
-									           	  
-									           	    <li class="" style="">
-									              	3반
-									              	<ol class="">
-									                <li>선생1</li>
-									                <li>선생2</li>
-									                <li>선생3</li>
-									              	</ol>
-									           		</li>
-									           	  
-									           	    <li class="" style="">
-									              	4반
-									              	<ol class="">
-									                <li>선생1</li>
-									                <li>선생2</li>
-									                <li>선생3</li>
-									              	</ol>
-									           		</li>
-									           	  
-									           	    <li class="" style="">
-									              	5반
-									              	<ol class="">
-									                <li>선생1</li>
-									                <li>선생2</li>
-									                <li>선생3</li>
-									              	</ol>
-									           		</li>
-
-									           		<li class="" style="">
-									              	5반
-									              	<ol class="">
-									                <li>선생1</li>
-									                <li>선생2</li>
-									                <li>선생3</li>
-									              	</ol>
-									           		</li>
-									        </ol>
-										</div>
-										
-										<!-- "span4" -->
-										 <div class="col-md-5">   
-									        <ol class="nested_with_switch vertical">
-										          	 	 <li>
-																    교원 목록
-										             		<ol class="">
-												                <li>교원1</li>
-												                <li>교원2</li>
-												                <li>교원3</li>
-												                <li>교원4</li>
-												                <li>교원5</li>
-											                    <li>교원6</li>
-											                    <li>교원7</li>
-											                    <li>교원8</li>
-											                    <li>교원9</li>
-											                    <li>교원0</li>
-									             			</ol>
-									          			</li>
-									       			</ol>
-												</div>
-	                            			</div>
-	                            		<button type="submit" name="submit">저장하기</button>
-	                            	</form>
+									              <%-- <c:forEach var="C" items="${takeClass}"> --%>
+									              <c:forEach begin="3" end="5" var="age">
+									              		${age}살
+										              <c:forEach var="C" items="${takeClass}">
+										              <c:if test="${C.classAge == age}">
+										              
+										              <ol class="jkc vertical">
+										           	    <li class="" style="">
+											              	<ol class="">
+											              	${C.classNo}반
+											              	</ol>
+										           		</li>
+									        	 	 </ol>
+									        	 	 </c:if>
+									        	 	 </c:forEach>
+								        	 	 </c:forEach>
+								        	 	 
+								        	 	 
+											</div>
+											<!-- "span4" -->
+										 	<div class="col-md-5">   
+										 		
+										 		<!-- ★★★★★<ol class="nested_with_switch vertical"> -->
+										 		
+									        	<ol class="jkc vertical">
+									        			교원목록
+									             	<c:forEach var="T" items="${takeTeacher}">
+										        <li>${T.teacher_name}</li>
+											        </c:forEach>
+									       		</ol>
+											</div>
+	                            		</div>
+	                            	<input type="button" value="저장하기" id="send" />
+	                            </form>
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
 	        </div>
-		<c:import url="./footer.jsp"></c:import>
-
-	    </div>
+		  <c:import url="./footer.jsp"></c:import>
+	   </div>
 	</div>
-
 </body>
 
 </html>

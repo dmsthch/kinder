@@ -25,7 +25,8 @@
 				<!-- 비품 품의서 리스트 -->
 				<div class="row">
 					<c:forEach var ="getCategory" items="${getCategory}">
-						<div class="col-lg-4 col-md-6 col-sm-6 ">
+						<div>
+						<div>
 							<div class="card card-stats">
 								<div class="card-header" data-background-color="green">
 									<!-- <i class="material-icons">content_copy</i> -->
@@ -33,17 +34,20 @@
 								</div>
 								<div class="card-content">									
 									<p class="category"></p>
-									<h3 class="title">품의서</h3>
+									<h3 class="title"><a href="${pageContext.request.contextPath}/sheet">품의서작성하기</a></h3>
 								</div>
 								<div class="card-footer textRiht">
 									<div class="stats ">
-<%-- 										<c:forEach var="getCategory1" items="${getCategory}">
-											<i class="material-icons" style="margin-left: 5px;">date_range</i><a href="#pablo">${getCategory1.categoryNo}</a>
-										</c:forEach> --%>
-										123
+ 										<c:forEach var="sheet" items="${sheet}">
+											<c:if test="${sheet.equipmentCategoryNo == getCategory.categoryNo}">
+												<i class="material-icons" style="margin-left: 5px;">date_range</i><a href="${pageContext.request.contextPath}/reroad?sheetName=${sheet.valueName}&sheetCategoryNo=${getCategory.categoryNo}">${sheet.valueName}</a>
+											</c:if>
+										</c:forEach>
 									</div>
 								</div>
 							</div>
+						</div>
+						<br>
 						</div>
 					</c:forEach>	
 				</div>

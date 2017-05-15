@@ -1,6 +1,7 @@
 package com.cafe24.dmsthch;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.EducationProject.Education;
 import com.cafe24.dmsthch.EducationProject.EducationForm;
 import com.cafe24.dmsthch.EducationProject.EducationProjectDao;
@@ -24,7 +26,8 @@ public class EducationProjectController {
 	
 	//계획안메인화면
 	@RequestMapping(value = "/educationProject", method = RequestMethod.GET)
-	public String educationMain(Model model) {
+	public String educationMain(Model model
+								,HttpSession session) {
 		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
 		int year = c.get(Calendar.YEAR);
 /*		System.out.println(c.get(Calendar.LONG_FORMAT));*/
@@ -32,7 +35,12 @@ public class EducationProjectController {
 		ntime += String.valueOf(c.get(Calendar.DATE)) + "일";*/
 		System.out.println(year);/*
 		System.out.println(c+"<<<c");*/
+		Integer integerYear = year;
+		String classYear = integerYear.toString();
 		model.addAttribute("year",year);
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		List<ChildClass> childclass = dao.selectAllChildClass(licenseKindergarten, classYear);
+		model.addAttribute("childclass",childclass);
 		return "EducationProject/EducationProject";
 	}
 	
@@ -105,6 +113,18 @@ public class EducationProjectController {
 		Education result =dao.educationProjectLoad(categoryNo, date, licenseKindergarten,age,classNo);
 		model.addAttribute("resultData",result);
 		return "EducationProject/EducationProjectLoad";
+	}
+	
+	//계획안 리스트()
+	@RequestMapping(value = "/EducationProjectList", method = RequestMethod.GET)
+	public String EducationProjectList(HttpSession session
+										,@RequestParam(value="categoryNo") String categoryNo
+										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo){
+		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
+		int month = c.get(Calendar.MONTH);
+	
+		
+		return "EducationProject/EducationProjectList";
 	}
 	
 	

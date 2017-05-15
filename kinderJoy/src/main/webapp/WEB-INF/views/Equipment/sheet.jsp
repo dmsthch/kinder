@@ -39,7 +39,7 @@
 		<div class="content">
 			<div class="container-fluid">	
 			
-	<div class="btn-group">
+<!-- 	<div class="btn-group">
 	  <button type="button" class="btn btn-primary">:: 비품카테고리 ::</button>
 	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 	    <span class="caret"></span>
@@ -51,9 +51,19 @@
 	    <li><a href="#">도서목록</a></li>
 	    <li><a href="#">기타</a></li>
 	  </ul>
+	</div> -->
+	<div class="input-group-btn search-panel">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100px;">
+			<span id="category">카테고리 </span><span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<c:forEach var="a" items="${getCategory}">
+				<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
+			</c:forEach>
+		</ul>
 	</div>
+	<input type="hidden" name="boardCategoryNo" value="0" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
 	<button id="btTest">save</button>
-	<button id="reroad">road</button>
 	<div>
 		제목 :
 		<input type="text" id="sheetName"/>
@@ -62,35 +72,25 @@
 		<div id="example1"></div>
 	</div>
 	
-	
-	<!-- Trigger the modal with a button123 -->
-	<div style="display : none;">
-	<button type="button" id="roadmodal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-	</div>
-	<!-- Modal -->
-	<div id="myModal" class="modal fade" role="dialog">
-  		<div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">저장 목록</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  	</div>
-	</div>
 	
 	
 </div></div></div></div>
-
+<script>
+$(document).ready(function(e){
+    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+		e.preventDefault();
+		var param = $(this).attr("href").replace("#",""); //해당 버튼의 href속성에서 #을 제거한 값
+		console.log(param + 'param값 확인');
+		var category = $(this).text(); //해당 버튼의 내용
+		$('.search-panel span#category').text(category); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
+		$('#boardCategoryNo').val(param);
+	});
+});
+</script>
 <script data-jsfiddle="example1">
+
+
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
 	
@@ -154,31 +154,12 @@
 		}
 	   
 	});
- 	$('#reroad').click(function(){
- 		console.log('더워 미치겠네');
- 		$('#roadmodal').trigger('click');
-
- 		$.ajax({
- 			url : "${pageContext.request.contextPath}/reroad",
- 			type : 'POST',
- 			dataType: "json",
- 			async: false,
- 			data:Sheet,
- 			success : function(data){
-
- 			var jsondata = JSON.stringify(data);
-
- 			alert(jsondata);
- 		                        
- 		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
- 		     console.log("Status: " + textStatus);
- 		},timeout: 3000
- 		});    
- 	});
-	  	
 	  	
 	$('#btTest').click(function(){
 /* 		dataArray[dataArray.length] = hot.mergeCells;	 */
+		var param = $('#boardCategoryNo').val();
+		console.log(param);
+		var borderArray=[];
 		var jparse=JSON.stringify(dataArray);
 		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
 		for(var i = 0 ; i<hot.countRows(); i++){
@@ -200,7 +181,7 @@
 	        url:"${pageContext.request.contextPath}/save",
 	        type:'POST',
 	        async: false,
-	        data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "sheetName":sheetName },
+	        data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "sheetName":sheetName, "sheetCategory" : param },
 	        success:function(data){
 	            alert("저장!");
 /* 	            window.opener.location.reload();
@@ -220,7 +201,9 @@
 // 		console.log(dataArray);sdf
 	},5000)
 	})
-  
+
+
+
 </script>
 </body>
 <%-- <c:import url="../module/importJS.jsp"></c:import> --%>

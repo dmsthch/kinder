@@ -80,7 +80,7 @@
 
 <div class="row">
 	<div class="form-group">
-	    <div class="row">    
+	    <div class="row col-sm-offset-1">    
 	        <div class="col-xs-8 col-xs-offset-2">
 			    <div class="input-group">
 	                <div class="input-group-btn search-panel">
@@ -96,7 +96,7 @@
 	
 	<div class="form-group">
 	    <div class="row">   
-	    	<div class="col-xs-3 col-xs-offset-2">
+	    	<div class="col-xs-3 col-xs-offset-3">
 <%-- 	        	<input type="text" name="boardTeacher" class="form-control" value="첨부파일 : ${board.boardDay }" style="background-color:white;" readonly> --%>
 				
 				<span>첨부파일 : 
@@ -117,7 +117,7 @@
 	
 	<div class="form-group">
 		<div class="row">    
-	        <div class="col-xs-8 col-xs-offset-2">
+	        <div class="col-xs-8 col-xs-offset-3">
 		    	<div class="input-group col-sm-12">
 	                <textarea readonly name="boardContent" style="background-color:white;" rows="15" class="form-control">${board.boardContent }</textarea>
 	            </div>
@@ -127,7 +127,7 @@
 	 
 	<div class="form-group">
 		<div class="row">    
-	        <div class="col-xs-8 col-xs-offset-2 text-right">
+	        <div class="col-xs-8 col-xs-offset-3 text-right">
 	        	<a href="${pageContext.request.contextPath}/MaterialModify?boardNo=${board.boardNo}"><button type="button" class="btn btn-default">글수정</button></a>
 				<a href="${pageContext.request.contextPath}/MaterialDocumnetList"><button type="button" class="btn btn-default">글목록</button></a>
 	        </div>
