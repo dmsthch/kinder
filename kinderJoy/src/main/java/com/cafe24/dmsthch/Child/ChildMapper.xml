@@ -38,7 +38,7 @@
   	
   </select>
   
-  <select id="getClass" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
+  <select id="getClass" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.ChildClass">
   	SELECT
   		class_no AS classNo
   	  	, license_kindergarten AS licenseKindergarten 
@@ -50,21 +50,6 @@
   	LIMIT  #{beginRow}, #{pagePerRow}  	
   </select>
   	
-  <select id="getChildList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
-  	SELECT 
-  		kid_no 
-  		, kid_name
-  		, kid_birth
-  		, kid_address
-  		, kid_protector_phone
-  		, kid_precautions
-  		, kid_gender
-  		, kid_commuting
-  		, kid_entrance_day
-  	FROM kid 
-  	LIMIT  #{beginRow}, #{pagePerRow}
-  </select>
-  
   <select id="getChildCount" resultType="int">
   	SELECT COUNT(*) FROM kid
   </select>
@@ -98,6 +83,23 @@
   	
   </insert>
   
+  <insert id="insertClass" parameterType="com.cafe24.dmsthch.Child.ChildClass">
+  	
+  	INSERT INTO kid_class (
+  		license_kindergarten,
+  		class_name,
+  		class_year,
+  		class_age )
+  	VALUES (
+  		#{licenseKindergarten},
+  		#{className},
+  	    DATE_FORMAT(NOW(),'%Y-%m-%d'),
+  		#{classAge}
+  	);
+  	
+  	
+  </insert>
+  
   <!-- 여러가지 조건으로 select -->
   <select id="severalSelect" resultType="com.cafe24.dmsthch.Child.Child" parameterType="java.util.Map">
   	select
@@ -118,6 +120,21 @@
 	and teacher_formation.license_kindergarten = #{license} and teacher_formation.teacher_no = #{teacherNo}
 	LIMIT  #{beginRow}, #{pagePerRow}
 		  	
+  </select>
+  
+  <select id="getChildList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
+  	SELECT 
+  		kid.kid_name AS kidName,
+		kid.kid_birth AS kidBirth ,
+		kid.kid_address AS kidAddress,
+		kid.kid_protector_phone AS kidProtectorPhone,
+		kid.kid_protector_phone_reserve AS kidProtectorPhoneReserve,
+		kid.kid_precautions AS kidPrecautions,
+		kid.kid_gender AS kidGender,
+		kid.kid_commuting AS kidCommuting,
+		kid.kid_entrance_day AS kidEntranceDay
+  	FROM kid where kid.license_kindergarten = #{license}
+  	LIMIT  #{beginRow},#{pagePerRow}
   </select>
   
   </mapper>

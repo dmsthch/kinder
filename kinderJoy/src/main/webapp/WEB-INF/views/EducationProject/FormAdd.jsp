@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,15 +15,28 @@
   <script src="js/LCR/EducationProject/numbro/languages.js"></script>
   <script src="js/LCR/EducationProject/handsontable.js"></script>
   <script src="js/jquery.js"></script>
-
+<c:import url="./nav/SideNav.jsp"></c:import>
+<c:import url="../module/importCSS.jsp"></c:import>
+<c:import url="../module/navbar.jsp"></c:import>
 	<title>Insert title here</title>
+	<script>
+	$(document).ready(function(){
+		$('#educationProjectAddPage').attr('class','active');
+	})
+	</script>
 </head>
-<body>
-	<button id="btTest">bt</button>
-	<button name="save" id="save">Save</button>
-	<button name="test" id="test">Test</button>
-	<div class="wrapper" style="margin-top: 20px;">
-		<div id="example1"></div>
+<body class="components-page">
+	<div class="wrapper">
+		<div class="main-panel">
+			<div class="content">
+				<button id="btTest">bt</button>
+				<button name="save" id="save">Save</button>
+				<button name="test" id="test">Test</button>
+				<div class="wrapper" style="margin-top: 20px;">
+					<div id="example1"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 <script data-jsfiddle="example1">

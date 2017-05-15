@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,15 +15,23 @@
   <script src="js/LCR/EducationProject/numbro/languages.js"></script>
   <script src="js/LCR/EducationProject/handsontable.js"></script>
   <script src="js/jquery.js"></script>
-
+	<c:import url="./nav/SideNav.jsp"></c:import>
+	<c:import url="../module/importCSS.jsp"></c:import>
+	<c:import url="../module/navbar.jsp"></c:import>
 	<title>Insert title here</title>
 </head>
-<body>
-	<!-- <button name="save" id="save">계획안 저장</button> -->
-	날짜 : ${resultData.addDate}<br>
-	번호 : ${resultData.educationProjectNo} 
-	<div class="wrapper" style="margin-top: 20px;">
-		<div id="example1"></div>
+<body class="components-page">
+	<div class="wrapper">
+		<div class="main-panel">
+			<div class="content">
+				<!-- <button name="save" id="save">계획안 저장</button> -->
+				날짜 : ${resultData.addDate}<br>
+				번호 : ${resultData.educationProjectNo} 
+				<div class="wrapper" style="margin-top: 20px;">
+					<div id="example1"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 <script data-jsfiddle="example1">

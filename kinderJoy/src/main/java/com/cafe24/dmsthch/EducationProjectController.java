@@ -1,5 +1,7 @@
 package com.cafe24.dmsthch;
 
+import java.util.Calendar;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,15 @@ public class EducationProjectController {
 	
 	//계획안메인화면
 	@RequestMapping(value = "/educationProject", method = RequestMethod.GET)
-	public String educationMain() {
+	public String educationMain(Model model) {
+		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
+		int year = c.get(Calendar.YEAR);
+/*		System.out.println(c.get(Calendar.LONG_FORMAT));*/
+		/*ntime += String.valueOf(c.get(Calendar.MONTH)) + "월 ";
+		ntime += String.valueOf(c.get(Calendar.DATE)) + "일";*/
+		System.out.println(year);/*
+		System.out.println(c+"<<<c");*/
+		model.addAttribute("year",year);
 		return "EducationProject/EducationProject";
 	}
 	
@@ -87,10 +97,12 @@ public class EducationProjectController {
 	public String EducationProjectLoad(HttpSession session
 										,Model model
 										,@RequestParam(value="categoryNo") String categoryNo
+										,@RequestParam(value="age", required=false, defaultValue="") int age
+										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo
 										,@RequestParam(value="date") String date){
 		System.out.println("계획안 불러오는거 테스트");
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
-		Education result =dao.educationProjectLoad(categoryNo, date, licenseKindergarten);
+		Education result =dao.educationProjectLoad(categoryNo, date, licenseKindergarten,age,classNo);
 		model.addAttribute("resultData",result);
 		return "EducationProject/EducationProjectLoad";
 	}
