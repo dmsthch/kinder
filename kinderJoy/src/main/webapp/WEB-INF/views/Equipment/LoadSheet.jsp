@@ -117,9 +117,16 @@ $(document).ready(function(e){
 
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
-	
-	var testData = [null,null,null,null,{"row":4,"col":7,"val":"1234"},{"row":5,"col":4,"val":"4321"},{"row":6,"col":10,"val":"2134"},null,null,null,{"row":10,"col":7,"val":"4321"},null,null,{"row":13,"col":6,"val":"1234"},{"mergedCellInfoCollection":[]}]; //데이터
-	var testMerge = [{"row":5,"col":2,"rowspan":5,"colspan":3},{"row":10,"col":4,"rowspan":5,"colspan":5}];
+	var dataValue = ${sheet.valueVal};
+	var dataMerge = ${sheet.valueMerge};
+	var dataBorders = ${sheet.valueBorders};
+	//
+	var countRow = ${sheet.valueRow};
+	var countCol = ${sheet.valueCols};
+	var addDate = ${resultData.addDate}
+	var educationProjectNo = ${resultData.educationProjectNo} 
+//	var testData = [null,null,null,null,{"row":4,"col":7,"val":"1234"},{"row":5,"col":4,"val":"4321"},{"row":6,"col":10,"val":"2134"},null,null,null,{"row":10,"col":7,"val":"4321"},null,null,{"row":13,"col":6,"val":"1234"},{"mergedCellInfoCollection":[]}]; //데이터
+//	var testMerge = [{"row":5,"col":2,"rowspan":5,"colspan":3},{"row":10,"col":4,"rowspan":5,"colspan":5}];
 	
 	  
 		hot = new Handsontable(container, {

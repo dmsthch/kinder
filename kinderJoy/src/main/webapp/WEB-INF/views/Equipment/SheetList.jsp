@@ -37,10 +37,11 @@
 								</div>
 								<div class="card-footer textRiht">
 									<div class="stats ">
-<%-- 										<c:forEach var="getCategory1" items="${getCategory}">
-											<i class="material-icons" style="margin-left: 5px;">date_range</i><a href="#pablo">${getCategory1.categoryNo}</a>
-										</c:forEach> --%>
-										123
+ 										<c:forEach var="sheet" items="${sheet}">
+											<c:if test="${sheet.equipmentCategoryNo == getCategory.categoryNo}">
+												<i class="material-icons" style="margin-left: 5px;">date_range</i><a href="${pageContext.request.contextPath}/reroad?sheetName=${sheet.valueName}">${sheet.valueName}</a>
+											</c:if>
+										</c:forEach>
 									</div>
 								</div>
 							</div>

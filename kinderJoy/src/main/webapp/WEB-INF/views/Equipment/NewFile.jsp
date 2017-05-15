@@ -2,6 +2,11 @@
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- script -->
+<style>
+.table.table {
+1
+}
+</style>
 <script>
 	// TR태그 복사하기
 	$(document).on('click','#button',function(){
@@ -194,6 +199,7 @@
 							</c:forEach>
 						</ul>
 					</div>
+					<input type="hidden" name="boardCategoryNo" value="0" class="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
 <!-- 					<select class="form-control select" name="equipmentCategorySelect">
 						<option class="option">카테고리<span class="caret"></span></option>
 						<option value="1">교재,교구</option>
@@ -257,6 +263,7 @@
 							</c:forEach>
 						</ul>
 					</div>
+					<input type="hidden" name="boardCategoryNo" value="0" class="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
 <!-- 				<select class="form-control select" name="equipmentCategorySelect">
 					<option class="option">카테고리<span class="caret"></span></option>
 					<option value="1">교재,교구</option>
@@ -308,8 +315,8 @@
 			e.preventDefault();
 			var param = $(this).attr("href").replace("#",""); //해당 버튼의 href속성에서 #을 제거한 값
 			var category = $(this).text(); //해당 버튼의 내용
-			$('.search-panel span#category').text(category); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
-			$('.input-group #boardCategoryNo').val(param);
+			$(this).parent().parent().find('.search-panel span#category').text(category); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
+			$(this).parent(),parent().find('.boardCategoryNo').val(param);
 		});
 	});
 </script>
