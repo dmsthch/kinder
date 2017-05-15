@@ -141,7 +141,7 @@
 	                                        </div>
 	                                    </div>
 
-	                                    <button type="submit" class="btn btn-primary pull-right">프로필 수정하기</button>
+	                                    <button type="submit" class="btn btn-fault">프로필 수정하기</button>
 	                                    <div class="clearfix"></div>
 	                                </form>
 	                            </div>

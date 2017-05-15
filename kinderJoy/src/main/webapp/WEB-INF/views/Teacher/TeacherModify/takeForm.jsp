@@ -39,7 +39,7 @@
 	
 	$(document).ready(function(){
 		var oldContainer;
-		$("ol.nested_with_switch").sortable({
+		$("ol.jkc").sortable({
 		  group: 'nested',
 		  afterMove: function (placeholder, container) {
 		    if(oldContainer != container){
@@ -101,28 +101,40 @@
 									                
 									              </div> -->
 									              
-									              <ol class="nested_with_switch vertical">
-									              	반
-									        	  	<c:forEach var="C" items="${takeClass}">							           	  
-									           	    <li class="" style="">
-									              	${C.classNo}반
-									              	<ol class="">
-									              	</ol>
-									           		</li>
-									           	  	</c:forEach>
-								        	 	 </ol>
+									              
+									              <%-- <c:forEach var="C" items="${takeClass}"> --%>
+									              <c:forEach begin="3" end="5" var="age">
+									              		${age}살
+										              <c:forEach var="C" items="${takeClass}">
+										              <c:if test="${C.classAge == age}">
+										              
+										              <ol class="jkc vertical">
+										           	    <li class="" style="">
+											              	<ol class="">
+											              	${C.classNo}반
+											              	</ol>
+										           		</li>
+									        	 	 </ol>
+									        	 	 </c:if>
+									        	 	 </c:forEach>
+								        	 	 </c:forEach>
+								        	 	 
+								        	 	 
 											</div>
 											<!-- "span4" -->
 										 	<div class="col-md-5">   
-									        	<ol class="nested_with_switch vertical">
+										 		
+										 		<!-- ★★★★★<ol class="nested_with_switch vertical"> -->
+										 		
+									        	<ol class="jkc vertical">
 									        			교원목록
-										             	<c:forEach var="T" items="${takeTeacher}">
-												        <li>${T.teacher_id}</li>
-												        </c:forEach>
+									             	<c:forEach var="T" items="${takeTeacher}">
+										        <li>${T.teacher_name}</li>
+											        </c:forEach>
 									       		</ol>
 											</div>
 	                            		</div>
-	                            	<button type="submit" name="submit">저장하기</button>
+	                            	<input type="button" value="저장하기" id="send" />
 	                            </form>
 	                        </div>
 	                    </div>
