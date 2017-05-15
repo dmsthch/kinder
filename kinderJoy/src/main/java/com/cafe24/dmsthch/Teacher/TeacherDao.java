@@ -1,6 +1,9 @@
 package com.cafe24.dmsthch.Teacher;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +45,25 @@ public class TeacherDao {
 	}
 	
 	//전체 교원의 전체 정보 조회 admin전용
-	public List<String> tableList(Teacher teacher) {
-		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.tableList",teacher);
+	public List<Object> tableList(String 입력값) {
+		System.out.println(입력값+"나오냐");
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.tableList",입력값);
 	}
+	
+	//편성폼 교원
+	//컨트롤러에서 받은 값이 변수에 대입된다.
+	public List<String> takeT(String takeTeacher) {
+		System.out.println("편성폼의 교원 메서드 호출 확인");
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeTeacher",takeTeacher);
+	}
+	
+	//편성폼 클래스
+	//컨트롤러에서 받은 값이 변수에 대입된다
+	public List<Integer> takeC(String takeClass) {
+		System.out.println("편성폼의 클래스 메서드 호출 확인");
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeClass", takeClass);
+	}
+	
+	
+	
 }
