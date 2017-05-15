@@ -4,30 +4,45 @@
 <!DOCTYPE html>
 <html>
 
-
+<head>
 <script>
 console.log(${year}+"<,,,");
 console.log(${childclass}+"<<childclass")
 </script>
+<c:import url="../module/importJS.jsp"></c:import>
 <c:import url="./nav/SideNav.jsp"></c:import>
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
 <style>
-	.ageFont {
+.ageFont {
 	font-size: 35px;
-	}
-	
-	.textRiht{
+}
+
+.textRiht {
 	text-align: right;
 	margin-right: 20px;
-	}
+}
+
+.myBtn.myBtn {
+	background: transparent;
+	border: 2px solid white;
+	border-radius: 0;
+	color: white;
+	font-size: 15px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	padding: 5px 35px;
+	margin-top: 5px;
+	transition: all 0.4s ease-in-out;
+}
 </style>
+</head>
 <body class="components-page">
 <div class="wrapper">
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
-			
+				<button class=" btn btn-default myBtn"> adsf</button>
 				<!-- 월간계획안 -->
 				<div class="row">
 					<c:forEach var ="age" begin="3" end ="5">

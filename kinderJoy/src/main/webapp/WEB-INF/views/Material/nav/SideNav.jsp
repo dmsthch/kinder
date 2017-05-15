@@ -9,26 +9,19 @@
 	<link rel="icon" type="image/png" href="css/LCR/assets/img/favicon.png" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Material Dashboard by Creative Tim</title>
-
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-
- 
+    <!-- Bootstrap core CSS     -->
+    <link href="css/LCR/EducationProject/assets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!--  Material Dashboard CSS    -->
-    <link href="css/LCR/EducationProject/assets/css/material-dashboard.css" rel="stylesheet"/>
+    <link href="css/KHS/material-dashboard.css" rel="stylesheet"/>
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     
-
+    <script src="js/LCR/Calendar/lib/jquery.min.js"></script>
 </head>
 <body class="components-page">
-
-
-	
 
 	    <div class="sidebar" data-color="blue" data-image="../assets/img/sidebar-1.jpg">
 			<!--
@@ -47,59 +40,44 @@
 	            <ul class="nav">
 	                <!-- <li class="active"> -->
 	                <li id="educationProjectAddPage">
-	                    <a href="${pageContext.request.contextPath}/educationProjectAddPage">
+	                    <a href="${pageContext.request.contextPath}/Material">
 	                        <i class="material-icons">dashboard</i>
-	                        <p>양식 추가</p>
+	                        <p>자료실</p>
+	                    </a>
+	                </li>
+	                <li id="educationProjectAddPage">
+	                    <a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=0">
+	                        <i class="material-icons">dashboard</i>
+	                        <p>전체 리스트</p>
 	                    </a>
 	                </li>
 	                <li id="educationProjectFormLoad">
-	                    <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=1">
+	                    <a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=1">
 	                        <i class="material-icons">person</i>
-	                        <p>임시</p>
+	                        <p>문서 양식 리스트</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="${pageContext.request.contextPath}/educationProjectAddPage">
+	                    <a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=2">
 	                        <i class="material-icons">content_paste</i>
-	                        <p>임시2</p>
+	                        <p>교육 자료 리스트</p>
 	                    </a>
 	                </li>
 	                <li>
-	                    <a href="typography.html">
+	                    <a href="${pageContext.request.contextPath}/MaterialAdd">
 	                        <i class="material-icons">library_books</i>
-	                        <p>Typography</p>
+	                        <p>자료 추가</p>
 	                    </a>
 	                </li>
-	                <li>
-	                    <a href="icons.html">
-	                        <i class="material-icons">bubble_chart</i>
-	                        <p>Icons</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="maps.html">
-	                        <i class="material-icons">location_on</i>
-	                        <p>Maps</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="notifications.html">
-	                        <i class="material-icons text-gray">notifications</i>
-	                        <p>Notifications</p>
-	                    </a>
-	                </li>
-					<li class="active-pro">
-	                    <a href="upgrade.html">
-	                        <i class="material-icons">unarchive</i>
-	                        <p>Upgrade to PRO</p>
-	                    </a>
-	                </li>
+	                
 	            </ul>
 	    	</div>
 	    </div>
 	    
 	    <!--   Core JS Files   -->
-
+	<script src="css/LCR/EducationProject/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
+	<script src="css/LCR/EducationProject/assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="css/LCR/EducationProject/assets/js/material.min.js" type="text/javascript"></script>
 
 	<!--  Charts Plugin -->
 	<script src="css/LCR/EducationProject/assets/js/chartist.min.js"></script>
@@ -109,9 +87,18 @@
 
 
 	<!-- Material Dashboard javascript methods -->
-<!-- 	<script src="css/LCR/EducationProject/assets/js/material-dashboard.js"></script> -->
+	<script src="css/LCR/EducationProject/assets/js/material-dashboard.js"></script>
 
+	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
+	<script src="css/LCR/EducationProject/assets/js/demo.js"></script>
 
+	<script type="text/javascript">
+    	$(document).ready(function(){
+			// Javascript method's body can be found in assets/js/demos.js
+        	demo.initDashboardPageCharts();
+
+    	});
+	</script>
 	    
 
   </div><!-- /.container-fluid -->
