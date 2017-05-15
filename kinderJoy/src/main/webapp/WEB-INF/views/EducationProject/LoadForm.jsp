@@ -38,6 +38,7 @@
 		</div>
 	</div>
 <script data-jsfiddle="example1">
+$(document).ready(function(){
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
 	var dataValue = ${resultData.formVal};
@@ -164,7 +165,7 @@
 // 		console.log(hot.getCellsMeta())
 // 		console.log(dataArray);
 	},5000)
-  
+})
 </script>
 
 

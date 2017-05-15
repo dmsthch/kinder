@@ -119,7 +119,9 @@
 	AND (SELECT year(add_date)) = #{addDate}
 	AND age = #{age}
 	</if>
-	AND e.class_no =${classNo} 
+	<if test="categoryNo != 1">
+	AND e.class_no = ${classNo}
+	</if> 
 </select>
 
 <!-- 해당 유치원의 모든 반 목록 가져오기 -->
@@ -133,7 +135,28 @@
 	WHERE license_kindergarten = #{licenseKindergarten}
 	AND class_year = #{classYear}
  </select>
-	
 
-  
+<!-- 해당 반의 카테고리별로(월/주/일) 목록 가져오기 -->
+<select id="EducationProjectList" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.EducationProject.Educationt">
+	SELECT
+	 	e.education_project_no AS educationProjectNo 
+		,e.add_date AS addDate
+		,c.category_name AS categoryNo
+		,e.age
+		,e.class_no AS classNo
+	FROM education_project e
+	INNER JOIN education_category c
+	ON e.category_no = c.category_no
+	WHERE license_kindergarten = #{licenseKindergarten}
+	<if test="categoryNo == 2 ">
+		AND (SELECT month(add_date)) = #{addDate}
+	</if>
+	<if test="categoryNo == 3 ">
+		AND (SELECT week(add_date)) = #{addDate}
+	</if>
+	<if test="categoryNo == 4 ">
+		AND (SELECT day(add_date)) = #{addDate}
+	</if>
+	AND class_no = #{classNo}
+</select>
   </mapper>

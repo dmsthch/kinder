@@ -117,7 +117,13 @@ public class EducationProjectController {
 	
 	//계획안 리스트()
 	@RequestMapping(value = "/EducationProjectList", method = RequestMethod.GET)
-	public String EducationProjectList(){
+	public String EducationProjectList(HttpSession session
+										,@RequestParam(value="categoryNo") String categoryNo
+										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo){
+		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
+		int month = c.get(Calendar.MONTH);
+	
+		
 		return "EducationProject/EducationProjectList";
 	}
 	
