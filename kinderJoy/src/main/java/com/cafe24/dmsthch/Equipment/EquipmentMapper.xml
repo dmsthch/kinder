@@ -19,6 +19,8 @@
   			license_kindergarten=#{licenseKindergarten} 
   		AND 
   			value_name=#{valueName}
+  		AND
+  			equipment_category_no=#{equipmentCategoryNo}
   		ORDER BY value_no 
   		DESC LIMIT 1;
   	</select>

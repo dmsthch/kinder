@@ -65,7 +65,8 @@ public class EquipmentDao {
 	
 	// 스프레드 시트값 로드하기
 	public Sheet selectEquipmentSheet(HttpSession session
-								,String reroad) {
+								,String reroad
+								,String sheetCategoryNo) {
 		
 		System.out.println("selectEquipment 메서드 내용 실행");
 		
@@ -74,7 +75,7 @@ public class EquipmentDao {
 		
 		sheet.setLicenseKindergarten(licenseKindergarten);
 		sheet.setValueName(reroad);
-		
+		sheet.setEquipmentCategoryNo(sheetCategoryNo);
 		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectLoadEquipmentSheet", sheet);
 	}
 	

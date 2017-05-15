@@ -16,7 +16,15 @@
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
 
-
+<style>
+@font-face{
+	font-family: 'koverwatch';
+	src: url(fonts/koverwatch.ttf) format('truetype');
+}
+body {
+	font-family: koverwatch
+}
+</style>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 

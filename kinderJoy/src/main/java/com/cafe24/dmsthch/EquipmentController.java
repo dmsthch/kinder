@@ -86,13 +86,15 @@ public class EquipmentController {
 		
 		return "Equipment/sheet";
 	}
-	@RequestMapping(value = "reroad", method = RequestMethod.POST)
+	@RequestMapping(value = "reroad", method = RequestMethod.GET)
 	public String road(Model model
 						,HttpSession session
-						,@RequestParam(value="reroad") String reroad){
+						,@RequestParam(value="sheetName") String reroad
+						,@RequestParam(value="sheetCategoryNo") String sheetCategoryNo){
 		
-		Sheet sheet = dao.selectEquipmentSheet(session, reroad);
+		Sheet sheet = dao.selectEquipmentSheet(session, reroad, sheetCategoryNo);
 		model.addAttribute("sheet", sheet);
+		
 		return "Equipment/LoadSheet";
 	}
 	@RequestMapping(value = "saveLoad", method = RequestMethod.GET)

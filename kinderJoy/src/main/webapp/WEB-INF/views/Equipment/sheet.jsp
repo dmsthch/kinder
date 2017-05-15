@@ -64,7 +64,6 @@
 	</div>
 	<input type="hidden" name="boardCategoryNo" value="0" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
 	<button id="btTest">save</button>
-	<button id="reroad">road</button>
 	<div>
 		제목 :
 		<input type="text" id="sheetName"/>
@@ -73,30 +72,7 @@
 		<div id="example1"></div>
 	</div>
 	
-	
-	<!-- Trigger the modal with a button123 -->
-	<div style="display : none;">
-	<button type="button" id="roadmodal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-	</div>
-	<!-- Modal -->
-	<div id="myModal" class="modal fade" role="dialog">
-  		<div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">저장 목록</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  	</div>
-	</div>
 	
 	
 </div></div></div></div>
@@ -178,28 +154,6 @@ $(document).ready(function(e){
 		}
 	   
 	});
- 	$('#reroad').click(function(){
- 		console.log('더워 미치겠네');
- 		$('#roadmodal').trigger('click');
-
- 		$.ajax({
- 			url : "${pageContext.request.contextPath}/reroad",
- 			type : 'POST',
- 			dataType: "json",
- 			async: false,
- 			data:Sheet,
- 			success : function(data){
-
- 			var jsondata = JSON.stringify(data);
-
- 			alert(jsondata);
- 		                        
- 		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
- 		     console.log("Status: " + textStatus);
- 		},timeout: 3000
- 		});    
- 	});
-	  	
 	  	
 	$('#btTest').click(function(){
 /* 		dataArray[dataArray.length] = hot.mergeCells;	 */
