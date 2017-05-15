@@ -14,17 +14,13 @@
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
 
-    <!-- Bootstrap core CSS     -->
-    <link href="css/LCR/EducationProject/assets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!--  Material Dashboard CSS    -->
-    <link href="css/LCR/EducationProject/assets/css/material-dashboard.css" rel="stylesheet"/>
+ 
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     
-    <script src="js/LCR/Calendar/lib/jquery.min.js"></script>
+
 </head>
 <body class="components-page">
 
@@ -100,31 +96,14 @@
 	    </div>
 	    
 	    <!--   Core JS Files   -->
-	<script src="css/LCR/EducationProject/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-	<script src="css/LCR/EducationProject/assets/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="css/LCR/EducationProject/assets/js/material.min.js" type="text/javascript"></script>
 
-	<!--  Charts Plugin -->
-	<script src="css/LCR/EducationProject/assets/js/chartist.min.js"></script>
 
-	<!--  Notifications Plugin    -->
-	<script src="css/LCR/EducationProject/assets/js/bootstrap-notify.js"></script>
 
 
 	<!-- Material Dashboard javascript methods -->
-	<script src="css/LCR/EducationProject/assets/js/material-dashboard.js"></script>
+<!-- 	<script src="css/LCR/EducationProject/assets/js/material-dashboard.js"></script> -->
 
-	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-	<script src="css/LCR/EducationProject/assets/js/demo.js"></script>
 
-	<script type="text/javascript">
-    	$(document).ready(function(){
-
-			// Javascript method's body can be found in assets/js/demos.js
-        	demo.initDashboardPageCharts();
-
-    	});
-	</script>
 	    
 
   </div><!-- /.container-fluid -->

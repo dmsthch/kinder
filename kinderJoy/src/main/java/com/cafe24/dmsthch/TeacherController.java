@@ -42,8 +42,21 @@ public class TeacherController {
 	
 	//편성표폼 호출
 	@RequestMapping(value="/takeForm", method=RequestMethod.GET)
-	public String takeForm() {
-		System.out.println("편성표 폼 호출__Teacher/TeacherModify/takeForm으로 포워드\n");
+	public String takeForm(HttpSession httpsession ,Model model) {
+		System.out.println("편성폼 호출__Teacher/TeacherModify/takeForm으로 포워드\n");
+		
+		//자신의 유치원 정보만 가져오기위하여 세션에 저장되어있는 값인 licenseKindergarten을 가져와서
+		//TDao에 있는 takeClass 메서드에 
+		//((String) httpsession.getAttribute("licenseKindergarten")) 값을 넣어주었다
+		//takeTeacher도 마찬가지
+		
+		List<String> takeT = TDao.takeT((String) httpsession.getAttribute("licenseKindergarten"));
+		List<Integer> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
+		System.out.println(takeC +"CCCCCCCCCCCCCCCCCCCCC");
+		
+		model.addAttribute("takeTeacher" ,takeT);
+		model.addAttribute("takeClass"   ,takeC);
+		
 		return "Teacher/TeacherModify/takeForm";
 	}
 	
@@ -57,10 +70,11 @@ public class TeacherController {
 		return "Teacher/TeacherModify/user";
 	}
 	
-	//교원목록 테이블폼 호출 메서드 //Table List
+	//교원목록 테이블폼 호출 메서드 //TableList
 	@RequestMapping(value="/kyotable", method=RequestMethod.GET)
-	public String kyowon1(Model model, Teacher teacher) {
-		List<String> teacher2 = TDao.tableList(teacher);
+	public String kyowon1(Model model, HttpSession httpsession) {
+		List<Object> teacher2 = TDao.tableList((String)httpsession.getAttribute("licenseKindergarten"));
+		
 		//폼에 뿌려주려고 모델객체에 담음
 		model.addAttribute("tableList",teacher2);
 		/*Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));

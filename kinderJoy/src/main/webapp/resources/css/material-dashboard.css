@@ -465,6 +465,7 @@ h2.title {
 .sidebar .nav,
 .off-canvas-sidebar .nav {
   margin-top: 20px;
+
 }
 .sidebar .nav li > a,
 .off-canvas-sidebar .nav li > a {
@@ -663,6 +664,7 @@ h2.title {
 }
 .main-panel > .navbar {
   margin-bottom: 0;
+
 }
 
 .main-panel {
@@ -1449,7 +1451,7 @@ h2.title {
 }
 
 body {
-  background-color: #EEEEEE;
+  background-color: #FFFFFF;
   color: #3C4858;
 }
 body.inverse {
@@ -2876,12 +2878,15 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   border-bottom: 1px solid #ededf3;
   padding: 10px 0;
 }
+
 .navbar .navbar-brand {
   position: relative;
   height: 50px;
   line-height: 30px;
   color: inherit;
   padding: 10px 15px;
+  font-size: 40px;
+  font-family: 'Nanum Pen Script', serif;
 }
 .navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
   color: inherit;
@@ -2910,13 +2915,14 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   margin-bottom: 15px;
 }
 .navbar .navbar-nav > li > a {
-  color: inherit;
+  color: #151515;
   padding-top: 15px;
   padding-bottom: 15px;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 30px;
   text-transform: uppercase;
   border-radius: 3px;
+   font-family: 'Nanum Pen Script', serif;
 }
 .navbar .navbar-nav > li > a:hover, .navbar .navbar-nav > li > a:focus {
   color: inherit;
@@ -3311,13 +3317,15 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 .navbar-inverse {
   background-color: #3f51b5;
 }
+
 .navbar.navbar-transparent {
-  background-color: transparent;
+  background-color: #FAFAFA;
+  opacity : 0.85;
   box-shadow: none;
   border-bottom: 0;
 }
 .navbar.navbar-transparent .logo-container .brand {
-  color: #FFFFFF;
+  color: #01DFD7;
 }
 .navbar-fixed-top {
   border-radius: 0;
