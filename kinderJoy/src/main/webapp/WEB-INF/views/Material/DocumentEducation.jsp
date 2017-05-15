@@ -7,9 +7,9 @@
 	<title>Title</title>
 	
 	<!-- CSS Link -->
-	<c:import url="../module/KHS/importCSS.jsp"></c:import>
+	<c:import url="../module/importCSS.jsp"></c:import>
 	<!-- JS Link -->
-	<c:import url="../module/KHS/importJS.jsp"></c:import>
+	<c:import url="../module/importJS.jsp"></c:import>
 
 	<style type="text/css">
 		h6 {
@@ -26,8 +26,8 @@
 		$(document).ready(function(e){
 			
 			// 처음 실행할때 리스트 미리보기 탭에서 전체텝이 출력되는 현상 방지
-			$('.nav-tabs-wrapper').find('a').eq(1).click();
-			$('.nav-tabs-wrapper').find('a').eq(0).click()
+// 			$('.nav-tabs-wrapper').find('a').eq(1).click();
+// 			$('.nav-tabs-wrapper').find('a').eq(0).click()
 			
 			//검색창에서 카테고리 버튼
 		    $('.search-panel .dropdown-menu').find('a').click(function(e) {
@@ -100,9 +100,7 @@
 									<h6 class="title">전체 리스트</h6>
 								</div>
 								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons text-danger">warning</i> <a href="#pablo">Get More Space...</a>
-									</div>
+									
 								</div>
 							</div>
 						</a>
@@ -119,9 +117,6 @@
 									<h6 class="title">문서 양식 리스트</h6>
 								</div>
 								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons text-danger">warning</i> <a href="#pablo">Get More Space...</a>
-									</div>
 								</div>
 							</div>
 						</a>
@@ -138,9 +133,6 @@
 									<h6 class="title">교육 자료 리스트</h6>
 								</div>
 								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons text-danger">warning</i> <a href="#pablo">Get More Space...</a>
-									</div>
 								</div>
 							</div>
 						</a>
@@ -157,9 +149,6 @@
 									<h6 class="title">자료 추가</h6>
 								</div>
 								<div class="card-footer">
-									<div class="stats">
-										<i class="material-icons text-danger">warning</i><a href="#pablo">Get More Space...</a>
-									</div>
 								</div>
 							</div>
 						</a>
@@ -225,7 +214,7 @@
 											</table>
 										</div>
 										
-										<div class="tab-pane active" id="documentList">
+										<div class="tab-pane" id="documentList">
 											<table class="table">
 												<thead class="text-center">
 													<tr>
@@ -248,7 +237,7 @@
 											</table>
 										</div>
 										
-										<div class="tab-pane active" id="educationList">
+										<div class="tab-pane" id="educationList">
 											<table class="table">
 												<thead>
 													<tr>
