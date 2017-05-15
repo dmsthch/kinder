@@ -54,9 +54,9 @@
 	                    </a>
 	                </li>
 	                <li id="educationProjectFormLoad">
-	                    <a href="${pageContext.request.contextPath}/sheet">
+	                    <a href="${pageContext.request.contextPath}/SheetList">
 	                        <i class="material-icons">person</i>
-	                        <p>품의서 작성</p>
+	                        <p>품의서 리스트</p>
 	                    </a>
 	                </li>
 	                <li>

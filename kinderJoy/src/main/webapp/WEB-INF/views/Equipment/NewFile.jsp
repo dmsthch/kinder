@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- script -->
 <script>
+
 	// TR태그 복사하기
 	$(document).on('click','#button',function(){
 			var getCopyObject = $('#copyTargetTable tbody').clone();			
@@ -32,7 +33,7 @@
 	// 보관상태 포커스아웃으로 readonly 생성
 	$(document).on('focusout','.test1',function(){
 		$(this).attr('readonly','readonly');
-	});
+	}); 
 	// 숫자 유효성 검사
 	$(document).on('focusout','.testNote',function(){	
 		var testNote2 = $(this).val();
@@ -99,11 +100,11 @@
 		console.log(testValuePrice);
 		$(this).parent().parent().parent().parent().find('.testTotalPrice').val(testValuePrice);
 	});
-	//카테고리 셀렉트 카테고리 글씨 삭제
+/* 	//카테고리 셀렉트 카테고리 글씨 삭제
  	$(document).on('click','.select',function(){
  		$(this).find('.option').remove();
  		console.log('삭제완료');
- 	});
+ 	}); */
 	// 총단가 구하기
 	$(document).on('focusout','.testPrice',function(){
 		var testPrice = $(this).val();
@@ -116,7 +117,7 @@
 	});
 	// 비품 한줄 저장
  	$(document).on('click','.save',function(){
- 		var selectValue = $(this).parent().parent().find('.select').val();
+ 		var selectValue = $(this).parent().parent().find('.boardCategoryNo').val();
  		var priceValue = $(this).parent().parent().find('.testTotalPrice').val();
  		if(isNaN(selectValue) == true) {
  			alert('카테고리를 선택해주세요.');
@@ -194,6 +195,7 @@
 							</c:forEach>
 						</ul>
 					</div>
+					<input type="hidden" name="boardCategoryNo" value="0" class="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
 <!-- 					<select class="form-control select" name="equipmentCategorySelect">
 						<option class="option">카테고리<span class="caret"></span></option>
 						<option value="1">교재,교구</option>
@@ -253,10 +255,11 @@
 						</button>
 						<ul class="dropdown-menu" role="menu">
 							<c:forEach var="a" items="${getCategory}">
-								<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
+								<li><a id="test_romi" href="${a.categoryNo}">${a.categoryName}</a></li>
 							</c:forEach>
 						</ul>
 					</div>
+					<input type="hidden" name="boardCategoryNo" value="0" class="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
 <!-- 				<select class="form-control select" name="equipmentCategorySelect">
 					<option class="option">카테고리<span class="caret"></span></option>
 					<option value="1">교재,교구</option>
@@ -270,7 +273,7 @@
 				<input class="form-control test1" name="test1" type="text" style="width : 400px" value="test" readonly/>
 			</td>
 			<td>
-				<input class="form-control testValue" name="testValue" type="text" style="width : 100px" value="50" readonly/>
+				<input class="form-control testValue" name="testValue" type="text" style="width : 100px" value="0" readonly/>
 			</td>
 			<td>
 				<div class="form-inline">
@@ -284,7 +287,7 @@
 				</div>
 			</td>
 			<td>
-				<input class="form-control testPrice" name="testPrice" type="text" style="width : 100px" value="50"/>
+				<input class="form-control testPrice" name="testPrice" type="text" style="width : 100px" value="0"/>
 			</td>
 			<td>
 				<input class="form-control testTotalPrice" name="testTotalPrice" type="text" style="width : 100px" readonly/>
@@ -303,13 +306,16 @@
 </table>
 <!-- select button -->
 <script>
-	$(document).ready(function(e){
-	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
-			e.preventDefault();
+	//$(document).ready(function(e){
+		$(document).on('click','.search-panel .dropdown-menu a',function(e){
+	   // $('.search-panel .dropdown-menu').find('a').click(function(e) {
+		/* 	 alert('romi'); */
+		   e.preventDefault(); 
+			//alert(this);
 			var param = $(this).attr("href").replace("#",""); //해당 버튼의 href속성에서 #을 제거한 값
 			var category = $(this).text(); //해당 버튼의 내용
-			$('.search-panel span#category').text(category); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
-			$('.input-group #boardCategoryNo').val(param);
+			$(this).parent().parent().parent().parent().parent().find('.search-panel span#category').text(category); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
+			$(this).parent().parent().parent().parent().parent().find('.boardCategoryNo').val(param);
 		});
-	});
+	//});
 </script>
