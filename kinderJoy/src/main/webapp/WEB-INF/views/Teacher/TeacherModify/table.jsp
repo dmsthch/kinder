@@ -3,8 +3,9 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 <head>
-
+	
 	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -26,7 +27,17 @@
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+	
+	<script src="js/jquery.js"></script>
+	
+	<script>
+	$(document).ready(function(){
+		$('#kyotable').attr('class','active');
+		$('#sidekyotable').attr('style','background-color:orange');
+		
+	});
+	</script>
+	
 </head>
 
 <body>
@@ -34,45 +45,8 @@
 	<div class="wrapper">
 	
 	<!-- 사이드메뉴바 BEGIN -->
-	
-	    <div class="sidebar" data-color="orange" data-image="../assets/img/sidebar-1.jpg">
-			<!--
-	        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
-		    Tip 2: you can also add an image using data-image tag
-
-			-->
-
-			<div class="logo">
-				<a href="${pageContext.request.contextPath}/" class="simple-text">
-					햇병아리
-				</a>
-			</div>
-
-
-	    	<div class="sidebar-wrapper">
-				<ul class="nav">
-	                <li>
-	                    <a href="${pageContext.request.contextPath}/kyo">
-	                        <i class="material-icons">person</i>
-	                        <p>User Profile</p>
-	                    </a>
-	                </li>
-	                <li class="active">
-	                    <a href="${pageContext.request.contextPath}/kyotable">
-	                        <i class="material-icons">content_paste</i>
-	                        <p>Table List</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="${pageContext.request.contextPath}/takeForm">
-	                        <i class="material-icons">people</i>
-	                        <p>Take Form</p>
-	                    </a>
-	                </li>
-	            </ul>
-	    	</div>
-		</div>
-<!-- 사이드메뉴바 END -->
+	<c:import url="./side.jsp"></c:import>
+	<!-- 사이드메뉴바 END -->
 
 
 	    <div class="main-panel">
@@ -85,53 +59,34 @@
 	                            <div class="card-header" data-background-color="orange">
 	                                <h4 class="title">교원 명단</h4>
 	                                <p class="category">현재 활동중인 교직원 명단입니다.</p>
-	                            </div>
+	                            </div>                            
 	                            <div class="card-content table-responsive">
 	                                <table class="table">
 	                                    <thead class="text-primary">
-	                                    	<th>Name</th>
-	                                    	<th>Country</th>
-	                                    	<th>City</th>
-											<th>Salary</th>
+	                                    	<th>아이디</th>
+	                                    	<th>권한</th>
+	                                    	<th>이름</th>
+											<th>가입일자</th>
+											<th>번호</th>
+											<th>은행</th>
+											<th>계좌</th>
+											<th>호봉</th>
 	                                    </thead>
+	                                    
+	                                    <c:forEach var="t" items="${tableList}">
 	                                    <tbody>
 	                                        <tr>
-	                                        	<td>Dakota Rice</td>
-	                                        	<td>Niger</td>
-	                                        	<td>Oud-Turnhout</td>
-												<td class="text-primary">$36,738</td>
-	                                        </tr>
+	                                        	<td>${t.teacher_id}</td>
+	                                        	<td>${t.teacher_level}</td>
+	                                        	<td>${t.teacher_name}</td>
+	                                        	<td>${t.teacher_add_day}</td>
+	                                        	<td>${t.teacher_phone}</td>
+	                                        	<td>${t.teacher_bank}</td>
+	                                        	<td>${t.teacher_account}</td>
+	                                        	<td>${t.teacher_paystep}</td>
 	                                        <tr>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-												<td class="text-primary">$23,789</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Sage Rodriguez</td>
-	                                        	<td>Netherlands</td>
-	                                        	<td>Baileux</td>
-												<td class="text-primary">$56,142</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Philip Chaney</td>
-	                                        	<td>Korea, South</td>
-	                                        	<td>Overland Park</td>
-												<td class="text-primary">$38,735</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Doris Greene</td>
-	                                        	<td>Malawi</td>
-	                                        	<td>Feldkirchen in Kärnten</td>
-												<td class="text-primary">$63,542</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>Mason Porter</td>
-	                                        	<td>Chile</td>
-	                                        	<td>Gloucester</td>
-												<td class="text-primary">$78,615</td>
-	                                        </tr>
 	                                    </tbody>
+	                                   </c:forEach>
 	                                </table>
 
 	                            </div>

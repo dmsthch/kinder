@@ -6,7 +6,8 @@
 
 
 <script>
-console.log(${year}+"<,,,")
+console.log(${year}+"<,,,");
+console.log(${childclass}+"<<childclass")
 </script>
 <c:import url="./nav/SideNav.jsp"></c:import>
 <c:import url="../module/importCSS.jsp"></c:import>
@@ -27,7 +28,7 @@ console.log(${year}+"<,,,")
 		<div class="content">
 			<div class="container-fluid">
 			
-				<!-- 주간계획안 -->
+				<!-- 월간계획안 -->
 				<div class="row">
 					<c:forEach var ="age" begin="3" end ="5">
 						<div class="col-lg-4 col-md-6 col-sm-6 ">
@@ -42,8 +43,14 @@ console.log(${year}+"<,,,")
 								</div>
 								<div class="card-footer textRiht">
 									<div class="stats ">
-										<c:forEach var="forYear" begin="${year-2}" end="${year}">
-											<i class="material-icons" style="margin-left: 5px;">date_range</i><a href="#pablo">${forYear}년 </a>
+										<c:if test="${childclass == '[]'}">
+											생성된 반이 없습니다.
+										</c:if>
+										<c:forEach var="childclass" items="${childclass}">
+											<c:if test="${childclass.classAge == age }">
+												<i class="material-icons" style="margin-left: 5px;">library_books</i>
+												<a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&date=${forYear}&classNo=${childclass.classNo}"> ${childclass.className}반 </a><br/>
+											</c:if>
 										</c:forEach>
 									</div>
 								</div>
@@ -51,7 +58,7 @@ console.log(${year}+"<,,,")
 						</div>
 					</c:forEach>	
 				</div>
-				<!-- 주간계획안  끝 -->
+				<!-- 월간계획안  끝 -->
 
 				<!-- 연간계획안 -->
 				<div class="row">

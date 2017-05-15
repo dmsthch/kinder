@@ -1,5 +1,6 @@
 
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- script -->
 <script>
 	// TR태그 복사하기
@@ -115,6 +116,15 @@
 	});
 	// 비품 한줄 저장
  	$(document).on('click','.save',function(){
+ 		var selectValue = $(this).parent().parent().find('.select').val();
+ 		var priceValue = $(this).parent().parent().find('.testTotalPrice').val();
+ 		if(isNaN(selectValue) == true) {
+ 			alert('카테고리를 선택해주세요.');
+ 			$(this).parent().parent().find('.select').focus();
+ 		}else if(priceValue == '') {
+ 			alert('총단가의 가격이 없습니다.');
+ 			$(this).parent().parent().find('.testPrice').focus();
+ 		}
  		var params = $(this).parent().parent().parent().find('.testForm').serialize();
  	    jQuery.ajax({
  	        url: '${pageContext.request.contextPath}/testSave',
@@ -132,8 +142,25 @@
  	        }
  	    });
  	});
- 	/*	$(documnen).on('','',function(){});123112323
-	$(document).on('','',function(){}); asdf*/
+	//비품 리스트 호출하기
+ 	$(documnen).on('load','#table',function(){
+ 	    jQuery.ajax({
+ 	        url: '${pageContext.request.contextPath}/testSave',
+ 	        type: 'POST',
+ 	        data:params,
+ 	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+ 	        dataType: 'html',
+ 	        success: function (result) {
+ 	            if (result == 1){
+ 	                console.log('데이터 보내기 성공');
+ 	                alert('저장되었습니다.');
+ 	            }else{
+ 	            	alert('저장에 실패하였습니다.');
+ 	            }
+ 	        }
+ 	    });
+ 	});
+ 		/*$(document).on('','',function(){}); asdf*/
 </script>
 
 <input class="btn btn-default dropdown-toggle" id="button" type="button" value="추가"/>
@@ -153,11 +180,12 @@
 		</tr>
 	</thead>
 	<tbody>
+<%-- 		<c:forEach var="equipmentList" items="${equipmentList}"> --%>
 		<form class="testForm" method="psot">
 			<tr>
 				<td>	
-<%-- 					<div class="input-group-btn search-panel">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<div class="input-group-btn search-panel">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100px;">
 							<span id="category">카테고리 </span><span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
@@ -165,21 +193,21 @@
 								<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
 							</c:forEach>
 						</ul>
-					</div> --%>
-					<select class="form-control select" name="equipmentCategorySelect">
+					</div>
+<!-- 					<select class="form-control select" name="equipmentCategorySelect">
 						<option class="option">카테고리<span class="caret"></span></option>
 						<option value="1">교재,교구</option>
 						<option value="2">사무용품</option>
 						<option value="3">체육용품</option>
 						<option value="4">도서목록</option>
 						<option value="5">기타</option>
-					</select>
+					</select> -->
 				</td>
 				<td>
-					<input class="form-control test1" name="test1" type="text" style="width : 400px" value="test" readonly/>
+					<input class="form-control test1" name="test1" type="text" style="width : 400px" value="${equipmentList.equipmentName}" readonly/>
 				</td>
 				<td>
-					<input class="form-control testValue" name="testValue" type="text" style="width : 100px" value="50" readonly/>
+					<input class="form-control testValue" name="testValue" type="text" style="width : 100px" value="${equipmentList.equipmnetAmount}" readonly/>
 				</td>
 				<td>
 					<div class="form-inline">
@@ -193,22 +221,23 @@
 					</div>
 				</td>
 				<td>
-					<input class="form-control testPrice" name="testPrice" type="text" style="width : 100px" value="50"/>
+					<input class="form-control testPrice" name="testPrice" type="text" style="width : 100px" value="${equipmentList.equipmentCost}"/>
 				</td>
 				<td>
 					<input class="form-control testTotalPrice" name="testTotalPrice" type="text" style="width : 100px" readonly/>
 				</td>
 				<td>
-					<input class="form-control testCustomer" name="testCustomer" type="text" style="width : 100px" value="집" readonly/>
+					<input class="form-control testCustomer" name="testCustomer" type="text" style="width : 100px" value="${equipmentList.equipmentCustomer}" readonly/>
 				</td>
 				<td>
-					<input class="form-control testState" name="testState" type="text" style="width : 200px" value="집돌이" readonly/>
+					<input class="form-control testState" name="testState" type="text" style="width : 200px" value="${equipmentList.equipmnetState}" readonly/>
 				</td>
 				<td>
 					<input type="button" class="btn btn-default dropdown-toggle save" value="저장"/>
 				</td>
 			</tr>
 		</form>	
+<%-- 		</c:forEach> --%>
 	</tbody>
 </table>
 
@@ -218,8 +247,8 @@
 	<form class="testForm" method="psot">
 		<tr>
 			<td>	
-<%-- 					<div class="input-group-btn search-panel">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					<div class="input-group-btn search-panel">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100px;">
 							<span id="category">카테고리 </span><span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
@@ -227,15 +256,15 @@
 								<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
 							</c:forEach>
 						</ul>
-					</div> --%>
-				<select class="form-control select" name="equipmentCategorySelect">
+					</div>
+<!-- 				<select class="form-control select" name="equipmentCategorySelect">
 					<option class="option">카테고리<span class="caret"></span></option>
 					<option value="1">교재,교구</option>
 					<option value="2">사무용품</option>
 					<option value="3">체육용품</option>
 					<option value="4">도서목록</option>
 					<option value="5">기타</option>
-				</select>
+				</select> -->
 			</td>
 				<td>
 				<input class="form-control test1" name="test1" type="text" style="width : 400px" value="test" readonly/>
@@ -272,3 +301,15 @@
 		</tr>
 	</form>	
 </table>
+<!-- select button -->
+<script>
+	$(document).ready(function(e){
+	    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+			e.preventDefault();
+			var param = $(this).attr("href").replace("#",""); //해당 버튼의 href속성에서 #을 제거한 값
+			var category = $(this).text(); //해당 버튼의 내용
+			$('.search-panel span#category').text(category); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
+			$('.input-group #boardCategoryNo').val(param);
+		});
+	});
+</script>
