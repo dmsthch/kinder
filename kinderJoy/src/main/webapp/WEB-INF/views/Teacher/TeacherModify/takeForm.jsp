@@ -59,7 +59,11 @@
 			
 			$(document).ready(function(){
 				var a = $("#li_id_name").html();
-				alert(a);
+				if (a != null) {
+					console.log(a);
+				}else{
+					console.log("값이 없음");
+				}
 				
 				$("#send").click(function(){
 					$.ajax({
@@ -74,7 +78,6 @@
 					});
 				});
 			});
-			
 			</script>
 			
 </head>
