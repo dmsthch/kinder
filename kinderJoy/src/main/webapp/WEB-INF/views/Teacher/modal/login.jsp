@@ -1,17 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
 
 <link rel="stylesheet" href="css/JKC/css/default.css">
-</head>
-<body>
-	
+
 	<!-- ★★★★★ 로그인 모달 시작★★★★★ -->
-<div class="container">
+<!-- <div class="container" > -->
   <!-- Trigger the modal with a button -->
 
   <!-- Modal -->
@@ -30,9 +23,6 @@
 
 <div id="site-container">
 	<div class="siteColorBg">	
-															<!-- 이미지 -->
-    <div class="siteAnimationBg active" style="background-image: url(&quot;images/JKC/kid.jpg&quot;);">
-    </div>
 </div>
 <div class="siteCover"></div>    
 <div class="be-cover">
@@ -58,12 +48,4 @@
 <!-- 바디엔드 -->
 
         </div>
-      </div>
       
-    </div>
-  </div>
-  
-</div>
-	
-</body>
-</html>

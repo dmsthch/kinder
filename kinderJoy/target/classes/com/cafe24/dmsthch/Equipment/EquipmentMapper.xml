@@ -3,6 +3,50 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
+  
+  	<select id="selectLoadEquipmentSheet" parameterType="com.cafe24.dmsthch.Equipment.Sheet" resultType="com.cafe24.dmsthch.Equipment.Sheet">
+  		SELECT
+  			 equipment_category_no AS equipmentCategoryNo
+  			,value_name AS valueName
+  			,value_merge AS valueMerge
+  			,value_val AS valueVal
+  			,value_borders AS valueBorders
+  			,value_row AS valueRow
+  			,value_cols AS valueCols
+  		FROM 
+  			sheet_value 
+  		WHERE 
+  			license_kindergarten=#{licenseKindergarten} 
+  		AND 
+  			value_name=#{valueName}
+  		AND
+  			equipment_category_no=#{equipmentCategoryNo}
+  		ORDER BY value_no 
+  		DESC LIMIT 1;
+  	</select>
+  	<select id="selectSheetName" parameterType="String" resultType="com.cafe24.dmsthch.Equipment.Sheet">
+  		SELECT
+  			 equipment_category_no AS equipmentCategoryNo
+  			,value_name AS valueName
+  		FROM
+  			 sheet_value 
+  		WHERE
+  			 license_kindergarten = #{licenseKindergarten}
+  		ORDER BY value_no DESC;
+  	</select>
+  	
+  	<select id="selectEquipmentCount" parameterType="com.cafe24.dmsthch.Equipment.Equipment" resultType="int">
+  		SELECT COUNT(c.equipment_no) FROM(
+  			SELECT * FROM equipment
+  			Where license_kindergarten=#{licenseKindergarten}
+  			GROUP BY equipment_name) as c;
+  	</select>
+  	<select id="selectEquipment" parameterType="int" resultType="com.cafe24.dmsthch.Equipment.Equipment">
+		SELECT * FROM equipment
+		GROUP BY equipment_name
+		ORDER BY equipment_day
+		DESC LIMIT #{countNo};
+  	</select>
   	
   	<insert id="addEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
   		INSERT INTO equipment(
@@ -38,17 +82,29 @@
   	
   	<insert id="addEquipmentSheet" parameterType="com.cafe24.dmsthch.Equipment.Sheet">
   		INSERT INTO sheet_value(
-  		 	teacher_no
-  			,license_kindergarten
-  			,sheet_content
+  		 	 license_kindergarten
+  		 	,teacher_no
+  		 	,equipment_category_no
+  		 	,value_name
+  		 	,value_merge
+  		 	,value_val
+  		 	,value_borders
+  		 	,value_row
+  		 	,value_cols
   		) VALUES(
-  		 	#{teacherNo}
-  			,#{licenseKindergarten}
-  			,#{sheetContent}
+  		 	 #{licenseKindergarten}
+  			,#{teacherNo}
+  			,#{equipmentCategoryNo}
+  			,#{valueName}
+  			,#{valueMerge}
+  			,#{valueVal}
+  			,#{valueBorders}
+  			,#{valueRow}
+  			,#{valueCols}
   		);
   	</insert>
 
-	<select id="selectEquipment" parameterType="int" resultType="com.cafe24.dmsthch.Equipment.Sheet">
+	<select id="selectEquipmentSheet" parameterType="int" resultType="com.cafe24.dmsthch.Equipment.Sheet">
 		SELECT
 		  	 sheet_no AS sheetNo
 		 	,teacher_no AS teacherNo

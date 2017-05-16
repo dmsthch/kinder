@@ -11,7 +11,7 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	<!-- CSS Link -->
-<c:import url="./EquipmentNav/SideNav.jsp"></c:import>
+
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
 

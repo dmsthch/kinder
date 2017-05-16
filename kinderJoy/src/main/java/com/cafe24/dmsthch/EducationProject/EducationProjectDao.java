@@ -1,11 +1,12 @@
 package com.cafe24.dmsthch.EducationProject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.cafe24.dmsthch.Child.ChildClass;
 
 @Repository
 public class EducationProjectDao {
@@ -60,7 +61,7 @@ public class EducationProjectDao {
 	}
 	
 	//계획안 불러오기
-	public Education educationProjectLoad(String categoryNo,String addDate,String licenseKindergarten){
+	public Education educationProjectLoad(String categoryNo,String addDate,String licenseKindergarten,int age, String classNo){
 		Education edu = new Education();
 		System.out.println(addDate +"<<addDate");
 		System.out.println(categoryNo +"<<categoryNo");
@@ -68,9 +69,26 @@ public class EducationProjectDao {
 		edu.setAddDate(addDate);
 		edu.setCategoryNo(categoryNo);
 		edu.setLicenseKindergarten(licenseKindergarten);
-		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectLoad",edu);
+		edu.setAge(age);
+		edu.setClassNo(classNo);
+		edu = sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectLoad",edu);
+		//System.out.println(edu.getVal()+"<<getVal 쳇쳇");
+		return edu;
 	}
 	
+	//계획안메인화면 갈때 생성된 반 셀렉트하기
+	public List<ChildClass> selectAllChildClass(String licenseKindergarten, String classYear){
+		ChildClass childclass = new ChildClass();
+		childclass.setLicenseKindergarten(licenseKindergarten);
+		childclass.setClassYear(classYear);
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.selectAllChildClass",childclass);
+	}
+	
+	//계획안 반별로 리스트 불러오기
+	public List<Education> EducationProjectList(String licenseKindergarten,String categoryNo,String classNo){
+		
+		return null;
+	}
 	
 	//테스트용
 	public String selectTest(){

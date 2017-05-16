@@ -1,5 +1,10 @@
 package com.cafe24.dmsthch.Teacher;
 
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,9 +28,9 @@ public class TeacherDao {
 	}
 	
 	//교원 한명 조회
-	public Teacher OneSelectTeacher(int t_no) {
+	public Teacher OneSelectTeacher(int INT) {
 		System.out.println("교원 한명 정보 조회 메서드 실행_TeacherDao.java");
-		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.OneSelectTeacher", t_no);
+		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.OneSelectTeacher", INT);
 	}
 	
 	//아이디 중복체크
@@ -39,4 +44,24 @@ public class TeacherDao {
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.sign_up_id_check", joongbok);
 	}
 	
+	//전체 교원의 전체 정보 조회 admin전용
+	public List<Object> tableList(String string) {
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.tableList",string);
+	}
+	
+	//편성 교원
+	// 입력값은 라이선스 하나니까 String이다. 컨트롤러에서 받은 값이 변수에 대입된다.
+	//리턴값은 여러개 이고 타입도 여러개이므로 Object이다
+	public List<Object> takeT(String string) {
+		System.out.println(string +"<-------------takeT");
+		System.out.println("편성폼의 교원 메서드 호출 확인");
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeTeacher",string);
+	}
+	
+	//편성폼 클래스
+	//컨트롤러에서 받은 값이 변수에 대입된다
+	public List<Object> takeC(String string) {
+		System.out.println("편성폼의 클래스 메서드 호출 확인");
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeClass", string);
+	}
 }

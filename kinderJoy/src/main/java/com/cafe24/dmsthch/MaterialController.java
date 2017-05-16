@@ -49,10 +49,12 @@ public class MaterialController {
 			String license = (String) session.getAttribute("licenseKindergarten");
 			
 			List<Map<String, Object>> boardCategoryList = materialDao.getBoardCategory();
+			List<Board> allList = materialDao.getBoardList(license, 0, 1, 10);
 			List<Board> documentList = materialDao.getBoardList(license, 1, 1, 10);
 			List<Board> materialList = materialDao.getBoardList(license, 2, 1, 10);
 			
 			model.addAttribute("boardCategoryList", boardCategoryList);
+			model.addAttribute("allList", allList);
 			model.addAttribute("documentList", documentList);
 			model.addAttribute("educationList", materialList);
 		}
