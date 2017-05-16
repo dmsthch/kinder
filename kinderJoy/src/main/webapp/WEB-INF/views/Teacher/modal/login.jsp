@@ -23,9 +23,6 @@
 
 <div id="site-container">
 	<div class="siteColorBg">	
-	<!-- 이미지 -->
-    <div class="siteAnimationBg active" style="background-image: url(&quot;images/JKC/kid.jpg&quot;);">
-    </div>
 </div>
 <div class="siteCover"></div>    
 <div class="be-cover">
@@ -51,5 +48,4 @@
 <!-- 바디엔드 -->
 
         </div>
-      </div>
       

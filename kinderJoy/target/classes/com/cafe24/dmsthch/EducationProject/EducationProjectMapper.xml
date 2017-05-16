@@ -137,7 +137,7 @@
  </select>
 
 <!-- 해당 반의 카테고리별로(월/주/일) 목록 가져오기 -->
-<select id="EducationProjectList" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.EducationProject.Educationt">
+<select id="EducationProjectList" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.EducationProject.Education">
 	SELECT
 	 	e.education_project_no AS educationProjectNo 
 		,e.add_date AS addDate
