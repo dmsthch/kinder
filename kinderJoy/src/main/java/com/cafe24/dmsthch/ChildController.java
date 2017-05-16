@@ -138,10 +138,10 @@ public class ChildController {
 			return "redirect:/ChildClass";
 		}
 		
-		@RequestMapping(value="/ChildFormation" , method=RequestMethod.GET)
+		@RequestMapping(value="/testSelect" , method=RequestMethod.GET)
 		public String ChildFormation() {
-			System.out.println("ChildFormation Æû ¿äÃ»");
-			return "Child/ChildFormation";
+			System.out.println("testSelect Æû ¿äÃ»");
+			return "Child/testSelect";
 		}
 		
 		@RequestMapping(value="/ClassAdd" , method=RequestMethod.GET)
