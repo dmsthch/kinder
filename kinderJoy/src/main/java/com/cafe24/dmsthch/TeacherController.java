@@ -34,9 +34,23 @@ public class TeacherController {
 		return "";
 	}
 	
+	//계정삭제
+	@RequestMapping(value="/deleteAccount", method = RequestMethod.POST)
+	public String delete(HttpSession httpsession ,SessionStatus sessionstatus) {
+		//현재 세션에 있는 아이디값을 가져와서 TDao에서 부른 메서드 안에 대입 후 쿼리 실행하면
+		//아이디가 삭제되고 그 후 처리는 삭제는 처리할 것이 없음
+		//하지만 삭제 후 인서트하기 위해선 TDao를 한번 더 거쳐야한다
+		
+		TDao.delete((String) httpsession.getAttribute("teacherId"));
+		System.out.println(httpsession.getAttribute("teacherId") + "<-- 삭제된 아이디");
+		System.out.println
+		(TDao.insert((String) httpsession.getAttribute("teacherId")) +"<-- remove_id컬럼에 삭제한 아이디 추가");
+		sessionstatus.setComplete();
+		return "redirect:/home";
+	}
 	
 	//계정삭제폼 호출
-	@RequestMapping(value="delete", method = RequestMethod.GET)
+	@RequestMapping(value="/delete", method = RequestMethod.GET)
 	public String delete() {
 		return "Teacher/TeacherModify/delete";
 	}
@@ -101,6 +115,7 @@ public class TeacherController {
 		System.out.println("로그인체크메서드 호출_Controller");
 		System.out.println("사용자가 입력한 아이디는? : " + userid);
 		int check = TDao.logincheck(userid);
+		int check2 = TDao.logincheck2(userid);
 		
 		if(check == 0){
 			System.out.println("DB에 중복되는 값이 없습니다_TeacherController");
@@ -139,7 +154,7 @@ public class TeacherController {
 	public String Login(SessionStatus sessionstatus,HttpServletRequest request,Model model,Teacher teacher,HttpSession session,String joongbok) throws SQLException {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
-		System.out.println(teacher.getTeacher_id() +"<--티쳐겟아이디");
+		System.out.println(teacher.getTeacher_id() +"<-- 사용자가 입력한 아이디");
 		System.out.println(TDao+" <--TDao 동작 확인");
 
 		if(saveSession != null) {
