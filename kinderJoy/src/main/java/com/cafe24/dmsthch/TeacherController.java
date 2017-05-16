@@ -26,6 +26,15 @@ public class TeacherController {
 	@Autowired
 	private TeacherDao TDao;
 	
+	
+	//takeForm save메서드 호출
+	@RequestMapping(value="/save2", method = RequestMethod.POST)
+	public String save() {
+		System.out.println("호출확인");
+		return "";
+	}
+	
+	
 	//계정삭제폼 호출
 	@RequestMapping(value="delete", method = RequestMethod.GET)
 	public String delete() {

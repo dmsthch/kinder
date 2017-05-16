@@ -1,0 +1,54 @@
+.multiselect-wrapper {
+	overflow: visible;
+    margin: .3em;
+	border-radius: 5px;
+	background-color: lightgray;
+}
+.multiselect-list {
+	padding: 0;
+	margin: 0;
+}
+.multiselect-list.empty {
+	display: none;
+}
+.multiselect-list-item {
+	cursor: pointer;
+	display: inline-block;
+	margin: .1em;
+	padding: .3em;
+	border: 1px solid gray;
+	border-radius: 5px;
+	background-color: white;
+    color: gray;
+    text-decoration: none;
+}
+.multiselect-list-item:hover {
+	border: 1px solid pink;
+	color: pink;
+}
+.multiselect-box {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	vertical-align: middle;
+	line-height: normal;
+	overflow: visible;
+}
+.multiselect-box-item {
+	display: inline-block;
+	margin: .1em;
+	padding: .3em;
+	background-color: gray;
+	border: 1px solid gray;
+	border-radius: 5px;
+    color: white;
+    text-decoration: none;
+}
+.multiselect-box-item:hover
+{
+	border: 1px solid pink;
+	background-color: pink;
+}
+.multiselect-box.empty {
+	display: none;
+}
