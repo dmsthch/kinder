@@ -96,13 +96,17 @@ VALUES(#{teacher_id});
 
 
 <!-- 편성폼에 들어갈 쿼리 -->
-<!-- 입력값은 라이선스 하나이니까 String이고 값이 여러개인 String이니 List<String>이다 -->
+<!-- 입력값은 라이선스 ,level 두 개이니 Teacher이고 result값은 여러 개 이고 타입도 여러개이므로 List<Object>이다 -->
 <!-- 세션의 값을 가져오는 것이니 = #{} 이 안에는 세션에 저장된 이름을 적어야 한다  -->
-<select id="takeTeacher" parameterType="java.lang.String" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+<select id="takeTeacher" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 SELECT 
-teacher_id
+teacher_no
+,teacher_name
 from teacher 
-where license_kindergarten = #{licenseKindergarten};
+where 
+ license_kindergarten = #{licenseKindergarten} 
+AND
+ teacher_level= '선생님';
 </select>
 
 <!-- 입력값은 라이선스 하나니까 String이고 값이 여러개인 int니까 List<Integer>이다 -->
@@ -114,6 +118,7 @@ where license_kindergarten = #{licenseKindergarten};
 <select id="takeClass" parameterType="java.lang.String" resultType="com.cafe24.dmsthch.Child.ChildClass">
 SELECT 
 class_no AS classNo
+, class_age AS classAge
 from kid_class  
 where license_kindergarten = #{licenseKindergarten};
 </select>

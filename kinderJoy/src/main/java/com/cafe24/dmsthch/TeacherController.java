@@ -50,9 +50,10 @@ public class TeacherController {
 		//((String) httpsession.getAttribute("licenseKindergarten")) 값을 넣어주었다
 		//takeTeacher도 마찬가지
 		
-		List<String> takeT = TDao.takeT((String) httpsession.getAttribute("licenseKindergarten"));
-		List<Integer> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
-		System.out.println(takeC +"CCCCCCCCCCCCCCCCCCCCC");
+		//List<> takeT는 result이다   
+							//TDao.takeT((String) httpsession.getAttribute("licenseKindergarten"));는 메서드에 입력한 값이므로 즉, 라이선스 이므로 String이다
+		List<Object> takeT = TDao.takeT((String)httpsession.getAttribute("licenseKindergarten"));
+		List<Object> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
 		
 		model.addAttribute("takeTeacher" ,takeT);
 		model.addAttribute("takeClass"   ,takeC);
