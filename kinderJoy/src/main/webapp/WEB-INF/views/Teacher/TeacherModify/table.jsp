@@ -59,14 +59,14 @@
 	                                    <c:forEach var="t" items="${tableList}">
 	                                    <tbody>
 	                                        <tr>
-	                                        	<td>${t.teacher_id}</td>
-	                                        	<td>${t.teacher_level}</td>
-	                                        	<td>${t.teacher_name}</td>
-	                                        	<td>${t.teacher_add_day}</td>
-	                                        	<td>${t.teacher_phone}</td>
-	                                        	<td>${t.teacher_bank}</td>
-	                                        	<td>${t.teacher_account}</td>
-	                                        	<td>${t.teacher_paystep}</td>
+	                                        	<td>${t.teacherId}</td>
+	                                        	<td>${t.teacherLevel}</td>
+	                                        	<td>${t.teacherName}</td>
+	                                        	<td>${t.teacherAddDay}</td>
+	                                        	<td>${t.teacherPhone}</td>
+	                                        	<td>${t.teacherBank}</td>
+	                                        	<td>${t.teacherAccount}</td>
+	                                        	<td>${t.teacherPaystep}</td>
 	                                        <tr>
 	                                    </tbody>
 	                                   </c:forEach>

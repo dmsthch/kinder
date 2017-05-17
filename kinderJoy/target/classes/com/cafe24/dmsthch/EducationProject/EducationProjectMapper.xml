@@ -144,10 +144,13 @@
 		,category_no AS categoryNo
 		,age
 		,class_no AS classNo
+		,project_date_info AS projectDateInfo
 	FROM education_project
 	WHERE license_kindergarten = #{licenseKindergarten}
 	AND category_no = ${categoryNo}
+	<if test="classNo != 0">
 	AND class_no = #{classNo}
+	</if>
 	ORDER BY add_date DESC
 </select>
 

@@ -20,14 +20,26 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     
+<style>
+
+.dropdown-submenu{position:absolute;}
+ 
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px; display: none; } 
+ 
+.dropdown-submenu:hover>.dropdown-menu{display:block;position:absolute;}
+ 
+.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+ 
+.dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
+ 
+.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;} 
+
+</style>
 
 </head>
-<body class="components-page">
+<body class="components-page nav" style="">
 
-
-	
-
-	    <div class="sidebar" data-color="blue" data-image="../assets/img/sidebar-1.jpg">
+	    <div class="sidebar" data-color="blue">
 			<!--
 		        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -40,7 +52,7 @@
 				</a>
 			</div>
 
-	    	<div class="sidebar-wrapper">
+	    	<div class="sidebar-wrapper" style="overflow: visible;">
 	            <ul class="nav">
             	   <li>
 	                   <a href="${pageContext.request.contextPath}/educationProject" class="smoothScroll">
@@ -49,7 +61,37 @@
 	                        <p>계획안 메인화면</p>
 	                    </a>
 	                </li>
-	                <!-- <li class="active"> -->
+	                
+	                <li class="dropdown" >
+	                    <a class="dropdown-toggle " type="button" data-toggle="dropdown" >
+	                        <i class="material-icons">content_paste</i>
+	                        <p>일일계획안 <span class="caret"></span></p>
+                        </a>
+							    <ul class="pull-right dropdown-menu" style="margin-right:-62%; margin-top:-20%" >
+							    	<li><a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=4">일일계획안 전체 보기</a></li>
+							    	<li class="divider"></li>
+							    	
+							    	<li class="dropdown-submenu" >
+							    	<a href="#"> test 1</a>
+							    	<ul class="dropdown-menu" style="margin-left:1%">
+							    		<li> <a href="#">test0001</a>
+							    		</li>
+							    	</ul>
+							    	</li>
+							    	
+							      <li><a href="#">HTML</a></li>
+							      <li><a href="#">CSS</a></li>
+							      <li><a href="#">JavaScript</a></li>
+							      <li class="divider"></li>
+							      <li><a href="#">About Us</a></li>
+							    </ul>
+						  
+	                    
+
+	                </li>
+	             	
+	             	
+	             	<!-- <li class="active"> -->
 	                <li id="educationProjectAddPage">
 	                    <a href="${pageContext.request.contextPath}/educationProjectAddPage">
 	                        <i class="material-icons">library_books</i>
@@ -68,7 +110,6 @@
 	                        <p>임시2</p>
 	                    </a>
 	                </li>
-	             
 	                <li>
 	                    <a href="icons.html">
 	                        <i class="material-icons">bubble_chart</i>

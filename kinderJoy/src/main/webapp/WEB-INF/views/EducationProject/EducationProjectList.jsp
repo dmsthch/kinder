@@ -10,10 +10,11 @@
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="./nav/SideNav.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
+<c:import url="../module/importJS.jsp"></c:import>
 <script>
+
 $(document).ready(function(){
-	var addDate = $('#addDate').val();
-	console.log(addDate);
+
 })
 </script>
 </head>
@@ -31,28 +32,30 @@ $(document).ready(function(){
 						
 						<div class="card-content table-responsive">
 							<table class="table table-hover">
-			                    <tbody>
+			                    <tbody>	
+			                    	<!-- 월간계획안일 경우 -->
 			                    	<c:if test="${categoryNo == 2}">
 			                    	<c:forEach items="${eduList}" var="eduList">
 									 <tr>
-									 	<td>${className}반 월간계획안 : ${fn :substring(eduList.addDate,0,4)}년 -  ${fn :substring(eduList.addDate,5,7)}월</td>
+									 	<td style="cursor:pointer;" onclick="location.href=''">${className}반 월간계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월</td>
 									 </tr>
 									</c:forEach>
 									</c:if>
 									
+									<!-- 주간계획안일 경우 -->
 									<c:if test="${categoryNo == 3}">
 			                    	<c:forEach items="${eduList}" var="eduList">
 									 <tr>
-									 	<input type="hidden" value="${eduList.addDate}" id="addDate">
-									 	<td>${className}반 주간계획안 : ${fn :substring(eduList.addDate,0,4)}년 -  ${fn :substring(eduList.addDate,5,7)}월 <span id="week"></span></td>
+									 	<td style="cursor:pointer;" onclick="location.href=''">${className}반 주간계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월 - ${fn :substring(eduList.projectDateInfo,8,9)}주</td>
 									 </tr>
 									</c:forEach>
 									</c:if>
 									
+									<!-- 일일계획안일 경우 -->
 									<c:if test="${categoryNo == 4}">
 			                    	<c:forEach items="${eduList}" var="eduList">
 									 <tr>
-									 	<td>${className}반 일일계획안 : ${fn :substring(eduList.addDate,0,4)}년 -  ${fn :substring(eduList.addDate,5,7)}월 - ${fn : substring(eduList.addDate,8,10}일</td>
+									 	<td style="cursor:pointer;" onclick="location.href=''">${className}반 일일계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월 - ${fn : substring(eduList.projectDateInfo,8,10)}일</td>
 									 </tr>
 									</c:forEach>
 									</c:if>
@@ -68,4 +71,5 @@ $(document).ready(function(){
 </div>
 
 </body>
+
 </html>

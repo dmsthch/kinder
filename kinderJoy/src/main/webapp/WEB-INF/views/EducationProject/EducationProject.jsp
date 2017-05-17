@@ -11,12 +11,11 @@ console.log(${year}+"<,,,");
 console.log(${childclass}+"<<childclass")
 </script>
 <c:import url="../module/importCSS.jsp"></c:import>
-<c:import url="./nav/SideNav.jsp"></c:import>
 
 <c:import url="../module/navbar.jsp"></c:import>
 <style>
 .ageFont {
-	font-size: 35px;
+	font-size: 30px;
 }
 
 .textRiht {
@@ -36,14 +35,58 @@ console.log(${childclass}+"<<childclass")
 	margin-top: 5px;
 	transition: all 0.4s ease-in-out;
 }
+.card-header.card-header{
+	padding: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.sidebar.sidebar{
+	z-index:5555;
+}
+
 </style>
+
+<c:import url="./nav/SideNav.jsp"></c:import>
+
 </head>
-<body class="components-page">
+<body class="components-page" style="z-index:10">
+
 <div class="wrapper">
 	<div class="main-panel">
 		<div class="content">
-			<div class="container-fluid">
-				<button class=" btn btn-default myBtn"> adsf</button>
+			<div class="container-fluid">				
+				<!-- 일일계획안 -->
+				<div class="row">
+					<c:forEach var ="age" begin="3" end ="5">
+						<div class="col-lg-4 col-md-6 col-sm-6 ">
+							<div class="card card-stats">
+								<div class="card-header" data-background-color="blue">
+									<!-- <i class="material-icons">content_copy</i> -->
+									<h3 class="ageFont title">${age}세</h3>
+								</div>
+								<div class="card-content">									
+									<p class="category"></p>
+									<h3 class="title" style="font-weight: bold;">일일계획안</h3>
+								</div>
+								<div class="card-footer textRiht">
+									<div class="stats ">
+										<c:if test="${childclass == '[]'}">
+											생성된 반이 없습니다.
+										</c:if>
+										<c:forEach var="childclass" items="${childclass}">
+											<c:if test="${childclass.classAge == age }">
+												<i class="material-icons" style="margin-left: 5px;">library_books</i>
+												<a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=4&classNo=${childclass.classNo}"> ${childclass.className}반 </a><br/>
+											</c:if>
+										</c:forEach>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>	
+				</div>
+				<!-- 일일계획안 끝 -->
 				
 				<!-- 주간계획안 -->
 				<div class="row">
@@ -76,6 +119,7 @@ console.log(${childclass}+"<<childclass")
 					</c:forEach>	
 				</div>
 				<!-- 주간계획안 끝 -->
+
 				
 				<!-- 월간계획안 -->
 				<div class="row">
@@ -139,6 +183,7 @@ console.log(${childclass}+"<<childclass")
 		</div>
 	</div>
 </div>
+
 <%-- 
 <a href="${pageContext.request.contextPath}/educationProjectAddPage">계획안 양식추가</a>
 <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=1">1번 양식 불러오기</a>

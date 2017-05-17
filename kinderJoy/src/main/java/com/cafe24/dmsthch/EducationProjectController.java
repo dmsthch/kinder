@@ -119,24 +119,22 @@ public class EducationProjectController {
 	@RequestMapping(value = "/EducationProjectList", method = RequestMethod.GET)
 	public String EducationProjectList(HttpSession session
 										,@RequestParam(value="categoryNo") String categoryNo
-										,@RequestParam(value="classNo") int classNo
+										,@RequestParam(value="classNo", required=false, defaultValue="0") int classNo
 										,Model model){
 		System.out.println(categoryNo+"<<categoryNo");
 		System.out.println(classNo+"<<classNo");		
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
-/*		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
-		int month = (c.get(Calendar.MONTH))+1;
-		System.out.println(month+"<<month");
-		Integer integerMonth = month;
-		System.out.println(integerMonth+"<<integerMonth");
-		String classMonth = integerMonth.toString();
-		System.out.println(classMonth+"<<<classMonth");*/
-		
 		List<Education> eduList = dao.EducationProjectList(licenseKindergarten, categoryNo, classNo);
-		String className = dao.selectClassName(classNo);
+		if(classNo==0){
+			
+		}else{
+			String className = dao.selectClassName(classNo);
+			model.addAttribute("className",className);
+		}
+		
 		String categoryName = dao.selectCategoryName(categoryNo);
 		model.addAttribute("eduList",eduList);
-		model.addAttribute("className",className);
+		
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("categoryNo",categoryNo);
 		return "EducationProject/EducationProjectList";
