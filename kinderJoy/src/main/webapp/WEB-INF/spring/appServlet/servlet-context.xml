@@ -58,6 +58,24 @@
 	<!-- multipartResolver 파일 input output에 사용 hs -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
+	 <interceptors>
+		<interceptor>
+			<mapping path="/Material"/>
+			<mapping path="/kyo"/>
+			<mapping path="/kyotable"/>
+			<mapping path="/takeForm"/>
+			<mapping path="/license"/>
+			<mapping path="/delete"/>
+			<mapping path="/ChildList"/>
+			<mapping path="/ChildClass"/>
+			<mapping path="/ClassAdd"/>
+			<mapping path="/educationProject"/>
+			<mapping path="/educationProjectAddPage"/>
+			
+		    <beans:bean class="com.cafe24.dmsthch.Teacher.TeacherInterceptor"/>
+		</interceptor>
+	</interceptors>
+
 	<interceptors>
         <interceptor>
      		<!-- 브라우저의 캐싱 방지 (모든 웹 페이지) -->
