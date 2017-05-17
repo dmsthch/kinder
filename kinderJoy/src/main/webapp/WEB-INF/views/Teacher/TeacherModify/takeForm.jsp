@@ -50,21 +50,36 @@
 					  group: 'no-drop',
 					  drag: false
 					});	
-					
-					$("#send").click(function(){
-			            $.ajax({
-			                url: "${pageContext.request.contextPath}/saveTakeForm",
-			                method: "POST",
-			                data: {text: $("#input").val(), data: $("ul.myList li.active").attr("data-id"),
-			                success: function(result){
-			                    alert(result);
-			                }
-			            });
-			        });
-			    });
-					
 			});
 			</script>
+			
+			
+			
+			<script>
+			
+			$(document).ready(function(){
+				var a = $("#li_id_name").html();
+				if (a != null) {
+					console.log(a);
+				}else{
+					console.log("값이 없음");
+				}
+				
+				$("#send").click(function(){
+					$.ajax({
+						url : "${pageContext.request.contextPath}/save2",
+						type : "POST",
+						data : a,
+							
+							success: function(result){
+								alert(a);
+							
+						}
+					});
+				});
+			});
+			</script>
+			
 </head>
 <body>
 <div class="wrapper">
@@ -81,12 +96,11 @@
 		                        <h4 class="title">편성표</h4>
 		                        <p class="category">편성표를 작성해주세요.</p>
             				</div>
-            				<input type="text" name="input" id="input" />
                                 <div class="card-content table-responsive">
 									<div class="col-md-5" >
 							            <c:forEach begin="3" end="5" var="age">
 								            <ol class="simple_with_no_drag vertical">
-								              	<li>
+								              	<li id="li-id">
 								              	${age}살
 									            	<c:forEach var="C" items="${takeClass}">
 											            <c:if test="${C.classAge == age}">
@@ -106,7 +120,7 @@
 									 	<div class="col-md-5">
 								        	<ol class="jkc vertical">교원목록
 								             	<c:forEach var="T" items="${takeTeacher}">
-										        	<li><i class="icon-move"></i>${T.teacher_name}</li>
+										        	<li id="li_id_name"><i class="icon-move"></i>${T.teacher_name}</li>
 										        </c:forEach>
 								       		</ol>
 										</div>

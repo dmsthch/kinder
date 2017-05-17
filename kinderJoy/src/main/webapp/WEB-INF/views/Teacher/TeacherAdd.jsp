@@ -4,7 +4,16 @@
 <!DOCTYPE html>
 <head>
 
-
+	<!-- CSS Link -->
+	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
+	<!-- JS Link -->
+	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
+	
+		<!-- draggable -->
+		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script type="text/javascript" src="https://johnny.github.io/jquery-sortable/js/jquery-sortable.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://johnny.github.io/jquery-sortable/css/application.css">
+		<!-- draggable -->
 
 <script>
 	//사용자가 입력한 값과 DB에 저장된 값을 비교하여 중복하는지 체크한다

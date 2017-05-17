@@ -54,7 +54,7 @@ console.log(${childclass}+"<<childclass")
 								</div>
 								<div class="card-content">									
 									<p class="category"></p>
-									<h3 class="title">월간계획안</h3>
+									<h3 class="title" style="font-weight: bold;">월간계획안</h3>
 								</div>
 								<div class="card-footer textRiht">
 									<div class="stats ">
@@ -86,7 +86,7 @@ console.log(${childclass}+"<<childclass")
 								</div>
 								<div class="card-content">									
 									<p class="category"></p>
-									<h3 class="title">연간계획안</h3>
+									<h3 class="title" style="font-weight: bold;">연간계획안</h3>
 								</div>
 								<div class="card-footer textRiht">
 									<div class="stats ">

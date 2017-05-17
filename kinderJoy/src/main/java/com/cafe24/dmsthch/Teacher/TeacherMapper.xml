@@ -50,13 +50,63 @@ teacher_no = #{teacher_no}
 
 </select>
 
+
+
+
+
 <!-- 회원 아이디 중복 체크 -->
  <select id="sign_up_id_check" parameterType="java.lang.String" resultType="int">
- SELECT
- count(*)
- FROM teacher
- WHERE teacher_id = #{teacher_id}
+SELECT
+count(*)
+FROM
+teacher
+WHERE teacher_id = #{teacher_id};
+<!-- 
+★★★방식1
+
+SELECT sum(C.cnt)
+FROM
+(
+select count(*) cnt
+from teacher
+WHERE teacher_id = #{teacher_id}
+
+union all
+
+select count(*) cnt
+from remove_id
+WHERE teacher_id = #{teacher_id}
+)C 
+
+★★★방식2
+
+SELECT
+count(*)
+FROM teacher
+WHERE teacher_id = #{teacher_id}
+
+union all
+ 
+SELECT
+count(*)
+FROM remove_id
+WHERE teacher_id = #{teacher_id}
+
+-->
  </select>
+ 
+ <!-- 회원 아이디 중복 체크2(remove_id테이블) -->
+ <select id="sign_up_id_check2" parameterType="java.lang.String" resultType="int">
+SELECT
+count(*)
+FROM
+remove_id
+WHERE teacher_id = #{teacher_id};
+ </select>
+
+
+
+
 
 <!-- 전체 교원 조회 table list에 필요 -->
 <!-- 입력값은 라이선스 하나니까 String이고 리턴값은 여러개이니 Teacher인 오브젝트이다 -->
@@ -82,12 +132,12 @@ select
 <!-- 입력값과 결과값을 생각하고 타입을 지정하자. -->  
 
 <!-- 회원탈퇴 후 삭제된 아이디에 들어갈 쿼리 -->
-<delete id="withdrawal" parameterType="java.lang.String">
+<delete id="deleteAccount" parameterType="java.lang.String">
 DELETE FROM teacher 
 WHERE teacher_id = #{teacher_id};
 </delete>
-
-<insert id="removeId" parameterType="java.lang.String">
+<!-- 입력값 하나 그것도 아이디만 넣는것이니 String이고 리턴값은 없어도 된다 -->
+<insert id="insertId" parameterType="java.lang.String">
 INSERT INTO remove_id(teacher_id) 
 VALUES(#{teacher_id});
 </insert>
