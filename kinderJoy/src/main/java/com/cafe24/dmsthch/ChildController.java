@@ -139,8 +139,16 @@ public class ChildController {
 		}
 		
 		@RequestMapping(value="/testSelect" , method=RequestMethod.GET)
-		public String ChildFormation() {
+		public String ChildFormation(Child child, HttpSession session) {
 			System.out.println("testSelect Æû ¿äÃ»");
+			
+			String license = (String) session.getAttribute("licenseKindergarten");
+			
+			
+			
+			
+			
+			
 			return "Child/testSelect";
 		}
 		
