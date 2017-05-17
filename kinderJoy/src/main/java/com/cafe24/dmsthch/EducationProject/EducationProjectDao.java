@@ -14,7 +14,7 @@ public class EducationProjectDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//Æû Ãß°¡ÇÒ¶§
-	public void formAdd(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten){		
+	public void formAdd(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten, String formTitle){		
 		EducationForm eduForm = new EducationForm();
 		eduForm.setLicenseKindergarten(licenseKindergarten);
 		eduForm.setFormVal(formVal);
@@ -22,6 +22,7 @@ public class EducationProjectDao {
 		eduForm.setFormBorders(formBorders);
 		eduForm.setFormCountRow(formCountRow);
 		eduForm.setFormCountCol(formCountCol);
+		eduForm.setFormTitle(formTitle);
 		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formAdd", eduForm);
 	}
 	
@@ -45,8 +46,13 @@ public class EducationProjectDao {
 		return resultForm;
 	}
 	
+	//Æû Á¦¸ñ ¼¿·ºÆ® ÇÏ±â
+	public List<EducationForm> educationProjectFormName(String licenseKindergarten){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectFormName", licenseKindergarten);
+	}
+	
 	//°èÈ¹¾È Ãß°¡ÇÏ±â
-	public void educationProjectAdd(String val,String merge,String borders, int countRow, int countCol, String licenseKindergarten){
+	public void educationProjectAdd(String val,String merge,String borders, int countRow, int countCol, String licenseKindergarten, int age,String classNo, String categoryNo, String projectDateInfo){
 		Education edu = new Education();
 		edu.setVal(val);
 		edu.setMerge(merge);
@@ -54,6 +60,10 @@ public class EducationProjectDao {
 		edu.setCountRow(countRow);
 		edu.setCountCol(countCol);
 		edu.setLicenseKindergarten(licenseKindergarten);
+		edu.setAge(age);
+		edu.setClassNo(classNo);
+		edu.setCategoryNo(categoryNo);
+		edu.setProjectDateInfo(projectDateInfo);
 		/*Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		edu.setAddDate(sdf.format(date));*/

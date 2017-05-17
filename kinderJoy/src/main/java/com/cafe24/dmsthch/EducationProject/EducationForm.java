@@ -9,7 +9,15 @@ public class EducationForm {
 	private String formBorders;
 	private int formCountRow;
 	private int formCountCol;
+	private String formTitle;
 	
+	
+	public String getFormTitle() {
+		return formTitle;
+	}
+	public void setFormTitle(String formTitle) {
+		this.formTitle = formTitle;
+	}
 	public int getFormCountRow() {
 		return formCountRow;
 	}

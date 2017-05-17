@@ -32,6 +32,8 @@
 	<div class="wrapper">
 		<div class="main-panel">
 			<div class="content">
+				======양식 추가하기======<br/>
+				<input type="text" placeholder="양식의 이름을 입력해주세요." name="formTitle" id="formTitle" style="width: 500px;"><br/>
 				<button id="btTest">bt</button>
 				<button name="save" id="save">Save</button>
 				<button name="test" id="test">Test</button>
@@ -145,6 +147,7 @@
 		alert('test');
 		var jparse=JSON.stringify(dataArray);
 		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
+		var formTitle = $('#formTitle').val();
 		console.log(jparse+"<<<<jparse");
 		console.log(mergeparse);
 		var borderArray=[];
@@ -168,9 +171,9 @@
 			type : 'POST',
 			dataType: 'JSON',
 			async: false,
-			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol },
+			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol,"formTitle":formTitle },
 			success : function(data){
-			alert('success');
+			alert('저장완료');
 		                        
    		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
    		     console.log("Status: " + textStatus);
