@@ -1,25 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
-	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+
 <head>
 
-	<title>1TEAM</title>
-	
-    <!-- Bootstrap core CSS     -->
-    <link href="css/JKC/modiassets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!--  Material Dashboard CSS    -->
-    <link href="css/JKC/modiassets/css/material-dashboard.css" rel="stylesheet"/>
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="css/JKC/modiassets/css/demo.css" rel="stylesheet" />
-
-    <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
+	<!-- CSS Link -->
+	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
+	<!-- JS Link -->
+	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
 	
 	<script src="js/jquery.js"></script>
 	
@@ -69,14 +59,14 @@
 	                                    <c:forEach var="t" items="${tableList}">
 	                                    <tbody>
 	                                        <tr>
-	                                        	<td>${t.teacher_id}</td>
-	                                        	<td>${t.teacher_level}</td>
-	                                        	<td>${t.teacher_name}</td>
-	                                        	<td>${t.teacher_add_day}</td>
-	                                        	<td>${t.teacher_phone}</td>
-	                                        	<td>${t.teacher_bank}</td>
-	                                        	<td>${t.teacher_account}</td>
-	                                        	<td>${t.teacher_paystep}</td>
+	                                        	<td>${t.teacherId}</td>
+	                                        	<td>${t.teacherLevel}</td>
+	                                        	<td>${t.teacherName}</td>
+	                                        	<td>${t.teacherAddDay}</td>
+	                                        	<td>${t.teacherPhone}</td>
+	                                        	<td>${t.teacherBank}</td>
+	                                        	<td>${t.teacherAccount}</td>
+	                                        	<td>${t.teacherPaystep}</td>
 	                                        <tr>
 	                                    </tbody>
 	                                   </c:forEach>
@@ -160,21 +150,5 @@
 
 </body>
 
-	<!--   Core JS Files   -->
-	<script src="js/JKC/modiassets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-	<script src="js/JKC/modiassets/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="js/JKC/modiassets/js/material.min.js" type="text/javascript"></script>
-
-	<!--  Charts Plugin -->
-	<script src="js/JKC/modiassets/js/chartist.min.js"></script>
-
-	<!--  Notifications Plugin    -->
-	<script src="js/JKC/modiassets/js/bootstrap-notify.js"></script>
-
-	<!-- Material Dashboard javascript methods -->
-	<script src="js/JKC/modiassets/js/material-dashboard.js"></script>
-
-	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-	<script src="js/JKC/modiassets/js/demo.js"></script>
 
 </html>

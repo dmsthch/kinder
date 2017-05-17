@@ -54,9 +54,9 @@
 	                    </a>
 	                </li>
 	                <li id="educationProjectFormLoad">
-	                    <a href="${pageContext.request.contextPath}/sheet">
+	                    <a href="${pageContext.request.contextPath}/SheetList">
 	                        <i class="material-icons">person</i>
-	                        <p>품의서 작성</p>
+	                        <p>품의서 리스트</p>
 	                    </a>
 	                </li>
 	                <li>
@@ -69,32 +69,23 @@
 	    	</div>
 	    </div>
 	    
-	    <!--   Core JS Files   -->
+<!-- 	      Core JS Files  
 	<script src="css/LCR/EducationProject/assets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
 	<script src="css/LCR/EducationProject/assets/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="css/LCR/EducationProject/assets/js/material.min.js" type="text/javascript"></script>
 
-	<!--  Charts Plugin -->
+	 Charts Plugin
 	<script src="css/LCR/EducationProject/assets/js/chartist.min.js"></script>
 
-	<!--  Notifications Plugin    -->
+	 Notifications Plugin   
 	<script src="css/LCR/EducationProject/assets/js/bootstrap-notify.js"></script>
 
 
-	<!-- Material Dashboard javascript methods -->
+	Material Dashboard javascript methods
 	<script src="css/LCR/EducationProject/assets/js/material-dashboard.js"></script>
 
-	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-	<script src="css/LCR/EducationProject/assets/js/demo.js"></script>
-
-	<script type="text/javascript">
-    	$(document).ready(function(){
-
-			// Javascript method's body can be found in assets/js/demos.js
-        	demo.initDashboardPageCharts();
-
-    	});
-	</script>
+	Material Dashboard DEMO methods, don't include it in your project!
+	<script src="css/LCR/EducationProject/assets/js/demo.js"></script> -->
 	    
 
   </div><!-- /.container-fluid -->

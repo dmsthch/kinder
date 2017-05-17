@@ -23,9 +23,6 @@
 
 <div id="site-container">
 	<div class="siteColorBg">	
-	<!-- 이미지 -->
-    <div class="siteAnimationBg active" style="background-image: url(&quot;images/JKC/kid.jpg&quot;);">
-    </div>
 </div>
 <div class="siteCover"></div>    
 <div class="be-cover">
@@ -35,9 +32,9 @@
             <h1>로그인</h1>
             <fieldset>
                 <div class="form-item">
-                    <input type="text" class="form-text" name="teacher_id" value="test01" placeholder="아이디를 입력하세요"></div>
+                    <input type="text" class="form-text" name="teacherId" value="test01" placeholder="아이디를 입력하세요"></div>
                 <div class="form-item">
-                    <input type="password" class="form-text" name="teacher_pw" value="test01" placeholder="비밀번호를 입력하세요">
+                    <input type="password" class="form-text" name="teacherPw" value="test01" placeholder="비밀번호를 입력하세요">
                 </div>
                 
                 <div class="form-item"><button type="submit" class="vanellope rp-font vanellope-pascal">login</button></div>
@@ -51,5 +48,4 @@
 <!-- 바디엔드 -->
 
         </div>
-      </div>
       

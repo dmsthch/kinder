@@ -25,29 +25,47 @@ public class EquipmentController {
 	EquipmentDao dao;
 	
 	@RequestMapping(value = "Equipment", method = RequestMethod.GET)
-	public String test01(Model model){
+	public String test01(Model model
+						,HttpSession session){
 		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
 		System.out.println(getCategory + "getCategory 확인");
 		model.addAttribute("getCategory", getCategory);
+		Equipment equipmnet = new Equipment();
+		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
+		
+		equipmnet.setLicenseKindergarten(licenseKindergarten);
+		
+		int equipmnetCount = dao.selectEquipmentCount(session);
+		System.out.println(equipmnetCount + "equipmnetCount 확인");
+		List<Equipment> equipmentList = dao.selectEquipment(equipmnetCount);
+		
+		model.addAttribute("equipmentList",equipmentList);
 		return "Equipment/Equipment";
 	}
-	@RequestMapping(value = "test02", method = RequestMethod.GET)
+	@RequestMapping(value = "test01", method = RequestMethod.GET)
 	public String test05(){
 		
-		return "Equipment/test02";
+		return "Equipment/NewFile";
+	}
+	@RequestMapping(value = "test02", method = RequestMethod.GET)
+	public String test06(){
+		
+		return "Equipment/testSelect";
 	}
 	@RequestMapping(value = "sheet", method = RequestMethod.GET)
-	public String sheet(){
-		
+	public String sheet(Model model){
+		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
+		System.out.println(getCategory + "getCategory 확인");
+		model.addAttribute("getCategory", getCategory);
 		return "Equipment/sheet";
 	}
-	@RequestMapping(value = "test01", method = RequestMethod.GET)
+/*	@RequestMapping(value = "test01", method = RequestMethod.GET)
 	public String test02(Model model){
 		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
 		System.out.println(getCategory + "getCategory 확인");
 		model.addAttribute("getCategory", getCategory);
 		return "Equipment/NewFile";
-	}
+	}*/
 /*	@RequestMapping(value = "save", method = RequestMethod.GET)
 	public String save(Model model
 						,@RequestParam(value="jsonStr") String jsonStr
@@ -77,21 +95,24 @@ public class EquipmentController {
 							, @RequestParam(value="countRow") String countRow
 							, @RequestParam(value="countCol") String countCol
 							, @RequestParam(value="sheetName") String sheetName
-							,HttpSession session){
+							, @RequestParam(value="sheetCategory") String sheetCategory
+							, HttpSession session){
 		
-		return null;
+		dao.addEquementSheet(dataArray, mergeArray, borderArray, countRow, countCol, sheetCategory, sheetName, session);
+		
+		return "Equipment/sheet";
 	}
-/*	@RequestMapping(value = "reroad", method = RequestMethod.POST)
-	public String road(HttpSession session, Model model){
+	@RequestMapping(value = "reroad", method = RequestMethod.GET)
+	public String road(Model model
+						,HttpSession session
+						,@RequestParam(value="sheetName") String reroad
+						,@RequestParam(value="sheetCategoryNo") String sheetCategoryNo){
 		
-		int teacherNo = (Integer)session.getAttribute("teacherNo");
-		
-		Sheet sheet = dao.selectEquipment(teacherNo);
-		
+		Sheet sheet = dao.selectEquipmentSheet(session, reroad, sheetCategoryNo);
 		model.addAttribute("sheet", sheet);
 		
-		return "Equipment/Equipment";
-	}*/
+		return "Equipment/LoadSheet";
+	}
 	@RequestMapping(value = "saveLoad", method = RequestMethod.GET)
 	public String test04(HttpSession session
 						,Model model){
@@ -100,7 +121,7 @@ public class EquipmentController {
 		
 		equipmnet.setLicenseKindergarten(licenseKindergarten);
 		
-		int equipmnetCount = dao.selectEquipmentCount(equipmnet);
+		int equipmnetCount = dao.selectEquipmentCount(session);
 		
 		List<Equipment> equipmentList = dao.selectEquipment(equipmnetCount);
 		
@@ -109,7 +130,7 @@ public class EquipmentController {
 	}
 	@RequestMapping(value = "testSave", method = RequestMethod.POST)
 	@ResponseBody
-	public int test03(@RequestParam(value="equipmentCategorySelect") String equipmentCategorySelect
+	public int test03(@RequestParam(value="boardCategoryNo") String equipmentCategorySelect
 						,@RequestParam(value="test1") String test1
 						,@RequestParam(value="testPrice") String testPrice
 						,@RequestParam(value="testValue") String testValue
@@ -143,12 +164,20 @@ public class EquipmentController {
 		
 		return returnValue;
 	}
-	@RequestMapping(value = "asdf", method = RequestMethod.GET)
-	public String sheetList(Model model){
+	@RequestMapping(value = "SheetList", method = RequestMethod.GET)
+	public String sheetList(Model model
+							,HttpSession session){
 		System.out.println("시트 리스트 메서드 실행");
 		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
 		model.addAttribute("getCategory", getCategory);
 		
+		List<Sheet> sheet = dao.selectEquipmentName(session);
+		
+		model.addAttribute("sheet", sheet);
+		
+		System.out.println("리턴 값 확인");
+		System.out.println(getCategory);
+		System.out.println(sheet);
 		return "Equipment/SheetList";
 	}
 }	

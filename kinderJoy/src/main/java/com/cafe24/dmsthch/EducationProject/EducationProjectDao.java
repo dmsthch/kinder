@@ -85,7 +85,10 @@ public class EducationProjectDao {
 	}
 	
 	//계획안 반별로 리스트 불러오기
-	
+	public List<Education> EducationProjectList(String licenseKindergarten,String categoryNo,String classNo){
+		
+		return null;
+	}
 	
 	//테스트용
 	public String selectTest(){

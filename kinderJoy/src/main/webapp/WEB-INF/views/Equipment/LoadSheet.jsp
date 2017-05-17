@@ -66,13 +66,11 @@
 	<button id="btTest">save</button>
 	<div>
 		제목 :
-		<input type="text" id="sheetName"/>
+		<input type="text" id="sheetName" value="${sheet.valueName}"/>
 	</div>
 	<div class="wrapper" style="margin-top: 20px;">
 		<div id="example1"></div>
 	</div>
-	
-
 	
 	
 </div></div></div></div>
@@ -93,32 +91,58 @@ $(document).ready(function(e){
 
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
-	
-	var testData = [null,null,null,null,{"row":4,"col":7,"val":"1234"},{"row":5,"col":4,"val":"4321"},{"row":6,"col":10,"val":"2134"},null,null,null,{"row":10,"col":7,"val":"4321"},null,null,{"row":13,"col":6,"val":"1234"},{"mergedCellInfoCollection":[]}]; //데이터
-	var testMerge = [{"row":5,"col":2,"rowspan":5,"colspan":3},{"row":10,"col":4,"rowspan":5,"colspan":5}];
-	
+	var dataValue = ${sheet.valueVal};
+	console.log(dataValue);
+	var dataMerge = ${sheet.valueMerge};
+	console.log(dataMerge);
+	var dataBorders = ${sheet.valueBorders};
+	console.log(dataBorders);
+	var countRow = ${sheet.valueRow};
+	console.log(countRow);
+	var countCol = ${sheet.valueCols};
+	console.log(countCol);
+	var dataName = '${sheet.valueName}';
+	console.log(dataName);
+	var equipmentCategoryNo = ${sheet.equipmentCategoryNo};
+	console.log(equipmentCategoryNo);
+//	var testData = [null,null,null,null,{"row":4,"col":7,"val":"1234"},{"row":5,"col":4,"val":"4321"},{"row":6,"col":10,"val":"2134"},null,null,null,{"row":10,"col":7,"val":"4321"},null,null,{"row":13,"col":6,"val":"1234"},{"mergedCellInfoCollection":[]}]; //데이터
+//	var testMerge = [{"row":5,"col":2,"rowspan":5,"colspan":3},{"row":10,"col":4,"rowspan":5,"colspan":5}];
+		for(j=0; j<dataValue.length;j++){
+		if(dataValue[j]==null){
+			dataValue[j]={ };
+			console.log(dataValue);
+			for(i=0 ; i<countCol; i++){
+				dataValue[j][i] ='';
+				console.log("ㅇㅅㅇ! ->> "+ i);
+			}
+		}	
+	}
 	  
 		hot = new Handsontable(container, {
-// 			data: testData,    //데이터 가져오기
+ 			data: dataValue,    //데이터 가져오기
 			colWidths: [47],
 
-			startRows: 30,
-			startCols: 20,
+			startRows: countRow,
+			startCols: countCol,
 
 			rowHeaders : true,
 			colHeaders : true,
 			
+			minRows: countRow,
+			minCols: countCol,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 
 			mergeCells : true,
 			customBorders: true,
-			
+			customBorders: dataBorders,
 			contextMenu : true,
-//			mergeCells : testMerge,
-/* 			contextMenuCopyPaste: {
+			mergeCells: dataMerge, //셀병합 가져오기
+			minSpareRows: 1, //여유 행
+			
+ 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
-			}, */
+			},
 			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
 				console.log(data, type)
@@ -155,44 +179,45 @@ $(document).ready(function(e){
 	   
 	});
 	  	
+	  	
 	$('#btTest').click(function(){
-/* 		dataArray[dataArray.length] = hot.mergeCells;	 */
-		var param = $('#boardCategoryNo').val();
-		console.log(param);
-		var borderArray=[];
-		var jparse=JSON.stringify(dataArray);
-		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
-		for(var i = 0 ; i<hot.countRows(); i++){
-			for(var j = 0; j<hot.countCols(); j++){
-				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
-					console.log('값이 있는 머지 확인!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
-					var borders = hot.getCellMeta(i,j).borders;
-					borderArray.push(borders);
+		/* 		dataArray[dataArray.length] = hot.mergeCells;	 */
+				var param = $('#boardCategoryNo').val();
+				console.log(param);
+				var borderArray=[];
+				var jparse=JSON.stringify(dataArray);
+				var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
+				for(var i = 0 ; i<hot.countRows(); i++){
+					for(var j = 0; j<hot.countCols(); j++){
+						if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
+							console.log('값이 있는 머지 확인!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
+							var borders = hot.getCellMeta(i,j).borders;
+							borderArray.push(borders);
+						}
+					}
 				}
-			}
-		}
-		var borderparse=JSON.stringify(borderArray);
-		console.log(borderparse+"<<<borderparse");
-		
-		var countRow =hot.countRows(); 
-		var countCol =hot.countCols(); 
-		var sheetName = $('#sheetName').val();		
-	    $.ajax({
-	        url:"${pageContext.request.contextPath}/save",
-	        type:'POST',
-	        async: false,
-	        data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "sheetName":sheetName, "sheetCategory" : param },
-	        success:function(data){
-	            alert("저장!");
-/* 	            window.opener.location.reload();
-	            window.close();
-	            self.close(); */
-	        },
-	        error:function(jqXHR, textStatus, errorThrown){
-	            alert("저장실패~~ \n" + textStatus + " : " + errorThrown);
-	            self.close();
-	        }
-		});    
+				var borderparse=JSON.stringify(borderArray);
+				console.log(borderparse+"<<<borderparse");
+				
+				var countRow =hot.countRows(); 
+				var countCol =hot.countCols(); 
+				var sheetName = $('#sheetName').val();		
+			    $.ajax({
+			        url:"${pageContext.request.contextPath}/save",
+			        type:'POST',
+			        async: false,
+			        data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "sheetName":sheetName, "sheetCategory" : param },
+			        success:function(data){
+			            alert("저장!");
+		/* 	            window.opener.location.reload();
+			            window.close();
+			            self.close(); */
+			        },
+			        error:function(jqXHR, textStatus, errorThrown){
+			            alert("저장실패~~ \n" + textStatus + " : " + errorThrown);
+			            self.close();
+			        }
+				});     
 	    
 	    
 	setTimeout(function(){

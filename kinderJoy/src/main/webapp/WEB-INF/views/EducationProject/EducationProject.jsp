@@ -9,9 +9,9 @@
 console.log(${year}+"<,,,");
 console.log(${childclass}+"<<childclass")
 </script>
-<c:import url="../module/importJS.jsp"></c:import>
-<c:import url="./nav/SideNav.jsp"></c:import>
 <c:import url="../module/importCSS.jsp"></c:import>
+<c:import url="./nav/SideNav.jsp"></c:import>
+
 <c:import url="../module/navbar.jsp"></c:import>
 <style>
 .ageFont {
@@ -54,7 +54,7 @@ console.log(${childclass}+"<<childclass")
 								</div>
 								<div class="card-content">									
 									<p class="category"></p>
-									<h3 class="title">월간계획안</h3>
+									<h3 class="title" style="font-weight: bold;">월간계획안</h3>
 								</div>
 								<div class="card-footer textRiht">
 									<div class="stats ">
@@ -64,7 +64,7 @@ console.log(${childclass}+"<<childclass")
 										<c:forEach var="childclass" items="${childclass}">
 											<c:if test="${childclass.classAge == age }">
 												<i class="material-icons" style="margin-left: 5px;">library_books</i>
-												<a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&date=${forYear}&classNo=${childclass.classNo}"> ${childclass.className}반 </a><br/>
+												<a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=2&classNo=${childclass.classNo}"> ${childclass.className}반 </a><br/>
 											</c:if>
 										</c:forEach>
 									</div>
@@ -86,7 +86,7 @@ console.log(${childclass}+"<<childclass")
 								</div>
 								<div class="card-content">									
 									<p class="category"></p>
-									<h3 class="title">연간계획안</h3>
+									<h3 class="title" style="font-weight: bold;">연간계획안</h3>
 								</div>
 								<div class="card-footer textRiht">
 									<div class="stats ">
@@ -110,6 +110,6 @@ console.log(${childclass}+"<<childclass")
 <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=1">1번 양식 불러오기</a>
 <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=2">2번 양식 불러오기</a>
 <a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&date=20170511">저장된 계획안 불러오기 테스트 // 날짜 : 20170511</a> --%>
-
+<c:import url="../module/importJS.jsp"></c:import>
 </body>
 </html>

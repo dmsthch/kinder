@@ -1,10 +1,6 @@
 package com.cafe24.dmsthch.Teacher;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,9 +24,9 @@ public class TeacherDao {
 	}
 	
 	//교원 한명 조회
-	public Teacher OneSelectTeacher(int t_no) {
+	public Teacher OneSelectTeacher(int INT) {
 		System.out.println("교원 한명 정보 조회 메서드 실행_TeacherDao.java");
-		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.OneSelectTeacher", t_no);
+		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.OneSelectTeacher", INT);
 	}
 	
 	//아이디 중복체크
@@ -42,28 +38,40 @@ public class TeacherDao {
 		//리턴데이터타입이 int인 이유는 쿼리 실행 시 사용자가 입력한 아이디와 동일한 값이 있다면 카운트가 1 없으면 0이 되기 때문이다
 		System.out.println("로그인 체크 메서드 호출 _DAO");
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.sign_up_id_check", joongbok);
+		//아까 오류가 있었는데 하나의 값을 가져오려면
+		//selectOne을 써야하는데 selectList를 써서 오류가 났었다 
 	}
 	
 	//전체 교원의 전체 정보 조회 admin전용
-	public List<Object> tableList(String 입력값) {
-		System.out.println(입력값+"나오냐");
-		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.tableList",입력값);
+	public List<Object> tableList(String string) {
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.tableList",string);
 	}
 	
-	//편성폼 교원
-	//컨트롤러에서 받은 값이 변수에 대입된다.
-	public List<String> takeT(String takeTeacher) {
+	//편성 교원
+	// 입력값은 라이선스 하나니까 String이다. 컨트롤러에서 받은 값이 변수에 대입된다.
+	//리턴값은 여러개 이고 타입도 여러개이므로 Object이다
+	public List<Object> takeT(String string) {
+		System.out.println(string +"<-------------takeT");
 		System.out.println("편성폼의 교원 메서드 호출 확인");
-		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeTeacher",takeTeacher);
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeTeacher",string);
 	}
 	
 	//편성폼 클래스
 	//컨트롤러에서 받은 값이 변수에 대입된다
-	public List<Integer> takeC(String takeClass) {
+	public List<Object> takeC(String string) {
 		System.out.println("편성폼의 클래스 메서드 호출 확인");
-		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeClass", takeClass);
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeClass", string);
 	}
 	
+	//회원탈퇴
+	public int delete(String string) {
+		System.out.println("회원탈퇴메서드 _DAO");
+		return sql.delete("com.cafe24.dmsthch.Teacher.TeacherMapper.deleteAccount", string);
+	}
 	
-	
+	//회원 탈퇴 후 remove테이블에 넣을 아이디
+	public int insert(String string) {
+		System.out.println("remove테이블의 teacher_id컬럼에 삭제된 아이디 추가 메서드 호출 _DAO");
+		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.insertId" ,string);
+	}
 }

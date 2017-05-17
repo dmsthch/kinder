@@ -1,28 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
-<head>
 
+<head>
+	
+	<!-- CSS Link -->
+	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
+	<!-- JS Link -->
+	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
+	
 	<title>1TEAM</title>
 
-    <!-- Bootstrap core CSS     -->
-    <link href="css/JKC/modiassets/css/bootstrap.min.css" rel="stylesheet" />
-
-    <!--  Material Dashboard CSS    -->
-    <link href="css/JKC/modiassets/css/material-dashboard.css" rel="stylesheet"/>
-
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="css/JKC/modiassets/css/demo.css" rel="stylesheet" />
-
-    <!--     Fonts and icons     -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
-	
+    
 	<script src="js/jquery.js"></script>
 	
 	<script>
@@ -67,19 +58,19 @@
 	                                        <div class="col-md-5">
 												<div class="form-group label-floating">
 													<label class="control-label">아이디</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_id}" readonly>
+													<input type="text" class="form-control" value="${kyoteacher.teacherId}" readonly>
 												</div>
 	                                        </div>
 	                                        <div class="col-md-3">
 												<div class="form-group label-floating">
 													<label class="control-label">이름</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_name}" >
+													<input type="text" class="form-control" value="${kyoteacher.teacherName}" >
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">핸드폰 번호</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_phone}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherPhone}">
 												</div>
 	                                        </div>
 	                                    </div>
@@ -88,13 +79,13 @@
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">권한</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_level}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherLevel}">
 												</div>
 	                                       </div>
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">add</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_add_day}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherAddDay}">
 												</div>
 	                                        </div>
 	                                    </div>
@@ -103,7 +94,7 @@
 	                                        <div class="col-md-12">
 												<div class="form-group label-floating">
 													<label class="control-label">라이선스</label>
-													<input type="text" class="form-control" value="${kyoteacher.license_kindergarten}">
+													<input type="text" class="form-control" value="${kyoteacher.licenseKindergarten}">
 												</div>
 	                                        </div>
 	                                    </div>
@@ -112,19 +103,19 @@
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">은행</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_bank}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherBank}">
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">계좌</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_account}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherAccount}">
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">호봉</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_paystep}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherPaystep}">
 												</div>
 	                                        </div>
 	                                    </div>
@@ -141,7 +132,7 @@
 	                                        </div>
 	                                    </div>
 
-	                                    <button type="submit" class="btn btn-primary pull-right">프로필 수정하기</button>
+	                                    <button type="submit" class="btn btn-fault">프로필 수정하기</button>
 	                                    <div class="clearfix"></div>
 	                                </form>
 	                            </div>
@@ -154,22 +145,5 @@
 	    </div>
 	</div>
 </body>
-
-	<!--   Core JS Files   -->
-	<script src="js/JKC/modiassets/js/jquery-3.1.0.min.js" type="text/javascript"></script>
-	<script src="js/JKC/modiassets/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="js/JKC/modiassets/js/material.min.js" type="text/javascript"></script>
-
-	<!--  Charts Plugin -->
-	<script src="js/JKC/modiassets/js/chartist.min.js"></script>
-
-	<!--  Notifications Plugin    -->
-	<script src="js/JKC/modiassets/js/bootstrap-notify.js"></script>
-
-	<!-- Material Dashboard javascript methods -->
-	<script src="js/JKC/modiassets/js/material-dashboard.js"></script>
-
-	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
-	<script src="js/JKC/modiassets/js/demo.js"></script>
 
 </html>

@@ -45,21 +45,19 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>유치원 라이센스</th>
                 <th>반이름</th>
                 <th>운영년도</th>
-                <th>반번호</th>
+                <th>나이</th>
                 <th>반편성</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach var="c" items="${list}">
                 <tr>
-                    <td>${c.licenseKindergarten}</td>
                     <td><a href="${pageContext.request.contextPath}/ChildModify2?class_no=${c.classNo}">${c.className}</a></td>
                     <td>${c.classYear}</td>
                     <td>${c.classAge}</td>
-                    <td><a href="${pageContext.request.contextPath}/ChildFormation"><button>반편성</button></a></td>
+                    <td><a href="${pageContext.request.contextPath}/testSelect"><button>반편성</button></a></td>
                 </tr>
             </c:forEach>
         </tbody>
