@@ -139,24 +139,32 @@
 <!-- 해당 반의 카테고리별로(월/주/일) 목록 가져오기 -->
 <select id="EducationProjectList" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.EducationProject.Education">
 	SELECT
-	 	e.education_project_no AS educationProjectNo 
-		,e.add_date AS addDate
-		,c.category_name AS categoryNo
-		,e.age
-		,e.class_no AS classNo
-	FROM education_project e
-	INNER JOIN education_category c
-	ON e.category_no = c.category_no
+	 	education_project_no AS educationProjectNo 
+		,add_date AS addDate
+		,category_no AS categoryNo
+		,age
+		,class_no AS classNo
+	FROM education_project
 	WHERE license_kindergarten = #{licenseKindergarten}
-	<if test="categoryNo == 2 ">
-		AND (SELECT month(add_date)) = #{addDate}
-	</if>
-	<if test="categoryNo == 3 ">
-		AND (SELECT week(add_date)) = #{addDate}
-	</if>
-	<if test="categoryNo == 4 ">
-		AND (SELECT day(add_date)) = #{addDate}
-	</if>
+	AND category_no = ${categoryNo}
 	AND class_no = #{classNo}
+	ORDER BY add_date DESC
 </select>
+
+<!-- 반의 이름 가져오기 -->
+<select id="selectClassName" parameterType="int" resultType="String">
+	SELECT
+		class_name AS className
+	FROM kid_class
+	WHERE class_no = #{classNo}
+</select>
+
+<!-- 계획안 카테고리 이름 가져오기 -->
+<select id="selectCategoryName" parameterType="String" resultType="String">
+	SELECT
+		category_name AS categoryName
+	FROM education_category
+	WHERE category_no = #{categoryNo} 
+</select>
+
   </mapper>

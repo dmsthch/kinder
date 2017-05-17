@@ -20,23 +20,15 @@
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
 	<title>Insert title here</title>
-	<script>
-	$(document).ready(function(){
-		$('#educationProjectFormLoad').attr('class','active');
-	})
-	</script>
-</head>
-<body class="components-page">
-	<div class="wrapper">
-		<div class="main-panel">
-			<div class="content">
-				<button name="save" id="save">계획안 저장</button>
-				<div class="wrapper" style="margin-top: 20px;">
-					<div id="example1"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+
+<!-- 네비바 관련 스크립트  -->
+<script>//네비바 관련 스크립트 네비의 해당부분을 active클래스를 줌.
+$(document).ready(function(){
+	$('#educationProjectFormLoad').attr('class','active');
+})
+</script>
+
+<!-- 스프레드 시트 관련 스크립트 -->
 <script data-jsfiddle="example1">
 $(document).ready(function(){
 	var container = document.getElementById('example1'),hot;
@@ -117,9 +109,10 @@ $(document).ready(function(){
 		}
 	   
 	});
-	$('#btTest').click(function(){
+		
+	/* $('#btTest').click(function(){
 		dataArray[dataArray.length] = hot.mergeCells;
-	})
+	}) */
 	
 	$('#save').click(function(){
 		alert('test');
@@ -160,16 +153,28 @@ $(document).ready(function(){
    		});    
 	})
   
-	setTimeout(function(){
+	//setTimeout(function(){
 // 		console.log(hot.mergeCells)
 // 		console.log(hot.getCellsMeta())
 // 		console.log(dataArray);
-	},5000)
+	//},5000)
 })
 </script>
 
 
-
-
+</head>
+<body class="components-page">
+	<div class="wrapper">
+		<div class="main-panel">
+			<div class="content">
+				<button name="save" id="save">계획안 저장</button>
+				<div class="wrapper" style="margin-top: 20px;">
+					<div id="example1"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+
+
 </html>

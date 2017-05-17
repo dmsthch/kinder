@@ -42,11 +42,18 @@
 
 	    	<div class="sidebar-wrapper">
 	            <ul class="nav">
+            	   <li>
+	                   <a href="${pageContext.request.contextPath}/educationProject" class="smoothScroll">
+	                        <i class="material-icons">dashboard</i>
+	                        
+	                        <p>계획안 메인화면</p>
+	                    </a>
+	                </li>
 	                <!-- <li class="active"> -->
 	                <li id="educationProjectAddPage">
 	                    <a href="${pageContext.request.contextPath}/educationProjectAddPage">
-	                        <i class="material-icons">dashboard</i>
-	                        <p>양식 추가</p>
+	                        <i class="material-icons">library_books</i>
+	                        <p>양식 관리</p>
 	                    </a>
 	                </li>
 	                <li id="educationProjectFormLoad">
@@ -61,12 +68,7 @@
 	                        <p>임시2</p>
 	                    </a>
 	                </li>
-	                <li>
-	                    <a href="typography.html">
-	                        <i class="material-icons">library_books</i>
-	                        <p>Typography</p>
-	                    </a>
-	                </li>
+	             
 	                <li>
 	                    <a href="icons.html">
 	                        <i class="material-icons">bubble_chart</i>

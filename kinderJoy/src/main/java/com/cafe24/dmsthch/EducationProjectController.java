@@ -106,7 +106,7 @@ public class EducationProjectController {
 										,Model model
 										,@RequestParam(value="categoryNo") String categoryNo
 										,@RequestParam(value="age", required=false, defaultValue="") int age
-										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo
+										,@RequestParam(value="classNo", required=false, defaultValue="") int classNo
 										,@RequestParam(value="date") String date){
 		System.out.println("계획안 불러오는거 테스트");
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
@@ -119,11 +119,26 @@ public class EducationProjectController {
 	@RequestMapping(value = "/EducationProjectList", method = RequestMethod.GET)
 	public String EducationProjectList(HttpSession session
 										,@RequestParam(value="categoryNo") String categoryNo
-										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo){
-		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
-		int month = c.get(Calendar.MONTH);
-	
+										,@RequestParam(value="classNo") int classNo
+										,Model model){
+		System.out.println(categoryNo+"<<categoryNo");
+		System.out.println(classNo+"<<classNo");		
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+/*		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
+		int month = (c.get(Calendar.MONTH))+1;
+		System.out.println(month+"<<month");
+		Integer integerMonth = month;
+		System.out.println(integerMonth+"<<integerMonth");
+		String classMonth = integerMonth.toString();
+		System.out.println(classMonth+"<<<classMonth");*/
 		
+		List<Education> eduList = dao.EducationProjectList(licenseKindergarten, categoryNo, classNo);
+		String className = dao.selectClassName(classNo);
+		String categoryName = dao.selectCategoryName(categoryNo);
+		model.addAttribute("eduList",eduList);
+		model.addAttribute("className",className);
+		model.addAttribute("categoryName", categoryName);
+		model.addAttribute("categoryNo",categoryNo);
 		return "EducationProject/EducationProjectList";
 	}
 	

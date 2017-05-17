@@ -11,7 +11,7 @@ public class Education {
 	private String addDate;
 	private String categoryNo;
 	private int age;
-	private String classNo;
+	private int classNo;
 	
 	public int getAge() {
 		return age;
@@ -19,10 +19,10 @@ public class Education {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public String getClassNo() {
+	public int getClassNo() {
 		return classNo;
 	}
-	public void setClassNo(String classNo) {
+	public void setClassNo(int classNo) {
 		this.classNo = classNo;
 	}
 	public String getCategoryNo() {

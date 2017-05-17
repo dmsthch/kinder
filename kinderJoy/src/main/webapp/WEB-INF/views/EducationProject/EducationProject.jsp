@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 
@@ -43,6 +44,39 @@ console.log(${childclass}+"<<childclass")
 		<div class="content">
 			<div class="container-fluid">
 				<button class=" btn btn-default myBtn"> adsf</button>
+				
+				<!-- 주간계획안 -->
+				<div class="row">
+					<c:forEach var ="age" begin="3" end ="5">
+						<div class="col-lg-4 col-md-6 col-sm-6 ">
+							<div class="card card-stats">
+								<div class="card-header" data-background-color="red">
+									<!-- <i class="material-icons">content_copy</i> -->
+									<h3 class="ageFont title">${age}세</h3>
+								</div>
+								<div class="card-content">									
+									<p class="category"></p>
+									<h3 class="title" style="font-weight: bold;">주간계획안</h3>
+								</div>
+								<div class="card-footer textRiht">
+									<div class="stats ">
+										<c:if test="${childclass == '[]'}">
+											생성된 반이 없습니다.
+										</c:if>
+										<c:forEach var="childclass" items="${childclass}">
+											<c:if test="${childclass.classAge == age }">
+												<i class="material-icons" style="margin-left: 5px;">library_books</i>
+												<a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=3&classNo=${childclass.classNo}"> ${childclass.className}반 </a><br/>
+											</c:if>
+										</c:forEach>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>	
+				</div>
+				<!-- 주간계획안 끝 -->
+				
 				<!-- 월간계획안 -->
 				<div class="row">
 					<c:forEach var ="age" begin="3" end ="5">
@@ -64,7 +98,7 @@ console.log(${childclass}+"<<childclass")
 										<c:forEach var="childclass" items="${childclass}">
 											<c:if test="${childclass.classAge == age }">
 												<i class="material-icons" style="margin-left: 5px;">library_books</i>
-												<a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=2&classNo=${childclass.classNo}"> ${childclass.className}반 </a><br/>
+												<a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=2&classNo=${childclass.classNo}"> ${childclass.className}반 </a><br/>
 											</c:if>
 										</c:forEach>
 									</div>
