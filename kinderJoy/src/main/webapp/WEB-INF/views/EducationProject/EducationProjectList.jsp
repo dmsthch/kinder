@@ -27,7 +27,16 @@ $(document).ready(function(){
 					<div class="card">
 						<div class="card-header" data-background-color="blue">
 							<h4 class="title">${categoryName}</h4>
-							<p class="category">${className}반</p>
+								<c:if test="${className!=null}">
+									<p class="category">${className}반</p>
+								</c:if>
+								<c:if test="${className==null}">
+									<c:if test="${age!=0}">
+										<p class="category">${age}세</p>
+									</c:if>
+									<p class="category">전체 반</p>
+								</c:if>
+								
 						</div>
 						
 						<div class="card-content table-responsive">
@@ -37,7 +46,7 @@ $(document).ready(function(){
 			                    	<c:if test="${categoryNo == 2}">
 			                    	<c:forEach items="${eduList}" var="eduList">
 									 <tr>
-									 	<td style="cursor:pointer;" onclick="location.href=''">${className}반 월간계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월</td>
+									 	<td style="cursor:pointer;" onclick="location.href=''">${eduList.classNo}반 월간계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월</td>
 									 </tr>
 									</c:forEach>
 									</c:if>
@@ -46,7 +55,7 @@ $(document).ready(function(){
 									<c:if test="${categoryNo == 3}">
 			                    	<c:forEach items="${eduList}" var="eduList">
 									 <tr>
-									 	<td style="cursor:pointer;" onclick="location.href=''">${className}반 주간계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월 - ${fn :substring(eduList.projectDateInfo,8,9)}주</td>
+									 	<td style="cursor:pointer;" onclick="location.href=''">${eduList.classNo}반 주간계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월 - ${fn :substring(eduList.projectDateInfo,8,9)}주</td>
 									 </tr>
 									</c:forEach>
 									</c:if>
@@ -55,7 +64,7 @@ $(document).ready(function(){
 									<c:if test="${categoryNo == 4}">
 			                    	<c:forEach items="${eduList}" var="eduList">
 									 <tr>
-									 	<td style="cursor:pointer;" onclick="location.href=''">${className}반 일일계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월 - ${fn : substring(eduList.projectDateInfo,8,10)}일</td>
+									 	<td style="cursor:pointer;" onclick="location.href=''">${eduList.classNo}반 일일계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월 - ${fn : substring(eduList.projectDateInfo,8,10)}일</td>
 									 </tr>
 									</c:forEach>
 									</c:if>

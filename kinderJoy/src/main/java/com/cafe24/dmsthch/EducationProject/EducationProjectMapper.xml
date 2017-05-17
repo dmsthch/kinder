@@ -139,23 +139,28 @@
 <!-- 해당 반의 카테고리별로(월/주/일) 목록 가져오기 -->
 <select id="EducationProjectList" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.EducationProject.Education">
 	SELECT
-	 	education_project_no AS educationProjectNo 
-		,add_date AS addDate
-		,category_no AS categoryNo
+	 	e.education_project_no AS educationProjectNo 
+		,e.add_date AS addDate
+		,e.category_no AS categoryNo
 		,age
-		,class_no AS classNo
-		,project_date_info AS projectDateInfo
-	FROM education_project
-	WHERE license_kindergarten = #{licenseKindergarten}
-	AND category_no = ${categoryNo}
-	<if test="classNo != 0">
-	AND class_no = #{classNo}
+		,k.class_name AS classNo
+		,e.project_date_info AS projectDateInfo
+	FROM education_project e
+	INNER JOIN kid_class k
+	ON e.class_no = k.class_no
+	WHERE e.license_kindergarten = #{licenseKindergarten}
+	AND e.category_no = ${categoryNo}
+	<if test="classNo != '' ">
+	AND e.class_no = #{classNo}
 	</if>
-	ORDER BY add_date DESC
+	<if test="age !=0">
+	AND e.age = #{age}
+	</if>
+	ORDER BY e.project_date_info DESC
 </select>
 
 <!-- 반의 이름 가져오기 -->
-<select id="selectClassName" parameterType="int" resultType="String">
+<select id="selectClassName" parameterType="String" resultType="String">
 	SELECT
 		class_name AS className
 	FROM kid_class

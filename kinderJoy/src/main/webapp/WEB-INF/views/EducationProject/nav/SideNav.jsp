@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,7 +34,12 @@
 .dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
  
 .dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;} 
-
+.sidebar.sidebar{
+	z-index:5555;
+}
+.components-page.components-page{
+ z-index:10;
+}
 </style>
 
 </head>
@@ -46,7 +52,7 @@
 		        Tip 2: you can also add an image using data-image tag
 		    -->
 
-			<div class="logo" style="margin-bottom: 20px;">
+			<div class="logo" style="padding-bottom: 51px;">
 				<a href="http://www.creative-tim.com" class="simple-text">
 					
 				</a>
@@ -71,13 +77,14 @@
 							    	<li><a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=4">일일계획안 전체 보기</a></li>
 							    	<li class="divider"></li>
 							    	
-							    	<li class="dropdown-submenu" >
-							    	<a href="#"> test 1</a>
-							    	<ul class="dropdown-menu" style="margin-left:1%">
-							    		<li> <a href="#">test0001</a>
-							    		</li>
-							    	</ul>
-							    	</li>
+							    	<c:forEach begin="3" end="5" var="age">
+								    	<li class="dropdown-submenu" >
+								    		<a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=4&age=${age}"> ${age}세 </a>
+									    	<ul class="dropdown-menu" style="margin-left:1%">
+									    		<li><a href="#">test0001</a></li>
+									    	</ul>
+								    	</li>
+							    	</c:forEach>
 							    	
 							      <li><a href="#">HTML</a></li>
 							      <li><a href="#">CSS</a></li>

@@ -11,7 +11,7 @@ public class Education {
 	private String addDate;
 	private String categoryNo;
 	private int age;
-	private int classNo;
+	private String classNo;
 	private String projectDateInfo;
 	
 
@@ -27,10 +27,11 @@ public class Education {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public int getClassNo() {
+
+	public String getClassNo() {
 		return classNo;
 	}
-	public void setClassNo(int classNo) {
+	public void setClassNo(String classNo) {
 		this.classNo = classNo;
 	}
 	public String getCategoryNo() {

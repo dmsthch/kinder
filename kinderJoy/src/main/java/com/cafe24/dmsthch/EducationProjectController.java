@@ -106,7 +106,7 @@ public class EducationProjectController {
 										,Model model
 										,@RequestParam(value="categoryNo") String categoryNo
 										,@RequestParam(value="age", required=false, defaultValue="") int age
-										,@RequestParam(value="classNo", required=false, defaultValue="") int classNo
+										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo
 										,@RequestParam(value="date") String date){
 		System.out.println("계획안 불러오는거 테스트");
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
@@ -119,24 +119,20 @@ public class EducationProjectController {
 	@RequestMapping(value = "/EducationProjectList", method = RequestMethod.GET)
 	public String EducationProjectList(HttpSession session
 										,@RequestParam(value="categoryNo") String categoryNo
-										,@RequestParam(value="classNo", required=false, defaultValue="0") int classNo
+										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo
+										,@RequestParam(value="age", required=false, defaultValue="0") int age
 										,Model model){
 		System.out.println(categoryNo+"<<categoryNo");
 		System.out.println(classNo+"<<classNo");		
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
-		List<Education> eduList = dao.EducationProjectList(licenseKindergarten, categoryNo, classNo);
-		if(classNo==0){
-			
-		}else{
-			String className = dao.selectClassName(classNo);
-			model.addAttribute("className",className);
-		}
-		
+		List<Education> eduList = dao.EducationProjectList(licenseKindergarten, categoryNo, classNo, age);
+		String className = dao.selectClassName(classNo);
+		model.addAttribute("className",className);
 		String categoryName = dao.selectCategoryName(categoryNo);
 		model.addAttribute("eduList",eduList);
-		
 		model.addAttribute("categoryName", categoryName);
 		model.addAttribute("categoryNo",categoryNo);
+		model.addAttribute("age",age);
 		return "EducationProject/EducationProjectList";
 	}
 	

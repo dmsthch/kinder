@@ -41,16 +41,16 @@ console.log(${childclass}+"<<childclass")
 	padding-right: 20px;
 }
 
-.sidebar.sidebar{
+/* .sidebar.sidebar{
 	z-index:5555;
-}
+} */
 
 </style>
 
 <c:import url="./nav/SideNav.jsp"></c:import>
 
 </head>
-<body class="components-page" style="z-index:10">
+<body class="components-page" >
 
 <div class="wrapper">
 	<div class="main-panel">
