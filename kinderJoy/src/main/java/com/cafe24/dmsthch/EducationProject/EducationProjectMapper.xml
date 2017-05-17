@@ -141,22 +141,38 @@
 	SELECT
 	 	e.education_project_no AS educationProjectNo 
 		,e.add_date AS addDate
-		,c.category_name AS categoryNo
-		,e.age
-		,e.class_no AS classNo
+		,e.category_no AS categoryNo
+		,age
+		,k.class_name AS classNo
+		,e.project_date_info AS projectDateInfo
 	FROM education_project e
-	INNER JOIN education_category c
-	ON e.category_no = c.category_no
-	WHERE license_kindergarten = #{licenseKindergarten}
-	<if test="categoryNo == 2 ">
-		AND (SELECT month(add_date)) = #{addDate}
+	INNER JOIN kid_class k
+	ON e.class_no = k.class_no
+	WHERE e.license_kindergarten = #{licenseKindergarten}
+	AND e.category_no = ${categoryNo}
+	<if test="classNo != '' ">
+	AND e.class_no = #{classNo}
 	</if>
-	<if test="categoryNo == 3 ">
-		AND (SELECT week(add_date)) = #{addDate}
+	<if test="age !=0">
+	AND e.age = #{age}
 	</if>
-	<if test="categoryNo == 4 ">
-		AND (SELECT day(add_date)) = #{addDate}
-	</if>
-	AND class_no = #{classNo}
+	ORDER BY e.project_date_info DESC
 </select>
+
+<!-- 반의 이름 가져오기 -->
+<select id="selectClassName" parameterType="String" resultType="String">
+	SELECT
+		class_name AS className
+	FROM kid_class
+	WHERE class_no = #{classNo}
+</select>
+
+<!-- 계획안 카테고리 이름 가져오기 -->
+<select id="selectCategoryName" parameterType="String" resultType="String">
+	SELECT
+		category_name AS categoryName
+	FROM education_category
+	WHERE category_no = #{categoryNo} 
+</select>
+
   </mapper>

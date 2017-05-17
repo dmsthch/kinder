@@ -26,6 +26,12 @@ public class TeacherController {
 	@Autowired
 	private TeacherDao TDao;
 	
+	//권한 없을 때 보여줄 페이지
+		@RequestMapping(value="/권한없는 사람이 보는 페이지", method = RequestMethod.GET)
+		public String kwonhan() {
+		System.out.println("! 권한없는 사람이 접근 ! 게임페이지 호출!");
+		return "Teacher/TheAviator/index";
+		}
 	
 	//takeForm save메서드 호출
 	@RequestMapping(value="/save2", method = RequestMethod.POST)
@@ -90,7 +96,7 @@ public class TeacherController {
 	public String kyowon(HttpSession httpsession,Model model) {
 		Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
 		model.addAttribute("kyoteacher",teacher);
-		System.out.println("user Profile호출___Teacher/TeacherModify/user로 포워드\n");	
+		System.out.println("user Profile호출___Teacher/TeacherModify/user로 포워드\n");
 		return "Teacher/TeacherModify/user";
 	}
 	
@@ -115,7 +121,6 @@ public class TeacherController {
 		System.out.println("로그인체크메서드 호출_Controller");
 		System.out.println("사용자가 입력한 아이디는? : " + userid);
 		int check = TDao.logincheck(userid);
-		int check2 = TDao.logincheck2(userid);
 		
 		if(check == 0){
 			System.out.println("DB에 중복되는 값이 없습니다_TeacherController");
@@ -136,44 +141,31 @@ public class TeacherController {
 		return "redirect:/home";
 	}
 	
-/*	//로그인폼 호출 메서드 ★★★모달형식은 사용할 필요가 없음
-		
-	@RequestMapping(value="/Login" , method = RequestMethod.GET)
-	public String Login(HttpSession session) {
-		System.out.println("로그인화면");
-		if(session.getAttribute("teacherId") == null){
-			return "Teacher/TeacherLogin";
-			
-		}else{
-			return "redirect:/home";
-		}
-	}*/
-	
 	//로그인 처리
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
 	public String Login(SessionStatus sessionstatus,HttpServletRequest request,Model model,Teacher teacher,HttpSession session,String joongbok) throws SQLException {
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
-		System.out.println(teacher.getTeacher_id() +"<-- 사용자가 입력한 아이디");
+		System.out.println(teacher.getTeacherId() +"<-- 사용자가 입력한 아이디");
 		System.out.println(TDao+" <--TDao 동작 확인");
 
 		if(saveSession != null) {
 			if(session.getAttribute("teacherId") == null){
 				
-				model.addAttribute("teacherNo",saveSession.getTeacher_no());
-				System.out.println(saveSession.getTeacher_no() +" <-- 세션에 저장될 넘버 값 세션");
+				model.addAttribute("teacherNo",saveSession.getTeacherNo());
+				System.out.println(saveSession.getTeacherNo() +" <-- 세션에 저장될 넘버 값 세션");
 				
-				model.addAttribute("licenseKindergarten",saveSession.getLicense_kindergarten());
-				System.out.println(saveSession.getLicense_kindergarten() +" <-- 세션에 저장될 라이센스값");
+				model.addAttribute("licenseKindergarten",saveSession.getLicenseKindergarten());
+				System.out.println(saveSession.getLicenseKindergarten() +" <-- 세션에 저장될 라이센스값");
 				
-				model.addAttribute("teacherId", saveSession.getTeacher_id());
-				System.out.println(saveSession.getTeacher_id() +"<-- 세션에 저장될 아이디 값");
+				model.addAttribute("teacherId", saveSession.getTeacherId());
+				System.out.println(saveSession.getTeacherId() +"<-- 세션에 저장될 아이디 값");
 				
-				model.addAttribute("teacherName", saveSession.getTeacher_name());
-				System.out.println(saveSession.getTeacher_name() + "<-- 세션에 저장될 네임값");
+				model.addAttribute("teacherName", saveSession.getTeacherName());
+				System.out.println(saveSession.getTeacherName() + "<-- 세션에 저장될 네임값");
 				
-				model.addAttribute("teacherLevel" ,saveSession.getTeacher_level());
-				System.out.println(saveSession.getTeacher_level() + " <--세션에 저장될 레벨값");
+				model.addAttribute("teacherLevel" ,saveSession.getTeacherLevel());
+				System.out.println(saveSession.getTeacherLevel() + " <--세션에 저장될 레벨값");
 				
 				session.setMaxInactiveInterval(7200);
 
@@ -194,6 +186,7 @@ public class TeacherController {
 	public String logOut(@ModelAttribute Teacher teacher ,SessionStatus sessionstatus){
 
 		sessionstatus.setComplete();
+
 
 		
 		System.out.println(sessionstatus +"\n SessionAttributes만 초기화");

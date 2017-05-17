@@ -120,7 +120,7 @@
 									 	<div class="col-md-5">
 								        	<ol class="jkc vertical">교원목록
 								             	<c:forEach var="T" items="${takeTeacher}">
-										        	<li id="li_id_name"><i class="icon-move"></i>${T.teacher_name}</li>
+										        	<li id="li_id_name"><i class="icon-move"></i>${T.teacherName}</li>
 										        </c:forEach>
 								       		</ol>
 										</div>

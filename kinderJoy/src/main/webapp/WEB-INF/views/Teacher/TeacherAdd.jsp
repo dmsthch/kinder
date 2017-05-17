@@ -88,7 +88,7 @@ $(document).ready(function(){
     <div class="form-group">
       <label class="control-label col-sm-2">이름:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" name="teacher_name" placeholder="이름을 입력하세요">
+        <input type="text" class="form-control" name="teacherName" placeholder="이름을 입력하세요">
       </div>
     </div>
     
@@ -96,7 +96,7 @@ $(document).ready(function(){
     <div class="form-group">
       <label class="control-label col-sm-2">아이디:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="teacher_ajax_id" name="teacher_id" placeholder="아이디를 입력하세요">
+        <input type="text" class="form-control" id="teacher_ajax_id" name="teacherId" placeholder="아이디를 입력하세요">
         <input type="button" id="idcheckbutton" value="아이디체크"/>
         사용가능여부 : <jeon />
       </div>
@@ -106,7 +106,7 @@ $(document).ready(function(){
     <div class="form-group">
       <label class="control-label col-sm-2">Password:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" name="teacher_pw" placeholder="비밀번호를 입력하세요">
+        <input type="text" class="form-control" name="teacherPw" placeholder="비밀번호를 입력하세요">
       </div>
     </div>
     
@@ -114,7 +114,7 @@ $(document).ready(function(){
     <div class="form-group">
       <label class="control-label col-sm-2">등록일자:</label>
       <div class="col-sm-10">          
-        <input type="date" class="form-control" name="teacher_add_day">
+        <input type="date" class="form-control" name="teacherAddDay">
       </div>
     </div>
     
@@ -122,7 +122,7 @@ $(document).ready(function(){
     <div class="form-group">
       <label class="control-label col-sm-2">연락처:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" name="teacher_phone" placeholder="연락처를 입력하세요">
+        <input type="text" class="form-control" name="teacherPhone" placeholder="연락처를 입력하세요">
       </div>
     </div>
     

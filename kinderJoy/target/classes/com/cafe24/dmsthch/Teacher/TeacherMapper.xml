@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cafe24.dmsthch.Teacher.TeacherMapper">
-
+<!-- #{전역변수명} -->
 <insert id="insert" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
 INSERT INTO teacher 
 	(
@@ -17,36 +17,55 @@ INSERT INTO teacher
 	,teacher_phone
 	)
 VALUES 
-	(#{teacher_no}
+	(#{teacherNo}
 	,"GUEST"
-	,#{teacher_level}
-	,#{teacher_name}
-	,#{teacher_id}
-	,#{teacher_pw}
-	,#{teacher_add_day}
-	,#{teacher_phone}
+	,#{teacherLevel}
+	,#{teacherName}
+	,#{teacherId}
+	,#{teacherPw}
+	,#{teacherAddDay}
+	,#{teacherPhone}
 )
 </insert>
 
 <select id="login" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 
 SELECT 
-	teacher_no,teacher_name,teacher_id,teacher_level,license_kindergarten
+	teacher_no 				AS teacherNo
+	, teacher_name 			AS teacherName
+	, teacher_id 			AS teacherId
+	, teacher_level 		AS teacherLevel
+	, license_kindergarten 	AS licenseKindergarten
 	FROM 
 	teacher
 	WHERE
-	teacher_id = #{teacher_id}
+	teacher_id = #{teacherId}
 	AND 
-	teacher_pw = #{teacher_pw}
+	teacher_pw = #{teacherPw}
 </select>
 
 <!-- teacher_no는 int타입이니  parameterType="int"가 되겠고 반환값은 여러개니까 Teacher전역변수가 된다-->
 <select id="OneSelectTeacher" parameterType="int" resultType="com.cafe24.dmsthch.Teacher.Teacher">
-
-SELECT * 
+<!-- where절은 db에서 비교하는것이니 AS를 사용할 필요가 없다 -->
+<!-- 입력값은 getter와 setter를 거치기 때문에 AS를 사용하여 전역변수와 동일하게 적어야한다 -->
+<!-- AS를 사용하는 이유는 DB에서 값을 가져올 때 전역변수 명이랑 동일해야 값이 전역변수에 대입이 되는데
+	 이름이 다르면 대입이 안되기 때문에 AS를 사용하여 컬럼명을 변경해서 가져오는것이다
+ -->
+SELECT 
+  teacher_no 			AS teacherNo
+, license_kindergarten 	AS licenseKindergarten
+, teacher_level 		AS teacherLevel
+, teacher_name 			AS teacherName
+, teacher_id 			AS teacherId
+, teacher_pw 			AS teacherPw
+, teacher_add_day 		AS teacherAddDay
+, teacher_phone 		AS teacherPhone
+, teacher_bank 			AS teacherBank
+, teacher_account 		AS teacherAccount
+, teacher_paystep 		AS teacherPaystep
 FROM teacher 
 WHERE 
-teacher_no = #{teacher_no}
+teacher_no = #{teacherNo}
 
 </select>
 
@@ -56,72 +75,37 @@ teacher_no = #{teacher_no}
 
 <!-- 회원 아이디 중복 체크 -->
  <select id="sign_up_id_check" parameterType="java.lang.String" resultType="int">
-SELECT
-count(*)
-FROM
-teacher
-WHERE teacher_id = #{teacher_id};
-<!-- 
-★★★방식1
 
-SELECT sum(C.cnt)
+SELECT sum(Result.C)
 FROM
 (
-select count(*) cnt
+select count(*) C
 from teacher
-WHERE teacher_id = #{teacher_id}
+WHERE teacher_id = #{teacherId}
 
 union all
 
-select count(*) cnt
+select count(*) C
 from remove_id
-WHERE teacher_id = #{teacher_id}
-)C 
+WHERE teacher_id = #{teacherId}
+)Result 
 
-★★★방식2
-
-SELECT
-count(*)
-FROM teacher
-WHERE teacher_id = #{teacher_id}
-
-union all
- 
-SELECT
-count(*)
-FROM remove_id
-WHERE teacher_id = #{teacher_id}
-
--->
  </select>
- 
- <!-- 회원 아이디 중복 체크2(remove_id테이블) -->
- <select id="sign_up_id_check2" parameterType="java.lang.String" resultType="int">
-SELECT
-count(*)
-FROM
-remove_id
-WHERE teacher_id = #{teacher_id};
- </select>
-
-
-
-
 
 <!-- 전체 교원 조회 table list에 필요 -->
 <!-- 입력값은 라이선스 하나니까 String이고 리턴값은 여러개이니 Teacher인 오브젝트이다 -->
 <select id="tableList" parameterType="java.lang.String" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 
 select 
-  teacher_no
-, teacher_id
-, teacher_level
-, teacher_name
-, teacher_add_day
-, teacher_phone
-, teacher_bank
-, teacher_account
-, teacher_paystep
+  teacher_no		AS teacherNo
+, teacher_id		AS teacherId
+, teacher_level		AS teacherLevel
+, teacher_name		AS teacherName
+, teacher_add_day	AS teacherAddDay
+, teacher_phone		AS teacherPhone
+, teacher_bank		AS teacherBank
+, teacher_account	AS teacherAccount
+, teacher_paystep	AS teacherPaystep
  from 
  	teacher
  where 
@@ -134,12 +118,12 @@ select
 <!-- 회원탈퇴 후 삭제된 아이디에 들어갈 쿼리 -->
 <delete id="deleteAccount" parameterType="java.lang.String">
 DELETE FROM teacher 
-WHERE teacher_id = #{teacher_id};
+WHERE teacher_id = #{teacherId};
 </delete>
 <!-- 입력값 하나 그것도 아이디만 넣는것이니 String이고 리턴값은 없어도 된다 -->
 <insert id="insertId" parameterType="java.lang.String">
 INSERT INTO remove_id(teacher_id) 
-VALUES(#{teacher_id});
+VALUES(#{teacherId});
 </insert>
 <!-- 회원탈퇴 후 삭제된 아이디에 들어갈 쿼리 END-->
 
@@ -150,9 +134,9 @@ VALUES(#{teacher_id});
 <!-- 세션의 값을 가져오는 것이니 = #{} 이 안에는 세션에 저장된 이름을 적어야 한다  -->
 <select id="takeTeacher" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 SELECT 
-teacher_no
-,teacher_name
-from teacher 
+teacher_no 		AS teacherNo
+,teacher_name	AS teacherName
+from teacher
 where 
  license_kindergarten = #{licenseKindergarten} 
 AND

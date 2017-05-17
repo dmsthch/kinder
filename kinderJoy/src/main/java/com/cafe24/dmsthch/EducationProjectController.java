@@ -119,11 +119,20 @@ public class EducationProjectController {
 	@RequestMapping(value = "/EducationProjectList", method = RequestMethod.GET)
 	public String EducationProjectList(HttpSession session
 										,@RequestParam(value="categoryNo") String categoryNo
-										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo){
-		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
-		int month = c.get(Calendar.MONTH);
-	
-		
+										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo
+										,@RequestParam(value="age", required=false, defaultValue="0") int age
+										,Model model){
+		System.out.println(categoryNo+"<<categoryNo");
+		System.out.println(classNo+"<<classNo");		
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		List<Education> eduList = dao.EducationProjectList(licenseKindergarten, categoryNo, classNo, age);
+		String className = dao.selectClassName(classNo);
+		model.addAttribute("className",className);
+		String categoryName = dao.selectCategoryName(categoryNo);
+		model.addAttribute("eduList",eduList);
+		model.addAttribute("categoryName", categoryName);
+		model.addAttribute("categoryNo",categoryNo);
+		model.addAttribute("age",age);
 		return "EducationProject/EducationProjectList";
 	}
 	

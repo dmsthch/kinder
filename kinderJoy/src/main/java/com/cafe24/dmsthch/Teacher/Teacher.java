@@ -1,83 +1,81 @@
 package com.cafe24.dmsthch.Teacher;
 
 public class Teacher {
-	private int teacher_no;
-	private String license_kindergarten;
-	private String teacher_level;
-	private String teacher_name;
-	private String teacher_id;
-	private String teacher_pw;
-	private String teacher_add_day;
-	private String teacher_phone;
-	private String teacher_bank;
-	private String teacher_account;
-	private String teacher_paystep;
-	
-	public int getTeacher_no() {
-		System.out.println("전역변수 동작확인_넘버만");
-		return teacher_no;
+	private int teacherNo;
+	private String licenseKindergarten;
+	private String teacherLevel;
+	private String teacherName;
+	private String teacherId;
+	private String teacherPw;
+	private String teacherAddDay;
+	private String teacherPhone;
+	private String teacherBank;
+	private String teacherAccount;
+	private String teacherPaystep;
+	public int getTeacherNo() {
+		return teacherNo;
 	}
-	public void setTeacher_no(int teacher_no) {
-		this.teacher_no = teacher_no;
+	public void setTeacherNo(int teacherNo) {
+		this.teacherNo = teacherNo;
 	}
-	public String getLicense_kindergarten() {
-		return license_kindergarten;
+	public String getLicenseKindergarten() {
+		return licenseKindergarten;
 	}
-	public void setLicense_kindergarten(String license_kindergarten) {
-		this.license_kindergarten = license_kindergarten;
+	public void setLicenseKindergarten(String licenseKindergarten) {
+		this.licenseKindergarten = licenseKindergarten;
 	}
-	public String getTeacher_level() {
-		return teacher_level;
+	public String getTeacherLevel() {
+		return teacherLevel;
 	}
-	public void setTeacher_level(String teacher_level) {
-		this.teacher_level = teacher_level;
+	public void setTeacherLevel(String teacherLevel) {
+		this.teacherLevel = teacherLevel;
 	}
-	public String getTeacher_name() {
-		return teacher_name;
+	public String getTeacherName() {
+		return teacherName;
 	}
-	public void setTeacher_name(String teacher_name) {
-		this.teacher_name = teacher_name;
+	public void setTeacherName(String teacherName) {
+		this.teacherName = teacherName;
 	}
-	public String getTeacher_id() {
-		return teacher_id;
+	public String getTeacherId() {
+		return teacherId;
 	}
-	public void setTeacher_id(String teacher_id) {
-		this.teacher_id = teacher_id;
+	public void setTeacherId(String teacherId) {
+		this.teacherId = teacherId;
 	}
-	public String getTeacher_pw() {
-		return teacher_pw;
+	public String getTeacherPw() {
+		return teacherPw;
 	}
-	public void setTeacher_pw(String teacher_pw) {
-		this.teacher_pw = teacher_pw;
+	public void setTeacherPw(String teacherPw) {
+		this.teacherPw = teacherPw;
 	}
-	public String getTeacher_add_day() {
-		return teacher_add_day;
+	public String getTeacherAddDay() {
+		return teacherAddDay;
 	}
-	public void setTeacher_add_day(String teacher_add_day) {
-		this.teacher_add_day = teacher_add_day;
+	public void setTeacherAddDay(String teacherAddDay) {
+		this.teacherAddDay = teacherAddDay;
 	}
-	public String getTeacher_phone() {
-		return teacher_phone;
+	public String getTeacherPhone() {
+		return teacherPhone;
 	}
-	public void setTeacher_phone(String teacher_phone) {
-		this.teacher_phone = teacher_phone;
+	public void setTeacherPhone(String teacherPhone) {
+		this.teacherPhone = teacherPhone;
 	}
-	public String getTeacher_bank() {
-		return teacher_bank;
+	public String getTeacherBank() {
+		return teacherBank;
 	}
-	public void setTeacher_bank(String teacher_bank) {
-		this.teacher_bank = teacher_bank;
+	public void setTeacherBank(String teacherBank) {
+		this.teacherBank = teacherBank;
 	}
-	public String getTeacher_account() {
-		return teacher_account;
+	public String getTeacherAccount() {
+		return teacherAccount;
 	}
-	public void setTeacher_account(String teacher_account) {
-		this.teacher_account = teacher_account;
+	public void setTeacherAccount(String teacherAccount) {
+		this.teacherAccount = teacherAccount;
 	}
-	public String getTeacher_paystep() {
-		return teacher_paystep;
+	public String getTeacherPaystep() {
+		return teacherPaystep;
 	}
-	public void setTeacher_paystep(String teacher_paystep) {
-		this.teacher_paystep = teacher_paystep;
+	public void setTeacherPaystep(String teacherPaystep) {
+		this.teacherPaystep = teacherPaystep;
 	}
 }

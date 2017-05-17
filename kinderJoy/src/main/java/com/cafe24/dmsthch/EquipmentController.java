@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.dmsthch.Equipment.Equipment;
 import com.cafe24.dmsthch.Equipment.EquipmentDao;
+import com.cafe24.dmsthch.Equipment.EquipmentRequest;
 import com.cafe24.dmsthch.Equipment.Sheet;
 
 @Controller
@@ -23,6 +24,32 @@ public class EquipmentController {
 	
 	@Autowired
 	EquipmentDao dao;
+	@RequestMapping(value = "RequestSave", method = RequestMethod.POST)
+	public String test07(@RequestParam(value="teacherNo") String teacherNo
+						,@RequestParam(value="categoryNo") String categoryNo
+						,@RequestParam(value="requestAmount") String requestAmount
+						,@RequestParam(value="requestName") String requestName
+						,@RequestParam(value="requestDate") String requestDate
+						,@RequestParam(value="requestPrice") String requestPrice
+						,@RequestParam(value="requestStant") String requestStant
+						,@RequestParam(value="requestReason") String requestReason
+						,HttpSession session){
+		
+		System.out.println("---RequestSave---");
+		System.out.println(teacherNo);
+		System.out.println(categoryNo);
+		System.out.println(requestAmount);
+		System.out.println(requestName);
+		System.out.println(requestDate);
+		System.out.println(requestPrice);
+		System.out.println(requestStant);
+		System.out.println(requestReason);
+		System.out.println("---RequestSave---");
+		
+		dao.addEquipmentRequest(teacherNo, categoryNo, requestAmount, requestName, requestDate, requestPrice, requestStant, requestReason, session);
+		
+		return "redirect:/test01";
+	}
 	
 	@RequestMapping(value = "Equipment", method = RequestMethod.GET)
 	public String test01(Model model
@@ -43,14 +70,19 @@ public class EquipmentController {
 		return "Equipment/Equipment";
 	}
 	@RequestMapping(value = "test01", method = RequestMethod.GET)
-	public String test05(){
-		
+	public String test05(HttpSession session
+						,Model model){
+		String teacherName = (String)session.getAttribute("teacherName");
+		int teacherNo = (Integer)session.getAttribute("teacherNo");
+		model.addAttribute("teacherName",teacherName);
+		model.addAttribute("teacherNo",teacherNo);
 		return "Equipment/NewFile";
 	}
-	@RequestMapping(value = "test02", method = RequestMethod.GET)
-	public String test06(){
-		
-		return "Equipment/testSelect";
+	@RequestMapping(value = "testList", method = RequestMethod.GET)
+	public String test06(Model model){
+		List<EquipmentRequest> equipmentRequest = dao.selectEqipmentRequest();
+		model.addAttribute("equipmentRequest",equipmentRequest);
+		return "Equipment/testList";
 	}
 	@RequestMapping(value = "sheet", method = RequestMethod.GET)
 	public String sheet(Model model){

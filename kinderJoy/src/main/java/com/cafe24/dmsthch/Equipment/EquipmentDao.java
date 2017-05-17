@@ -14,6 +14,36 @@ import org.springframework.stereotype.Repository;
 public class EquipmentDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	// 비품 건의서 리스트 출력
+	public List<EquipmentRequest> selectEqipmentRequest() {
+		System.out.println("selectEqipmentRequest 메서드 내용 실행");
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectEquipmentRequest");
+	}
+	// 비품 건의서 입력
+	public int addEquipmentRequest(String teacherNo
+									,String categoryNo
+									,String requestAmount
+									,String requestName
+									,String requestDate
+									,String requestPrice
+									,String requestStant
+									,String requestReason
+									,HttpSession session) {
+		System.out.println("addEquipmentRequest 메서드 내용 실행");
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		EquipmentRequest equipmentRequest = new EquipmentRequest();
+		equipmentRequest.setLicenseKindergarten(licenseKindergarten);
+		equipmentRequest.setRequestName(requestName);
+		equipmentRequest.setCategoryNo(categoryNo);
+		equipmentRequest.setRequestAmount(requestAmount);
+		equipmentRequest.setTeacherNo(teacherNo);
+		equipmentRequest.setRequestDay(requestDate);
+		equipmentRequest.setRequestReason(requestReason);
+		equipmentRequest.setRequestPrice(requestPrice);
+		equipmentRequest.setRequestStant(requestStant);
+		
+		return sqlSessionTemplate.insert("com.cafe24.dmsthch.Equipment.EquipmentMapper.addEquipmentRequest",equipmentRequest);
+	}
 	// 비품 품의서 리스트 네임 출력하기
 	public List<Sheet> selectEquipmentName(HttpSession session) {
 		System.out.println("selectEquipmentName 메서드 내용 실행");

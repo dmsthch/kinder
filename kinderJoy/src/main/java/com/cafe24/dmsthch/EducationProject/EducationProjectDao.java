@@ -85,9 +85,27 @@ public class EducationProjectDao {
 	}
 	
 	//계획안 반별로 리스트 불러오기
-	public List<Education> EducationProjectList(String licenseKindergarten,String categoryNo,String classNo){
+	public List<Education> EducationProjectList(String licenseKindergarten,String categoryNo,String classNo,int age){
+		Education edu = new Education();
+		edu.setLicenseKindergarten(licenseKindergarten);
+		edu.setCategoryNo(categoryNo);
+		edu.setClassNo(classNo);
+		edu.setAge(age);
+		System.out.println("체크포인트 1");
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.EducationProjectList", edu);
+	}
+	
+	//반번호로 반이름 셀렉트하기
+	public String selectClassName(String classNo){
+		System.out.println("체크포인트 2");
+		System.out.println(classNo +"<<classno체크");
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.selectClassName", classNo);
+	}
+	
+	//카테고리 번호로 카테고리 이름 셀렉트하기(연간/월간/주간/일간)
+	public String selectCategoryName(String categoryNo){
 		
-		return null;
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.selectCategoryName",categoryNo);
 	}
 	
 	//테스트용

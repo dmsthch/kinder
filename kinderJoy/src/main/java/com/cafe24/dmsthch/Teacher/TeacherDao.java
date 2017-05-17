@@ -42,12 +42,6 @@ public class TeacherDao {
 		//selectOne을 써야하는데 selectList를 써서 오류가 났었다 
 	}
 	
-	//아이디 중복체크2(remove_id 테이블)
-		public int logincheck2(String joongbok) {
-		System.out.println("로그인 체크 메서드 호출2 _DAO22");
-		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.sign_up_id_check2", joongbok);
-		}
-	
 	//전체 교원의 전체 정보 조회 admin전용
 	public List<Object> tableList(String string) {
 		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.tableList",string);
