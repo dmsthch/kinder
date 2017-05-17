@@ -144,14 +144,7 @@ public class ChildController {
 			
 			String license = (String) session.getAttribute("licenseKindergarten");
 			
-			child.setLicenseKindergarten(license);;
 			
-			System.out.println(child.getLicenseKindergarten());
-			System.out.println(child.getKidName());
-			System.out.println(child.getKidBirth());
-			
-			
-			childDao.getList(child);
 			
 			
 			

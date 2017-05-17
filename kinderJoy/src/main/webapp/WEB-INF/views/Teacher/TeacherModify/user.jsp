@@ -58,19 +58,19 @@
 	                                        <div class="col-md-5">
 												<div class="form-group label-floating">
 													<label class="control-label">아이디</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_id}" readonly>
+													<input type="text" class="form-control" value="${kyoteacher.teacherId}" readonly>
 												</div>
 	                                        </div>
 	                                        <div class="col-md-3">
 												<div class="form-group label-floating">
 													<label class="control-label">이름</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_name}" >
+													<input type="text" class="form-control" value="${kyoteacher.teacherName}" >
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">핸드폰 번호</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_phone}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherPhone}">
 												</div>
 	                                        </div>
 	                                    </div>
@@ -79,13 +79,13 @@
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">권한</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_level}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherLevel}">
 												</div>
 	                                       </div>
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">add</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_add_day}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherAddDay}">
 												</div>
 	                                        </div>
 	                                    </div>
@@ -94,7 +94,7 @@
 	                                        <div class="col-md-12">
 												<div class="form-group label-floating">
 													<label class="control-label">라이선스</label>
-													<input type="text" class="form-control" value="${kyoteacher.license_kindergarten}">
+													<input type="text" class="form-control" value="${kyoteacher.licenseKindergarten}">
 												</div>
 	                                        </div>
 	                                    </div>
@@ -103,19 +103,19 @@
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">은행</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_bank}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherBank}">
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">계좌</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_account}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherAccount}">
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">호봉</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacher_paystep}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherPaystep}">
 												</div>
 	                                        </div>
 	                                    </div>
