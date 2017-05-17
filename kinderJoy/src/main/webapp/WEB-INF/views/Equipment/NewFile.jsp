@@ -3,6 +3,9 @@
 
 <!doctype html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<jsp:useBean id="now" class="java.util.Date"/>
+<fmt:formatDate value="${now }" pattern="yyyy-MM-dd" var="today" />
 <html>
 <head>
 	<meta charset="utf-8">
@@ -24,7 +27,15 @@
 body {
 	font-family: koverwatch
 }
+/* .form-control{
+	width:400px;
+} */
 </style>
+<script>
+$(document).ready(function(){
+	$('#equipmentRequestNav').attr('class','active');
+})
+</script>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -32,54 +43,109 @@ body {
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
-				<div>
-					비품 건의서
-					<div>
-					비품카테고리
-					<select>
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
-					</select>
-					</div>
-					<div>
-					품명
-					</div>
-					<div>
-					<input type="text"/>
-					</div>
-					<div>
-					수량
-					</div>
-					<div>
-					<input type="text"/>
-					</div>
-					<div>
-					교원번호
-					</div>
-					<div>
-					<input type="text"/>
-					</div>
-					<div>
-					신청일자
-					</div>
-					<div>
-					<input type="date"/>
-					</div>
-					<div>
-					</div>
-					<div>
-					<textarea>신청사유</textarea>
-					</div>
-					<div>
-					예상금액
-					</div>
-					<div>
-					<input type="text"/>원
-					</div>
-				</div>
+	        <div class="content">
+	            <div class="container-fluid">
+	                <div class="row">
+	                    <div class="col-md-12">
+	                        <div class="card">
+	                            <div class="card-header" data-background-color="blue">
+	                                <h4 class="title">비품 신청</h4>
+									<p class="category">EQUIPMENT REQUEST</p>
+	                            </div>
+	                            <div class="card-content">
+	                                <form id="equipmnetRequestForm" action="${pageContext.request.contextPath}/RequestSave" method="POST">
+	                                    <div class="row">
+	                                        <div class="col-md-3">
+												<div class="form-group label-floating">
+													<label class="control-label">신청자</label>
+													<input type="text" class="form-control" value="${teacherName}" readonly>
+													<input type="hidden" name="teacherNo" value="${teacherNo}"/>
+												</div>
+	                                        </div>
+	                                        <div class="col-md-5">
+												<div class="form-group label-floating">
+													<label class="control-label">비품 카테고리</label>
+													<div class="radio" style="margin:0 auto" align="center">
+														<label>
+															<input type="radio" name="categoryNo" value="1">
+															교재,교구
+														</label>
+														<label>
+															<input type="radio" name="categoryNo" value="2">
+															사무용품
+														</label>
+														<label>
+															<input type="radio" name="categoryNo" value="3">
+															체육용품
+														</label>
+														<label>
+															<input type="radio" name="categoryNo" value="4">
+															도서목록
+														</label>
+														<label>
+															<input type="radio" name="categoryNo" value="5">
+															기타
+														</label>
+													</div>
+												</div>
+	                                        </div>
+	                                        <div class="col-md-4">
+												<div class="form-group label-floating">
+													<label class="control-label">수량</label>
+													<input type="text" name="requestAmount" class="form-control" >
+												</div>
+	                                        </div>
+	                                    </div>
+
+	                                    <div class="row">
+	                                        <div class="col-md-6">
+												<div class="form-group label-floating">
+													<label class="control-label">비품 신청 명</label>
+													<input type="text" name="requestName" class="form-control" >
+												</div>
+	                                        </div>
+	                                        <div class="col-md-6">
+												<div class="form-group label-floating">
+													<label class="control-label">신청일</label>
+													<input type="text" name="requestDate" class="form-control" value="${today}" readonly/>
+												</div>
+	                                        </div>
+	                                    </div>
+	                                    <div class="row">
+	                                        <div class="col-md-6">
+												<div class="form-group label-floating">
+													<label class="control-label">예상 금액</label>
+													<input type="text" name="requestPrice" class="form-control" />
+												</div>
+	                                        </div>
+	                                        <div class="col-md-6">
+												<div class="form-group label-floating">
+													<label class="control-label">예상 구입처</label>
+													<input type="text" name="requestStant" class="form-control" />
+												</div>
+	                                        </div>
+	                                    </div>
+	                                    <div class="row">
+	                                        <div class="col-md-12">
+	                                            <div class="form-group">
+	                                                <label>상세</label>
+													<div class="form-group label-floating">
+									    				<label class="control-label">신청사유</label>
+								    					<textarea class="form-control" name="requestReason" rows="5"></textarea>
+		                        					</div>
+	                                            </div>
+	                                        </div>
+	                                    </div>
+
+	                                    <button type="submit" class="btn btn-info pull-right">신청하기</button>
+	                                    <div class="clearfix"></div>
+	                                </form>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
 			</div>
 		</div>
 	</div>

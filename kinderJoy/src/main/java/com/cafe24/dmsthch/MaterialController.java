@@ -87,11 +87,16 @@ public class MaterialController {
 	public String materialAdd(Board board, HttpSession session) throws IllegalStateException, IOException{
 		System.out.println("MaterialAdd(post) Controller run");
 		
+		String returnUrl = "redirect:/MaterialDocumnetList";
+		if(board.getBoardCategoryNo() == 0){
+			returnUrl = "Material/MaterialAdd";
+			return returnUrl;
+		}
+		
 		if(session.getAttribute("teacherNo") != null){			
 			board.setTeacherNo( (Integer) session.getAttribute("teacherNo"));
 			board.setLicenseKindergarten( (String) session.getAttribute("licenseKindergarten"));
-		}
-		
+		}		
 		//파일 물리적 경로에 저장 , 테이블 data 입력
 		List<MultipartFile> files = board.getFiles();
 		MultipartFile file = files.get(0);
@@ -102,7 +107,7 @@ public class MaterialController {
 		//게시글 입력
 		materialDao.insertBoard(board);
 		
-		return "redirect:/MaterialDocumnetList";
+		return returnUrl;
 	}
 	
 	//게시판 리스트
@@ -234,6 +239,19 @@ public class MaterialController {
 			returnUrl = "redirect:/MaterialSelect?boardNo="+board.getBoardNo();
 		}
 		return returnUrl;
+	}
+	
+	//게시글 삭제 처리
+	@RequestMapping(value="/MaterialDelete", method=RequestMethod.GET)
+	public String materialDelete(Board board, HttpSession session){
+		
+		String license = (String) session.getAttribute("licenseKindergarten");
+		int teacherNo = (Integer) session.getAttribute("teacherNo");
+		String teacherLevel = (String) session.getAttribute("teacherLevel");
+				
+		materialDao.materialDelete(license, teacherLevel, teacherNo, board.getBoardNo());
+		
+		return "redirect:/MaterialDocumnetList?categoryNo=0";
 	}
 	
 	//검색

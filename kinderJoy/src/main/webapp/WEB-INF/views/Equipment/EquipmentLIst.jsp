@@ -4,6 +4,10 @@
 <!-- script -->
 <script>
 
+	$(document).ready(function(){
+		$('#equipmentListNav').attr('class','active');
+	})
+
 	// TR태그 복사하기
 	$(document).on('click','#button',function(){
 			var getCopyObject = $('#copyTargetTable tbody').clone();			

@@ -181,6 +181,7 @@ public class TeacherController {
 
 		sessionstatus.setComplete();
 
+
 		
 		System.out.println(sessionstatus +"\n SessionAttributes만 초기화");
 		System.out.println(" redirect:/home");

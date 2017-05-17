@@ -3,6 +3,49 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
+  	<!-- 비품신청 리스트 출력 -->
+  	<select id="selectEquipmentRequest" resultType="com.cafe24.dmsthch.Equipment.EquipmentRequest">
+		SELECT
+			t.teacher_name AS teacherNO
+			,c.category_name AS categoryNo
+			,e.request_name AS requestName
+			,e.request_reason AS requestReason
+			,e.request_price AS requestPrice
+			,e.request_day AS requestDay
+		FROM
+			equipment_request e
+		INNER JOIN teacher t
+		ON t.teacher_no = e.teacher_no
+		INNER JOIN equipment_request_category c
+		ON c.category_no = e.category_no
+		ORDER BY
+			e.request_no
+		ASC;
+  	</select>
+  	<!-- 비품 신청 입력 -->
+  	<insert id="addEquipmentRequest" parameterType="com.cafe24.dmsthch.Equipment.EquipmentRequest">
+  	INSERT INTO equipment_request(
+		 license_kindergarten
+		,request_name
+		,category_no
+		,request_amount
+		,teacher_no
+		,request_day
+		,request_reason
+		,request_price
+		,request_stant) 
+	VALUES(
+		 #{licenseKindergarten}
+		,#{requestName}
+		,#{categoryNo}
+		,#{requestAmount}
+		,#{teacherNo}
+		,#{requestDay}
+		,#{requestReason}
+		,#{requestPrice}
+		,#{requestStant}
+	);
+  	</insert>
   	<!-- 비품 셀렉트 카운트 받아서 셀렉트 리스트 출력 -->
   	<select id="selectEquipmentList" parameterType="int" resultType="com.cafe24.dmsthch.Equipment.Equipment">
   		SELECT 
