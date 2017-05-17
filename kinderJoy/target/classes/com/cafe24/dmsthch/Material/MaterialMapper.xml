@@ -204,4 +204,25 @@
 		 limit #{nowPage}, 10
 	</select>
 	
+	<!-- 글삭제 -->
+	<delete id="materialDelete" parameterType="java.util.Map">	<!-- 원장용 -->
+		DELETE FROM 
+			board 
+		WHERE 
+			board_no = #{boardNo}
+		and 
+			license_kindergarten = #{license}
+	</delete>
+	<delete id="materialDeleteTeacher" parameterType="java.util.Map">	<!-- 선생용 -->
+		DELETE FROM 
+			board 
+		WHERE 
+			board_no = #{boardNo}
+		and 
+			license_kindergarten = #{license}
+		and 
+			teacher_no = #{teacherNo}
+	</delete>
+	
+	
 </mapper>

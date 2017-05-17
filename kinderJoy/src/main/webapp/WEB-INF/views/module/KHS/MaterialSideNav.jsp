@@ -14,13 +14,13 @@
 
 		<div class="logo">
 			<a href="http://www.creative-tim.com" class="simple-text">
-				
+				&nbsp
 			</a>
 		</div>
 
     	<div class="sidebar-wrapper">
             <ul class="nav">
-                <li class="active">
+                <li class="">
                     <a href="${pageContext.request.contextPath}/Material">
                         <i class="material-icons">dashboard</i>
                         <p>자료실</p>

@@ -87,9 +87,9 @@ public class MaterialDao {
 		map.put("nowPage", (nowPage-1)*10);
 		return sqlSessionTemplate.selectList(sql+"materialAllSearch", map);
 	}
+	
 	//카테고리별 검색
 	public List<Board> materialCategorySearch(String license, int categoryNo, String txtSearch, int nowPage){
-		System.out.println("cat : "+categoryNo);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("license", license);
 		map.put("categoryNo", categoryNo);
@@ -97,4 +97,23 @@ public class MaterialDao {
 		map.put("nowPage", (nowPage-1)*10);
 		return sqlSessionTemplate.selectList(sql+"materialCategorySearch", map);
 	}
+	
+	//글 삭제
+	public int materialDelete(String license, String level, int teacherNo, String boardNo){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("license", license);
+		map.put("teacherNo", teacherNo);
+		map.put("boardNo", boardNo);
+		
+		String newSql = "";
+		if(level.equals("원장")){
+			newSql = sql + "materialDelete";
+		}else{
+			newSql = sql + "materialDeleteTeacher";
+		}
+		
+		return sqlSessionTemplate.delete(newSql, map);
+		
+	}
+	
 }

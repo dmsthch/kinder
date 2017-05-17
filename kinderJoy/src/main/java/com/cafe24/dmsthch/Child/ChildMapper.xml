@@ -137,4 +137,11 @@
   	LIMIT  #{beginRow},#{pagePerRow}
   </select>
   
+  <select id="getList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
+  	SELECT 
+  		license_kindergarten, 
+  		kid_name, 
+  		kid_birth 
+  	FROM kid where license_kindergarten = #{license}
+  </select>
   </mapper>

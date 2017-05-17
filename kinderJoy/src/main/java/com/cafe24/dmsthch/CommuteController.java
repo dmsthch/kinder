@@ -72,7 +72,7 @@ public class CommuteController {
 				System.out.println("출근등록을 안한상태");
 				Teacher teacher = tDao.OneSelectTeacher(teacherNo); //해당 교원 검색 (이름 사용 위해)
 				model.addAttribute("teacherNo", teacherNo);
-				model.addAttribute("teacherName", teacher.getTeacher_name()); //이름 등록
+				model.addAttribute("teacherName", teacher.getTeacherName()); //이름 등록
 				model.addAttribute("commuteCheck", "미출근"); //출근 등록을 안한 상태
 			}else{ //출근등록을 한상태
 				System.out.println("출근등록을 한상태");
@@ -124,7 +124,7 @@ public class CommuteController {
 		if(session.getAttribute("teacherNo") != null){
 			teacherNo = (Integer) session.getAttribute("teacherNo");
 			teacher = tDao.OneSelectTeacher(teacherNo);
-			teacher.setTeacher_no(teacherNo);
+			teacher.setTeacherNo(teacherNo);
 		}
 		
 		System.out.println(teacherNo);
@@ -139,11 +139,11 @@ public class CommuteController {
 		System.out.println("/CommuteIn(unlogin) Controller");
 		
 		Teacher noTeacher = tDao.LoginTeacher(teacher); // id pw 확인 메서드 교원번호 return
-		int teacherNo = noTeacher.getTeacher_no();
+		int teacherNo = noTeacher.getTeacherNo();
 		System.out.println("teacherNo : " + teacherNo);
 		
 		Teacher getTeacher = tDao.OneSelectTeacher(teacherNo);
-		getTeacher.setTeacher_no(teacherNo);
+		getTeacher.setTeacherNo(teacherNo);
 		
 		if(teacherNo > 0){ //로그인 성공
 			if(cDao.commuteCheck(teacherNo) == null){ //출근등록이 안되어 있는 경우
@@ -191,7 +191,7 @@ public class CommuteController {
 		System.out.println("/commuteOut(login) Controller");
 		
 		Teacher noTeacher = tDao.LoginTeacher(teacher); // id pw 확인 메서드 교원번호 return
-		int teacherNo = noTeacher.getTeacher_no();
+		int teacherNo = noTeacher.getTeacherNo();
 		System.out.println(teacherNo);
 		
 		if(teacherNo > 0){ //로그인 성공
@@ -202,7 +202,7 @@ public class CommuteController {
 		Map<Object, Object> map = cDao.commuteCheck(teacherNo); //오늘날짜 출근부 체크
 		Teacher nameTeacher = tDao.OneSelectTeacher(teacherNo); //해당 교원 검색 (이름 사용 위해)
 						
-		String teacherName = nameTeacher.getTeacher_name();
+		String teacherName = nameTeacher.getTeacherName();
 		String attendanceEnd = map.get("attendanceEnd")+"";
 		
 		String notice = teacherName+"님 "+attendanceEnd+" 퇴근등록 되셧습니다";

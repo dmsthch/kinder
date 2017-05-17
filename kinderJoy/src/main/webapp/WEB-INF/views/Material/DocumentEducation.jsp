@@ -10,6 +10,9 @@
 	<c:import url="../module/importCSS.jsp"></c:import>
 	<!-- JS Link -->
 	<c:import url="../module/importJS.jsp"></c:import>
+	
+	<script src="js/KHS/hsCustom.js"></script>
+	
 
 	<style type="text/css">
 		h6 {
@@ -25,10 +28,6 @@
 	<script>
 		$(document).ready(function(e){
 			
-			// 처음 실행할때 리스트 미리보기 탭에서 전체텝이 출력되는 현상 방지
-// 			$('.nav-tabs-wrapper').find('a').eq(1).click();
-// 			$('.nav-tabs-wrapper').find('a').eq(0).click()
-			
 			//검색창에서 카테고리 버튼
 		    $('.search-panel .dropdown-menu').find('a').click(function(e) {
 				e.preventDefault();
@@ -37,6 +36,9 @@
 				$('.search-panel span#search_concept').text(concept); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
 				$('.input-group #search_param').val(param);
 			});
+		  	//사이드바 active속성 주기
+		    setSidenavActive(0);
+		    
 		});
 	</script>
 	
