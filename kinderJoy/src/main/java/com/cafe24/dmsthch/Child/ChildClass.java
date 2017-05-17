@@ -2,7 +2,7 @@ package com.cafe24.dmsthch.Child;
 
 public class ChildClass {
 	
-	private int classNo;
+	private String classNo;
 	private String className;
 	private String classYear;
 	private int classAge;
@@ -14,10 +14,11 @@ public class ChildClass {
 	public void setLicenseKindergarten(String licenseKindergarten) {
 		this.licenseKindergarten = licenseKindergarten;
 	}
-	public int getClassNo() {
+
+	public String getClassNo() {
 		return classNo;
 	}
-	public void setClassNo(int classNo) {
+	public void setClassNo(String classNo) {
 		this.classNo = classNo;
 	}
 	public String getClassName() {
