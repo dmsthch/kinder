@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:import url="../module/importJS.jsp"></c:import>  
 	<meta charset='utf-8'>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	 <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/handsontable.css">
@@ -14,7 +15,7 @@
   <script src="js/LCR/EducationProject/numbro/numbro.js"></script>
   <script src="js/LCR/EducationProject/numbro/languages.js"></script>
   <script src="js/LCR/EducationProject/handsontable.js"></script>
-  <script src="js/jquery.js"></script>
+  
   
 <c:import url="./nav/SideNav.jsp"></c:import>
 <%-- <c:import url="../module/importCSS.jsp"></c:import> --%>
@@ -30,63 +31,78 @@ $(document).ready(function(){
 
 <!-- 스프레드 시트 관련 스크립트 -->
 <script data-jsfiddle="example1">
+
+
 $(document).ready(function(){
 	var container = document.getElementById('example1'),hot;
+	var formOrder = ${formOrder}
 	var dataArray;
-	var dataValue = ${resultData.formVal};
-	console.log(dataValue);
-	console.log("======================!!!===================");
-	var dataMerge = ${resultData.formMerge};
-	var dataBorders = ${resultData.formBorders};
-	//
-	var countRow = ${resultData.formCountRow};
-	var countCol = ${resultData.formCountCol};
-	var dataForSave = ${resultData.formVal};
 
-	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
-// {1:"", 2:"" }	
-	for(j=0; j<dataValue.length;j++){
-		if(dataValue[j]==null){
-			dataValue[j]={ };
-			console.log(dataValue);
-			for(i=0 ; i<countCol; i++){
-				dataValue[j][i] ='';
-				console.log("ㅇㅅㅇ! ->> "+ i);
-			}
-		}	
+	var testData = [];
+	if(formOrder=='0'){
+		
+	}else{
+/* 		var container = document.getElementById('example1'),hot;
+		var dataArray;
+		var dataValue = ${resultData.formVal};
+		console.log(dataValue);
+		console.log("======================!!!===================");
+		var dataMerge = ${resultData.formMerge};
+		var dataBorders = ${resultData.formBorders};
+		//
+		var countRow = ${resultData.formCountRow};
+		var countCol = ${resultData.formCountCol};
+		var dataForSave = ${resultData.formVal}; */
+
+		/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
+	// {1:"", 2:"" }	
+		/* for(j=0; j<dataValue.length;j++){
+			if(dataValue[j]==null){
+				dataValue[j]={ };
+				console.log(dataValue);
+				for(i=0 ; i<countCol; i++){
+					dataValue[j][i] ='';
+					console.log("ㅇㅅㅇ! ->> "+ i);
+				}
+			}	
+		}
+		
+		
+		console.log(dataValue);
+		console.log('===============================');
+		console.log(dataForSave); */
+		
 	}
-	
-	
-	console.log(dataValue);
-	console.log('===============================');
-	console.log(dataForSave);
 	
 	
 	//var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
 	
 	
 		hot = new Handsontable(container, {
-			if(dataValue!=null){
-				data: dataValue,   //데이터 가져오기
-			}else if(dataValue == null){
-			}
- 			  
-			startRows: countRow,
+			
+				//data: dataValue,   //데이터 가져오기
+		/* 	startRows: countRow,
 			startCols: countCol,
-			rowHeaders : true,
-			colHeaders : true,
 			minRows: countRow,
 			minCols: countCol,
+ 			   */
+			startRows: 30,
+			startCols: 20,
+			minRows: 30,
+			minCols: 20,
+			rowHeaders : true,
+			colHeaders : true,
+			
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
-			customBorders: dataBorders,
+			//customBorders: dataBorders,
 			contextMenu : true,
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
- 			mergeCells: dataMerge, //셀병합 가져오기
+ 			//mergeCells: dataMerge, //셀병합 가져오기
  			minSpareRows: 1, //여유 행
  			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
@@ -167,6 +183,11 @@ $(document).ready(function(){
 // 		console.log(dataArray);
 	//},5000)
 })
+
+
+
+//
+}
 </script>
 
 

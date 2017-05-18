@@ -166,7 +166,7 @@ console.log(${childclass}+"<<childclass") */
 									<div class="stats ">
 										<c:forEach var="forYear" begin="${year-2}" end="${year}">
 											<i class="material-icons" style="margin-left: 5px;">date_range</i>
-											<a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&date=${forYear}&age=${age}">${forYear}년</a>
+											<a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&projectDateInfo=${forYear}&age=${age}">${forYear}년</a>
 										</c:forEach>
 									</div>
 								</div>

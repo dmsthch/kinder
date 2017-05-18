@@ -44,7 +44,7 @@
 			                    	<c:if test="${categoryNo == 1}">
 			                    	<c:forEach items="${eduList}" var="eduList">
 									 <tr>
-									 	<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&date=${fn :substring(eduList.projectDateInfo,0,4)}&age=${eduList.age}'"> ${fn :substring(eduList.projectDateInfo,0,4)}년 연간계획안 :  ${eduList.age}세  </td>
+									 	<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&&age=${eduList.age}&projectDateInfo=${eduList.projectDateInfo}'"> ${fn :substring(eduList.projectDateInfo,0,4)}년 연간계획안 :  ${eduList.age}세  </td>
 									 </tr>
 									</c:forEach>
 									</c:if>

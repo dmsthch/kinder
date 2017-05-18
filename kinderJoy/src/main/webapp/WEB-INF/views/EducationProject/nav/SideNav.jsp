@@ -45,7 +45,7 @@
 <script>
 $(document).ready(function(){
 	
-	//저장된 게획안의 양식 번호와 이름 가져오기
+	//저장된 계획안의 양식 번호와 이름 가져오기
 	var form = [];
 		$.ajax({
 			url : "${pageContext.request.contextPath}/educationProjectFormName",
@@ -148,7 +148,7 @@ $(document).ready(function(){
 						    <ul class="pull-right dropdown-menu" style="margin-right:-62%; margin-top:-20%" >
 						    	<li><a href="${pageContext.request.contextPath}/educationProjectAddPage">양식 추가하기</a></li>
 						    	<li class="divider"></li>
-							    	<li class="dropdown-submenu " >
+							    	<li class="dropdown-submenu ">
 							    		<a href="#" > 양식 불러오기 </a>
 							    	<ul class="dropdown-menu navFormLoad" style="margin-left:1%" id="navFormLoad">
 							    		
@@ -169,6 +169,14 @@ $(document).ready(function(){
 	                        <p>일일계획안 <span class="caret"></span></p>
                         </a>
 						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
+						    	<li class="dropdown-submenu ">
+							    	<a href="#" > 일일계획안 작성 </a>
+							    	<ul class="dropdown-menu navFormLoad" style="margin-left:1%" id="navFormLoad">
+							    		<li><a href="${pageContext.request.contextPath}/EducationProjectAdd">빈 시트</a></li>
+							    	
+							    	</ul>
+							    </li>	
+						    	<li class="divider"></li>
 						    	<li><a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=4">일일계획안 전체 보기</a></li>
 						    	<li class="divider"></li>
 						    	

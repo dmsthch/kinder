@@ -178,6 +178,16 @@ public class EducationProjectController {
 		return "";
 	}
 	
+	//계획안 저장 폼 가기
+	@RequestMapping(value = "/EducationProjectAdd", method = RequestMethod.GET)
+	public String educationProjectGoAdd(HttpSession session
+										,Model model
+										,@RequestParam(value="formOrder", required=false, defaultValue="0") int formOrder) {
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		model.addAttribute("formOrder",formOrder);
+		return "EducationProject/EducationProjectAdd";
+	}
+	
 	//계획안 불러오기
 	@RequestMapping(value = "/EducationProjectLoad", method = RequestMethod.GET)
 	public String EducationProjectLoad(HttpSession session
