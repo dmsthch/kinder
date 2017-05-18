@@ -6,16 +6,12 @@
 			<!--
 	        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 		    Tip 2: you can also add an image using data-image tag
-
-			-->
-
-			<div class="logo">
-				<a href="${pageContext.request.contextPath}/" class="simple-text">
-					햇병아리
-				</a>
+		    -->
+		    <div class="logo">
 			</div>
-
-
+			<div class="logo">
+			</div>
+		    
 	    	<div class="sidebar-wrapper">
 				<ul class="nav">
 	                <li id="kyo">

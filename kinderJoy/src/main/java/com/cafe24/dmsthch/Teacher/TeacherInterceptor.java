@@ -1,8 +1,6 @@
 package com.cafe24.dmsthch.Teacher;
 
-
 import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -29,6 +27,5 @@ public class TeacherInterceptor extends HandlerInterceptorAdapter{
 			return true;
 		}
 		return false;
-		
 	}
 }

@@ -69,8 +69,15 @@ teacher_no = #{teacherNo}
 
 </select>
 
+<!-- 로그인 아이디 체크 -->
+<select id="loginIdcheck" parameterType="java.lang.String" resultType="int">
 
+SELECT 
+count(*)
+FROM teacher 
+WHERE teacher_id = #{teacherId}
 
+</select>
 
 
 <!-- 회원 아이디 중복 체크 -->
