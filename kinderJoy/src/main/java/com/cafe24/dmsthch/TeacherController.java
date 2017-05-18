@@ -4,10 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
@@ -30,11 +27,11 @@ public class TeacherController {
 	private TeacherDao TDao;
 	
 	//권한 없을 때 보여줄 페이지
-		@RequestMapping(value="/권한없는 사람이 보는 페이지", method = RequestMethod.GET)
-		public String kwonhan() {
-		System.out.println("! 권한없는 사람이 접근 ! 게임페이지 호출!");
-		return "Teacher/TheAviator/index";
-		}
+	@RequestMapping(value="/권한없는 사람이 보는 페이지", method = RequestMethod.GET)
+	public String kwonhan() {
+	System.out.println("! 권한없는 사람이 접근 ! 게임페이지 호출!");
+	return "Teacher/TheAviator/index";
+	}
 	
 	//takeForm save메서드 호출
 	@RequestMapping(value="/save2", method = RequestMethod.POST)
@@ -106,6 +103,15 @@ public class TeacherController {
 		Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
 		model.addAttribute("kyoteacher",teacher);
 		System.out.println("user Profile호출___Teacher/TeacherModify/user로 포워드\n");
+		return "Teacher/TeacherModify/user";
+	}
+	
+	
+	//교원 수정하기 자기 정보 수정하기 
+	@RequestMapping(value="/teacherUpdate", method = RequestMethod.POST)
+	public String updateTeacher(HttpSession httpsession ,Model model) {
+		TDao.updateTeacher(httpsession.getAttribute("teacherId"));
+		System.out.println("수정확인_Controller");
 		return "Teacher/TeacherModify/user";
 	}
 	
