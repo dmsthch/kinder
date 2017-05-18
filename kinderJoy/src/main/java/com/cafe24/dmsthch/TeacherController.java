@@ -1,9 +1,7 @@
 package com.cafe24.dmsthch;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,12 @@ public class TeacherController {
 	@Autowired
 	private TeacherDao TDao;
 	
+	//권한 없을 때 보여줄 페이지
+		@RequestMapping(value="/권한없는 사람이 보는 페이지", method = RequestMethod.GET)
+		public String kwonhan() {
+		System.out.println("! 권한없는 사람이 접근 ! 게임페이지 호출!");
+		return "Teacher/TheAviator/index";
+		}
 	
 	//takeForm save메서드 호출
 	@RequestMapping(value="/save2", method = RequestMethod.POST)
@@ -135,9 +139,32 @@ public class TeacherController {
 		return "redirect:/home";
 	}
 	
+	
+	//로그인 아이디 체크 메서드 로그인 할 때! 아이디 조회 메서드
+	@RequestMapping(value="/login_id_check",method =RequestMethod.POST)
+	@ResponseBody
+	public int loginIdCheck(HttpServletResponse response, @RequestParam("teacherId") String userid) {
+		System.out.println("로그인체크메서드 호출_Controller");
+		System.out.println("사용자가 입력한 아이디는? : " + userid);
+		int check = TDao.loginIdcheck(userid);
+		if(check == 1) {
+			System.out.println("아이디 있음_loginIdCheck_TeacherController");
+		} else {
+			System.out.println("아이디 없음");
+		}
+		return check;
+	}
+	
+	
+	//@RequestParam("클라이언트가 입력한 값") String 매개변수
+	//리퀘스트 파람을 쓰면 값을 알아서 넣어준다
 	//로그인 처리
 	@RequestMapping(value="/Login" , method = RequestMethod.POST)
-	public String Login(SessionStatus sessionstatus,HttpServletRequest request,Model model,Teacher teacher,HttpSession session,String joongbok) throws SQLException {
+	public String Login(
+			Model model 
+			,Teacher teacher 
+			,HttpSession session ) throws Exception {
+		
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
 		Teacher saveSession = TDao.LoginTeacher(teacher);
 		System.out.println(teacher.getTeacherId() +"<-- 사용자가 입력한 아이디");
@@ -170,7 +197,8 @@ public class TeacherController {
 				}
 			} else {
 				model.addAttribute("nogin","로그인실패");
-				return "redirect:/home";
+				System.out.println("아이디나 비밀번호를 확인해주세요");
+				return "/home";
 		}
 		return "redirect:/home";
 	}

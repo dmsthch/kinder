@@ -143,7 +143,7 @@ public class ChildController {
 			System.out.println("testSelect Æû ¿äÃ»");
 	
 			
-			String kidBirth = (String) session.getAttribute("kidBirth");
+			
 			
 			
 			String license = (String) session.getAttribute("licenseKindergarten");
