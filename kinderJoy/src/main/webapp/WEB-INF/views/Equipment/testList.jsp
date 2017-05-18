@@ -51,7 +51,7 @@ $(document).ready(function(){
 	$('#equipmnetRequestListNav').attr('class','active');
 })
 //비품 우클릭 이벤트
-/* $(document).ready(function(){
+/* $(document).ready(function(){a
 	$('.table tbody tr').mouseup(function(){
 		console.log('마우스 오버 확인');
 		var testTD = $(this).find('.textTD').text();
