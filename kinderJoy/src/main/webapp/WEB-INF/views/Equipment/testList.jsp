@@ -19,10 +19,10 @@
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
 <!--  -->
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
           rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/screen.css" type="text/css"/>
-    <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/theme.css" type="text/css"/>
+     <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/screen.css" type="text/css"/>
+<!--     <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/theme.css" type="text/css"/> -->
     <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/theme-fixes.css" type="text/css"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
     <link href="js/KSS/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
@@ -50,17 +50,12 @@ body {
 $(document).ready(function(){
 	$('#equipmnetRequestListNav').attr('class','active');
 })
-/* //비품 우클릭 이벤트
-$(document).ready(function(){
-	$('.table tbody tr').mouseover(function(){
+//비품 우클릭 이벤트
+/* $(document).ready(function(){
+	$('.table tbody tr').mouseup(function(){
 		console.log('마우스 오버 확인');
-		$(this).on('mousedown', function() {
-		}).on('mouseup', function(event) {
-		    console.log('마우스 이벤트');
-		    if(event.button==2){ 
-		    	console.log('마우스 우클릭 이벤트');
-		    }
-		});
+		var testTD = $(this).find('.textTD').text();
+		console.log(testTD);
 	});
 
 
@@ -73,7 +68,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 $(function(){
     /**************************************************
-     * Custom Command Handler
+     * Custom Command Handler123
      **************************************************/
     $.contextMenu.types.label = function(item, opt, root) {
         // this === item.$node
@@ -82,7 +77,8 @@ $(function(){
             + '<li class="label1" title="label 1">label 1'
             + '<li class="label2" title="label 2">label 2'
             + '<li class="label3" title="label 3">label 3'
-            + '<li class="label4" title="label 4">label 4')
+            + '<li class="label4" title="label 4">label 4'
+            +'</ul></span>')
             .appendTo(this)
             .on('click', 'li', function() {
                 // do some funky stuff
@@ -99,20 +95,55 @@ $(function(){
             // some funky key handling, maybe?
         });
     };
-
+/* 	$.contextMenu.types.open = function(item, opt, root) {
+		$('<span class="buyEnd">구입 완료</span>').appendTo(this).on('click','.buyEnd',function(){
+			var testTD = $('#testTD').val();
+			alert('확인완료' + testTD);
+			 console.log('Clicked on ' + $(this).text());
+             // hide the menu
+             root.$menu.trigger('contextmenu:hide');
+		});
+        this.addClass('open').on('contextmenu:focus', function(e) {
+            // setup some awesome stuff
+        }).on('contextmenu:blur', function(e) {
+            // tear down whatever you did
+        }).on('keydown', function(e) {
+            // some funky key handling, maybe?
+        });
+	} */
     /**************************************************
      * Context-Menu with custom command "label"
      **************************************************/
     $.contextMenu({
         selector: '.table tbody tr', 
         callback: function(key, options) {
-            var m = "clicked: " + key;
-            window.console && console.log(m) || alert(m); 
+			if(key == 'open') {
+				console.log('확인');
+				var textIP = $(this).find('.textIP').val();
+				console.log(textIP);
+		 	    jQuery.ajax({
+		 	        url: '${pageContext.request.contextPath}/testListSave',
+		 	        type: 'POST',
+		 	        data:{"textIP":textIP},
+		 	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+		 	        dataType: 'html',
+		 	        success: function (result) {
+		 	            if (result == 1){
+		 	                console.log('데이터 보내기 성공');
+		 	                alert('삭제되었습니다.');
+		 	               location.href="${pageContext.request.contextPath}/testList"
+		 	            }else{
+		 	            	alert('삭제에 실패하였습니다.');
+		 	            }
+		 	        }
+		 	    });
+			}
         },
         items: {
-            open: {name: "구입완료", callback: $.noop},
-            label: {type: "label", customName: "Label"},
-            edit: {name: "Edit", callback: $.noop}
+//            open: {type: "open", customName: "Open"},
+			open:{name: "구입완료"},
+/*             label: {type: "label", customName: "Label"},
+            edit: {name: "Edit", callback: $.noop}  */
         }
     });
 });
@@ -144,12 +175,13 @@ $(function(){
 	                                    <tbody>
 	                                    	<c:forEach var="equipmentRequest" items="${equipmentRequest}">
 		                                        <tr>
-		                                        	<td>${equipmentRequest.teacherNo}</td>
+		                                        	<td class="textTD">${equipmentRequest.teacherNo}</td>
 		                                        	<td>${equipmentRequest.categoryNo}</td>
 		                                        	<td>${equipmentRequest.requestName}</td>
 		                                        	<td>${equipmentRequest.requestReason}</td>
 		                                        	<td>${equipmentRequest.requestPrice}</td>
-		                                        	<td>${equipmentRequest.requestDay}</td>
+		                                        	<td>${equipmentRequest.requestDay}<td>
+		                                        	<input type="hidden" class="textIP" value="${equipmentRequest.requestNo}"/>
 		                                        </tr>
 	                                        </c:forEach>
 	                                    </tbody>

@@ -10,8 +10,8 @@
 	<!-- CSS Link -->
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
 	<!-- JS Link -->
-	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
-	
+<%-- 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
+	 --%>
 	<title>1TEAM</title>
 
     
