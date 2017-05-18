@@ -7,12 +7,12 @@
 
 <head>
 <script>
-console.log(${year}+"<,,,");
-console.log(${childclass}+"<<childclass")
+/* console.log(${year}+"<,,,");
+console.log(${childclass}+"<<childclass") */
 </script>
-<c:import url="../module/importCSS.jsp"></c:import>
 
-<c:import url="../module/navbar.jsp"></c:import>
+
+
 <style>
 .ageFont {
 	font-size: 30px;
@@ -41,17 +41,13 @@ console.log(${childclass}+"<<childclass")
 	padding-right: 20px;
 }
 
-/* .sidebar.sidebar{
-	z-index:5555;
-} */
 
 </style>
-
+<c:import url="../module/navbar.jsp"></c:import>
 <c:import url="./nav/SideNav.jsp"></c:import>
 
 </head>
 <body class="components-page" >
-
 <div class="wrapper">
 	<div class="main-panel">
 		<div class="content">

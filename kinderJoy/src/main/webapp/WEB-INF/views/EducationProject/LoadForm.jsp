@@ -17,7 +17,7 @@
   <script src="js/jquery.js"></script>
   
 <c:import url="./nav/SideNav.jsp"></c:import>
-<c:import url="../module/importCSS.jsp"></c:import>
+<%-- <c:import url="../module/importCSS.jsp"></c:import> --%>
 <c:import url="../module/navbar.jsp"></c:import>
 	<title>Insert title here</title>
 
