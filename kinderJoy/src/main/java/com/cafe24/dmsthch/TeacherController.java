@@ -26,6 +26,12 @@ public class TeacherController {
 	@Autowired
 	private TeacherDao TDao;
 	
+	//권한 없을 때 보여줄 페이지
+		@RequestMapping(value="/권한없는 사람이 보는 페이지", method = RequestMethod.GET)
+		public String kwonhan() {
+		System.out.println("! 권한없는 사람이 접근 ! 게임페이지 호출!");
+		return "Teacher/TheAviator/index";
+		}
 	
 	//takeForm save메서드 호출
 	@RequestMapping(value="/save2", method = RequestMethod.POST)

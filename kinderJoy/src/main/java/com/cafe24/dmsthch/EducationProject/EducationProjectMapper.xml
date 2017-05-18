@@ -40,6 +40,7 @@
   		,form_borders
   		,form_count_row
   		,form_count_col
+  		,form_title
   	)VALUES(
   		(
   			SELECT * FROM
@@ -54,6 +55,7 @@
   		,#{formBorders}
   		,#{formCountRow}
   		,#{formCountCol}
+  		,#{formTitle}
   	)
 </insert>
 	
@@ -70,6 +72,15 @@
 	WHERE license_kindergarten = #{licenseKindergarten}
 	AND form_order = #{formOrder}
 </select>
+
+	<!-- 저장된 계획안 이름 불러오기 -->
+<select id="educationProjectFormName" parameterType="String" resultType="com.cafe24.dmsthch.EducationProject.EducationForm">
+	SELECT
+		form_title AS formTitle
+		,form_order AS formOrder
+	FROM education_project_form
+	WHERE license_kindergarten = #{licenseKindergarten} 
+</select>
 	
 	<!-- 계획안 저장하기 -->
 <insert id="educationProjectAdd" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm">
@@ -84,6 +95,7 @@
 		,category_no
 		,age
 		,class_no
+		,project_date_info
 	)VALUES(
 		#{val}
 		,#{borders}
@@ -94,7 +106,8 @@
 		,curdate()
 		,1
 		,#{age}
-		,#{class_no}
+		,#{classNo}
+		,#{projectDateInfo}
 	)
 </insert>
 	
@@ -115,14 +128,19 @@
 	INNER JOIN education_category c
 	ON e.category_no = c.category_no
 	WHERE license_kindergarten = #{licenseKindergarten}
+	
 	<if test="categoryNo == 1">
 	AND (SELECT year(add_date)) = #{addDate}
 	AND age = #{age}
+	AND e.category_no = #{categoryNo}
 	</if>
 	<if test="categoryNo != 1">
 	AND e.class_no = ${classNo}
+	AND e.category_no = #{categoryNo}
 	</if> 
 </select>
+
+	
 
 <!-- 해당 유치원의 모든 반 목록 가져오기 -->
 <select id="selectAllChildClass" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.Child.ChildClass">

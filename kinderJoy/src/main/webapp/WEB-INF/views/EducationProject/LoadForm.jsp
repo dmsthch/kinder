@@ -138,12 +138,16 @@ $(document).ready(function(){
 		var countRow =hot.countRows(); 
 		var countCol =hot.countCols(); 
       
+		var categoryNo = $('.categoryNo:checked').val();
+		var age = $('.age:checked').val();
+		var classNo = $('.classNo:checked').val();
+		var projectDateInfo = $('.projectDateInfo').val();
       $.ajax({
 			url : "${pageContext.request.contextPath}/educationProjectAdd",
 			type : 'POST',
 			dataType: 'JSON',
 			async: false,
-			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol },
+			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo,"age":age, "classNo":classNo, "projectDateInfo":projectDateInfo},
 			success : function(data){
 			alert('success');
 		                        
@@ -167,6 +171,63 @@ $(document).ready(function(){
 	<div class="wrapper">
 		<div class="main-panel">
 			<div class="content">
+				<div class="radio">
+					<label>
+						<input type="radio" name="categoryNo" value="1" class="categoryNo">
+						연간계획안
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="categoryNo" value="2" class="categoryNo">
+						월간계획안
+					</label>
+				</div>
+				<div class="radio">
+					<label> 
+						<input type="radio" name="categoryNo" value="3" class="categoryNo">
+						주간계획안
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="categoryNo" value="4" class="categoryNo">
+						일일계획안
+					</label>
+				</div>
+				<hr>
+				
+				<div class="radio">
+					<label>
+						<input type="radio" name="age" value="3" class="age">
+						3세
+					</label>
+				</div>
+				
+					<div class="radio">
+					<label>
+						<input type="radio" name="age" value="4" class="age">
+						4세
+					</label>
+				</div>
+				
+					<div class="radio">
+					<label>
+						<input type="radio" name="age" value="5" class="age">
+						5세
+					</label>
+				</div>
+				<hr>
+				
+				<div class="radio">
+					<label>
+						<input type="radio" name="classNo" value="8" class="classNo">
+						카나리아반
+					</label>
+				</div>
+				<hr>
+				<input type="date" class="projectDateInfo" name="projectDateInfo">
+				
 				<button name="save" id="save">계획안 저장</button>
 				<div class="wrapper" style="margin-top: 20px;">
 					<div id="example1"></div>
