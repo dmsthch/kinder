@@ -66,10 +66,9 @@ $(document).ready(function(){
 	
 	
 		hot = new Handsontable(container, {
-			if(dataValue!=null){
+			
 				data: dataValue,   //데이터 가져오기
-			}else if(dataValue == null){
-			}
+			
  			  
 			startRows: countRow,
 			startCols: countCol,

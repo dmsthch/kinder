@@ -67,23 +67,12 @@ public class ChildDao {
         return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.severalSelect", map);
 	}
 	
-	public List<Child> getList(String license, String kidName, String kidBirth, int currentPage, int pagePerRow){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("license", license);
-		map.put("kidName", kidName);
-		map.put("kidBirth", kidBirth);
-		map.put("beginRow", (currentPage-1)*pagePerRow);
-	   	map.put("pagePerRow", pagePerRow);
-	   	
-	   	System.out.println(license);
-	   	System.out.println(kidName);
-	   	System.out.println(kidBirth);
-	   	System.out.println((currentPage-1)*pagePerRow);
-	   	System.out.println(pagePerRow);
-	
+
+	public List<Child> getFormationChildList(String license){
 		
-		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getList", map);
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getFormationChildList", license);
+		
 	}
-		
+
 
 }

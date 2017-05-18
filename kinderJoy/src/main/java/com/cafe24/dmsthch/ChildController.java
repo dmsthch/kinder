@@ -126,7 +126,7 @@ public class ChildController {
 			
 			String license = (String) session.getAttribute("licenseKindergarten");
 			
-			childclass.setLicenseKindergarten(license);;
+			childclass.setLicenseKindergarten(license);
 			
 			System.out.println(childclass.getLicenseKindergarten());
 			System.out.println(childclass.getClassName());
@@ -139,15 +139,21 @@ public class ChildController {
 		}
 		
 		@RequestMapping(value="/testSelect" , method=RequestMethod.GET)
-		public String ChildFormation(Child child, HttpSession session) {
+		public String ChildFormation(Child child, HttpSession session, Model model) {
 			System.out.println("testSelect Æû ¿äÃ»");
+	
+			
+			
+			
 			
 			String license = (String) session.getAttribute("licenseKindergarten");
 			
+			child.setLicenseKindergarten(license);
+			List<Child> getFormationChildList = childDao.getFormationChildList(license);
+					
+			model.addAttribute("getFormationChildList", getFormationChildList);
 			
-			
-			
-			
+			System.out.println(getFormationChildList);
 			
 			return "Child/testSelect";
 		}
