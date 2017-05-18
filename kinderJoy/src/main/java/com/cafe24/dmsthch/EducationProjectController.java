@@ -1,10 +1,15 @@
 package com.cafe24.dmsthch;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +22,7 @@ import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.EducationProject.Education;
 import com.cafe24.dmsthch.EducationProject.EducationForm;
 import com.cafe24.dmsthch.EducationProject.EducationProjectDao;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 @Controller
 public class EducationProjectController {
@@ -58,11 +64,12 @@ public class EducationProjectController {
 								, @RequestParam(value="mergeArray", required=false, defaultValue="") String formMerge
 								, @RequestParam(value="borderArray",required=false, defaultValue="") String formBorders
 								, @RequestParam(value="countRow",required=true) int formCountRow
-								, @RequestParam(value="countCol",required=true) int formCountCol) {
+								, @RequestParam(value="countCol",required=true) int formCountCol
+								, @RequestParam(value="formTitle",required=false, defaultValue="") String formTitle) {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(formVal+"<<<formval");
 		System.out.println(formBorders+"<<<<formBorders");
-		dao.formAdd(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten);
+		dao.formAdd(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten,formTitle);
 		return "";
 	}
 	
@@ -84,6 +91,39 @@ public class EducationProjectController {
 		return "EducationProject/LoadForm";
 	}
 	
+	//저장된 양식 이름 가져오기
+	@ResponseBody
+	@RequestMapping(value = "/educationProjectFormName", method = RequestMethod.GET)
+	public List<EducationForm> educationProjectFormName(HttpSession session
+														,HttpServletResponse response){
+		System.out.println("form네임 테스트");
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		List<EducationForm> ledu = dao.educationProjectFormName(licenseKindergarten);
+		JSONArray jArray = new JSONArray();
+		JSONObject json = null;
+		for(int i=0; i<ledu.size(); i++){
+			json = new JSONObject();
+			EducationForm edu = ledu.get(i);
+			json.put("formTitle", edu.getFormTitle());
+			json.put("formOrder", edu.getFormOrder());
+			jArray.add(json);
+		}
+		response.setContentType("text/xml;charset=utf-8");
+		PrintWriter print;
+		try {
+			print = response.getWriter();
+			print.print(jArray);
+			print.flush();
+			print.close();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return null;
+	
+	}
+	
 	//계획안 저장하기
 	@ResponseBody
 	@RequestMapping(value = "/educationProjectAdd", method = RequestMethod.POST)
@@ -92,11 +132,15 @@ public class EducationProjectController {
 								, @RequestParam(value="mergeArray", required=false, defaultValue="") String merge
 								, @RequestParam(value="borderArray",required=false, defaultValue="") String borders
 								, @RequestParam(value="countRow",required=false, defaultValue="") int countRow
-								, @RequestParam(value="countCol",required=false, defaultValue="") int countCol) {
+								, @RequestParam(value="countCol",required=false, defaultValue="") int countCol
+								, @RequestParam(value="age",required=false, defaultValue="") int age
+								, @RequestParam(value="classNo",required=true) String classNo
+								, @RequestParam(value="categoryNo",required=true) String categoryNo
+								, @RequestParam(value="projectDateInfo",required=true) String projectDateInfo) {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(val+"<<<formval");
 		System.out.println(borders+"<<<<formBorders");
-		dao.educationProjectAdd(val, merge, borders, countRow, countCol, licenseKindergarten);
+		dao.educationProjectAdd(val, merge, borders, countRow, countCol, licenseKindergarten, age, classNo, categoryNo, projectDateInfo);
 		return "";
 	}
 	
@@ -115,15 +159,26 @@ public class EducationProjectController {
 		return "EducationProject/EducationProjectLoad";
 	}
 	
+
+	
 	//계획안 리스트()
 	@RequestMapping(value = "/EducationProjectList", method = RequestMethod.GET)
 	public String EducationProjectList(HttpSession session
 										,@RequestParam(value="categoryNo") String categoryNo
-										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo){
-		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
-		int month = c.get(Calendar.MONTH);
-	
-		
+										,@RequestParam(value="classNo", required=false, defaultValue="") String classNo
+										,@RequestParam(value="age", required=false, defaultValue="0") int age
+										,Model model){
+		System.out.println(categoryNo+"<<categoryNo");
+		System.out.println(classNo+"<<classNo");		
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		List<Education> eduList = dao.EducationProjectList(licenseKindergarten, categoryNo, classNo, age);
+		String className = dao.selectClassName(classNo);
+		model.addAttribute("className",className);
+		String categoryName = dao.selectCategoryName(categoryNo);
+		model.addAttribute("eduList",eduList);
+		model.addAttribute("categoryName", categoryName);
+		model.addAttribute("categoryNo",categoryNo);
+		model.addAttribute("age",age);
 		return "EducationProject/EducationProjectList";
 	}
 	

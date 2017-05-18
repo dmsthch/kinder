@@ -31,7 +31,7 @@
 
 	
 
-	    <div class="sidebar" data-color="blue" data-image="../assets/img/sidebar-1.jpg">
+	    <div class="sidebar" data-color="red" data-image="../assets/img/sidebar-1.jpg">
 			<!--
 		        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -47,22 +47,28 @@
 	    	<div class="sidebar-wrapper">
 	            <ul class="nav">
 	                <!-- <li class="active"> -->
-	                <li id="educationProjectAddPage">
+	                <li id="equipmentListNav">
 	                    <a href="${pageContext.request.contextPath}/Equipment">
 	                        <i class="material-icons">dashboard</i>
 	                        <p>비품 리스트</p>
 	                    </a>
 	                </li>
-	                <li id="educationProjectFormLoad">
+	                <li id="equipmentSheetListNav">
 	                    <a href="${pageContext.request.contextPath}/SheetList">
 	                        <i class="material-icons">person</i>
 	                        <p>품의서 리스트</p>
 	                    </a>
 	                </li>
-	                <li>
-	                    <a href="${pageContext.request.contextPath}/educationProjectAddPage">
+	                <li id="equipmentRequestNav">
+	                    <a href="${pageContext.request.contextPath}/test01">
 	                        <i class="material-icons">content_paste</i>
 	                        <p>비품 건의서</p>
+	                    </a>
+	                </li>
+	               	<li id="equipmnetRequestListNav">
+	                    <a href="${pageContext.request.contextPath}/testList">
+	                        <i class="material-icons">content_paste</i>
+	                        <p>비품 건의 리스트</p>
 	                    </a>
 	                </li>
 	            </ul>

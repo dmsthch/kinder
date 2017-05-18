@@ -12,13 +12,22 @@ public class Education {
 	private String categoryNo;
 	private int age;
 	private String classNo;
+	private String projectDateInfo;
 	
+
+	public String getProjectDateInfo() {
+		return projectDateInfo;
+	}
+	public void setProjectDateInfo(String projectDateInfo) {
+		this.projectDateInfo = projectDateInfo;
+	}
 	public int getAge() {
 		return age;
 	}
 	public void setAge(int age) {
 		this.age = age;
 	}
+
 	public String getClassNo() {
 		return classNo;
 	}

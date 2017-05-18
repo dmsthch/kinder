@@ -15,7 +15,19 @@
 	text-align: right;
 	margin-right: 20px;
 	}
+	@font-face{
+	font-family: 'koverwatch';
+	src: url(fonts/koverwatch.ttf) format('truetype');
+}
+body {
+	font-family: koverwatch
+}
 </style>
+<script>
+$(document).ready(function(){
+	$('#equipmentSheetListNav').attr('class','active');
+})
+</script>
 <body class="components-page">
 <div class="wrapper">
 	<div class="main-panel">

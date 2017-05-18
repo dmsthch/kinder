@@ -14,7 +14,7 @@ public class EducationProjectDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//폼 추가할때
-	public void formAdd(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten){		
+	public void formAdd(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten, String formTitle){		
 		EducationForm eduForm = new EducationForm();
 		eduForm.setLicenseKindergarten(licenseKindergarten);
 		eduForm.setFormVal(formVal);
@@ -22,6 +22,7 @@ public class EducationProjectDao {
 		eduForm.setFormBorders(formBorders);
 		eduForm.setFormCountRow(formCountRow);
 		eduForm.setFormCountCol(formCountCol);
+		eduForm.setFormTitle(formTitle);
 		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formAdd", eduForm);
 	}
 	
@@ -45,8 +46,13 @@ public class EducationProjectDao {
 		return resultForm;
 	}
 	
+	//폼 제목 셀렉트 하기
+	public List<EducationForm> educationProjectFormName(String licenseKindergarten){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectFormName", licenseKindergarten);
+	}
+	
 	//계획안 추가하기
-	public void educationProjectAdd(String val,String merge,String borders, int countRow, int countCol, String licenseKindergarten){
+	public void educationProjectAdd(String val,String merge,String borders, int countRow, int countCol, String licenseKindergarten, int age,String classNo, String categoryNo, String projectDateInfo){
 		Education edu = new Education();
 		edu.setVal(val);
 		edu.setMerge(merge);
@@ -54,6 +60,10 @@ public class EducationProjectDao {
 		edu.setCountRow(countRow);
 		edu.setCountCol(countCol);
 		edu.setLicenseKindergarten(licenseKindergarten);
+		edu.setAge(age);
+		edu.setClassNo(classNo);
+		edu.setCategoryNo(categoryNo);
+		edu.setProjectDateInfo(projectDateInfo);
 		/*Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		edu.setAddDate(sdf.format(date));*/
@@ -85,9 +95,27 @@ public class EducationProjectDao {
 	}
 	
 	//계획안 반별로 리스트 불러오기
-	public List<Education> EducationProjectList(String licenseKindergarten,String categoryNo,String classNo){
+	public List<Education> EducationProjectList(String licenseKindergarten,String categoryNo,String classNo,int age){
+		Education edu = new Education();
+		edu.setLicenseKindergarten(licenseKindergarten);
+		edu.setCategoryNo(categoryNo);
+		edu.setClassNo(classNo);
+		edu.setAge(age);
+		System.out.println("체크포인트 1");
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.EducationProjectList", edu);
+	}
+	
+	//반번호로 반이름 셀렉트하기
+	public String selectClassName(String classNo){
+		System.out.println("체크포인트 2");
+		System.out.println(classNo +"<<classno체크");
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.selectClassName", classNo);
+	}
+	
+	//카테고리 번호로 카테고리 이름 셀렉트하기(연간/월간/주간/일간)
+	public String selectCategoryName(String categoryNo){
 		
-		return null;
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.selectCategoryName",categoryNo);
 	}
 	
 	//테스트용

@@ -58,7 +58,7 @@
 		inner join teacher
 		where teacher.teacher_no = teacher_attendance.teacher_no
 		and teacher_attendance.attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
-		and teacher.teacher_no = #{teacher_no}
+		and teacher.teacher_no = #{teacherNo}
 	</select>
 	
 	<!-- 오늘날짜 출근 등록 -->
@@ -69,8 +69,8 @@
 			attendance_start,
 			attendance_day
 		)VALUES (
-			#{teacher_no},
-			#{license_kindergarten},
+			#{teacherNo},
+			#{licenseKindergarten},
 			DATE_FORMAT(NOW(),'%H:%i:%s'),
 			DATE_FORMAT(NOW(),'%Y-%m-%d')
 		);
