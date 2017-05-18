@@ -126,7 +126,7 @@
  		console.log(selectValue);
  		if(selectValue == 0) {
  			alert('카테고리를 선택해주세요.');
- 			$(this).parent().parent().find('.select').focus();
+ 			$(this).parent().parent().find('.search-panel').focus();
  		}else if(priceValue == '') {
  			alert('총단가의 가격이 없습니다.');
  			$(this).parent().parent().find('.testPrice').focus();
@@ -172,7 +172,7 @@
 
 <input class="btn btn-default dropdown-toggle" id="button" type="button" value="추가"/>
 
-<table id="table" border="1">
+<table id="table">
 	<thead>
 		<tr>
 			<td>카테고리</td>
@@ -263,7 +263,7 @@
  		</c:forEach>
 	</tbody>
 </table>
-
+<!-- Plus Math icon by Icons8 -->
 
 
 <table id="copyTargetTable" style="display:none">
