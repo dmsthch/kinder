@@ -5,7 +5,8 @@
 <html>
 
 <head>
-	
+	<!-- navbar -->
+	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 	<!-- CSS Link -->
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
 	<!-- JS Link -->

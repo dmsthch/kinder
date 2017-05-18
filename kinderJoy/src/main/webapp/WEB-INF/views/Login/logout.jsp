@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>로그 아웃</title>
 
 	
 	<!-- ★★★★★권한확인 및 로그아웃 모달 시작★★★★★ -->

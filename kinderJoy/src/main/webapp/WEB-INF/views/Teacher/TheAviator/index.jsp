@@ -3,18 +3,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<!-- CSS Link -->
-	<c:import url="../module/importCSS.jsp"></c:import>
-	<!-- JS Link -->
-	<c:import url="../module/importJS.jsp"></c:import>
-
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>The Aviator: The Game | Codrops</title>
 		<meta name="description" content="Demo of the game: The Making of 'The Aviator': Animating a Basic 3D Scene with Three.js" />
 		<meta name="keywords" content="three.js, webgl, tutorial, game, 3d, animation, airplane, web development, javascript" />
 		<meta name="author" content="Karim Maaloul for Codrops" />
-		<link rel="shortcut icon" href="favicon.ico">
 		<link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,700italic' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/JKC/gamecss/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/JKC/gamecss/game.css" />
