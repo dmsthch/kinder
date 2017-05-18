@@ -1,9 +1,13 @@
 package com.cafe24.dmsthch;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
@@ -46,9 +51,15 @@ public class TeacherController {
 		//하지만 삭제 후 인서트하기 위해선 TDao를 한번 더 거쳐야한다
 		
 		TDao.delete((String) httpsession.getAttribute("teacherId"));
-		System.out.println(httpsession.getAttribute("teacherId") + "<-- 삭제된 아이디");
-		System.out.println
-		(TDao.insert((String) httpsession.getAttribute("teacherId")) +"<-- remove_id컬럼에 삭제한 아이디 추가");
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("teacherId", httpsession.getAttribute("teacherId"));
+		map.put("teacherName", httpsession.getAttribute("teacherName"));
+		map.put("teacherLevel", httpsession.getAttribute("teacherLevel"));
+
+		TDao.deleteANDinsert(map);
+		
 		sessionstatus.setComplete();
 		return "redirect:/home";
 	}
@@ -98,13 +109,26 @@ public class TeacherController {
 		return "Teacher/TeacherModify/user";
 	}
 	
-	//교원목록 테이블폼 호출 메서드 //TableList
+	//교원의 정보 조회 admin전용 TableList ★현재 교원 ,이직한 교원★
 	@RequestMapping(value="/kyotable", method=RequestMethod.GET)
-	public String kyowon1(Model model, HttpSession httpsession) {
+	public String kyowon1(Model model, HttpSession httpsession ,Teacher teacher) {
+		
 		List<Object> teacher2 = TDao.tableList((String)httpsession.getAttribute("licenseKindergarten"));
+		
+		Map<String ,Object> map = new HashMap<String ,Object>();
+		map.put("teacherId", teacher.getTeacherId());
+		System.out.println(teacher.getTeacherId());
+		map.put("teacherName", teacher.getTeacherName());
+		map.put("teacherLevel", teacher.getTeacherLevel());
+		map.put("teacherRemoveDay", teacher.getTeacherRemoveDay());
+		System.out.println(teacher.getTeacherRemoveDay());
+		
+		List<Object> teacherRemove = TDao.removeList(map);
+		
 		
 		//폼에 뿌려주려고 모델객체에 담음
 		model.addAttribute("tableList",teacher2);
+		model.addAttribute("removeList",teacherRemove);
 		/*Teacher teacher =TDao.OneSelectTeacher((Integer)httpsession.getAttribute("teacherNo"));
 		model.addAttribute("kyoteacher",teacher);*/
 		System.out.println("Table List폼 호출___/Teacher/TeacherModify/table로 포워드\n");

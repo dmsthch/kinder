@@ -3,7 +3,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cafe24.dmsthch.Teacher.TeacherMapper">
-<!-- #{전역변수명} -->
+
+<update id="updateTeacher" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
+
+
+
+</update>
+
+<!-- #{전역변수의 입력값 입력값의 전역변수} -->
 <insert id="insert" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
 INSERT INTO teacher 
 	(
@@ -120,17 +127,36 @@ select
 
 </select>
 
-<!-- 입력값과 결과값을 생각하고 타입을 지정하자. -->  
-
-<!-- 회원탈퇴 후 삭제된 아이디에 들어갈 쿼리 -->
+<!-- 회원탈퇴 메서드 -->
 <delete id="deleteAccount" parameterType="java.lang.String">
 DELETE FROM teacher 
 WHERE teacher_id = #{teacherId};
 </delete>
-<!-- 입력값 하나 그것도 아이디만 넣는것이니 String이고 리턴값은 없어도 된다 -->
-<insert id="insertId" parameterType="java.lang.String">
-INSERT INTO remove_id(teacher_id) 
-VALUES(#{teacherId});
+
+<!-- 탈퇴한 회원 조회_TableList-->  
+<select id="removeTable" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+
+SELECT
+	teacher_id			AS teacherId
+	,teacher_name		AS teacherName
+	,teacher_level		AS teacherLevel
+	,teacher_remove_day	AS teacherRemoveDay
+FROM
+	remove_id
+</select>
+
+<!-- 여러개의 입력값이니 Teacher -->
+<insert id="insertId" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
+INSERT INTO remove_id(
+	 teacher_id 
+	,teacher_name 
+	,teacher_level 
+)
+VALUES (
+	 #{teacherId}
+	,#{teacherName}
+	,#{teacherLevel}
+)
 </insert>
 <!-- 회원탈퇴 후 삭제된 아이디에 들어갈 쿼리 END-->
 

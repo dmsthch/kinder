@@ -5,17 +5,14 @@
 <html>
 
 <head>
-	<!-- navbar -->
-	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
-	<!-- CSS Link -->
-	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
 	<!-- JS Link -->
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
-	
-	<title>1TEAM</title>
 
-    
-	<script src="js/jquery.js"></script>
+	<!-- navbar -->
+	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+	
+	<!-- CSS Link -->
+	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
 	
 	<script>
 	$(document).ready(function(){
