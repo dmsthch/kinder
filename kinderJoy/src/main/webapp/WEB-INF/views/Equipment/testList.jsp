@@ -18,7 +18,20 @@
 <c:import url="./EquipmentNav/SideNav.jsp"></c:import>
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
+<!--  -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/screen.css" type="text/css"/>
+    <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/theme.css" type="text/css"/>
+    <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/theme-fixes.css" type="text/css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <link href="js/KSS/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/KSS/jquery.contextMenu.js" type="text/javascript"></script>
+    <script src="js/KSS/jquery.ui.position.min.js" type="text/javascript"></script>
+    <script src="https://swisnl.github.io/jQuery-contextMenu/js/main.js" type="text/javascript"></script>
 
+<!--  -->
 <style>
 @font-face{
 	font-family: 'koverwatch';
@@ -31,14 +44,80 @@ body {
 	width:400px;
 } */
 </style>
+
 <script>
+
 $(document).ready(function(){
 	$('#equipmnetRequestListNav').attr('class','active');
 })
+/* //비품 우클릭 이벤트
+$(document).ready(function(){
+	$('.table tbody tr').mouseover(function(){
+		console.log('마우스 오버 확인');
+		$(this).on('mousedown', function() {
+		}).on('mouseup', function(event) {
+		    console.log('마우스 이벤트');
+		    if(event.button==2){ 
+		    	console.log('마우스 우클릭 이벤트');
+		    }
+		});
+	});
+
+
+}); */
 </script>
+
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+<script type="text/javascript">
+$(document).ready(function(){
+$(function(){
+    /**************************************************
+     * Custom Command Handler
+     **************************************************/
+    $.contextMenu.types.label = function(item, opt, root) {
+        // this === item.$node
 
+        $('<span>Label<ul>'
+            + '<li class="label1" title="label 1">label 1'
+            + '<li class="label2" title="label 2">label 2'
+            + '<li class="label3" title="label 3">label 3'
+            + '<li class="label4" title="label 4">label 4')
+            .appendTo(this)
+            .on('click', 'li', function() {
+                // do some funky stuff
+                console.log('Clicked on ' + $(this).text());
+                // hide the menu
+                root.$menu.trigger('contextmenu:hide');
+            });
+
+        this.addClass('labels').on('contextmenu:focus', function(e) {
+            // setup some awesome stuff
+        }).on('contextmenu:blur', function(e) {
+            // tear down whatever you did
+        }).on('keydown', function(e) {
+            // some funky key handling, maybe?
+        });
+    };
+
+    /**************************************************
+     * Context-Menu with custom command "label"
+     **************************************************/
+    $.contextMenu({
+        selector: '.table tbody tr', 
+        callback: function(key, options) {
+            var m = "clicked: " + key;
+            window.console && console.log(m) || alert(m); 
+        },
+        items: {
+            open: {name: "구입완료", callback: $.noop},
+            label: {type: "label", customName: "Label"},
+            edit: {name: "Edit", callback: $.noop}
+        }
+    });
+});
+});
+</script>
  <div class="wrapper">
 	<div class="main-panel">
 		<div class="content">
@@ -89,5 +168,6 @@ $(document).ready(function(){
 
 
 </body>
-<c:import url="../module/importJS.jsp"></c:import>
+<!-- 껐는데 왜 자꾸 나와 -->
+<%-- <c:import url="../module/importJS.jsp"></c:import> --%>
 </html>
