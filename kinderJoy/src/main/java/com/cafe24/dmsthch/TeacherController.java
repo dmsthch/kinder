@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,10 +111,28 @@ public class TeacherController {
 	
 	//교원 수정하기 자기 정보 수정하기 
 	@RequestMapping(value="/teacherUpdate", method = RequestMethod.POST)
-	public String updateTeacher(HttpSession httpsession ,Model model) {
-		TDao.updateTeacher(httpsession.getAttribute("teacherId"));
-		System.out.println("수정확인_Controller");
-		return "Teacher/TeacherModify/user";
+	public String updateTeacher(HttpServletRequest request ,HttpSession httpsession ,Model model) {
+		
+		Teacher teacher = new Teacher();
+		
+		teacher.setTeacherName(request.getParameter("teacherName"));
+		teacher.setTeacherPhone(request.getParameter("teacherPhone"));
+		teacher.setTeacherLevel(request.getParameter("teacherLevel"));
+		teacher.setTeacherBank(request.getParameter("teacherBank"));
+		teacher.setTeacherAccount(request.getParameter("teacherAccount"));
+		teacher.setTeacherPaystep(request.getParameter("teacherPaystep"));
+		System.out.println(request.getParameter("teacherPaystep"));
+		
+		int a = TDao.updateTeacher(teacher);
+		
+		if(a == 0) {
+			System.out.println("업데이트 안댐");
+		}else{
+			System.out.println("업데이트 성공");
+		}
+		
+		return null;
+
 	}
 	
 	//교원의 정보 조회 admin전용 TableList ★현재 교원 ,이직한 교원★
