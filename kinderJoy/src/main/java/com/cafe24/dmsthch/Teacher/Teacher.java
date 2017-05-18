@@ -12,6 +12,14 @@ public class Teacher {
 	private String teacherBank;
 	private String teacherAccount;
 	private String teacherPaystep;
+	private String teacherRemoveDay;
+	
+	public String getTeacherRemoveDay() {
+		return teacherRemoveDay;
+	}
+	public void setTeacherRemoveDay(String teacherRemoveDay) {
+		this.teacherRemoveDay = teacherRemoveDay;
+	}
 	public int getTeacherNo() {
 		return teacherNo;
 	}
