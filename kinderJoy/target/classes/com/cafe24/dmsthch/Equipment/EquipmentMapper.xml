@@ -3,10 +3,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
+  	<!-- 비품신청 삭제 -->
+  	<delete id="removeEquipmentRequest" parameterType="com.cafe24.dmsthch.Equipment.EquipmentRequest">
+  		DELETE FROM 
+  			equipment_request 
+  		WHERE 
+  			request_no=#{requestNo}
+  		AND 
+  			license_kindergarten=#{licenseKindergarten};
+  	</delete>
   	<!-- 비품신청 리스트 출력 -->
   	<select id="selectEquipmentRequest" resultType="com.cafe24.dmsthch.Equipment.EquipmentRequest">
 		SELECT
-			t.teacher_name AS teacherNO
+			 e.request_no AS requestNo
+			,t.teacher_name AS teacherNO
 			,c.category_name AS categoryNo
 			,e.request_name AS requestName
 			,e.request_reason AS requestReason
