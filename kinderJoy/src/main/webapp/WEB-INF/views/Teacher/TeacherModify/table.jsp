@@ -5,14 +5,12 @@
 <html>
 
 <head>
+	<!-- JS Link -->
+	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
 	<!-- navbar -->
 	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 	<!-- CSS Link -->
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
-	<!-- JS Link -->
-	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
-	
-	<script src="js/jquery.js"></script>
 	
 	<script>
 	$(document).ready(function(){
@@ -88,54 +86,19 @@
 	                                    <thead>
 	                                        <th>ID</th>
 	                                    	<th>Name</th>
-	                                    	<th>Salary</th>
-	                                    	<th>Country</th>
-	                                    	<th>City</th>
+	                                    	<th>Level</th>
+	                                    	<th>removeDay</th>
 	                                    </thead>
+	                                    <c:forEach var="R" items="${removeList}">
 	                                    <tbody>
 	                                        <tr>
-	                                        	<td>1</td>
-	                                        	<td>Dakota Rice</td>
-	                                        	<td>$36,738</td>
-	                                        	<td>Niger</td>
-	                                        	<td>Oud-Turnhout</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>2</td>
-	                                        	<td>Minerva Hooper</td>
-	                                        	<td>$23,789</td>
-	                                        	<td>Curaçao</td>
-	                                        	<td>Sinaai-Waas</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>3</td>
-	                                        	<td>Sage Rodriguez</td>
-	                                        	<td>$56,142</td>
-	                                        	<td>Netherlands</td>
-	                                        	<td>Baileux</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>4</td>
-	                                        	<td>Philip Chaney</td>
-	                                        	<td>$38,735</td>
-	                                        	<td>Korea, South</td>
-	                                        	<td>Overland Park</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>5</td>
-	                                        	<td>Doris Greene</td>
-	                                        	<td>$63,542</td>
-	                                        	<td>Malawi</td>
-	                                        	<td>Feldkirchen in Kärnten</td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>6</td>
-	                                        	<td>Mason Porter</td>
-	                                        	<td>$78,615</td>
-	                                        	<td>Chile</td>
-	                                        	<td>Gloucester</td>
+	                                        	<td>${R.teacherId}</td>
+	                                        	<td>${R.teacherName}</td>
+	                                        	<td>${R.teacherLevel}</td>
+	                                        	<td>${R.teacherRemoveDay}</td>
 	                                        </tr>
 	                                    </tbody>
+	                                    </c:forEach>
 	                                </table>
 	                            </div>
 	                        </div>

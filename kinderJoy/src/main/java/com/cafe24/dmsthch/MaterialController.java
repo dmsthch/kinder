@@ -280,26 +280,27 @@ public class MaterialController {
 				
 				System.out.println(categoryNo + " : catNo");
 				
-				String[] pageName = new String[getCategory.size()];
+				String[] pageName = null;
 				
 				if(categoryNo == 0){ //전체검색일때
-					pageName[0] = "통합 검색";
+					pageName = new String[getCategory.size()];
+					pageName[0] = "#통합검색";
 					for(int i=1; i<pageName.length; i++){
-						pageName[i] = getCategory.get(i-1).get("categoryName")+"";
+						pageName[i] = "#"+getCategory.get(i-1).get("categoryName");
 					}
 					
 					List<Board> unifiedList = materialDao.materialAllSearch(license, txtSearch, 1);
 					allList.add(unifiedList);
 					
 					for(int i=1; i<getCategory.size(); i++){
-						System.out.println("반복문!~ " + i);
 						List<Board> catList = materialDao.materialCategorySearch(license, i, txtSearch, 1);
 						allList.add(catList);
 					}
 				}else{ // 카테고리별 검색일때
-					pageName[0] = getCategory.get(categoryNo-1).get("categoryName")+"";
+					pageName = new String[1];
+					pageName[0] = "#"+getCategory.get(categoryNo-1).get("categoryName");
 					List<Board> catList = materialDao.materialCategorySearch(license, categoryNo, txtSearch, 1);
-					allList.add(catList);
+					allList.add(catList); 
 				}
 								
 				model.addAttribute("pageName", pageName);

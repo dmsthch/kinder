@@ -2,127 +2,143 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
 	<meta charset="utf-8">
 	<title>Title</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="">
-	<meta name="description" content="">
-	
-	<!-- 따라다니는 메뉴 -->
-	<script src="js/KHS/RefreshStaticMenu.js"></script>
 	
 	<!-- CSS Link -->
 	<c:import url="../module/importCSS.jsp"></c:import>
+	<!-- JS Link -->
+	<c:import url="../module/importJS.jsp"></c:import>
 	
+	<script src="js/KHS/hsCustom.js"></script>
 	
-	<style>
-		#staticMenu { 
-			margin: 0pt; 
-			padding: 0pt;  
-			position: absolute; 
-			right: 0px; 
-			top: 0px;
-			position:absolute;
-			z-index:9999;
-			overflow:hidden;
-			border-radius: 13px;
+
+	<style type="text/css">
+		h6 {
+			color : black;
 		}
-		#staticMenu div{
-		  height:100%;
-		  width:100%;
-		  color:#fff;
-		  background:rgba(153,153,153,0.3);
-		  padding:10px;
-		}
-		#staticMenu p{
-		  color: black;
-		}
-		
-		.myBtn {
- 		  background: transparent; 
-		  border: 2px solid black;
-		  border-radius: 0;
-		  color: black;
-		  font-size: 15px;
-		  font-weight: bold;
-		  letter-spacing: 2px;
-		  padding: 5px 30px;
-		  margin-top: 5px;
-		  transition: all 0.4s ease-in-out;
-		  border-radius: 8px;
-		}
-		.pageBtn{
-			padding: 5px 15px;
-			border-radius: 13px;
-		}
-		#body{
-			margin-top: 6%;
+		.btnSearchForm.btnSearchForm {
+			margin-top: 10%;
+			background-color: rgba(189,189,189,0.4);
+			border-bottom: 1px solid #BD24A9;
 		}
 	</style>
 	
+	<script>
+		$(document).ready(function(e){
+			
+			//검색창에서 카테고리 버튼
+		    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+				e.preventDefault();
+				var param = $(this).attr("href").replace("#",""); //해당 버튼의 href속성에서 #을 제거한 값
+				var concept = $(this).text(); //해당 버튼의 내용
+				$('.search-panel span#search_concept').text(concept); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
+				$('.input-group #search_param').val(param);
+			});
+
+		    $('[data-toggle=tab]').eq(0).click();
+		    
+		});
+	</script>
+	
 </head>
-<body id="body" class="container-fluid" onload="InitializeStaticMenu();">
+
+<body class="container-fluid">
+
 
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
-<!-- Follow sideNav -->
-<div id="staticMenu" class="text-center">
-	<div>
-		<a href="${pageContext.request.contextPath}/Material" class="smoothScroll btn btn-default myBtn">자료실</a>
+
+
+<div class="wrapper">
+
+    <c:import url="../module/KHS/MaterialSideNav.jsp"></c:import>
+
+    <div class="main-panel">
+		<div class="content">
+			<div class="container-fluid">
+			
+				<div class="row">
+					<div class="text-center"><h1>Search Page</h1></div>
+				</div><br/>
+											
+				<br/>
+				<div class="row"> <!-- 자료실 미리보기 -->
+					<div class="col-sm-12">
+							<div class="card card-nav-tabs">
+								<div class="card-header" data-background-color="purple">
+									<div class="nav-tabs-navigation">
+										<div class="nav-tabs-wrapper">
+											<span class="nav-tabs-title">자료실 :</span>
+											<ul class="nav nav-tabs" data-tabs="tabs">
+											
+												<c:forEach var="searchCat" items="${pageName }">
+												
+													<li class="">
+														<a href="${searchCat}" data-toggle="tab">
+															<i class="material-icons">code</i>
+															${fn:substringAfter(searchCat,'#')}
+														<div class="ripple-container"></div></a>
+													</li>
+														
+												</c:forEach>
+																				
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<div class="card-content">
+									<div class="tab-content">
+									
+										<c:forEach var="list" varStatus="status" items="${allList }">
+										
+											<div class="tab-pane" id="${fn:substringAfter(pageName[status.index],'#')}">
+												<table class="table table-hover">
+													<thead class="text-center">
+														<tr>
+															 <th>No</th>
+															 <th>제목</th>
+															 <th>작성자</th>
+															 <th>작성일</th>
+														</tr>
+													</thead>
+													<c:forEach var="board" items="${list}">
+														<tr>
+															<td>${board.boardNo }</td>
+															<td>
+																<c:forEach var="category" items="${getCategory}">
+																	<c:if test="${category.categoryNo == board.boardCategoryNo}">${category.categoryName}</c:if>
+																</c:forEach>	
+															</td>
+															<td><a href="${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}">${board.boardTitle }</a></td>
+															<td>${board.teacherNo }</td>
+															<td>${board.boardDay }</td>
+														</tr>
+													</c:forEach>
+												</table>
+											</div>
+										
+										</c:forEach>
+										
+									</div>
+								</div><!-- content End -->
+								
+							</div>
+						</div>
+				
+				
+				</div>  <!-- tab row End -->
+				
+				
+			</div>
+		</div>
+			
+			
 	</div>
 </div>
-
-<div class="section-title text-center">
-	<h1 class="heading bold">
-		Material Search
-	</h1>
-	<hr>
-</div>
-
-<div class="row">
-	<c:forEach var="list" varStatus="status" items="${allList }">
-		<div class="col-sm-8 col-sm-offset-2">
-		
-			<h1 class="heading bold">${pageName[status.index]}</h1><br/>
-			
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						 <th>No</th>
-						 <th>카테고리</th>
-						 <th>제목</th>
-						 <th>작성자</th>
-						 <th>작성일</th>
-					</tr>
-				</thead>
-				
-				<tbody>
-					<c:forEach var="board" items="${list}">
-						<tr>
-							<td>${board.boardNo }</td>
-							<td>
-								<c:forEach var="category" items="${getCategory}">
-									<c:if test="${category.categoryNo == board.boardCategoryNo}">${category.categoryName}</c:if>
-								</c:forEach>	
-							</td>
-							<td><a href="${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}">${board.boardTitle }</a></td>
-							<td>${board.teacherNo }</td>
-							<td>${board.boardDay }</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</c:forEach>
-</div>
-
-<!-- footer -->
-<c:import url="../module/footer.jsp"></c:import>
-
-<!-- JS Link -->
-<c:import url="../module/importJS.jsp"></c:import>
 
 </body>
 </html>

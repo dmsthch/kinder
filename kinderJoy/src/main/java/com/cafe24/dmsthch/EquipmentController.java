@@ -51,6 +51,17 @@ public class EquipmentController {
 		return "redirect:/test01";
 	}
 	
+	@RequestMapping(value = "testListSave", method = RequestMethod.POST)
+	@ResponseBody
+	public int testListSave(@RequestParam(value="textIP") String textIP
+								,HttpSession session){
+		System.out.println("textIP 확인 : " + textIP);
+		
+		int returnResult = dao.removeEquipmentRequest(textIP, session);
+		System.out.println("returnResult 값 확인 : " + returnResult);
+		return returnResult;
+	}
+	
 	@RequestMapping(value = "Equipment", method = RequestMethod.GET)
 	public String test01(Model model
 						,HttpSession session){

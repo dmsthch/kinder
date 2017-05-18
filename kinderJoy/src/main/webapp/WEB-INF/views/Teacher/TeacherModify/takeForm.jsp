@@ -3,15 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
+	<!-- JS Link -->
+	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
 	<!-- navbar -->
 	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 	<!-- CSS Link -->
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
-	<!-- JS Link -->
-	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
+
 	
 		<!-- draggable -->
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script type="text/javascript" src="https://johnny.github.io/jquery-sortable/js/jquery-sortable.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://johnny.github.io/jquery-sortable/css/application.css">
 		<!-- draggable -->
