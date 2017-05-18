@@ -17,7 +17,7 @@ public class TeacherDao {
 		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.insert", teacher);
 	}
 	
-	//로그인 메서드
+	//로그인 메서드 
 	public Teacher LoginTeacher(Teacher teacher) {
 		System.out.println("로그인 확인");
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.login", teacher);
@@ -28,6 +28,13 @@ public class TeacherDao {
 		System.out.println("교원 한명 정보 조회 메서드 실행_TeacherDao.java");
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.OneSelectTeacher", INT);
 	}
+	
+	//로그인 아이디 체크 로그인!할 때 아이디 체크!
+	public int loginIdcheck(String string) {
+		System.out.println("로그인 아이디 체크_DAO");
+		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.loginIdcheck", string);
+	}
+	
 	
 	//아이디 중복체크
 	public int logincheck(String joongbok) {
