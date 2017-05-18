@@ -7,15 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<c:import url="../module/importCSS.jsp"></c:import>
+<%-- <c:import url="../module/importCSS.jsp"></c:import> --%>
 <c:import url="./nav/SideNav.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
-<c:import url="../module/importJS.jsp"></c:import>
+<%-- <c:import url="../module/importJS.jsp"></c:import> --%>
 <script>
 
-$(document).ready(function(){
 
-})
 </script>
 </head>
 <body class="components-page">
@@ -42,11 +40,20 @@ $(document).ready(function(){
 						<div class="card-content table-responsive">
 							<table class="table table-hover">
 			                    <tbody>	
+			                    	<!-- 연간계획안일 경우 -->
+			                    	<c:if test="${categoryNo == 1}">
+			                    	<c:forEach items="${eduList}" var="eduList">
+									 <tr>
+									 	<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&&age=${eduList.age}&projectDateInfo=${eduList.projectDateInfo}'"> ${fn :substring(eduList.projectDateInfo,0,4)}년 연간계획안 :  ${eduList.age}세  </td>
+									 </tr>
+									</c:forEach>
+									</c:if>
+			                    	
 			                    	<!-- 월간계획안일 경우 -->
 			                    	<c:if test="${categoryNo == 2}">
 			                    	<c:forEach items="${eduList}" var="eduList">
 									 <tr>
-									 	<td style="cursor:pointer;" onclick="location.href=''">${eduList.classNo}반 월간계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월</td>
+									 	<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=2&classNo=${eduList.classNo}&projectDateInfo=${eduList.projectDateInfo}'">${eduList.className}반 월간계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월</td>
 									 </tr>
 									</c:forEach>
 									</c:if>
@@ -55,7 +62,7 @@ $(document).ready(function(){
 									<c:if test="${categoryNo == 3}">
 			                    	<c:forEach items="${eduList}" var="eduList">
 									 <tr>
-									 	<td style="cursor:pointer;" onclick="location.href=''">${eduList.classNo}반 주간계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월 - ${fn :substring(eduList.projectDateInfo,8,9)}주</td>
+									 	<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=3&classNo=${eduList.classNo}&projectDateInfo=${eduList.projectDateInfo}'">${eduList.className}반 주간계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월 - ${fn :substring(eduList.projectDateInfo,8,9)}주</td>
 									 </tr>
 									</c:forEach>
 									</c:if>
@@ -64,7 +71,7 @@ $(document).ready(function(){
 									<c:if test="${categoryNo == 4}">
 			                    	<c:forEach items="${eduList}" var="eduList">
 									 <tr>
-									 	<td style="cursor:pointer;" onclick="location.href=''">${eduList.classNo}반 일일계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월 - ${fn : substring(eduList.projectDateInfo,8,10)}일</td>
+									 	<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=4&classNo=${eduList.classNo}&projectDateInfo=${eduList.projectDateInfo}'">${eduList.className}반 일일계획안 : ${fn :substring(eduList.projectDateInfo,0,4)}년 -  ${fn :substring(eduList.projectDateInfo,5,7)}월 - ${fn : substring(eduList.projectDateInfo,8,10)}일</td>
 									 </tr>
 									</c:forEach>
 									</c:if>

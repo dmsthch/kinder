@@ -1,6 +1,9 @@
 package com.cafe24.dmsthch.EducationProject;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,7 @@ public class EducationProjectDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//폼 추가할때
-	public void formAdd(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten){		
+	public void formAdd(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten, String formTitle){		
 		EducationForm eduForm = new EducationForm();
 		eduForm.setLicenseKindergarten(licenseKindergarten);
 		eduForm.setFormVal(formVal);
@@ -22,6 +25,7 @@ public class EducationProjectDao {
 		eduForm.setFormBorders(formBorders);
 		eduForm.setFormCountRow(formCountRow);
 		eduForm.setFormCountCol(formCountCol);
+		eduForm.setFormTitle(formTitle);
 		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formAdd", eduForm);
 	}
 	
@@ -45,8 +49,13 @@ public class EducationProjectDao {
 		return resultForm;
 	}
 	
+	//폼 제목 셀렉트 하기
+	public List<EducationForm> educationProjectFormName(String licenseKindergarten){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectFormName", licenseKindergarten);
+	}
+	
 	//계획안 추가하기
-	public void educationProjectAdd(String val,String merge,String borders, int countRow, int countCol, String licenseKindergarten){
+	public void educationProjectAdd(String val,String merge,String borders, int countRow, int countCol, String licenseKindergarten, int age,String classNo, String categoryNo, String projectDateInfo){
 		Education edu = new Education();
 		edu.setVal(val);
 		edu.setMerge(merge);
@@ -54,6 +63,10 @@ public class EducationProjectDao {
 		edu.setCountRow(countRow);
 		edu.setCountCol(countCol);
 		edu.setLicenseKindergarten(licenseKindergarten);
+		edu.setAge(age);
+		edu.setClassNo(classNo);
+		edu.setCategoryNo(categoryNo);
+		edu.setProjectDateInfo(projectDateInfo);
 		/*Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		edu.setAddDate(sdf.format(date));*/
@@ -61,18 +74,17 @@ public class EducationProjectDao {
 	}
 	
 	//계획안 불러오기
-	public Education educationProjectLoad(String categoryNo,String addDate,String licenseKindergarten,int age, String classNo){
+	public Education educationProjectLoad(String categoryNo,String projectDateInfo,String licenseKindergarten,int age, String classNo){
 		Education edu = new Education();
-		System.out.println(addDate +"<<addDate");
+		System.out.println(projectDateInfo +"<<addDate");
 		System.out.println(categoryNo +"<<categoryNo");
 		System.out.println(licenseKindergarten +"<<licenseKindergarten");
-		edu.setAddDate(addDate);
+		edu.setProjectDateInfo(projectDateInfo);
 		edu.setCategoryNo(categoryNo);
 		edu.setLicenseKindergarten(licenseKindergarten);
 		edu.setAge(age);
 		edu.setClassNo(classNo);
 		edu = sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectLoad",edu);
-		//System.out.println(edu.getVal()+"<<getVal 쳇쳇");
 		return edu;
 	}
 	
@@ -91,7 +103,8 @@ public class EducationProjectDao {
 		edu.setCategoryNo(categoryNo);
 		edu.setClassNo(classNo);
 		edu.setAge(age);
-		System.out.println("체크포인트 1");
+		System.out.println(edu.getClassNo()+"<<<classno");
+		System.out.println(edu.getAge()+"<<<age");
 		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.EducationProjectList", edu);
 	}
 	
@@ -100,6 +113,26 @@ public class EducationProjectDao {
 		System.out.println("체크포인트 2");
 		System.out.println(classNo +"<<classno체크");
 		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.selectClassName", classNo);
+	}
+	
+	//반 이름 셀렉트하는 리스트
+	public List<HashMap<String, Object>> selectClassNameList(List<Education> eduList){
+		HashMap<String, Object> map = null;
+		Education edu = null;
+		List<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
+		for(int i =0; i < eduList.size(); i++){
+			map = new HashMap<String, Object>();
+			edu = eduList.get(i);
+			map.put("educationProjectNo", edu.getEducationProjectNo());
+			map.put("addDate", edu.getAge());
+			map.put("categoryNo", edu.getCategoryNo());
+			map.put("age", edu.getAge());
+			map.put("classNo", edu.getClassNo());
+			map.put("projectDateInfo", edu.getProjectDateInfo());
+			map.put("className", selectClassName(edu.getClassNo()));
+			list.add(map);
+		}
+		return list;
 	}
 	
 	//카테고리 번호로 카테고리 이름 셀렉트하기(연간/월간/주간/일간)

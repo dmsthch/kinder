@@ -14,6 +14,15 @@ import org.springframework.stereotype.Repository;
 public class EquipmentDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	// 비품 건의서 삭제
+	public int removeEquipmentRequest(String requestNo
+										,HttpSession session) {
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		EquipmentRequest equipmentRequest = new EquipmentRequest();
+		equipmentRequest.setRequestNo(requestNo);
+		equipmentRequest.setLicenseKindergarten(licenseKindergarten);
+		return sqlSessionTemplate.delete("com.cafe24.dmsthch.Equipment.EquipmentMapper.removeEquipmentRequest",equipmentRequest);
+	}
 	// 비품 건의서 리스트 출력
 	public List<EquipmentRequest> selectEqipmentRequest() {
 		System.out.println("selectEqipmentRequest 메서드 내용 실행");

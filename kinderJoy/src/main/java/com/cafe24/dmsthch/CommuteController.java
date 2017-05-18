@@ -251,6 +251,13 @@ public class CommuteController {
 		return "Commute/CommuteInfo";
 	}
 	
+	//월별 출석 현황
+	@RequestMapping(value="/CommuteForMonth", method=RequestMethod.GET)
+	public String CommuteForMonth(HttpSession session){
+		
+		return "Commute/CommuteForMonth";
+	}
+	
 	
 	
 	

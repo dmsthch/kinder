@@ -31,7 +31,7 @@
 
 	
 
-	    <div class="sidebar" data-color="red" data-image="../assets/img/sidebar-1.jpg">
+	    <div class="sidebar" data-color="red">
 			<!--
 		        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 

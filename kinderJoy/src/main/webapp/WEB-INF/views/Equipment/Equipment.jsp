@@ -24,6 +24,9 @@
 body {
 	font-family: koverwatch
 }
+button {
+	background-color: white;
+ }
 </style>
 
 </head>

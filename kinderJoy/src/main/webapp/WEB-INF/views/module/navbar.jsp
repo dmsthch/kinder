@@ -54,7 +54,7 @@
 
 
 <!-- ★★★★★ 로그인 모달 시작★★★★★ -->
-<c:import url="/WEB-INF/views/Teacher/modal/login.jsp"></c:import>
+<c:import url="/WEB-INF/views/Login/login.jsp"></c:import>
 <!-- ★★★★★로그아웃 모달 시작★★★★★ -->
-<c:import url="/WEB-INF/views/Teacher/modal/logout.jsp"></c:import>
+<c:import url="/WEB-INF/views/Login/logout.jsp"></c:import>
 

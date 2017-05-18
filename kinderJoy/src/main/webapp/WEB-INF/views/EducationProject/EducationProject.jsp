@@ -7,12 +7,12 @@
 
 <head>
 <script>
-console.log(${year}+"<,,,");
-console.log(${childclass}+"<<childclass")
+/* console.log(${year}+"<,,,");
+console.log(${childclass}+"<<childclass") */
 </script>
-<c:import url="../module/importCSS.jsp"></c:import>
 
-<c:import url="../module/navbar.jsp"></c:import>
+
+
 <style>
 .ageFont {
 	font-size: 30px;
@@ -41,17 +41,13 @@ console.log(${childclass}+"<<childclass")
 	padding-right: 20px;
 }
 
-/* .sidebar.sidebar{
-	z-index:5555;
-} */
 
 </style>
-
+<c:import url="../module/navbar.jsp"></c:import>
 <c:import url="./nav/SideNav.jsp"></c:import>
 
 </head>
 <body class="components-page" >
-
 <div class="wrapper">
 	<div class="main-panel">
 		<div class="content">
@@ -170,7 +166,7 @@ console.log(${childclass}+"<<childclass")
 									<div class="stats ">
 										<c:forEach var="forYear" begin="${year-2}" end="${year}">
 											<i class="material-icons" style="margin-left: 5px;">date_range</i>
-											<a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&date=${forYear}&age=${age}">${forYear}년</a>
+											<a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&projectDateInfo=${forYear}&age=${age}">${forYear}년</a>
 										</c:forEach>
 									</div>
 								</div>
@@ -189,6 +185,6 @@ console.log(${childclass}+"<<childclass")
 <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=1">1번 양식 불러오기</a>
 <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=2">2번 양식 불러오기</a>
 <a href="${pageContext.request.contextPath}/EducationProjectLoad?categoryNo=1&date=20170511">저장된 계획안 불러오기 테스트 // 날짜 : 20170511</a> --%>
-<c:import url="../module/importJS.jsp"></c:import>
+<%-- <c:import url="../module/importJS.jsp"></c:import> --%>
 </body>
 </html>
