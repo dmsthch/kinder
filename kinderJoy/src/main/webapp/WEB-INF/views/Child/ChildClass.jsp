@@ -39,6 +39,7 @@
         <li><a href="<c:url value="/" />">반 1</a></li>
         <li><a href="<c:url value="/" />">반 2</a></li>
         <li><a href="<c:url value="/ClassAdd"/>">반 입력</a></li>
+        <li><a href="${pageContext.request.contextPath}/dtd">ㅇㅅㅇ!!!!</a></li>
       </ul>
 </div>
 <div class="col-md-10">
@@ -57,7 +58,7 @@
                     <td><a href="${pageContext.request.contextPath}/ChildModify2?class_no=${c.classNo}">${c.className}</a></td>
                     <td>${c.classYear}</td>
                     <td>${c.classAge}</td>
-                    <td><a href="${pageContext.request.contextPath}/testSelect"><button>반편성</button></a></td>
+                    <td><a href="${pageContext.request.contextPath}/testSelect?classAge=${c.classAge}&classNo=${c.classNo}"><button>반편성</button></a></td>
                 </tr>
             </c:forEach>
         </tbody>

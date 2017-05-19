@@ -11,51 +11,77 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	<!-- CSS Link -->
-
+<c:import url="../module/importJS.jsp"></c:import>
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
 
-<style>
-@font-face{
-	font-family: 'koverwatch';
-	src: url(fonts/koverwatch.ttf) format('truetype');
-}
-body {
-	font-family: koverwatch
-}
-</style>
-<link rel="stylesheet" href="css/KSS/jquery.multiselect.css" />
-<script type="text/javascript" src="css/KSS/jquery.multiselect.js"></script>
 <script>
+$(document).ready(function(){
+	$(document).on('click','#right',function(){
+		var value;
+		var name;
+		var $before = $('.before:selected');
+		console.log($before);
+		
+		if($before.length!=0){
+		value = $before.val();
+		name=$before.attr('id');
+		$before.remove();
+		$('#after').append('<option class="after" value="'+value+'" id="'+name+'">'+name+'</option>');
+		}
+	})
+	
+	$(document).on('click','#left',function(){
+		var value;
+		var name;
+		var $after = $('.after:selected');
+		console.log($after+"<<<<after");
+		if($after.length!=0){
+		value = $after.val();
+		name=$after.attr('id');
+		$after.remove();
+		$('#before').append('<option class="before" value="'+value+'" id="'+name+'">'+name+'</option>');
+		}
+	})
+	
+	$('#testSelectButton').click(function(){
+		var options = [];
+		options = $('#after option');
+		var kidNo = [];
+		console.log(options.length + "leng");
+		for(var i=0;i<options.length; i++){
+			kidNo[i] = $('#after option').eq(i).attr('value');
+		}
+		console.log(kidNo);
+		location.href ="${pageContext.request.contextPath}/testTest01?kidNo="+kidNo+"&classNo="+${classNo}; 
+	 	
+	})
+	
+})
 
-$('#pre-selected-options').multiSelect();
 </script>
-    <meta name="description" lang="en" content="jQuery multiselect plugin with two sides. The user can select one or more items and send them to the other side."/>
-    <meta name="keywords" lang="en" content="jQuery multiselect plugin" />
-
-    <base href="http://crlcu.github.io/multiselect/" />
-    <link rel="icon" type="image/x-icon" href="https://github.com/favicon.ico" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="lib/google-code-prettify/prettify.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    
 </head>
+ 
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
  <div class="wrapper">
 	<div class="main-panel">
 		<div class="content">
+		
 			<div class="container-fluid">
     
-    <div id="wrap" class="container">            
+    <div id="wrap" class="container">
+    	       
         <h4 id="with-data-options">With <code>data</code> options</h4>
-            
+           <form id="testSelectForm" action="${pageContext.request.contextPath}/testTest01" method="POST">
             <div class="row">
                 <div class="col-xs-5">
-                    <select name="from[]" style="height:500px"class="multiselect form-control" size="8" multiple="multiple" data-right="#multiselect_to_1" data-right-all="#right_All_1" data-right-selected="#right_Selected_1" data-left-all="#left_All_1" data-left-selected="#left_Selected_1">
+                    <select id="before" name="before" style="height:500px" class="form-control" size="8">
                    		
                    		<c:forEach var="c" items="${getFormationChildList}">
                    			
-                   			<option>${c.kidName}</option>
+                   			<option class="before" value="${c.kidNo}" id="${c.kidName}">${c.kidName}</option>
                    		
                    		</c:forEach>
                    		
@@ -63,43 +89,20 @@ $('#pre-selected-options').multiSelect();
                 </div>
                 
                 <div class="col-xs-2">
-                    <button type="button" id="right_All_1" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
-                    <button type="button" id="right_Selected_1" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
-                    <button type="button" id="left_Selected_1" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
-                    <button type="button" id="left_All_1" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+                    <button type="button" id="right"> 오른쪽 </button>
+                    <button type="button" id="left"> 왼쪽 </button>
                 </div>
                 
                 <div class="col-xs-5">
-                    <select name="to[]" id="multiselect_to_1" style="height:500px" class="form-control" size="8" multiple="multiple"></select>
+                    <select id="after" name="kidNo" style="height:500px" class="form-control" size="8"></select>
+                </div>
+                <div>
+                	<input class="btn btn-default" id="testSelectButton" type="button" value="확인"/>
                 </div>
             </div>
+           </form>
         </div>
-   
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js"></script>
-<script type="text/javascript" src="dist/js/multiselect.min.js"></script>
-
-<script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-    
-    ga('create', 'UA-39934286-1', 'github.com');
-    ga('send', 'pageview');
-</script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    // make code pretty
-    window.prettyPrint && prettyPrint();
-
-    $('.multiselect').multiselect();
-});
-</script>
-
+  
 			</div>
 		</div>
 	</div>
@@ -108,5 +111,5 @@ $(document).ready(function() {
 
 
 </body>
-<%-- <c:import url="../module/importJS.jsp"></c:import> --%>
+
 </html>
