@@ -3,6 +3,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
+  <insert id="classOrganization" parameterType="java.util.Map">
+  	INSERT INTO kid_formation(
+	  	license_kindergarten
+	  	,kid_no
+	  	,class_no
+  	)VALUES(
+  		#{licenseKindergarten}
+  		,#{kidNo}
+  		,#{classNo}
+  	)
+  </insert>
+  
   
   <update id="updateChild" parameterType="com.cafe24.dmsthch.Child.Child">
   UPDATE kid SET 
@@ -137,11 +149,15 @@
   	LIMIT  #{beginRow},#{pagePerRow}
   </select>
   
-  <select id="getFormationChildList" parameterType="String" resultType="com.cafe24.dmsthch.Child.Child">
+  <select id="getFormationChildList" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.Child.Child">
   	SELECT 
-  		license_kindergarten AS licenseKindergarten, 
+  		license_kindergarten AS licenseKindergarten,
+  		kid_no AS kidNo,
   		kid_name AS kidName, 
   		kid_birth AS kidBirth 
-  	FROM kid where license_kindergarten = #{license}
+  	FROM kid 
+  	where license_kindergarten = #{licenseKindergarten}
+  	AND ((DATE_FORMAT(now(),'%Y') - DATE_FORMAT(kid_birth,'%Y'))) = #{classAge}
+  	
   </select>
   </mapper>
