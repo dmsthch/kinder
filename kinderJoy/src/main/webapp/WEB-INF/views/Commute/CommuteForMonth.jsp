@@ -26,14 +26,14 @@
 	</style>
 	
 	<script>
-		$(document).ready(function(e){
+	
+		var drawCarendar = function(month){
 			
-			//사이드바 active속성 주기
-		    setSidenavActive(2);
-			
-		    var date = new Date();
+			var date = new Date();
 		    var nowYear = date.getFullYear(); //현재의 년
-		    var nowMonth = date.getMonth()+1; //현재의 월, 0부터 시작하니 +1
+		    var nowMonth = month; //현재의 월, 0부터 시작하니 +1
+
+// 		    var nowMonth = date.getMonth()+1; //현재의 월, 0부터 시작하니 +1
 		    var nowDate = date.getDate(); //오늘 날짜
 		    
 		    var week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
@@ -42,46 +42,91 @@
 		    var nowLastDay = ( new Date( nowYear, nowMonth, 0) ).getDate(); //이번달 마지막 날짜
 		    var nowDay = ( new Date( nowYear, nowMonth-1, 1) ).getDay(); //이번달1일의 요일
 		    
-		    var lastWeek = Math.ceil( (nowLastDay+nowDay)/7 ); //이번달 주 수
+		    var lastWeek = Math.ceil( (nowLastDay+nowDay)/7 ); //이번달주수
 		    
-		    var otherDay = otherLastDay - nowDay //달력에 표시할 저번달의 시작날짜
+		    var otherDay = otherLastDay - nowDay+1 //달력에 표시할 저번달의 시작날짜
+		    
+		    
+		    $('h2').html(nowMonth+' 월');
 		    
 		    // 요일 입력
+		    $('#week').html('');
 		    for(i=0; i<week.length; i++){
-		    	var inputHtml = "<td>"+ week[i] +"</td>";
+		    	var inputHtml = "<td>";
+		    	if(i == 0){ //일요일
+		    		inputHtml = "<td style='color:red'>";
+		    	}else if(i == 6){ //토요일
+		    		inputHtml = "<td style='color:blue'>";	
+		    	}
+		    	inputHtml += week[i] +"</td>";
 		    	$('#week').append(inputHtml);
 		    }
 		    
+		    // 날짜 입력
 		    var dayCount = 1;
+		    var nextCount = 1;
+		    $('#day').html('');
 		    for(i=0; i<lastWeek; i++){
-		    	
-		    	var inputHtml = "<tr id='"+ i +"'>";
-		    	
+		    	var inputHtml = "<tr>";
 		    	for(j=0; j<7; j++){
 		    		
 		    		if(otherDay <= otherLastDay){
-		    			inputHtml += "<td>" + otherDay++ + "</td>";
+		    			inputHtml += "<td class='prev-month'>" + otherDay++ + "</td>";
 		    		}else if(dayCount <= nowLastDay){
-		    			inputHtml += "<td>" + dayCount++ + "</td>";
+		    			if(j==0){ //일요일
+		    				inputHtml += "<td style='color:red' id='"+ dayCount +"'>" + dayCount++ + "</td>";
+		    			}else if(j==6){ //토요일
+		    				inputHtml += "<td style='color:blue' id='"+ dayCount +"'>" + dayCount++ + "</td>";		    				
+		    			}else{
+			    			inputHtml += "<td id='"+ dayCount +"'>" + dayCount++ + "</td>";
+		    			}
+		    		}else{
+		    			inputHtml += "<td class='next-month'>" + nextCount++ + "</td>";
 		    		}
 		    		
 		    	}
-		    	
 		    	inputHtml += "</tr>"
-		    	console.log(inputHtml); 
-		    	
+				$('#day').append(inputHtml);
 		    }
 		    
-		    console.log(nowYear + "이번 년");
-		    console.log(nowMonth + "이번 달");
-		    console.log(nowDate + "오늘 날짜");
-		    console.log(otherLastDay + "저번달 마지막 날짜");
-		    console.log(nowLastDay + "이번달 마지막 날짜");
-		    console.log(nowDay + "이번달 1일 요일");
-		    console.log(week[nowDay] + ":요일");
-		    console.log(lastWeek + "주 수");
+		    $('#'+nowDate).attr('class','current-day'); //오늘날짜 표시
+			
+		}
+	
+	
+		$(document).ready(function(e){
+			
+			//사이드바 active속성 주기
+		    setSidenavActive(2);
+			
+			
+		    var date = new Date();
+		    var nowMonth = date.getMonth()+1; //현재의 월, 0부터 시작하니 +1
+		    
+		    drawCarendar(nowMonth);
+		    
+		    $('#otherMonth').click(function(){
+		    	
+		    	if(nowMonth > 0){
+		    		drawCarendar(--nowMonth);
+		    		console.log(nowMonth);
+		    	}
+		    	
+		    });
+		    
+		    $('#nextMonth').click(function(){
+
+		    	if(nowMonth < 11){
+		    		drawCarendar(++nowMonth);
+		    		console.log(nowMonth);
+		    	}
+		    	
+		    });
+		    
 		    
 		});
+		
+		
 	</script>
 	
 </head>
@@ -111,8 +156,8 @@
 					<div class="calendar col-sm-12">
 						<header>		
 							<h2>September</h2>
-							<a class="btn-prev fontawesome-angle-left" href="#"></a>
-							<a class="btn-next fontawesome-angle-right" href="#"></a>
+							<a class="btn-prev fontawesome-angle-left" id="otherMonth" href="#"></a>
+							<a class="btn-next fontawesome-angle-right" id="nextMonth" href="#"></a>
 						</header>
 						<table>
 							<thead>
