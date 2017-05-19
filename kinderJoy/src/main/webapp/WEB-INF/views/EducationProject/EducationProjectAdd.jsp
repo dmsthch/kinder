@@ -4,24 +4,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="../module/importJS.jsp"></c:import>  
-	<meta charset='utf-8'>
+<meta charset='utf-8'>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	 <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/handsontable.css">
-  <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/pikaday/pikaday.css">
-  <script src="js/LCR/EducationProject/pikaday/pikaday.js"></script>
-  <script src="js/LCR/EducationProject/moment/moment.js"></script>
-  <script src="js/LCR/EducationProject/zeroclipboard/ZeroClipboard.js"></script>
-  <script src="js/LCR/EducationProject/numbro/numbro.js"></script>
-  <script src="js/LCR/EducationProject/numbro/languages.js"></script>
-  <script src="js/LCR/EducationProject/handsontable.js"></script>
-  
-  
+<meta charset='utf-8'>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" media="screen" href="js/LCR/EducationProject/handsontable.css">
+<link rel="stylesheet" media="screen" href="js/LCR/EducationProject/pikaday/pikaday.css">
+<script src="js/LCR/EducationProject/pikaday/pikaday.js"></script>
+<script src="js/LCR/EducationProject/moment/moment.js"></script>
+<script src="js/LCR/EducationProject/zeroclipboard/ZeroClipboard.js"></script>
+<script src="js/LCR/EducationProject/numbro/numbro.js"></script>
+<script src="js/LCR/EducationProject/numbro/languages.js"></script>
+<script src="js/LCR/EducationProject/handsontable.js"></script>
+<c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="./nav/SideNav.jsp"></c:import>
-<%-- <c:import url="../module/importCSS.jsp"></c:import> --%>
 <c:import url="../module/navbar.jsp"></c:import>
-	<title>Insert title here</title>
 
+
+	<title>Insert title here</title>
 <!-- 네비바 관련 스크립트  -->
 <script>//네비바 관련 스크립트 네비의 해당부분을 active클래스를 줌.
 $(document).ready(function(){

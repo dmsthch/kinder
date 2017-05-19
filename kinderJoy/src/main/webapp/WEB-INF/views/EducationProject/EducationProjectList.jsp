@@ -7,12 +7,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<%-- <c:import url="../module/importCSS.jsp"></c:import> --%>
+<c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="./nav/SideNav.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
 <%-- <c:import url="../module/importJS.jsp"></c:import> --%>
 <script>
-
+$(document).ready(function(){
+	var categoryNo = ${categoryNo}
+	if(categoryNo==1){
+		$('#activeYear').attr('class','active');	
+	}else if(categoryNo==2){
+		$('#activeMonth').attr('class','active');
+	}else if(categoryNo==3){
+		$('#activeWeek').attr('class','active');
+	}else if(categoryNo==4){
+		$('#activeDay').attr('class','active');
+	}
+	
+})
 
 </script>
 </head>
