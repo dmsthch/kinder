@@ -5,9 +5,15 @@
 <mapper namespace="com.cafe24.dmsthch.Teacher.TeacherMapper">
 
 <update id="updateTeacher" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
-
-
-
+UPDATE teacher 
+SET 
+ teacher_name		=	#{teacherName}
+,teacher_level		=	#{teacherLevel}
+,teacher_phone		=	#{teacherPhone}
+,teacher_bank		=	#{teacherBank}
+,teacher_account	=	#{teacherAccount}
+,teacher_paystep	=	#{teacherPaystep}
+WHERE teacher_id	=	#{teacherId}
 </update>
 
 <!-- #{전역변수의 입력값 입력값의 전역변수} -->
@@ -20,18 +26,24 @@ INSERT INTO teacher
 	,teacher_name
 	,teacher_id
 	,teacher_pw
-	,teacher_add_day
 	,teacher_phone
+	,teacher_bank
+	,teacher_account
+	,teacher_paystep
+	,teacher_add_day
 	)
 VALUES 
 	(#{teacherNo}
 	,"GUEST"
-	,#{teacherLevel}
+	,"선생님"
 	,#{teacherName}
 	,#{teacherId}
 	,#{teacherPw}
-	,#{teacherAddDay}
 	,#{teacherPhone}
+	,#{teacherBank}
+	,#{teacherAccount}
+	,#{teacherPaystep}
+	,now()
 )
 </insert>
 

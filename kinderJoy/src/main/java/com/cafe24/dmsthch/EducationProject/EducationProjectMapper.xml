@@ -130,14 +130,13 @@
 	WHERE license_kindergarten = #{licenseKindergarten}
 	
 	<if test="categoryNo == 1">
-	AND (SELECT year(add_date)) = #{addDate}
 	AND age = #{age}
-	AND e.category_no = #{categoryNo}
 	</if>
 	<if test="categoryNo != 1">
 	AND e.class_no = ${classNo}
-	AND e.category_no = #{categoryNo}
 	</if> 
+	AND e.category_no = #{categoryNo}
+	AND e.project_date_info = #{projectDateInfo}
 </select>
 
 	
@@ -152,24 +151,31 @@
   	FROM kid_class
 	WHERE license_kindergarten = #{licenseKindergarten}
 	AND class_year = #{classYear}
+	ORDER BY class_age ASC
  </select>
 
-<!-- 해당 반의 카테고리별로(월/주/일) 목록 가져오기 -->
+<!-- 해당 반의 카테고리별로(월/주/일) 목록 가져오기  조인 필요없어졌음 수정해야함. -->
 <select id="EducationProjectList" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.EducationProject.Education">
 	SELECT
 	 	e.education_project_no AS educationProjectNo 
 		,e.add_date AS addDate
 		,e.category_no AS categoryNo
 		,age
-		,k.class_name AS classNo
+		<if test="categoryNo != 1">
+		,e.class_no AS classNo
+		</if>
 		,e.project_date_info AS projectDateInfo
 	FROM education_project e
+	<if test="categoryNo != 1">
 	INNER JOIN kid_class k
 	ON e.class_no = k.class_no
+	</if>
 	WHERE e.license_kindergarten = #{licenseKindergarten}
 	AND e.category_no = ${categoryNo}
-	<if test="classNo != '' ">
-	AND e.class_no = #{classNo}
+	<if test="categoryNo != 1">
+		<if test="classNo != ''">
+		AND e.class_no = #{classNo}
+		</if>
 	</if>
 	<if test="age !=0">
 	AND e.age = #{age}
@@ -193,4 +199,35 @@
 	WHERE category_no = #{categoryNo} 
 </select>
 
+
+
+
+<!-- -구 -해당 반의 카테고리별로(월/주/일) 목록 가져오기 -->
+<!-- <select id="EducationProjectList" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.EducationProject.Education">
+	SELECT
+	 	e.education_project_no AS educationProjectNo 
+		,e.add_date AS addDate
+		,e.category_no AS categoryNo
+		,age
+		<if test="categoryNo != 1">
+		,k.class_name AS classNo
+		</if>
+		,e.project_date_info AS projectDateInfo
+	FROM education_project e
+	<if test="categoryNo != 1">
+	INNER JOIN kid_class k
+	ON e.class_no = k.class_no
+	</if>
+	WHERE e.license_kindergarten = #{licenseKindergarten}
+	AND e.category_no = ${categoryNo}
+	<if test="categoryNo != 1">
+		<if test="classNo != ''">
+		AND e.class_no = #{classNo}
+		</if>
+	</if>
+	<if test="age !=0">
+	AND e.age = #{age}
+	</if>
+	ORDER BY e.project_date_info DESC
+</select> -->
   </mapper>

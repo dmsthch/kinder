@@ -89,4 +89,10 @@ public class TeacherDao {
 		System.out.println("remove테이블의 teacher_id컬럼에 삭제된 아이디 추가 메서드 호출 _DAO");
 		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.insertId" ,object);
 	}
+	
+	//자기 정보 수정
+	public int updateTeacher(Teacher teacher) {
+		System.out.println("수정확메서드호출_Dao");
+		return sql.update("com.cafe24.dmsthch.Teacher.TeacherMapper.updateTeacher", teacher);
+	}
 }
