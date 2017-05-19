@@ -19,8 +19,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons' rel='stylesheet' type='text/css'>
     
-	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
-	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
+
 	
 <style>
 
@@ -41,7 +40,13 @@
 .components-page.components-page{
  z-index:10;
 }
+
+.nav li .active ul a {background-color: black;}
+
 </style>
+
+<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
+<%-- <c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>  --%>
 <script>
 $(document).ready(function(){
 	
@@ -132,7 +137,7 @@ $(document).ready(function(){
 
 	    	<div class="sidebar-wrapper" style="overflow: visible;">
 	            <ul class="nav ">
-            	   <li class="navEducationProject">
+            	   <li class="navEducationProject" id="eduHome">
 	                   <a href="${pageContext.request.contextPath}/educationProject" class="smoothScroll">
 	                        <i class="material-icons">dashboard</i>
 	                        
@@ -140,7 +145,7 @@ $(document).ready(function(){
 	                    </a>
 	                </li>
 	                
-	                <li class="dropdown" >
+	                <li class="dropdown"  id="educationProjectAddPage">
 	                    <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;" id="formManagement">
 	                        <i class="material-icons">library_books</i>
 	                        <p>양식관리 <span class="caret"></span></p>
@@ -153,16 +158,13 @@ $(document).ready(function(){
 							    	<ul class="dropdown-menu navFormLoad" style="margin-left:1%" id="navFormLoad">
 							    		
 							    	</ul>
-							    		<!-- ! -->
-								    	<%-- <ul class="dropdown-menu" style="margin-left:1%">
-								    		<li><a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=${form.formOrder}">${form.formTitle}</a></li>
-								    	</ul> --%>
+							    	
 							    	</li>	
 						    </ul>
 	                </li>
 	                
 	                <!-- 요기부터 -->
-	               <li class="dropdown">
+	               <li class="dropdown" id="activeDay">
 	                	
 	                    <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
 	                        <i class="material-icons">content_paste</i>
@@ -192,7 +194,7 @@ $(document).ready(function(){
 	                </li>
 	                <!-- 요기까지 반복됨 // 반복될것 : 카테고리, 나이 -->
 	                
-	                 <li class="dropdown">
+	                 <li class="dropdown" id="activeWeek">
 	                	
 	                    <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
 	                        <i class="material-icons">content_paste</i>
@@ -213,8 +215,8 @@ $(document).ready(function(){
 						    </ul>
 	                </li>
 	                
-	                <li class="dropdown">
-	                	
+	                <li class="dropdown" id="activeMonth">
+	          
 	                    <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
 	                        <i class="material-icons">content_paste</i>
 	                        <p>월간계획안 <span class="caret"></span></p>
@@ -234,7 +236,7 @@ $(document).ready(function(){
 						    </ul>
 	                </li>
 	                
-	                <li class="dropdown">
+	                <li class="dropdown" id="activeYear">
 	                	
 	                    <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
 	                        <i class="material-icons">content_paste</i>
@@ -255,12 +257,12 @@ $(document).ready(function(){
 	             	
 	             	
 	             	<!-- <li class="active"> -->
-	                <li id="educationProjectAddPage">
+<%-- 	                <li id="educationProjectAddPage">
 	                    <a href="${pageContext.request.contextPath}/educationProjectAddPage">
 	                        <i class="material-icons">library_books</i>
 	                        <p>양식 관리</p>
 	                    </a>
-	                </li>
+	                </li> --%>
 	                <li id="educationProjectFormLoad">
 	                    <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=1">
 	                        <i class="material-icons">person</i>
@@ -273,48 +275,11 @@ $(document).ready(function(){
 	                        <p>임시2</p>
 	                    </a>
 	                </li>
-	                <li>
-	                    <a href="icons.html">
-	                        <i class="material-icons">bubble_chart</i>
-	                        <p>Icons</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="maps.html">
-	                        <i class="material-icons">location_on</i>
-	                        <p>Maps</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="notifications.html">
-	                        <i class="material-icons text-gray">notifications</i>
-	                        <p>Notifications</p>
-	                    </a>
-	                </li>
-					<li class="active-pro">
-	                    <a href="upgrade.html">
-	                        <i class="material-icons">unarchive</i>
-	                        <p>Upgrade to PRO</p>
-	                    </a>
-	                </li>
-	                <c:forEach items="${age3}" var="age3"> 
-	                	
-	                	dd${age3.className}
-	                </c:forEach>
+	
+
 	            </ul>
 	    	</div>
-	    </div>
-	    
-	    <!--   Core JS Files   -->
-
-
-
-
-	<!-- Material Dashboard javascript methods -->
-<!-- 	<script src="css/LCR/EducationProject/assets/js/material-dashboard.js"></script> -->
-
-
-	    
-
+	    </div>    
+	
   </div><!-- /.container-fluid -->
 </nav>

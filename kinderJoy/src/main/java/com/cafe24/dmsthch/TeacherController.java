@@ -110,28 +110,39 @@ public class TeacherController {
 	
 	//교원 수정하기 자기 정보 수정하기 
 	@RequestMapping(value="/teacherUpdate", method = RequestMethod.POST)
-	public String updateTeacher(HttpServletRequest request ,HttpSession httpsession ,Model model) {
+	public String updateTeacher(Teacher teacher
+			, HttpSession httpsession
+			, Model model) {
 		
-		Teacher teacher = new Teacher();
+/*		
+ 		//기존 형식
 		
+		teacher.setTeacherId((String) httpsession.getAttribute("teacherId"));
+		//WHERE절도 똑같이 teacher에 세팅하면 조건이 성립된다.
 		teacher.setTeacherName(request.getParameter("teacherName"));
 		teacher.setTeacherPhone(request.getParameter("teacherPhone"));
 		teacher.setTeacherLevel(request.getParameter("teacherLevel"));
 		teacher.setTeacherBank(request.getParameter("teacherBank"));
 		teacher.setTeacherAccount(request.getParameter("teacherAccount"));
 		teacher.setTeacherPaystep(request.getParameter("teacherPaystep"));
-		System.out.println(request.getParameter("teacherPaystep"));
+*/
 		
+		
+		//조건절에 들어갈 아이디값을 가져와야 하는데 현재 세션에서 가져왔다
+		teacher.setTeacherId((String) httpsession.getAttribute("teacherId"));
+		
+		//값이 들어가야하는 부분엔 매개변수에 RequestParam으로 값을 자동으로 가져와서 teacher에 세팅해주었다
+		/*매개변수에 @RequestParam("value") String value; 넣으면 된다*/
+
 		int a = TDao.updateTeacher(teacher);
 		
 		if(a == 0) {
 			System.out.println("업데이트 안댐");
+			return "redirect:/home";
 		}else{
 			System.out.println("업데이트 성공");
+			return "redirect:/kyo";
 		}
-		
-		return null;
-
 	}
 	
 	//교원의 정보 조회 admin전용 TableList ★현재 교원 ,이직한 교원★
@@ -177,7 +188,7 @@ public class TeacherController {
 		return check;
 	}
 	
-	//입력 
+	//입력 회원가입
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert(Teacher teacher) {//매개변수는 전역변수이다
 		TDao.insertTeacher(teacher);

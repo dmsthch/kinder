@@ -67,10 +67,21 @@ public class ChildDao {
         return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.severalSelect", map);
 	}
 	
+	//넘버배열 받아서 반에 넣기
+	public void classOrganization(String licenseKindergarten,int[] kidNo, String classNo){
+		Map<String, Object> map = null;
+		for(int i =0; i<kidNo.length;i++){
+			map =new HashMap<String, Object>();
+			map.put("licenseKindergarten", licenseKindergarten);
+			map.put("kidNo", kidNo[i]);
+			map.put("classNo", classNo);
+			sqlSessionTemplate.insert("com.cafe24.dmsthch.Child.ChildMapper.classOrganization",map);
+		}
+	}
 
-	public List<Child> getFormationChildList(String license){
+	public List<Child> getFormationChildList(ChildClass childClass){
 		
-		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getFormationChildList", license);
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getFormationChildList", childClass);
 		
 	}
 

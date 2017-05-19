@@ -66,7 +66,7 @@ public class EducationProjectController {
 								, @RequestParam(value="borderArray",required=false, defaultValue="") String formBorders
 								, @RequestParam(value="countRow",required=true) int formCountRow
 								, @RequestParam(value="countCol",required=true) int formCountCol
-								, @RequestParam(value="formTitle",required=false, defaultValue="") String formTitle) {
+								, @RequestParam(value="formTitle",required=false, defaultValue="제목 없음") String formTitle) {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(formVal+"<<<formval");
 		System.out.println(formBorders+"<<<<formBorders");
