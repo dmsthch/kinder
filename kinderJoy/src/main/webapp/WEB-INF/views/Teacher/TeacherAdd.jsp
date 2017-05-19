@@ -112,14 +112,6 @@ $(document).ready(function(){
     
     
     <div class="form-group">
-      <label class="control-label col-sm-2">등록일자:</label>
-      <div class="col-sm-10">          
-        <input type="date" class="form-control" name="teacherAddDay">
-      </div>
-    </div>
-    
-    
-    <div class="form-group">
       <label class="control-label col-sm-2">연락처:</label>
       <div class="col-sm-10">          
         <input type="text" class="form-control" name="teacherPhone" placeholder="연락처를 입력하세요">
