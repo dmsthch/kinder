@@ -13,7 +13,8 @@
 <%-- <c:import url="../module/importJS.jsp"></c:import> --%>
 <script>
 $(document).ready(function(){
-	var categoryNo = ${categoryNo}
+	var categoryNo = ${categoryNo};
+	console.log(categoryNo+"<<categoryNo")
 	if(categoryNo==1){
 		$('#activeYear').attr('class','active');	
 	}else if(categoryNo==2){

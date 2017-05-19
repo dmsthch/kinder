@@ -26,18 +26,24 @@ INSERT INTO teacher
 	,teacher_name
 	,teacher_id
 	,teacher_pw
-	,teacher_add_day
 	,teacher_phone
+	,teacher_bank
+	,teacher_account
+	,teacher_paystep
+	,teacher_add_day
 	)
 VALUES 
 	(#{teacherNo}
 	,"GUEST"
-	,#{teacherLevel}
+	,"선생님"
 	,#{teacherName}
 	,#{teacherId}
 	,#{teacherPw}
-	,#{teacherAddDay}
 	,#{teacherPhone}
+	,#{teacherBank}
+	,#{teacherAccount}
+	,#{teacherPaystep}
+	,now()
 )
 </insert>
 
