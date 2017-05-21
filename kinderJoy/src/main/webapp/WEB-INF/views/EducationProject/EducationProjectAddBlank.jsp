@@ -79,7 +79,7 @@ $(document).ready(function(){
 			},
 			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
-				//console.log(data, type)
+				//console.log(data, type);
 				
 				if(dataArray === undefined){
 					dataArray = [];
