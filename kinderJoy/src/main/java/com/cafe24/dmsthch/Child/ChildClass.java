@@ -1,7 +1,7 @@
 package com.cafe24.dmsthch.Child;
 
 public class ChildClass {
-	
+
 	private String classNo;
 	private String className;
 	private String classYear;

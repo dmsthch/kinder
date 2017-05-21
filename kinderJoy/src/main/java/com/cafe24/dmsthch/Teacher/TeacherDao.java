@@ -91,8 +91,8 @@ public class TeacherDao {
 	}
 	
 	//자기 정보 수정
-	public int updateTeacher(Object object) {
-		System.out.println("수정확인_Dao");
-		return sql.update("com.cafe24.dmsthch.Teacher.TeacherMapper.updateTeacher", object);
+	public int updateTeacher(Teacher teacher) {
+		System.out.println("수정확메서드호출_Dao");
+		return sql.update("com.cafe24.dmsthch.Teacher.TeacherMapper.updateTeacher", teacher);
 	}
 }

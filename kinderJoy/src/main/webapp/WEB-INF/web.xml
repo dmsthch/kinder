@@ -11,9 +11,13 @@
     </init-param>
   </filter>
   
+  <error-page>
+  <error-code>404</error-code>
+  <location>/ErrorPage</location>
+  </error-page>
+  
   <!-- 필터안에 리스너가 있으면 리스너 사용 불가 등록 위치에 따라 달라지니까 잘 보고 글을 작성하자 -->
 
-  	
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
@@ -31,7 +35,5 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-<!--   <session-config>
-    <session-timeout>1</session-timeout>
-  </session-config> -->
+
 </web-app>

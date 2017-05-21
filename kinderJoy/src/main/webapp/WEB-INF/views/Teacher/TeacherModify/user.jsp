@@ -6,17 +6,9 @@
 
 <head>
 	<!-- JS Link -->
-<<<<<<< HEAD
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
-=======
-<%-- 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
-	 --%>
-	<title>1TEAM</title>
->>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
-
 	<!-- navbar -->
 	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
-	
 	<!-- CSS Link -->
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
 	

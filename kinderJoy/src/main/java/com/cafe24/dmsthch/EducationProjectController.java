@@ -66,7 +66,7 @@ public class EducationProjectController {
 								, @RequestParam(value="borderArray",required=false, defaultValue="") String formBorders
 								, @RequestParam(value="countRow",required=true) int formCountRow
 								, @RequestParam(value="countCol",required=true) int formCountCol
-								, @RequestParam(value="formTitle",required=false, defaultValue="") String formTitle) {
+								, @RequestParam(value="formTitle",required=false, defaultValue="제목 없음") String formTitle) {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(formVal+"<<<formval");
 		System.out.println(formBorders+"<<<<formBorders");
@@ -78,18 +78,55 @@ public class EducationProjectController {
 	@RequestMapping(value = "/educationProjectFormLoad", method = RequestMethod.GET)
 	public String educationProjectFormLoad(HttpSession session
 										,Model model
-										,@RequestParam(value="formOrder") int formOrder){
+										,@RequestParam(value="formOrder", required=false, defaultValue="0") int formOrder
+										,@RequestParam(value="isBlank", required=false, defaultValue="0") int isBlank
+										,@RequestParam(value="categoryNo",required=false, defaultValue="0") String categoryNo){
+		//1번.isBlank가 1일경우는 계획안 작성-빈 시트일경우. 보내줘야 할 값 - 해당 유치원의 반에 대한 정보들+ 카테고리넘버. formOrder는 자동적으로 0 
+		//2번.isBlank가 0이고, formOrder가 0이 아니며 카테고리넘버가 있는경우 - 계획안 작성-양식있는경우. 보내줘야할 값 - 해당 order번호에 맞는 양식정보 + 해당유치원 반에 대한 정보 +카테고리넘버
+		//3번.카테고리넘버가 없는경우는 순수하게 양식 불러오는경우(수정/삭제하는경우) 보내줘야할값 - order번호에 맞는 시트에 저장된 값, order넘버 
 		System.out.println("로드 테스트");
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
-		EducationForm result = dao.formLoad(licenseKindergarten, formOrder);
-		//System.out.println(isMerge+"<<isMerge   ,"+ isBorders+"<<isBorders");
-		//System.out.println(result.getFormMerge()+"<<<<체크체크 머지");
-		//System.out.println(result.getFormCountCol()+"<<체크체크 카운트");
-		if(result==null){
-			return "EducationProject/EducationProject";
+
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+		Integer integerYear = year;
+		String classYear = integerYear.toString(); //올해 년도 String형식으로
+		System.out.println(isBlank+"<<<<isBlank");
+		System.out.println(categoryNo+"<<categoryNo");
+		System.out.println(formOrder+"<<<formOrder");
+		if(isBlank==1){
+		//위 주석의 1번 경우.
+			System.out.println("주석1번경우");
+			List<ChildClass> listChildClass = dao.selectAllChildClass(licenseKindergarten, classYear);
+			System.out.println(listChildClass+"<<<listChildClass");
+			model.addAttribute("listChildClass", listChildClass);
+			model.addAttribute("categoryNo", categoryNo);
+			return "EducationProject/EducationProjectAddBlank";
+		}else if(categoryNo.equals("0")){
+		//3번경우
+			System.out.println("주석3번경우");
+			EducationForm result = dao.formLoad(licenseKindergarten, formOrder);
+			model.addAttribute("resultData",result);
+			model.addAttribute("formOrder",formOrder);
+			if(result==null){
+				return "EducationProject/EducationProject";
+			}
+			return "EducationProject/LoadForm";
+		}else if(isBlank==0&&formOrder!=0){
+		//위 주석의 2번경우	
+			System.out.println("주석2번경우");
+			EducationForm result = dao.formLoad(licenseKindergarten, formOrder);
+			List<ChildClass> listChildClass = dao.selectAllChildClass(licenseKindergarten, classYear);
+			model.addAttribute("resultData",result);
+			model.addAttribute("listChildClass", listChildClass);
+			model.addAttribute("categoryNo", categoryNo);
+			return "EducationProject/EducationProjectAdd";
 		}
-		model.addAttribute("resultData",result);
-		return "EducationProject/LoadForm";
+		
+		
+		
+		return "EducationProject/EducationProject";
+		
 	}
 	
 	//저장된 양식 이름 가져오기
@@ -174,6 +211,7 @@ public class EducationProjectController {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(val+"<<<formval");
 		System.out.println(borders+"<<<<formBorders");
+		System.out.println(categoryNo+"<<<<<<<categoryNocategoryNo");
 		dao.educationProjectAdd(val, merge, borders, countRow, countCol, licenseKindergarten, age, classNo, categoryNo, projectDateInfo);
 		return "";
 	}
