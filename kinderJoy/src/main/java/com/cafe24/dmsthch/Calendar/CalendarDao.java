@@ -29,5 +29,11 @@ public class CalendarDao {
 		System.out.println("deleteSchedule 메서드작동 확인 CalendarDao ");
 		sqlSessionTemplate.delete("com.cafe24.dmsthch.Calendar.CalendarMapper.deleteSchedule",scheduleNo);
 	}
+	
+	//스케쥴 하나 저장하기
+	public void addSchedule(Schedule schedule){
+		System.out.println("addSchedule 메서드작동 확인 CalendarDao ");
+		sqlSessionTemplate.insert("com.cafe24.dmsthch.Calendar.CalendarMapper.addSchedule",schedule);
+	}
 
 }

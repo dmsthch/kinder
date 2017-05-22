@@ -38,6 +38,9 @@
 	</div>
 	
 <script data-jsfiddle="example1">
+$(document).ready(function(){
+	
+
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
 	var dataValue = ${resultData.val};
@@ -68,7 +71,8 @@
 	
 	//var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
 	
-	
+	console.log(countRow);
+	console.log(countCol);
 		hot = new Handsontable(container, {
  			data: dataValue,    //데이터 가져오기
 			startRows: countRow,
@@ -77,6 +81,7 @@
 			colHeaders : true,
 			minRows: countRow,
 			minCols: countCol,
+			colWidths: 80,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
@@ -164,7 +169,7 @@
 // 		console.log(hot.getCellsMeta())
 // 		console.log(dataArray);
 	
-  
+})  
 </script>
 
 

@@ -44,7 +44,7 @@
   	)VALUES(
   		(
   			SELECT * FROM
-	  		(SELECT COUNT(form_no)
+	  		(SELECT MAX(form_order)
 	  		FROM education_project_form
 	  		WHERE license_kindergarten = #{licenseKindergarten}) 
 	  		as temp
@@ -104,7 +104,7 @@
 		,#{countRow}
 		,#{countCol}
 		,curdate()
-		,1
+		,#{categoryNo}
 		,#{age}
 		,#{classNo}
 		,#{projectDateInfo}

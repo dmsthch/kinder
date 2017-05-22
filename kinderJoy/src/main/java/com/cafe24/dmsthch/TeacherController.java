@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,13 @@ public class TeacherController {
 	
 	@Autowired
 	private TeacherDao TDao;
+	
+	//ErrorPage.jsp
+	@RequestMapping(value="/ErrorPage", method = RequestMethod.GET)
+	public String ErrorPage() {
+		System.out.println("web.xml에 404에러 설정 \n404error페이지 호출_TeacherController");
+		return "Teacher/ErrorPage";
+	}
 	
 	//권한 없을 때 보여줄 페이지
 	@RequestMapping(value="/권한없는 사람이 보는 페이지", method = RequestMethod.GET)

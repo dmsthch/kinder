@@ -73,10 +73,11 @@
 	
 		hot = new Handsontable(container, {
  			//data: dataTest,    //데이터 가져오기
-			startRows: 30,
-			startCols: 20,
+			startRows: 40,
+			startCols: 15,
 			rowHeaders : true,
 			colHeaders : true,
+			colWidths: 80,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
