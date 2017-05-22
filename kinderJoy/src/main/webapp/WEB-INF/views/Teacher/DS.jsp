@@ -34,10 +34,10 @@
 
 </head>
 <body>
-<c:if test="${takeTeacher != null}">
+<c:if test="${teacherString != null}">
 값있음
 </c:if>
-<c:if test="${takeTeacher == null}">
+<c:if test="${teacherString == null}">
 값없
 </c:if>
 
@@ -80,7 +80,15 @@
 <script>
     (function () {
     	
-    	var takeTeacher = '${teacherName}';	/* ★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★*/
+    	var childString = "${childString}";
+    	var teacherString = "${teacherString}";
+    	
+    	for(var i=0; i<teacherString; i++){
+    	console.log(teacherString)
+    	}
+    	
+    	console.log(childString)
+    	/* ★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★*/
         var app = angular.module('App', []);
         
         app.controller('dndCtrl', ['$scope', 'someArrays', function ($scope, someArrays) {
@@ -336,20 +344,13 @@
     app.factory('someArrays', ['$q', '$timeout', function ($q, $timeout) {
         var deferred = $q.defer();
         
-        for(var i in takeTeacher){
-        	console.log(takeTeacher)
-        }
-        
         $timeout(function () {
             deferred.resolve({
                 someArrays:{
-                    list0:
-                    [
-                        {name:takeTeacher}
-                    ],
+                    list0:teacherString,
                     list1:
                     [
-                        {name:'Job 33'},
+                        {name:childString},
                         {name:'Job 44'},
                         {name:'Job 55'},
                         {name:'Job 66'},
