@@ -43,6 +43,9 @@
 
 .nav li .active ul a {background-color: black;}
 
+.subHr {
+	font-size: 1px; padding: 0px; margin-top: -10px; margin-bottom: -10px; text-align: center; color: #CFCFCF;
+}
 </style>
 
 <c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
@@ -76,6 +79,10 @@ $(document).ready(function(){
 		//console.log(formTitle);
  		 $('.navFormLoad').append('<li><a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder='+formOrder+'"> '+formTitle+'</a></li>');   	
 		 /* $('.navFormLoad').append('<li><a href="#">'+i+'</a></li>');    */
+ 		 $('.navFormLoadDay').append('<li><a href="${pageContext.request.contextPath}/educationProjectFormLoad?categoryNo=4&formOrder='+formOrder+'"> '+formTitle+'</a></li>');
+ 		$('.navFormLoadWeek').append('<li><a href="${pageContext.request.contextPath}/educationProjectFormLoad?categoryNo=3&formOrder='+formOrder+'"> '+formTitle+'</a></li>');
+ 		$('.navFormLoadMonth').append('<li><a href="${pageContext.request.contextPath}/educationProjectFormLoad?categoryNo=2&formOrder='+formOrder+'"> '+formTitle+'</a></li>');
+ 		$('.navFormLoadYear').append('<li><a href="${pageContext.request.contextPath}/educationProjectFormLoad?categoryNo=1&formOrder='+formOrder+'"> '+formTitle+'</a></li>');
 	}
 	
 	//반 정보 가져오기
@@ -155,7 +162,7 @@ $(document).ready(function(){
 						    	<li class="divider"></li>
 							    	<li class="dropdown-submenu ">
 							    		<a href="#" > 양식 불러오기 </a>
-							    	<ul class="dropdown-menu navFormLoad" style="margin-left:1%" id="navFormLoad">
+							    	<ul class="dropdown-menu navFormLoad" style="margin-left:0.3%" id="navFormLoad">
 							    		
 							    	</ul>
 							    	
@@ -173,9 +180,9 @@ $(document).ready(function(){
 						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
 						    	<li class="dropdown-submenu ">
 							    	<a href="#" > 일일계획안 작성 </a>
-							    	<ul class="dropdown-menu navFormLoad" style="margin-left:1%" id="navFormLoad">
-							    		<li><a href="${pageContext.request.contextPath}/EducationProjectAdd">빈 시트</a></li>
-							    	
+							    	<ul class="dropdown-menu navFormLoadDay" style="margin-left:0.3%" id="navFormLoad">
+							    		<li><a href="${pageContext.request.contextPath}/educationProjectFormLoad?categoryNo=4&isBlank=1">빈 시트</a></li>
+							    		<li class="subHr" >-------사용자 저장 양식-------</li>
 							    	</ul>
 							    </li>	
 						    	<li class="divider"></li>
@@ -185,7 +192,7 @@ $(document).ready(function(){
 						    	<c:forEach begin="3" end="5" var="age"> <!-- 요놈!! -->
 							    	<li class="dropdown-submenu">
 							    		<a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=4&age=${age}"> ${age}세 </a>
-								    	<ul class="dropdown-menu ${age}" style="margin-left:1%">
+								    	<ul class="dropdown-menu ${age}" style="margin-left:0.3%">
 								    		<!-- <li><a href="#" class="">test0001</a></li> -->
 								    	</ul>
 							    	</li>
@@ -201,13 +208,21 @@ $(document).ready(function(){
 	                        <p>주간계획안 <span class="caret"></span></p>
                         </a>
 						    <ul class="pull-right dropdown-menu navEducationProject" id="week" style="margin-right:-62%; margin-top:-20%" >
+						    	
+						    	<li class="dropdown-submenu ">
+							    	<a href="#" > 주간계획안 작성 </a>
+							    	<ul class="dropdown-menu navFormLoadWeek" style="margin-left:0.3%" id="navFormLoad">
+							    		<li><a href="${pageContext.request.contextPath}/educationProjectFormLoad?categoryNo=3&isBlank=1">빈 시트</a></li>
+							    		<li class="subHr" >-------사용자 저장 양식-------</li>
+							    	</ul>
+							    </li>
+						    	<li class="divider"></li>
 						    	<li><a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=3">주간계획안 전체 보기</a></li>
 						    	<li class="divider"></li>
-						    	
 						    	<c:forEach begin="3" end="5" var="age"> <!-- 요놈!! -->
 							    	<li class="dropdown-submenu">
 							    		<a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=3&age=${age}"> ${age}세 </a>
-								    	<ul class="dropdown-menu ${age}" style="margin-left:1%">
+								    	<ul class="dropdown-menu ${age}" style="margin-left:0.3%">
 								    		<!-- <li><a href="#" class="">test0001</a></li> -->
 								    	</ul>
 							    	</li>
@@ -222,13 +237,21 @@ $(document).ready(function(){
 	                        <p>월간계획안 <span class="caret"></span></p>
                         </a>
 						    <ul class="pull-right dropdown-menu navEducationProject" id="month" style="margin-right:-62%; margin-top:-20%" >
+						    	<li class="dropdown-submenu ">
+							    	<a href="#" > 월간계획안 작성 </a>
+							    	<ul class="dropdown-menu navFormLoadMonth" style="margin-left:0.3%" id="navFormLoad">
+							    		<li><a href="${pageContext.request.contextPath}/educationProjectFormLoad?categoryNo=2&isBlank=1">빈 시트</a></li>
+							    		<li class="subHr" >-------사용자 저장 양식-------</li>
+							    	</ul>
+							    </li>
+						    	<li class="divider"></li>
 						    	<li><a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=2">월간계획안 전체 보기</a></li>
 						    	<li class="divider"></li>
 						    	
 						    	<c:forEach begin="3" end="5" var="age"> <!-- 요놈!! -->
 							    	<li class="dropdown-submenu">
 							    		<a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=2&age=${age}"> ${age}세 </a>
-								    	<ul class="dropdown-menu ${age}" style="margin-left:1%">
+								    	<ul class="dropdown-menu ${age}" style="margin-left:0.3%">
 								    		<!-- <li><a href="#" class="">test0001</a></li> -->
 								    	</ul>
 							    	</li>
@@ -243,6 +266,15 @@ $(document).ready(function(){
 	                        <p>연간계획안 <span class="caret"></span></p>
                         </a>
 						    <ul class="pull-right dropdown-menu navEducationProject" id="month" style="margin-right:-62%; margin-top:-20%" >
+						    	<li class="dropdown-submenu ">
+							    	<a href="#" > 연간계획안 작성 </a>
+							    	<ul class="dropdown-menu navFormLoadYear" style="margin-left:0.3%" id="navFormLoad">
+							    		<li><a href="${pageContext.request.contextPath}/educationProjectFormLoad?categoryNo=1&isBlank=1">빈 시트</a></li>
+							    		<li class="subHr" >-------사용자 저장 양식-------</li>
+							    	</ul>
+							    </li>
+						    	<li class="divider"></li>
+						    
 						    	<li><a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=1">연간계획안 전체 보기</a></li>
 						    	<li class="divider"></li>
 						    	

@@ -4,7 +4,6 @@
   
 <mapper namespace="com.cafe24.dmsthch.Commute.CommuteMapper">
 	
-	
 	<!-- 복귀 등록 -->
 	<update id="absenceReturn" parameterType="java.lang.String">
 		UPDATE 
@@ -86,5 +85,25 @@
 			teacher_no=#{teacherNo} and attendance_day=DATE_FORMAT(NOW(),'%Y-%m-%d');
 	</update>
 	
+	<!-- 기간별 출석 조회 -->
+	<select id="commuteCheckForMonth" parameterType="java.util.Map" resultType="java.util.Map">
+		select 
+			teacher_attendance.attendance_no AS attendanceNo,
+			teacher_attendance.teacher_no AS teacherNo,
+			teacher_attendance.attendance_start AS attendanceStart,
+			teacher_attendance.attendance_end AS attendanceEnd,
+			teacher_attendance.attendance_day AS attendanceDay,
+			teacher_absence.absence_no AS absenceNo,
+			teacher_absence.category_no AS categoryNo,
+			teacher_absence.absence_start AS absenceStart,
+			teacher_absence.absence_end AS absenceEnd
+		from
+			teacher_attendance 
+		left join teacher_absence on teacher_attendance.attendance_no = teacher_absence.attendance_no
+		where teacher_attendance.license_kindergarten = #{license}
+		and teacher_attendance.teacher_no = #{teacherNo}
+		and teacher_attendance.attendance_day &gt; #{startDay}
+		and teacher_attendance.attendance_day &lt; (SELECT LAST_DAY(#{startDay}));
+	</select>
 
 </mapper>

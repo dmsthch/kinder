@@ -19,6 +19,7 @@ public class ChildDao {
     }
 	
 	public Child getChild(int kid_no) {
+		System.out.println("getChild()");
 	    return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getChild",kid_no);
 	}
 	 
@@ -27,6 +28,12 @@ public class ChildDao {
 	  	map.put("beginRow", (currentPage-1)*pagePerRow);
 	   	map.put("pagePerRow", pagePerRow);
 	    return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getClass", map);
+	}
+	
+	//반한개 검색
+	public ChildClass getClass(int classNo){
+		System.out.println("getClass() run");
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getClassOne", classNo);
 	}
 	
 	    
@@ -68,7 +75,7 @@ public class ChildDao {
 	}
 	
 	//넘버배열 받아서 반에 넣기
-	public void classOrganization(String licenseKindergarten,int[] kidNo, String classNo){
+	public void classOrganization(String licenseKindergarten,int[] kidNo, int classNo){
 		Map<String, Object> map = null;
 		for(int i =0; i<kidNo.length;i++){
 			map =new HashMap<String, Object>();
@@ -84,6 +91,14 @@ public class ChildDao {
 		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getFormationChildList", childClass);
 		
 	}
+	
+	public List<Child> getRematinderFormationList(ChildClass childClass){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getRemainderFormationList",childClass);
+		
+	}
 
+	public List<Child> getClassMemberList(Child child){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getClassMemberList",child);
+	}
 
 }

@@ -11,7 +11,6 @@
 	<!-- JS Link -->
 	<c:import url="../module/importJS.jsp"></c:import>
 	
-	<!-- sidevar 색칠하기 -->
 	<script src="js/KHS/hsCustom.js"></script>
 	
 	<!-- 달력 css -->
@@ -26,62 +25,82 @@
 	</style>
 	
 	<script>
+	
+		var showCommuteCheck = function(month){
+			var getCommute = [];
+			$.ajax({
+				url : "${pageContext.request.contextPath}/showCommuteCheck?month="+month,
+				type : 'GET',
+				dataType: 'JSON',
+				async: false,
+				success : function(data){
+					console.log(data+":data")
+					getCommute = data;
+			},error: function(XMLHttpRequest, textStatus, errorThrown) { 
+				console.log("XMLHttpRequest" + XMLHttpRequest);
+			    console.log("Status: " + textStatus);
+			    console.log('errorThrown: ' + errorThrown);
+			},timeout: 3000
+			});	
+
+			for(i=0; i<getCommute.length; i++){
+				console.log(getCommute[i]);
+				
+				var commuteDay = getCommute[i].attendanceDay;
+				var absenceNo = getCommute[i].absenceNo;
+				commuteDay = commuteDay.substring(8,10);
+				
+				if(commuteDay.substring(0,1) == '0'){
+					commuteDay = commuteDay.substring(1,2);
+				}
+				
+				console.log(commuteDay);
+				
+				$('#'+commuteDay).css('border','2px solid green');
+				
+				if(absenceNo != "null"){ //외출이 있는 경우
+					$('#'+commuteDay).css('border','2px solid orange');
+				}
+				
+			}
+			
+		};
+	
 		$(document).ready(function(e){
 			
 			//사이드바 active속성 주기
 		    setSidenavActive(2);
 			
 		    var date = new Date();
-		    var nowYear = date.getFullYear(); //현재의 년
 		    var nowMonth = date.getMonth()+1; //현재의 월, 0부터 시작하니 +1
-		    var nowDate = date.getDate(); //오늘 날짜
 		    
-		    var week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
-
-		    var otherLastDay = ( new Date( nowYear, nowMonth-1, 0) ).getDate(); //저번달 마지막 날짜
-		    var nowLastDay = ( new Date( nowYear, nowMonth, 0) ).getDate(); //이번달 마지막 날짜
-		    var nowDay = ( new Date( nowYear, nowMonth-1, 1) ).getDay(); //이번달1일의 요일
+		    drawCarendar(nowMonth);
+		    showCommuteCheck(nowMonth);
 		    
-		    var lastWeek = Math.ceil( (nowLastDay+nowDay)/7 ); //이번달 주 수
-		    
-		    var otherDay = otherLastDay - nowDay //달력에 표시할 저번달의 시작날짜
-		    
-		    // 요일 입력
-		    for(i=0; i<week.length; i++){
-		    	var inputHtml = "<td>"+ week[i] +"</td>";
-		    	$('#week').append(inputHtml);
-		    }
-		    
-		    var dayCount = 1;
-		    for(i=0; i<lastWeek; i++){
+		    $('#otherMonth').click(function(){
 		    	
-		    	var inputHtml = "<tr id='"+ i +"'>";
-		    	
-		    	for(j=0; j<7; j++){
-		    		
-		    		if(otherDay <= otherLastDay){
-		    			inputHtml += "<td>" + otherDay++ + "</td>";
-		    		}else if(dayCount <= nowLastDay){
-		    			inputHtml += "<td>" + dayCount++ + "</td>";
-		    		}
-		    		
+		    	if(nowMonth > 1){
+		    		drawCarendar(--nowMonth);
+				    showCommuteCheck(nowMonth);
+		    		console.log(nowMonth);
 		    	}
 		    	
-		    	inputHtml += "</tr>"
-		    	console.log(inputHtml); 
-		    	
-		    }
+		    });
 		    
-		    console.log(nowYear + "이번 년");
-		    console.log(nowMonth + "이번 달");
-		    console.log(nowDate + "오늘 날짜");
-		    console.log(otherLastDay + "저번달 마지막 날짜");
-		    console.log(nowLastDay + "이번달 마지막 날짜");
-		    console.log(nowDay + "이번달 1일 요일");
-		    console.log(week[nowDay] + ":요일");
-		    console.log(lastWeek + "주 수");
+		    $('#nextMonth').click(function(){
+
+		    	if(nowMonth < 12){
+		    		drawCarendar(++nowMonth);
+				    showCommuteCheck(nowMonth);
+		    		console.log(nowMonth);
+		    	}
+		    	
+		    });
+		    
 		    
 		});
+		
+		
 	</script>
 	
 </head>
@@ -104,15 +123,15 @@
 			<div class="container-fluid">
 			
 				<div class="row">
-					<div class="text-center"><h1>월별 출석 현황</h1></div>
+					<div class="text-center"><h1 id="calTitle">월별 출석 현황</h1></div>
 				</div><br/>
 				
 				<div class="row">
 					<div class="calendar col-sm-12">
 						<header>		
 							<h2>September</h2>
-							<a class="btn-prev fontawesome-angle-left" href="#"></a>
-							<a class="btn-next fontawesome-angle-right" href="#"></a>
+							<a class="btn-prev fontawesome-angle-left" id="otherMonth" href="#"></a>
+							<a class="btn-next fontawesome-angle-right" id="nextMonth" href="#"></a>
 						</header>
 						<table>
 							<thead>

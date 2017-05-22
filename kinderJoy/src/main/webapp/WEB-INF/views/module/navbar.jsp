@@ -22,7 +22,7 @@
                     <!-- <img src="../assets/img/new_logo.png" alt="Creative Tim Logo"> -->
                 </div>
                 <div class="brand">
-                  <p><a href="${pageContext.request.contextPath}/" class="navbar-brand">Team. 햇병아리</a></p>
+                  <p><a href="${pageContext.request.contextPath}/" class="navbar-brand">Team. 핵병아리</a></p>
                 </div>
             </div>
       </a>
@@ -43,6 +43,7 @@
 				<li><a href="${pageContext.request.contextPath}/Equipment" class="smoothScroll">비품</a></li>
 				<li><a href="${pageContext.request.contextPath}/kyo" class="smoothScroll">교원</a></li>
 				<li><a href="${pageContext.request.contextPath}/Material" class="smoothScroll">자료실</a></li>
+				<li><a href="${pageContext.request.contextPath}/Management" class="smoothScroll">예산</a></li>
 				<li><a href="#" data-toggle="modal" data-target="#signOut" class="smoothScroll">로그아웃</a></li>
 			</c:if>
 

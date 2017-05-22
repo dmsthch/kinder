@@ -1,5 +1,6 @@
 package com.cafe24.dmsthch.Commute;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,15 @@ public class CommuteDao {
 	public int absenceReturn(String absenceNo){
 		System.out.println("absenceReturn() run");
 		return sqlSessionTemplate.update(sql+"absenceReturn", absenceNo);
+	}
+	
+	public List<Map<String, Object>> getCommuteForMonth(String license, int teacherNo, String startDay){
+		System.out.println("getCommuteForMonth() run");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("license", license);
+		map.put("teacherNo", teacherNo);
+		map.put("startDay", startDay);
+		return sqlSessionTemplate.selectList(sql+"commuteCheckForMonth", map);
 	}
 	
 	
