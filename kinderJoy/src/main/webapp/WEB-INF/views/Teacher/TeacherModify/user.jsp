@@ -5,17 +5,12 @@
 <html>
 
 <head>
+	<!-- JS Link -->
+	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
 	<!-- navbar -->
 	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 	<!-- CSS Link -->
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
-	<!-- JS Link -->
-<%-- 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
-	 --%>
-	<title>1TEAM</title>
-
-    
-	<script src="js/jquery.js"></script>
 	
 	<script>
 	$(document).ready(function(){
@@ -52,7 +47,7 @@
 									<p class="category">자신의 회원정보를 수정하세요.</p>
 	                            </div>
 	                            <div class="card-content">
-	                                <form>
+	                                <form id="updateTeacherForm" action="${pageContext.request.contextPath}/teacherUpdate" method="post">
 	                                    <div class="row">
 	                                    
 	                                    <!-- 인풋상자의 상 하 간격조절 -->
@@ -65,13 +60,13 @@
 	                                        <div class="col-md-3">
 												<div class="form-group label-floating">
 													<label class="control-label">이름</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacherName}" >
+													<input type="text" class="form-control" name="teacherName" value="${kyoteacher.teacherName}" >
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">핸드폰 번호</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacherPhone}">
+													<input type="text" class="form-control" name="teacherPhone" value="${kyoteacher.teacherPhone}">
 												</div>
 	                                        </div>
 	                                    </div>
@@ -80,13 +75,13 @@
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">권한</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacherLevel}">
+													<input type="text" class="form-control" name="teacherLevel" value="${kyoteacher.teacherLevel}">
 												</div>
 	                                       </div>
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">add</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacherAddDay}">
+													<input type="text" class="form-control" value="${kyoteacher.teacherAddDay}" readonly>
 												</div>
 	                                        </div>
 	                                    </div>
@@ -95,7 +90,7 @@
 	                                        <div class="col-md-12">
 												<div class="form-group label-floating">
 													<label class="control-label">라이선스</label>
-													<input type="text" class="form-control" value="${kyoteacher.licenseKindergarten}">
+													<input type="text" class="form-control" value="${kyoteacher.licenseKindergarten}" readonly>
 												</div>
 	                                        </div>
 	                                    </div>
@@ -104,32 +99,20 @@
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">은행</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacherBank}">
+													<input type="text" class="form-control" name="teacherBank" value="${kyoteacher.teacherBank}">
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">계좌</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacherAccount}">
+													<input type="text" class="form-control" name="teacherAccount" value="${kyoteacher.teacherAccount}">
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">호봉</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacherPaystep}">
+													<input type="text" class="form-control" name="teacherPaystep" value="${kyoteacher.teacherPaystep}">
 												</div>
-	                                        </div>
-	                                    </div>
-
-	                                    <div class="row">
-	                                        <div class="col-md-12">
-	                                            <div class="form-group">
-	                                                <!-- <label>About Me</label> -->
-													<div class="form-group label-floating">
-									    				<label class="control-label"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-								    					<textarea class="form-control" rows="5"></textarea>
-		                        					</div>
-	                                            </div>
 	                                        </div>
 	                                    </div>
 

@@ -93,7 +93,7 @@
   	VALUES (
   		#{licenseKindergarten},
   		#{className},
-  	    DATE_FORMAT(NOW(),'%Y-%m-%d'),
+  	    DATE_FORMAT(NOW(),'%Y'),
   		#{classAge}
   	);
   	
@@ -137,11 +137,11 @@
   	LIMIT  #{beginRow},#{pagePerRow}
   </select>
   
-  <select id="getList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
+  <select id="getFormationChildList" parameterType="String" resultType="com.cafe24.dmsthch.Child.Child">
   	SELECT 
-  		license_kindergarten, 
-  		kid_name, 
-  		kid_birth 
+  		license_kindergarten AS licenseKindergarten, 
+  		kid_name AS kidName, 
+  		kid_birth AS kidBirth 
   	FROM kid where license_kindergarten = #{license}
   </select>
   </mapper>

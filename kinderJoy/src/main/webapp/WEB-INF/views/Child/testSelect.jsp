@@ -51,12 +51,14 @@ $('#pre-selected-options').multiSelect();
             
             <div class="row">
                 <div class="col-xs-5">
-                    <select name="from[]" class="multiselect form-control" size="8" multiple="multiple" data-right="#multiselect_to_1" data-right-all="#right_All_1" data-right-selected="#right_Selected_1" data-left-all="#left_All_1" data-left-selected="#left_Selected_1">
-                        <option value="1">Item 1</option>
-                        <option value="2">Item 5</option>
-                        <option value="2">Item 2</option>
-                        <option value="2">Item 4</option>
-                        <option value="3">Item 3</option>
+                    <select name="from[]" style="height:500px"class="multiselect form-control" size="8" multiple="multiple" data-right="#multiselect_to_1" data-right-all="#right_All_1" data-right-selected="#right_Selected_1" data-left-all="#left_All_1" data-left-selected="#left_Selected_1">
+                   		
+                   		<c:forEach var="c" items="${getFormationChildList}">
+                   			
+                   			<option>${c.kidName}</option>
+                   		
+                   		</c:forEach>
+                   		
                     </select>
                 </div>
                 
@@ -68,7 +70,7 @@ $('#pre-selected-options').multiSelect();
                 </div>
                 
                 <div class="col-xs-5">
-                    <select name="to[]" id="multiselect_to_1" class="form-control" size="8" multiple="multiple"></select>
+                    <select name="to[]" id="multiselect_to_1" style="height:500px" class="form-control" size="8" multiple="multiple"></select>
                 </div>
             </div>
         </div>

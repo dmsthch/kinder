@@ -1,6 +1,8 @@
 package com.cafe24.dmsthch.Teacher;
 
 import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,7 +25,7 @@ public class TeacherDao {
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.login", teacher);
 	}
 	
-	//교원 한명 조회
+	//교원 한명 조회 나의 정보
 	public Teacher OneSelectTeacher(int INT) {
 		System.out.println("교원 한명 정보 조회 메서드 실행_TeacherDao.java");
 		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.OneSelectTeacher", INT);
@@ -49,10 +51,16 @@ public class TeacherDao {
 		//selectOne을 써야하는데 selectList를 써서 오류가 났었다 
 	}
 	
-	//전체 교원의 전체 정보 조회 admin전용
+	//전체 교원의 전체 정보 조회 admin 전용 TableList
 	public List<Object> tableList(String string) {
 		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.tableList",string);
 	}
+	
+	//이직한 교원의 정보 조회 admin 전용 TableList
+	public List<Object> removeList(Map<String, Object> map){
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.removeTable" ,map);
+	}
+	
 	
 	//편성 교원
 	// 입력값은 라이선스 하나니까 String이다. 컨트롤러에서 받은 값이 변수에 대입된다.
@@ -77,8 +85,14 @@ public class TeacherDao {
 	}
 	
 	//회원 탈퇴 후 remove테이블에 넣을 아이디
-	public int insert(String string) {
+	public int deleteANDinsert(Object object) {
 		System.out.println("remove테이블의 teacher_id컬럼에 삭제된 아이디 추가 메서드 호출 _DAO");
-		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.insertId" ,string);
+		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.insertId" ,object);
+	}
+	
+	//자기 정보 수정
+	public int updateTeacher(Object object) {
+		System.out.println("수정확메서드호출_Dao");
+		return sql.update("com.cafe24.dmsthch.Teacher.TeacherMapper.updateTeacher", object);
 	}
 }

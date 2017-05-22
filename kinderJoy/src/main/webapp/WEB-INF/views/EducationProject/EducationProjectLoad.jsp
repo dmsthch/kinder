@@ -51,16 +51,16 @@
 	for(j=0; j<dataValue.length;j++){
 		if(dataValue[j]==null){
 			dataValue[j]={ };
-			console.log(dataValue);
+			//console.log(dataValue);
 			for(i=0 ; i<countCol; i++){
 				dataValue[j][i] ='';
-				console.log("ㅇㅅㅇ! ->> "+ i);
+				//console.log("ㅇㅅㅇ! ->> "+ i);
 			}
 		}	
 	}
 	
 	
-	console.log(dataValue[0]);
+	//console.log(dataValue[0]);
 	
 	
 	//var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
@@ -87,10 +87,10 @@
  			minSpareRows: 1, //여유 행
 			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
-				console.log(data, type)
+				//console.log(data, type)
 				
 				if(dataArray === undefined){
-					console.log('초깅화')
+					//console.log('초깅화')
 					dataArray = [];
 				}
 				
@@ -100,7 +100,7 @@
 					var val = data[0][3];
 					var meats = hot.getCellMeta(row,col);
 					
-					console.log(meats.borders)
+					//console.log(meats.borders)
 
 					if(val !== null){
 // 						console.log(row, col, val)
@@ -122,20 +122,20 @@
 		var jparse=JSON.stringify(dataArray);
 		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
 		var inputDate = $('#date').val();
-		console.log(jparse+"<<<<jparse");
-		console.log(mergeparse);
+		//console.log(jparse+"<<<<jparse");
+		//console.log(mergeparse);
 		var borderArray=[];
 		for(var i = 0 ; i<hot.countRows(); i++){
 			for(var j = 0; j<hot.countCols(); j++){
 				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
-					console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
+					//console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
 					var borders = hot.getCellMeta(i,j).borders;
 					borderArray.push(borders);
 				}
 			}
 		}
 		var borderparse=JSON.stringify(borderArray);
-		console.log(borderparse+"<<<borderparse");
+		//console.log(borderparse+"<<<borderparse");
 		
 		
 		var countRow =hot.countRows(); 
@@ -156,11 +156,11 @@
    		});    
 	})
   
-	setTimeout(function(){
+
 // 		console.log(hot.mergeCells)
 // 		console.log(hot.getCellsMeta())
 // 		console.log(dataArray);
-	},5000)
+	
   
 </script>
 

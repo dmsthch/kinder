@@ -1,10 +1,16 @@
 package com.cafe24.dmsthch;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.dmsthch.Commute.CommuteDao;
+import com.cafe24.dmsthch.Commute.CommuteService;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
@@ -24,6 +31,8 @@ public class CommuteController {
 	private CommuteDao cDao;
 	@Autowired
 	private TeacherDao tDao;
+	@Autowired
+	private CommuteService commuteServise;
 	
 	
 	
@@ -247,6 +256,7 @@ public class CommuteController {
 	//출석 현황
 	@RequestMapping(value="/CommuteInfo", method=RequestMethod.GET)
 	public String commuteInfo(HttpSession session){
+		System.out.println("CommuteInfo() Run Controller");
 		
 		return "Commute/CommuteInfo";
 	}
@@ -254,8 +264,48 @@ public class CommuteController {
 	//월별 출석 현황
 	@RequestMapping(value="/CommuteForMonth", method=RequestMethod.GET)
 	public String CommuteForMonth(HttpSession session){
-		
+		System.out.println("CommuteForMonth() Run Controller");
 		return "Commute/CommuteForMonth";
+	}
+	
+	//월별 출석 현황 - 출석정보 가져오기
+	@RequestMapping(value="/showCommuteCheck", method=RequestMethod.GET)
+	public void showCommuteCheck(HttpSession session, HttpServletResponse response
+								,@RequestParam(value="month",required=true) int month){
+		System.out.println("showCommuteCheck() Run Controller");
+		
+		List<Map<String, Object>> getCommuteCheck = commuteServise.getCommuteForMonth(session, month);
+		
+		JSONArray jArray = new JSONArray();
+		JSONObject json = null;
+		
+		for(int i=0; i<getCommuteCheck.size(); i++){
+			json = new JSONObject();
+			Map<String, Object> map = getCommuteCheck.get(i);
+			
+			json.put("attendanceNo", map.get("attendanceNo")+"");
+			json.put("attendanceDay", map.get("attendanceDay")+"");
+			json.put("teacherNo", map.get("teacherNo")+"");
+			json.put("attendanceStart", map.get("attendanceStart")+"");
+			json.put("attendanceEnd", map.get("attendanceEnd")+"");
+			json.put("absenceNo", map.get("absenceNo")+"");
+			json.put("categoryNo", map.get("categoryNo")+"");
+			json.put("absenceStart", map.get("absenceStart")+"");
+			json.put("absenceEnd", map.get("absenceEnd")+"");	
+			
+			jArray.add(json);
+		}
+		response.setContentType("text/xml;charset=utf-8");
+		PrintWriter print;
+		try {
+			print = response.getWriter();
+			print.print(jArray);
+			print.flush();
+			print.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

@@ -11,7 +11,6 @@
 	<!-- JS Link -->
 	<c:import url="../module/importJS.jsp"></c:import>
 	
-	<!-- sidevar 색칠하기 -->
 	<script src="js/KHS/hsCustom.js"></script>
 	
 	<!-- 달력 css -->
@@ -27,88 +26,57 @@
 	
 	<script>
 	
-		var drawCarendar = function(month){
-			
-			var date = new Date();
-		    var nowYear = date.getFullYear(); //현재의 년
-		    var nowMonth = month; //현재의 월, 0부터 시작하니 +1
+		var showCommuteCheck = function(month){
+			var getCommute = [];
+			$.ajax({
+				url : "${pageContext.request.contextPath}/showCommuteCheck?month="+month,
+				type : 'GET',
+				dataType: 'JSON',
+				async: false,
+				success : function(data){
+					console.log(data+":data")
+					getCommute = data;
+			},error: function(XMLHttpRequest, textStatus, errorThrown) { 
+				console.log("XMLHttpRequest" + XMLHttpRequest);
+			    console.log("Status: " + textStatus);
+			    console.log('errorThrown: ' + errorThrown);
+			},timeout: 3000
+			});	
 
-// 		    var nowMonth = date.getMonth()+1; //현재의 월, 0부터 시작하니 +1
-		    var nowDate = date.getDate(); //오늘 날짜
-		    
-		    var week = new Array('일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일');
-
-		    var otherLastDay = ( new Date( nowYear, nowMonth-1, 0) ).getDate(); //저번달 마지막 날짜
-		    var nowLastDay = ( new Date( nowYear, nowMonth, 0) ).getDate(); //이번달 마지막 날짜
-		    var nowDay = ( new Date( nowYear, nowMonth-1, 1) ).getDay(); //이번달1일의 요일
-		    
-		    var lastWeek = Math.ceil( (nowLastDay+nowDay)/7 ); //이번달주수
-		    
-		    var otherDay = otherLastDay - nowDay+1 //달력에 표시할 저번달의 시작날짜
-		    
-		    
-		    $('h2').html(nowMonth+' 월');
-		    
-		    // 요일 입력
-		    $('#week').html('');
-		    for(i=0; i<week.length; i++){
-		    	var inputHtml = "<td>";
-		    	if(i == 0){ //일요일
-		    		inputHtml = "<td style='color:red'>";
-		    	}else if(i == 6){ //토요일
-		    		inputHtml = "<td style='color:blue'>";	
-		    	}
-		    	inputHtml += week[i] +"</td>";
-		    	$('#week').append(inputHtml);
-		    }
-		    
-		    // 날짜 입력
-		    var dayCount = 1;
-		    var nextCount = 1;
-		    $('#day').html('');
-		    for(i=0; i<lastWeek; i++){
-		    	var inputHtml = "<tr>";
-		    	for(j=0; j<7; j++){
-		    		
-		    		if(otherDay <= otherLastDay){
-		    			inputHtml += "<td class='prev-month'>" + otherDay++ + "</td>";
-		    		}else if(dayCount <= nowLastDay){
-		    			if(j==0){ //일요일
-		    				inputHtml += "<td style='color:red' id='"+ dayCount +"'>" + dayCount++ + "</td>";
-		    			}else if(j==6){ //토요일
-		    				inputHtml += "<td style='color:blue' id='"+ dayCount +"'>" + dayCount++ + "</td>";		    				
-		    			}else{
-			    			inputHtml += "<td id='"+ dayCount +"'>" + dayCount++ + "</td>";
-		    			}
-		    		}else{
-		    			inputHtml += "<td class='next-month'>" + nextCount++ + "</td>";
-		    		}
-		    		
-		    	}
-		    	inputHtml += "</tr>"
-				$('#day').append(inputHtml);
-		    }
-		    
-		    $('#'+nowDate).attr('class','current-day'); //오늘날짜 표시
+			for(i=0; i<getCommute.length; i++){
+				console.log(getCommute[i]);
+				
+				var commuteDay = getCommute[i].attendanceDay;
+				commuteDay = commuteDay.substring(8,10);
+				
+				if(commuteDay.substring(0,1) == '0'){
+					commuteDay = commuteDay.substring(1,2);
+				}
+				
+				console.log(commuteDay);
+				
+				$('#'+commuteDay).css('border','2px solid green');
+				
+			}
 			
-		}
-	
+		};
 	
 		$(document).ready(function(e){
 			
 			//사이드바 active속성 주기
 		    setSidenavActive(2);
 			
-			
 		    var date = new Date();
 		    var nowMonth = date.getMonth()+1; //현재의 월, 0부터 시작하니 +1
 		    
 		    drawCarendar(nowMonth);
+		    showCommuteCheck(nowMonth);
 		    
 		    $('#otherMonth').click(function(){
 		    	
-		    	if(nowMonth > 0){
+		    	if(nowMonth > 1){
 		    		drawCarendar(--nowMonth);
+				    showCommuteCheck(nowMonth);
 		    		console.log(nowMonth);
 		    	}
 		    	
@@ -116,8 +84,9 @@
 		    
 		    $('#nextMonth').click(function(){
 
-		    	if(nowMonth < 11){
+		    	if(nowMonth < 12){
 		    		drawCarendar(++nowMonth);
+				    showCommuteCheck(nowMonth);
 		    		console.log(nowMonth);
 		    	}
 		    	
