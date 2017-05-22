@@ -14,11 +14,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<!-- CSS Link -->
-<c:import url="../module/importCSS.jsp"></c:import>
-<!-- JS Link -->
-<c:import url="../module/importJS.jsp"></c:import>
-	
+
  <style>
 	 #body{
 	 	margin-top: 5%;
@@ -32,17 +28,9 @@
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
 
-<div class="col-md-2">
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="<c:url value="/ChildList" />">Home</a></li>
-        <li class="active"><a href="<c:url value="/ChildClass" />">전체 반</a></li>
-        <li><a href="<c:url value="/" />">반 1</a></li>
-        <li><a href="<c:url value="/" />">반 2</a></li>
-        <li><a href="<c:url value="/ClassAdd"/>">반 입력</a></li>
-        <li><a href="${pageContext.request.contextPath}/dtd">ㅇㅅㅇ!!!!</a></li>
-      </ul>
-</div>
-<div class="col-md-10">
+<c:import url="../Child/nav/SideNav.jsp"></c:import>
+	
+<div class="col-sm-10 col-sm-offset-2">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -76,8 +64,6 @@
     </div>
 </div>
 
-<!-- footer -->
-<c:import url="../module/footer.jsp"></c:import>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.cafe24.dmsthch;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,14 @@ import com.cafe24.dmsthch.Child.ChildDao;
 public class ChildController {
 	@Autowired
 	private ChildDao childDao;
+	
+	//네비에서 반 눌렀을때, 해당 반의 유아 리스트 보여주기
+	@RequestMapping(value="/ChildClassSelect" , method=RequestMethod.GET)
+	public String ChildClassSelect(@RequestParam(value="classNo")int classNo){
+		ChildClass childClass = childDao.getClass(classNo);
+		
+		return "Child/ChildSelectClass";
+	}
 	
 	//발달 폼 요청
 	@RequestMapping(value="/ChildDevelopment" , method=RequestMethod.GET)
@@ -139,22 +148,56 @@ public class ChildController {
 		}
 		
 		//편성후에 확인누르면 kinNo배열로 받아서 ~~
-		@RequestMapping(value="/testTest01" , method=RequestMethod.GET)
-		public String dtd( @RequestParam(value="kidNo")int[] kidNo
-							,@RequestParam(value="classNo")String classNo
-							,HttpSession session)  {
-			System.out.println(kidNo[0]+"<<kinNo");
-			System.out.println(classNo+"<<<classNO");
+		@RequestMapping(value="/ChildSelectClass" , method=RequestMethod.GET)
+		public String dtd( @RequestParam(value="kidNo") int[] kidNo
+							,@RequestParam(value="classNo")int classNo
+							,HttpSession session
+							,Model model)  {
+			System.out.println("ChildSelectClass() run Controller");
+						
 			String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
-			childDao.classOrganization(licenseKindergarten,kidNo, classNo);
 			
-			return null;
+			
+			
+				childDao.classOrganization(licenseKindergarten,kidNo, classNo); //반 입력하는거
+			
+			
+			boolean isLogin = (session.getAttribute("teacherNo") != null) ? true : false;
+			
+			System.out.println(classNo + "classno!!");
+			
+			//반 하나 검색
+			ChildClass childClass = childDao.getClass(classNo);
+			
+			model.addAttribute("childClass",childClass);
+			
+ 
+			List<Child> childList = new ArrayList<Child>();
+			if(isLogin){
+				String license = (String) session.getAttribute("licenseKindergarten");
+				
+				for(int i=0; i<kidNo.length; i++){
+					System.out.println("for : " + kidNo[i]);
+					Child child = childDao.getChild(kidNo[i]);
+					
+					childList.add(child);
+					System.out.println("point 1");
+					//유아가져오기 , 리스트에 담기 , 보내기
+				}
+				
+				model.addAttribute("childList", childList);
+				System.out.println("point 2");
+			}
+			
+			
+			model.addAttribute("classNo", classNo);
+
+			return "Child/ChildSelectClass";
 		}
 		
 		//편성하는 페이지 가는것
 		@RequestMapping(value="/testSelect" , method=RequestMethod.GET)
 		public String ChildFormation(HttpSession session, Model model
-											
 				,ChildClass childClass) {
 			
 			System.out.println("testSelect 폼 요청");
@@ -163,9 +206,8 @@ public class ChildController {
 			String license = (String) session.getAttribute("licenseKindergarten");
 			
 			childClass.setLicenseKindergarten(license);
-			List<Child> getFormationChildList = childDao.getFormationChildList(childClass);
-					
-			model.addAttribute("getFormationChildList", getFormationChildList);
+			List<Child> getRematinderFormationList = childDao.getRematinderFormationList(childClass);
+			model.addAttribute("getRematinderFormationList", getRematinderFormationList);
 			System.out.println(childClass.getClassNo()+"<<<<클래스넘버");
 			model.addAttribute("classNo",childClass.getClassNo());
 			
@@ -173,6 +215,8 @@ public class ChildController {
 			return "Child/testSelect";
 		}
 		
+		// 편성 후 리스트요청
+				
 		@RequestMapping(value="/ClassAdd" , method=RequestMethod.GET)
 		public String ClassAdd() {
 			System.out.println("ClassAdd 폼 요청");

@@ -45,16 +45,9 @@
 <body id="body">
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
+<c:import url="../Child/nav/SideNav.jsp"></c:import>
 
-<div class="col-md-2">
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="<c:url value="/ChildList" />">Home</a></li>
-        <li><a href="<c:url value="/ChildClass"/>">전체 반</a></li>
-        <li><a href="<c:url value="/" />">반 1</a></li>
-        <li><a href="<c:url value="/" />">반 2</a></li>
-        <li class="active"><a href="<c:url value="/ClassAdd"/>">반 입력</a></li>
-      </ul>
-</div>
+
 <form id="addForm" action="${pageContext.request.contextPath}/ClassAdd" method="post">
 <div class="col-md-10">
 <div class="form-inline">
