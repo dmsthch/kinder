@@ -47,6 +47,20 @@ public class CalendarController {
 		return jsonSchedule;
 	}
 	
+	//일정 저장하기
+	@RequestMapping(value = "/addShedule", method = RequestMethod.POST)
+	public String addShedule(Schedule schedule
+							,HttpSession session){
+		System.out.println("addShedule 호출!!!!!");
+		String licenseKindergarten=(String)session.getAttribute("licenseKindergarten");
+		int teacherNo = (Integer)session.getAttribute("teacherNo");
+		schedule.setTeacherNo(teacherNo);
+		schedule.setLicenseKindergarten(licenseKindergarten);
+		calDao.addSchedule(schedule);
+		
+		return "redirect:/calendarTest";
+	}
+	
 	@RequestMapping(value = "/deleteSchedule", method = RequestMethod.GET)
 	public String deleteSchedule(@RequestParam(value="scheduleNo", required=true)int scheduleNo){
 		calDao.deleteSchedule(scheduleNo);
