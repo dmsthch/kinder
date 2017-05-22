@@ -11,11 +11,14 @@
 	<c:import url="../module/importJS.jsp"></c:import>
 	<!-- Clock CSS Link -->
 	<link rel="stylesheet" href="css/KHS/Commute.css">
+	
+	<script src="js/KHS/hsCustom.js"></script>
 
 <script>
 		
 	$(document).ready(function(){
-		
+		//사이드바 active속성 주기
+	    setSidenavActive(1);
 		//출근하기 버튼
 		$('#BtcommuteIn').click(function(){
 			$('#unloginForm').removeAttr('action');
@@ -39,6 +42,9 @@
 
 <!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
+
+<!-- sideNav -->
+<c:import url="../module/KHS/CommuteSideNav.jsp"></c:import>
 
 <div id="clock">
 	<div id="app"></div>
@@ -143,6 +149,5 @@
  
 <!-- footer -->
 <c:import url="../module/footer.jsp"></c:import>
-
 </body>
 </html>

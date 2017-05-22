@@ -53,7 +53,7 @@ $(document).ready(function(){
 			kidNo[i] = $('#after option').eq(i).attr('value');
 		}
 		console.log(kidNo);
-		location.href ="${pageContext.request.contextPath}/testTest01?kidNo="+kidNo+"&classNo="+${classNo}; 
+		location.href ="${pageContext.request.contextPath}/ChildSelectClass?kidNo="+kidNo+"&classNo="+${classNo}; 
 	 	
 	})
 	
@@ -79,7 +79,7 @@ $(document).ready(function(){
                 <div class="col-xs-5">
                     <select id="before" name="before" style="height:500px" class="form-control" size="8">
                    		
-                   		<c:forEach var="c" items="${getFormationChildList}">
+                   		<c:forEach var="c" items="${getRematinderFormationList}">
                    			
                    			<option class="before" value="${c.kidNo}" id="${c.kidName}">${c.kidName}</option>
                    		
@@ -89,8 +89,8 @@ $(document).ready(function(){
                 </div>
                 
                 <div class="col-xs-2">
-                    <button type="button" id="right"> 오른쪽 </button>
-                    <button type="button" id="left"> 왼쪽 </button>
+                    <button type="button" id="left"> <span class="glyphicon glyphicon-chevron-left"></span>
+                    <button type="button" id="right"><span class="glyphicon glyphicon-chevron-right"></span> </button>
                 </div>
                 
                 <div class="col-xs-5">

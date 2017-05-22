@@ -47,6 +47,7 @@
 				console.log(getCommute[i]);
 				
 				var commuteDay = getCommute[i].attendanceDay;
+				var absenceNo = getCommute[i].absenceNo;
 				commuteDay = commuteDay.substring(8,10);
 				
 				if(commuteDay.substring(0,1) == '0'){
@@ -56,6 +57,10 @@
 				console.log(commuteDay);
 				
 				$('#'+commuteDay).css('border','2px solid green');
+				
+				if(absenceNo != "null"){ //외출이 있는 경우
+					$('#'+commuteDay).css('border','2px solid orange');
+				}
 				
 			}
 			
@@ -118,7 +123,7 @@
 			<div class="container-fluid">
 			
 				<div class="row">
-					<div class="text-center"><h1>월별 출석 현황</h1></div>
+					<div class="text-center"><h1 id="calTitle">월별 출석 현황</h1></div>
 				</div><br/>
 				
 				<div class="row">
