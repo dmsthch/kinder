@@ -138,22 +138,37 @@ public class ChildController {
 			return "redirect:/ChildClass";
 		}
 		
+		//편성후에 확인누르면 kinNo배열로 받아서 ~~
+		@RequestMapping(value="/testTest01" , method=RequestMethod.GET)
+		public String dtd( @RequestParam(value="kidNo")int[] kidNo
+							,@RequestParam(value="classNo")String classNo
+							,HttpSession session)  {
+			System.out.println(kidNo[0]+"<<kinNo");
+			System.out.println(classNo+"<<<classNO");
+			String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
+			childDao.classOrganization(licenseKindergarten,kidNo, classNo);
+			
+			return null;
+		}
+		
+		//편성하는 페이지 가는것
 		@RequestMapping(value="/testSelect" , method=RequestMethod.GET)
-		public String ChildFormation(Child child, HttpSession session, Model model) {
+		public String ChildFormation(HttpSession session, Model model
+											
+				,ChildClass childClass) {
+			
 			System.out.println("testSelect 폼 요청");
 	
 			
-			
-			
-			
 			String license = (String) session.getAttribute("licenseKindergarten");
 			
-			child.setLicenseKindergarten(license);
-			List<Child> getFormationChildList = childDao.getFormationChildList(license);
+			childClass.setLicenseKindergarten(license);
+			List<Child> getFormationChildList = childDao.getFormationChildList(childClass);
 					
 			model.addAttribute("getFormationChildList", getFormationChildList);
+			System.out.println(childClass.getClassNo()+"<<<<클래스넘버");
+			model.addAttribute("classNo",childClass.getClassNo());
 			
-			System.out.println(getFormationChildList);
 			
 			return "Child/testSelect";
 		}

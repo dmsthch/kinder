@@ -4,10 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
@@ -29,12 +26,19 @@ public class TeacherController {
 	@Autowired
 	private TeacherDao TDao;
 	
+	//ErrorPage.jsp
+	@RequestMapping(value="/ErrorPage", method = RequestMethod.GET)
+	public String ErrorPage() {
+		System.out.println("web.xml에 404에러 설정 \n404error페이지 호출_TeacherController");
+		return "Teacher/ErrorPage";
+	}
+	
 	//권한 없을 때 보여줄 페이지
-		@RequestMapping(value="/권한없는 사람이 보는 페이지", method = RequestMethod.GET)
-		public String kwonhan() {
-		System.out.println("! 권한없는 사람이 접근 ! 게임페이지 호출!");
-		return "Teacher/TheAviator/index";
-		}
+	@RequestMapping(value="/권한없는 사람이 보는 페이지", method = RequestMethod.GET)
+	public String kwonhan() {
+	System.out.println("! 권한없는 사람이 접근 ! 게임페이지 호출!");
+	return "Teacher/TheAviator/index";
+	}
 	
 	//takeForm save메서드 호출
 	@RequestMapping(value="/save2", method = RequestMethod.POST)
@@ -109,6 +113,44 @@ public class TeacherController {
 		return "Teacher/TeacherModify/user";
 	}
 	
+	
+	//교원 수정하기 자기 정보 수정하기 
+	@RequestMapping(value="/teacherUpdate", method = RequestMethod.POST)
+	public String updateTeacher(Teacher teacher
+			, HttpSession httpsession
+			, Model model) {
+		
+/*		
+ 		//기존 형식
+		
+		teacher.setTeacherId((String) httpsession.getAttribute("teacherId"));
+		//WHERE절도 똑같이 teacher에 세팅하면 조건이 성립된다.
+		teacher.setTeacherName(request.getParameter("teacherName"));
+		teacher.setTeacherPhone(request.getParameter("teacherPhone"));
+		teacher.setTeacherLevel(request.getParameter("teacherLevel"));
+		teacher.setTeacherBank(request.getParameter("teacherBank"));
+		teacher.setTeacherAccount(request.getParameter("teacherAccount"));
+		teacher.setTeacherPaystep(request.getParameter("teacherPaystep"));
+*/
+		
+		
+		//조건절에 들어갈 아이디값을 가져와야 하는데 현재 세션에서 가져왔다
+		teacher.setTeacherId((String) httpsession.getAttribute("teacherId"));
+		
+		//값이 들어가야하는 부분엔 매개변수에 RequestParam으로 값을 자동으로 가져와서 teacher에 세팅해주었다
+		/*매개변수에 @RequestParam("value") String value; 넣으면 된다*/
+
+		int a = TDao.updateTeacher(teacher);
+		
+		if(a == 0) {
+			System.out.println("업데이트 안댐");
+			return "redirect:/home";
+		}else{
+			System.out.println("업데이트 성공");
+			return "redirect:/kyo";
+		}
+	}
+	
 	//교원의 정보 조회 admin전용 TableList ★현재 교원 ,이직한 교원★
 	@RequestMapping(value="/kyotable", method=RequestMethod.GET)
 	public String kyowon1(Model model, HttpSession httpsession ,Teacher teacher) {
@@ -152,7 +194,7 @@ public class TeacherController {
 		return check;
 	}
 	
-	//입력 
+	//입력 회원가입
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
 	public String insert(Teacher teacher) {//매개변수는 전역변수이다
 		TDao.insertTeacher(teacher);
