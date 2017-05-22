@@ -6,13 +6,18 @@
 <html>
 
 <head>
+
+<c:import url="../module/importCSS.jsp"></c:import>
+<c:import url="../module/navbar.jsp"></c:import>
+<c:import url="./nav/SideNav.jsp"></c:import>
+
 <script>
 /* console.log(${year}+"<,,,");
 console.log(${childclass}+"<<childclass") */
+$(document).ready(function(){
+	$('#eduHome').attr('class','active');
+})
 </script>
-
-
-
 <style>
 .ageFont {
 	font-size: 30px;
@@ -43,8 +48,6 @@ console.log(${childclass}+"<<childclass") */
 
 
 </style>
-<c:import url="../module/navbar.jsp"></c:import>
-<c:import url="./nav/SideNav.jsp"></c:import>
 
 </head>
 <body class="components-page" >
@@ -180,6 +183,7 @@ console.log(${childclass}+"<<childclass") */
 	</div>
 </div>
 
+<%-- <c:import url="/WEB-INF/views/module/importJS.jsp"></c:import> --%>
 <%-- 
 <a href="${pageContext.request.contextPath}/educationProjectAddPage">계획안 양식추가</a>
 <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=1">1번 양식 불러오기</a>

@@ -4,24 +4,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="../module/importJS.jsp"></c:import>  
-	<meta charset='utf-8'>
+<meta charset='utf-8'>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	 <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/handsontable.css">
-  <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/pikaday/pikaday.css">
-  <script src="js/LCR/EducationProject/pikaday/pikaday.js"></script>
-  <script src="js/LCR/EducationProject/moment/moment.js"></script>
-  <script src="js/LCR/EducationProject/zeroclipboard/ZeroClipboard.js"></script>
-  <script src="js/LCR/EducationProject/numbro/numbro.js"></script>
-  <script src="js/LCR/EducationProject/numbro/languages.js"></script>
-  <script src="js/LCR/EducationProject/handsontable.js"></script>
-  
-  
+<meta charset='utf-8'>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" media="screen" href="js/LCR/EducationProject/handsontable.css">
+<link rel="stylesheet" media="screen" href="js/LCR/EducationProject/pikaday/pikaday.css">
+<script src="js/LCR/EducationProject/pikaday/pikaday.js"></script>
+<script src="js/LCR/EducationProject/moment/moment.js"></script>
+<script src="js/LCR/EducationProject/zeroclipboard/ZeroClipboard.js"></script>
+<script src="js/LCR/EducationProject/numbro/numbro.js"></script>
+<script src="js/LCR/EducationProject/numbro/languages.js"></script>
+<script src="js/LCR/EducationProject/handsontable.js"></script>
+<c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="./nav/SideNav.jsp"></c:import>
-<%-- <c:import url="../module/importCSS.jsp"></c:import> --%>
 <c:import url="../module/navbar.jsp"></c:import>
-	<title>Insert title here</title>
 
+
+	<title>Insert title here</title>
 <!-- 네비바 관련 스크립트  -->
 <script>//네비바 관련 스크립트 네비의 해당부분을 active클래스를 줌.
 $(document).ready(function(){
@@ -35,14 +35,12 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 	var container = document.getElementById('example1'),hot;
-	var formOrder = ${formOrder}
+	/* var formOrder = ${formOrder} */
 	var dataArray;
 
 	var testData = [];
-	if(formOrder=='0'){
-		
-	}else{
-/* 		var container = document.getElementById('example1'),hot;
+	
+ 		var container = document.getElementById('example1'),hot;
 		var dataArray;
 		var dataValue = ${resultData.formVal};
 		console.log(dataValue);
@@ -52,11 +50,11 @@ $(document).ready(function(){
 		//
 		var countRow = ${resultData.formCountRow};
 		var countCol = ${resultData.formCountCol};
-		var dataForSave = ${resultData.formVal}; */
+		var dataForSave = ${resultData.formVal}; 
 
 		/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 	// {1:"", 2:"" }	
-		/* for(j=0; j<dataValue.length;j++){
+		for(j=0; j<dataValue.length;j++){
 			if(dataValue[j]==null){
 				dataValue[j]={ };
 				console.log(dataValue);
@@ -70,9 +68,9 @@ $(document).ready(function(){
 		
 		console.log(dataValue);
 		console.log('===============================');
-		console.log(dataForSave); */
+		console.log(dataForSave); 
 		
-	}
+	
 	
 	
 	//var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
@@ -80,16 +78,16 @@ $(document).ready(function(){
 	
 		hot = new Handsontable(container, {
 			
-				//data: dataValue,   //데이터 가져오기
-		/* 	startRows: countRow,
+			data: dataValue,   //데이터 가져오기
+		 	startRows: countRow,
 			startCols: countCol,
 			minRows: countRow,
 			minCols: countCol,
- 			   */
-			startRows: 30,
+ 			   
+			/* startRows: 30,
 			startCols: 20,
 			minRows: 30,
-			minCols: 20,
+			minCols: 20, */
 			rowHeaders : true,
 			colHeaders : true,
 			
@@ -97,12 +95,12 @@ $(document).ready(function(){
 // 			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
-			//customBorders: dataBorders,
+			customBorders: dataBorders,
 			contextMenu : true,
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
- 			//mergeCells: dataMerge, //셀병합 가져오기
+ 			mergeCells: dataMerge, //셀병합 가져오기
  			minSpareRows: 1, //여유 행
  			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"

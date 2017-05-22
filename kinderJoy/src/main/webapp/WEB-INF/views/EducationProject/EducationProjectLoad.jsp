@@ -4,20 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset='utf-8'>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	 <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/handsontable.css">
-  <link rel="stylesheet" media="screen" href="js/LCR/EducationProject/pikaday/pikaday.css">
-  <script src="js/LCR/EducationProject/pikaday/pikaday.js"></script>
-  <script src="js/LCR/EducationProject/moment/moment.js"></script>
-  <script src="js/LCR/EducationProject/zeroclipboard/ZeroClipboard.js"></script>
-  <script src="js/LCR/EducationProject/numbro/numbro.js"></script>
-  <script src="js/LCR/EducationProject/numbro/languages.js"></script>
-  <script src="js/LCR/EducationProject/handsontable.js"></script>
-  <script src="js/jquery.js"></script>
-	<c:import url="./nav/SideNav.jsp"></c:import>
+<meta charset='utf-8'>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" media="screen" href="js/LCR/EducationProject/handsontable.css">
+<link rel="stylesheet" media="screen" href="js/LCR/EducationProject/pikaday/pikaday.css">
+<script src="js/LCR/EducationProject/pikaday/pikaday.js"></script>
+<script src="js/LCR/EducationProject/moment/moment.js"></script>
+<script src="js/LCR/EducationProject/zeroclipboard/ZeroClipboard.js"></script>
+<script src="js/LCR/EducationProject/numbro/numbro.js"></script>
+<script src="js/LCR/EducationProject/numbro/languages.js"></script>
+<script src="js/LCR/EducationProject/handsontable.js"></script>
+<c:import url="../module/importCSS.jsp"></c:import>
+<c:import url="./nav/SideNav.jsp"></c:import>
+<c:import url="../module/navbar.jsp"></c:import>
+  
+<%-- 	<c:import url="./nav/SideNav.jsp"></c:import>
 	<c:import url="../module/importCSS.jsp"></c:import>
-	<c:import url="../module/navbar.jsp"></c:import>
+	<c:import url="../module/navbar.jsp"></c:import> --%>
 	<title>Insert title here</title>
 </head>
 <body class="components-page">
