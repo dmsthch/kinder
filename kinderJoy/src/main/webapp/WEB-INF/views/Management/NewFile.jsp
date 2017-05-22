@@ -6,13 +6,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Title</title>
+	<title>핵병아리:비품예산</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	<!-- CSS Link -->
-<c:import url="./EquipmentNav/SideNav.jsp"></c:import>
+<c:import url="./ManagementNav/SideNav.jsp"></c:import>
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
 
@@ -36,7 +36,29 @@ button {
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
-				<jsp:include page="../Equipment/EquipmentLIst.jsp"></jsp:include>
+				
+				<div>
+					<table>
+						<thead>
+							<th>품명</th>
+							<th>수량</th>
+							<th>단가</th>
+							<th>총단가</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>123</td>
+								<td>123</td>
+								<td>123</td>
+								<td>123</td>
+							<tr>
+						</tbody>
+					</table>
+					<div>
+						총액수
+						<div>123</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

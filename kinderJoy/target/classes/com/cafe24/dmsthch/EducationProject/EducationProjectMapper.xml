@@ -104,7 +104,7 @@
 		,#{countRow}
 		,#{countCol}
 		,curdate()
-		,1
+		,#{categoryNo}
 		,#{age}
 		,#{classNo}
 		,#{projectDateInfo}
