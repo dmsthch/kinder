@@ -68,7 +68,7 @@
 	//console.log(dataTest[0]);
 	
 	
-	//var testMerge = [{"row":2,"col":1,"rowspan":2,"colspan":3},{"row":5,"col":2,"rowspan":3,"colspan":3}];
+	//var testMerge = [{"row":2,"col":1,"rowspan":2,"colspan":3},{"row":5,"col":2,"rowspan":3,"colspan":3}];;
 	
 	
 		hot = new Handsontable(container, {
