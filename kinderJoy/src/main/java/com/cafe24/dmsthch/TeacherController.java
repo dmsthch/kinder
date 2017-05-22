@@ -100,7 +100,7 @@ public class TeacherController {
 		model.addAttribute("takeTeacher" ,takeT);
 		model.addAttribute("takeClass"   ,takeC);
 		
-		return "Teacher/TeacherModify/takeForm";
+		return "Teacher/TeacherModify/index";
 	}
 	
 	
