@@ -10,17 +10,14 @@
 	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 	<!-- CSS Link -->
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
-<<<<<<< HEAD
+
 	<link rel="stylesheet" href="css/JKC/takeForm/css/bootstrap-select.css">
 	<script src="js/JKC/takeForm/js/bootstrap-select.js"></script>
-=======
 
 	<link href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css' rel='stylesheet'/>
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
->>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
-	
-<<<<<<< HEAD
+
 <!--   
 	<style>
 	    body {
@@ -28,8 +25,6 @@
 	    }
 	</style> -->
 
-  
-=======
 		<!-- draggable -->
 		<script type="text/javascript" src="https://johnny.github.io/jquery-sortable/js/jquery-sortable.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://johnny.github.io/jquery-sortable/css/application.css">
@@ -119,18 +114,13 @@
 				});
 			});
 			</script>
-			
->>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
+
 </head>
 <body>
-<<<<<<< HEAD
 
-=======
 <div class="wrapper" id="container">
 	<!-- 사이드메뉴바 BEGIN -->
->>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 	<c:import url="./side.jsp"></c:import>
-<<<<<<< HEAD
 
 <div class="main-panel">
 	        <div class="content">
@@ -159,7 +149,6 @@
 								    </div>
 								  </form>
 	                            </div>
-=======
 		<!-- 사이드메뉴바 END -->
 		<div class="main-panel">
 			<div class="content">
@@ -201,7 +190,6 @@
 										</div>
 	                            	</div>
                             	<input type="button" value="저장하기" id="send" />
->>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 	                        </div>
 	                    </div>
 	                </div>

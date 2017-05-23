@@ -65,8 +65,8 @@ $(document).ready(function(){
 
 		hot = new Handsontable(container, {
  			
-			startRows: 30,
-			startCols: 20,
+			startRows: 40,
+			startCols: 15,
 			rowHeaders : true,
 			colHeaders : true,
 			colWidths: 80,
@@ -138,12 +138,11 @@ $(document).ready(function(){
       $.ajax({
 			url : "${pageContext.request.contextPath}/educationProjectAdd",
 			type : 'POST',
-			dataType: 'JSON',
+			dataType: 'HTML',
 			async: false,
 			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo, "age":age, "classNo":classNo, "projectDateInfo":projectDateInfo},
 			success : function(data){
-			alert('success');
-		                        
+			alert('success! '+data);                  
    		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
    		     console.log("Status: " + textStatus);
    		},timeout: 3000

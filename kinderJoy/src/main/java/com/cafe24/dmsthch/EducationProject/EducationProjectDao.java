@@ -55,7 +55,7 @@ public class EducationProjectDao {
 	}
 	
 	//계획안 추가하기
-	public void educationProjectAdd(String val,String merge,String borders, int countRow, int countCol, String licenseKindergarten, int age,String classNo, String categoryNo, String projectDateInfo){
+	public String educationProjectAdd(String val,String merge,String borders, int countRow, int countCol, String licenseKindergarten, int age,String classNo, String categoryNo, String projectDateInfo){
 		Education edu = new Education();
 		edu.setVal(val);
 		edu.setMerge(merge);
@@ -67,10 +67,27 @@ public class EducationProjectDao {
 		edu.setClassNo(classNo);
 		edu.setCategoryNo(categoryNo);
 		edu.setProjectDateInfo(projectDateInfo);
+		//이미 있는지 체크 한번하고
+		String result = sqlSessionTemplate.selectOne("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectBeforeAdd", edu);
+		System.out.println(result+"<<<계획안 추가시 있는지 확인한 후 result값 ");
+		String reString =null;
+		if(result==null){
+			//없으면 추가
+			System.out.println("계획안 추가시 이미 있는지 확인하고난 후 없을때 if");
+			sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectAdd",edu);
+			reString = "추가완료";
+		}else{
+			//있으면 업데이트
+			System.out.println("계획안 추가시 이미 있는지 확인하고난 후 있을때 if");
+			int re =Integer.parseInt(result);
+			edu.setEducationProjectNo(re);
+			sqlSessionTemplate.update("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectUpdate",edu);
+			reString = "업데이트 되었습니다.";
+		}
 		/*Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		edu.setAddDate(sdf.format(date));*/
-		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectAdd",edu);
+		return reString;
 	}
 	
 	//계획안 불러오기
