@@ -51,7 +51,7 @@ $(document).ready(function(){
 	var countCol = ${resultData.countCol};
 	var addDate = ${resultData.addDate}
 	var educationProjectNo = ${resultData.educationProjectNo} 
-
+	var dataForSave = ${resultData.formVal};
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 // {1:"", 2:"" }	
 	for(j=0; j<dataValue.length;j++){
@@ -111,11 +111,8 @@ $(document).ready(function(){
 					//console.log(meats.borders)
 
 					if(val !== null){
-// 						console.log(row, col, val)
-						if(dataArray[row] === undefined){
-							dataArray[row] = {};							
-						}
-						dataArray[row][col] = val;
+						dataForSave[row][col] = val;
+						dataArray=dataForSave;
 					}
 				}			
 		}

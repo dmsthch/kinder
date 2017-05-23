@@ -99,24 +99,14 @@ public class TeacherController {
 							//TDao.takeT((String) httpsession.getAttribute("licenseKindergarten"));는 메서드에 입력한 값이므로 즉, 라이선스 이므로 String이다
 		List<Teacher> takeT = TDao.takeT((String)httpsession.getAttribute("licenseKindergarten"));
 		List<ChildClass> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
-		
 
-		for(int i=0; i<takeT.size(); i++) {
-			Teacher t = takeT.get(i);
-			
-			String teacherString = "[{name:"+t.getTeacherName()+",id:"+t.getTeacherNo()+"}]";
-			//String teacherSName = "티쳐네임"+t.getTeacherName();
-			System.out.println(teacherString);
-			model.addAttribute("teacherString" ,teacherString);
-		}
+		//classNo classAge teacherNo teacherName
 		
-		for(int y=0; y<takeC.size(); y++) {
-			ChildClass j = takeC.get(y);
-			
-			String childString = "[{name:"+j.getClassAge()+",id:"+j.getClassNo()+"}]";
-			System.out.println(childString);
-			model.addAttribute("childString" ,childString);
-		}
+		model.addAttribute("takeTeacher" ,takeT);
+		model.addAttribute("takeClass"   ,takeC);
+
+		//return "Teacher/TeacherModify/takeForm";
+
 		return "Teacher/DS";
 	}
 	

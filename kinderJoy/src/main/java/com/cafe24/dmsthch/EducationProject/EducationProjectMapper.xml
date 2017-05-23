@@ -81,9 +81,26 @@
 	FROM education_project_form
 	WHERE license_kindergarten = #{licenseKindergarten} 
 </select>
+
+	<!-- 계획안 저장 전, 이미 작성된것은 아닌지 확인하기 -->
+<select id="educationProjectBeforeAdd" parameterType="com.cafe24.dmsthch.EducationProject.Education" resultType="String">
+	SELECT 
+		education_project_no
+	FROM education_project
+	WHERE license_kindergarten = #{licenseKindergarten}
+	AND category_no = #{categoryNo}
+	AND project_date_info = #{projectDateInfo}
+	<if test="categoryNo==1">
+	AND age = #{age}
+	</if>
+	<if test="categoryNo==2||categoryNo==3||categoryNo==4">
+	AND class_no = #{classNo}
+	</if>
+
+</select>
 	
 	<!-- 계획안 저장하기 -->
-<insert id="educationProjectAdd" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm">
+<insert id="educationProjectAdd" parameterType="com.cafe24.dmsthch.EducationProject.Education">
 	INSERT INTO education_project(
 		val
 		,borders
@@ -110,6 +127,23 @@
 		,#{projectDateInfo}
 	)
 </insert>
+
+	<!-- 계획안 수정하기 -->
+<update id="educationProjectUpdate" parameterType="com.cafe24.dmsthch.EducationProject.Education">
+	UPDATE education_project
+	SET 
+		val = #{val}
+		,borders = #{borders}
+		,merge = #{merge}
+		,license_kindergarten = #{licenseKindergarten}
+		,count_row = #{countRow}
+		,count_col = #{countCol}
+		,category_no = #{categoryNo}
+		,age = #{age}
+		,class_no = #{classNo}
+		,project_date_info = #{projectDateInfo}
+	WHERE education_project_no = #{educationProjectNo}
+</update>
 	
 	<!-- 계획안 불러오기 -->
 <select id="educationProjectLoad" parameterType="com.cafe24.dmsthch.EducationProject.Education" resultType="com.cafe24.dmsthch.EducationProject.Education">

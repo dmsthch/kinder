@@ -172,7 +172,7 @@
 			async: false,
 			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol,"formTitle":formTitle },
 			success : function(data){
-			alert('저장완료');
+			alert('success! '+data); 
 		                        
    		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
    		     console.log("Status: " + textStatus);
