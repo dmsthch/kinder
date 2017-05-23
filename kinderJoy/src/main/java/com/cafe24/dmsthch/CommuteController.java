@@ -265,7 +265,15 @@ public class CommuteController {
 	@RequestMapping(value="/CommuteForMonth", method=RequestMethod.GET)
 	public String CommuteForMonth(HttpSession session){
 		System.out.println("CommuteForMonth() Run Controller");
-		return "Commute/CommuteForMonth";
+		
+		String returnUrl = "/";
+		boolean isLogin = (session.getAttribute("teacherNo") != null) ? true : false;
+		
+		if(isLogin){
+			returnUrl = "Commute/CommuteForMonth";
+		}
+		
+		return returnUrl;
 	}
 	
 	//월별 출석 현황 - 출석정보 가져오기

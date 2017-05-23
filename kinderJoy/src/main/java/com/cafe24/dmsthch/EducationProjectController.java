@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -202,8 +201,8 @@ public class EducationProjectController {
 								, @RequestParam(value="dataArray") String val
 								, @RequestParam(value="mergeArray", required=false, defaultValue="") String merge
 								, @RequestParam(value="borderArray",required=false, defaultValue="") String borders
-								, @RequestParam(value="countRow",required=false, defaultValue="") int countRow
-								, @RequestParam(value="countCol",required=false, defaultValue="") int countCol
+								, @RequestParam(value="countRow",required=true) int countRow
+								, @RequestParam(value="countCol",required=true) int countCol
 								, @RequestParam(value="age",required=false, defaultValue="") int age
 								, @RequestParam(value="classNo",required=true) String classNo
 								, @RequestParam(value="categoryNo",required=true) String categoryNo

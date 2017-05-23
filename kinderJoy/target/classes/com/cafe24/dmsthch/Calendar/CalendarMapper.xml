@@ -43,4 +43,27 @@
  	WHERE schedule_no = #{scheduleNo} 	
   </delete>
   
+  <!-- 스케쥴 저장하기 -->
+  <insert id="addSchedule">
+  	INSERT INTO schedule (
+  		teacher_no
+  		,license_kindergarten
+  		,category_no
+  		,schedule_content
+  		,schedule_start_day
+  		,schedule_end_day
+  		,schedule_title
+  	) VALUES (
+  		#{teacherNo}
+  		,#{licenseKindergarten}
+  		,#{categoryNo}
+  		,#{scheduleContent}
+  		,#{scheduleStartDay}
+  		,#{scheduleEndDay}
+  		,#{scheduleTitle}
+  	)
+  	
+  	
+  </insert>
+  
   </mapper>

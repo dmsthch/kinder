@@ -14,52 +14,40 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<%-- <!-- CSS Link -->
+<!-- CSS Link -->
 <c:import url="../module/importCSS.jsp"></c:import>
 <!-- JS Link -->
-<c:import url="../module/importJS.jsp"></c:import> --%>
+<c:import url="../module/importJS.jsp"></c:import>
 	
  <style>
 	 #body{
 	 	margin-top: 5%;
 	 }
  </style>
- <c:import url="../module/navbar.jsp"></c:import>
-<c:import url="../Child/nav/SideNav.jsp"></c:import>
+ 
  
 </head>
 
 <body id="body">
 <!-- navbar -->
+<c:import url="../module/navbar.jsp"></c:import>
 
+<c:import url="../Child/nav/SideNav.jsp"></c:import>
 
 <div class="col-md-10 col-sm-offset-2">
-    <table class="table table-striped">
+<h3 class="text-center">반이름 : ${childClass.className}</h3> 
+<h3 class="text-right">운영년도 : ${childClass.classYear}</h3>
+<div class="col-sm-5 col-sm-offset-3 text-center">
+    <table class="table table-hover ">
         <thead>
             <tr>
-                <th>이름</th>
-                <th>생년월일</th>
-                <th>주소</th>
-                <th>보호자번호</th>
-                <th>보호자예비번호</th>
-                <th>주의사항</th>
-                <th>성별</th>
-                <th>통학방법</th>
-                <th>입학일</th>
+                <th style="text-align:center; font-size:20px;">아이 이름</th>
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="c" items="${list}">
+            <c:forEach var="c" items="${childList}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/ChildModify?kid_no=${c.kidNo}">${c.kidName}</a></td>
-                    <td>${c.kidBirth}</td>
-                    <td>${c.kidAddress}</td>
-                    <td>${c.kidProtectorPhone}</td>
-                    <td>${c.kidProtectorPhoneReserve}</td>
-                    <td>${c.kidPrecautions}</td>
-                    <td>${c.kidGender}</td>
-                    <td>${c.kidCommuting}</td>
-                    <td>${c.kidEntranceDay}</td>
+					<td>${c.kidName}</td>
                 </tr>
             </c:forEach>
         </tbody>
@@ -72,10 +60,7 @@
             <li class="next"><a href="${pageContext.request.contextPath}/ChildList?currentPage=${currentPage+1}">다음</a></li>
         </c:if>
     </ul>
-    <div>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildAdd">게시글 입력</a>
-    </div>
 </div>
-
+</div>
 </body>
 </html>

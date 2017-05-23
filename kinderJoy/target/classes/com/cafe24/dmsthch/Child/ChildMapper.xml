@@ -31,20 +31,29 @@
   WHERE  kid_no = #{kidNo}
   </update>
   
+  <select id="getClassOne" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Child.ChildClass">
+  	select 
+  		license_kindergarten AS licenseKindergarten
+  		, class_no AS classNo
+  		, class_name AS className
+  		, class_year AS classYear
+  		, class_age AS classAge
+  	from 
+  	kid_class where class_no = #{classNo}
+  </select>
+  
   <select id="getChild" parameterType="int" resultType="com.cafe24.dmsthch.Child.Child">
   	SELECT
-  	
-  	  	license_kindergarten
-	  	, kid_name
-	  	, kid_birth
-	  	, kid_address 
-	  	, kid_protector_phone 
-	  	, kid_protector_phone_reserve 
-	  	, kid_precautions 
-	  	, kid_gender
-	  	, kid_commuting 
-  		, kid_entrance_day
-  		
+  	  	license_kindergarten AS licenseKindergarten
+	  	, kid_name AS kidName
+	  	, kid_birth AS kidBirth
+	  	, kid_address AS kidAddress
+	  	, kid_protector_phone AS kidProtectorPhone
+	  	, kid_protector_phone_reserve AS kidProtectorPhoneReserve
+	  	, kid_precautions AS kidPrecautions
+	  	, kid_gender AS kidGender
+	  	, kid_commuting AS kidCommuting
+  		, kid_entrance_day AS KidEntranceDay
   	FROM kid
   	WHERE kid_no = #{kidNo}
   	
@@ -158,6 +167,26 @@
   	FROM kid 
   	where license_kindergarten = #{licenseKindergarten}
   	AND ((DATE_FORMAT(now(),'%Y') - DATE_FORMAT(kid_birth,'%Y'))) = #{classAge}
+  	
+  </select>
+  
+  <select id="getRemainderFormationList"  parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.Child.Child"> 
+  	SELECT 
+  		license_kindergarten AS licenseKindergarten
+  		, kid_no AS kidNo
+		, kid_name AS kidName
+		, kid_birth AS kidBirth
+	FROM kid 
+	WHERE kid_no 
+	NOT IN(
+		select k.kid_no 
+		FROM kid_formation k 
+		INNER JOIN (
+			SELECT class_no 
+			FROM kid_class WHERE class_year =DATE_FORMAT(NOW(),'%Y')
+		) c 
+		ON k.class_no = c.class_no)
+	AND license_kindergarten = #{licenseKindergarten};
   	
   </select>
   </mapper>
