@@ -100,6 +100,8 @@ public class TeacherController {
 		List<Teacher> takeT = TDao.takeT((String)httpsession.getAttribute("licenseKindergarten"));
 		List<ChildClass> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
 		
+		//classNo classAge teacherNo teacherName
+		
 		model.addAttribute("takeTeacher" ,takeT);
 		model.addAttribute("takeClass"   ,takeC);
 		
@@ -113,9 +115,11 @@ public class TeacherController {
 			ChildClass j = takeC.get(y);
 			System.out.println(j.getClassAge()+"<<반나이");
 			System.out.println(j.getClassNo()+"<<반넘버");
+			System.out.println(j+"<jjjjjjjjjjjjj");
 		}
 		
 		return "Teacher/DS";
+		//return "Teacher/TeacherModify/takeForm";
 	}
 	
 	

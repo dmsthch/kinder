@@ -196,7 +196,8 @@ AND
 -->
 <select id="takeClass" parameterType="java.lang.String" resultType="com.cafe24.dmsthch.Child.ChildClass">
 SELECT 
-class_no AS classNo
+  class_no AS classNo
+, class_name AS className
 , class_age AS classAge
 from kid_class  
 where license_kindergarten = #{licenseKindergarten};

@@ -45,10 +45,34 @@
     <div class="span1"></div>
 
     <div class="span5 well">
-        <span class="label label-info">{{someArrays.list0.length}} Jobs</span>
+        <span class="label label-info">{{someArrays.list1.length}} Jobs</span>
         <hr>
-        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.list0' class="selectable" ng-model="someArrays.list0" ui-selectable="{{selectableConfig}}" >
-            <li ui-draggable ng-repeat='item in someArrays.list0' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
+        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.list1' class="selectable" ng-model="someArrays.list1" ui-selectable="{{selectableConfig}}" >
+            <li ui-draggable ng-repeat='item in someArrays.list1' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
+                <i class="icon-move pull-left move"></i> {{item.name}}
+                <span class="label label-success pull-right">{{item.id}}</span>
+            </li>
+        </ul>
+          
+    </div>
+    
+    <div class="span5 well">
+        <span class="label label-info">{{someArrays.list2.length}} Jobs</span>
+        <hr>
+        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.list2' class="selectable" ng-model="someArrays.list2" ui-selectable="{{selectableConfig}}" >
+            <li ui-draggable ng-repeat='item in someArrays.list2' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
+                <i class="icon-move pull-left move"></i> {{item.name}}
+                <span class="label label-success pull-right">{{item.id}}</span>
+            </li>
+        </ul>
+          
+    </div>
+    
+        <div class="span5 well">
+        <span class="label label-info">{{someArrays.list3.length}} Jobs</span>
+        <hr>
+        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.list3' class="selectable" ng-model="someArrays.list3" ui-selectable="{{selectableConfig}}" >
+            <li ui-draggable ng-repeat='item in someArrays.list3' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
                 <i class="icon-move pull-left move"></i> {{item.name}}
                 <span class="label label-success pull-right">{{item.id}}</span>
             </li>
@@ -66,8 +90,8 @@
             <button class="btn btn-mini btn-danger" ng-click="select('none')">None</button>
         </div>
 
-        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.list1' class="selectable" ng-model="selectedJobs" ui-selectable="{{selectableConfig}}" >
-            <li ui-draggable ng-repeat='item in someArrays.list1 | name_filter:nameFilter | id_filter:idFilter' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
+        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.list0' class="selectable" ng-model="selectedJobs" ui-selectable="{{selectableConfig}}" >
+            <li ui-draggable ng-repeat='item in someArrays.list0 | name_filter:nameFilter | id_filter:idFilter' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
                 <i class="icon-move pull-left move"></i> {{item.name}}
                 <span class="label label-success pull-right">{{item.id}}</span>
             </li>
@@ -77,12 +101,11 @@
     <div class="span1"></div>
 </div>
 
+
 <script>
     (function () {
-    	
-    	var takeTeacher = '${teacherName}';	/* ★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★*/
         var app = angular.module('App', []);
-        
+
         app.controller('dndCtrl', ['$scope', 'someArrays', function ($scope, someArrays) {
 
             someArrays.then(function (result) {
@@ -335,27 +358,60 @@
 	
     app.factory('someArrays', ['$q', '$timeout', function ($q, $timeout) {
         var deferred = $q.defer();
-        
-        for(var i in takeTeacher){
-        	console.log(takeTeacher)
-        }
-        
+         
         $timeout(function () {
             deferred.resolve({
-                someArrays:{
+            	
+            	someArrays:{
+            	
                     list0:
+                    	
                     [
-                        {name:takeTeacher}
-                    ],
+                    	<c:forEach var='t' items='${takeTeacher}'>
+                        {name:'${t.teacherName}', id:'${t.teacherNo}'},
+                        </c:forEach>
+                    	
+                    ]
+                    
+            	,
+            	
+                    
                     list1:
                     [
-                        {name:'Job 33'},
-                        {name:'Job 44'},
-                        {name:'Job 55'},
-                        {name:'Job 66'},
-                        {name:'Job 77'},
-                        {name:'Job 88'}
+<c:forEach var='c' items='${takeClass}'>
+                    	
+                    	<c:if test="${c.classAge == 3}">
+                        {name:'${c.className}' ,id:'${c.classAge}'},
+                        </c:if>
+                        
+                        </c:forEach>
                     ]
+            	,
+            		list2:
+            		[
+            			
+						<c:forEach var='c' items='${takeClass}'>
+                    	
+                    	<c:if test="${c.classAge == 4}">
+                        {name:'${c.className}' ,id:'${c.classAge}'},
+                        </c:if>
+                        
+                        </c:forEach>
+            			
+            		]
+            	,
+            		list3:
+            		[
+            			
+						<c:forEach var='c' items='${takeClass}'>
+                    	
+                    	<c:if test="${c.classAge == 5}">
+                        {name:'${c.className}' ,id:'${c.classAge}'},
+                        </c:if>
+                        
+                        </c:forEach>
+            			
+            		]
                 }
             });
         }, 50);
