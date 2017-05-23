@@ -34,21 +34,15 @@
 
 </head>
 <body>
-<c:if test="${teacherString != null}">
-값있음
-</c:if>
-<c:if test="${teacherString == null}">
-값없
-</c:if>
 
 <div ng-app='App' id="container" class='row-fluid' ng-controller='dndCtrl' ui-selectable-drag-drop ng-cloak>
     <div class="span1"></div>
 
     <div class="span5 well">
-        <span class="label label-info">{{someArrays.list1.length}} Jobs</span>
+        <span class="label label-info">{{someArrays.someArrays1.list1.length}} Jobs</span>
         <hr>
-        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.list1' class="selectable" ng-model="someArrays.list1" ui-selectable="{{selectableConfig}}" >
-            <li ui-draggable ng-repeat='item in someArrays.list1' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
+        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.someArrays1.list1' class="selectable" ng-model="someArrays.someArrays1.list1" ui-selectable="{{selectableConfig}}" >
+            <li ui-draggable ng-repeat='item in someArrays.someArrays1.list1' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
                 <i class="icon-move pull-left move"></i> {{item.name}}
                 <span class="label label-success pull-right">{{item.id}}</span>
             </li>
@@ -57,10 +51,10 @@
     </div>
     
     <div class="span5 well">
-        <span class="label label-info">{{someArrays.list2.length}} Jobs</span>
+        <span class="label label-info">{{someArrays.someArrays1.list2.length}} Jobs</span>
         <hr>
-        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.list2' class="selectable" ng-model="someArrays.list2" ui-selectable="{{selectableConfig}}" >
-            <li ui-draggable ng-repeat='item in someArrays.list2' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
+        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.someArrays1.list2' class="selectable" ng-model="someArrays.someArrays1.list2" ui-selectable="{{selectableConfig}}" >
+            <li ui-draggable ng-repeat='item in someArrays.someArrays1.list2' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
                 <i class="icon-move pull-left move"></i> {{item.name}}
                 <span class="label label-success pull-right">{{item.id}}</span>
             </li>
@@ -69,10 +63,10 @@
     </div>
     
         <div class="span5 well">
-        <span class="label label-info">{{someArrays.list3.length}} Jobs</span>
+        <span class="label label-info">{{someArrays.someArrays1.list3.length}} Jobs</span>
         <hr>
-        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.list3' class="selectable" ng-model="someArrays.list3" ui-selectable="{{selectableConfig}}" >
-            <li ui-draggable ng-repeat='item in someArrays.list3' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
+        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.someArrays1.list3' class="selectable" ng-model="someArrays.someArrays1.list3" ui-selectable="{{selectableConfig}}" >
+            <li ui-draggable ng-repeat='item in someArrays.someArrays1.list3' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
                 <i class="icon-move pull-left move"></i> {{item.name}}
                 <span class="label label-success pull-right">{{item.id}}</span>
             </li>
@@ -90,8 +84,8 @@
             <button class="btn btn-mini btn-danger" ng-click="select('none')">None</button>
         </div>
 
-        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.list0' class="selectable" ng-model="selectedJobs" ui-selectable="{{selectableConfig}}" >
-            <li ui-draggable ng-repeat='item in someArrays.list0 | name_filter:nameFilter | id_filter:idFilter' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
+        <ul id="selectable" ui-drop-listener='dropListener' data-model='someArrays.someArrays1.list0' class="selectable" ng-model="selectedJobs" ui-selectable="{{selectableConfig}}" >
+            <li ui-draggable ng-repeat='item in someArrays.someArrays1.list0 | name_filter:nameFilter | id_filter:idFilter' data-index='{{$index}}' data-object="{{item}}" class='btn btn-info btn-block'>
                 <i class="icon-move pull-left move"></i> {{item.name}}
                 <span class="label label-success pull-right">{{item.id}}</span>
             </li>
@@ -370,21 +364,18 @@
 
         $timeout(function () {
             deferred.resolve({
-            	
             	someArrays:{
+            	someArrays1:{
             	
-                    list0:
-                    	
-                    [
+                    list0 : [
                     	<c:forEach var='t' items='${takeTeacher}'>
                         {name:'${t.teacherName}', id:'${t.teacherNo}'},
                         </c:forEach>
                     	
                     ]
-                    
             	,
-            		list1:
-                    [
+            	
+            		list1 : [
 						<c:forEach var='c' items='${takeClass}'>
                     	
                     	<c:if test="${c.classAge == 3}">
@@ -394,9 +385,8 @@
                         </c:forEach>
                     ]
             	,
-            		list2:
-            		[
-            			
+            	
+            		list2 : [
 						<c:forEach var='c' items='${takeClass}'>
                     	
                     	<c:if test="${c.classAge == 4}">
@@ -404,11 +394,9 @@
                         </c:if>
                         
                         </c:forEach>
-            			
             		]
             	,
-            		list3:
-            		[
+            		list3 : [
             			
 						<c:forEach var='c' items='${takeClass}'>
                     	
@@ -419,7 +407,7 @@
                         </c:forEach>
             			
             		]
-                }
+                }}
             });
         }, 50);
         return deferred.promise;
