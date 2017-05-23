@@ -34,10 +34,10 @@
 
 </head>
 <body>
-<c:if test="${takeTeacher != null}">
+<c:if test="${teacherString != null}">
 값있음
 </c:if>
-<c:if test="${takeTeacher == null}">
+<c:if test="${teacherString == null}">
 값없
 </c:if>
 
@@ -104,6 +104,19 @@
 
 <script>
     (function () {
+<<<<<<< HEAD
+=======
+    	
+    	var childString = "${childString}";
+    	var teacherString = "${teacherString}";
+    	
+    	for(var i=0; i<teacherString; i++){
+    	console.log(teacherString)
+    	}
+    	
+    	console.log(childString)
+    	/* ★★★★★★★★★★ ★★★★★★★★★★★★★★★★★★★*/
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
         var app = angular.module('App', []);
 
         app.controller('dndCtrl', ['$scope', 'someArrays', function ($scope, someArrays) {
@@ -358,9 +371,14 @@
 	
     app.factory('someArrays', ['$q', '$timeout', function ($q, $timeout) {
         var deferred = $q.defer();
+<<<<<<< HEAD
          
+=======
+        
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
         $timeout(function () {
             deferred.resolve({
+<<<<<<< HEAD
             	
             	someArrays:{
             	
@@ -376,8 +394,13 @@
             	,
             	
                     
+=======
+                someArrays:{
+                    list0:teacherString,
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
                     list1:
                     [
+<<<<<<< HEAD
 <c:forEach var='c' items='${takeClass}'>
                     	
                     	<c:if test="${c.classAge == 3}">
@@ -385,6 +408,14 @@
                         </c:if>
                         
                         </c:forEach>
+=======
+                        {name:childString},
+                        {name:'Job 44'},
+                        {name:'Job 55'},
+                        {name:'Job 66'},
+                        {name:'Job 77'},
+                        {name:'Job 88'}
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
                     ]
             	,
             		list2:

@@ -100,26 +100,44 @@ public class TeacherController {
 		List<Teacher> takeT = TDao.takeT((String)httpsession.getAttribute("licenseKindergarten"));
 		List<ChildClass> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
 		
+<<<<<<< HEAD
 		//classNo classAge teacherNo teacherName
 		
 		model.addAttribute("takeTeacher" ,takeT);
 		model.addAttribute("takeClass"   ,takeC);
 		
+=======
+
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 		for(int i=0; i<takeT.size(); i++) {
 			Teacher t = takeT.get(i);
-			System.out.println(t.getTeacherNo()+"<<선생넘버");
-			System.out.println(t.getTeacherName()+"<<네임");
+			
+			String teacherString = "[{name:"+t.getTeacherName()+",id:"+t.getTeacherNo()+"}]";
+			//String teacherSName = "티쳐네임"+t.getTeacherName();
+			System.out.println(teacherString);
+			model.addAttribute("teacherString" ,teacherString);
 		}
 		
 		for(int y=0; y<takeC.size(); y++) {
 			ChildClass j = takeC.get(y);
+<<<<<<< HEAD
 			System.out.println(j.getClassAge()+"<<반나이");
 			System.out.println(j.getClassNo()+"<<반넘버");
 			System.out.println(j+"<jjjjjjjjjjjjj");
+=======
+			
+			String childString = "[{name:"+j.getClassAge()+",id:"+j.getClassNo()+"}]";
+			System.out.println(childString);
+			model.addAttribute("childString" ,childString);
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 		}
+<<<<<<< HEAD
 		
 		return "Teacher/DS";
 		//return "Teacher/TeacherModify/takeForm";
+=======
+		return "Teacher/DS";
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 	}
 	
 	

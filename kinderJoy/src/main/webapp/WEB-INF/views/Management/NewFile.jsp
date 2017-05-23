@@ -46,12 +46,14 @@ button {
 							<th>총단가</th>
 						</thead>
 						<tbody>
+							<c:forEach var="plusMinus" items="${plusMinus}">
 							<tr>
-								<td>123</td>
-								<td>123</td>
-								<td>123</td>
-								<td>123</td>
+								<td>${plusMinus.equipmentName}</td>
+								<td>${plusMinus.PLUS - plusMinus.MINUS}</td>
+								<td>${equipmentCost]}</td>
+								<td>${(plusMinus.PLUS - plusMinus.MINUS)*equipmentCost}</td>
 							<tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					<div>
