@@ -10,11 +10,34 @@
 	<!-- CSS Link -->
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
 
+	<link href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css' rel='stylesheet'/>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 	
 		<!-- draggable -->
 		<script type="text/javascript" src="https://johnny.github.io/jquery-sortable/js/jquery-sortable.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://johnny.github.io/jquery-sortable/css/application.css">
 		<!-- draggable -->
+	
+<style>
+       #container {
+           margin-top: 20px;
+       }
+
+       #container .ui-droppable { }
+
+       ul { margin: 0; }
+       hr { margin: 5px 0; }
+       .btn-block { padding-left: 5px; padding-right: 5px; }
+
+       #selectable .ui-selecting { background: #FECA40; }
+       #selectable .ui-selected { background: #F39814; color: white; }
+
+       .badge.badge-drag { position: absolute; top: -7px; right: -7px; }
+
+       i.move {cursor: move;}
+
+   </style>
 		
 			<script>
 			$(document).ready(function(){
@@ -83,7 +106,7 @@
 			
 </head>
 <body>
-<div class="wrapper">
+<div class="wrapper" id="container">
 	<!-- 사이드메뉴바 BEGIN -->
 	<c:import url="./side.jsp"></c:import>
 		<!-- 사이드메뉴바 END -->
@@ -100,7 +123,7 @@
                                 <div class="card-content table-responsive">
 									<div class="col-md-5" >
 							            <c:forEach begin="3" end="5" var="age">
-								            <ol class="simple_with_no_drag vertical">
+								            <ol id="selectable" class="simple_with_no_drag vertical">
 								              	<li id="li-id">
 								              	${age}살
 									            	<c:forEach var="C" items="${takeClass}">
