@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.dmsthch.Child.ChildClass;
+
 @Repository
 public class TeacherDao {
 	
@@ -65,15 +67,16 @@ public class TeacherDao {
 	//편성 교원
 	// 입력값은 라이선스 하나니까 String이다. 컨트롤러에서 받은 값이 변수에 대입된다.
 	//리턴값은 여러개 이고 타입도 여러개이므로 Object이다
-	public List<Object> takeT(String string) {
+	public List<Teacher> takeT(String string) {
 		System.out.println(string +"<-------------takeT");
 		System.out.println("편성폼의 교원 메서드 호출 확인");
+		//System.out.println(tList.get(0).getTeacherName()+"<<<<<네임 DAO");
 		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeTeacher",string);
 	}
 	
 	//편성폼 클래스
 	//컨트롤러에서 받은 값이 변수에 대입된다
-	public List<Object> takeC(String string) {
+	public List<ChildClass> takeC(String string) {
 		System.out.println("편성폼의 클래스 메서드 호출 확인");
 		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeClass", string);
 	}

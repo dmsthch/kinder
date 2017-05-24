@@ -68,15 +68,16 @@
 	//console.log(dataTest[0]);
 	
 	
-	//var testMerge = [{"row":2,"col":1,"rowspan":2,"colspan":3},{"row":5,"col":2,"rowspan":3,"colspan":3}];
+	//var testMerge = [{"row":2,"col":1,"rowspan":2,"colspan":3},{"row":5,"col":2,"rowspan":3,"colspan":3}];;
 	
 	
 		hot = new Handsontable(container, {
  			//data: dataTest,    //데이터 가져오기
-			startRows: 30,
-			startCols: 20,
+			startRows: 40,
+			startCols: 15,
 			rowHeaders : true,
 			colHeaders : true,
+			colWidths: 80,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
@@ -171,7 +172,7 @@
 			async: false,
 			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol,"formTitle":formTitle },
 			success : function(data){
-			alert('저장완료');
+			alert('success! '+data); 
 		                        
    		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
    		     console.log("Status: " + textStatus);

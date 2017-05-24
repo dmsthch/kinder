@@ -46,10 +46,10 @@ $(document).ready(function(){
 	for(j=0; j<dataValue.length;j++){
 		if(dataValue[j]==null){
 			dataValue[j]={ };
-			console.log(dataValue);
+			//console.log(dataValue);
 			for(i=0 ; i<countCol; i++){
 				dataValue[j][i] ='';
-				console.log("ㅇㅅㅇ! ->> "+ i);
+				//console.log("ㅇㅅㅇ! ->> "+ i);
 			}
 		}	
 	}
@@ -65,7 +65,7 @@ $(document).ready(function(){
 	
 		hot = new Handsontable(container, {
 			
-				data: dataValue,   //데이터 가져오기
+			data: dataValue,   //데이터 가져오기
 			
  			  
 			startRows: countRow,
@@ -98,11 +98,16 @@ $(document).ready(function(){
 					var row = data[0][0];
 					var col = data[0][1];
 					var val = data[0][3];
+					console.log(row)
+					console.log(col)
+					console.log(val+"<<<<<<<<<<<<<<<<<val!!!!!!!!!!!!!!!!!!!")
+					console.log(dataForSave[row]);
 					var meats = hot.getCellMeta(row,col);
 					
 					console.log(meats.borders)
-
+				
 					if(val !== null){
+						
 						dataForSave[row][col] = val;
 						dataArray=dataForSave;
 					}
@@ -150,7 +155,7 @@ $(document).ready(function(){
 			async: false,
 			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo,"age":age, "classNo":classNo, "projectDateInfo":projectDateInfo},
 			success : function(data){
-			alert('success');
+				alert('success! '+data); 
 		                        
    		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
    		     console.log("Status: " + textStatus);

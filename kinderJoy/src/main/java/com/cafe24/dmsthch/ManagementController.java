@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.cafe24.dmsthch.Management.ManagementDao;
 import com.cafe24.dmsthch.Management.ManagementEquipment;
+import com.cafe24.dmsthch.Management.ManagementPlusMinus;
 import com.cafe24.dmsthch.Management.ManagementYesterDayEquipment;
 
 @Controller
@@ -22,11 +23,13 @@ public class ManagementController {
 		System.out.println("ManagementController test11 메서드 실행");
 		System.out.println(test);
 		if(test.equals("1")) {
-			int countNo = dao.selectCountEquipmentList();
+/*			int countNo = dao.selectCountEquipmentList();
 			List<ManagementEquipment> todayEquipment = dao.selectManagementList(countNo);
 			List<ManagementYesterDayEquipment> yesterdayEquipment = dao.selectManagementYesterDayList(countNo);
 			model.addAttribute("todayEquipment",todayEquipment);
-			model.addAttribute("yesterdayEquipment",yesterdayEquipment);
+			model.addAttribute("yesterdayEquipment",yesterdayEquipment);*/
+			List<ManagementPlusMinus> plusMinus = dao.selectManagementPlusMinusList();
+			model.addAttribute("plusMinus",plusMinus);
 		}
 		return "Management/NewFile";
 	}

@@ -38,6 +38,9 @@
 	</div>
 	
 <script data-jsfiddle="example1">
+$(document).ready(function(){
+	
+
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
 	var dataValue = ${resultData.val};
@@ -48,7 +51,7 @@
 	var countCol = ${resultData.countCol};
 	var addDate = ${resultData.addDate}
 	var educationProjectNo = ${resultData.educationProjectNo} 
-
+	var dataForSave = ${resultData.formVal};
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 // {1:"", 2:"" }	
 	for(j=0; j<dataValue.length;j++){
@@ -68,7 +71,8 @@
 	
 	//var testMerge = [ {row: 1, col: 1, rowspan: 3, colspan: 3} , {row: 3, col: 4, rowspan: 2, colspan: 2} ];
 	
-	
+	console.log(countRow);
+	console.log(countCol);
 		hot = new Handsontable(container, {
  			data: dataValue,    //데이터 가져오기
 			startRows: countRow,
@@ -77,6 +81,7 @@
 			colHeaders : true,
 			minRows: countRow,
 			minCols: countCol,
+			colWidths: 80,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
@@ -106,11 +111,8 @@
 					//console.log(meats.borders)
 
 					if(val !== null){
-// 						console.log(row, col, val)
-						if(dataArray[row] === undefined){
-							dataArray[row] = {};							
-						}
-						dataArray[row][col] = val;
+						dataForSave[row][col] = val;
+						dataArray=dataForSave;
 					}
 				}			
 		}
@@ -164,7 +166,7 @@
 // 		console.log(hot.getCellsMeta())
 // 		console.log(dataArray);
 	
-  
+})  
 </script>
 
 

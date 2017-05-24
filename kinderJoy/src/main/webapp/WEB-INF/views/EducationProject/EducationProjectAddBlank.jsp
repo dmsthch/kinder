@@ -24,6 +24,7 @@
 
 <script>
 $(document).ready(function(){
+	//네비바 색주기
 	var categoryNo = ${categoryNo};
 	console.log(categoryNo+"<<categoryNo")
 	if(categoryNo==1){
@@ -64,11 +65,11 @@ $(document).ready(function(){
 
 		hot = new Handsontable(container, {
  			
-			startRows: 30,
-			startCols: 20,
+			startRows: 40,
+			startCols: 15,
 			rowHeaders : true,
 			colHeaders : true,
-			 colWidths: 80,
+			colWidths: 80,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
@@ -137,12 +138,11 @@ $(document).ready(function(){
       $.ajax({
 			url : "${pageContext.request.contextPath}/educationProjectAdd",
 			type : 'POST',
-			dataType: 'JSON',
+			dataType: 'HTML',
 			async: false,
 			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo, "age":age, "classNo":classNo, "projectDateInfo":projectDateInfo},
 			success : function(data){
-			alert('success');
-		                        
+			alert('success! '+data);                  
    		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
    		     console.log("Status: " + textStatus);
    		},timeout: 3000
@@ -181,7 +181,7 @@ $(document).ready(function(){
 					
 				</div>
 				<button name="save" id="save">Save</button>
-				<button name="test" id="test">Test</button>
+				
 				<div class="wrapper" style="margin-top: 20px;">
 					<div id="example1"></div>
 				</div>
