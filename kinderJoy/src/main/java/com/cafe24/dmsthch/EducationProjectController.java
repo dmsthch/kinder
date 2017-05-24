@@ -60,6 +60,7 @@ public class EducationProjectController {
 	@ResponseBody
 	@RequestMapping(value = "/educationProjectFormAdd", method = RequestMethod.POST)
 	public String educationAdd(HttpSession session
+								, @RequestParam(value="formOrder", required=false, defaultValue="0") int formOrder
 								, @RequestParam(value="dataArray") String formVal
 								, @RequestParam(value="mergeArray", required=false, defaultValue="") String formMerge
 								, @RequestParam(value="borderArray",required=false, defaultValue="") String formBorders
@@ -69,9 +70,16 @@ public class EducationProjectController {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(formVal+"<<<formval");
 		System.out.println(formBorders+"<<<<formBorders");
-		dao.formAdd(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten,formTitle);
+		System.out.println(formOrder + "<<<<<<formOrder");
+		if(formOrder==0){
+			dao.formAdd(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten,formTitle);
+		}else{
+			dao.formUpdate(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten, formTitle, formOrder);
+		}
+		
 		return "";
 	}
+	
 	
 	//양식 불러오기
 	@RequestMapping(value = "/educationProjectFormLoad", method = RequestMethod.GET)
@@ -206,12 +214,24 @@ public class EducationProjectController {
 								, @RequestParam(value="age",required=false, defaultValue="") int age
 								, @RequestParam(value="classNo",required=true) String classNo
 								, @RequestParam(value="categoryNo",required=true) String categoryNo
-								, @RequestParam(value="projectDateInfo",required=true) String projectDateInfo) {
+								, @RequestParam(value="projectDateInfo",required=true) String projectDateInfo
+								,HttpServletResponse response) {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(val+"<<<formval");
 		System.out.println(borders+"<<<<formBorders");
 		System.out.println(categoryNo+"<<<<<<<categoryNocategoryNo");
-		dao.educationProjectAdd(val, merge, borders, countRow, countCol, licenseKindergarten, age, classNo, categoryNo, projectDateInfo);
+		String result = dao.educationProjectAdd(val, merge, borders, countRow, countCol, licenseKindergarten, age, classNo, categoryNo, projectDateInfo);
+		response.setContentType("text/xml;charset=utf-8");
+		PrintWriter print;
+		try {
+			print = response.getWriter();
+			print.print(result);
+			print.flush();
+			print.close();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
 		return "";
 	}
 	
