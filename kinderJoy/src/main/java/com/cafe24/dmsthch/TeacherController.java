@@ -107,7 +107,11 @@ public class TeacherController {
 
 		//return "Teacher/TeacherModify/takeForm";
 
+<<<<<<< HEAD
 		return "Teacher/TeacherModify/takeForm";
+=======
+		return "Teacher/TeacherModify/takeTab";
+>>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 	}
 	
 	

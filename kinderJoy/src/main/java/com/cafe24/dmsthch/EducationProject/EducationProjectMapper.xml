@@ -59,7 +59,7 @@
   	)
 </insert>
 	
-	<!-- 로드하기 -->
+	<!-- 폼 로드하기 -->
 <select id="formLoad" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm" resultType="com.cafe24.dmsthch.EducationProject.EducationForm">
 	SELECT
 		form_no AS formNo 
@@ -68,10 +68,25 @@
 		,form_borders AS formBorders
 		,form_count_row AS formCountRow
 		,form_count_col AS formCountCol
+		,form_title AS formTitle
 	FROM education_project_form
 	WHERE license_kindergarten = #{licenseKindergarten}
 	AND form_order = #{formOrder}
 </select>
+
+	<!-- 폼 수정하기 -->
+<update id="formUpdate" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm">
+	UPDATE education_project_form
+	SET
+  		form_val = #{formVal}
+  		,form_merge = #{formMerge}
+  		,form_borders = #{formBorders}
+  		,form_count_row = #{formCountRow}
+  		,form_count_col = #{formCountCol}
+  		,form_title = #{formTitle}
+	WHERE license_kindergarten = #{licenseKindergarten}
+	AND form_order = #{formOrder}
+</update>
 
 	<!-- 저장된 계획안 이름 불러오기 -->
 <select id="educationProjectFormName" parameterType="String" resultType="com.cafe24.dmsthch.EducationProject.EducationForm">
