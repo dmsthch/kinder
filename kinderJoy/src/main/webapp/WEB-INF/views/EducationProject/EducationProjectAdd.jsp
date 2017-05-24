@@ -147,8 +147,11 @@ $(document).ready(function(){
 					var meats = hot.getCellMeta(row,col);
 					
 					//console.log(meats.borders)
-
+	
 					if(val !== null){
+						if(dataForSave[row] == null && dataForSave[row] == undefined){
+							dataForSave[row] = {};
+						}
 						dataForSave[row][col] = val;
 						dataArray=dataForSave;
 					}
@@ -189,7 +192,29 @@ $(document).ready(function(){
 		
 		var age = $('#selectAge').val();
 		var classNo = $('#selectClass').val();
-		var projectDateInfo = $('#projectDateInfo').val();
+		if(categoryNo == 3){
+			var weekInfoYear = $('#projectDateInfoYear').val();
+			var weekInfoMonth = $('#projectDateInfoMonth').val();
+			if(weekInfoMonth<10){
+				if(weekInfoMonth.length<2){
+					weekInfoMonth = "0"+weekInfoMonth;
+				}
+			}
+			var weekInfoWeek = $('#projectDateInfoWeek').val();
+			var projectDateInfo =weekInfoYear+"-"+weekInfoMonth +"-"+weekInfoWeek;
+		}else if(categoryNo == 2){
+			var weekInfoYear = $('#projectDateInfoYear').val();
+			var weekInfoMonth = $('#projectDateInfoMonth').val();
+			if(weekInfoMonth<10){
+				if(weekInfoMonth.length<2){
+					weekInfoMonth = "0"+weekInfoMonth;
+				}
+			}
+			var projectDateInfo = weekInfoYear+"-"+weekInfoMonth 
+		}else{
+			var projectDateInfo = $('#projectDateInfo').val();	
+		}
+		
 		console.log(countRow);
 		console.log(countCol);
 		console.log(categoryNo);
@@ -243,7 +268,7 @@ $(document).ready(function(){
 						
 						</select>
 					</div>
-					<div class="col-sm-4" id="afterAge" style="display: none;">
+					<div class="col-sm-3" id="afterAge" style="display: none;">
 						<select class="form-control" id="selectClass" name="selectClass">
 							<option value="" disabled selected> 반 선택  </option>
 							<c:forEach items="${listChildClass}" var="childClass">
@@ -251,9 +276,33 @@ $(document).ready(function(){
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-sm-2" id="afterClass" style="display: none;">
-					<input class="form-control" type="date" id="projectDateInfo">
-					</div>
+					<!-- 일일계획안 -->
+					<c:if test="${categoryNo==4}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+						<input class="form-control" type="date" id="projectDateInfo">
+						</div>
+					</c:if>
+					<!-- 주간계획안 -->
+					<c:if test="${categoryNo==3}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+							<div class="col-sm-4"> <input class="form-control" type="text" id="projectDateInfoYear" placeholder="년 입력"> </div>
+							<div class="col-sm-4"> <input class="form-control" type="text" id="projectDateInfoMonth" placeholder="월 입력"> </div>
+							<div class="col-sm-4"><input class="form-control" type="text" id="projectDateInfoWeek" placeholder="주 입력"></div>
+						</div>
+					</c:if>
+					<!-- 월간계획안 -->
+					<c:if test="${categoryNo==2}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+						<div class="col-sm-6"><input class="form-control" type="text" id="projectDateInfoYear" placeholder="년 입력"></div>
+						<div class="col-sm-6"><input class="form-control" type="text" id="projectDateInfoMonth" placeholder="월 입력"></div>
+						</div>
+					</c:if>
+					<!-- 연간계획안 -->
+					<c:if test="${categoryNo==1}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+						<input class="form-control" type="text" id="projectDateInfo" placeholder="년 입력">
+						</div>
+					</c:if>
 					
 				</div>
 				<button name="save" id="save">계획안 저장</button>
