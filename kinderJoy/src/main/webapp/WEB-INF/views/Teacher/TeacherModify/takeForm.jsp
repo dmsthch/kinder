@@ -3,21 +3,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-
+	
 	<!-- JS Link -->
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
-	<!-- navbar -->
-	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 	<!-- CSS Link -->
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
-
-	<link rel="stylesheet" href="css/JKC/takeForm/css/bootstrap-select.css">
-	<script src="js/JKC/takeForm/js/bootstrap-select.js"></script>
-
-	<link href='http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css' rel='stylesheet'/>
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
+	<!-- navbar -->
+	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+	<!-- 사이드메뉴바 BEGIN -->
+	<c:import url="./side.jsp"></c:import>
 <!--   
 	<style>
 	    body {
@@ -87,118 +81,67 @@
 					});	
 			});
 			</script>
-			
-			
-			
-			<script>
-			
-			$(document).ready(function(){
-				var a = $("#li_id_name").html();
-				if (a != null) {
-					console.log(a);
-				}else{
-					console.log("값이 없음");
-				}
-				
-				$("#send").click(function(){
-					$.ajax({
-						url : "${pageContext.request.contextPath}/save2",
-						type : "POST",
-						data : a,
-							
-							success: function(result){
-								alert(a);
-							
-						}
-					});
-				});
-			});
-			</script>
 
 </head>
 <body>
 
 <div class="wrapper" id="container">
-	<!-- 사이드메뉴바 BEGIN -->
-	<c:import url="./side.jsp"></c:import>
+
 
 <div class="main-panel">
 	        <div class="content">
 	            <div class="container-fluid">
 	                <div class="row">
-	                    <div class="col-md-12">
+	                    <div class="col-md-12" data-background-color="green">
 	                        <div class="card">
 	                            <div class="card-header" data-background-color="orange">
 	                                <h4 class="title">반 배정</h4>
 	                                <p class="category">반에 선생님을 배정시키세요.</p>
 	                            </div>                            
+	<div class="card-content table-responsive">                         
 	                            
-	                            <div class="card-content table-responsive">
-								  <form class="form-inline">
-								    <div class="form-group">
-									    <c:forEach var="TC" items="${takeClass}">
-									      <label>${TC.classAge}</label>
-									     </c:forEach>
-								    </div>
-								    <div class="form-group">
-								      <select id="lunchBegins" class="selectpicker" data-live-search="true" title="선생">
-								        <c:forEach var="TT" items="${takeTeacher}">
-								        <option>${TT.teacherName}</option>
-								        </c:forEach>
-								      </select>
-								    </div>
-								  </form>
-	                            </div>
+	<select name="selValue" data-live-search="true" class="selectpicker">
+	<c:forEach var="TC" items="${takeClass}">      
+	<c:if test="${TC.classAge == 3}">
+	   <option value="">${TC.className} [${TC.classAge}]</option>
+	</c:if>
+	</c:forEach>
+	</select>
+	
+	<select name="selValue" data-live-search="true" class="selectpicker">
+	<c:forEach var="TC" items="${takeClass}">               
+	<c:if test="${TC.classAge == 4}">
+		<option value="">${TC.className} [${TC.classAge}]</option>
+	</c:if>
+	</c:forEach>
+	</select>
+	
+	<select name="selValue" data-live-search="true" class="selectpicker">
+	<c:forEach var="TC" items="${takeClass}">                      
+	<c:if test="${TC.classAge == 5}">
+		<option value="">${TC.className} [${TC.classAge}]</option>
+	</c:if>
+	</c:forEach>
+	</select>
+	
+	<select id="lunchBegins" class="selectpicker" data-live-search="true" title="선생">
+		<c:forEach var="TT" items="${takeTeacher}">
+			<option>${TT.teacherName}</option>
+		</c:forEach>
+	</select>
+	
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
 		<!-- 사이드메뉴바 END -->
-		<div class="main-panel">
-			<div class="content">
-				<div class="card">
-	        	   <div class="container-fluid">
-	             	  <div class="row" >
-	                  		<div class="col-md-10"  data-background-color="green">
-	            			<div class="card-header">
-		                        <h4 class="title">편성표</h4>
-		                        <p class="category">편성표를 작성해주세요.</p>
-            				</div>
-                                <div class="card-content table-responsive">
-									<div class="col-md-5" >
-							            <c:forEach begin="3" end="5" var="age">
-								            <ol id="selectable" class="simple_with_no_drag vertical">
-								              	<li id="li-id">
-								              	${age}살
-									            	<c:forEach var="C" items="${takeClass}">
-											            <c:if test="${C.classAge == age}">
-												            <ol class="jkc vertical">
-												           	    <li class="" style="">
-													              	<ol class="">
-													              		${C.classNo}반
-													              	</ol>
-												           		</li>
-											        	 	</ol>
-										        	 	</c:if>
-								        	 		</c:forEach>
-								        	 	</li>
-							        	 	</ol>
-						        	 	</c:forEach>
-									</div>
-									 	<div class="col-md-5">
-								        	<ol class="jkc vertical">교원목록
-								             	<c:forEach var="T" items="${takeTeacher}">
-										        	<li id="li_id_name"><i class="icon-move"></i>${T.teacherName}</li>
-										        </c:forEach>
-								       		</ol>
-										</div>
-	                            	</div>
-                            	<input type="button" value="저장하기" id="send" />
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-		
+
 		<c:import url="./footer.jsp"></c:import>
 
-	    </div>
 
 </body>
 </html>
