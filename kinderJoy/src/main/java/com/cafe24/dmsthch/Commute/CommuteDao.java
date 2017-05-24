@@ -55,6 +55,7 @@ public class CommuteDao {
 		return sqlSessionTemplate.update(sql+"absenceReturn", absenceNo);
 	}
 	
+	//월별로 출석정보 가져오기
 	public List<Map<String, Object>> getCommuteForMonth(String license, int teacherNo, String startDay){
 		System.out.println("getCommuteForMonth() run");
 		Map<String, Object> map = new HashMap<String, Object>();
