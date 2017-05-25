@@ -1,6 +1,6 @@
-package com.cafe24.dmsthch.Management;
+package com.cafe24.dmsthch.Equipment;
 
-public class ManagementPlusMinus {
+public class EquipmentPlusMinus {
 	private String equipmentNo;
 	private String licenseKindergarten;
 	private String equipmentName;

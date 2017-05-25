@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cafe24.dmsthch.Equipment.Equipment;
 import com.cafe24.dmsthch.Equipment.EquipmentDao;
+import com.cafe24.dmsthch.Equipment.EquipmentPlusMinus;
 import com.cafe24.dmsthch.Equipment.EquipmentRequest;
 import com.cafe24.dmsthch.Equipment.Sheet;
 
@@ -68,7 +69,10 @@ public class EquipmentController {
 		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
 		System.out.println(getCategory + "getCategory 확인");
 		model.addAttribute("getCategory", getCategory);
-		Equipment equipmnet = new Equipment();
+		List<EquipmentPlusMinus> plusMinus = dao.selectEquipmentPlusMinusList();
+		model.addAttribute("plusMinus",plusMinus);
+		
+		/*		Equipment equipmnet = new Equipment();
 		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
 		
 		equipmnet.setLicenseKindergarten(licenseKindergarten);
@@ -77,7 +81,7 @@ public class EquipmentController {
 		System.out.println(equipmnetCount + "equipmnetCount 확인");
 		List<Equipment> equipmentList = dao.selectEquipment(equipmnetCount);
 		
-		model.addAttribute("equipmentList",equipmentList);
+		model.addAttribute("equipmentList",equipmentList);*/
 		return "Equipment/Equipment";
 	}
 	@RequestMapping(value = "test01", method = RequestMethod.GET)
@@ -173,19 +177,25 @@ public class EquipmentController {
 	}
 	@RequestMapping(value = "testSave", method = RequestMethod.POST)
 	@ResponseBody
-	public int test03(@RequestParam(value="boardCategoryNo") String equipmentCategorySelect
+	public int test03(@RequestParam(value="boardCategoryNo", required=false, defaultValue="") String equipmentCategorySelect
+						,@RequestParam(value="testCategoryNo", required=false, defaultValue="") String testCategoryNo
 						,@RequestParam(value="test1") String test1
 						,@RequestParam(value="testPrice") String testPrice
-						,@RequestParam(value="testValue") String testValue
+						,@RequestParam(value="testValue", required=false, defaultValue="") String testValue
+						,@RequestParam(value="updatePlusInput", required=false, defaultValue="") String updatePlusInput
+						,@RequestParam(value="updateMinusInput", required=false, defaultValue="") String updateMinusInput
 						,@RequestParam(value="testCustomer") String testCustomer
 						,@RequestParam(value="testState") String testState
 						,HttpSession session){
 		
 		System.out.println("비품 저장 메서드 실행");
+		System.out.println(testCategoryNo);
 		System.out.println(equipmentCategorySelect);
 		System.out.println(test1);
 		System.out.println(testPrice);
 		System.out.println(testValue);
+		System.out.println(updatePlusInput);
+		System.out.println(updateMinusInput);
 		System.out.println(testCustomer);
 		System.out.println(testState);
 		

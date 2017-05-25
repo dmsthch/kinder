@@ -21,7 +21,6 @@
 	 }
  </style>
  
- 
 </head>
 
 <body id="body">
@@ -43,7 +42,7 @@
         <tbody>
             <c:forEach var="c" items="${list}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/ChildModify2?class_no=${c.classNo}">${c.className}</a></td>
+                    <td><a href="${pageContext.request.contextPath}/viewClass?classNo=${c.classNo}">${c.className}</a></td>
                     <td>${c.classYear}</td>
                     <td>${c.classAge}</td>
                     <td><a href="${pageContext.request.contextPath}/testSelect?classAge=${c.classAge}&classNo=${c.classNo}"><button>반편성</button></a></td>

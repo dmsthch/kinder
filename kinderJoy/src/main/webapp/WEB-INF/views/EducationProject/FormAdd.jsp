@@ -74,16 +74,20 @@
 		hot = new Handsontable(container, {
  			//data: dataTest,    //데이터 가져오기
 			startRows: 40,
-			startCols: 15,
-			rowHeaders : true,
-			colHeaders : true,
+			startCols: 15, 
 			colWidths: 80,
-// 			manualRowResize : true,
-// 			manualColumnResize : true,
+			rowHeights: 30,
+ //			manualRowResize : true,
+ //			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
 //			customBorders: testBorders,
 			contextMenu : true,
+		    manualColumnMove: true,
+		    manualRowMove: true,
+			rowHeaders : true,
+			colHeaders : true,
+			renderAllRows: true,
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
@@ -117,33 +121,10 @@
 		}
 	   
 	});
-	$('#test').click(function(){
-/* 		console.log(dataArray);
-		var jparse=JSON.stringify(dataArray);
-		console.log(jparse+"<<<<jparse");
-		console.log(JSON.stringify(hot.mergeCells.mergedCellInfoCollection)); */
-		//console.log(JSON.stringify(hot.getCellMeta(1,1).borders));
-		var borderArray;
-		var allCells = hot.getCellsMeta().borders;
-		console.log(allCells);
-		//console.log(hot.countRows()); 행수 구하기
-		//console.log(hot.countCols());열수구하기
-		var borderArray=[];
-		for(var i = 0 ; i<hot.countRows(); i++){
-			for(var j = 0; j<hot.countCols(); j++){
-				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
-					console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
-					var borders = JSON.stringify(hot.getCellMeta(i,j).borders);
-					borderArray.push(borders);
-				}
-			}
-		}
-		
-		
-		
-	})
+	
 	$('#save').click(function(){
-		alert('test');
+
+		
 		var jparse=JSON.stringify(dataArray);
 		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
 		var formTitle = $('#formTitle').val();
@@ -172,7 +153,7 @@
 			async: false,
 			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol,"formTitle":formTitle },
 			success : function(data){
-			alert('success! '+data); 
+			showNotification('top','right',data.result);
 		                        
    		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
    		     console.log("Status: " + textStatus);

@@ -3,6 +3,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
+  
+  <select id="getClassOne" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Child.ChildClass">
+  	select 
+  		license_kindergarten AS licenseKindergarten
+  		, class_no AS classNo
+  		, class_name AS className
+  		, class_year AS classYear
+  		, class_age AS classAge
+  	from 
+  	kid_class where class_no = #{classNo}
+  </select>
+  
+  <select id="getClassNoToTeacherNo" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Child.ChildClass">
+	select 
+		class_no AS classNo
+	from 
+		teacher_formation 
+	where 
+		teacher_no = #{teacherNo}
+  
+  </select>
+  
   <insert id="classOrganization" parameterType="java.util.Map">
   	INSERT INTO kid_formation(
 	  	license_kindergarten
@@ -30,17 +52,6 @@
   	, kid_entrance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
   WHERE  kid_no = #{kidNo}
   </update>
-  
-  <select id="getClassOne" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Child.ChildClass">
-  	select 
-  		license_kindergarten AS licenseKindergarten
-  		, class_no AS classNo
-  		, class_name AS className
-  		, class_year AS classYear
-  		, class_age AS classAge
-  	from 
-  	kid_class where class_no = #{classNo}
-  </select>
   
   <select id="getChild" parameterType="int" resultType="com.cafe24.dmsthch.Child.Child">
   	SELECT
@@ -124,6 +135,7 @@
   <!-- 여러가지 조건으로 select -->
   <select id="severalSelect" resultType="com.cafe24.dmsthch.Child.Child" parameterType="java.util.Map">
   	select
+  		kid.kid_no AS kidNo,
 		kid.kid_name AS kidName,
 		kid.kid_birth AS kidBirth ,
 		kid.kid_address AS kidAddress,
@@ -145,6 +157,7 @@
   
   <select id="getChildList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Child.Child">
   	SELECT 
+  		kid.kid_no AS kidNo,
   		kid.kid_name AS kidName,
 		kid.kid_birth AS kidBirth ,
 		kid.kid_address AS kidAddress,
@@ -156,18 +169,6 @@
 		kid.kid_entrance_day AS kidEntranceDay
   	FROM kid where kid.license_kindergarten = #{license}
   	LIMIT  #{beginRow},#{pagePerRow}
-  </select>
-  
-  <select id="getFormationChildList" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.Child.Child">
-  	SELECT 
-  		license_kindergarten AS licenseKindergarten,
-  		kid_no AS kidNo,
-  		kid_name AS kidName, 
-  		kid_birth AS kidBirth 
-  	FROM kid 
-  	where license_kindergarten = #{licenseKindergarten}
-  	AND ((DATE_FORMAT(now(),'%Y') - DATE_FORMAT(kid_birth,'%Y'))) = #{classAge}
-  	
   </select>
   
   <select id="getRemainderFormationList"  parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.Child.Child"> 
@@ -186,7 +187,23 @@
 			FROM kid_class WHERE class_year =DATE_FORMAT(NOW(),'%Y')
 		) c 
 		ON k.class_no = c.class_no)
-	AND license_kindergarten = #{licenseKindergarten};
+	AND license_kindergarten = #{licenseKindergarten}
+	AND DATE_FORMAT(now(),'%Y') - DATE_FORMAT(kid_birth,'%Y') = #{classAge};
   	
   </select>
+  
+  <select id="getChildForClass" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.Child.Child">
+  	select 
+		kid.kid_name AS kidName
+		,kid.kid_no AS kidNo
+	from 
+		kid 
+	left join 
+		kid_formation 
+	on kid.kid_no = kid_formation.kid_no 
+	where kid.license_kindergarten = #{licenseKindergarten}
+	and kid_formation.class_no = #{classNo}
+  
+  </select>
+  
   </mapper>

@@ -14,45 +14,33 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<!-- CSS Link -->
-<c:import url="../module/importCSS.jsp"></c:import>
-<!-- JS Link -->
-<c:import url="../module/importJS.jsp"></c:import>
 	
  <style>
 	 #body{
 	 	margin-top: 5%;
 	 }
  </style>
- 
+ <c:import url="../module/navbar.jsp"></c:import>
+<c:import url="../Child/nav/SideNav.jsp"></c:import>
  
 </head>
 
 <body id="body">
 <!-- navbar -->
-<c:import url="../module/navbar.jsp"></c:import>
 
-<c:import url="../Child/nav/SideNav.jsp"></c:import>
 
 <div class="col-md-10 col-sm-offset-2">
-<h3 class="text-center">반이름 : ${childClass.className}</h3> 
-<h3 class="text-right">운영년도 : ${childClass.classYear}</h3>
-<div class="col-sm-5 col-sm-offset-3 text-center">
-    <table class="table table-hover ">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th style="text-align:center; font-size:20px;">아이 이름</th>
+                <th>반</th>
+                <th>유아명</th>
+                <th>날짜</th>
+                <th>출석여부</th>
+                <th>특이사항여부</th>
             </tr>
         </thead>
-        <tbody>
-            <c:forEach var="c" items="${list}">
-                <tr>
-					<td>${c.kidName}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-</div>
-</div>
+  
+
 </body>
 </html>

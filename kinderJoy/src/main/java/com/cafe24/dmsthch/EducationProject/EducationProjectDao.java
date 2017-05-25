@@ -17,7 +17,7 @@ public class EducationProjectDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//폼 추가할때
-	public void formAdd(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten, String formTitle){		
+	public String formAdd(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten, String formTitle){		
 		EducationForm eduForm = new EducationForm();
 		eduForm.setLicenseKindergarten(licenseKindergarten);
 		eduForm.setFormVal(formVal);
@@ -26,12 +26,18 @@ public class EducationProjectDao {
 		eduForm.setFormCountRow(formCountRow);
 		eduForm.setFormCountCol(formCountCol);
 		eduForm.setFormTitle(formTitle);
+		String re = null;
+		if(sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formAdd", eduForm) == 1){
+			re = "입력완료.";
+		}else{
+			re = "입력실패.";
+		}
 		
-		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formAdd", eduForm);
+		return re;
 	}
 	
 	//폼 수정
-	public void formUpdate(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten, String formTitle, int formOrder){		
+	public String formUpdate(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten, String formTitle, int formOrder){		
 		EducationForm eduForm = new EducationForm();
 		eduForm.setLicenseKindergarten(licenseKindergarten);
 		eduForm.setFormVal(formVal);
@@ -41,7 +47,13 @@ public class EducationProjectDao {
 		eduForm.setFormCountCol(formCountCol);
 		eduForm.setFormTitle(formTitle);
 		eduForm.setFormOrder(formOrder);
-		sqlSessionTemplate.update("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formUpdate", eduForm);
+		String re = null;
+		if(sqlSessionTemplate.update("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formUpdate", eduForm) ==1){
+			re = "수정 완료.";
+		}else{
+			re = "수정 실패.";
+		}
+		return re;
 	}
 	
 	//폼 불러올때
