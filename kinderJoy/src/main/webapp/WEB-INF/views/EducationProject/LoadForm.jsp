@@ -22,7 +22,7 @@
 <!-- 네비바 관련 스크립트  -->
 <script>//네비바 관련 스크립트 네비의 해당부분을 active클래스를 줌.
 $(document).ready(function(){
-	$('#educationProjectFormLoad').attr('class','active');
+	$('#educationProjectAddPage').attr('class','active');
 })
 </script>
 
@@ -103,7 +103,8 @@ $(document).ready(function(){
 			
 			data: dataValue,   //데이터 가져오기
 			
- 			  
+		//	width: 1800,
+		//  height: 700,
 			startRows: countRow,
 			startCols: countCol,
 			rowHeaders : true,
@@ -111,12 +112,14 @@ $(document).ready(function(){
 			minRows: countRow,
 			minCols: countCol,
 			colWidths: 80,
-// 			manualRowResize : true,
-// 			manualColumnResize : true,
+			rowHeights: 30,
+ 		//	manualRowResize : true,
+ 	//		manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
 			customBorders: dataBorders,
 			contextMenu : true,
+//			renderAllRows: true,
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
@@ -162,7 +165,7 @@ $(document).ready(function(){
 	}) */
 	
 	$('#save').click(function(){
-		alert('test');
+		
 		var jparse=JSON.stringify(dataValue);
 		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
 		var inputDate = $('#date').val();
@@ -199,7 +202,7 @@ $(document).ready(function(){
 			async: false,
 			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo,"age":age, "classNo":classNo, "projectDateInfo":projectDateInfo, "formOrder" : formOrder,"formTitle" : formTitle},
 			success : function(data){
-				alert('success! '+data); 
+			showNotification('top','right',data.result);
 		                        
    		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
    		     console.log("Status: " + textStatus);

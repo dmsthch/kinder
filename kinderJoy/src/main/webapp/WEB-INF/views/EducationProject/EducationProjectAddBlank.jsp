@@ -70,11 +70,14 @@ $(document).ready(function(){
 			rowHeaders : true,
 			colHeaders : true,
 			colWidths: 80,
+			rowHeights: 30,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
 			contextMenu : true,
+			 manualColumnMove: true,
+			    manualRowMove: true,
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
@@ -104,50 +107,185 @@ $(document).ready(function(){
 		}
 	   
 	});
-
-	
-	
-	$('#save').click(function(){
-		alert('test');
-		var jparse=JSON.stringify(dataArray);
-		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
-		var inputDate = $('#date').val();
-		//console.log(jparse+"<<<<jparse");
-		//console.log(mergeparse);
-		var borderArray=[];
-		for(var i = 0 ; i<hot.countRows(); i++){
-			for(var j = 0; j<hot.countCols(); j++){
-				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
-					var borders = hot.getCellMeta(i,j).borders;
-					borderArray.push(borders);
-				}
+		
+		
+	//입력후 유효성 경고창 띄우기
+	$(document).on('change','.inspection',function(){
+		var $this=$(this)
+		var thisVal = $this.val();
+		var id = $this.attr('id');
+		console.log(isNaN(thisVal)+"<<<<")
+		if(id == 'projectDateInfoYear' || id =='projectDateInfo'){
+			if(thisVal.length!=4||thisVal<0||isNaN(thisVal)){
+				showNotification('top','right','year');
+				$this.focus();
+			}
+		}else if(id == 'projectDateInfoMonth'){
+			console.log('월일때')
+			if(thisVal.length>2||thisVal<0 || isNaN(thisVal)){
+				showNotification('top','right','month');
+				$this.focus();
 			}
 		}
-		var borderparse=JSON.stringify(borderArray);
-		//console.log(borderparse+"<<<borderparse");
-		
-		
-		var countRow =hot.countRows(); 
-		var countCol =hot.countCols(); 
-      
-		var categoryNo = ${categoryNo};
-		console.log(categoryNo+"<<categoryNo222")
-		var age = $('#selectAge').val();
-		var classNo = $('#selectClass').val();
-		var projectDateInfo = $('#projectDateInfo').val();
-      $.ajax({
-			url : "${pageContext.request.contextPath}/educationProjectAdd",
-			type : 'POST',
-			dataType: 'HTML',
-			async: false,
-			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo, "age":age, "classNo":classNo, "projectDateInfo":projectDateInfo},
-			success : function(data){
-			alert('success! '+data);                  
-   		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
-   		     console.log("Status: " + textStatus);
-   		},timeout: 3000
-   		});    
 	})
+		
+	$('#save').click(function(){
+		//저장하기 전유효성검사
+				//검사할 항목 : 연령, 반, 날짜
+				//일일계획안(카테고리넘버 4)일때 --> 연령, 반, 날짜 (selectAge ,selectClass ,projectDateInfo)가 널이 아니여야 함.
+				//주간계획안(카테고리넘버 3)일때 -->연령, 반, 날짜-년,월,주(selectAge ,selectClass,projectDateInfoYear,projectDateInfoMonth,projectDateInfoWeek)가 널이 아니여야함.
+				//월간계획안(카테고리넘버 2)일때 --> 연령, 반, 날짜-년,월(selectAge ,selectClass,projectDateInfoYear,projectDateInfoMonth)이 널이 아니여야함.
+				//연간계획안(카테고리넘버 1)일때 -->연령, 날짜 (selectAge, projectDateInfo)가 널이 아니여야함.
+				
+				//날짜-년은 4자리 숫자여야한다.
+				//날짜-월은 숫자만 입력되어야 하며 2자리이다.
+				//날짜-일은 숫자만 입력되어야 하며 2자리이고 1이상이며 32를 넘길수 없다. 
+				//날짜-월은 1자리 수를 입력했을때 (1~9) 자동으로 2자리 수를 만들어주도록 한다.
+				//날짜 - 주는 숫자, 1자리수, 1~5까지 입력가능. -- 셀렉트박스로 바꿀까?
+					
+				var age = $('#selectAge').val();
+				var weekInfoYear = $('#projectDateInfoYear').val();
+				var weekInfoMonth = $('#projectDateInfoMonth').val();
+				var weekInfoWeek = $('#projectDateInfoWeek').val();
+				var projectDateInfo; //조건에 따라서 달라짐.
+				var classNo = $('#selectClass').val();
+				var categoryNo = ${categoryNo};
+				var saveOk = 0;
+				if(age == null || age == undefined){
+					//연령은 모든곳에서 null이 아니여야함.
+					showNotification('top','right','empty');
+					$('#selectAge').focus();
+				}else if(categoryNo==4){
+				//계획안 종류에 따라 조건 시작
+				//일일계획안일때
+					projectDateInfo = $('#projectDateInfo').val();
+				console.log(projectDateInfo+"<<<<projectDateInfo");
+					if(classNo == null || classNo == undefined ){
+						$('#selectClass').focus();
+						showNotification('top','right','empty');
+					}else if(projectDateInfo == null || projectDateInfo == undefined ||projectDateInfo==''){
+						$('#projectDateInfo').focus();
+						showNotification('top','right','empty');
+					}else{
+						saveOk = 1;
+					}
+				}else if(categoryNo==3){
+				//주간계획안일때
+					if(classNo == null || classNo == undefined ){
+						showNotification('top','right','empty');
+						$('#selectClass').focus();
+					}else if(weekInfoYear == null || weekInfoYear == undefined ){
+						$('#projectDateInfoYear').focus();
+						showNotification('top','right','empty');
+					}else if(weekInfoMonth == null || weekInfoMonth == undefined){
+						$('#projectDateInfoMonth').focus();
+						showNotification('top','right','empty');
+					}else if(weekInfoWeek== null || weekInfoWeek == undefined){
+						$('#projectDateInfoWeek').focus();
+						showNotification('top','right','empty');
+					}else if(weekInfoYear.length != 4 || weekInfoYear <0 ||isNaN(weekInfoYear)){
+						$('#projectDateInfoYear').focus();
+						showNotification('top','right','empty');
+					}else if(weekInfoMonth.length > 2 || weekInfoMonth < 0 ||isNaN(weekInfoMonth)){
+						('#projectDateInfoMonth').focus();
+						showNotification('top','right','empty');
+					}else{
+						saveOk = 1;
+						//주간계획안은 YYYY-MM-주 (1~5)로 입력되어야함. 해당하는 형식으로 바꿔준다.
+						if(weekInfoMonth<10){
+							//달 입력할때 숫자 하나만 입력했을때
+							if(weekInfoMonth.length<2){
+								weekInfoMonth = "0"+weekInfoMonth;
+							}
+						}
+						projectDateInfo =weekInfoYear+"-"+weekInfoMonth +"-"+weekInfoWeek;
+					}
+				}else if(categoryNo==2){
+				//월간계획안일때
+					if(classNo == null || classNo == undefined ){
+						$('#selectClass').focus();
+						showNotification('top','right','empty');
+					}else if(weekInfoYear == null || weekInfoYear == undefined ){
+						$('#projectDateInfoYear').focus();
+						showNotification('top','right','empty');
+					}else if(weekInfoMonth == null || weekInfoMonth == undefined || weekInfoMonth==''){
+						$('#projectDateInfoMonth').focus();
+						showNotification('top','right','empty');
+					}else if(weekInfoYear.length != 4 || weekInfoYear <0 || isNaN(weekInfoYear)){
+						$('#projectDateInfoYear').focus();
+						showNotification('top','right','empty');
+					}else if(weekInfoMonth.length > 2 || weekInfoMonth < 0 || isNaN(weekInfoMonth)){
+						('#projectDateInfoMonth').focus();
+						showNotification('top','right','empty');
+					}else{
+						//월간 계획안은 YYYY-DD형식이어야 한다. 해당하는 형식으로 바꿔준다.
+						if(weekInfoMonth<10){
+							//달 입력시 숫자 하나만 입력했을때 0붙여서 만들어줌
+							if(weekInfoMonth.length<2){
+								weekInfoMonth = "0"+weekInfoMonth;
+							}
+						}
+						projectDateInfo = weekInfoYear+"-"+weekInfoMonth
+						saveOk = 1;
+					}
+				}else if(categoryNo==1){
+				//연간계획안일때
+					projectDateInfo = $('#projectDateInfo').val();
+					if(projectDateInfo== null || projectDateInfo == undefined ||projectDateInfo==''){
+						$('#projectDateInfo').focus();
+						showNotification('top','right','empty');
+					}else if(projectDateInfo.length != 4 || projectDateInfo <0 || isNaN(projectDateInfo)){
+						$('#projectDateInfoYear').focus();
+						showNotification('top','right','empty');
+					}else{
+						saveOk = 1;
+					}
+				
+				}
+				
+				if(saveOk==1){
+	
+					var jparse=JSON.stringify(dataArray);
+					var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
+					var inputDate = $('#date').val();
+					//console.log(jparse+"<<<<jparse");
+					//console.log(mergeparse);
+					var borderArray=[];
+					for(var i = 0 ; i<hot.countRows(); i++){
+						for(var j = 0; j<hot.countCols(); j++){
+							if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
+								var borders = hot.getCellMeta(i,j).borders;
+								borderArray.push(borders);
+							}
+						}
+					}
+					var borderparse=JSON.stringify(borderArray);
+					//console.log(borderparse+"<<<borderparse");
+					
+					
+					var countRow =hot.countRows(); 
+					var countCol =hot.countCols(); 
+			      
+					var categoryNo = ${categoryNo};
+					console.log(categoryNo+"<<categoryNo222")
+					var age = $('#selectAge').val();
+					var classNo = $('#selectClass').val();
+					
+			      $.ajax({
+						url : "${pageContext.request.contextPath}/educationProjectAdd",
+						type : 'POST',
+						dataType: 'JSON',
+						async: false,
+						data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo, "age":age, "classNo":classNo, "projectDateInfo":projectDateInfo},
+						success : function(data){
+							showNotification('top','right',data.result);             
+			   		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
+			   		     console.log("Status: " + textStatus);
+			   		},timeout: 3000
+			   		});   
+				}	
+			})
+
 }) 
 </script>
 
@@ -159,7 +297,7 @@ $(document).ready(function(){
 			<div class="content">
 				<div class="row">
 					<div class="col-sm-2">
-						<select class="form-control" id="selectAge">
+						<select class="form-control" id="selectAge" >
 						<option value="" disabled selected> 연령 선택  </option>
 						<option value="3" >3세</option>
 						<option value="4">4세</option>
@@ -167,17 +305,48 @@ $(document).ready(function(){
 						
 						</select>
 					</div>
-					<div class="col-sm-4" id="afterAge" style="display: none;">
-						<select class="form-control" id="selectClass" name="selectClass">
+					<div class="col-sm-3" id="afterAge" style="display: none;">
+						<select class="form-control" id="selectClass" name="selectClass" >
 							<option value="" disabled selected> 반 선택  </option>
 							<c:forEach items="${listChildClass}" var="childClass">
 								<option value="${childClass.classNo}" class="${childClass.classAge}">${childClass.className}</option>
 							</c:forEach>
 						</select>
 					</div>
-					<div class="col-sm-2" id="afterClass" style="display: none;">
-					<input class="form-control" type="date" id="projectDateInfo">
-					</div>
+					<!-- 일일계획안 -->
+					<c:if test="${categoryNo==4}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+						<input class="form-control" type="date" id="projectDateInfo" >
+						</div>
+					</c:if>
+					<!-- 주간계획안 -->
+					<c:if test="${categoryNo==3}"> 
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+							<div class="col-sm-4"> <input class="form-control inspection" type="text" id="projectDateInfoYear" placeholder="년 입력" > </div>
+							<div class="col-sm-3"> <input class="form-control inspection" type="text" id="projectDateInfoMonth" placeholder="월 입력" > </div>
+							<div class="col-sm-5"><select class="form-control" id="projectDateInfoWeek">
+													<option value="" disabled selected>주 선택</option>
+													<option value=1>1주</option>
+													<option value=2>2주</option>
+													<option value=3>3주</option>
+													<option value=4>4주</option>
+													<option value=5>5주</option>
+													</select></div>
+						</div>
+					</c:if>
+					<!-- 월간계획안 -->
+					<c:if test="${categoryNo==2}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+						<div class="col-sm-6"><input class="form-control inspection" type="text" id="projectDateInfoYear" placeholder="년 입력" ></div>
+						<div class="col-sm-6"><input class="form-control inspection" type="text" id="projectDateInfoMonth" placeholder="월 입력" ></div>
+						</div>
+					</c:if>
+					<!-- 연간계획안 -->
+					<c:if test="${categoryNo==1}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+						<input class="form-control inspection" type="text" id="projectDateInfo" placeholder="년 입력" >
+						</div>
+					</c:if>
 					
 				</div>
 				<button name="save" id="save">Save</button>

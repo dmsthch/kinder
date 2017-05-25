@@ -62,7 +62,7 @@ $(document).ready(function(){
 
 	for(i=0; i<childClass.length; i++){
 		
-		var classString = '<li><a href="${pageContext.request.contextPath}/ChildSelectClass?classNo='+childClass[i].classNo+'">'+childClass[i].className+'</a></li>';
+		var classString = '<li><a href="${pageContext.request.contextPath}/viewClass?classNo='+childClass[i].classNo+'">' + childClass[i].className + '</a></li>';
 		
 		
 		if(childClass[i].classAge == 3){
@@ -130,6 +130,12 @@ $(document).ready(function(){
 						    </ul>
 	                </li>
 	                <!-- 테스트끝 -->
+	                <li id="ChildCommute">
+	                    <a href="${pageContext.request.contextPath}/ChildCommute">
+	                        <i class="material-icons">person</i>
+	                        <p>유아 출석</p>
+	                    </a>
+	                </li>
 	            </ul>
 	    	</div>
 	    </div>

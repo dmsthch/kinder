@@ -93,12 +93,17 @@ $(document).ready(function(){
 			minRows: countRow,
 			minCols: countCol,
 			colWidths: 80,
+			rowHeights: 30,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
+			
 			customBorders: dataBorders,
 			contextMenu : true,
+			renderAllRows: true,
+		    manualColumnMove: true,
+		    manualRowMove: true,
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},

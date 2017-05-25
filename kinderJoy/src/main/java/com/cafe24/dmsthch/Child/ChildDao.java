@@ -100,5 +100,13 @@ public class ChildDao {
 	public List<Child> getClassMemberList(Child child){
 		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getClassMemberList",child);
 	}
+	
+	public List<Child> getChildForClass(ChildClass childClass){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getChildForClass",childClass);
+	}
+	
+	public ChildClass getClassNoToTeacherNo(int teacherNo){
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getClassNoToTeacherNo",teacherNo);
+	}
 
 }

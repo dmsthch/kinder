@@ -348,3 +348,32 @@ function debounce(func, wait, immediate) {
 		if (immediate && !timeout) func.apply(context, args);
 	};
 };
+
+type = ['','info','success','warning','danger'];
+function showNotification(from, align, messageType){
+	color = Math.floor(3);
+	if(messageType=='year'){
+		var message = "년도는 4자리 숫자로 입력해주세요."
+	}else if(messageType=='month'){
+		var message = "월은 1~12사이의 숫자로 입력해주세요."
+	}else if(messageType=='empty'){
+		var message = "작성하지 않은 항목이 있거나, 입력 형식이 잘못되었습니다."
+	}else{
+		color = Math.floor(2);
+		var message=messageType;
+	}
+	
+	$.notify({
+    	icon: "notifications",
+    	message: message
+
+    },{
+        type: type[color],
+        timer: 4000,
+        placement: {
+            from: from,
+            align: align
+        }
+    });
+}
+

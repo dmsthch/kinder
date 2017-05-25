@@ -126,7 +126,9 @@
 		,add_date
 		,category_no
 		,age
+		<if test="categoryNo != 1">
 		,class_no
+		</if>
 		,project_date_info
 	)VALUES(
 		#{val}
@@ -138,7 +140,9 @@
 		,curdate()
 		,#{categoryNo}
 		,#{age}
+		<if test="categoryNo != 1">
 		,#{classNo}
+		</if>
 		,#{projectDateInfo}
 	)
 </insert>
