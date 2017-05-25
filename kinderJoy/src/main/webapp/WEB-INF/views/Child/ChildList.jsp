@@ -51,7 +51,7 @@
         <tbody>
             <c:forEach var="c" items="${list}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/ChildModify?kid_no=${c.kidNo}">${c.kidName}</a></td>
+                    <td><a href="${pageContext.request.contextPath}/ChildModify?kidNo=${c.kidNo}">${c.kidName}</a></td>
                     <td>${c.kidBirth}</td>
                     <td>${c.kidAddress}</td>
                     <td>${c.kidProtectorPhone}</td>
@@ -73,7 +73,7 @@
         </c:if>
     </ul>
     <div>
-        <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildAdd">게시글 입력</a>
+        <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildAdd">유아 등록</a>
     </div>
 </div>
 
