@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: smart-202-1
 Build-Jdk: 1.8.0_121
-=======
-Built-By: ￪ﾹﾌ￫ﾣﾨ
-Build-Jdk: 1.8.0_112
->>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 Created-By: Maven Integration for Eclipse
 
