@@ -8,12 +8,6 @@
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
 	<!-- JS Link -->
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
-	
-		<!-- draggable -->
-		<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script type="text/javascript" src="https://johnny.github.io/jquery-sortable/js/jquery-sortable.js"></script>
-		<link rel="stylesheet" type="text/css" href="https://johnny.github.io/jquery-sortable/css/application.css">
-		<!-- draggable -->
 
 <script>
 	//사용자가 입력한 값과 DB에 저장된 값을 비교하여 중복하는지 체크한다
@@ -59,13 +53,64 @@ $(document).ready(function(){
 	});
 </script>
 
+<script>
 
+$(document).ready(function(){
+	$("#submit").click(function(){
+		
+		var name = $("#teacherName").val();
+		var id = $("#teacher_ajax_id").val();
+		var pw = $("#teacherPw").val();
+		var hp = $("#teacherPhone").val();
+		
+		var regId = /^[a-z0-9]{4,12}$/;	// 아이디 유효성 검사식
+		var regPw = /^[a-z0-9]{6,10}$/;	// 비밀번호 유효성 검사식
+		var regNm = /^[가-힣]{2,15}|[a-zA-Z]{2,15}\s[a-zA-Z]{2,15}$/;	// 이름 유효성 검사식
+		var regEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;  // 이메일 유효성 검사식
+		var regPhone = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	// 핸드폰번호 유효성 검사식
+		
+		
+		
+		if (name == "" || name == null) {
+			alert('입력하셈1');
+			$("#teacherName").focus();
+			return false;
+		}
+		
+		if (id == "" || id == null) {
+
+			alert('아이디입력');
+			$("#teacher_ajax_id").focus();
+			return false;
+		}else{
+			if(!$("#teacher_ajax_id").val().regId){
+				alert('영문대,소문자 , 숫자 4 ~12 자리로 입력해 주세요.')
+				$("#teacher_ajax_id").focus();
+				return false;
+			}
+		}
+		
+		if (pw == "" || pw == null) {
+			alert('입력하셈3');
+			$("#teacherPw").focus();
+			return false;
+		}
+		
+		if (hp == "" || hp == null) {
+			alert('입력하셈4');
+			$("#teacherPhone").focus();
+			return false;
+		}
+		
+	});
+});
+</script>
 
 </head>
 <body>
 <div class="container">
   <h2>회원가입</h2>
-  <form action="${pageContext.request.contextPath}/insert" class="form-horizontal" method="post">
+  <form action="${pageContext.request.contextPath}/insert" class="form-horizontal" method="post" name="formName">
     
     
 <!--     <div class="form-group">
@@ -88,7 +133,7 @@ $(document).ready(function(){
     <div class="form-group">
       <label class="control-label col-sm-2">이름:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" name="teacherName" placeholder="이름을 입력하세요">
+        <input type="text" class="form-control" name="teacherName" id="teacherName" placeholder="이름을 입력하세요">
       </div>
     </div>
     
@@ -106,7 +151,7 @@ $(document).ready(function(){
     <div class="form-group">
       <label class="control-label col-sm-2">Password:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" name="teacherPw" placeholder="비밀번호를 입력하세요">
+        <input type="text" class="form-control" id="teacherPw" name="teacherPw" placeholder="비밀번호를 입력하세요">
       </div>
     </div>
     
@@ -114,7 +159,7 @@ $(document).ready(function(){
     <div class="form-group">
       <label class="control-label col-sm-2">연락처:</label>
       <div class="col-sm-10">          
-        <input type="text" class="form-control" name="teacherPhone" placeholder="연락처를 입력하세요">
+        <input type="text" class="form-control" id="teacherPhone" name="teacherPhone" placeholder="연락처를 입력하세요">
       </div>
     </div>
     
@@ -145,7 +190,7 @@ $(document).ready(function(){
     
     <div class="form-group">        
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default" id="submit">Submit</button>
       </div>
     </div>
   </form>
