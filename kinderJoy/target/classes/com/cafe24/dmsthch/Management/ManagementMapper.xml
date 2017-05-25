@@ -2,7 +2,29 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.cafe24.dmsthch.Equipment.ManagementMapper">
+  <mapper namespace="com.cafe24.dmsthch.Management.ManagementMapper">
+  <!-- 같은 네임품명 플러스값 총합, 마이너스값 총합 값  가져오기 -->
+	<select id="selectMangementPlusMinsList" resultType="com.cafe24.dmsthch.Management.ManagementPlusMinus">
+		 SELECT
+		 	 t.equipment_no AS equipmentNo 
+		 	,t.license_kindergarten AS licenseKindergarten
+		 	,t.equipment_name AS equipmentName
+		 	,t.category_no AS categoryNo
+		 	,v.equipment_cost AS equipmentCost
+		 	,sum(v.equipment_amount) AS PLUS
+		 	,sum(m.equipment_amount) AS MINUS
+		 	,v.equipment_customer AS equipmentCustomer
+		 	,MAX(v.equipment_day) AS equipmentDay
+		FROM
+			test_equipment t
+		INNER JOIN
+			test_equipment_value_plus v
+		ON v.equipment_no = t.equipment_no
+		INNER JOIN
+			test_equipment_value_minus m
+		ON m.equipment_no = t.equipment_no
+		GROUP BY t.equipment_no			
+	</select>
   <!-- 같은 네임품명중 오늘에서 하루전까지의 값중에서 최신값 구하기 -->
 	<select id="selectManagementYesterDayList" parameterType="int" resultType="com.cafe24.dmsthch.Management.ManagementEquipment">
 		SELECT 

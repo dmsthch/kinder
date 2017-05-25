@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
+import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
@@ -36,14 +38,14 @@ public class TeacherController {
 	//권한 없을 때 보여줄 페이지
 	@RequestMapping(value="/권한없는 사람이 보는 페이지", method = RequestMethod.GET)
 	public String kwonhan() {
-	System.out.println("! 권한없는 사람이 접근 ! 게임페이지 호출!");
+	System.out.println("! 권한없는 사람이 접근 ! 게임페이지 호출! _TeacherController");
 	return "Teacher/TheAviator/index";
 	}
 	
 	//takeForm save메서드 호출
 	@RequestMapping(value="/save2", method = RequestMethod.POST)
 	public String save() {
-		System.out.println("호출확인");
+		System.out.println("호출확인 _TeacherController");
 		return "";
 	}
 	
@@ -61,6 +63,7 @@ public class TeacherController {
 		map.put("teacherId", httpsession.getAttribute("teacherId"));
 		map.put("teacherName", httpsession.getAttribute("teacherName"));
 		map.put("teacherLevel", httpsession.getAttribute("teacherLevel"));
+		System.out.println("삭제완료_TeacherController");
 
 		TDao.deleteANDinsert(map);
 		
@@ -94,13 +97,17 @@ public class TeacherController {
 		
 		//List<> takeT는 result이다   
 							//TDao.takeT((String) httpsession.getAttribute("licenseKindergarten"));는 메서드에 입력한 값이므로 즉, 라이선스 이므로 String이다
-		List<Object> takeT = TDao.takeT((String)httpsession.getAttribute("licenseKindergarten"));
-		List<Object> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
+		List<Teacher> takeT = TDao.takeT((String)httpsession.getAttribute("licenseKindergarten"));
+		List<ChildClass> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
+
+		//classNo classAge teacherNo teacherName
 		
 		model.addAttribute("takeTeacher" ,takeT);
 		model.addAttribute("takeClass"   ,takeC);
-		
-		return "Teacher/TeacherModify/takeForm";
+
+		//return "Teacher/TeacherModify/takeForm";
+
+		return "Teacher/TeacherModify/takeTab";
 	}
 	
 	
@@ -277,7 +284,7 @@ public class TeacherController {
 
 
 		
-		System.out.println(sessionstatus +"\n SessionAttributes만 초기화");
+		System.out.println(sessionstatus +"\n 로그아웃 SessionAttributes만 초기화");
 		System.out.println(" redirect:/home");
 		return "redirect:/home";
 	}

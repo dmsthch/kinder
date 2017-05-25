@@ -22,10 +22,39 @@
 
 
 	<title>Insert title here</title>
-<!-- 네비바 관련 스크립트  -->
-<script>//네비바 관련 스크립트 네비의 해당부분을 active클래스를 줌.
+
+<script>
 $(document).ready(function(){
-	$('#educationProjectFormLoad').attr('class','active');
+	//네비바 색주기
+	var categoryNo = ${categoryNo};
+	//console.log(categoryNo+"<<categoryNo")
+	if(categoryNo==1){
+		$('#activeYear').attr('class','active');	
+	}else if(categoryNo==2){
+		$('#activeMonth').attr('class','active');
+	}else if(categoryNo==3){
+		$('#activeWeek').attr('class','active');
+	}else if(categoryNo==4){
+		$('#activeDay').attr('class','active');
+	}
+	
+	//연령선택하면 해당 반 보여주는것
+	$(document).on('change','#selectAge',function(){
+		var selectAge = $('#selectAge').val();
+		/* $('#selectClass').find().attr('class',3).remove(); */
+		//아이디가 selectClass인 셀렉트박스 내의 옵션중 class가 selectAge 셀렉트 박스에서 셀렉트한 값과 같은 것을 구해야 함.
+		$('select[name=selectClass] option[class!="'+selectAge+'"]').attr('style','display:none');
+		$('select[name=selectClass] option[class="'+selectAge+'"]').attr('style','display:""');
+		$("#selectClass option:first").prop("selected", true);
+		
+		$('#afterAge').attr('style','display:"";');
+		
+	})
+	
+	$(document).on('change','#selectClass',function(){
+		$('#afterClass').attr('style','display:"";');
+	})
+	
 })
 </script>
 
@@ -43,8 +72,8 @@ $(document).ready(function(){
  		var container = document.getElementById('example1'),hot;
 		var dataArray;
 		var dataValue = ${resultData.formVal};
-		console.log(dataValue);
-		console.log("======================!!!===================");
+		//console.log(dataValue);
+		//console.log("======================!!!===================");
 		var dataMerge = ${resultData.formMerge};
 		var dataBorders = ${resultData.formBorders};
 		//
@@ -57,18 +86,18 @@ $(document).ready(function(){
 		for(j=0; j<dataValue.length;j++){
 			if(dataValue[j]==null){
 				dataValue[j]={ };
-				console.log(dataValue);
+				//console.log(dataValue);
 				for(i=0 ; i<countCol; i++){
 					dataValue[j][i] ='';
-					console.log("ㅇㅅㅇ! ->> "+ i);
+					//console.log("ㅇㅅㅇ! ->> "+ i);
 				}
 			}	
 		}
 		
 		
-		console.log(dataValue);
-		console.log('===============================');
-		console.log(dataForSave); 
+		//console.log(dataValue);
+		//console.log('===============================');
+		//console.log(dataForSave); 
 		
 	
 	
@@ -90,7 +119,7 @@ $(document).ready(function(){
 			minCols: 20, */
 			rowHeaders : true,
 			colHeaders : true,
-			
+			colWidths: 80,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
@@ -104,10 +133,10 @@ $(document).ready(function(){
  			minSpareRows: 1, //여유 행
  			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
-				console.log(data, type)
+				//console.log(data, type)
 				
 				if(dataArray === undefined){
-					console.log('초깅화')
+					//console.log('초깅화')
 					dataArray = [];
 				}
 				
@@ -117,9 +146,12 @@ $(document).ready(function(){
 					var val = data[0][3];
 					var meats = hot.getCellMeta(row,col);
 					
-					console.log(meats.borders)
-
+					//console.log(meats.borders)
+	
 					if(val !== null){
+						if(dataForSave[row] == null && dataForSave[row] == undefined){
+							dataForSave[row] = {};
+						}
 						dataForSave[row][col] = val;
 						dataArray=dataForSave;
 					}
@@ -137,29 +169,58 @@ $(document).ready(function(){
 		var jparse=JSON.stringify(dataArray);
 		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
 		var inputDate = $('#date').val();
-		console.log(jparse+"<<<<jparse");
-		console.log(mergeparse);
+		//console.log(jparse+"<<<<jparse");
+		//console.log(mergeparse);
 		var borderArray=[];
 		for(var i = 0 ; i<hot.countRows(); i++){
 			for(var j = 0; j<hot.countCols(); j++){
 				if(hot.getCellMeta(i,j).borders !== null && hot.getCellMeta(i,j).borders !==undefined ){
-					console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
+					//console.log('ㅇㅅㅇ!'+ JSON.stringify(hot.getCellMeta(i,j).borders));
 					var borders = hot.getCellMeta(i,j).borders;
 					borderArray.push(borders);
 				}
 			}
 		}
 		var borderparse=JSON.stringify(borderArray);
-		console.log(borderparse+"<<<borderparse");
+		//console.log(borderparse+"<<<borderparse");
 		
 		
 		var countRow =hot.countRows(); 
 		var countCol =hot.countCols(); 
       
-		var categoryNo = $('.categoryNo:checked').val();
-		var age = $('.age:checked').val();
-		var classNo = $('.classNo:checked').val();
-		var projectDateInfo = $('.projectDateInfo').val();
+		var categoryNo = ${categoryNo};
+		
+		var age = $('#selectAge').val();
+		var classNo = $('#selectClass').val();
+		if(categoryNo == 3){
+			var weekInfoYear = $('#projectDateInfoYear').val();
+			var weekInfoMonth = $('#projectDateInfoMonth').val();
+			if(weekInfoMonth<10){
+				if(weekInfoMonth.length<2){
+					weekInfoMonth = "0"+weekInfoMonth;
+				}
+			}
+			var weekInfoWeek = $('#projectDateInfoWeek').val();
+			var projectDateInfo =weekInfoYear+"-"+weekInfoMonth +"-"+weekInfoWeek;
+		}else if(categoryNo == 2){
+			var weekInfoYear = $('#projectDateInfoYear').val();
+			var weekInfoMonth = $('#projectDateInfoMonth').val();
+			if(weekInfoMonth<10){
+				if(weekInfoMonth.length<2){
+					weekInfoMonth = "0"+weekInfoMonth;
+				}
+			}
+			var projectDateInfo = weekInfoYear+"-"+weekInfoMonth 
+		}else{
+			var projectDateInfo = $('#projectDateInfo').val();	
+		}
+		
+		console.log(countRow);
+		console.log(countCol);
+		console.log(categoryNo);
+		console.log(age);
+		console.log(classNo);
+		console.log(projectDateInfo);
       $.ajax({
 			url : "${pageContext.request.contextPath}/educationProjectAdd",
 			type : 'POST',
@@ -167,7 +228,7 @@ $(document).ready(function(){
 			async: false,
 			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo,"age":age, "classNo":classNo, "projectDateInfo":projectDateInfo},
 			success : function(data){
-			alert('success');
+			alert('success! '+data); 
 		                        
    		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
    		     console.log("Status: " + textStatus);
@@ -188,69 +249,62 @@ $(document).ready(function(){
 
 </script>
 
+<style>
+.wtBorder { border : 3px;}
+</style>
 
 </head>
 <body class="components-page">
 	<div class="wrapper">
 		<div class="main-panel">
 			<div class="content">
-				<div class="radio">
-					<label>
-						<input type="radio" name="categoryNo" value="1" class="categoryNo">
-						연간계획안
-					</label>
+				<div class="row">
+					<div class="col-sm-2">
+						<select class="form-control" id="selectAge">
+						<option value="" disabled selected> 연령 선택  </option>
+						<option value="3" >3세</option>
+						<option value="4">4세</option>
+						<option value="5">5세</option>
+						
+						</select>
+					</div>
+					<div class="col-sm-3" id="afterAge" style="display: none;">
+						<select class="form-control" id="selectClass" name="selectClass">
+							<option value="" disabled selected> 반 선택  </option>
+							<c:forEach items="${listChildClass}" var="childClass">
+								<option value="${childClass.classNo}" class="${childClass.classAge}">${childClass.className}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<!-- 일일계획안 -->
+					<c:if test="${categoryNo==4}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+						<input class="form-control" type="date" id="projectDateInfo">
+						</div>
+					</c:if>
+					<!-- 주간계획안 -->
+					<c:if test="${categoryNo==3}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+							<div class="col-sm-4"> <input class="form-control" type="text" id="projectDateInfoYear" placeholder="년 입력"> </div>
+							<div class="col-sm-4"> <input class="form-control" type="text" id="projectDateInfoMonth" placeholder="월 입력"> </div>
+							<div class="col-sm-4"><input class="form-control" type="text" id="projectDateInfoWeek" placeholder="주 입력"></div>
+						</div>
+					</c:if>
+					<!-- 월간계획안 -->
+					<c:if test="${categoryNo==2}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+						<div class="col-sm-6"><input class="form-control" type="text" id="projectDateInfoYear" placeholder="년 입력"></div>
+						<div class="col-sm-6"><input class="form-control" type="text" id="projectDateInfoMonth" placeholder="월 입력"></div>
+						</div>
+					</c:if>
+					<!-- 연간계획안 -->
+					<c:if test="${categoryNo==1}">
+						<div class="col-sm-3" id="afterClass" style="display: none;">
+						<input class="form-control" type="text" id="projectDateInfo" placeholder="년 입력">
+						</div>
+					</c:if>
+					
 				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="categoryNo" value="2" class="categoryNo">
-						월간계획안
-					</label>
-				</div>
-				<div class="radio">
-					<label> 
-						<input type="radio" name="categoryNo" value="3" class="categoryNo">
-						주간계획안
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="categoryNo" value="4" class="categoryNo">
-						일일계획안
-					</label>
-				</div>
-				<hr>
-				
-				<div class="radio">
-					<label>
-						<input type="radio" name="age" value="3" class="age">
-						3세
-					</label>
-				</div>
-				
-					<div class="radio">
-					<label>
-						<input type="radio" name="age" value="4" class="age">
-						4세
-					</label>
-				</div>
-				
-					<div class="radio">
-					<label>
-						<input type="radio" name="age" value="5" class="age">
-						5세
-					</label>
-				</div>
-				<hr>
-				
-				<div class="radio">
-					<label>
-						<input type="radio" name="classNo" value="8" class="classNo">
-						카나리아반
-					</label>
-				</div>
-				<hr>
-				<input type="date" class="projectDateInfo" name="projectDateInfo">
-				
 				<button name="save" id="save">계획안 저장</button>
 				<div class="wrapper" style="margin-top: 20px;">
 					<div id="example1"></div>

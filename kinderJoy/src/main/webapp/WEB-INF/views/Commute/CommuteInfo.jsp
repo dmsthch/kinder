@@ -33,9 +33,12 @@
 			});
 			
 			//사이드바 active속성 주기
-		    setSidenavActive(4);
+		    setSidenavActive(0);
 		    
-		    
+			//출석율 progress-bar 퍼센트 설정
+		    var commutePercentage = "${commutePercentage}";
+		    $('.progress-bar').css('width',commutePercentage);
+			
 		});
 	</script>
 	
@@ -59,12 +62,54 @@
 			
 				<div class="row">
 					<div class="text-center"><h1>출석 현황</h1></div>
-				</div><br/>
+				</div>
 				
 				<div class="row">
-					
+					<div class="col-sm-10 col-sm-offset-1">
+						<p class="text-right">5월 출석율 (%)</p> 
+						<div class="progress">
+							<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuemax="100">
+								${businessDay }일중 ${commuteCount}일 ${commutePercentage}
+							</div>
+						</div>
+					</div>
+				</div>
 				
-				</div>							
+				<div class="row">
+				
+					<div class="col-sm-6">
+						<a href="${pageContext.request.contextPath}/Commute">
+							<div class="card card-stats">
+								<div class="card-header" data-background-color="orange">
+									<i class="material-icons">store</i>
+								</div>
+								<div class="card-content">
+									<p class="category">Commute</p>
+									<h6 class="title">출석부</h6>
+								</div>
+								<div class="card-footer">
+								</div> 
+							</div>
+						</a>
+					</div>
+					 
+					<div class="col-sm-6">
+						<a href="${pageContext.request.contextPath}/CommuteForMonth">
+							<div class="card card-stats">
+								<div class="card-header" data-background-color="blue">
+									<i class="material-icons">store</i>
+								</div>
+								<div class="card-content">
+									<p class="category">Calendar</p>
+									<h6 class="title">월별 출석 현황</h6>
+								</div>
+								<div class="card-footer">
+								</div>
+							</div>
+						</a>
+					</div>
+					
+				</div> <!-- row end -->					
 				
 			</div>
 		</div>

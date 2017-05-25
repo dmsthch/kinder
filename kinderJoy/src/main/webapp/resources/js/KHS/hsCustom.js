@@ -27,6 +27,7 @@ var drawCarendar = function(month){
     
     var otherDay = otherLastDay - nowDay+1 //달력에 표시할 저번달의 시작날짜
     
+    $('#calTitle').html(nowMonth+'월 출석 현황');
     $('h2').html(nowMonth+' 월');
     
     // 요일 입력

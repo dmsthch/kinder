@@ -253,10 +253,17 @@ public class CommuteController {
 		return "redirect:/Commute";
 	}
 	
-	//출석 현황
+	//출석 현황 메인
 	@RequestMapping(value="/CommuteInfo", method=RequestMethod.GET)
-	public String commuteInfo(HttpSession session){
+	public String commuteInfo(HttpSession session, Model model){
 		System.out.println("CommuteInfo() Run Controller");
+
+		Map<String, Object> getCommuteInfo = commuteServise.getCommuteInfo(session);
+		
+		System.out.println(getCommuteInfo);
+		model.addAttribute("commutePercentage", getCommuteInfo.get("commutePercentage"));
+		model.addAttribute("commuteCount", getCommuteInfo.get("commuteCount"));
+		model.addAttribute("businessDay", getCommuteInfo.get("businessDay"));
 		
 		return "Commute/CommuteInfo";
 	}
@@ -265,7 +272,15 @@ public class CommuteController {
 	@RequestMapping(value="/CommuteForMonth", method=RequestMethod.GET)
 	public String CommuteForMonth(HttpSession session){
 		System.out.println("CommuteForMonth() Run Controller");
-		return "Commute/CommuteForMonth";
+		
+		String returnUrl = "/";
+		boolean isLogin = (session.getAttribute("teacherNo") != null) ? true : false;
+		
+		if(isLogin){
+			returnUrl = "Commute/CommuteForMonth";
+		}
+		
+		return returnUrl;
 	}
 	
 	//월별 출석 현황 - 출석정보 가져오기

@@ -91,7 +91,7 @@ $(document).ready(function() {
 		 	$('#start').val(getStart);
 			$('#end').val(getEnd); 
 			
-			$('#addButton').click(function(){
+	/* 		$('#addButton').click(function(){
 				var title, content,category;
 				title =$('#title').val();
 				//console.log(title+"<<<<<<title요거요거")
@@ -108,7 +108,7 @@ $(document).ready(function() {
 					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick이 뭐지?
 				}
 				$('#calendar').fullCalendar('unselect');
-			})
+			}) */
 			}
 		},
 		
@@ -262,36 +262,40 @@ $(document).ready(function() {
         <h4 class="modal-title calendarModalTitle">일정 추가(아직 추가 안됨!!)</h4>
       </div>
       <div class="modal-body calendarModalBody">
+      <form action="${pageContext.request.contextPath}/addShedule" method="post">
       	<div class="row" style="margin-bottom: 10px; text-align: center;">
       		<div class="col-sm-2"><label>제 목 :</label></div>
-      		<div class="col-sm-10"><input value="아직추가안됨!!" type="text" id="title" class="form-control"> </div>      	
+      		<div class="col-sm-10"><input value="아직추가안됨!!" type="text" id="title" class="form-control" name="scheduleTitle"> </div>      	
       	</div>
       	<div class="row" style="margin-bottom: 10px; text-align: center;">
       		<div class="col-sm-2"><label>내 용 :</label></div>
-      		<div class="col-sm-10"><textarea class="form-control" id="content" rows="5" ></textarea></div>
+      		<div class="col-sm-10"><textarea class="form-control" id="content" rows="5" name="scheduleContent"></textarea></div>
       	</div>
       	<div class="row" style="margin-bottom: 10px; text-align: center;">
       		<div class="col-sm-2"><label>기 간 :</label></div>
       		<div class="col-sm-4">
-      			<input type="date" id="start" class="form-control"/>
+      			<input type="date" id="start" class="form-control" name="scheduleStartDay"/>
       		</div>
       		<div class="col-sm-1"> ~ </div>
-      		<div class="col-sm-4"><input type="date" id="end" class="form-control"> </div>      	
+      		<div class="col-sm-4"><input type="date" id="end" class="form-control" name="scheduleEndDay"> </div>      	
       	</div>
        	<div class="row" style="margin-bottom: 10px; text-align: center;">
       		<div class="col-sm-2"><label>분류 :</label></div>
       	    <div class="col-sm-10">
-      	    	<select class="form-control" id="category">
+      	    	<select class="form-control" id="category" name="categoryNo">
       	    		<option value="1"> 기관일정 </option>
       	    		<option value="2"> 개인일정 </option>
       	    	</select> 
       	    </div>     
       	</div>
+      	<div class="modal-footer calendarModalFooter">
+      	<!-- <input type="submit" class="btn btn-default" id="addButton" data-dismiss="modal" value="추가"> -->
+		<input type="submit" type="submit" value="test">
+        <input type="button" class="btn btn-default" data-dismiss="modal" value="close">
       </div>
-      <div class="modal-footer calendarModalFooter">
-      	<button type="button" class="btn btn-default" id="addButton" data-dismiss="modal">추가</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </form>
       </div>
+      
     </div>
 
   </div>

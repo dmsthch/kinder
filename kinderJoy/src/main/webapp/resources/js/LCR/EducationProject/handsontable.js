@@ -257,8 +257,8 @@ var WalkontableBorder = function WalkontableBorder(wotInstance, settings) {
       }
       style = div.style;
       style.backgroundColor = (this.settings[position] && this.settings[position].color) ? this.settings[position].color : settings.border.color;
-      style.height = (this.settings[position] && this.settings[position].width) ? this.settings[position].width + 'px' : settings.border.width + 'px';
-      style.width = (this.settings[position] && this.settings[position].width) ? this.settings[position].width + 'px' : settings.border.width + 'px';
+      style.height = (this.settings[position] && this.settings[position].width) ? this.settings[position].width +1+ 'px' : settings.border.width + 'px';
+      style.width = (this.settings[position] && this.settings[position].width) ? this.settings[position].width +2+ 'px' : settings.border.width + 'px';
       this.main.appendChild(div);
     }
     this.top = this.main.childNodes[0];
