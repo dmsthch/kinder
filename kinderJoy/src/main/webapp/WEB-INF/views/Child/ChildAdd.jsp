@@ -53,7 +53,7 @@
     <form id="addForm" action="${pageContext.request.contextPath}/ChildAdd" method="post">
         <div class="form-group">
             <label for="license_kindergarten">유치원 :</label>
-            <input class="form-control" name="license_kindergarten" value="${teacherLicense }" id="license_kindergarten" type="text" readonly/>
+            <input class="form-control" name="licenseKindergarten" value="${licenseKindergarten}" id="licenseKindergarten" type="text" readonly/>
         </div>
         <div class="form-group">
             <label for="kid_name">이름 :</label>
