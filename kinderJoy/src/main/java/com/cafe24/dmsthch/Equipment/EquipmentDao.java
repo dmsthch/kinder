@@ -10,10 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
+
 @Repository
 public class EquipmentDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	//같은 네임품명 플러스값 총합, 마이너스값 총합 값  가져오기
+	public List<EquipmentPlusMinus> selectEquipmentPlusMinusList() {
+		System.out.println("selectEquipmentPlusMinusList 내용 실행");
+
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectEquipmnetPlusMinsList");
+	}
 	// 비품 건의서 삭제
 	public int removeEquipmentRequest(String requestNo
 										,HttpSession session) {

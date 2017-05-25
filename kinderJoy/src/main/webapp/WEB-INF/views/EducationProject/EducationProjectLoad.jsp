@@ -51,10 +51,11 @@ $(document).ready(function(){
 	var countCol = ${resultData.countCol};
 	var addDate = ${resultData.addDate}
 	var educationProjectNo = ${resultData.educationProjectNo} 
-
+	var dataForSave = ${resultData.val};
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 // {1:"", 2:"" }	
-	for(j=0; j<dataValue.length;j++){
+
+	for(j=0; j<countRow;j++){
 		if(dataValue[j]==null){
 			dataValue[j]={ };
 			//console.log(dataValue);
@@ -62,9 +63,19 @@ $(document).ready(function(){
 				dataValue[j][i] ='';
 				//console.log("ㅇㅅㅇ! ->> "+ i);
 			}
-		}	
+		}
+		if(j==0){
+			for(i=0 ; i<countCol; i++){
+				if(dataValue[0][i] == null && dataValue[0][i] == undefined){
+					dataValue[0][i] ='';
+				}
+				//console.log("ㅇㅅㅇ! ->> "+ i);
+			}
+		}
 	}
 	
+	
+	console.log(dataValue);
 	
 	//console.log(dataValue[0]);
 	
@@ -111,11 +122,13 @@ $(document).ready(function(){
 					//console.log(meats.borders)
 
 					if(val !== null){
-// 						console.log(row, col, val)
-						if(dataArray[row] === undefined){
-							dataArray[row] = {};							
+						if(dataForSave[row] == null && dataForSave[row] == undefined){
+							
+							dataForSave[row] = {};
 						}
-						dataArray[row][col] = val;
+						dataForSave[row][col] = val;
+// 						/* dataForSave[row][col] = val; */
+						dataValue=dataForSave;  
 					}
 				}			
 		}

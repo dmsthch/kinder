@@ -15,6 +15,7 @@
 		 	,sum(m.equipment_amount) AS MINUS
 		 	,v.equipment_customer AS equipmentCustomer
 		 	,MAX(v.equipment_day) AS equipmentDay
+		 	,t.equipment_state AS equipmentState
 		FROM
 			test_equipment t
 		INNER JOIN
