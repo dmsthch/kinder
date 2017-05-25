@@ -24,7 +24,6 @@
 .tabs nav {
 	text-align: center;
 }
-
 .tabs nav ul {
 	position: relative;
 	display: -ms-flexbox;
@@ -60,6 +59,7 @@
 	flex: 1;
 }
 
+
 .tabs nav a {
 	position: relative;
 	display: block;
@@ -75,7 +75,7 @@
 }
 
 .tabs nav li.tab-current a {
-	color: #74777b;
+	color: #4374D9;	/* 여기 */
 }
 
 .tabs nav a:focus {
@@ -159,7 +159,7 @@
 .content-wrap section p {
 	margin: 0;
 	padding: 0.75em 0;
-	color: rgba(40,44,42,0.05);
+/* 	color: rgba(40,44,42,0.05); 여기*/
 	font-weight: 900;
 	font-size: 4em;
 	line-height: 1;
