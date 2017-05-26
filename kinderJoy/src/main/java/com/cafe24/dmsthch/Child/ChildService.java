@@ -19,5 +19,22 @@ public class ChildService {
 		
 		return childClass;
 	}
+	
+	//출석시 특이사항이 있는경우 특이사항 등록하는 메서드
+	public void insertUnusual(ChildAttendance childAttendance){
+		
+		ChildAttendance getTodayAttendance = childDao.getTodayAttendance(childAttendance.getKidNo());
+		
+		getTodayAttendance.setCategoryNo(childAttendance.getCategoryNo());
+		getTodayAttendance.setAttendanceMemo(childAttendance.getAttendanceMemo());
+
+		System.out.println(getTodayAttendance.getKidNo());
+		System.out.println(getTodayAttendance.getAttendanceNo());
+		System.out.println(getTodayAttendance.getCategoryNo());
+		System.out.println(getTodayAttendance.getAttendanceMemo());
+		
+		childDao.unusualInsert(getTodayAttendance);
+		
+	}
 
 }
