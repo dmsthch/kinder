@@ -107,6 +107,7 @@ public class TeacherController {
 
 		//return "Teacher/TeacherModify/takeForm";
 
+		//return "Teacher/TeacherModify/takeForm";
 		return "Teacher/TeacherModify/takeTab";
 	}
 	

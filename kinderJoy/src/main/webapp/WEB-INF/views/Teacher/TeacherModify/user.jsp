@@ -5,12 +5,15 @@
 <html>
 
 <head>
+
 	<!-- JS Link -->
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
-	<!-- navbar -->
-	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 	<!-- CSS Link -->
 	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
+	<!-- navbar -->
+	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+	<!-- 사이드메뉴바 BEGIN -->
+	<c:import url="./side.jsp"></c:import>
 	
 	<script>
 	$(document).ready(function(){
@@ -24,11 +27,6 @@
 <body>
 
 	<div class="wrapper">
-	
-	<!-- 사이드메뉴바 BEGIN -->
-	<c:import url="./side.jsp"></c:import>
-	<!-- 사이드메뉴바 END -->
-	
 	
 	    <div class="main-panel">
 
