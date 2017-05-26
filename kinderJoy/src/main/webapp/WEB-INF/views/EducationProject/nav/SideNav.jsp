@@ -286,29 +286,6 @@ $(document).ready(function(){
 						    	</c:forEach>
 						    </ul>
 	                </li>
-	             	
-	             	
-	             	<!-- <li class="active"> -->
-<%-- 	                <li id="educationProjectAddPage">
-	                    <a href="${pageContext.request.contextPath}/educationProjectAddPage">
-	                        <i class="material-icons">library_books</i>
-	                        <p>양식 관리</p>
-	                    </a>
-	                </li> --%>
-	                <li id="educationProjectFormLoad">
-	                    <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=1">
-	                        <i class="material-icons">person</i>
-	                        <p>임시</p>
-	                    </a>
-	                </li>
-	                <li>
-	                    <a href="${pageContext.request.contextPath}/educationProjectAddPage">
-	                        <i class="material-icons">content_paste</i>
-	                        <p>임시2</p>
-	                    </a>
-	                </li>
-	
-
 	            </ul>
 	    	</div>
 	    </div>    

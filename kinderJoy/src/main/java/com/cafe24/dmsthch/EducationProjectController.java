@@ -59,7 +59,7 @@ public class EducationProjectController {
 	//계획안 양식 추가하기
 	@ResponseBody
 	@RequestMapping(value = "/educationProjectFormAdd", method = RequestMethod.POST)
-	public String educationAdd(HttpSession session
+	public JSONObject educationAdd(HttpSession session
 								, @RequestParam(value="formOrder", required=false, defaultValue="0") int formOrder
 								, @RequestParam(value="dataArray") String formVal
 								, @RequestParam(value="mergeArray", required=false, defaultValue="") String formMerge
@@ -71,13 +71,16 @@ public class EducationProjectController {
 		System.out.println(formVal+"<<<formval");
 		System.out.println(formBorders+"<<<<formBorders");
 		System.out.println(formOrder + "<<<<<<formOrder");
+		String re = null;
 		if(formOrder==0){
-			dao.formAdd(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten,formTitle);
+			re = dao.formAdd(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten,formTitle);
 		}else{
-			dao.formUpdate(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten, formTitle, formOrder);
+			re = dao.formUpdate(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten, formTitle, formOrder);
 		}
+		JSONObject jo = new JSONObject();
+		jo.put("result", re);
 		
-		return "";
+		return jo;
 	}
 	
 	
@@ -205,7 +208,7 @@ public class EducationProjectController {
 	//계획안 저장하기
 	@ResponseBody
 	@RequestMapping(value = "/educationProjectAdd", method = RequestMethod.POST)
-	public String educationProjectAdd(HttpSession session
+	public JSONObject educationProjectAdd(HttpSession session
 								, @RequestParam(value="dataArray") String val
 								, @RequestParam(value="mergeArray", required=false, defaultValue="") String merge
 								, @RequestParam(value="borderArray",required=false, defaultValue="") String borders
@@ -215,13 +218,13 @@ public class EducationProjectController {
 								, @RequestParam(value="classNo",required=true) String classNo
 								, @RequestParam(value="categoryNo",required=true) String categoryNo
 								, @RequestParam(value="projectDateInfo",required=true) String projectDateInfo
-								,HttpServletResponse response) {
+								/*,HttpServletResponse response*/) {
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		System.out.println(val+"<<<formval");
 		System.out.println(borders+"<<<<formBorders");
 		System.out.println(categoryNo+"<<<<<<<categoryNocategoryNo");
 		String result = dao.educationProjectAdd(val, merge, borders, countRow, countCol, licenseKindergarten, age, classNo, categoryNo, projectDateInfo);
-		response.setContentType("text/xml;charset=utf-8");
+		/*response.setContentType("text/xml;charset=utf-8");
 		PrintWriter print;
 		try {
 			print = response.getWriter();
@@ -231,8 +234,10 @@ public class EducationProjectController {
 		} catch (IOException e) {
 			
 			e.printStackTrace();
-		}
-		return "";
+		}*/
+		JSONObject jo = new JSONObject();
+		jo.put("result", result);
+		return jo;
 	}
 	
 	//계획안 저장 폼 가기
