@@ -41,7 +41,7 @@
 	</style>
 </head>
 
-<body>asdasdsasd
+<body>
 	<c:forEach begin="3" end="5" var="age">
 		<div class="container" style=" padding-top:50; float:right; ">
 			<form class="ac-custom ac-checkbox ac-boxfill" autocomplete="off">
@@ -49,7 +49,6 @@
 			<header class="codrops-header">
 			<h1>${age}»ì Æí¼º</h1>
 			</header>
-				asd
 				<section>
 					<div class="tabs tabs-style-linetriangle">
 						<nav>
