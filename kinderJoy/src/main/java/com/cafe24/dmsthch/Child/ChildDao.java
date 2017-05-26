@@ -14,6 +14,42 @@ public class ChildDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	//유아번호로 당일 출석정보 가져오기 (특이사항 포함)
+	public List<ChildAttendance> getCommuteAll(int kidNo){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getCommuteAll", kidNo);
+	}
+	
+	//당일 출석 특이사항 insert
+	public int unusualInsert(ChildAttendance childAttendance){
+		return sqlSessionTemplate.insert("com.cafe24.dmsthch.Child.ChildMapper.unusualInsert", childAttendance);
+	}
+	
+	//kidNo로 당일 출석정보 가져오기
+	public ChildAttendance getTodayAttendance(int kidNo){
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getTodayAttendance", kidNo);
+	}
+	
+	//당일 출석이 처음이 아닌 경우 update
+	public int kidAttendanceUpdate(ChildAttendance childAttendance){
+		return sqlSessionTemplate.update("com.cafe24.dmsthch.Child.ChildMapper.kidAttendanceUpdate", childAttendance);
+	}
+	
+	//당일 출석이 처음인 경우 출석체크학 insert
+	public int kidAttendanceInsert(ChildAttendance childAttendance){
+		return sqlSessionTemplate.insert("com.cafe24.dmsthch.Child.ChildMapper.kidAttendanceInsert", childAttendance);
+	}
+	
+	//출석 특이사항 가져오기
+	public List<Map<String, Object>> getAttendanceCategory(){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getAttendanceCategory");
+	}
+	
+	//당일 출석부 등록유무 확인
+	public int isTodayCommute(String license){
+		System.out.println("isTodayCommute() run ChildDao");
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.isTodayCommute", license);
+	}
+	
 	public int updateChild(Child child) {
         return sqlSessionTemplate.update("com.cafe24.dmsthch.Child.ChildMapper.updateChild", child);
     }
@@ -99,6 +135,14 @@ public class ChildDao {
 
 	public List<Child> getClassMemberList(Child child){
 		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getClassMemberList",child);
+	}
+	
+	public List<Child> getChildForClass(ChildClass childClass){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getChildForClass",childClass);
+	}
+	
+	public ChildClass getClassNoToTeacherNo(int teacherNo){
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getClassNoToTeacherNo",teacherNo);
 	}
 
 }

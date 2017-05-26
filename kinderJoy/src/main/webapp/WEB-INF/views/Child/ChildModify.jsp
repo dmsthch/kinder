@@ -34,46 +34,46 @@
 <div class="container">
     <form id="modifyForm" action="${pageContext.request.contextPath}/ChildModify" method="post">
         <div class="form-group">kid_no :
-            <input class="form-control" name="kid_no" value="${child.kidNo}" type="text" readonly="readonly"/>
+            <input class="form-control" name="kidNo" value="${child.kidNo}" type="text" readonly="readonly"/>
         </div>
         <div class="form-group">
             <label for="license_kindergarten">유치원 :</label>
-            <input class="form-control" value="${child.licenseKindergarten}" name="license_kindergarten" id="license_kindergarten" type="text"/>
+            <input class="form-control" value="${child.licenseKindergarten}" name="licenseKindergarten" id="licenseKindergarten" type="text"/>
         </div>
          <div class="form-group">
             <label for="kid_name">이름 :</label>
-            <input class="form-control" value="${child.kidName}" name="kid_name" id="kid_name" type="text"/>
+            <input class="form-control" value="${child.kidName}" name="kidName" id="kidName" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_birth">생년월일 :</label>
-            <input class="form-control" value="${child.kidBirth}" name="kid_birth" id="kid_birth" type="text"/>
+            <input class="form-control" value="${child.kidBirth}" name="kidBirth" id="kidBirth" type="text"/>
         </div>    
         <div class="form-group">
             <label for="kid_address">주소 :</label>
-            <input class="form-control" value="${child.kidAddress}" name="kid_address" id="kid_address" type="text"/>
+            <input class="form-control" value="${child.kidAddress}" name="kidAddress" id="kidAddress" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_protector_phone">보호자 번호 :</label>
-            <input class="form-control" value="${child.kidProtectorPhone}" name="kid_protector_phone" id="kid_protector_phone" type="text"/>
+            <input class="form-control" value="${child.kidProtectorPhone}" name="kidProtectorPhone" id="kidProtectorPhone" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_protector_phone_reserve">보호자 예비번호 :</label>
-            <input class="form-control" value="${child.kidProtectorPhoneReserve}" name="kid_protector_phone_reserve" id="kid_protector_phone_reserve" type="text"/>
+            <input class="form-control" value="${child.kidProtectorPhoneReserve}" name="kidProtectorPhoneReserve" id="kidProtectorPhoneReserve" type="text"/>
         </div>
         <div class="form-group">주의사항 :
-            <textarea class="form-control" id="kid_precautions" name="kid_precautions" rows="5" cols="50">${child.kidPrecautions}</textarea>
+            <textarea class="form-control" id="kidPrecautions" name="kidPrecautions" rows="5" cols="50">${child.kidPrecautions}</textarea>
         </div>
         <div class="form-group">
             <label for="kid_gender">성별 :</label>
-            <input class="form-control" value="${child.kidGender}" name="kid_gender" id="kid_gender" type="text"/>
+            <input class="form-control" value="${child.kidGender}" name="kidGender" id="kidGender" type="text"/>
         </div>
         <div class="form-group">
             <label for="kid_commuting">통학방법 :</label>
-            <input class="form-control" value="${child.kidCommuting}" name="kid_commuting" id="kid_commuting" type="text"/>
+            <input class="form-control" value="${child.kidCommuting}" name="kidCommuting" id="kidCommuting" type="text"/>
         </div>
          <div class="form-group">
             <label for="kid_commuting">입학일 :</label>
-            <input class="form-control" value="${child.kidEntranceDay}" name="kid_entrance_day" id="kid_entrance_day" type="text" readonly="readonly"/>
+            <input class="form-control" value="${child.kidEntranceDay}" name="kidEntranceDay" id="kidEntranceDay" type="text" readonly="readonly"/>
         </div>
         <div>
         

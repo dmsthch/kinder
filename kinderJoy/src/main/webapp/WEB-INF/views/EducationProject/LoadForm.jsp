@@ -26,7 +26,24 @@ $(document).ready(function(){
 })
 </script>
 
-<!-- 스프레드 시트 관련 스크립트 -->
+
+
+
+</head>
+<body class="components-page">
+	<div class="wrapper">
+		<div class="main-panel">
+			<div class="content">
+				<input type="text" name="formTitle" value="${resultData.formTitle}" id="formTitle">
+				<button name="save" id="save">계획안 수정</button>
+				<div class="wrapper" style="margin-top: 20px;">
+					<div id="example1"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 스프레드 시트 관련 스크립트 -->
 <script data-jsfiddle="example1">
 $(document).ready(function(){
 	var container = document.getElementById('example1'),hot;
@@ -43,7 +60,7 @@ $(document).ready(function(){
 
 	/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 // {1:"", 2:"" }	
-	for(j=0; j<dataValue.length;j++){
+	/* for(j=0; j<countRow;j++){
 		if(dataValue[j]==null){
 			dataValue[j]={ };
 			//console.log(dataValue);
@@ -52,8 +69,27 @@ $(document).ready(function(){
 				//console.log("ㅇㅅㅇ! ->> "+ i);
 			}
 		}	
-	}
+	} */
 	
+	
+	for(j=0; j<countRow;j++){
+		if(dataValue[j]==null){
+			dataValue[j]={ };
+			//console.log(dataValue);
+			for(i=0 ; i<countCol; i++){
+				dataValue[j][i]=" ";
+				//console.log("ㅇㅅㅇ! ->> "+ i);
+			}
+		}
+		if(j==0){
+			for(i=0 ; i<countCol; i++){
+				if(dataValue[0][i] == null && dataValue[0][i] == undefined){
+					dataValue[0][i] ='';
+				}
+				//console.log("ㅇㅅㅇ! ->> "+ i);
+			}
+		}
+	}
 	
 	console.log(dataValue);
 	console.log('===============================');
@@ -74,6 +110,7 @@ $(document).ready(function(){
 			colHeaders : true,
 			minRows: countRow,
 			minCols: countCol,
+			colWidths: 80,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
@@ -101,15 +138,19 @@ $(document).ready(function(){
 					console.log(row)
 					console.log(col)
 					console.log(val+"<<<<<<<<<<<<<<<<<val!!!!!!!!!!!!!!!!!!!")
-					console.log(dataForSave[row]);
+					//console.log(dataForSave[row][col]);;
 					var meats = hot.getCellMeta(row,col);
 					
 					console.log(meats.borders)
 				
 					if(val !== null){
-						
+						if(dataForSave[row] == null && dataForSave[row] == undefined){
+							
+							dataForSave[row] = {};
+						}
 						dataForSave[row][col] = val;
-						dataArray=dataForSave;
+// 						/* dataForSave[row][col] = val; */
+						dataValue=dataForSave;  
 					}
 				}			
 		}
@@ -122,7 +163,7 @@ $(document).ready(function(){
 	
 	$('#save').click(function(){
 		alert('test');
-		var jparse=JSON.stringify(dataArray);
+		var jparse=JSON.stringify(dataValue);
 		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
 		var inputDate = $('#date').val();
 		console.log(jparse+"<<<<jparse");
@@ -148,12 +189,15 @@ $(document).ready(function(){
 		var age = $('.age:checked').val();
 		var classNo = $('.classNo:checked').val();
 		var projectDateInfo = $('.projectDateInfo').val();
+		var formOrder = ${formOrder};
+		var formTitle = $('#formTitle').val();
+		console.log(formOrder+"<<<<<<<<<<폼오더")
       $.ajax({
-			url : "${pageContext.request.contextPath}/educationProjectAdd",
+			url : "${pageContext.request.contextPath}/educationProjectFormAdd",
 			type : 'POST',
 			dataType: 'JSON',
 			async: false,
-			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo,"age":age, "classNo":classNo, "projectDateInfo":projectDateInfo},
+			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo,"age":age, "classNo":classNo, "projectDateInfo":projectDateInfo, "formOrder" : formOrder,"formTitle" : formTitle},
 			success : function(data){
 				alert('success! '+data); 
 		                        
@@ -170,77 +214,6 @@ $(document).ready(function(){
 	//},5000)
 })
 </script>
-
-
-</head>
-<body class="components-page">
-	<div class="wrapper">
-		<div class="main-panel">
-			<div class="content">
-				<div class="radio">
-					<label>
-						<input type="radio" name="categoryNo" value="1" class="categoryNo">
-						연간계획안
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="categoryNo" value="2" class="categoryNo">
-						월간계획안
-					</label>
-				</div>
-				<div class="radio">
-					<label> 
-						<input type="radio" name="categoryNo" value="3" class="categoryNo">
-						주간계획안
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="categoryNo" value="4" class="categoryNo">
-						일일계획안
-					</label>
-				</div>
-				<hr>
-				
-				<div class="radio">
-					<label>
-						<input type="radio" name="age" value="3" class="age">
-						3세
-					</label>
-				</div>
-				
-					<div class="radio">
-					<label>
-						<input type="radio" name="age" value="4" class="age">
-						4세
-					</label>
-				</div>
-				
-					<div class="radio">
-					<label>
-						<input type="radio" name="age" value="5" class="age">
-						5세
-					</label>
-				</div>
-				<hr>
-				
-				<div class="radio">
-					<label>
-						<input type="radio" name="classNo" value="8" class="classNo">
-						카나리아반
-					</label>
-				</div>
-				<hr>
-				<input type="date" class="projectDateInfo" name="projectDateInfo">
-				
-				<button name="save" id="save">계획안 저장</button>
-				<div class="wrapper" style="margin-top: 20px;">
-					<div id="example1"></div>
-				</div>
-			</div>
-		</div>
-	</div>
 </body>
 
 

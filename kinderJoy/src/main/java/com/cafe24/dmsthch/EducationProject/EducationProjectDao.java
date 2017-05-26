@@ -26,7 +26,22 @@ public class EducationProjectDao {
 		eduForm.setFormCountRow(formCountRow);
 		eduForm.setFormCountCol(formCountCol);
 		eduForm.setFormTitle(formTitle);
+		
 		sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formAdd", eduForm);
+	}
+	
+	//Æû ¼öÁ¤
+	public void formUpdate(String formVal,String formMerge,String formBorders, int formCountRow, int formCountCol, String licenseKindergarten, String formTitle, int formOrder){		
+		EducationForm eduForm = new EducationForm();
+		eduForm.setLicenseKindergarten(licenseKindergarten);
+		eduForm.setFormVal(formVal);
+		eduForm.setFormMerge(formMerge);
+		eduForm.setFormBorders(formBorders);
+		eduForm.setFormCountRow(formCountRow);
+		eduForm.setFormCountCol(formCountCol);
+		eduForm.setFormTitle(formTitle);
+		eduForm.setFormOrder(formOrder);
+		sqlSessionTemplate.update("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formUpdate", eduForm);
 	}
 	
 	//Æû ºÒ·¯¿Ã¶§
