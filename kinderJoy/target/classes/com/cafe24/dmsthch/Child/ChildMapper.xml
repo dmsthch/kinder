@@ -4,6 +4,115 @@
   
   <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
   
+  <!-- 유아번호로 오늘날짜 출석정보 가져오기 (특이사항 포함)-->
+  <select id="getCommuteAll" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Child.ChildAttendance">
+  	select 
+		kid_attendance.attendance_no AS attendanceNo,
+		kid_attendance.kid_no AS kidNo,
+		kid_attendance.license_kindergarten AS licenseKindergarten,
+		kid_attendance.attendance,
+		kid_attendance.attendance_unusual AS attendanceUnusual,
+		kid_attendance.attendance_day AS attendanceDay,
+		kid_attendance_unusual.category_no AS categoryNo,
+		kid_attendance_unusual.attendance_time AS attendanceTime,
+		kid_attendance_unusual.attendance_memo AS attendanceMemo
+	from kid_attendance left join kid_attendance_unusual 
+	on kid_attendance.attendance_no = kid_attendance_unusual.attendance_no
+	where kid_attendance.attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+	and kid_attendance.kid_no = #{kidNo}
+  
+  </select>
+  
+  
+  <!-- 출석 특이사항 insert -->
+  <insert id="unusualInsert" parameterType="com.cafe24.dmsthch.Child.ChildAttendance">
+  	INSERT INTO kid_attendance_unusual (
+  		kid_no,
+  		attendance_no,
+  		category_no,
+  		attendance_time,
+  		attendance_memo,
+  		attendance_day
+  	) VALUES (
+  		#{kidNo},
+  		#{attendanceNo},
+  		#{categoryNo},
+  		DATE_FORMAT(NOW(),'%T'),
+  		#{attendanceMemo},
+  		DATE_FORMAT(NOW(),'%Y-%m-%d')
+  	);
+  	
+  </insert>
+  
+    <!-- kidNo로 당일 출석정보 가져오기 -->
+  <select id="getTodayAttendance" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Child.ChildAttendance">
+  	select 
+		attendance_no AS attendanceNo,
+		kid_no AS kidNo,
+		license_kindergarten AS licenseKindergarten,
+		attendance,
+		attendance_unusual AS attendanceUnusual,
+		attendance_day AS attendanceDay
+	from 
+		kid_attendance 
+	where kid_no = #{kidNo}
+	and attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+  </select>  
+
+  
+<!--   당일 출석이 처음이 아닌경우 update -->
+  <update id="kidAttendanceUpdate" parameterType="com.cafe24.dmsthch.Child.ChildAttendance">
+	  UPDATE 
+	  	kid_attendance 
+	  SET 
+	  	attendance = #{attendance},
+	  	attendance_unusual = #{attendanceUnusual} 
+	  WHERE 
+	  	kid_no = #{kidNo}
+	  and 
+	  	attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+  
+  </update>
+  
+<!-- 당일 출석이 처음인경우 insert -->
+  <insert id="kidAttendanceInsert" parameterType="com.cafe24.dmsthch.Child.ChildAttendance">
+  	INSERT INTO kid_attendance (
+  		kid_no, 
+  		license_kindergarten, 
+  		attendance, 
+  		attendance_unusual, 
+  		attendance_day
+  	) VALUES (
+  		#{kidNo},
+  		#{licenseKindergarten},
+  		#{attendance},
+  		#{attendanceUnusual},
+  		DATE_FORMAT(NOW(),'%Y-%m-%d')
+  	)
+  </insert>
+  
+  <!-- 출석 특이사항 카테고리 가져오기 -->
+  <select id="getAttendanceCategory" resultType="java.util.Map">
+  	select 
+		category_no AS categoryNo
+		,category_name AS categoryName 
+	from
+		kid_attendance_category
+  </select>
+  
+  <!-- 당일 출석부 등록유무 확인 -->
+  <select id="isTodayCommute" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	select 
+  		count(*)
+  	from 
+  		kid_attendance 
+  	where 
+  		attendance_day = DATE_FORMAT(NOW(),'%Y-%m-%d')
+  	and
+  		license_kindergarten = #{license}
+  </select>
+  
+  <!-- 반하나 가져오기 -->
   <select id="getClassOne" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Child.ChildClass">
   	select 
   		license_kindergarten AS licenseKindergarten
@@ -15,6 +124,7 @@
   	kid_class where class_no = #{classNo}
   </select>
   
+  <!-- 선생번호로 반번호 가져오기 -->
   <select id="getClassNoToTeacherNo" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Child.ChildClass">
 	select 
 		class_no AS classNo
@@ -24,6 +134,11 @@
 		teacher_no = #{teacherNo}
   
   </select>
+  
+  
+  
+  
+  
   
   <insert id="classOrganization" parameterType="java.util.Map">
   	INSERT INTO kid_formation(

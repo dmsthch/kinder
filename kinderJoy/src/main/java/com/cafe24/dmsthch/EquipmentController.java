@@ -165,21 +165,14 @@ public class EquipmentController {
 						,Model model){
 		Equipment equipmnet = new Equipment();
 		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
-		
-		equipmnet.setLicenseKindergarten(licenseKindergarten);
-		
-		int equipmnetCount = dao.selectEquipmentCount(session);
-		
-		List<Equipment> equipmentList = dao.selectEquipment(equipmnetCount);
-		
-		model.addAttribute("equipmentList",equipmentList);
+
 		return "Equipment/NewFile";
 	}
 	@RequestMapping(value = "testSave", method = RequestMethod.POST)
 	@ResponseBody
 	public int test03(@RequestParam(value="boardCategoryNo", required=false, defaultValue="") String equipmentCategorySelect
 						,@RequestParam(value="testCategoryNo", required=false, defaultValue="") String testCategoryNo
-						,@RequestParam(value="test1") String test1
+						,@RequestParam(value="test1") String equipmentName
 						,@RequestParam(value="testPrice") String testPrice
 						,@RequestParam(value="testValue", required=false, defaultValue="") String testValue
 						,@RequestParam(value="updatePlusInput", required=false, defaultValue="") String updatePlusInput
@@ -191,31 +184,18 @@ public class EquipmentController {
 		System.out.println("비품 저장 메서드 실행");
 		System.out.println(testCategoryNo);
 		System.out.println(equipmentCategorySelect);
-		System.out.println(test1);
+		System.out.println(equipmentName);
 		System.out.println(testPrice);
 		System.out.println(testValue);
 		System.out.println(updatePlusInput);
 		System.out.println(updateMinusInput);
 		System.out.println(testCustomer);
 		System.out.println(testState);
-		
-		int teacherNo = (Integer)session.getAttribute("teacherNo");
-		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
-		
-		Equipment equipment = new Equipment();
-		
-		equipment.setLicenseKindergarten(licenseKindergarten);
-		equipment.setTeacherNo(teacherNo);
-		equipment.setEquipmentName(test1);
-		equipment.setCategoryNo(Integer.parseInt(equipmentCategorySelect));
-		equipment.setEquipmentCost(Integer.parseInt(testPrice));
-		equipment.setEquipmentAmount(Integer.parseInt(testValue));
-		equipment.setEquipmentCustomer(testCustomer);
-		equipment.setEquipmentState(testState);
 
-		int returnValue = dao.addEquipment(equipment);
+	
+		dao.addTestEquipment(equipmentName, testCategoryNo, equipmentCategorySelect, testState, session);
 		
-		return returnValue;
+		return 0;
 	}
 	@RequestMapping(value = "SheetList", method = RequestMethod.GET)
 	public String sheetList(Model model

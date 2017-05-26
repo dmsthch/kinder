@@ -81,6 +81,12 @@ public class EducationProjectDao {
 		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.educationProjectFormName", licenseKindergarten);
 	}
 	
+	//폼 삭제하기
+	public int educationProjectFormDelete(EducationForm eduForm){
+		System.out.println(eduForm.getFormNo()+"<<<formNo");
+		return sqlSessionTemplate.delete("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formDelete",eduForm);
+	}
+	
 	//계획안 추가하기
 	public String educationProjectAdd(String val,String merge,String borders, int countRow, int countCol, String licenseKindergarten, int age,String classNo, String categoryNo, String projectDateInfo){
 		Education edu = new Education();

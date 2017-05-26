@@ -3,8 +3,53 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
-  	<!-- 같은 네임품명 플러스값 총합, 마이너스값 총합 값  가져오기 -->
-	<select id="selectEquipmnetPlusMinsList" resultType="com.cafe24.dmsthch.Equipment.EquipmentPlusMinus">
+  	<!-- test_equipment_value(plus,minus) insert -->
+  	<insert id="addTestEquipmentValue" parameterType="com.cafe24.dmsthch.Equipment.EquipmentValue">
+  		INSERT(
+			 equipment_no
+			,equipment_cost
+			,equipment_amount
+			,equipment_customer
+			,equipment_day
+		)INTO
+		VALUES(
+			 #{equipmentNo}
+			,#{equipmentCost}
+			,#{equipmentAmount}
+			,#{equipmentCustomer}
+			,#{equipmentDay}
+		);
+  	</insert>
+  	<!-- test_equipment select -->
+  	<select id="selectTestEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment" resultType="com.cafe24.dmsthch.Equipment.Equipment">
+  		SELECT
+			equipment_no AS equipmentNo
+		FROM
+			test_equipment
+		WHERE
+			equipment_name = #{equipmentName}
+		AND
+			license_kindergarten = #{licenseKindergarten};
+  	</select>
+  	<!-- test_equipment insert -->
+  	<insert id="addTestEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
+  		INSERT(
+			 license_kindergarten
+			,equipment_name
+			,teacher_no
+			,category_no
+			,equipmnet_state
+		)INTO
+		VALUES(
+			 #{licenseKindergarten}
+			,#{equipmentName}
+			,#{teacherNo}
+			,#{categoryNo}
+			,#{equipmentState}
+		);
+  	</insert>
+   	<!-- 같은 네임품명 플러스값 총합, 마이너스값 총합 값  가져오기 -->
+<!--	<select id="selectEquipmnetPlusMinsList" resultType="com.cafe24.dmsthch.Equipment.EquipmentPlusMinus">
 		 SELECT
 		 	 t.equipment_no AS equipmentNo 
 		 	,t.license_kindergarten AS licenseKindergarten
@@ -25,7 +70,7 @@
 			test_equipment_value_minus m
 		ON m.equipment_no = t.equipment_no
 		GROUP BY t.equipment_no			
-	</select>
+	</select> -->
   	<!-- 비품신청 삭제 -->
   	<delete id="removeEquipmentRequest" parameterType="com.cafe24.dmsthch.Equipment.EquipmentRequest">
   		DELETE FROM 
@@ -79,8 +124,9 @@
 		,#{requestStant}
 	);
   	</insert>
-  	<!-- 비품 셀렉트 카운트 받아서 셀렉트 리스트 출력 -->
-  	<select id="selectEquipmentList" parameterType="int" resultType="com.cafe24.dmsthch.Equipment.Equipment">
+  	
+   <!-- 비품 셀렉트 카운트 받아서 셀렉트 리스트 출력 -->
+<!--  	<select id="selectEquipmentList" parameterType="int" resultType="com.cafe24.dmsthch.Equipment.Equipment">
   		SELECT 
   			 equipment_no AS equipmentNo
   			,license_kindergarten AS licenseKindergarten
@@ -100,10 +146,10 @@
   			equipment_day
   		DESC LIMIT #{equipmnetCount};
   	</select>
-  	<!-- 비품 리스트 셀렉트 카운트 구하기 -->
+  	비품 리스트 셀렉트 카운트 구하기
   	<select id="selectCountEquipmentList" parameterType="String" resultType="int">
 		SELECT COUNT(DISTINCT equipment_name) FROM equipment WHERE license_kindergarten=#{licenseKindergarten};
-  	</select>
+  	</select> -->
   	
   	
   	
@@ -138,7 +184,7 @@
   		ORDER BY value_no DESC;
   	</select>
   	
-  	<insert id="addEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
+<!--   	<insert id="addEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
   		INSERT INTO equipment(
   			  license_kindergarten
   			, equipment_name
@@ -160,7 +206,7 @@
   			,#{equipmentState}
   			,now()
   		);
-  	</insert>
+  	</insert> -->
   	
   	<select id="selectEquipmentCategory" resultType="java.util.Map">
   		SELECT

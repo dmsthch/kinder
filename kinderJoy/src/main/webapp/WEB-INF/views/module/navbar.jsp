@@ -22,7 +22,7 @@
                     <!-- <img src="../assets/img/new_logo.png" alt="Creative Tim Logo"> -->
                 </div>
                 <div class="brand">
-                  <p><a href="${pageContext.request.contextPath}/" class="navbar-brand">Team. 핵병아리</a></p>
+                  <p><a href="${pageContext.request.contextPath}/" class="navbar-brand">Team. 햇병아리</a></p>
                 </div>
             </div>
       </a>
