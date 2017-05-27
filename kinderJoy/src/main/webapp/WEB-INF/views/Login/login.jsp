@@ -26,6 +26,15 @@ $(document).ready(function(){
 		});
 	});
 </script>
+
+<!-- 관리자 자동선택 -->
+<!-- <script>
+$(document).ready(function(){
+	$('#btnAdmin').trigger('click');
+});
+</script> -->
+
+
 <style>
 
 <style>
@@ -76,13 +85,13 @@ div.tab button.active {
 		<div class="modal-dialog">
 	
 	<div class="tab">
-	  <button class="tablinks" onclick="openCity(event, 'London')">관리자</button>
-	  <button class="tablinks" onclick="openCity(event, 'Paris')">일반</button>
+	  <button class="tablinks" onclick="openCity(event, 'admin')" id="btnAdmin">관리자</button>
+	  <button class="tablinks" onclick="openCity(event, 'client')">일반</button>
 	</div>
 <!-- 관리자 로그인 -->	
 <form id="LoginForm" action="${pageContext.request.contextPath}/Login" method="post" accept-charset="UTF-8">
 	<div class="modal-content">
-		<div id="London" class="tabcontent">
+		<div id="admin" class="tabcontent">
 		
 		<h3>관리자 로그인</h3>
 		
@@ -110,7 +119,7 @@ div.tab button.active {
 <!-- 일반 로그인 -->
 <form id="LoginForm" action="${pageContext.request.contextPath}/Login" method="post" accept-charset="UTF-8">
 	<div class="modal-content">
-		<div id="Paris" class="tabcontent">
+		<div id="client" class="tabcontent">
 		
 			<h3>일반 로그인</h3>
 			
