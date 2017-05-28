@@ -180,7 +180,7 @@
  	        }
  	    });
  	}); */
- 	// 플러스 버튼 눌렀을 시 플러스 값 넘기기
+ 	// 플러스 버튼 눌렀을 시 플러스 값 넘기기1
 </script>
 
 <input class="btn btn-default dropdown-toggle" id="button" type="button" value="비품추가"/>
