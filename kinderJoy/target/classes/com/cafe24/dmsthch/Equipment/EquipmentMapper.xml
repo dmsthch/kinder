@@ -4,26 +4,41 @@
   
   <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
   	<!-- test_equipment_value(plus,minus) insert -->
-  	<insert id="addTestEquipmentValue" parameterType="com.cafe24.dmsthch.Equipment.EquipmentValue">
-  		INSERT(
+   	<insert id="addTestEquipmentValueMinus" parameterType="com.cafe24.dmsthch.Equipment.EquipmentValue">
+  		INSERT INTO test_equipment_value_minus(
 			 equipment_no
 			,equipment_cost
 			,equipment_amount
 			,equipment_customer
-			,equipment_day
-		)INTO
+			,equipment_day)
 		VALUES(
 			 #{equipmentNo}
 			,#{equipmentCost}
 			,#{equipmentAmount}
 			,#{equipmentCustomer}
-			,#{equipmentDay}
+			,now()
+		);
+  	</insert>
+  	<insert id="addTestEquipmentValuePlus" parameterType="com.cafe24.dmsthch.Equipment.EquipmentValue">
+  		INSERT INTO test_equipment_value_plus(
+			 equipment_no
+			,equipment_cost
+			,equipment_amount
+			,equipment_customer
+			,equipment_day)
+		VALUES(
+			 #{equipmentNo}
+			,#{equipmentCost}
+			,#{equipmentAmount}
+			,#{equipmentCustomer}
+			,now()
 		);
   	</insert>
   	<!-- test_equipment select -->
   	<select id="selectTestEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment" resultType="com.cafe24.dmsthch.Equipment.Equipment">
   		SELECT
-			equipment_no AS equipmentNo
+			 equipment_no AS equipmentNo
+			,equipment_name AS equipmentName
 		FROM
 			test_equipment
 		WHERE
@@ -33,13 +48,12 @@
   	</select>
   	<!-- test_equipment insert -->
   	<insert id="addTestEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
-  		INSERT(
+  		INSERT INTO test_equipment(
 			 license_kindergarten
 			,equipment_name
 			,teacher_no
 			,category_no
-			,equipmnet_state
-		)INTO
+			,equipmnet_state)
 		VALUES(
 			 #{licenseKindergarten}
 			,#{equipmentName}
@@ -49,7 +63,7 @@
 		);
   	</insert>
    	<!-- 같은 네임품명 플러스값 총합, 마이너스값 총합 값  가져오기 -->
-<!--	<select id="selectEquipmnetPlusMinsList" resultType="com.cafe24.dmsthch.Equipment.EquipmentPlusMinus">
+	<select id="selectEquipmnetPlusMinusList" resultType="com.cafe24.dmsthch.Equipment.EquipmentPlusMinus">
 		 SELECT
 		 	 t.equipment_no AS equipmentNo 
 		 	,t.license_kindergarten AS licenseKindergarten
@@ -70,7 +84,7 @@
 			test_equipment_value_minus m
 		ON m.equipment_no = t.equipment_no
 		GROUP BY t.equipment_no			
-	</select> -->
+	</select>
   	<!-- 비품신청 삭제 -->
   	<delete id="removeEquipmentRequest" parameterType="com.cafe24.dmsthch.Equipment.EquipmentRequest">
   		DELETE FROM 
