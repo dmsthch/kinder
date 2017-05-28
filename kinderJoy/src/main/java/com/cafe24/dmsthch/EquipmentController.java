@@ -69,10 +69,11 @@ public class EquipmentController {
 		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
 		System.out.println(getCategory + "getCategory 확인");
 		model.addAttribute("getCategory", getCategory);
+	
 		List<EquipmentPlusMinus> plusMinus = dao.selectEquipmentPlusMinusList();
 		model.addAttribute("plusMinus",plusMinus);
 		
-		/*		Equipment equipmnet = new Equipment();
+/*		Equipment equipmnet = new Equipment();
 		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
 		
 		equipmnet.setLicenseKindergarten(licenseKindergarten);
@@ -168,6 +169,7 @@ public class EquipmentController {
 
 		return "Equipment/NewFile";
 	}
+	// 비품 한줄 저장
 	@RequestMapping(value = "testSave", method = RequestMethod.POST)
 	@ResponseBody
 	public int test03(@RequestParam(value="boardCategoryNo", required=false, defaultValue="") String equipmentCategorySelect
@@ -191,12 +193,30 @@ public class EquipmentController {
 		System.out.println(updateMinusInput);
 		System.out.println(testCustomer);
 		System.out.println(testState);
-
-	
-		dao.addTestEquipment(equipmentName, testCategoryNo, equipmentCategorySelect, testState, session);
-		
-		return 0;
+		int resultInsert;
+		Equipment equipment;
+		equipment = dao.selectTestEquipment(equipmentName, session);
+		String selectEquipemntName = equipment.getEquipmentName();
+		if(selectEquipemntName == equipmentName) {
+			int selectEquipemntNo = equipment.getEquipmentNo();
+			if(updatePlusInput == "") {
+				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, testPrice, testValue, testCustomer);
+			} else {
+				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, testPrice, testValue, testCustomer);
+			}
+		} else {
+			dao.addTestEquipment(equipmentName, testCategoryNo, equipmentCategorySelect, testState, session);
+			equipment = dao.selectTestEquipment(equipmentName, session);
+			int selectEquipemntNo = equipment.getEquipmentNo();
+			if(updatePlusInput == "") {
+				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, testPrice, testValue, testCustomer);
+			} else {
+				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, testPrice, testValue, testCustomer);
+			}
+		}
+		return resultInsert;
 	}
+	// 스프레드 시트 실행
 	@RequestMapping(value = "SheetList", method = RequestMethod.GET)
 	public String sheetList(Model model
 							,HttpSession session){
