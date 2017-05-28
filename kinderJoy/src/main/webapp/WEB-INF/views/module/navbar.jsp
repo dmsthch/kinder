@@ -27,13 +27,12 @@
             </div>
       </a>
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
 		<ul  class="nav navbar-nav navbar-right">
 			<c:if test= "${null eq teacherId}"> <!-- teacherId값이 null 이라면 --> <!-- 모달 영역 밖 클릭 시 닫힘 방지 //data-backdrop="static" -->
 				<li><a href="#" data-toggle="modal" data-target="#signIn" class="smoothScroll">로그인</a></li>
-				<li><a href="${pageContext.request.contextPath}/Add" class="smoothScroll">회원가입</a></li>
+				<li><a href="${pageCo /ntext.request.contextPath}/Add" class="smoothScroll">회원가입</a></li>
 			</c:if>
 		
 			<c:if test="${null ne teacherId}"> <!-- teacherId값이 null이 아니라면 -->
@@ -58,4 +57,3 @@
 <c:import url="/WEB-INF/views/Login/login.jsp"></c:import>
 <!-- ★★★★★로그아웃 모달 시작★★★★★ -->
 <c:import url="/WEB-INF/views/Login/logout.jsp"></c:import>
-
