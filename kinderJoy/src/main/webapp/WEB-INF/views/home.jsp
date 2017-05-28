@@ -43,6 +43,7 @@
 				<c:if test="${teacherId != null }">
 					<a href="${pageContext.request.contextPath}/CommuteInfo" class="smoothScroll btn btn-danger">출석현황</a>
 				</c:if>
+				<a href="${pageContext.request.contextPath}/testLogin">.</a>
 			</div>
 		</div>
 	</div>		

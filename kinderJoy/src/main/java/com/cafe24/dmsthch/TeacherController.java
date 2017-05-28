@@ -1,9 +1,19 @@
 package com.cafe24.dmsthch;
 
+import java.io.IOException;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.RSAPublicKeySpec;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import javax.crypto.Cipher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
 import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
@@ -229,6 +238,95 @@ public class TeacherController {
 		return check;
 	}
 	
+	//로그인 폼 호출
+	@RequestMapping(value="/testLogin", method=RequestMethod.GET)
+	public void Login(HttpServletRequest request ,HttpServletResponse response) throws Exception {
+		
+		
+		KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+		generator.initialize(1024);
+
+		KeyPair keyPair = generator.genKeyPair();
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+
+		PublicKey publicKey = keyPair.getPublic();
+		PrivateKey privateKey = keyPair.getPrivate();
+
+		HttpSession session = request.getSession();
+		// 세션에 공개키의 문자열을 키로하여 개인키를 저장한다.
+		session.setAttribute("__rsaPrivateKey__", privateKey);
+
+		// 공개키를 문자열로 변환하여 JavaScript RSA 라이브러리 넘겨준다.
+		RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+
+		String publicKeyModulus = publicSpec.getModulus().toString(16);
+		String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
+
+		request.setAttribute("publicKeyModulus", publicKeyModulus);
+		request.setAttribute("publicKeyExponent", publicKeyExponent);
+		
+		request.getRequestDispatcher("/WEB-INF/views/Login/testLogin.jsp").forward(request, response);
+		
+	}
+	
+	
+	//로그인 암호화된 아이디 비밀번호를 복호화한다.
+	@RequestMapping(value="/loginTest", method=RequestMethod.POST)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+		String securedUsername = request.getParameter("securedUsername");
+		System.out.println(securedUsername +"<--암호화된 아이디");
+        String securedPassword = request.getParameter("securedPassword");
+        System.out.println(securedPassword+"<--암호회된 패스워드");
+        
+        HttpSession session = request.getSession();
+        PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
+        session.removeAttribute("__rsaPrivateKey__"); // 키의 재사용을 막는다. 항상 새로운 키를 받도록 강제.
+
+        if (privateKey == null) {
+            throw new RuntimeException("암호화 비밀키 정보를 찾을 수 없습니다.");
+        }
+        try {
+            String username = decryptRsa(privateKey, securedUsername);
+            String password = decryptRsa(privateKey, securedPassword);
+            System.out.println(username +"<--복호화한 아이디");
+            System.out.println(password +"<--복호화한 패스");
+            request.setAttribute("username", username);
+            request.setAttribute("password", password);
+            request.getRequestDispatcher("/WEB-INF/views/Login/testLogin.jsp").forward(request, response);
+        } catch (Exception ex) {
+            throw new ServletException(ex.getMessage(), ex);
+        }
+    }
+
+    private String decryptRsa(PrivateKey privateKey, String securedValue) throws Exception {
+        System.out.println("will decrypt : " + securedValue);
+        Cipher cipher = Cipher.getInstance("RSA");
+        byte[] encryptedBytes = hexToByteArray(securedValue);
+        cipher.init(Cipher.DECRYPT_MODE, privateKey);
+        byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+        String decryptedValue = new String(decryptedBytes, "utf-8"); // 문자 인코딩 주의.
+        return decryptedValue;
+    }
+
+    /**
+     * 16진 문자열을 byte 배열로 변환한다.
+     */
+    public static byte[] hexToByteArray(String hex) {
+        if (hex == null || hex.length() % 2 != 0) {
+            return new byte[]{};
+        }
+
+        byte[] bytes = new byte[hex.length() / 2];
+        for (int i = 0; i < hex.length(); i += 2) {
+            byte value = (byte)Integer.parseInt(hex.substring(i, i + 2), 16);
+            bytes[(int) Math.floor(i / 2)] = value;
+        }
+        return bytes;
+}
+	
+	
+	
 	
 	//@RequestParam("클라이언트가 입력한 값") String 매개변수
 	//리퀘스트 파람을 쓰면 값을 알아서 넣어준다
@@ -269,9 +367,10 @@ public class TeacherController {
 				System.out.println("세션의 유지 시간 : "+session.getMaxInactiveInterval()+"초");
 
 				}
-			} else {
+			} else {				
 				model.addAttribute("nogin","로그인실패");
 				System.out.println("아이디나 비밀번호를 확인해주세요");
+				
 				return "/home";
 		}
 		return "redirect:/home";
