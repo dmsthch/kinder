@@ -30,13 +30,32 @@
 	<div class="wrapper">
 		<div class="main-panel">
 			<div class="content">
-				======양식 추가하기======<br/>
-				<input type="text" placeholder="양식의 이름을 입력해주세요." name="formTitle" id="formTitle" style="width: 500px;"><br/>
-				<button id="btTest">bt</button>
-				<button name="save" id="save">Save</button>
-				<button name="test" id="test">Test</button>
-				<div class="wrapper" style="margin-top: 20px;">
-					<div id="example1"></div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header" data-background-color="blue">
+									<h3 class="title">양식 추가하기</h3>
+								</div>
+								
+								<div class="card-content">
+									<div class="row">
+										<div class="col-sm-2" style="padding-top: 15px; text-align: center;"> 
+											<button name="save" id="save" class="btn btn-info">양식 추가</button>
+											
+										</div>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" placeholder="양식의 제목을 입력하세요." name="formTitle" id="formTitle">
+										</div>
+									</div>
+									
+								</div>
+							</div>
+							<div class="wrapper" style="margin-top: 20px;">
+								<div id="example1"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -74,7 +93,7 @@
 		hot = new Handsontable(container, {
  			//data: dataTest,    //데이터 가져오기
 			startRows: 40,
-			startCols: 15, 
+			startCols: 18, 
 			colWidths: 80,
 			rowHeights: 30,
  //			manualRowResize : true,

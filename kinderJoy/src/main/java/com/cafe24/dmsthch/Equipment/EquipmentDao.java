@@ -15,6 +15,34 @@ import org.springframework.stereotype.Repository;
 public class EquipmentDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	// test_equipment_value insert
+	public int addTestEquipmentValuePlus(int selectEquipemntNo
+									,String testPrice
+									,String testValue
+									,String testCustomer) {
+		System.out.println("addTestEquipmentValuePlus 내용 실행");
+		String equipmentNo = Integer.toString(selectEquipemntNo);
+		EquipmentValue equipmentValue = new EquipmentValue();
+		equipmentValue.setEquipmentNo(equipmentNo);
+		equipmentValue.setEquipmentCost(testPrice);
+		equipmentValue.setEquipmentAmount(testValue);
+		equipmentValue.setEquipmentCustomer(testCustomer);
+		
+		return sqlSessionTemplate.insert("com.cafe24.dmsthch.Equipment.EquipmentMapper.addTestEquipmentValuePlus",equipmentValue);
+	}
+	public int addTestEquipmentValueMinus(int selectEquipemntNo
+			,String testPrice
+			,String testValue
+			,String testCustomer) {
+		System.out.println("addTestEquipmentValueMinus 내용 실행");
+		String equipmentNo = Integer.toString(selectEquipemntNo);
+		EquipmentValue equipmentValue = new EquipmentValue();
+		equipmentValue.setEquipmentNo(equipmentNo);
+		equipmentValue.setEquipmentCost(testPrice);
+		equipmentValue.setEquipmentAmount(testValue);
+		equipmentValue.setEquipmentCustomer(testCustomer);
+	return sqlSessionTemplate.insert("com.cafe24.dmsthch.Equipment.EquipmentMapper.addTestEquipmentValueMinus",equipmentValue);
+	}
 	// test_equipment select 및 중복검사
 	public Equipment selectTestEquipment(String equipmentName
 										,HttpSession session) {
@@ -23,6 +51,7 @@ public class EquipmentDao {
 		Equipment equipment = new Equipment();
 		equipment.setEquipmentName(equipmentName);
 		equipment.setLicenseKindergarten(licenseKindergarten);
+		System.out.println("중간점검");
 		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectTestEquipment",equipment);
 	}
 	// test_equipment insert
@@ -32,6 +61,9 @@ public class EquipmentDao {
 								,String testState
 								,HttpSession session) {
 		System.out.println("addTestEquipment 내용 실행");
+		System.out.println(testCategoryNo);
+		System.out.println(equipmentCategorySelect);
+		System.out.println("--------");
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		int teacherNo = (Integer)session.getAttribute("teacherNo");
 		Equipment equipment = new Equipment();
@@ -40,8 +72,10 @@ public class EquipmentDao {
 		equipment.setEquipmentName(equipmentName);
 		equipment.setTeacherNo(teacherNo);
 		if(testCategoryNo.equals("")) {
+			System.out.println("testCategofyNo if");
 			equipment.setCategoryNo(equipmentCategorySelect);
 		}else if(equipmentCategorySelect.equals("")) {
+			System.out.println("equipmentCategorySelect else if");
 			equipment.setCategoryNo(testCategoryNo);
 		}
 		equipment.setEquipmentState(testState);
@@ -51,7 +85,7 @@ public class EquipmentDao {
 	public List<EquipmentPlusMinus> selectEquipmentPlusMinusList() {
 		System.out.println("selectEquipmentPlusMinusList 내용 실행");
 
-		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectEquipmnetPlusMinsList");
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectEquipmnetPlusMinusList");
 	}
 	// 비품 건의서 삭제
 	public int removeEquipmentRequest(String requestNo

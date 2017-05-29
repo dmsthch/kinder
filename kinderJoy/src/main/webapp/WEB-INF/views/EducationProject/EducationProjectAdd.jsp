@@ -40,7 +40,7 @@ $(document).ready(function(){
 	
 	//연령선택하면 해당 반 보여주는것
 	$(document).on('change','#selectAge',function(){
-		if (categoryNo==1){
+		if(categoryNo==1){
 			$('#afterClass').attr('style','display:"";');
 		}else{
 			var selectAge = $('#selectAge').val();
@@ -49,9 +49,9 @@ $(document).ready(function(){
 			$('select[name=selectClass] option[class!="'+selectAge+'"]').attr('style','display:none');
 			$('select[name=selectClass] option[class="'+selectAge+'"]').attr('style','display:""');
 			$("#selectClass option:first").prop("selected", true);
-			
 			$('#afterAge').attr('style','display:"";');
 		}
+		
 	})
 	
 	$(document).on('change','#selectClass',function(){
@@ -362,82 +362,102 @@ $(document).ready(function(){
 	<div class="wrapper">
 		<div class="main-panel">
 			<div class="content">
-				<div class="row">
-					<div class="col-sm-2">
-						<select class="form-control" id="selectAge" >
-						<option value="" disabled selected> 연령 선택  </option>
-						<option value="3" >3세</option>
-						<option value="4">4세</option>
-						<option value="5">5세</option>
-						
-						</select>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header" data-background-color="blue">
+									<c:choose>
+										<c:when test="${categoryNo == 4}">
+											<h3 class="title">일일계획안 작성</h3>
+										</c:when>
+										<c:when test="${categoryNo == 3}">
+											<h3 class="title">주간계획안 작성</h3>
+										</c:when>
+										<c:when test="${categoryNo == 2}">
+											<h3 class="title">월간계획안 작성</h3>
+										</c:when>
+										<c:when test="${categoryNo == 1}">
+											<h3 class="title">연간계획안 작성</h3>
+										</c:when>
+									</c:choose>
+								</div>
+								
+								<div class="card-content">
+									<div class="row">
+										<div class="col-sm-2" style="padding-top: 15px; text-align: center;"> 
+											<button name="save" id="save" class="btn btn-info">저장/수정</button>
+											
+										</div>
+										<div class="col-sm-2">
+											<select class="form-control" id="selectAge" >
+											<option value="" disabled selected> 연령 선택  </option>
+											<option value="3" >3세</option>
+											<option value="4">4세</option>
+											<option value="5">5세</option>
+											</select>
+										</div>
+										
+										<div class="col-sm-3" id="afterAge" style="display: none;">
+											<select class="form-control" id="selectClass" name="selectClass" >
+												<option value="" disabled selected> 반 선택  </option>
+												<c:forEach items="${listChildClass}" var="childClass">
+													<option value="${childClass.classNo}" class="${childClass.classAge}">${childClass.className}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<!-- 일일계획안 -->
+										<c:if test="${categoryNo==4}">
+											<div class="col-sm-3" id="afterClass" style="display: none;">
+											<input class="form-control" type="date" id="projectDateInfo" >
+											</div>
+										</c:if>
+										<!-- 주간계획안 -->
+										<c:if test="${categoryNo==3}"> 
+											<div class="col-sm-3" id="afterClass" style="display: none;">
+												<div class="col-sm-4"> <input class="form-control inspection" type="text" id="projectDateInfoYear" placeholder="년 입력" > </div>
+												<div class="col-sm-3"> <input class="form-control inspection" type="text" id="projectDateInfoMonth" placeholder="월 입력" > </div>
+												<div class="col-sm-5"><select class="form-control" id="projectDateInfoWeek">
+																		<option value="" disabled selected>주 선택</option>
+																		<option value=1>1주</option>
+																		<option value=2>2주</option>
+																		<option value=3>3주</option>
+																		<option value=4>4주</option>
+																		<option value=5>5주</option>
+																		</select></div>
+											</div>
+										</c:if>
+										<!-- 월간계획안 -->
+										<c:if test="${categoryNo==2}">
+											<div class="col-sm-3" id="afterClass" style="display: none;">
+												<div class="col-sm-6"><input class="form-control inspection" type="text" id="projectDateInfoYear" placeholder="년 입력" ></div>
+												<div class="col-sm-6"><input class="form-control inspection" type="text" id="projectDateInfoMonth" placeholder="월 입력" ></div>
+											</div>
+										</c:if>
+										<!-- 연간계획안 -->
+										<c:if test="${categoryNo==1}">
+											<div class="col-sm-3" id="afterClass" style="display: none;">
+												<input class="form-control inspection" type="text" id="projectDateInfo" placeholder="년 입력" >
+											</div>
+										</c:if>
+										
+										
+									</div>
+									
+								</div>
+							</div>
+							<div class="wrapper" style="margin-top: 20px;">
+								<div id="example1"></div>
+							</div>
+						</div>
 					</div>
-					<div class="col-sm-3" id="afterAge" style="display: none;">
-						<select class="form-control" id="selectClass" name="selectClass" >
-							<option value="" disabled selected> 반 선택  </option>
-							<c:forEach items="${listChildClass}" var="childClass">
-								<option value="${childClass.classNo}" class="${childClass.classAge}">${childClass.className}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<!-- 일일계획안 -->
-					<c:if test="${categoryNo==4}">
-						<div class="col-sm-3" id="afterClass" style="display: none;">
-						<input class="form-control" type="date" id="projectDateInfo" >
-						</div>
-					</c:if>
-					<!-- 주간계획안 -->
-					<c:if test="${categoryNo==3}"> 
-						<div class="col-sm-3" id="afterClass" style="display: none;">
-							<div class="col-sm-4"> <input class="form-control inspection" type="text" id="projectDateInfoYear" placeholder="년 입력" > </div>
-							<div class="col-sm-3"> <input class="form-control inspection" type="text" id="projectDateInfoMonth" placeholder="월 입력" > </div>
-							<div class="col-sm-5"><select class="form-control" id="projectDateInfoWeek">
-													<option value="" disabled selected>주 선택</option>
-													<option value=1>1주</option>
-													<option value=2>2주</option>
-													<option value=3>3주</option>
-													<option value=4>4주</option>
-													<option value=5>5주</option>
-													</select></div>
-						</div>
-					</c:if>
-					<!-- 월간계획안 -->
-					<c:if test="${categoryNo==2}">
-						<div class="col-sm-3" id="afterClass" style="display: none;">
-						<div class="col-sm-6"><input class="form-control inspection" type="text" id="projectDateInfoYear" placeholder="년 입력" ></div>
-						<div class="col-sm-6"><input class="form-control inspection" type="text" id="projectDateInfoMonth" placeholder="월 입력" ></div>
-						</div>
-					</c:if>
-					<!-- 연간계획안 -->
-					<c:if test="${categoryNo==1}">
-						<div class="col-sm-3" id="afterClass" style="display: none;">
-						<input class="form-control inspection" type="text" id="projectDateInfo" placeholder="년 입력" >
-						</div>
-					</c:if>
-					
-				</div>
-				<button name="save" id="save">계획안 저장</button>
-				<div class="wrapper" style="margin-top: 20px;">
-					<div id="example1"></div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<!-- 경고창 -->
-	<div id="alert" style="display:none;">
-		<div class="alert alert-warning">
-			<div class="container-fluid">
-			  <div class="alert-icon">
-				<i class="material-icons">warning</i>
-			  </div>
-			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true"><i class="material-icons">clear</i></span>
-			  </button>
-			  <b>Warning Alert:</b> Hey, it looks like you still have the "copyright &copy;  2015" in your footer. Please update it!
-			</div>
-		</div>
-	</div>
+	
+	
 </body>
 
 
