@@ -27,43 +27,64 @@
  <c:import url="../module/navbar.jsp"></c:import>
 <c:import url="../Child/nav/SideNav.jsp"></c:import>
  
+<script>
+$(document).ready(function(){
+	$('#ChildHome').attr('class','active');
+
+	
+})
+	
+</script>
+
 </head>
 
 <body id="body">
 <!-- navbar -->
 
-
 <div class="col-md-10 col-sm-offset-2">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>이름</th>
-                <th>생년월일</th>
-                <th>주소</th>
-                <th>보호자번호</th>
-                <th>보호자예비번호</th>
-                <th>주의사항</th>
-                <th>성별</th>
-                <th>통학방법</th>
-                <th>입학일</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="c" items="${list}">
-                <tr>
-                    <td><a href="${pageContext.request.contextPath}/ChildModify?kidNo=${c.kidNo}">${c.kidName}</a></td>
-                    <td>${c.kidBirth}</td>
-                    <td>${c.kidAddress}</td>
-                    <td>${c.kidProtectorPhone}</td>
-                    <td>${c.kidProtectorPhoneReserve}</td>
-                    <td>${c.kidPrecautions}</td>
-                    <td>${c.kidGender}</td>
-                    <td>${c.kidCommuting}</td>
-                    <td>${c.kidEntranceDay}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+   <table class="table table-striped">
+ <div class="content">
+	            <div class="container-fluid">
+	                <div class="row">
+	                    <div class="col-md-12">
+	                        <div class="card">
+	                            <div class="card-header" data-background-color="purple">
+	                                <h4 class="title">유아 리스트</h4>
+	                                <p class="category">전체 반</p>
+	                            </div>
+	                         
+	                                    <thead class="text-primary">
+	                                    	<th>이름</th>
+                							<th>생년월일</th>
+		                					<th>주소</th>
+							                <th>보호자번호</th>
+							                <th>보호자예비번호</th>
+							                <th>주의사항</th>
+							                <th>성별</th>
+							                <th>통학방법</th>
+							                <th>입학일</th>
+	                                    </thead>
+	                                    <tbody>
+	                                    	<c:forEach var="c" items="${list}">
+	                                        	<tr>
+		                                        	<td><a href="${pageContext.request.contextPath}/ChildModify?kidNo=${c.kidNo}">${c.kidName}</a></td>
+								                    <td>${c.kidBirth}</td>
+								                    <td>${c.kidAddress}</td>
+								                    <td>${c.kidProtectorPhone}</td>
+								                    <td>${c.kidProtectorPhoneReserve}</td>
+								                    <td>${c.kidPrecautions}</td>
+								                    <td>${c.kidGender}</td>
+								                    <td>${c.kidCommuting}</td>
+								                    <td>${c.kidEntranceDay}</td>
+	                                        	</tr>
+	                                        </c:forEach>
+	                                    </tbody>
+	                                </table>
+
+	                            </div>
+	                        </div>
+	                    </div>
+
     <ul class="pager">
         <c:if test="${currentPage > 1}">
             <li class="previous"><a href="${pageContext.request.contextPath}/ChildList?currentPage=${currentPage-1}">이전</a></li>

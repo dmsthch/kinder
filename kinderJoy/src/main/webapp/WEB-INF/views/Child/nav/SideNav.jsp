@@ -93,7 +93,7 @@ $(document).ready(function(){
 
 	    	<div class="sidebar-wrapper" style="overflow: visible;">
 	            <ul class="nav ">
-            	   <li class="navChildList">
+            	   <li class="navChildList" id="ChildHome">
 	                   <a href="${pageContext.request.contextPath}/ChildList" class="smoothScroll">
 	                        <i class="material-icons">dashboard</i>
 	                        
@@ -102,7 +102,7 @@ $(document).ready(function(){
 	                </li>
 	                
 	                <!-- <li class="active"> -->
-	                <li id="ChildClass">
+	                <li class="navChildClass" id="ChildClass">
 	                    <a href="${pageContext.request.contextPath}/ChildClass">
 	                        <i class="material-icons">person</i>
 	                        <p>전체 반</p>
