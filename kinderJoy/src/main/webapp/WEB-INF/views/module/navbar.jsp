@@ -32,7 +32,7 @@
 		<ul  class="nav navbar-nav navbar-right">
 			<c:if test= "${null eq teacherId}"> <!-- teacherId값이 null 이라면 --> <!-- 모달 영역 밖 클릭 시 닫힘 방지 //data-backdrop="static" -->
 				<li><a href="#" data-toggle="modal" data-target="#signIn" class="smoothScroll">로그인</a></li>
-				<li><a href="${pageCo /ntext.request.contextPath}/Add" class="smoothScroll">회원가입</a></li>
+				<li><a href="${pageContext.request.contextPath}/Add" class="smoothScroll">회원가입</a></li>
 			</c:if>
 		
 			<c:if test="${null ne teacherId}"> <!-- teacherId값이 null이 아니라면 -->
