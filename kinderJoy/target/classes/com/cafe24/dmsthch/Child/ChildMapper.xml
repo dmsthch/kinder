@@ -3,6 +3,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
+  <!-- 해당유치원의 반편성번호와 유아정보 가져오기 (발달평가를 위한 셀렉트) -->
+  <select id="ChildBeforeDevelopmentAdd" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT
+		f.kid_formation_no AS KidFormationNo
+		,k.kid_name AS kidName
+		,k.kid_birth AS kidBirth
+		,k.kid_gender AS kidGender
+		,c.class_name AS className
+		,c.class_age AS classAge
+	FROM kid_formation f
+	INNER JOIN kid k
+	ON k.kid_no = f.kid_no
+	INNER JOIN kid_class c
+	ON c.class_no = f.class_no
+	WHERE c.class_year = #{year}
+	AND c.license_kindergarten = #{licenseKindergarten}
+	<if test="searchVal != '' &amp;&amp; searchType != ''">
+		<if test="searchType == KidName">
+			AND k.kid_name = #{searchVal}
+		</if>
+		<if test="searchType == className">
+			AND c.class_name = #{searchVal}
+		</if>
+	</if>
+	<if test="searchAge != ''">
+		AND c.class_age = #{searchAge}
+	</if>
+	
+	ORDER by k.kid_name ASC
+	LIMIT #{startRow}, #{onePageRow};
+  </select>
   
   <!-- 유아번호로 오늘날짜 출석정보 가져오기 (특이사항 포함)-->
   <select id="getCommuteAll" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Child.ChildAttendance">
