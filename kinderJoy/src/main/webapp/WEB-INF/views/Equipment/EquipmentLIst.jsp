@@ -94,7 +94,7 @@
 					<input class="form-control equipmentAmout" name="equipmentAmout" type="text" value="${plusMinus.PLUS - plusMinus.MINUS}" readonly/>
 				</div>
 				<div class="col-sm-1">
-					<input type="hidden" class="updatePlusInput form-control" name="updateInput"/>
+					<input type="hidden" class="updateInput form-control" name="updateInput"/>
 					<input type="button" class="updatePlus plus" value="+"/>
 					<input type="button" class="updateMinus minus" value="-"/>
 				</div>
