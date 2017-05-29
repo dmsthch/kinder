@@ -177,10 +177,11 @@ public class EquipmentController {
 						,@RequestParam(value="test1") String equipmentName
 						,@RequestParam(value="testPrice") String testPrice
 						,@RequestParam(value="testValue", required=false, defaultValue="") String testValue
-						,@RequestParam(value="updatePlusInput", required=false, defaultValue="") String updatePlusInput
-						,@RequestParam(value="updateMinusInput", required=false, defaultValue="") String updateMinusInput
+						,@RequestParam(value="updateInput", required=false, defaultValue="PLUS") String updateInput
 						,@RequestParam(value="testCustomer") String testCustomer
 						,@RequestParam(value="testState") String testState
+						,@RequestParam(value="updatePlusInput", required=false, defaultValue="") String updatePlusInput
+						,@RequestParam(value="updateMinusInput", required=false, defaultValue="") String updateMinusInput
 						,HttpSession session){
 		
 		System.out.println("비품 저장 메서드 실행");
@@ -189,29 +190,34 @@ public class EquipmentController {
 		System.out.println(equipmentName);
 		System.out.println(testPrice);
 		System.out.println(testValue);
-		System.out.println(updatePlusInput);
-		System.out.println(updateMinusInput);
+		System.out.println(updateInput);
 		System.out.println(testCustomer);
 		System.out.println(testState);
+		System.out.println(updatePlusInput);
+		System.out.println(updateMinusInput);
 		int resultInsert;
-		Equipment equipment;
+		Equipment equipment = new Equipment();;
 		equipment = dao.selectTestEquipment(equipmentName, session);
-		String selectEquipemntName = equipment.getEquipmentName();
-		if(selectEquipemntName == equipmentName) {
+		System.out.println(equipment + "equipment 확인");
+		if(equipment == null) {
+			dao.addTestEquipment(equipmentName, testCategoryNo, equipmentCategorySelect, testState, session);
+			equipment = new Equipment();
+			equipment = dao.selectTestEquipment(equipmentName, session);
 			int selectEquipemntNo = equipment.getEquipmentNo();
-			if(updatePlusInput == "") {
+			if(!updateInput.equals("PLUS")) {
+				System.out.println("minus 확인");
 				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, testPrice, testValue, testCustomer);
 			} else {
+				System.out.println("plus 확인");
+				dao.addTestEquipmentValueMinus(selectEquipemntNo, testPrice, "0", testCustomer);
 				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, testPrice, testValue, testCustomer);
 			}
 		} else {
-			dao.addTestEquipment(equipmentName, testCategoryNo, equipmentCategorySelect, testState, session);
-			equipment = dao.selectTestEquipment(equipmentName, session);
 			int selectEquipemntNo = equipment.getEquipmentNo();
-			if(updatePlusInput == "") {
-				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, testPrice, testValue, testCustomer);
+			if(!updateInput.equals("PLUS")) {
+				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, testPrice, updateMinusInput, testCustomer);
 			} else {
-				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, testPrice, testValue, testCustomer);
+				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, testPrice, updatePlusInput, testCustomer);
 			}
 		}
 		return resultInsert;

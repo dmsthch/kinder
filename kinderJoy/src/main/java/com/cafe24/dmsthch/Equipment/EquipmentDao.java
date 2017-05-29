@@ -61,6 +61,9 @@ public class EquipmentDao {
 								,String testState
 								,HttpSession session) {
 		System.out.println("addTestEquipment 내용 실행");
+		System.out.println(testCategoryNo);
+		System.out.println(equipmentCategorySelect);
+		System.out.println("--------");
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		int teacherNo = (Integer)session.getAttribute("teacherNo");
 		Equipment equipment = new Equipment();
@@ -69,8 +72,10 @@ public class EquipmentDao {
 		equipment.setEquipmentName(equipmentName);
 		equipment.setTeacherNo(teacherNo);
 		if(testCategoryNo.equals("")) {
+			System.out.println("testCategofyNo if");
 			equipment.setCategoryNo(equipmentCategorySelect);
 		}else if(equipmentCategorySelect.equals("")) {
+			System.out.println("equipmentCategorySelect else if");
 			equipment.setCategoryNo(testCategoryNo);
 		}
 		equipment.setEquipmentState(testState);
