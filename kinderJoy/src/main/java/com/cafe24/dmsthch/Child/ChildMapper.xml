@@ -19,6 +19,9 @@
 	ON c.class_no = f.class_no
 	WHERE c.class_year = #{year}
 	AND c.license_kindergarten = #{licenseKindergarten}
+	<if test="searchAge!=''">
+		AND c.class_age = #{searchAge}
+	</if>
 	<if test="searchType!='' ">
 		<if test="searchType.equals('kidName')">
 			 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') 
@@ -31,9 +34,7 @@
 		 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') OR c.class_name LIKE CONCAT('%',#{searchVal},'%')
 		
 	</if>
-	<if test="searchAge!=''">
-		AND c.class_age = #{searchAge}
-	</if>
+
 	
 	ORDER by k.kid_name ASC
 	LIMIT #{startRow}, #{onePageRow};
