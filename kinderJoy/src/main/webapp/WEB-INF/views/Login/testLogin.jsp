@@ -15,9 +15,9 @@
        
        $(document).ready(function(){
        function validateEncryptedForm() {
-    	    var username = document.getElementById("username").value;
+    	    var username = $("#teacherId").val();
     	    console.log(username+" <--아이디");
-    	    var password = document.getElementById("password").value;
+    	    var password = $("#teacherPw").val();
     	    console.log(password+" <--패스워드");
     	    if (!username || !password) {
     	        alert("ID/PASSWORD.");
@@ -60,8 +60,8 @@
     
 <body>
     <div>
-        <label for="username">userID : <input type="text" id="username" size="16"/></label>
-        <label for="password">비밀번호 : <input type="password" id="password" size="16" /></label>
+        userID : <input type="text" id="username" name="teacherId" size="16"/>
+            비밀번호 : <input type="password" id="password" name="teacherPw" size="16" />
         <input type="hidden" id="rsaPublicKeyModulus" value="${publicKeyModulus}" />
         <input type="hidden" id="rsaPublicKeyExponent" value="${publicKeyExponent}" />
         <a href="<%=request.getContextPath()%>/loginFailure.jsp" onclick="validateEncryptedForm(); return false;">로그인</a>

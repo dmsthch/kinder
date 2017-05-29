@@ -37,9 +37,23 @@
 	// 보관상태 포커스아웃으로 readonly 생성
 	$(document).on('focusout','.equipmentState',function(){
 		$(this).attr('readonly','readonly');
+	});		
+	//plus 버튼 누를 시 태그 plus, minus 태그 삭제하고 plus 네입값 입력된 인풋 추가
+	$(document).on('click','.Plus',function(){
+		var testInput = '<input type="text" name="updatePlusInput" class="form-control"/>'
+		$(this).after(testInput);
+		console.log('plus 추가');
+		$(this).parent().find('.Minus').remove();
+		$(this).parent().find('.Plus').remove();
 	});
-		
-	
+	//plus 버튼 누를 시 태그 plus, minus 태그 삭제하고 plus 네입값 입력된 인풋 추가
+	$(document).on('click','.Minus',function(){
+		var testInput = '<input type="text" name="updateMinusInput" class="form-control"/>'
+		$(this).after(testInput);
+		console.log('minus 추가');
+		$(this).parent().find('.updatePlus').remove();
+		$(this).parent().find('.updateMinus').remove();
+	});
 </script>
 <style>
 	div{
@@ -81,8 +95,8 @@
 				</div>
 				<div class="col-sm-1">
 					<input type="hidden" class="updatePlusInput form-control" name="updateInput"/>
-					<input type="button" class="updatePlus plus" style="width:33px; height:33px;" value="+"/>
-					<input type="button" class="updateMinus minus" style="width:33px; height:33px;" value="-"/>
+					<input type="button" class="updatePlus plus" value="+"/>
+					<input type="button" class="updateMinus minus" value="-"/>
 				</div>
 				<div class="col-sm-1">
 					<input class="form-control equipmentPrice" name="equipmentPrice" type="text" value="${plusMinus.equipmentCost}"/>
@@ -123,7 +137,7 @@
 				<input class="form-control equipmentName" name="equipmentName" type="text" readonly/>
 			</div>
 			<div class="col-sm-1">
-				<input class="form-control equipmentAmout" name="equipmentAmout" type="text" readonly/>
+				<input class="form-control equipmentAmout" name="equipmentAmout" type="text" value="0" readonly/>
 			</div>
 			<div class="col-sm-1">
 				<input type="hidden" class="updatePlusInput form-control" name="updateInput"/>
@@ -131,7 +145,7 @@
 				<input type="button" class="updateMinus minus" style="width:33px; height:33px;" value="-"/>
 			</div>
 			<div class="col-sm-1">
-				<input class="form-control equipmentPrice" name="equipmentPrice" type="text"/>
+				<input class="form-control equipmentPrice" name="equipmentPrice" value="0" type="text"/>
 			</div>
 			<div class="col-sm-1">
 				<input class="form-control testTotalPrice" name="testTotalPrice" type="text" readonly/>
