@@ -272,7 +272,12 @@ public class TeacherController {
 	
 	//로그인 암호화된 아이디 비밀번호를 복호화한다.
 	@RequestMapping(value="/loginTest", method=RequestMethod.POST)
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response ,HttpSession session2)
+    protected void processRequest(
+    		HttpServletRequest request
+    		,Teacher teacher 
+    		, HttpServletResponse response
+    		, HttpSession session2
+    		, Model model)
             throws ServletException, IOException {
 		String securedUsername = request.getParameter("securedUsername");
         String securedPassword = request.getParameter("securedPassword");
@@ -287,13 +292,29 @@ public class TeacherController {
         try {
             String username = decryptRsa(privateKey, securedUsername);
             String password = decryptRsa(privateKey, securedPassword);
+           
             
+  
             session2.setAttribute("teacherId", username);
+            System.out.println(username);
+            if(session2.getAttribute("teacherId") != null) {
+            	/*Teacher saveSession = TDao.LoginTeacher(teacher);
+            	System.out.println("나오냐");
+                session2.setAttribute("teacherNo", saveSession.getTeacherNo());
+                System.out.println("나오냐2");
+                session2.setAttribute("licenseKindergarten", saveSession.getLicenseKindergarten());
+                session2.setAttribute("teacherLevel", saveSession.getTeacherLevel());
+                session2.setAttribute("teacherName", saveSession.getTeacherName());
+                System.out.println(saveSession.getTeacherName()+"<<<<<<<<<<<<<네임");*/
+            }
+
+            
+            
+            //넘버 라이 네임 레벨 아디
             
             System.out.println(username +"<--복호화한 아이디");
             System.out.println(password +"<--복호화한 패스");
-            request.setAttribute("username", username);
-            request.setAttribute("password", password);
+
             request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
         } catch (Exception ex) {
             throw new ServletException(ex.getMessage(), ex);
