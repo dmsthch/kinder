@@ -272,12 +272,10 @@ public class TeacherController {
 	
 	//로그인 암호화된 아이디 비밀번호를 복호화한다.
 	@RequestMapping(value="/loginTest", method=RequestMethod.POST)
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response ,HttpSession session2)
             throws ServletException, IOException {
 		String securedUsername = request.getParameter("securedUsername");
-		System.out.println(securedUsername +"<--암호화된 아이디");
         String securedPassword = request.getParameter("securedPassword");
-        System.out.println(securedPassword+"<--암호회된 패스워드");
         
         HttpSession session = request.getSession();
         PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
@@ -289,18 +287,21 @@ public class TeacherController {
         try {
             String username = decryptRsa(privateKey, securedUsername);
             String password = decryptRsa(privateKey, securedPassword);
+            
+            session2.setAttribute("teacherId", username);
+            
             System.out.println(username +"<--복호화한 아이디");
             System.out.println(password +"<--복호화한 패스");
             request.setAttribute("username", username);
             request.setAttribute("password", password);
-            request.getRequestDispatcher("/WEB-INF/views/Login/testLogin.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
         } catch (Exception ex) {
             throw new ServletException(ex.getMessage(), ex);
         }
     }
 
     private String decryptRsa(PrivateKey privateKey, String securedValue) throws Exception {
-        System.out.println("will decrypt : " + securedValue);
+        System.out.println("해독할 정보 : " + securedValue);
         Cipher cipher = Cipher.getInstance("RSA");
         byte[] encryptedBytes = hexToByteArray(securedValue);
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
