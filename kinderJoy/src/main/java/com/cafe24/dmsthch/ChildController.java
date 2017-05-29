@@ -27,6 +27,28 @@ public class ChildController {
 	@Autowired
 	private ChildService childService;
 	
+	//네비에서 발달평가 눌렀을때. (해당 유치원 내의 유아 검색하기)
+	@RequestMapping(value="/ChildBeforeDevelopmentAdd" , method=RequestMethod.GET)
+	public String ChildBeforeDevelopmentAdd(HttpSession session
+											,Model model
+											,@RequestParam(value="pageNo", required=false, defaultValue="1")int pageNo
+											,@RequestParam(value="searchVal", required=false, defaultValue="")String searchVal
+											,@RequestParam(value="searchType", required=false, defaultValue="")String searchType
+											,@RequestParam(value="searchAge", required=false, defaultValue="")String searchAge){
+		//필요한것 ->페이지넘버, 검색키워드, 키워드의 타입, 라이센스
+		//페이지넘버, 검색키워드, 키워드 타입이 없는경우 -->해당 유치원의 전체 유아 반편성리스트(현재 년도) 셀렉트하기. 기본 페이지 넘버 1
+		//넘겨야 할 데이터 = 라이센스,페이지넘버
+		System.out.println("체크포인트 로미1");
+		System.out.println(pageNo);
+		System.out.println(searchVal);
+		System.out.println(searchType);
+		System.out.println(searchAge);
+		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
+		List<Map<String, Object>> result = childDao.ChildBeforeDevelopmentAdd(pageNo, searchVal, searchType, searchAge, licenseKindergarten);
+		model.addAttribute("result",result);
+		return "Child/ChildBeforeDevelopmentAdd";
+	}
+	
 	//네비에서 반 눌렀을때, 해당 반의 유아 리스트 보여주기
 	@RequestMapping(value="/ChildClassSelect" , method=RequestMethod.GET)
 	public String ChildClassSelect(@RequestParam(value="classNo")int classNo
