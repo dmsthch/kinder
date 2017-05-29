@@ -24,14 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
 @Controller
-@SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "licenseKindergarten", "teacherNo", "teacherTime" })
+
 public class TeacherController {
 	
 	@Autowired
@@ -367,7 +366,15 @@ public class TeacherController {
 		if(saveSession != null) {
 			if(session.getAttribute("teacherId") == null){
 				
-				model.addAttribute("teacherNo",saveSession.getTeacherNo());
+				session.setAttribute("teacherNo",saveSession.getTeacherNo());
+				session.setAttribute("licenseKindergarten",saveSession.getLicenseKindergarten());
+				session.setAttribute("teacherId", saveSession.getTeacherId());
+				session.setAttribute("teacherName", saveSession.getTeacherName());
+				session.setAttribute("teacherLevel" ,saveSession.getTeacherLevel());
+				
+				//왜 인지는 모르겠으나 모델객체에 값을 저장하면 주소창에 값이 모두 노출되었다
+				//그런데 세션에 저장하니 주소창에 값이 없어졌다 왜???
+				/*model.addAttribute("teacherNo",saveSession.getTeacherNo());
 				System.out.println(saveSession.getTeacherNo() +" <-- 세션에 저장될 넘버 값 세션");
 				
 				model.addAttribute("licenseKindergarten",saveSession.getLicenseKindergarten());
@@ -380,33 +387,33 @@ public class TeacherController {
 				System.out.println(saveSession.getTeacherName() + "<-- 세션에 저장될 네임값");
 				
 				model.addAttribute("teacherLevel" ,saveSession.getTeacherLevel());
-				System.out.println(saveSession.getTeacherLevel() + " <--세션에 저장될 레벨값");
+				System.out.println(saveSession.getTeacherLevel() + " <--세션에 저장될 레벨값");*/
 				
 				session.setMaxInactiveInterval(7200);
-
-				//시간설정을 모델객체안에 담음
-				model.addAttribute("teacherTime", session.getMaxInactiveInterval());
+				session.setAttribute("teacherTime", session.getMaxInactiveInterval());
 				System.out.println("세션의 유지 시간 : "+session.getMaxInactiveInterval()+"초");
-
 				}
+			
 			} else {				
 				model.addAttribute("nogin","로그인실패");
 				System.out.println("아이디나 비밀번호를 확인해주세요");
 				
 				return "/home";
 		}
-		return "redirect:/home";
+		return "/home";
 	}
 	
 	//로그아웃 메서드
 	@RequestMapping(value="/logOut", method=RequestMethod.GET)
-	public String logOut(@ModelAttribute Teacher teacher ,SessionStatus sessionstatus){
+	public String logOut(@ModelAttribute Teacher teacher ,HttpSession session){
 
-		sessionstatus.setComplete();
+		//sessionstatus.setComplete();
+		session.invalidate();
+		System.out.println("세션 삭제");
 
 
 		
-		System.out.println(sessionstatus +"\n 로그아웃 SessionAttributes만 초기화");
+		//System.out.println(sessionstatus +"\n 로그아웃 SessionAttributes만 초기화");
 		System.out.println(" redirect:/home");
 		return "redirect:/home";
 	}
