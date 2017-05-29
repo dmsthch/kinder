@@ -28,6 +28,14 @@ public class ChildDao {
 		map.put("searchType",searchType );
 		map.put("startRow",startRow);
 		map.put("onePageRow",onePageRow);
+		System.out.println(year+"<<year");
+		System.out.println(licenseKindergarten+"<<licenseKindergarten");
+		System.out.println(searchVal+"<<searchVal");
+		System.out.println(searchAge+"<<searchAge");
+		System.out.println(searchType+"<<searchType");
+		System.out.println(startRow+"<<startRow");
+		System.out.println(onePageRow+"<<onePageRow");
+		
 		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.ChildBeforeDevelopmentAdd",map);
 	}
 	

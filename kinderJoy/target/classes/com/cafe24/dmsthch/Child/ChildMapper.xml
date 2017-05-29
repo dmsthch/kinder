@@ -19,15 +19,19 @@
 	ON c.class_no = f.class_no
 	WHERE c.class_year = #{year}
 	AND c.license_kindergarten = #{licenseKindergarten}
-	<if test="searchVal != '' &amp;&amp; searchType != ''">
-		<if test="searchType == KidName">
-			AND k.kid_name = #{searchVal}
+	<if test="searchType!='' ">
+		<if test="searchType.equals('kidName')">
+			 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') 
 		</if>
-		<if test="searchType == className">
-			AND c.class_name = #{searchVal}
+		<if test="searchType.equals('className')">
+			AND c.class_name LIKE CONCAT('%',#{searchVal},'%')
 		</if>
 	</if>
-	<if test="searchAge != ''">
+	<if test=" searchType == '' and searchVal != ''">
+		 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') OR c.class_name LIKE CONCAT('%',#{searchVal},'%')
+		
+	</if>
+	<if test="searchAge!=''">
 		AND c.class_age = #{searchAge}
 	</if>
 	
