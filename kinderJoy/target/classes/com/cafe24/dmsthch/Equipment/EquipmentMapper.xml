@@ -3,9 +3,101 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
-  	<!-- 같은 네임품명 플러스값 총합, 마이너스값 총합 값  가져오기 -->
-	<select id="selectEquipmnetPlusMinsList" resultType="com.cafe24.dmsthch.Equipment.EquipmentPlusMinus">
-		 SELECT
+  	<!-- test_equipment_value(plus,minus) insert -->
+   	<insert id="addTestEquipmentValueMinus" parameterType="com.cafe24.dmsthch.Equipment.EquipmentValue">
+  		INSERT INTO test_equipment_value_minus(
+			 equipment_no
+			,equipment_cost
+			,equipment_amount
+			,equipment_customer
+			,equipment_day)
+		VALUES(
+			 #{equipmentNo}
+			,#{equipmentCost}
+			,#{equipmentAmount}
+			,#{equipmentCustomer}
+			,now()
+		);
+  	</insert>
+  	<insert id="addTestEquipmentValuePlus" parameterType="com.cafe24.dmsthch.Equipment.EquipmentValue">
+  		INSERT INTO test_equipment_value_plus(
+			 equipment_no
+			,equipment_cost
+			,equipment_amount
+			,equipment_customer
+			,equipment_day)
+		VALUES(
+			 #{equipmentNo}
+			,#{equipmentCost}
+			,#{equipmentAmount}
+			,#{equipmentCustomer}
+			,now()
+		);
+  	</insert>
+  	<!-- test_equipment select -->
+  	<select id="selectTestEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment" resultType="com.cafe24.dmsthch.Equipment.Equipment">
+  		SELECT
+			 equipment_no AS equipmentNo
+			,equipment_name AS equipmentName
+		FROM
+			test_equipment
+		WHERE
+			equipment_name = #{equipmentName}
+		AND
+			license_kindergarten = #{licenseKindergarten};
+  	</select>
+  	<!-- test_equipment insert -->
+  	<insert id="addTestEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
+  		INSERT INTO test_equipment(
+			 license_kindergarten
+			,equipment_name
+			,teacher_no
+			,category_no
+			,equipment_state)
+		VALUES(
+			 #{licenseKindergarten}
+			,#{equipmentName}
+			,#{teacherNo}
+			,#{categoryNo}
+			,#{equipmentState}
+		);
+  	</insert>
+   	<!-- 같은 네임품명 플러스값 총합, 마이너스값 총합 값  가져오기 -->
+	<select id="selectEquipmnetPlusMinusList" resultType="com.cafe24.dmsthch.Equipment.EquipmentPlusMinus">
+		SELECT
+		 	 t.equipment_no AS equipmentNo 
+		 	,t.license_kindergarten AS licenseKindergarten
+		 	,t.equipment_name AS equipmentName
+		 	,t.category_no AS categoryNo
+		 	,v.equipment_cost AS equipmentCost
+		 	,v.equipment_amount AS PLUS
+		 	,m.equipment_amount AS MINUS
+			,v.equipment_customer AS equipmentCustomer
+			,MAX(v.equipment_day) AS equipmentDay
+		 	,t.equipment_state AS equipmentState
+		FROM
+			test_equipment t
+		INNER JOIN
+			(select
+				equipment_no
+				,equipment_cost
+				,equipment_customer
+				,equipment_day
+				,sum(equipment_amount) AS equipment_amount
+				from test_equipment_value_plus
+				GROUP BY equipment_no
+			) v
+		ON v.equipment_no = t.equipment_no
+		INNER JOIN
+			(select
+				equipment_no,
+				sum(equipment_amount) AS equipment_amount
+				from test_equipment_value_minus
+				GROUP BY equipment_no
+			) m
+		ON m.equipment_no = t.equipment_no
+		GROUP BY t.equipment_no
+<!-- 		SELECT
 		 	 t.equipment_no AS equipmentNo 
 		 	,t.license_kindergarten AS licenseKindergarten
 		 	,t.equipment_name AS equipmentName
@@ -13,18 +105,31 @@
 		 	,v.equipment_cost AS equipmentCost
 		 	,sum(v.equipment_amount) AS PLUS
 		 	,sum(m.equipment_amount) AS MINUS
-		 	,v.equipment_customer AS equipmentCustomer
-		 	,MAX(v.equipment_day) AS equipmentDay
+			,v.equipment_customer AS equipmentCustomer
+			,MAX(v.equipment_day) AS equipmentDay
 		 	,t.equipment_state AS equipmentState
 		FROM
 			test_equipment t
 		INNER JOIN
-			test_equipment_value_plus v
+			(select
+				equipment_no
+				,equipment_cost
+				,equipment_customer
+				,equipment_day
+				,sum(equipment_amount) AS equipment_amount
+				from test_equipment_value_plus
+				GROUP BY equipment_no
+			) v
 		ON v.equipment_no = t.equipment_no
 		INNER JOIN
-			test_equipment_value_minus m
+			(select
+				equipment_no,
+				sum(equipment_amount) AS equipment_amount
+				from test_equipment_value_minus
+				GROUP BY equipment_no
+			) m
 		ON m.equipment_no = t.equipment_no
-		GROUP BY t.equipment_no			
+		GROUP BY t.equipment_no	 -->
 	</select>
   	<!-- 비품신청 삭제 -->
   	<delete id="removeEquipmentRequest" parameterType="com.cafe24.dmsthch.Equipment.EquipmentRequest">
@@ -79,8 +184,9 @@
 		,#{requestStant}
 	);
   	</insert>
-  	<!-- 비품 셀렉트 카운트 받아서 셀렉트 리스트 출력 -->
-  	<select id="selectEquipmentList" parameterType="int" resultType="com.cafe24.dmsthch.Equipment.Equipment">
+  	
+   <!-- 비품 셀렉트 카운트 받아서 셀렉트 리스트 출력 -->
+<!--  	<select id="selectEquipmentList" parameterType="int" resultType="com.cafe24.dmsthch.Equipment.Equipment">
   		SELECT 
   			 equipment_no AS equipmentNo
   			,license_kindergarten AS licenseKindergarten
@@ -100,10 +206,10 @@
   			equipment_day
   		DESC LIMIT #{equipmnetCount};
   	</select>
-  	<!-- 비품 리스트 셀렉트 카운트 구하기 -->
+  	비품 리스트 셀렉트 카운트 구하기
   	<select id="selectCountEquipmentList" parameterType="String" resultType="int">
 		SELECT COUNT(DISTINCT equipment_name) FROM equipment WHERE license_kindergarten=#{licenseKindergarten};
-  	</select>
+  	</select> -->
   	
   	
   	
@@ -138,7 +244,7 @@
   		ORDER BY value_no DESC;
   	</select>
   	
-  	<insert id="addEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
+<!--   	<insert id="addEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
   		INSERT INTO equipment(
   			  license_kindergarten
   			, equipment_name
@@ -160,7 +266,7 @@
   			,#{equipmentState}
   			,now()
   		);
-  	</insert>
+  	</insert> -->
   	
   	<select id="selectEquipmentCategory" resultType="java.util.Map">
   		SELECT

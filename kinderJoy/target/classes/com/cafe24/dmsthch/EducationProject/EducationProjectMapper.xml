@@ -88,6 +88,13 @@
 	AND form_order = #{formOrder}
 </update>
 
+	<!-- 폼 삭제하기 -->
+<delete id="formDelete" parameterType="com.cafe24.dmsthch.EducationProject.EducationForm">
+	DELETE FROM education_project_form
+	WHERE license_kindergarten = #{licenseKindergarten}
+	AND form_no = #{formNo}  
+</delete>
+
 	<!-- 저장된 계획안 이름 불러오기 -->
 <select id="educationProjectFormName" parameterType="String" resultType="com.cafe24.dmsthch.EducationProject.EducationForm">
 	SELECT

@@ -22,12 +22,11 @@
                     <!-- <img src="../assets/img/new_logo.png" alt="Creative Tim Logo"> -->
                 </div>
                 <div class="brand">
-                  <p><a href="${pageContext.request.contextPath}/" class="navbar-brand">Team. 핵병아리</a></p>
+                  <p><a href="${pageContext.request.contextPath}/" class="navbar-brand">Team. 햇병아리</a></p>
                 </div>
             </div>
       </a>
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
 		<ul  class="nav navbar-nav navbar-right">
@@ -58,4 +57,3 @@
 <c:import url="/WEB-INF/views/Login/login.jsp"></c:import>
 <!-- ★★★★★로그아웃 모달 시작★★★★★ -->
 <c:import url="/WEB-INF/views/Login/logout.jsp"></c:import>
-
