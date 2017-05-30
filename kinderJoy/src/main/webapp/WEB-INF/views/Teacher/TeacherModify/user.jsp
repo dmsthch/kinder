@@ -21,7 +21,7 @@
 		$('#sidekyo').attr('style','background-color:#3DB7CC');	
 	});
 	</script>
-	
+
 </head>
 
 <body>

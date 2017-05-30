@@ -57,7 +57,7 @@ public class TeacherController {
 		return "";
 	}
 	
-	//계정삭제
+	//계정삭제 탈퇴
 	@RequestMapping(value="/deleteAccount", method = RequestMethod.POST)
 	public String delete(HttpSession httpsession ,SessionStatus sessionstatus) {
 		//현재 세션에 있는 아이디값을 가져와서 TDao에서 부른 메서드 안에 대입 후 쿼리 실행하면
@@ -75,7 +75,7 @@ public class TeacherController {
 
 		TDao.deleteANDinsert(map);
 		
-		sessionstatus.setComplete();
+		httpsession.invalidate();
 		return "redirect:/home";
 	}
 	

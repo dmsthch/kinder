@@ -20,7 +20,6 @@
 	<link rel="stylesheet" type="text/css" href="css/JKC/AnimatedCheckboxescss/component.css" />
 	<script src="js/JKC/AnimatedCheckboxesjs/modernizr.custom.js"></script>
 	
-	<link rel="stylesheet" type="text/css" href="css/JKC/takeTab/demo.css" />
 	<link rel="stylesheet" type="text/css" href="css/JKC/takeTab/tabs.css" />
 	<link rel="stylesheet" type="text/css" href="css/JKC/takeTab/tabstyles.css" />
  	<script src="js/JKC/takeTab/modernizr.custom.js"></script>
@@ -42,52 +41,77 @@
 </head>
 
 <body>
-	<c:forEach begin="3" end="5" var="age">
-		<div class="container" style=" padding-top:50; float:right; ">
-			<form class="ac-custom ac-checkbox ac-boxfill" autocomplete="off">
-			
-			<header class="codrops-header">
-			<h1>${age}살 편성</h1>
-			</header>
-				<section>
-					<div class="tabs tabs-style-linetriangle">
-						<nav>
-							<ul>
-							<c:forEach var="TC" items="${takeClass}" >
-							<c:if test="${TC.classAge == age}"> 
-							<li><a href="${TC.classNo}"><span>${TC.className}반</span></a></li>
-							</c:if>
-							</c:forEach> 
-							</ul>
-						</nav>
-					
-						<div class="content-wrap">
-							<c:forEach var="TC" items="${takeClass}" >
-							<c:if test="${TC.classAge == age}">
-							
-							<section id="${TC.classNo}">
-							<c:forEach var="TT" items="${takeTeacher}">
-							
-							<ul>
-								<li>
-								<label id="asd" for="${TT.teacherNo}">
-								<input id="${TT.teacherNo}" name="${TT.teacherNo}" type="checkbox">${TT.teacherName} &nbsp
-								</label>
-								</li>
-							</ul>
-								
-							</c:forEach>
-							</section>
-							
-							</c:if>
-							</c:forEach>
-						</div>
-					</div>
-				</section>
-			</form>			
-		</div>
-	</c:forEach>
-	
+	<div class="wrapper">
+
+	    <div class="main-panel">
+
+	        <div class="content">
+	            <div class="container-fluid">
+	                <div class="row">
+	                    <div class="col-md-12">
+	                        <div class="card">
+	                            <div class="card-header" data-background-color="orange">
+	                                <h4 class="title">교원 명단</h4>
+	                                <p class="category">현재 활동중인 교직원 명단입니다.</p>
+	                            </div>                            
+	                            <div class="card-content table-responsive">
+									<c:forEach begin="3" end="5" var="age">
+										<div class="container" style=" padding-top:50; float:right; ">
+											<form class="ac-custom ac-checkbox ac-boxfill" autocomplete="off">
+											
+											<header class="codrops-header">
+											<h1>${age}살 편성</h1>
+											</header>
+												<section>
+													<div class="tabs tabs-style-linetriangle">
+														<nav>
+															<ul>
+															<c:forEach var="TC" items="${takeClass}" >
+															<c:if test="${TC.classAge == age}"> 
+															<li><a href="${TC.classNo}"><span>${TC.className}반</span></a></li>
+															</c:if>
+															</c:forEach> 
+															</ul>
+														</nav>
+													
+														<div class="content-wrap">
+															<c:forEach var="TC" items="${takeClass}" >
+															<c:if test="${TC.classAge == age}">
+															
+															<section id="${TC.classNo}">
+															<c:forEach var="TT" items="${takeTeacher}">
+															
+															<ul>
+																<li>
+																<label id="asd" for="${TT.teacherNo}">
+																<input id="${TT.teacherNo}" name="${TT.teacherNo}" type="checkbox">${TT.teacherName} &nbsp
+																</label>
+																</li>
+															</ul>
+																
+															</c:forEach>
+															</section>
+															
+															</c:if>
+															</c:forEach>
+														</div>
+													</div>
+												</section>
+											</form>			
+										</div>
+									</c:forEach>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+		
+		<c:import url="./footer.jsp"></c:import>
+
+	    </div>
+	</div>
+
 	<script src="js/JKC/AnimatedCheckboxesjs/svgcheckbx.js"></script>
 	<script src="js/JKC/takeTab/cbpFWTabs.js"></script>
 	
