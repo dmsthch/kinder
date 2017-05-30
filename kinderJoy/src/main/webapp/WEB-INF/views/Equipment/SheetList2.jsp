@@ -33,7 +33,7 @@ $(document).ready(function(){
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
-				
+			
 				<!-- 비품 품의서 리스트 -->
 				<div class="row">
 					<c:forEach var ="getCategory" items="${getCategory}">

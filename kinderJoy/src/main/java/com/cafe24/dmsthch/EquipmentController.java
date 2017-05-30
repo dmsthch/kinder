@@ -170,54 +170,52 @@ public class EquipmentController {
 		return "Equipment/NewFile";
 	}
 	// 비품 한줄 저장
-	@RequestMapping(value = "testSave", method = RequestMethod.POST)
+	@RequestMapping(value = "equipmentListSave", method = RequestMethod.POST)
 	@ResponseBody
-	public int test03(@RequestParam(value="boardCategoryNo", required=false, defaultValue="") String equipmentCategorySelect
-						,@RequestParam(value="testCategoryNo", required=false, defaultValue="") String testCategoryNo
-						,@RequestParam(value="test1") String equipmentName
-						,@RequestParam(value="testPrice") String testPrice
-						,@RequestParam(value="testValue", required=false, defaultValue="") String testValue
-						,@RequestParam(value="updateInput", required=false, defaultValue="PLUS") String updateInput
-						,@RequestParam(value="testCustomer") String testCustomer
-						,@RequestParam(value="testState") String testState
+	public int test03(@RequestParam(value="boardCategoryNo") String boardCategoryNo
+						,@RequestParam(value="equipmentName") String equipmentName
+						,@RequestParam(value="equipmentAmount", required=false, defaultValue="") String equipmentAmount
 						,@RequestParam(value="updatePlusInput", required=false, defaultValue="") String updatePlusInput
 						,@RequestParam(value="updateMinusInput", required=false, defaultValue="") String updateMinusInput
+						,@RequestParam(value="equipmentCost", required=false, defaultValue="") String equipmentCost
+						,@RequestParam(value="equipmentTotalCost", required=false, defaultValue="PLUS") String equipmentTotalCost
+						,@RequestParam(value="equipmentCustomer") String equipmentCustomer
+						,@RequestParam(value="equipmentState") String equipmentState
 						,HttpSession session){
 		
 		System.out.println("비품 저장 메서드 실행");
-		System.out.println(testCategoryNo);
-		System.out.println(equipmentCategorySelect);
+		System.out.println(boardCategoryNo);
 		System.out.println(equipmentName);
-		System.out.println(testPrice);
-		System.out.println(testValue);
-		System.out.println(updateInput);
-		System.out.println(testCustomer);
-		System.out.println(testState);
+		System.out.println(equipmentAmount);
 		System.out.println(updatePlusInput);
 		System.out.println(updateMinusInput);
+		System.out.println(equipmentCost);
+		System.out.println(equipmentTotalCost);
+		System.out.println(equipmentCustomer);
+		System.out.println(equipmentState);
 		int resultInsert;
 		Equipment equipment = new Equipment();;
 		equipment = dao.selectTestEquipment(equipmentName, session);
 		System.out.println(equipment + "equipment 확인");
 		if(equipment == null) {
-			dao.addTestEquipment(equipmentName, testCategoryNo, equipmentCategorySelect, testState, session);
+			dao.addTestEquipment(session, equipmentName, boardCategoryNo, equipmentState);
 			equipment = new Equipment();
 			equipment = dao.selectTestEquipment(equipmentName, session);
 			int selectEquipemntNo = equipment.getEquipmentNo();
-			if(!updateInput.equals("PLUS")) {
+			if(updatePlusInput.equals("")) {
 				System.out.println("minus 확인");
-				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, testPrice, testValue, testCustomer);
+				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, equipmentCost, equipmentAmount, equipmentCustomer);
 			} else {
 				System.out.println("plus 확인");
-				dao.addTestEquipmentValueMinus(selectEquipemntNo, testPrice, "0", testCustomer);
-				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, testPrice, testValue, testCustomer);
+				dao.addTestEquipmentValueMinus(selectEquipemntNo, equipmentCost, "0", equipmentCustomer);
+				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, updatePlusInput, equipmentAmount, equipmentCustomer);
 			}
 		} else {
 			int selectEquipemntNo = equipment.getEquipmentNo();
-			if(!updateInput.equals("PLUS")) {
-				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, testPrice, updateMinusInput, testCustomer);
+			if(updatePlusInput.equals("")) {
+				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, equipmentCost, updateMinusInput, equipmentCustomer);
 			} else {
-				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, testPrice, updatePlusInput, testCustomer);
+				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, equipmentCost, updatePlusInput, equipmentCustomer);
 			}
 		}
 		return resultInsert;
