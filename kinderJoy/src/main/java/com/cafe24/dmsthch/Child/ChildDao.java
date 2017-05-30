@@ -14,6 +14,17 @@ public class ChildDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	//반편성번호 받아서 해당 유아 1명 정보 받아오기
+	public Map<String,Object> getChildInfoForDevelopment(ChildFormation childFormation){
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getChildInfoForDevelopment",childFormation);
+	}
+	
+	//연령 받아서 연령에 맞는 opserve가져오기
+	public List<ChildDevelopmentOpserve> ChildDevelopmentAddPage(ChildClass Childclass){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getOpserve",Childclass);
+	}
+	
 	//해당유치원의 반편성번호와 유아정보 가져오기 (발달평가를 위한 셀렉트)
 	public List<Map<String, Object>> ChildBeforeDevelopmentAdd(int pageNo,String searchVal,String searchType,String searchAge,String licenseKindergarten){
 		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅

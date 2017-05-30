@@ -42,9 +42,9 @@ $(document).ready(function(){
 				success : function(data){
 					if (data == 0){
 						if($("#teacher_ajax_id").val().length > 5 || $("#teacher_ajax_id").val() == ""){
-						$("jeon").html("사용가능")
-						}else{
 						$("jeon").html("사용불가")
+						}else{
+						$("jeon").html("사용가능")
 						}
 					}
 				}
@@ -188,13 +188,13 @@ $(document).ready(function(){
 		var id = $("#teacher_ajax_id");
 		var pw = $("#teacherPw");
 		var hp = $("#teacherPhone");
-		
-		var regId = /^[a-z]+[0-9]{3,19}$/g;	// 아이디 유효성 검사식 시작
-		var regPw = /^[a-z0-9]{7,12}$/;	// 비밀번호 유효성 검사식
+		///^[a-z]+[0-9]{3,15}$/g;//
+		var regId = /^[a-z0-9_]{4,20}$/;	// 아이디 유효성 검사식 시작
+		var regPw = /^[a-z0-9]{7,15}$/;	// 비밀번호 유효성 검사식
 		var regNm = /^[가-힣]{2,15}$/;	// 이름 유효성 검사식
 		var regEmail = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;  // 이메일 유효성 검사식
-		var regPhone = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;	// 핸드폰번호 유효성 검사식
-
+		var regPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;	// 핸드폰번호 유효성 검사식
+		///^\d{3}-\d{3,4}-\d{4}$//
 		'use strict';
 				// error variables
 				var UserError  = true,
@@ -348,7 +348,7 @@ $(document).ready(function(){
 		<span class="asterix">*</span>
 		<span class="cross">x</span>
 		<div class="alert alert-danger teacher-alert">
-			완성된 한글로 2자 이상 입력하세요.
+			완성된 한글로 2자 이상 15자 내로 입력하세요.
 		</div>
 		<div class="alert alert-danger custom-alert">
 			이름을 입력하세요.
@@ -358,11 +358,11 @@ $(document).ready(function(){
 	
 		<div class="form-group">
 		<input type="text" class="form-control" id="teacher_ajax_id" name="teacherId" placeholder="아이디를 입력하세요"  maxlength="15">
-	     		사용가능여부 : <jeon />
+	     		
 		<span class="asterix">*</span>
 		<span class="cross">x</span>
 		<div class="alert alert-danger teacher-alert">
-			영어 소문자 3자이상으로 시작하여 숫자 3자 이상으로 끝나야합니다. 예 : abc123
+			영어 소문자 3자이상으로 시작하여 숫자 3자 이상으로 끝나야합니다.  : abc123 사용가능여부 : <jeon />
 		</div>
 		<div class="alert alert-danger custom-alert">
 			아이디를 입력하세요.
@@ -375,7 +375,7 @@ $(document).ready(function(){
 		<span class="asterix">*</span>
 		<span class="cross">x</span>
 		<div class="alert alert-danger teacher-alert">
-			영문 숫자 조합으로 입력해주세요.
+			영문 숫자 조합으로 입력해주세요. 7자 이상 15자 내로 적어주세요.
 		</div>
 		<div class="alert alert-danger custom-alert">
 			비밀번호를 입력하세요
@@ -387,7 +387,6 @@ $(document).ready(function(){
 		<input type="text" class="form-control" id="teacherPhone" name="teacherPhone" placeholder="연락처를 입력하세요">
 		<span class="asterix">*</span>
 		<span class="cross">x</span>
-		<span class="verify"><i class="fa fa-check" aria-hidden="true"></i></span>
 		<div class="alert alert-danger teacher-alert">
 			핸드폰 번호를 정확히 입력하세요.
 		</div>
