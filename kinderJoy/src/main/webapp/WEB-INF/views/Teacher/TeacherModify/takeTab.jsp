@@ -4,7 +4,6 @@
 
 <html>
 <head>
-    
      
   	<!-- JS Link -->
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
@@ -15,36 +14,23 @@
 	<!-- 사이드메뉴바 BEGIN -->
 	<c:import url="./side.jsp"></c:import>
     
-    <link rel="stylesheet" type="text/css" href="css/JKC/AnimatedCheckboxescss/normalize.css" />
-	<link rel="stylesheet" type="text/css" href="css/JKC/AnimatedCheckboxescss/demo.css" />
-	<link rel="stylesheet" type="text/css" href="css/JKC/AnimatedCheckboxescss/component.css" />
-	<script src="js/JKC/AnimatedCheckboxesjs/modernizr.custom.js"></script>
-	
+	    <link rel="stylesheet" href="css/JKC/Multi-Column-Select/Multi-Column-Select.css">
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed|Ubuntu' rel='stylesheet' type='text/css'>
+
+        <style>
+            .clear{
+                margin-bottom: 10px;
+            }
+        </style>
+        
 	<link rel="stylesheet" type="text/css" href="css/JKC/takeTab/tabs.css" />
 	<link rel="stylesheet" type="text/css" href="css/JKC/takeTab/tabstyles.css" />
  	<script src="js/JKC/takeTab/modernizr.custom.js"></script>
 
-	<style>
-
-	label {
-	
-	
-	
-	}
-	
-	#asd {
-	
-	font-size: 3em; line-height: 100%;
-	
-	}
-	</style>
 </head>
 
 <body>
-	<div class="wrapper">
-
 	    <div class="main-panel">
-
 	        <div class="content">
 	            <div class="container-fluid">
 	                <div class="row">
@@ -54,15 +40,13 @@
 	                                <h4 class="title">교원 명단</h4>
 	                                <p class="category">현재 활동중인 교직원 명단입니다.</p>
 	                            </div>                            
-	                            <div class="card-content table-responsive">
 									<c:forEach begin="3" end="5" var="age">
-										<div class="container" style=" padding-top:50; float:right; ">
-											<form class="ac-custom ac-checkbox ac-boxfill" autocomplete="off">
-											
+										
+											<div class="wrapper">
 											<header class="codrops-header">
 											<h1>${age}살 편성</h1>
 											</header>
-												<section>
+												<!-- <section> -->
 													<div class="tabs tabs-style-linetriangle">
 														<nav>
 															<ul>
@@ -74,45 +58,87 @@
 															</ul>
 														</nav>
 													
-														<div class="content-wrap">
+													<div class="content-wrap">
 															<c:forEach var="TC" items="${takeClass}" >
 															<c:if test="${TC.classAge == age}">
-															
-															<section id="${TC.classNo}">
-															<c:forEach var="TT" items="${takeTeacher}">
-															
-															<ul>
-																<li>
-																<label id="asd" for="${TT.teacherNo}">
-																<input id="${TT.teacherNo}" name="${TT.teacherNo}" type="checkbox">${TT.teacherName} &nbsp
-																</label>
-																</li>
-															</ul>
-																
-															</c:forEach>
-															</section>
-															
+																<section id="${TC.classNo}">
+																<div class="wrapper">
+																	   <form action="test" method="POST">
+																	   
+																	   <!-- 시작 -->
+																	   <div id="selectcontrolm">
+																	   <select name="jj">
+																	   <c:forEach var="TT" items="${takeTeacher}">
+																	               <option>${TT.teacherName}</option>
+																	   </c:forEach>
+																	   </select>
+																	   </div>
+																	   <!-- 엔드 -->
+																	   
+																	       <div class="clear"></div>
+																	       <input type="submit" value="저장하기" class="btn" />
+																	   </form>
+																</div>
+																</section>
 															</c:if>
 															</c:forEach>
-														</div>
 													</div>
-												</section>
-											</form>			
-										</div>
+													</div>
+												<!-- </section> -->
+											</div>
 									</c:forEach>
 	                            </div>
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
-	        </div>
+
 		
 		<c:import url="./footer.jsp"></c:import>
 
 	    </div>
 	</div>
+	
 
-	<script src="js/JKC/AnimatedCheckboxesjs/svgcheckbx.js"></script>
+     <script src="js/JKC/Multi-Column-Select/Multi-Column-Select.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $('#selectcontrol').MultiColumnSelect({
+            menuclass : 'mcs',
+            openmenuClass : 'mcs-open',
+            openmenuText : '선택',
+            containerClass : 'mcs-container',
+            itemClass : 'mcs-item',
+            duration : 200,
+            onOpen: function() {
+                // some action
+            },
+            onClose: function() {
+                // some action
+            },
+            onItemSelect: function() {
+                // some action
+
+            }
+        });
+
+        $('#selectcontrolm').MultiColumnSelect({
+            multiple: true,
+            menuclass : 'mcs',
+            openmenuClass : 'mcs-open',
+            openmenuText : '다중선택',
+            containerClass : 'mcs-container',
+            itemClass : 'mcs-item',
+	    idprefix : 'yourOwnID-',
+            duration : 200,
+
+        });
+
+         /* $('#selectcontrolm').MultiColumnSelectAddItem('New','New Item'); */
+
+     });
+    </script>
+	
 	<script src="js/JKC/takeTab/cbpFWTabs.js"></script>
 	
 	<script>
