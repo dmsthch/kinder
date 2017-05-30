@@ -289,9 +289,6 @@ public class ChildController {
 			
 			List<Map<String, Object>> categoryList = childDao.getAttendanceCategory();
 
-			model.addAttribute("childList", childList);
-			model.addAttribute("getChildClass", getChildClass);
-			model.addAttribute("categoryList", categoryList);
 
 			List<ChildAttendance> resultAttendanceList = new ArrayList<ChildAttendance>();
 			
@@ -304,9 +301,11 @@ public class ChildController {
 					
 					resultAttendanceList.add(lastAttendance);
 				}
-				
 			}
 			
+			model.addAttribute("childList", childList);
+			model.addAttribute("getChildClass", getChildClass);
+			model.addAttribute("categoryList", categoryList);
 			model.addAttribute("resultAttendanceList", resultAttendanceList);
 			
 			return returnUri;
