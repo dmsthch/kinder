@@ -18,6 +18,8 @@ import com.cafe24.dmsthch.Child.Child;
 import com.cafe24.dmsthch.Child.ChildAttendance;
 import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.Child.ChildDao;
+import com.cafe24.dmsthch.Child.ChildDevelopmentOpserve;
+import com.cafe24.dmsthch.Child.ChildFormation;
 import com.cafe24.dmsthch.Child.ChildService;
 
 @Controller
@@ -26,6 +28,24 @@ public class ChildController {
 	private ChildDao childDao;
 	@Autowired
 	private ChildService childService;
+	
+	//발달평가 대상 선택에서 한명을 눌렀을때.(발달 평가하기 화면 이동)
+	@RequestMapping(value="/ChildDevelopmentAddPage" , method=RequestMethod.GET)
+	public String ChildDevelopmentAddPage(ChildFormation childFormation
+										,@RequestParam(value="classAge")int classAge
+										,Model model){
+	//필요한것 ->아이 정보 (반편성번호, 연령)
+	//해당 연령에 맞춰서 opserve정보를 가져오기
+		ChildClass childClass = new ChildClass();
+		childClass.setClassAge(classAge);
+		List<ChildDevelopmentOpserve> opserveList = childDao.ChildDevelopmentAddPage(childClass);
+	//반편성번호를 이용해서 아이 정보 셀렉트 해오기
+		Map<String,Object> map = new  HashMap<String,Object>();
+		map = childDao.getChildInfoForDevelopment(childFormation);
+		model.addAttribute("opserveList",opserveList);
+		model.addAttribute("child",map);
+		return "Child/ChildDevelopment";
+	}
 	
 	//네비에서 발달평가 눌렀을때. (해당 유치원 내의 유아 검색하기)
 	@RequestMapping(value="/ChildBeforeDevelopmentAdd" , method=RequestMethod.GET)
@@ -38,14 +58,13 @@ public class ChildController {
 		//필요한것 ->페이지넘버, 검색키워드, 키워드의 타입, 라이센스
 		//페이지넘버, 검색키워드, 키워드 타입이 없는경우 -->해당 유치원의 전체 유아 반편성리스트(현재 년도) 셀렉트하기. 기본 페이지 넘버 1
 		//넘겨야 할 데이터 = 라이센스,페이지넘버
-		System.out.println("체크포인트 로미1");
-		System.out.println(pageNo);
-		System.out.println(searchVal);
-		System.out.println(searchType);
-		System.out.println(searchAge);
 		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
 		List<Map<String, Object>> result = childDao.ChildBeforeDevelopmentAdd(pageNo, searchVal, searchType, searchAge, licenseKindergarten);
 		model.addAttribute("result",result);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("searchVal",searchVal);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("searchAge",searchAge);
 		return "Child/ChildBeforeDevelopmentAdd";
 	}
 	
