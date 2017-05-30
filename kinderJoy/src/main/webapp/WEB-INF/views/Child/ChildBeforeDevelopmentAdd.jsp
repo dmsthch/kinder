@@ -67,7 +67,7 @@
 								</thead>
 			                    <tbody>	
 			                    	<c:forEach items="${result}" var="result">
-			                    		<tr style="cursor:pointer;" onclick="location.href='#'">
+			                    		<tr style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/ChildDevelopmentAddPage?kidFormationNo=${result.KidFormationNo}&classAge=${result.classAge}'">
 									 		<td>${result.kidName}</td>
 									 		<td>${result.kidGender}</td>
 									 		<td>${result.classAge}</td>
@@ -76,6 +76,11 @@
 			                    	</c:forEach>
 								</tbody>
 							</table>
+							<hr/>
+							<c:if test="${pageNo >1 }">
+								<a href="${pageContext.request.contextPath}/ChildBeforeDevelopmentAdd?pageNo=${pageNo-1}&searchVal=${searchVal}&searchType=${searchType}&searchAge=${searchAge}">이전</a>
+							</c:if>
+								<a href="${pageContext.request.contextPath}/ChildBeforeDevelopmentAdd?pageNo=${pageNo+1}&searchVal=${searchVal}&searchType=${searchType}&searchAge=${searchAge}">다음</a>
 						</div>
 						
 					</div>
