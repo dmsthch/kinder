@@ -42,6 +42,13 @@
                     </a>
                 </li>
                 
+                <li class="">
+                    <a href="${pageContext.request.contextPath}/KidCommuteView">
+                        <i class="material-icons">dashboard</i>
+                        <p>유아 출석 현황</p>
+                    </a>
+                </li>
+                
             </ul>
     	</div>
     </div>

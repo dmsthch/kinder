@@ -6,7 +6,6 @@ var setSidenavActive = function(index){
 
 
 //달력
-
 var drawCarendar = function(month){
 	
 	var date = new Date();
@@ -59,7 +58,7 @@ var drawCarendar = function(month){
     			}else if(j==6){ //토요일
     				inputHtml += "<td style='color:blue' id='"+ dayCount +"'>" + dayCount++ + "</td>";		    				
     			}else{
-	    			inputHtml += "<td id='"+ dayCount +"'>" + dayCount++ + "</td>";
+	    			inputHtml += "<td id='"+ dayCount +"' class='commuteDay'>" + dayCount++ + "</td>";
     			}
     		}else{
     			inputHtml += "<td class='next-month'>" + nextCount++ + "</td>";
