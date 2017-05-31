@@ -85,7 +85,7 @@ $(document).ready(function(){
 </head>
 <body class="components-page nav" style="">
 
-	    <div class="sidebar" data-color="blue">
+	    <div class="sidebar" data-color="green">
 
 			<div class="logo" style="padding-bottom: 51px;">
 				<a href="http://www.creative-tim.com" class="simple-text"></a>
@@ -93,7 +93,7 @@ $(document).ready(function(){
 
 	    	<div class="sidebar-wrapper" style="overflow: visible;">
 	            <ul class="nav ">
-            	   <li class="navChildList">
+            	   <li class="navChildList" id="ChildHome">
 	                   <a href="${pageContext.request.contextPath}/ChildList" class="smoothScroll">
 	                        <i class="material-icons">dashboard</i>
 	                        
@@ -102,7 +102,7 @@ $(document).ready(function(){
 	                </li>
 	                
 	                <!-- <li class="active"> -->
-	                <li id="ChildClass">
+	                <li class="navChildClass" id="ChildClass">
 	                    <a href="${pageContext.request.contextPath}/ChildClass">
 	                        <i class="material-icons">person</i>
 	                        <p>전체 반</p>
@@ -134,6 +134,13 @@ $(document).ready(function(){
 	                    <a href="${pageContext.request.contextPath}/ChildCommute">
 	                        <i class="material-icons">person</i>
 	                        <p>유아 출석</p>
+	                    </a>
+	                </li>
+	                
+	                <li id="KidCommuteView">
+	                    <a href="${pageContext.request.contextPath}/KidCommuteView">
+	                        <i class="material-icons">person</i>
+	                        <p>유아 출석 보기</p>
 	                    </a>
 	                </li>
 	                

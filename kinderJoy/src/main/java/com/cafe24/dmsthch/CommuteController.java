@@ -328,7 +328,13 @@ public class CommuteController {
 	
 	//유아 출석 현황
 	@RequestMapping(value="KidCommuteView", method=RequestMethod.GET)
-	public String kidCommuteView(){
+	public String kidCommuteView(HttpSession session){
+		
+		String level = (String) session.getAttribute("teacherLevel");
+		
+		if(level.equals("원장")){
+			return "redirect:/";
+		}
 		
 		return "Commute/KidCommuteView";
 	}

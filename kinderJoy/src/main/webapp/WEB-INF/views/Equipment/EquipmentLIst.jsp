@@ -39,21 +39,88 @@
 		$(this).attr('readonly','readonly');
 	});		
 	//plus 버튼 누를 시 태그 plus, minus 태그 삭제하고 plus 네입값 입력된 인풋 추가
-	$(document).on('click','.Plus',function(){
-		var testInput = '<input type="text" name="updatePlusInput" class="form-control"/>'
+	$(document).on('click','.plus',function(){
+		var testInput = '<input type="text" name="updatePlusInput" class="form-control updatePlusInput"/>'
 		$(this).after(testInput);
 		console.log('plus 추가');
-		$(this).parent().find('.Minus').remove();
-		$(this).parent().find('.Plus').remove();
+		$(this).parent().find('.minus').remove();
+		$(this).parent().find('.plus').remove();
 	});
 	//plus 버튼 누를 시 태그 plus, minus 태그 삭제하고 plus 네입값 입력된 인풋 추가
-	$(document).on('click','.Minus',function(){
-		var testInput = '<input type="text" name="updateMinusInput" class="form-control"/>'
+	$(document).on('click','.minus',function(){
+		var testInput = '<input type="text" name="updateMinusInput" class="form-control updateMinusInput"/>'
 		$(this).after(testInput);
 		console.log('minus 추가');
-		$(this).parent().find('.updatePlus').remove();
-		$(this).parent().find('.updateMinus').remove();
+		$(this).parent().find('.plus').remove();
+		$(this).parent().find('.minus').remove();
 	});
+	//equipmentAmount 유효성 검사(plus)
+	$(document).on('focusout','.updatePlusInput',function(){
+		var checkAmountValue = $(this).val();
+		if(isNaN(checkAmountValue)) {
+			alert('숫자만 입력해주세요');
+			$(this).val('');
+			$(this).focus();
+		}
+	});
+	//equipmentAmount 유효성 검사(minus)
+	$(document).on('focusout','.updateMinusInput',function(){
+		var checkAmountValue = $(this).val();
+		if(isNaN(checkAmountValue)) {
+			alert('숫자만 입력해주세요');
+			$(this).val('');
+			$(this).focus();
+		}
+		//equipmentTotalCost보다 많은 수량 마이너스 막기
+		var checkAmountMinusValue = $(this).val();
+		var checkAmountValue = $(this).parent().parent().find('.equipmentAmount').val();
+		console.log(checkAmountMinusValue);
+		console.log(checkAmountValue);
+		if(checkAmountValue < checkAmountMinusValue) {
+			alert('수량은 총 수량보다 크게 입력하실 수 없습니다.');
+			$(this).val('');
+			$(this).focus();
+		}
+	});
+	//equipmentCost 유효성 검사
+	$(document).on('focusout','.equipmentCost',function(){
+		var checkAmountValue = $(this).val();
+		if(isNaN(checkAmountValue)) {
+			alert('숫자만 입력해주세요');
+			$(this).val('');
+			$(this).focus();
+		}
+		
+	});
+	// 비품 한줄 저장
+	$(document).on('click','.save',function(){
+		var categoryNo = $(this).parent().parent().find('.boardCategoryNo').val();
+		if(categoryNo == 0) {
+			alert('카테고리를 선택해 주세요.');
+		} else {
+			//console.log($(this).parent().parent().parent().find('.equipmentForm').serialize());
+			var params = $(this).parent().parent().serialize();
+			console.log(params);
+	 	    jQuery.ajax({
+	 	        url: '${pageContext.request.contextPath}/equipmentListSave',
+	 	        type: 'POST',
+	 	        data:params,
+	 	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
+	 	        dataType: 'html',
+	 	        success: function (result) {
+	 	            if (result == 1){
+	 	                console.log('데이터 보내기 성공');
+	 	                alert('저장되었습니다.');
+	 	            }else{
+	 	            	alert('저장에 실패하였습니다.');
+	 	            }
+	 	        }
+	 	    });
+		}
+		
+	});
+
+
 </script>
 <style>
 	div{
@@ -62,7 +129,36 @@
 	input{
 		text-align: center;
 	}
+	#staticMenu { 
+		margin: 30pt; 
+		padding: 0pt;  
+		position: absolute; 
+		right: 0px; 
+		top: 0px;
+		position:absolute;
+		z-index:9999;
+		overflow:hidden;
+		border-radius: 13px;
+	}
+	#staticMenu div{
+	  height:100%;
+	  width:100%;
+	  color:#fff;
+	  background:rgba(153,153,153,0.3);
+	  padding:10px;
+	}
+	#staticMenu p{
+	  color: black;
+	}
 </style>
+<script src="js/KHS/RefreshStaticMenu.js"></script>
+<script src="js/KHS/hsCustom.js"></script>
+<div id="staticMenu" class="text-center">
+	<div>
+		<br/>
+		<p>비품 추가하기</p>
+	</div>
+</div>
 <input class="btn btn-default dropdown-toggle" id="button" type="button" value="비품추가"/>
 <div class="row">
 	<div class="col-sm-1">카테고리</div>
@@ -78,12 +174,12 @@
 <div id="main">
 	<c:forEach var="plusMinus" items="${plusMinus}">
 		<div class="row main">
-			<form class="testForm">
+			<form class="equipmentForm">
 				<div class="col-sm-1">
 					<c:forEach var="a" items="${getCategory}">
 						<c:if test="${a.categoryNo == plusMinus.categoryNo}">
-							<input type="text" name="testCategoryNo" value="${a.categoryName}" class="form-control" readonly/>
-							<input type="hidden" name="boardCategoryNo" value="${a.categoryName}" class="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
+							<input type="text" value="${a.categoryName}" class="form-control " readonly/>
+							<input type="hidden" name="boardCategoryNo" value="${a.categoryNo}" class="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
 						</c:if>
 					</c:forEach>
 				</div>
@@ -91,18 +187,18 @@
 					<input class="form-control equipmentName" name="equipmentName" type="text" value="${plusMinus.equipmentName}" readonly/>
 				</div>
 				<div class="col-sm-1">
-					<input class="form-control equipmentAmout" name="equipmentAmout" type="text" value="${plusMinus.PLUS - plusMinus.MINUS}" readonly/>
+					<input class="form-control equipmentAmount" name="equipmentAmount" type="text" value="${plusMinus.PLUS - plusMinus.MINUS}" readonly/>
 				</div>
 				<div class="col-sm-1">
 					<input type="hidden" class="updateInput form-control" name="updateInput"/>
-					<input type="button" class="updatePlus plus" value="+"/>
-					<input type="button" class="updateMinus minus" value="-"/>
+					<input type="button" class="plus" value="+"/>
+					<input type="button" class="minus" value="-"/>
 				</div>
 				<div class="col-sm-1">
-					<input class="form-control equipmentPrice" name="equipmentPrice" type="text" value="${plusMinus.equipmentCost}"/>
+					<input class="form-control equipmentCost" name="equipmentCost" type="text" value="${plusMinus.equipmentCost}"/>
 				</div>
 				<div class="col-sm-1">
-					<input class="form-control equipmentTotalPrice" name="equipmentTotalPrice" type="text" value="${(plusMinus.PLUS - plusMinus.MINUS)*plusMinus.equipmentCost}" readonly/>
+					<input class="form-control equipmentTotalCost" name="equipmentTotalCost" type="text" value="${(plusMinus.PLUS - plusMinus.MINUS)*plusMinus.equipmentCost}" readonly/>
 				</div>
 				<div class="col-sm-2">
 					<input class="form-control equipmentCustomer" name="equipmentCustomer" type="text" value="${plusMinus.equipmentCustomer}" readonly/>
@@ -111,7 +207,7 @@
 					<input class="form-control equipmentState" name="equipmentState" type="text" value="${plusMinus.equipmentState}" readonly/>
 				</div>
 				<div class="col-sm-1">
-					<input type="button" class="btn btn-default dropdown-toggle save" value="추가"/>
+					<input type="button" class="btn btn-default save" value="추가"/>
 				</div>
 			</form>
 		</div>
@@ -119,7 +215,7 @@
 </div>
 <div id="sub" style="display:none;">
 	<div class="row sub">
-		<form class="testForm">
+		<form class="equipemntForm">
 			<div class="col-sm-1">
 				<input type="hidden" name="boardCategoryNo" value="0" class="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
 				<div class="input-group-btn search-panel">
@@ -137,27 +233,27 @@
 				<input class="form-control equipmentName" name="equipmentName" type="text" readonly/>
 			</div>
 			<div class="col-sm-1">
-				<input class="form-control equipmentAmout" name="equipmentAmout" type="text" value="0" readonly/>
+				<input class="form-control equipmentAmount" name="equipmentAmount" type="text" value="0" readonly/>
 			</div>
 			<div class="col-sm-1">
 				<input type="hidden" class="updatePlusInput form-control" name="updateInput"/>
-				<input type="button" class="updatePlus plus" style="width:33px; height:33px;" value="+"/>
-				<input type="button" class="updateMinus minus" style="width:33px; height:33px;" value="-"/>
+				<input type="button" class="plus" style="width:33px; height:33px;" value="+"/>
+				<input type="button" class="minus" style="width:33px; height:33px;" value="-"/>
 			</div>
 			<div class="col-sm-1">
-				<input class="form-control equipmentPrice" name="equipmentPrice" value="0" type="text"/>
+				<input class="form-control equipmentCost" name="equipmentCost" value="0" type="text"/>
 			</div>
 			<div class="col-sm-1">
-				<input class="form-control testTotalPrice" name="testTotalPrice" type="text" readonly/>
+				<input class="form-control equipmentTotalCost" name="equipmentTotalCost" type="text" readonly/>
 			</div>
 			<div class="col-sm-2">
-				<input class="form-control equipmentTotalPrice" name="equipmentTotalPrice" type="text" readonly/>
+				<input class="form-control equipmentCustomer" name="equipmentCustomer" type="text" readonly/>
 			</div>
 			<div class="col-sm-2">
 				<input class="form-control equipmentState" name="equipmentState" type="text" readonly/>
 			</div>
 			<div class="col-sm-1">
-				<input type="button" class="btn btn-default dropdown-toggle save" value="추가"/>
+				<input type="button" class="btn btn-default save" value="추가"/>
 			</div>
 		</form>
 	</div>
