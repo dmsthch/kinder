@@ -26,13 +26,44 @@
 	<link rel="stylesheet" type="text/css" href="css/JKC/takeTab/tabs.css" />
 	<link rel="stylesheet" type="text/css" href="css/JKC/takeTab/tabstyles.css" />
  	<script src="js/JKC/takeTab/modernizr.custom.js"></script>
+ 	
+ 	<script>
+ 	$(document).ready(function(){
+ 		
+ 		var selectClassName = "?";
+ 		var selectTeacherName = "?";
+ 		
+ 		$('.submit').click(function(){
+ 	 		/* var val = $("select option:selected").val();
+ 	 		alert(val+"<-선택값") */
+ 			/* var s = $('section').attr("class"); */
+ 			var s = $(this).parent().parent().parent().attr('class');
+ 			$(this).parent().find('#classNo').val(s);
+ 		});
+ 		
+ 		$('.tabClass').click(function(){ 			
+ 			selectClassName = $(this).find('span').html();
+ 			$('.inputResultView').val(selectClassName + "에 들어갈 선생님의 이름은 " + selectTeacherName + "입니다.");
+ 		});
+ 		
+ 		$(document).on('click','.mcs-item',function(){
+ 			console.log('클릭!');
+ 			selectTeacherName = $(this).html();
+ 			console.log(selectTeacherName);
+ 			$('.inputResultView').val(selectClassName + "에 들어갈 선생님의 이름은 " + selectTeacherName + "입니다.");
+ 			
+ 		});
+
+		
+ 	});
+ 	</script>
 
 </head>
 
 <body>
 	    <div class="main-panel">
 	        <div class="content">
-	            <div class="container-fluid">
+	            <div class="container-fluid">2
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card">
@@ -52,32 +83,38 @@
 															<ul>
 															<c:forEach var="TC" items="${takeClass}" >
 															<c:if test="${TC.classAge == age}"> 
-															<li><a href="${TC.classNo}"><span>${TC.className}반</span></a></li>
+															<li id="classN"><a class="tabClass" href="${TC.classNo}"><span>${TC.className}반</span></a></li>
 															</c:if>
-															</c:forEach> 
+															</c:forEach>
 															</ul>
 														</nav>
 													
 													<div class="content-wrap">
 															<c:forEach var="TC" items="${takeClass}" >
 															<c:if test="${TC.classAge == age}">
-																<section id="${TC.classNo}">
+																<section id="${TC.classNo}" >
+																<div class="${TC.classNo}">
+																
 																<div class="wrapper">
-																	   <form action="test" method="POST">
+																	   <form action="${pageContext.request.contextPath}/pyeonseong" method="POST">
 																	   
 																	   <!-- 시작 -->
-																	   <div id="selectcontrolm">
-																	   <select name="jj">
-																	   <c:forEach var="TT" items="${takeTeacher}">
-																	               <option>${TT.teacherName}</option>
-																	   </c:forEach>
+																	   <div class="selectcontrol">
+																	   <select class="jsel" name="teacherNo">
+																		   <c:forEach var="TT" items="${takeTeacher}">
+																		   <!--   -->       <option value="${TT.teacherNo}">${TT.teacherName}</option>
+																		   </c:forEach>
 																	   </select>
 																	   </div>
 																	   <!-- 엔드 -->
 																	   
 																	       <div class="clear"></div>
-																	       <input type="submit" value="저장하기" class="btn" />
+																	       <input type="hidden" name="classNo" id="classNo">
+																	       <input type="submit" value="저장하기" class="btn submit" />
+																	       <br><br><br><br><br>
+																	       <input type="button" class="inputResultView" value="?반에 들어갈 선생님의 이름은 ? 입니다">
 																	   </form>
+																	</div>
 																</div>
 																</section>
 															</c:if>
@@ -97,16 +134,15 @@
 		<c:import url="./footer.jsp"></c:import>
 
 	    </div>
-	</div>
 	
 
      <script src="js/JKC/Multi-Column-Select/Multi-Column-Select.min.js"></script>
     <script>
     $(document).ready(function(){
-        $('#selectcontrol').MultiColumnSelect({
+        $('.selectcontrol').MultiColumnSelect({
             menuclass : 'mcs',
             openmenuClass : 'mcs-open',
-            openmenuText : '선택',
+            openmenuText : '일반선택',
             containerClass : 'mcs-container',
             itemClass : 'mcs-item',
             duration : 200,
@@ -122,7 +158,7 @@
             }
         });
 
-        $('#selectcontrolm').MultiColumnSelect({
+        $('.selectcontrolm').MultiColumnSelect({
             multiple: true,
             menuclass : 'mcs',
             openmenuClass : 'mcs-open',

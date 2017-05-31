@@ -98,4 +98,9 @@ public class TeacherDao {
 		System.out.println("수정확메서드호출_Dao");
 		return sql.update("com.cafe24.dmsthch.Teacher.TeacherMapper.updateTeacher", teacher);
 	}
+	
+	//교원 인서트
+	public int pyeonseong(TeacherFormation TF) {
+		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.pyeonseong", TF);
+	}
 }
