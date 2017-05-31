@@ -31,6 +31,13 @@ public class ChildController {
 	private ChildDao childDao;
 	@Autowired
 	private ChildService childService;
+	
+	//발달평가목록
+	@RequestMapping(value="/ChildDevelopmentList" , method=RequestMethod.GET)
+	public String ChildDevelopmentList(){
+		
+		return null;
+	}
 
 	//발달평가 저장하기
 	@RequestMapping(value="/ChildDevelopmentAdd" , method=RequestMethod.POST)
