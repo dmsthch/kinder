@@ -38,7 +38,20 @@
 	$(document).on('focusout','.test1',function(){
 		$(this).attr('readonly','readonly');
 	}); 
-	// 숫자 유효성 검사
+	//plus 버튼 누를 시 태그 plus, minus 태그 삭제하고 plus 네입값 입력된 인풋 추가
+	$(document).on('click','.updatePlus',function(){
+		$(this).parent().find('.updatePlusInput').attr('type','text');
+		$(this).parent().find('.updateMinus').remove();
+		$(this).parent().find('.updatePlus').remove();
+	});
+	//plus 버튼 누를 시 태그 plus, minus 태그 삭제하고 plus 네입값 입력된 인풋 추가
+	$(document).on('click','.updateMinus',function(){
+		var testInput = '<input type="text" name="updateMinusInput" class="form-control"/>'
+		$(this).after(testInput);		
+		$(this).parent().find('.updatePlus').remove();
+		$(this).parent().find('.updateMinus').remove();
+	});
+ 	// 숫자 유효성 검사
 	$(document).on('focusout','.testNote',function(){	
 		var testNote2 = $(this).val();
 		var testValue2 = $(this).parent().parent().parent().parent().parent().find('.testValue').val();
@@ -167,10 +180,10 @@
  	        }
  	    });
  	}); */
- 		/*$(document).on('','',function(){}); asdf*/
+ 	// 플러스 버튼 눌렀을 시 플러스 값 넘기기1
 </script>
 
-<input class="btn btn-default dropdown-toggle" id="button" type="button" value="추가"/>
+<input class="btn btn-default dropdown-toggle" id="button" type="button" value="비품추가"/>
 
 <table id="table">
 	<thead>
@@ -186,12 +199,12 @@
 			<td>저장</td>
 		</tr>
 	</thead>
-	<tbody>
- 		<c:forEach var="equipmentList" items="${equipmentList}">
-			<tr>
-				<td>	
+	<tbody>  
+ 		<c:forEach var="plusMinus" items="${plusMinus}">
+			<tr class="row">
+				<td>
 				<form class="testForm">
-					<div class="input-group-btn search-panel">
+<%-- 					<div class="input-group-btn search-panel">
 						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100px;">
 							<span id="category">카테고리 </span><span class="caret"></span>
 						</button>
@@ -200,8 +213,14 @@
 								<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
 							</c:forEach>
 						</ul>
-					</div>
-					<input type="hidden" name="boardCategoryNo" value="0" class="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
+					</div> --%>
+					<c:forEach var="a" items="${getCategory}">
+					<c:if test="${a.categoryNo == plusMinus.categoryNo}">
+					<input type="text" name="testCategoryNo" value="${a.categoryName}" class="form-control" readonly/>
+					
+					<input type="hidden" name="boardCategoryNo" value="${a.categoryName}" class="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
+					</c:if>
+					</c:forEach>
 <!-- 					<select class="form-control select" name="equipmentCategorySelect">
 						<option class="option">카테고리<span class="caret"></span></option>
 						<option value="1">교재,교구</option>
@@ -213,50 +232,60 @@
 				</form>
 				</td>
 				<td>
+
 				<form class="testForm">
-					<input class="form-control test1" name="test1" type="text" style="width : 400px" value="${equipmentList.equipmentName}" readonly/>
+					<input class="form-control test1" name="test1" type="text" style="width : 400px" value="${plusMinus.equipmentName}" readonly/>
 				</form>
+
 				</td>
 				<td>
+
 				<form class="testForm">
-					<input class="form-control testValue" name="testValue" type="text" style="width : 100px" value="${equipmentList.equipmentAmount}" readonly/>
+					<input class="form-control testValue" name="testValue" type="text" style="width : 100px" value="${plusMinus.PLUS - plusMinus.MINUS}" readonly/>
 				</form>
+
 				</td>
 				<td>
+
 				<form class="testForm">
-					<div class="form-inline">
-						<div class="form-group">
-							<input  class="form-control testNote" name="testNote" type="text" style="width : 50px"/>
-						</div>
-						<div class="form-group">
-							<input type="button" class="plus" style="width:33px; height:33px" value="+"/>
-							<input type="button" class="minus" style="width:33px; height:33px" value="-"/>
-						</div>
-					</div>
+					<input type="hidden" class="updatePlusInput form-control" name="updatePlusInput"/>
+					<input type="hidden" class="updateMinusInput form-control" name="updateMinusInput"/>
+					<input type="button" class="updatePlus" style="width:33px; height:33px;" value="+"/>
+					<input type="button" class="updateMinus" style="width:33px; height:33px;" value="-"/>
 				</form>
+
 				</td>
 				<td>
+
 				<form class="testForm">
-					<input class="form-control testPrice" name="testPrice" type="text" style="width : 100px" value="${equipmentList.equipmentCost}"/>
+					<input class="form-control testPrice" name="testPrice" type="text" style="width : 100px" value="${plusMinus.equipmentCost}"/>
 				</form>
+
 				</td>
 				<td>
+
 				<form class="testForm">
-					<input class="form-control testTotalPrice" name="testTotalPrice" type="text" style="width : 100px" readonly/>
+					<input class="form-control testTotalPrice" name="testTotalPrice" type="text" style="width : 100px" value=""${(plusMinus.PLUS - plusMinus.MINUS)*plusMinus.equipmentCost} readonly/>
 				</form>
+
 				</td>
 				<td>
+
 				<form class="testForm">
-					<input class="form-control testCustomer" name="testCustomer" type="text" style="width : 100px" value="${equipmentList.equipmentCustomer}" readonly/>
+					<input class="form-control testCustomer" name="testCustomer" type="text" style="width : 100px" value="${plusMinus.equipmentCustomer}" readonly/>
 				</form>
+
 				</td>
 				<td>
+
 				<form class="testForm">
-					<input class="form-control testState" name="testState" type="text" style="width : 200px" value="${equipmentList.equipmentState}" readonly/>
+					<input class="form-control testState" name="testState" type="text" style="width : 200px" value="${plusMinus.equipmentState}" readonly/>
 				</form>
+
 				</td>
 				<td>
-					<input type="button" class="btn btn-default dropdown-toggle save" value="저장"/>
+
+					<input type="button" class="btn btn-default dropdown-toggle save" value="추가"/>
 				</td>
 				
 			</tr>
@@ -308,8 +337,8 @@
 						<input  class="form-control testNote" name="testNote" type="text" style="width : 50px"/>
 					</div>
 					<div class="form-group">
-						<input type="button" class="plus" style="width:33px; height:33px" value="+"/>
-						<input type="button" class="minus" style="width:33px; height:33px" value="-"/>
+						<input type="button" class="plus" style="width:33px; height:33px;" value="+"/>
+						<input type="button" class="minus" style="width:33px; height:33px;" value="-"/>
 					</div>
 				</div>
 			</form>

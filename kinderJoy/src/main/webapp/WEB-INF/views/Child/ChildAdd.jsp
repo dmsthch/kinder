@@ -93,9 +93,9 @@
             <input class="form-control" name="kidCommuting" id="kidCommuting" type="text"/>
         </div>
         <div>
-            <input class="btn btn-default" type="submit" id="addButton" type="button" value="글입력"/>
+            <input class="btn btn-default" type="submit" id="addButton" type="button" value="유아등록"/>
             <input class="btn btn-default" type="reset" value="초기화"/>
-            <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildList">글목록</a>
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildList">목록</a>
         </div>
     </form>
 </div>

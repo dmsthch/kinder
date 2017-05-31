@@ -50,8 +50,8 @@ button {
 							<tr>
 								<td>${plusMinus.equipmentName}</td>
 								<td>${plusMinus.PLUS - plusMinus.MINUS}</td>
-								<td>${equipmentCost]}</td>
-								<td>${(plusMinus.PLUS - plusMinus.MINUS)*equipmentCost}</td>
+								<td>${plusMinus.equipmentCost}</td>
+								<td>${(plusMinus.PLUS - plusMinus.MINUS)*plusMinus.equipmentCost}</td>
 							<tr>
 							</c:forEach>
 						</tbody>

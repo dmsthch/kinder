@@ -85,7 +85,7 @@ $(document).ready(function(){
 </head>
 <body class="components-page nav" style="">
 
-	    <div class="sidebar" data-color="blue">
+	    <div class="sidebar" data-color="green">
 
 			<div class="logo" style="padding-bottom: 51px;">
 				<a href="http://www.creative-tim.com" class="simple-text"></a>

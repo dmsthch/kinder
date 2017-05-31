@@ -26,10 +26,7 @@
 <body class="components-page">
 	<div class="wrapper">
 		<div class="main-panel">
-			<div class="content">
-				<!-- <button name="save" id="save">계획안 저장</button> -->
-				날짜 : ${resultData.addDate}<br>
-				번호 : ${resultData.educationProjectNo} 
+			<div class="content"> 
 				<div class="wrapper" style="margin-top: 20px;">
 					<div id="example1"></div>
 				</div>
@@ -93,12 +90,17 @@ $(document).ready(function(){
 			minRows: countRow,
 			minCols: countCol,
 			colWidths: 80,
+			rowHeights: 30,
 // 			manualRowResize : true,
 // 			manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
+			
 			customBorders: dataBorders,
 			contextMenu : true,
+			renderAllRows: true,
+		    manualColumnMove: true,
+		    manualRowMove: true,
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},

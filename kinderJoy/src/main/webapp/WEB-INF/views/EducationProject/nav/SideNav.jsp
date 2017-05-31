@@ -286,29 +286,61 @@ $(document).ready(function(){
 						    	</c:forEach>
 						    </ul>
 	                </li>
-	             	
-	             	
-	             	<!-- <li class="active"> -->
-<%-- 	                <li id="educationProjectAddPage">
-	                    <a href="${pageContext.request.contextPath}/educationProjectAddPage">
-	                        <i class="material-icons">library_books</i>
-	                        <p>양식 관리</p>
-	                    </a>
-	                </li> --%>
-	                <li id="educationProjectFormLoad">
-	                    <a href="${pageContext.request.contextPath}/educationProjectFormLoad?formOrder=1">
-	                        <i class="material-icons">person</i>
-	                        <p>임시</p>
-	                    </a>
-	                </li>
+	                
+	                
+	                <!-- 테스트중!! -->
 	                <li>
-	                    <a href="${pageContext.request.contextPath}/educationProjectAddPage">
-	                        <i class="material-icons">content_paste</i>
-	                        <p>임시2</p>
-	                    </a>
+	                	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#testModal">Open Modal</button>
 	                </li>
-	
-
+	                
+		                <!-- Modal -->
+						<div id="testModal" class="modal fade" role="dialog">
+						  <div class="modal-dialog" >
+						
+						    <!-- Modal content-->
+						    <div class="modal-content" style="width: 1000px;">
+						    <div id="myCarousel" class="carousel slide" dat/a-ride="carousel">
+								  <!-- Indicators -->
+								  <ol class="carousel-indicators">
+								    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+								    <li data-target="#myCarousel" data-slide-to="1"></li>
+								    <li data-target="#myCarousel" data-slide-to="2"></li>
+								  </ol>
+								
+								  <!-- Wrapper for slides -->
+								  <div class="carousel-inner">
+								    <div class="item active">
+								      <img src="images/LCR/manual/education_1.jpg" alt="Los Angeles">
+								    </div>
+								
+								    <div class="item">
+								      <img src="chicago.jpg" alt="Chicago">
+								    </div>
+								
+								    <div class="item">
+								      <img src="ny.jpg" alt="New York">
+								    </div>
+								  </div>
+								
+								  <!-- Left and right controls -->
+								  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+								    <span class="glyphicon glyphicon-chevron-left"></span>
+								    <span class="sr-only">Previous</span>
+								  </a>
+								  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+								    <span class="glyphicon glyphicon-chevron-right"></span>
+								    <span class="sr-only">Next</span>
+								  </a>
+							</div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+						
+						  </div>
+						</div>
+	                <!-- 테스트중!! -->
+	                
 	            </ul>
 	    	</div>
 	    </div>    

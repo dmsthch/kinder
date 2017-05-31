@@ -22,28 +22,11 @@
 <!-- 네비바 관련 스크립트  -->
 <script>//네비바 관련 스크립트 네비의 해당부분을 active클래스를 줌.
 $(document).ready(function(){
-	$('#educationProjectFormLoad').attr('class','active');
+	$('#educationProjectAddPage').attr('class','active');
 })
 </script>
 
-
-
-
-</head>
-<body class="components-page">
-	<div class="wrapper">
-		<div class="main-panel">
-			<div class="content">
-				<input type="text" name="formTitle" value="${resultData.formTitle}" id="formTitle">
-				<button name="save" id="save">계획안 수정</button>
-				<div class="wrapper" style="margin-top: 20px;">
-					<div id="example1"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- 스프레드 시트 관련 스크립트 -->
+<!-- 스프레드 시트 관련 스크립트 -->
 <script data-jsfiddle="example1">
 $(document).ready(function(){
 	var container = document.getElementById('example1'),hot;
@@ -103,7 +86,8 @@ $(document).ready(function(){
 			
 			data: dataValue,   //데이터 가져오기
 			
- 			  
+		//	width: 1800,
+		//  height: 700,
 			startRows: countRow,
 			startCols: countCol,
 			rowHeaders : true,
@@ -111,12 +95,14 @@ $(document).ready(function(){
 			minRows: countRow,
 			minCols: countCol,
 			colWidths: 80,
-// 			manualRowResize : true,
-// 			manualColumnResize : true,
+			rowHeights: 30,
+ 		//	manualRowResize : true,
+ 	//		manualColumnResize : true,
 			mergeCells : true,
 			customBorders: true,
 			customBorders: dataBorders,
 			contextMenu : true,
+//			renderAllRows: true,
 			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
 			},
@@ -156,13 +142,9 @@ $(document).ready(function(){
 		}
 	   
 	});
-		
-	/* $('#btTest').click(function(){
-		dataArray[dataArray.length] = hot.mergeCells;
-	}) */
 	
 	$('#save').click(function(){
-		alert('test');
+		
 		var jparse=JSON.stringify(dataValue);
 		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
 		var inputDate = $('#date').val();
@@ -199,7 +181,7 @@ $(document).ready(function(){
 			async: false,
 			data: {"dataArray": jparse, "mergeArray": mergeparse, "borderArray" : borderparse,"countRow" : countRow, "countCol":countCol, "categoryNo":categoryNo,"age":age, "classNo":classNo, "projectDateInfo":projectDateInfo, "formOrder" : formOrder,"formTitle" : formTitle},
 			success : function(data){
-				alert('success! '+data); 
+			showNotification('top','right',data.result);
 		                        
    		},error: function(XMLHttpRequest, textStatus, errorThrown) { 
    		     console.log("Status: " + textStatus);
@@ -207,13 +189,74 @@ $(document).ready(function(){
    		});    
 	})
   
-	//setTimeout(function(){
-// 		console.log(hot.mergeCells)
-// 		console.log(hot.getCellsMeta())
-// 		console.log(dataArray);
-	//},5000)
 })
 </script>
+
+
+
+</head>
+<body class="components-page">
+	<div class="wrapper">
+		<div class="main-panel">
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header" data-background-color="blue">
+									<h3 class="title">양식 불러오기</h3>
+								</div>
+								
+								<div class="card-content">
+									<div class="row">
+										<div class="col-sm-4">
+												<div class="form-group label-floating">
+													<label class="control-label">양식 제목 </label>
+													<input type="text" class="form-control" name="formTitle" value="${resultData.formTitle}" id="formTitle">
+												</div>
+										</div>
+										<div class="col-sm-2" style="padding-top: 15px; text-align: center;"> 
+											<button name="save" id="save" class="btn btn-info">양식 수정</button>
+										</div>
+										<div class="col-sm-2" style="padding-left: 0px; padding-top: 15px; text-align: left;"> 
+											<button data-toggle="modal" data-target="#deleteModal" name="delete" id="delete" class="btn btn-danger">양식 삭제</button>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+							<div class="wrapper" style="margin-top: 20px;">
+								<div id="example1"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+  <!-- Modal -->
+  <div class="modal fade" id="deleteModal" role="dialog">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <form method="post" action="${pageContext.request.contextPath}/educationProjectFormDelete">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4 class="modal-title">양식 삭제</h4>
+	        </div>
+	        <div class="modal-body">
+	          <p>이 양식을 삭제하시겠습니까?</p>
+	          <input type="hidden" name="formNo" value="${resultData.formNo}">
+	        </div>
+	        <div class="modal-footer">
+	          <input type="button" class="btn btn-default" data-dismiss="modal" value="취소">
+	          <button class="btn btn-danger" type="submit">삭제하기</button>
+	        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 

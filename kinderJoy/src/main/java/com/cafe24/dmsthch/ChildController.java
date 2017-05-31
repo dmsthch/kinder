@@ -1,7 +1,9 @@
 package com.cafe24.dmsthch;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.dmsthch.Child.Child;
+import com.cafe24.dmsthch.Child.ChildAttendance;
 import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.Child.ChildDao;
 import com.cafe24.dmsthch.Child.ChildService;
@@ -137,9 +140,9 @@ public class ChildController {
 			
 			String license = "";
 			if(session.getAttribute("teacherNo") != null){
-				license = (String) session.getAttribute("teacherLicense");
+				license = (String) session.getAttribute("licenseKindergarten");
 			}
-			model.addAttribute("teacherLicense");
+			model.addAttribute("licenseKindergarten");
 			
 			return "Child/ChildAdd";
 		}
@@ -230,7 +233,28 @@ public class ChildController {
 		}
 		
 		@RequestMapping(value="/ChildAdd" , method=RequestMethod.POST)
-		public String ChildAdd(HttpSession session ,Child child) {
+		public String ChildAdd(HttpSession session
+				,@RequestParam(value="licenseKindergarten") String licenseKindergarten
+				,@RequestParam(value="kidName") String kidName
+				,@RequestParam(value="kidBirth") String kidBirth
+				,@RequestParam(value="kidAddress") String kidAddress
+				,@RequestParam(value="kidProtectorPhone") int kidProtectorPhone
+				,@RequestParam(value="kidProtectorPhoneReserve", required=false, defaultValue="1") int kidProtectorPhoneReserve
+				,@RequestParam(value="kidPrecautions") String kidPrecautions
+				,@RequestParam(value="kidGender") String kidGender
+				,@RequestParam(value="kidCommuting") String kidCommuting) {
+			
+			Child child =new Child();
+			child.setLicenseKindergarten(licenseKindergarten);
+			child.setKidName(kidName);
+			child.setKidBirth(kidBirth);
+			child.setKidAddress(kidAddress);
+			child.setKidProtectorPhone(kidProtectorPhone);
+			child.setKidProtectorPhoneReserve(kidProtectorPhoneReserve);
+			child.setKidPrecautions(kidPrecautions);
+			child.setKidGender(kidGender);
+			child.setKidCommuting(kidCommuting);
+			
 			
 			String license = (String) session.getAttribute("licenseKindergarten");
 			
@@ -255,10 +279,25 @@ public class ChildController {
 		
 		
 		
+		
 		//유아 출석 뷰
 		@RequestMapping(value="/ChildCommute" , method=RequestMethod.GET)
 		public String childCommute(Model model, HttpSession session){
 			System.out.println("ChildCommute() run Controller");
+			
+			String returnUri = "/";
+			
+			boolean isLogin = (session.getAttribute("teacherNo") != null) ? true : false;
+			
+			if(isLogin){
+				String level = (String) session.getAttribute("teacherLevel");
+				
+				if(!level.equals("원장")){
+					returnUri = "Child/childCommute";
+				}else{
+					return "redirect:/";
+				}
+			}
 			
 			ChildClass childClass = childService.getChildClassToTeacherNo(session);
 			
@@ -267,12 +306,107 @@ public class ChildController {
 			
 			//반하나 검색
 			ChildClass getChildClass = childDao.getClass(Integer.parseInt(childClass.getClassNo()));
-			List<Child> childList = childDao.getChildForClass(childClass); //이부분
+			List<Child> childList = childDao.getChildForClass(childClass);
+			
+			List<Map<String, Object>> categoryList = childDao.getAttendanceCategory();
 
 			model.addAttribute("childList", childList);
 			model.addAttribute("getChildClass", getChildClass);
+			model.addAttribute("categoryList", categoryList);
+
+			List<ChildAttendance> resultAttendanceList = new ArrayList<ChildAttendance>();
 			
-			return "Child/childCommute";
+			//출석정보를 갖와 뿌려주기 위함
+			for(Child c : childList){
+				List<ChildAttendance> resultAttendance = childDao.getCommuteAll(c.getKidNo());
+				
+				if(resultAttendance.size() > 0){
+					ChildAttendance lastAttendance = resultAttendance.get(resultAttendance.size()-1);
+					
+					resultAttendanceList.add(lastAttendance);
+				}
+				
+			}
+			
+			model.addAttribute("resultAttendanceList", resultAttendanceList);
+			
+			return returnUri;
 		}
+		
+		
+		//출석 처리
+		@RequestMapping(value="/ChildCommute" , method=RequestMethod.POST)
+		public String childCommute(Model model, HttpSession session
+								  ,@RequestParam(value="formKidNo") String formKidNo
+								  ,@RequestParam(value="formKidName") String formKidName
+								  ,@RequestParam(value="formCheckbox") String formCheckbox
+								  ,@RequestParam(value="formCategory") String formCategory
+								  ,@RequestParam(value="formInput") String formInput){
+
+			System.out.println("childCommute(post) run Coltroller");
+			String license = (String) session.getAttribute("licenseKindergarten");
+			
+			System.out.println(formKidNo);
+			System.out.println(formKidName);
+			System.out.println(formCheckbox);
+			System.out.println(formCategory);
+			System.out.println(formInput);
+			
+			String[] kidNo = formKidNo.split(",");
+			String[] kidName = formKidName.split(",");
+			String[] kidCheckbox = formCheckbox.split(","); //출석 체크박스
+			String[] kidCategory = formCategory.split(","); //카테고리
+			String[] kidInput = formInput.split(","); //특이사항 정보
+			
+			List<ChildAttendance> insertDataList = new ArrayList<ChildAttendance>();
+			
+			for(int i=0; i<kidNo.length; i++){ //insertData Setting
+				ChildAttendance c = new ChildAttendance();
+				
+				int attendance = 0; // 0이 false - 출석유무
+				int attendanceUnusual = 0; //특이사항 유무
+				if(kidCheckbox[i].equals("true")) attendance = 1;
+				if(!kidCategory[i].equals("null")) attendanceUnusual = 1;
+								
+				c.setKidNo(Integer.parseInt(kidNo[i]));
+				c.setLicenseKindergarten(license);
+				c.setAttendance(attendance);
+				c.setAttendanceUnusual(attendanceUnusual);
+				
+				c.setCategoryNo(kidCategory[i]);
+				c.setAttendanceMemo(kidInput[i]);
+				
+				insertDataList.add(c);
+				
+			} //forEnd
+			
+			int todayCommute = childDao.isTodayCommute(license);
+			System.out.println(todayCommute);
+			
+			if(todayCommute == 0){ //금일 유아 출석체크가 처음인 경우 (insert Query)
+				System.out.println("처음인 경우");
+				for(ChildAttendance data : insertDataList){
+					childDao.kidAttendanceInsert(data);
+					if(!data.getCategoryNo().equals("null")){ //특이사항이 있는 경우
+						System.out.println("특이사항이 있는 경우 " + data.getKidNo());
+						childService.insertUnusual(data);
+						
+					}					
+				}
+				
+			}else{ //금일 유아 출석체크가 처음이 아닌 경우 (update Query)
+				System.out.println("처음이 아닌 경우");
+				for(ChildAttendance data : insertDataList){
+					childDao.kidAttendanceUpdate(data);
+					if(!data.getCategoryNo().equals("null")){ //특이사항이 있는 경우
+						System.out.println("특이사항이 있는 경우 " + data.getKidNo());
+						childService.insertUnusual(data);
+					}
+				}
+			}
+			
+			return "redirect:/ChildCommute";
+		}
+		
 
 }

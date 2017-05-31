@@ -10,6 +10,7 @@ public class ManagementPlusMinus {
 	private String MINUS;
 	private String equipmentCustomer;
 	private String equipmentDay;
+	private String equipmentState;
 	public String getEquipmentNo() {
 		return equipmentNo;
 	}
@@ -64,5 +65,11 @@ public class ManagementPlusMinus {
 	public void setEquipmentDay(String equipmentDay) {
 		this.equipmentDay = equipmentDay;
 	}
-
+	public String getEquipmentState() {
+		return equipmentState;
+	}
+	public void setEquipmentState(String equipmentState) {
+		this.equipmentState = equipmentState;
+	}
+	
 }

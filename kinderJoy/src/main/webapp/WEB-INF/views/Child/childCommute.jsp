@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <jsp:useBean id="toDay" class="java.util.Date" />
 <head>
 	<meta charset="utf-8">
@@ -18,7 +19,27 @@
 	
 	<script>
 		$(document).ready(function(){
-
+			
+			if(${fn:length(resultAttendanceList) > 0 }){
+				
+				console.log('출석값 있음')
+				
+				for(i=0; i<$('.getKidNo').length ; i++){
+					
+					console.log(i + ' : 아이');
+					
+					//체크박스 셋팅
+					if( $('.getCheckbox').eq(i).val() == 1 ) $('.checkbox').eq(i).prop('checked','true')
+					//카테고리 셋팅
+					if( $('.getCategory').eq(i).val() != '' ) $('.tdCategory').find('select').eq(i).val( $('.getCategory').eq(i).val() )
+					
+					if( $('.getInput').eq(i).val() != '' ) $('.tdInput').eq(i).children().val( $('.getInput').eq(i).val() )
+					
+				}				
+				
+			}
+			
+						
 			$('#btnAllCheckTrue').click(function(){
 				$('.checkbox').prop('checked','true');
 			});
@@ -26,25 +47,40 @@
 				$('.checkbox').prop('checked','');
 			});
 			
-			$('#testBt').click(function(){
-
+			$('.tdCategory').find('select').change(function(){
+				var value = $(this).val();
+				
+				if(value != 'null'){
+					$(this).parents('tr').find('.tdInput').children().val('');
+					$(this).parents('tr').find('.tdInput').children().removeAttr('readonly');			
+				}else{
+					$(this).parents('tr').find('.tdInput').children().attr('readonly','readonly');
+				}
+				
+			});
+			
+			$('#btnSubmit').click(function(){ //폼셋팅 후 submit
+				
+				$('#resultForm').find('input').val(''); //hiddenForm Reset
+				$('#btnSubmit').val('출석');
+				
 				var formKidNoValue = $('#formKidNo').val();
 				var formKidNameValue = $('#formKidName').val();
 				var formCheckboxValue = $('#formCheckbox').val();
+				var formCategory = $('#formCategory').val();
 				var formInput = $('#formInput').val();
 				
 				for(i=0; i < $('.tdKidNo').length; i++){
-					console.log(i);
-										
 					if(formKidNoValue.length == 0){
 						formKidNoValue = $('.tdKidNo').eq(i).html();
 						formKidNameValue = $('.tdKidName').eq(i).html();
 						formCheckboxValue = $('.checkbox').eq(i).prop('checked');
+						formCategory = $('.tdCategory').eq(i).find('select').val();
 						
-						if($('.tdInput').eq(i).val() == ''){
+						if($('.tdInput').eq(i).find('input').val() == ''){
 							formInput = 'null';						
 						}else{
-							formInput = $('.tdInput').eq(i).val();
+							formInput = $('.tdInput').eq(i).find('input').val();
 						}
 						
 						
@@ -52,25 +88,29 @@
 						formKidNoValue += ',' + $('.tdKidNo').eq(i).html();
 						formKidNameValue += ',' + $('.tdKidName').eq(i).html();
 						formCheckboxValue += ',' + $('.checkbox').eq(i).prop('checked');
+						formCategory += ',' + $('.tdCategory').eq(i).find('select').val();
 						
-						if($('.tdInput').eq(i).val() == ''){
+						if($('.tdInput').eq(i).find('input').val() == ''){
 							formInput += ',null';					
 						}else{
-							formInput += ',' + $('.tdInput').eq(i).val();
+							formInput += ',' + $('.tdInput').eq(i).find('input').val();
 						}
 						
 					}
-					console.log(formKidNoValue);
-					console.log(formKidNameValue);
-					console.log(formCheckboxValue);
-					console.log(formInput);
 					
-					//히든에 값셋팅 해야함
+					$('#formKidNo').val(formKidNoValue);
+					$('#formKidName').val(formKidNameValue);
+					$('#formCheckbox').val(formCheckboxValue);
+					$('#formCategory').val(formCategory);
+					$('#formInput').val(formInput);
+
+					console.log($('#formKidNo').val());
+					console.log($('#formKidName').val());
+					console.log($('#formCheckbox').val());
+					console.log($('#formCategory').val());
+					console.log($('#formInput').val());
 					
-					//히든에 값셋팅해서 컨트롤러로 넘겨서
-					//오늘 출석데이터 검색해서 없으면 insert
-					//있으면 update 처리해서 데이터를 갱신해주어야 함
-					
+					$('#resultForm').submit();
 				}
 				
 			});
@@ -109,34 +149,59 @@
 							<td>유아번호</td>
 							<td>이름</td>
 							<td>출석여부</td>
-							<td>특이사항여부</td>
+							<td>특이사항종류</td>
+							<td>특이사항내용</td>
 						</tr>
 					</thead>
 					<tbody>
+						
 						<c:forEach var="child" items="${childList}">
 							<tr>
 								<td class="tdKidNo">${child.kidNo}</td>
 								<td class="tdKidName">${child.kidName}</td>
 								<td class="tdCheckbox"><input type="checkbox" class="checkbox"></td>
+								<td class="tdCategory">
+									<select>
+										<option value="null">선택</option>
+										<c:forEach var="category" items="${categoryList}">
+											<option value="${category.categoryNo }">${category.categoryName}</option>
+										</c:forEach>
+									</select>
+								</td>
 								<td class="tdInput"><input type="text" style="width:100%"></td>
 							</tr>
-						</c:forEach>	
+						</c:forEach>
+							
 					</tbody>
 					
 				</table>
 				
-				<form>
-				
+				<form id="resultForm" action="${pageContext.request.contextPath}/ChildCommute" method="post">
 					<div class="text-right">
-						<input type="hidden" value="" id="formKidNo">
-						<input type="hidden" value="" id="formKidName">
-						<input type="hidden" value="" id="formCheckbox">
-						<input type="hidden" value="" id="formInput">
 						
-						<input type="button" id="testBt" value="갱신" class="btn btn-default">
-<!-- 						<input type="submit" value="갱신" class="btn btn-default"> -->
+						<input type="hidden" id="formKidNo" name="formKidNo">
+						<input type="hidden" id="formKidName" name="formKidName">
+						<input type="hidden" id="formCheckbox" name="formCheckbox">
+						<input type="hidden" id="formCategory" name="formCategory">
+						<input type="hidden" id="formInput" name="formInput">
+						
+						<input type="button" id="btnSubmit" value="출석" class="btn btn-default">
 					</div>
 				</form>
+			</div>
+			
+			<div>
+				
+				<c:if test="${fn:length(resultAttendanceList) > 0 }">
+					<c:forEach var="result" items="${resultAttendanceList }">
+						<input type="hidden" value="${result.kidNo }" class="getKidNo">
+						<input type="hidden" value="${result.attendance }" class="getCheckbox">
+						<input type="hidden" value="${result.categoryNo }" class="getCategory">
+						<input type="hidden" value="${result.attendanceMemo }" class="getInput">
+					</c:forEach>
+				</c:if>
+			
+			
 			</div>
 		
 		</div>

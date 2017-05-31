@@ -25,32 +25,24 @@
 
 <script>
  $(document).ready(function(){
-
- 		alert('test');
 		//네비바 색주기
-		/* var classAge = ${classAge}; */
-		//console.log(categoryNo+"<<categoryNo")
+	
 		$('#ChildClass').attr('class','active');
-		/* if(classAge==3){
-				
-		}else if(classAge == 4){
-			$('#ChildClass').attr('class','active');
-		}else if(classAge == 5){
-			$('#ChildClass').attr('class','active'); */
+
 })
 </script>
 <div class="col-md-10 col-sm-offset-2">
-   <table class="table table-striped">
- <div class="content">
+ 			<div class="content">
 	            <div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card">
-	                            <div class="card-header" data-background-color="purple">
+	                            <div class="card-header" data-background-color="green">
 	                                <h4 class="title">반 리스트</h4>
 	                                <p class="category">전체 반</p>
 	                            </div>
-	                         
+	                         		
+	                         		<table class="table table-striped">
 	                                    <thead class="text-primary">
 	                                    	<th>반이름</th>
 							                <th>운영년도</th>
@@ -71,7 +63,8 @@
 	                            </div>
 	                        </div>
 	                    </div>	
-
+					</div>
+				</div>
 
     <ul class="pager">
         <c:if test="${currentPage > 1}">

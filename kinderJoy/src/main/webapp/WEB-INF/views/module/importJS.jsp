@@ -10,6 +10,7 @@
 <script src="js/material-dashboard.js"></script>
 <script src="js/material.min.js"></script>
 <script src="js/smoothscroll.js"></script>
+<script src="js/bootstrap-notify.js"></script>
 
 <!-- <script src="js/bootstrap.min.js"></script> -->
 <script src="js/bootstrap.js"></script>

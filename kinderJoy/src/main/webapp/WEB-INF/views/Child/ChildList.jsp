@@ -42,17 +42,17 @@ $(document).ready(function(){
 <!-- navbar -->
 
 <div class="col-md-10 col-sm-offset-2">
-   <table class="table table-striped">
- <div class="content">
+ 			<div class="content">
 	            <div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card">
-	                            <div class="card-header" data-background-color="purple">
+	                            <div class="card-header" data-background-color="green">
 	                                <h4 class="title">유아 리스트</h4>
 	                                <p class="category">전체 반</p>
 	                            </div>
 	                         
+  									 <table class="table table-striped">
 	                                    <thead class="text-primary">
 	                                    	<th>이름</th>
                 							<th>생년월일</th>
@@ -80,11 +80,12 @@ $(document).ready(function(){
 	                                        </c:forEach>
 	                                    </tbody>
 	                                </table>
-
+				
 	                            </div>
 	                        </div>
 	                    </div>
-
+					</div>
+				</div>
     <ul class="pager">
         <c:if test="${currentPage > 1}">
             <li class="previous"><a href="${pageContext.request.contextPath}/ChildList?currentPage=${currentPage-1}">이전</a></li>
