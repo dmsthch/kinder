@@ -65,22 +65,29 @@ $(document).ready(function(){
 									<i class="material-icons">face</i>
 								</span>
 								<div class="col-md-2">
-								<input type="text" class="form-control" value="이름 : ${child. kidName}" readonly>
+									<input type="text" class="form-control" value="이름 : ${child. kidName}" readonly>
 								</div>
 								<div class="col-md-2">
-								<input type="text" class="form-control" value="성별 : ${child.kidGender}" readonly>
+									<input type="text" class="form-control" value="성별 : ${child.kidGender}" readonly>
 								</div>
 								<div class="col-md-2">
-								<input type="text" class="form-control" value="반 : ${child.className}" readonly>
+									<input type="text" class="form-control" value="반 : ${child.className}" readonly>
 								</div>
 								<div class="col-md-3">
-								<input type="text" class="form-control" value="생년월일 : ${child.kidBirth}" readonly>
+									<input type="text" class="form-control" value="생년월일 : ${child.kidBirth}" readonly>
+								</div>
+								<div class="col-md-2">
+									<input type="text" class="form-control" value="나이 : ${child.classAge}" readonly>
 								</div>
 							</div>
 							<hr/>	
+							
 						<form action="${pageContext.request.contextPath}/ChildDevelopmentAdd" method="post" id="developmentForm">
 							<input type="hidden" value="${child.kidFormationNo}" name="kidFormationNo"> <!-- 반편성번호 -->
 							<input type="hidden" value="" name="opserveNo" id="opserveNo"> <!-- 관찰문항번호. 옵션 -->
+							<input type="hidden" value="${child. kidName}" name="kidName" > <!-- 아이이름 -->
+							<input type="hidden" value="${child. kidBirth}" name="kidBirth" > <!-- 아이이름 -->
+							<input type="hidden" value="${child. classAge}" name="classAge" > <!-- 아이이름 -->
 							<div class="input-group col-md-4">
 								<span class="input-group-addon" style="padding-top: 20px;">
 									<i class="material-icons">forward</i>
@@ -102,7 +109,7 @@ $(document).ready(function(){
 								<select class="form-control" name="opserveNo" id="contentSelect">
 									<option value="" selected disabled>내용/문항 선택</option>
 									<c:forEach items="${opserveList}" var="opserve">
-									<option value="${opserve.opserveNo}" id="${opserve.opserveQuestionNo}" class="${fn :substring(opserve.opserveQuestionNo,0,1)}"> ${opserve.opserveContent} - ${opserve.opserveQuestion} </option>
+									<option value="${opserve.opserveNo}" id="${opserve.opserveQuestionNo}" class="${fn :substring(opserve.opserveQuestionNo,0,1)}">${opserve.opserveNo}  ${opserve.opserveContent} - ${opserve.opserveQuestion} </option>
 									</c:forEach>
 								</select>
 								
