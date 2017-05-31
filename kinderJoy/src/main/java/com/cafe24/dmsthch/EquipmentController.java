@@ -208,7 +208,7 @@ public class EquipmentController {
 			} else {
 				System.out.println("plus »Æ¿Œ");
 				dao.addTestEquipmentValueMinus(selectEquipemntNo, equipmentCost, "0", equipmentCustomer);
-				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, updatePlusInput, equipmentAmount, equipmentCustomer);
+				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, updatePlusInput, equipmentCost, equipmentCustomer);
 			}
 		} else {
 			int selectEquipemntNo = equipment.getEquipmentNo();

@@ -28,7 +28,18 @@ button {
 	background-color: white;
  }
 </style>
-
+<script>
+$(document).ready(function(){
+		var tdArray = 0;//asd
+		<c:forEach var="managementList" items="${managementList}">
+		<c:if test="${managementList.PM == 'plus'}">
+		tdArray += ${managementList.equipmentAmount * managementList.equipmentCost}
+		</c:if>
+		</c:forEach>
+		console.log(tdArray);
+		$('#totalValue').html(tdArray);
+	});
+</script>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
@@ -36,29 +47,43 @@ button {
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
-				
+				<form action="${pageContext.request.contextPath}/test11">
+					<input type="hidden" name="test" value="${test}"/>
+					<input type="date" name="testDay" value="${testDay}"/>
+					<input type="date" name="testDay2" value="${testDay2}"/>
+					<input type="submit" value="검색"/>
+				</form>
 				<div>
-					<table>
+					<table border="1">
 						<thead>
+							<th>PM</th>
+							<th>구매자</th>
 							<th>품명</th>
-							<th>수량</th>
 							<th>단가</th>
-							<th>총단가</th>
+							<th>구매,사용 수량</th>
+							<th>총 구매액수,사용액수</th>
+							<th>구매일,사용일</th>
 						</thead>
 						<tbody>
-							<c:forEach var="plusMinus" items="${plusMinus}">
+							<c:forEach var="managementList" items="${managementList}">
+							<c:if test="${managementList.equipmentAmount != 0}">
 							<tr>
-								<td>${plusMinus.equipmentName}</td>
-								<td>${plusMinus.PLUS - plusMinus.MINUS}</td>
-								<td>${plusMinus.equipmentCost}</td>
-								<td>${(plusMinus.PLUS - plusMinus.MINUS)*plusMinus.equipmentCost}</td>
+								<td>${managementList.PM}</td>
+								<td>${managementList.teacherName}</td>
+								<td>${managementList.equipmentName}</td>
+								<td>${managementList.equipmentCost}</td>
+								<td>${managementList.equipmentAmount}</td>
+								<td class="tdValue">${managementList.equipmentCost*managementList.equipmentAmount}</td>
+								<td>${managementList.equipmentDay}</td>
 							<tr>
+							</c:if>
 							</c:forEach>
 						</tbody>
 					</table>
-					<div>
-						총액수
-						<div>123</div>
+					<!--  -->
+					<div>총 구매금액</div>
+					<div id="totalValue">
+						
 					</div>
 				</div>
 			</div>
