@@ -1,5 +1,6 @@
 package com.cafe24.dmsthch.Child;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,42 @@ public class ChildDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	//반편성번호 받아서 해당 유아 1명 정보 받아오기
+	public Map<String,Object> getChildInfoForDevelopment(ChildFormation childFormation){
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getChildInfoForDevelopment",childFormation);
+	}
+	
+	//연령 받아서 연령에 맞는 opserve가져오기
+	public List<ChildDevelopmentOpserve> ChildDevelopmentAddPage(ChildClass Childclass){
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getOpserve",Childclass);
+	}
+	
+	//해당유치원의 반편성번호와 유아정보 가져오기 (발달평가를 위한 셀렉트)
+	public List<Map<String, Object>> ChildBeforeDevelopmentAdd(int pageNo,String searchVal,String searchType,String searchAge,String licenseKindergarten){
+		Calendar c = Calendar.getInstance(); //객체 생성 및 현재 일시분초...셋팅
+		int year = c.get(Calendar.YEAR);
+		int onePageRow = 10;
+		int startRow = (pageNo-1)*onePageRow;
+		Map<String,Object> map = new  HashMap<String,Object>();
+		map.put("year", year);
+		map.put("licenseKindergarten", licenseKindergarten);
+		map.put("searchVal", searchVal);
+		map.put("searchAge", searchAge);
+		map.put("searchType",searchType );
+		map.put("startRow",startRow);
+		map.put("onePageRow",onePageRow);
+		System.out.println(year+"<<year");
+		System.out.println(licenseKindergarten+"<<licenseKindergarten");
+		System.out.println(searchVal+"<<searchVal");
+		System.out.println(searchAge+"<<searchAge");
+		System.out.println(searchType+"<<searchType");
+		System.out.println(startRow+"<<startRow");
+		System.out.println(onePageRow+"<<onePageRow");
+		
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.ChildBeforeDevelopmentAdd",map);
+	}
+	
 	
 	//유아번호로 당일 출석정보 가져오기 (특이사항 포함)
 	public List<ChildAttendance> getCommuteAll(int kidNo){

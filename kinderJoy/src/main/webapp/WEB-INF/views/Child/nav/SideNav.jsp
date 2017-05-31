@@ -136,6 +136,23 @@ $(document).ready(function(){
 	                        <p>유아 출석</p>
 	                    </a>
 	                </li>
+	                
+	                <li class="dropdown">
+	                	 <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
+	                        <i class="material-icons">content_paste</i>
+	                        <p>유아 발달평가 <span class="caret"></span></p>
+                        </a>
+						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
+						    	 <!-- 발달평가 등록!! -->
+							    	<li>
+						    		<a href="${pageContext.request.contextPath}/ChildBeforeDevelopmentAdd"> 발달평가 등록 </a>
+								    </li>
+							    <!-- 발달평가등록끝 -->
+							    <!-- 발달평가 열람 -->
+							    
+							    <!-- 발달평가 열람끝 -->
+						    </ul>
+	                </li>
 	            </ul>
 	    	</div>
 	    </div>

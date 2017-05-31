@@ -24,14 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 
 @Controller
-@SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "licenseKindergarten", "teacherNo", "teacherTime" })
+
 public class TeacherController {
 	
 	@Autowired
@@ -58,7 +57,7 @@ public class TeacherController {
 		return "";
 	}
 	
-	//계정삭제
+	//계정삭제 탈퇴
 	@RequestMapping(value="/deleteAccount", method = RequestMethod.POST)
 	public String delete(HttpSession httpsession ,SessionStatus sessionstatus) {
 		//현재 세션에 있는 아이디값을 가져와서 TDao에서 부른 메서드 안에 대입 후 쿼리 실행하면
@@ -76,7 +75,7 @@ public class TeacherController {
 
 		TDao.deleteANDinsert(map);
 		
-		sessionstatus.setComplete();
+		httpsession.invalidate();
 		return "redirect:/home";
 	}
 	
@@ -272,12 +271,15 @@ public class TeacherController {
 	
 	//로그인 암호화된 아이디 비밀번호를 복호화한다.
 	@RequestMapping(value="/loginTest", method=RequestMethod.POST)
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(
+    		HttpServletRequest request
+    		,Teacher teacher 
+    		, HttpServletResponse response
+    		, HttpSession session2
+    		, Model model)
             throws ServletException, IOException {
 		String securedUsername = request.getParameter("securedUsername");
-		System.out.println(securedUsername +"<--암호화된 아이디");
         String securedPassword = request.getParameter("securedPassword");
-        System.out.println(securedPassword+"<--암호회된 패스워드");
         
         HttpSession session = request.getSession();
         PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
@@ -289,18 +291,37 @@ public class TeacherController {
         try {
             String username = decryptRsa(privateKey, securedUsername);
             String password = decryptRsa(privateKey, securedPassword);
+           
+            
+  
+            session2.setAttribute("teacherId", username);
+            System.out.println(username);
+            if(session2.getAttribute("teacherId") != null) {
+            	/*Teacher saveSession = TDao.LoginTeacher(teacher);
+            	System.out.println("나오냐");
+                session2.setAttribute("teacherNo", saveSession.getTeacherNo());
+                System.out.println("나오냐2");
+                session2.setAttribute("licenseKindergarten", saveSession.getLicenseKindergarten());
+                session2.setAttribute("teacherLevel", saveSession.getTeacherLevel());
+                session2.setAttribute("teacherName", saveSession.getTeacherName());
+                System.out.println(saveSession.getTeacherName()+"<<<<<<<<<<<<<네임");*/
+            }
+
+            
+            
+            //넘버 라이 네임 레벨 아디
+            
             System.out.println(username +"<--복호화한 아이디");
             System.out.println(password +"<--복호화한 패스");
-            request.setAttribute("username", username);
-            request.setAttribute("password", password);
-            request.getRequestDispatcher("/WEB-INF/views/Login/testLogin.jsp").forward(request, response);
+
+            request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
         } catch (Exception ex) {
             throw new ServletException(ex.getMessage(), ex);
         }
     }
 
     private String decryptRsa(PrivateKey privateKey, String securedValue) throws Exception {
-        System.out.println("will decrypt : " + securedValue);
+        System.out.println("해독할 정보 : " + securedValue);
         Cipher cipher = Cipher.getInstance("RSA");
         byte[] encryptedBytes = hexToByteArray(securedValue);
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
@@ -345,7 +366,15 @@ public class TeacherController {
 		if(saveSession != null) {
 			if(session.getAttribute("teacherId") == null){
 				
-				model.addAttribute("teacherNo",saveSession.getTeacherNo());
+				session.setAttribute("teacherNo",saveSession.getTeacherNo());
+				session.setAttribute("licenseKindergarten",saveSession.getLicenseKindergarten());
+				session.setAttribute("teacherId", saveSession.getTeacherId());
+				session.setAttribute("teacherName", saveSession.getTeacherName());
+				session.setAttribute("teacherLevel" ,saveSession.getTeacherLevel());
+				
+				//왜 인지는 모르겠으나 모델객체에 값을 저장하면 주소창에 값이 모두 노출되었다
+				//그런데 세션에 저장하니 주소창에 값이 없어졌다 왜???
+				/*model.addAttribute("teacherNo",saveSession.getTeacherNo());
 				System.out.println(saveSession.getTeacherNo() +" <-- 세션에 저장될 넘버 값 세션");
 				
 				model.addAttribute("licenseKindergarten",saveSession.getLicenseKindergarten());
@@ -358,33 +387,33 @@ public class TeacherController {
 				System.out.println(saveSession.getTeacherName() + "<-- 세션에 저장될 네임값");
 				
 				model.addAttribute("teacherLevel" ,saveSession.getTeacherLevel());
-				System.out.println(saveSession.getTeacherLevel() + " <--세션에 저장될 레벨값");
+				System.out.println(saveSession.getTeacherLevel() + " <--세션에 저장될 레벨값");*/
 				
 				session.setMaxInactiveInterval(7200);
-
-				//시간설정을 모델객체안에 담음
-				model.addAttribute("teacherTime", session.getMaxInactiveInterval());
+				session.setAttribute("teacherTime", session.getMaxInactiveInterval());
 				System.out.println("세션의 유지 시간 : "+session.getMaxInactiveInterval()+"초");
-
 				}
+			
 			} else {				
 				model.addAttribute("nogin","로그인실패");
 				System.out.println("아이디나 비밀번호를 확인해주세요");
 				
 				return "/home";
 		}
-		return "redirect:/home";
+		return "/home";
 	}
 	
 	//로그아웃 메서드
 	@RequestMapping(value="/logOut", method=RequestMethod.GET)
-	public String logOut(@ModelAttribute Teacher teacher ,SessionStatus sessionstatus){
+	public String logOut(@ModelAttribute Teacher teacher ,HttpSession session){
 
-		sessionstatus.setComplete();
+		//sessionstatus.setComplete();
+		session.invalidate();
+		System.out.println("세션 삭제");
 
 
 		
-		System.out.println(sessionstatus +"\n 로그아웃 SessionAttributes만 초기화");
+		//System.out.println(sessionstatus +"\n 로그아웃 SessionAttributes만 초기화");
 		System.out.println(" redirect:/home");
 		return "redirect:/home";
 	}

@@ -1,121 +1,144 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- bootstrap을 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
- 
-<!-- jquery를 사용하기위한 CDN주소 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- 
-<!-- bootstrap javascript소스를 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
- 
-<title>ChildDevelopment</title>
-<<<<<<< HEAD
+<title>Insert title here</title>
+<c:import url="../module/importCSS.jsp"></c:import>
+<c:import url="./nav/SideNav.jsp"></c:import>
+<c:import url="../module/navbar.jsp"></c:import>
+<script>
+$(document).ready(function(){
+	//맨처음분류 1~5까지 선택(신의사예자)하면 2번째 셀렉트에서 해당하는 내용만 보여주기
+	$(document).on('change','#questionSelect',function(){
+		var questionSelect = $('#questionSelect').val();
+		console.log(questionSelect);
+		$('select[name=opserveNo] option[class!="'+questionSelect+'"]').attr('style','display:none');
+		$('select[name=opserveNo] option[class="'+questionSelect+'"]').attr('style','display:""');
+		$("#afterSelect option:first").prop("selected", true);
+		$('#afterSelect').attr('style','display: "" ');
+	});
+	
+	$(document).on('change','#contentSelect',function(){
+		var contentSelect = $('#contentSelect option:selected').attr('id');
+		console.log(contentSelect);
+		$('.radio label[class="'+contentSelect+'"]').attr('style',' display:"" ');
+		$('.radio label[class!="'+contentSelect+'"]').attr('style','display:none');
+		$("#reference option:first").prop("selected", true);
+		$('#reference').attr('style','display: "" ');
+	})
+	
+	$(document).on('click','.radio',function(){
+		$('#textArea').attr('style','display:""');
+	})
+	
+	
+});
 
+</script>
 <style>
-.mydiv{
-	border: 1px solid black;
-
-}
-
-.mmydiv{
-	border-right: 1px solid black;
-}
-
+	.radio label{
+	color: #555; 
+	margin-bottom: 20px;
+	
+	}
+	
+	.radio {margin-left: 50px;}
 </style>
-
-=======
->>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 </head>
-
-<body>
-
-<div class="container">
-<<<<<<< HEAD
-  <h2>Bordered Table</h2>
-  
-  
-	<div class="row">
-		<div class="col-sm-12 row">
-		
-			<div class="col-sm-5 mydiv">
-				<div class="row">
-					<div class="col-sm-4 text-center mmydiv">1 <br/><br/></div>
-					<div class="col-sm-4 text-center mmydiv">1 <br/><br/></div>
-					<div class="col-sm-4 text-center">1 <br/><br/></div>
+<body class="components-page">
+<div class="wrapper">
+	<div class="main-panel">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header" data-background-color="green">
+							<h4 class="title">발달평가</h4>
+						</div>
+						<div class="card-content table-responsive ">
+							<div class="input-group row">
+								<span class="input-group-addon" style="padding-top: 20px;">
+									<i class="material-icons">face</i>
+								</span>
+								<div class="col-md-2">
+								<input type="text" class="form-control" value="이름 : ${child. kidName}" readonly>
+								</div>
+								<div class="col-md-2">
+								<input type="text" class="form-control" value="성별 : ${child.kidGender}" readonly>
+								</div>
+								<div class="col-md-2">
+								<input type="text" class="form-control" value="반 : ${child.className}" readonly>
+								</div>
+								<div class="col-md-3">
+								<input type="text" class="form-control" value="생년월일 : ${child.kidBirth}" readonly>
+								</div>
+							</div>
+							<hr/>	
+						<form action="${pageContext.request.contextPath}/ChildDevelopmentAdd" method="post" id="developmentForm">
+							<input type="hidden" value="${child.kidFormationNo}" name="kidFormationNo"> <!-- 반편성번호 -->
+							<input type="hidden" value="" name="opserveNo" id="opserveNo"> <!-- 관찰문항번호. 옵션 -->
+							<div class="input-group col-md-4">
+								<span class="input-group-addon" style="padding-top: 20px;">
+									<i class="material-icons">forward</i>
+								</span>
+								<select class="form-control" id="questionSelect">
+									<option value="" selected disabled> 분류 선택 </option>
+									<option value=1>신체운동,건강</option>
+									<option value=2>의사소통</option>
+									<option value=3>사회관계</option>
+									<option value=4>예술경험</option>
+									<option value=5>자연탐구</option>
+								</select>
+							</div>
+							
+							<div class="input-group col-md-11" id="afterSelect" style="display: none;">
+								<span class="input-group-addon" style="padding-top: 20px;">
+									<i class="material-icons">forward</i>
+								</span>
+								<select class="form-control" name="opserveNo" id="contentSelect">
+									<option value="" selected disabled>내용/문항 선택</option>
+									<c:forEach items="${opserveList}" var="opserve">
+									<option value="${opserve.opserveNo}" id="${opserve.opserveQuestionNo}" class="${fn :substring(opserve.opserveQuestionNo,0,1)}"> ${opserve.opserveContent} - ${opserve.opserveQuestion} </option>
+									</c:forEach>
+								</select>
+								
+							</div>
+								
+							<div class="input-group col-md-11" id="reference" style="display: none;">
+									<c:forEach items="${opserveList}" var="opserve">
+										<div class="radio ">
+											<label class="${opserve.opserveQuestionNo}"><input type="radio" name="developmentGroup" value="1" >1수준 : ${opserve.opserveReference1}</label>
+										</div>
+										<div class="radio ">
+											<label class="${opserve.opserveQuestionNo}"><input type="radio" name="developmentGroup" value="2" >2수준 : ${opserve.opserveReference2}</label>
+										</div>
+										<div class="radio ">
+										<label class="${opserve.opserveQuestionNo}"><input type="radio" name="developmentGroup" value="3" >3수준 : ${opserve.opserveReference3}</label>
+										</div>
+									</c:forEach>
+							</div>
+								
+							<div id="textArea" style="display: none;">
+							<hr/>
+								<textarea name="developmentCase" class="form-control" placeholder="수준에 관련된 사례를 입력하세요. &#13;&#10;예) 이야기 나누기 활동 시 정해진 주제와 관련된 이야기를 하던 도중 주제와 다른 이야기를 한다." rows="5"></textarea>
+							<hr/>
+							</div>
+								<button class="btn btn-success" id="save"> 저장 </button>
+						</form>
+							<%-- <c:forEach items="${opserveList}" var="opserve">
+								${opserve.opserveContent} <br>
+							</c:forEach> --%>
+						</div>
+						
+					</div>
 				</div>
 			</div>
-			
-			<div class="col-sm-7 ">
-				<div class="row">
-					<div class="col-sm-12 text-center mydiv">1</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 mydiv">1</div>
-					<div class="col-sm-4 mydiv">1</div>
-					<div class="col-sm-4 mydiv">1</div>
-				</div>
-			</div>
-		
 		</div>
-		
-		
 	</div>
-          
- 
-=======
-    <h1>ChildDevelopment</h1>
-    <form id="addForm" action="${pageContext.request.contextPath}/ChildDevelopment" method="post">
-        <div class="form-group">
-            <label for="development_group">분류 :</label>
-            <input class="form-control" name="development_group" id="development_group" type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="development_content">내용 :</label>
-            <input class="form-control" name="development_content" id="development_content" type="text"/>
-        </div>
-         <div class="form-group">
-            <label for="development_details">세부내용 :</label>
-            <input class="form-control" name="development_details" id="development_details" type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="development_question">관찰문항 :</label>
-            <input class="form-control" name="development_question" id="development_question" type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="development_standart">관찰준거 :</label>
-            <input class="form-control" name="development_standart" id="development_standart" type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="development_case">관찰사례 :</label>
-            <input class="form-control" name="development_case" id="development_case" type="text"/>
-        </div>
-        <div class="form-group">
-            <label for="development_day">관찰일 :</label>
-            <textarea class="form-control" name="kidPrecautions" id="kidPrecautions" rows="5" cols="50"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="development_title">제목 :</label>
-            <input class="form-control" name="development_title" id="development_title" type="text"/>
-        </div>
-         <div class="form-group">
-            <label for="license_kindergarten">유치원라이선스 :</label>
-            <input class="form-control" name="license_kindergarten" id="license_kindergarten" type="text"/>
-        </div>
-        <div>
-            <input class="btn btn-default" id="addButton" type="button" value="글입력"/>
-            <input class="btn btn-default" type="reset" value="초기화"/>
-            <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildList">글목록</a>
-        </div>
-    </form>
->>>>>>> branch 'master' of https://github.com/dmsthch/kinder.git
 </div>
 
 </body>

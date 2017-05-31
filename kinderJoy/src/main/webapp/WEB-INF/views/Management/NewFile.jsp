@@ -40,26 +40,28 @@ button {
 				<div>
 					<table>
 						<thead>
+							<th>PM</th>
+							<th>구매자</th>
 							<th>품명</th>
-							<th>수량</th>
 							<th>단가</th>
-							<th>총단가</th>
+							<th>구매,사용 수량</th>
+							<th>총 구매액수,사용액수</th>
+							<th>구매일,사용일</th>
 						</thead>
 						<tbody>
-							<c:forEach var="plusMinus" items="${plusMinus}">
+							<c:forEach var="managementList" items="${managementList}">
 							<tr>
-								<td>${plusMinus.equipmentName}</td>
-								<td>${plusMinus.PLUS - plusMinus.MINUS}</td>
-								<td>${plusMinus.equipmentCost}</td>
-								<td>${(plusMinus.PLUS - plusMinus.MINUS)*plusMinus.equipmentCost}</td>
+								<td>${managementList.PM}</td>
+								<td>${managementList.teacherName}</td>
+								<td>${managementList.equipmentName}</td>
+								<td>${managementList.equipmentCost}</td>
+								<td>${managementList.equipmentAmount}</td>
+								<td>${managementList.equipmentCost*managementList.equipmentAmount}</td>
+								<td>${managementList.equipmentDay}</td>
 							<tr>
 							</c:forEach>
 						</tbody>
 					</table>
-					<div>
-						총액수
-						<div>123</div>
-					</div>
 				</div>
 			</div>
 		</div>
