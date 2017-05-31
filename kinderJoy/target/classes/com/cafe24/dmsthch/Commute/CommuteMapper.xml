@@ -120,7 +120,7 @@
 		where teacher_attendance.license_kindergarten = #{license}
 		and teacher_attendance.teacher_no = #{teacherNo}
 		and teacher_attendance.attendance_day &gt; #{startDay}
-		and teacher_attendance.attendance_day &lt; (SELECT LAST_DAY(#{startDay}));
+		and teacher_attendance.attendance_day &lt;= (SELECT LAST_DAY(#{startDay}));
 	</select>
 
 </mapper>
