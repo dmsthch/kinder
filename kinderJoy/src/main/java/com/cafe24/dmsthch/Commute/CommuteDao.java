@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.dmsthch.Child.ChildAttendance;
 import com.cafe24.dmsthch.Teacher.Teacher;
 
 @Repository
@@ -17,6 +18,13 @@ public class CommuteDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	String sql = "com.cafe24.dmsthch.Commute.CommuteMapper.";
 	
+	//해당 날짜의 유아 출석정보 가져오기
+	public List<ChildAttendance> getKidCommuteToDate(String classNo, String selectDate){
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("classNo", classNo);
+		map.put("selectDate", selectDate);
+		return sqlSessionTemplate.selectList(sql+"getKidCommuteToDate", map);
+	}
 	
 	//오늘날짜 출근부 체크
 	public Map commuteCheck(int teacherNo){

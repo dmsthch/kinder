@@ -137,6 +137,13 @@ $(document).ready(function(){
 	                    </a>
 	                </li>
 	                
+	                <li id="KidCommuteView">
+	                    <a href="${pageContext.request.contextPath}/KidCommuteView">
+	                        <i class="material-icons">person</i>
+	                        <p>유아 출석 보기</p>
+	                    </a>
+	                </li>
+	                
 	                <li class="dropdown">
 	                	 <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
 	                        <i class="material-icons">content_paste</i>
@@ -148,9 +155,12 @@ $(document).ready(function(){
 						    		<a href="${pageContext.request.contextPath}/ChildBeforeDevelopmentAdd"> 발달평가 등록 </a>
 								    </li>
 							    <!-- 발달평가등록끝 -->
-							    <!-- 발달평가 열람 -->
+							    <!-- 발달평가 리스트 -->
+							    	<li>
+						    		<a href="${pageContext.request.contextPath}/ChildDevelopmentList"> 발달평가목록 </a>
+								    </li>
 							    
-							    <!-- 발달평가 열람끝 -->
+							    <!-- 발달평가 리슽끝 -->
 						    </ul>
 	                </li>
 	            </ul>
