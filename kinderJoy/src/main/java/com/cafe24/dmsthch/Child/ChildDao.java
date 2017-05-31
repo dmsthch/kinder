@@ -15,6 +15,21 @@ public class ChildDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	//발달목록 가져오기
+	public List<ChildDevelopmentDetails> getChildDevelopmentDetails(int pageNo,String searchVal,String searchType,String searchAge,String licenseKindergarten){
+		int onePageRow = 10;
+		int startRow = (pageNo-1)*onePageRow;
+		Map<String,Object> map = new  HashMap<String,Object>();
+		map.put("licenseKindergarten", licenseKindergarten);
+		map.put("searchVal", searchVal);
+		map.put("searchAge", searchAge);
+		map.put("searchType",searchType );
+		map.put("startRow",startRow);
+		map.put("onePageRow",onePageRow);
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getDevelopmentDetails",map);
+	}
+	
+	
 	//유아발달평가 상세 저장하기
 	public void addChildDevelopmentDetails(ChildDevelopmentDetails details , Child child){
 		//필요한것 -> 평가번호(완), 라이센스, 수준, 문항번호, 제목, 관찰사례, 관찰일

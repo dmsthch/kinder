@@ -155,9 +155,12 @@ $(document).ready(function(){
 						    		<a href="${pageContext.request.contextPath}/ChildBeforeDevelopmentAdd"> 발달평가 등록 </a>
 								    </li>
 							    <!-- 발달평가등록끝 -->
-							    <!-- 발달평가 열람 -->
+							    <!-- 발달평가 리스트 -->
+							    	<li>
+						    		<a href="${pageContext.request.contextPath}/ChildDevelopmentList"> 발달평가목록 </a>
+								    </li>
 							    
-							    <!-- 발달평가 열람끝 -->
+							    <!-- 발달평가 리슽끝 -->
 						    </ul>
 	                </li>
 	            </ul>

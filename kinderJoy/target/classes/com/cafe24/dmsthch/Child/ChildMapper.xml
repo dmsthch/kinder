@@ -3,6 +3,45 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
+  	<!-- 발달평가 목록 -->
+  	<select id="getDevelopmentDetails" resultType="java.util.Map" parameterType="java.util.Map">
+  		SELECT 
+			d.detailes_no AS detailesNo
+			,d.development_title AS developmentTitle
+			,c.class_name AS className
+			,k.kid_no AS kidNo
+		FROM development_details d
+		INNER JOIN development dev
+		ON dev.development_no = d.development_no
+		INNER JOIN kid_formation f
+		ON f.kid_formation_no = dev.kid_formation_no
+		INNER JOIN kid_class c
+		ON c.class_no = f.class_no
+		INNER JOIN kid k
+		ON k.kid_no = f.kid_no
+		WHERE d.license_kindergarten = #{licenseKindergarten}
+		<if test="searchAge!=''">
+			AND c.class_age = #{searchAge}
+		</if>
+		<if test="searchType!='' ">
+			<if test="searchType.equals('kidName')">
+				 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') 
+			</if>
+			<if test="searchType.equals('className')">
+				AND c.class_name LIKE CONCAT('%',#{searchVal},'%')
+			</if>
+		</if>
+		<if test=" searchType == '' and searchVal != ''">
+			 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') OR c.class_name LIKE CONCAT('%',#{searchVal},'%')
+			 OR d.development_title LIKE CONCAT('%',#{searchVal},'%')
+		</if>
+
+	
+	ORDER by k.kid_name ASC
+	LIMIT #{startRow}, #{onePageRow};
+		
+  	</select>
+  
 	<!-- 발달평가 상세 입력하기 -->
 	<insert id="addDevelopmentDetails" parameterType="com.cafe24.dmsthch.Child.ChildDevelopmentDetails">
 		INSERT INTO development_details(

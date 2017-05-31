@@ -31,6 +31,31 @@ public class ChildController {
 	private ChildDao childDao;
 	@Autowired
 	private ChildService childService;
+	
+	//발달평가 보기
+	@RequestMapping(value="/ChildDevelopmentView" , method=RequestMethod.GET)
+	public String ChildDevelopmentView(ChildDevelopmentDetails details){
+		details.getDetailesNo();
+		return "";
+	}
+	
+	//발달평가목록
+	@RequestMapping(value="/ChildDevelopmentList" , method=RequestMethod.GET)
+	public String ChildDevelopmentList(HttpSession session
+										,Model model
+										,@RequestParam(value="pageNo", required=false, defaultValue="1")int pageNo
+										,@RequestParam(value="searchVal", required=false, defaultValue="")String searchVal
+										,@RequestParam(value="searchType", required=false, defaultValue="")String searchType
+										,@RequestParam(value="searchAge", required=false, defaultValue="")String searchAge){
+		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
+		List<ChildDevelopmentDetails> detailsList = childDao.getChildDevelopmentDetails(pageNo, searchVal, searchType, searchAge,licenseKindergarten);
+		model.addAttribute("detailsList", detailsList);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("searchVal",searchVal);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("searchAge",searchAge);
+		return "Child/ChildDevelopmentList";
+	}
 
 	//발달평가 저장하기
 	@RequestMapping(value="/ChildDevelopmentAdd" , method=RequestMethod.POST)
