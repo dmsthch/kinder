@@ -17,30 +17,30 @@ public class EquipmentDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	// test_equipment_value insert
 	public int addTestEquipmentValuePlus(int selectEquipemntNo
-									,String testPrice
-									,String testValue
-									,String testCustomer) {
+									,String equipmentAmount
+									,String equipmentCost
+									,String equipmentCustomer) {
 		System.out.println("addTestEquipmentValuePlus 내용 실행");
 		String equipmentNo = Integer.toString(selectEquipemntNo);
 		EquipmentValue equipmentValue = new EquipmentValue();
 		equipmentValue.setEquipmentNo(equipmentNo);
-		equipmentValue.setEquipmentCost(testPrice);
-		equipmentValue.setEquipmentAmount(testValue);
-		equipmentValue.setEquipmentCustomer(testCustomer);
+		equipmentValue.setEquipmentCost(equipmentCost);
+		equipmentValue.setEquipmentAmount(equipmentAmount);
+		equipmentValue.setEquipmentCustomer(equipmentCustomer);
 		
 		return sqlSessionTemplate.insert("com.cafe24.dmsthch.Equipment.EquipmentMapper.addTestEquipmentValuePlus",equipmentValue);
 	}
 	public int addTestEquipmentValueMinus(int selectEquipemntNo
-			,String testPrice
-			,String testValue
-			,String testCustomer) {
+			,String equipmentCost
+			,String equipmentAmount
+			,String equipmentCustomer) {
 		System.out.println("addTestEquipmentValueMinus 내용 실행");
 		String equipmentNo = Integer.toString(selectEquipemntNo);
 		EquipmentValue equipmentValue = new EquipmentValue();
 		equipmentValue.setEquipmentNo(equipmentNo);
-		equipmentValue.setEquipmentCost(testPrice);
-		equipmentValue.setEquipmentAmount(testValue);
-		equipmentValue.setEquipmentCustomer(testCustomer);
+		equipmentValue.setEquipmentCost(equipmentCost);
+		equipmentValue.setEquipmentAmount(equipmentAmount);
+		equipmentValue.setEquipmentCustomer(equipmentCustomer);
 	return sqlSessionTemplate.insert("com.cafe24.dmsthch.Equipment.EquipmentMapper.addTestEquipmentValueMinus",equipmentValue);
 	}
 	// test_equipment select 및 중복검사
@@ -55,12 +55,15 @@ public class EquipmentDao {
 		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectTestEquipment",equipment);
 	}
 	// test_equipment insert
-	public int addTestEquipment(String equipmentName
-								,String testCategoryNo
-								,String equipmentCategorySelect
-								,String testState
-								,HttpSession session) {
+	public int addTestEquipment(HttpSession session
+								,String equipmentName
+								,String boardCategoryNo
+								,String equipmentState) {
 		System.out.println("addTestEquipment 내용 실행");
+		System.out.println(boardCategoryNo);
+		System.out.println(equipmentName);
+		System.out.println(equipmentState);
+		System.out.println("--------");
 		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
 		int teacherNo = (Integer)session.getAttribute("teacherNo");
 		Equipment equipment = new Equipment();
@@ -68,12 +71,8 @@ public class EquipmentDao {
 		equipment.setLicenseKindergarten(licenseKindergarten);
 		equipment.setEquipmentName(equipmentName);
 		equipment.setTeacherNo(teacherNo);
-		if(testCategoryNo.equals("")) {
-			equipment.setCategoryNo(equipmentCategorySelect);
-		}else if(equipmentCategorySelect.equals("")) {
-			equipment.setCategoryNo(testCategoryNo);
-		}
-		equipment.setEquipmentState(testState);
+		equipment.setCategoryNo(boardCategoryNo);
+		equipment.setEquipmentState(equipmentState);
 		return sqlSessionTemplate.insert("com.cafe24.dmsthch.Equipment.EquipmentMapper.addTestEquipment",equipment);
 	}
 	//같은 네임품명 플러스값 총합, 마이너스값 총합 값  가져오기

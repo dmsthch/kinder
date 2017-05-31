@@ -28,11 +28,11 @@ $(document).ready(function(){
 </script>
 
 <!-- 관리자 자동선택 -->
-<!-- <script>
+<!--  <script>
 $(document).ready(function(){
 	$('#btnAdmin').trigger('click');
 });
-</script> -->
+</script>  -->
 
 
 <style>

@@ -1,6 +1,8 @@
 package com.cafe24.dmsthch.Management;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,13 @@ import org.springframework.stereotype.Repository;
 public class ManagementDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	//기본 예산 이동시 오늘날짜 셀렉트
+	public List<ManagementList> selectManagementDayList(String testDay) {
+		System.out.println("selectManagementDayList 내용 실행");
+		System.out.println(testDay);
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Management.ManagementMapper.ManagementList", testDay);
+	}
+	
 	//같은 네임품명 플러스값 총합, 마이너스값 총합 값  가져오기
 	public List<ManagementPlusMinus> selectManagementPlusMinusList() {
 		System.out.println("selectManagementPlusMinusList 내용 실행");
