@@ -41,7 +41,7 @@
 								<div class="col-md-4">
 									<div class="radio" style="padding-top:25px;">
 										<label><input type="radio" name="searchAge" value="" >전체</label>
-										<label><input type="radio" name="searchAge" value="3" >3세</label>
+										<label><input type="radio" name="searchAge" value="3">3세</label>
 										<label><input type="radio" name="searchAge" value="4">4세</label>
 										<label><input type="radio" name="searchAge" value="5">5세</label>
 									</div>
