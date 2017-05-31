@@ -10,11 +10,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.dmsthch.Child.ChildAttendance;
+import com.cafe24.dmsthch.Child.ChildClass;
+import com.cafe24.dmsthch.Child.ChildDao;
+
 @Repository
 public class CommuteService {
 	
 	@Autowired
 	CommuteDao commuteDao;
+	@Autowired
+	ChildDao childDao;
 	
 	//해당 월의 출석정보 가져오기
 	public List<Map<String, Object>> getCommuteForMonth(HttpSession session, int month){
@@ -52,7 +58,7 @@ public class CommuteService {
 		List<Map<String, Object>> commuteList = this.getCommuteForMonth(session, month);
 		int commuteCount = commuteList.size();
 		int businessDay = this.getBusinessDayCount(month);
-		String commutePercentage = (businessDay/commuteCount) * 10 + "%";
+		String commutePercentage = ((double)commuteCount/(double)businessDay)*100.0 +"%";
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("commuteCount", commuteCount);
@@ -83,8 +89,36 @@ public class CommuteService {
 			}
 			startDay++;
 		}
-		
 		return businessDay;
+	}
+	
+	public List<ChildAttendance> getKidAttendance(HttpSession session, String month, String date){
+		
+		//날짜 만들기~
+		String getDate = "";
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		
+		getDate += year;
+		
+		if(month.length() == 1){
+			getDate += "0" + month;
+		}else{
+			getDate += month;
+		}
+		
+		if(date.length() == 1){
+			getDate += "0" + date;
+		}else{
+			getDate += date;
+		}
+		
+		
+		int teacherNo = (Integer) session.getAttribute("teacherNo");
+		ChildClass childClass = childDao.getClassNoToTeacherNo(teacherNo);
+		List<ChildAttendance> getAttendanceList = commuteDao.getKidCommuteToDate(childClass.getClassNo(), getDate);
+				
+		return getAttendanceList;
 	}
 
 }
