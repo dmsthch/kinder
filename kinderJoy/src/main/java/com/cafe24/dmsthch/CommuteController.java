@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cafe24.dmsthch.Child.ChildAttendance;
+import com.cafe24.dmsthch.Child.ChildDao;
 import com.cafe24.dmsthch.Commute.CommuteDao;
 import com.cafe24.dmsthch.Commute.CommuteService;
 import com.cafe24.dmsthch.Teacher.Teacher;
@@ -33,7 +35,8 @@ public class CommuteController {
 	private TeacherDao tDao;
 	@Autowired
 	private CommuteService commuteServise;
-	
+	@Autowired
+	private ChildDao childDao;
 	
 	
 	@RequestMapping(value="/hansol2", method=RequestMethod.GET)
@@ -307,6 +310,57 @@ public class CommuteController {
 			json.put("categoryNo", map.get("categoryNo")+"");
 			json.put("absenceStart", map.get("absenceStart")+"");
 			json.put("absenceEnd", map.get("absenceEnd")+"");	
+			
+			jArray.add(json);
+		}
+		response.setContentType("text/xml;charset=utf-8");
+		PrintWriter print;
+		try {
+			print = response.getWriter();
+			print.print(jArray);
+			print.flush();
+			print.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	//유아 출석 현황
+	@RequestMapping(value="KidCommuteView", method=RequestMethod.GET)
+	public String kidCommuteView(HttpSession session){
+		
+		String level = (String) session.getAttribute("teacherLevel");
+		
+		if(level.equals("원장")){
+			return "redirect:/";
+		}
+		
+		return "Commute/KidCommuteView";
+	}
+	
+	//유아 출석정보 가져오기
+	@RequestMapping(value="getKidCommute", method=RequestMethod.GET)
+	public void getKidCommute(HttpSession session, HttpServletResponse response
+							,@RequestParam(value="month",required=true) String month
+							,@RequestParam(value="date",required=true) String date){
+		System.out.println("getKidCommute() run Controller");
+		
+		System.out.println(month);
+		System.out.println(date);
+		
+		List<ChildAttendance> getKidCommuteList = commuteServise.getKidAttendance(session, month, date);
+		
+		JSONArray jArray = new JSONArray();
+		JSONObject json = null;
+		
+		for(ChildAttendance c : getKidCommuteList){
+			json = new JSONObject();			
+
+			json.put("KidNo", c.getKidNo()+"");
+			json.put("Attendance", c.getAttendance()+"");
+			json.put("AttendanceUnusual", c.getAttendanceUnusual()+"");
+			json.put("kidName", childDao.getChild(c.getKidNo()).getKidName()+"");
 			
 			jArray.add(json);
 		}

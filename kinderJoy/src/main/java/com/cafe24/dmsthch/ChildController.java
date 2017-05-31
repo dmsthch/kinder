@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import com.cafe24.dmsthch.Child.Child;
 import com.cafe24.dmsthch.Child.ChildAttendance;
 import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.Child.ChildDao;
+import com.cafe24.dmsthch.Child.ChildDevelopment;
+import com.cafe24.dmsthch.Child.ChildDevelopmentDetails;
 import com.cafe24.dmsthch.Child.ChildDevelopmentOpserve;
 import com.cafe24.dmsthch.Child.ChildFormation;
 import com.cafe24.dmsthch.Child.ChildService;
@@ -29,9 +32,82 @@ public class ChildController {
 	@Autowired
 	private ChildService childService;
 	
+	//발달평가 보기
+	@RequestMapping(value="/ChildDevelopmentView" , method=RequestMethod.GET)
+	public String ChildDevelopmentView(ChildDevelopmentDetails details){
+		details.getDetailesNo();
+		return "";
+	}
+	
+	//발달평가목록
+	@RequestMapping(value="/ChildDevelopmentList" , method=RequestMethod.GET)
+	public String ChildDevelopmentList(HttpSession session
+										,Model model
+										,@RequestParam(value="pageNo", required=false, defaultValue="1")int pageNo
+										,@RequestParam(value="searchVal", required=false, defaultValue="")String searchVal
+										,@RequestParam(value="searchType", required=false, defaultValue="")String searchType
+										,@RequestParam(value="searchAge", required=false, defaultValue="")String searchAge){
+		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
+		List<ChildDevelopmentDetails> detailsList = childDao.getChildDevelopmentDetails(pageNo, searchVal, searchType, searchAge,licenseKindergarten);
+		model.addAttribute("detailsList", detailsList);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("searchVal",searchVal);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("searchAge",searchAge);
+		return "Child/ChildDevelopmentList";
+	}
+
+	//발달평가 저장하기
+	@RequestMapping(value="/ChildDevelopmentAdd" , method=RequestMethod.POST)
+	public String ChildDevelopmentAdd(ChildDevelopment development
+									, ChildDevelopmentDetails details
+									, Child child
+									, HttpSession session
+									, @RequestParam(value="classAge")int classAge
+									, HttpServletRequest request){
+		//일단, 유아발달평가(development)에 해당유아 (반편성번호)가 있는지 확인해야함.
+		//없다면 새로 생성해야하며,
+		//있으면 그것의 평가 번호를 가져와야함.
+		//그다음 입력(details)에 그 평가번호가 필요함. 그러니까 일단 있는지 없는지부터 판단하자.
+		//없다면 입력해야할때, 선생님의 편성 번호가 필요하다!!!!!
+		details.setOpserveNo(details.getOpserveNo().substring(1,details.getOpserveNo().length()));
+		System.out.println(details.getDevelopmentGroup()+"<<그룹");
+		int teacherNo =  (Integer)session.getAttribute("teacherNo");
+		String developmentNo =  childDao.getChildDevelopmentNo(development, teacherNo);
+		System.out.println(developmentNo+"<<<차일드 컨트롤러, developmentNo");
+		//여기까지 발달평가 번호 가져왔음. 이제 발달평가 번호를 가지고 디테일에 저장해야함.
+		//필요한것 -> 평가번호(완), 라이센스, 수준, 문항번호, 제목, 관찰사례, 관찰일
+		//제목은 '나이'+'아이이름'+'opserve의 content'+'날짜' 형식으로 넣어줄 예정.
+		details.setDevelopmentNo(developmentNo);
+		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
+		details.setLicenseKindergarten(licenseKindergarten);
+		childDao.addChildDevelopmentDetails(details, child);
+		String kidFormationNo = development.getKidFormationNo();
+		return "redirect:/ChildDevelopmentAddPage?kidFormationNo="+kidFormationNo+"&classAge="+classAge;
+	}
+	
+	
 	//발달평가 대상 선택에서 한명을 눌렀을때.(발달 평가하기 화면 이동)
 	@RequestMapping(value="/ChildDevelopmentAddPage" , method=RequestMethod.GET)
 	public String ChildDevelopmentAddPage(ChildFormation childFormation
+										,@RequestParam(value="classAge")int classAge
+										,Model model){
+	//필요한것 ->아이 정보 (반편성번호, 연령)
+	//해당 연령에 맞춰서 opserve정보를 가져오기
+		ChildClass childClass = new ChildClass();
+		childClass.setClassAge(classAge);
+		List<ChildDevelopmentOpserve> opserveList = childDao.ChildDevelopmentAddPage(childClass);
+	//반편성번호를 이용해서 아이 정보 셀렉트 해오기
+		Map<String,Object> map = new  HashMap<String,Object>();
+		map = childDao.getChildInfoForDevelopment(childFormation);
+		model.addAttribute("opserveList",opserveList);
+		model.addAttribute("child",map);
+		return "Child/ChildDevelopment";
+	}
+	
+	//발달평가 대상 선택에서 한명을 눌렀을때.(발달 평가하기 화면 이동)
+	@RequestMapping(value="/ChildDevelopmentAddPage" , method=RequestMethod.POST)
+	public String ChildDevelopmentAddPage2(ChildFormation childFormation
 										,@RequestParam(value="classAge")int classAge
 										,Model model){
 	//필요한것 ->아이 정보 (반편성번호, 연령)
@@ -181,9 +257,9 @@ public class ChildController {
 			
 			String license = "";
 			if(session.getAttribute("teacherNo") != null){
-				license = (String) session.getAttribute("teacherLicense");
+				license = (String) session.getAttribute("licenseKindergarten");
 			}
-			model.addAttribute("teacherLicense");
+			model.addAttribute("licenseKindergarten");
 			
 			return "Child/ChildAdd";
 		}
@@ -274,7 +350,28 @@ public class ChildController {
 		}
 		
 		@RequestMapping(value="/ChildAdd" , method=RequestMethod.POST)
-		public String ChildAdd(HttpSession session ,Child child) {
+		public String ChildAdd(HttpSession session
+				,@RequestParam(value="licenseKindergarten") String licenseKindergarten
+				,@RequestParam(value="kidName") String kidName
+				,@RequestParam(value="kidBirth") String kidBirth
+				,@RequestParam(value="kidAddress") String kidAddress
+				,@RequestParam(value="kidProtectorPhone") int kidProtectorPhone
+				,@RequestParam(value="kidProtectorPhoneReserve", required=false, defaultValue="1") int kidProtectorPhoneReserve
+				,@RequestParam(value="kidPrecautions") String kidPrecautions
+				,@RequestParam(value="kidGender") String kidGender
+				,@RequestParam(value="kidCommuting") String kidCommuting) {
+			
+			Child child =new Child();
+			child.setLicenseKindergarten(licenseKindergarten);
+			child.setKidName(kidName);
+			child.setKidBirth(kidBirth);
+			child.setKidAddress(kidAddress);
+			child.setKidProtectorPhone(kidProtectorPhone);
+			child.setKidProtectorPhoneReserve(kidProtectorPhoneReserve);
+			child.setKidPrecautions(kidPrecautions);
+			child.setKidGender(kidGender);
+			child.setKidCommuting(kidCommuting);
+			
 			
 			String license = (String) session.getAttribute("licenseKindergarten");
 			
@@ -424,7 +521,7 @@ public class ChildController {
 				}
 			}
 			
-			return "redirect:/ChildCommute";
+			return "redirect:/KidCommuteView";
 		}
 		
 

@@ -30,7 +30,7 @@ button {
 </style>
 
 </head>
-<body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+<body data-spy="scroll" data-target=".navbar-collapse" data-offset="50" onload="InitializeStaticMenu();">
 
  <div class="wrapper">
 	<div class="main-panel">

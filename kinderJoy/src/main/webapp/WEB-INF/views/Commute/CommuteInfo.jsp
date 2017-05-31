@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <head>
 	<meta charset="utf-8">
 	<title>Title</title>
@@ -69,7 +70,7 @@
 						<p class="text-right">5월 출석율 (%)</p> 
 						<div class="progress">
 							<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuemax="100">
-								${businessDay }일중 ${commuteCount}일 ${commutePercentage}
+								${businessDay }일중 ${commuteCount}일 ${fn:substring(commutePercentage, 0, 2)}%
 							</div>
 						</div>
 					</div>

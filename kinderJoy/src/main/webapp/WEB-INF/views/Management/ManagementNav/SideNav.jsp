@@ -73,11 +73,12 @@
 	                        <p>비품 예산<span class="caret"></span></p>
                         </a>
 						    <ul class="pull-right dropdown-menu" style="margin-right:-62%; margin-top:-20%" >
-						    	<li><a href="${pageContext.request.contextPath}/test11?test=1">일별 예산</a></li>
-								<li><a href="${pageContext.request.contextPath}/test11?test=2">주별 예산</a></li>
-								<li><a href="${pageContext.request.contextPath}/test11?test=3">월별 예산</a></li>
-								<li><a href="${pageContext.request.contextPath}/test11?test=4">분기별 예산</a></li>
-								<li><a href="${pageContext.request.contextPath}/test11?test=5">년도별 예산</a></li>
+						    	<li><a href="${pageContext.request.contextPath}/Management?test=6">전체</a></li>
+						    	<li><a href="${pageContext.request.contextPath}/Management?test=1">교제,교구</a></li>
+								<li><a href="${pageContext.request.contextPath}/Management?test=2">사무용품</a></li>
+								<li><a href="${pageContext.request.contextPath}/Management?test=3">체육용품</a></li>
+								<li><a href="${pageContext.request.contextPath}/Management?test=4">도서목록</a></li>
+								<li><a href="${pageContext.request.contextPath}/Management?test=5">기타</a></li>
 						    </ul>
 	                </li>
 	               	<li class="dropdown">

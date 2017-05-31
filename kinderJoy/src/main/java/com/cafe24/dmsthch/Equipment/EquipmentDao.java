@@ -17,8 +17,8 @@ public class EquipmentDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 	// test_equipment_value insert
 	public int addTestEquipmentValuePlus(int selectEquipemntNo
-									,String equipmentCost
 									,String equipmentAmount
+									,String equipmentCost
 									,String equipmentCustomer) {
 		System.out.println("addTestEquipmentValuePlus 내용 실행");
 		String equipmentNo = Integer.toString(selectEquipemntNo);
