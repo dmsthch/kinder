@@ -28,6 +28,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
+import com.cafe24.dmsthch.Teacher.TeacherFormation;
 
 @Controller
 
@@ -119,6 +120,26 @@ public class TeacherController {
 		return "Teacher/TeacherModify/takeTab";
 	}
 	
+	//편성표 입력폼
+	@RequestMapping(value="/pyeonseong", method=RequestMethod.POST)
+	public String kyowon(HttpServletRequest request ,TeacherFormation TF ,HttpSession httpsession ) {
+		
+/*		//원래는 이렇게 폼에서 보낸 값을 받아야 하는데
+		TF.setClassNo(TF.getClassNo());
+		TF.setTeacherNo(TF.getTeacherNo());
+		//스프링에서는 알아서 값을 가져와서 세팅해주기 때문에 생략가능하다
+*/		
+		TF.setLicenseKindergarten((String) httpsession.getAttribute("licenseKindergarten"));
+		
+		int pyeonSeong = TDao.pyeonseong(TF);
+		
+		if(pyeonSeong == 0) {
+			System.out.println("패");
+		}else{
+			System.out.println("성");
+		}
+		return "redirect:/takeForm";
+	}
 	
 	//교원 수정폼 호출 메서드 //User Profile
 	@RequestMapping(value="/kyo", method=RequestMethod.GET)
@@ -133,8 +154,7 @@ public class TeacherController {
 	//교원 수정하기 자기 정보 수정하기 
 	@RequestMapping(value="/teacherUpdate", method = RequestMethod.POST)
 	public String updateTeacher(Teacher teacher
-			, HttpSession httpsession
-			, Model model) {
+			, HttpSession httpsession) {
 		
 /*		
  		//기존 형식
@@ -153,8 +173,6 @@ public class TeacherController {
 		//조건절에 들어갈 아이디값을 가져와야 하는데 현재 세션에서 가져왔다
 		teacher.setTeacherId((String) httpsession.getAttribute("teacherId"));
 		
-		//값이 들어가야하는 부분엔 매개변수에 RequestParam으로 값을 자동으로 가져와서 teacher에 세팅해주었다
-		/*매개변수에 @RequestParam("value") String value; 넣으면 된다*/
 
 		int a = TDao.updateTeacher(teacher);
 		

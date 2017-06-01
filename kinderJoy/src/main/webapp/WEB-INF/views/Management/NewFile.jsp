@@ -15,6 +15,18 @@
 <c:import url="./ManagementNav/SideNav.jsp"></c:import>
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
+<!--  -->
+     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
+          rel='stylesheet' type='text/css'>
+     <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/screen.css" type="text/css"/>
+<!--     <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/theme.css" type="text/css"/> -->
+    <link rel="stylesheet" href="https://swisnl.github.io/jQuery-contextMenu/css/theme-fixes.css" type="text/css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <link href="js/KSS/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/KSS/jquery.contextMenu.js" type="text/javascript"></script>
+    <script src="js/KSS/jquery.ui.position.min.js" type="text/javascript"></script>
+    <script src="https://swisnl.github.io/jQuery-contextMenu/js/main.js" type="text/javascript"></script>
 
 <style>
 @font-face{
@@ -38,23 +50,32 @@ $(document).ready(function(){
 		</c:forEach>
 		console.log(tdArray);
 		$('#totalValue').html(tdArray);
+		$('#managementEquipemntListNav').attr('class','active');
 	});
 </script>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
-
  <div class="wrapper">
 	<div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
-				<form action="${pageContext.request.contextPath}/test11">
+			
+				<form action="${pageContext.request.contextPath}/Management">
 					<input type="hidden" name="test" value="${test}"/>
 					<input type="date" name="testDay" value="${testDay}"/>
 					<input type="date" name="testDay2" value="${testDay2}"/>
 					<input type="submit" value="검색"/>
 				</form>
 				<div>
-					<table border="1">
+				<div class="row">
+	                    <div class="col-md-12">
+	                        <div class="card card-plain">
+	                            <div class="card-header" data-background-color="green">
+	                                <h4 class="title">비품 예산 관리 리스트</h4>
+	                                <p class="category">MANAGEMENT EQUIPMENT LIST</p>
+	                            </div>
+	                            <div class="card-content table-responsive">
+					<table class="table table-hover">
 						<thead>
 							<th>PM</th>
 							<th>구매자</th>
@@ -83,7 +104,10 @@ $(document).ready(function(){
 					<!--  -->
 					<div>총 구매금액</div>
 					<div id="totalValue">
-						
+							  </div>
+	                        </div>
+	                    </div>
+	                </div>
 					</div>
 				</div>
 			</div>

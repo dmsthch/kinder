@@ -67,7 +67,7 @@
 	    	<div class="sidebar-wrapper" style="overflow:visible;">
 	            <ul class="nav" style="overflow:visible;">
 	                <!-- <li class="active"> -->
-	                <li id="equipmentListNav" class="dropdown">
+	                <li id="managementEquipemntListNav" class="dropdown">
 	                    <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;" id="formManagement">
 	                        <i class="material-icons">dashboard</i>
 	                        <p>비품 예산<span class="caret"></span></p>
