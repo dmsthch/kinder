@@ -21,22 +21,76 @@ import com.cafe24.dmsthch.Management.ManagementYesterDayEquipment;
 public class ManagementController {
 	@Autowired
 	ManagementDao dao;
-	@RequestMapping(value = "test11", method = RequestMethod.GET)
+	@RequestMapping(value = "Management", method = RequestMethod.GET)
 	public String test10(Model model
-						,@RequestParam(value="test", required=false, defaultValue="1") String test
+						,@RequestParam(value="test", required=false, defaultValue="6") String test
 						,@RequestParam(value="testDay", required=false, defaultValue="") String testDay
 						,@RequestParam(value="testDay2", required=false, defaultValue="") String testDay2){
 		System.out.println("ManagementController test11 메서드 실행");
 		System.out.println(test);
-		if(test.equals("1")) {
-			if(testDay.equals("")) {
+		if(test.equals("6")) {
+			if(testDay.equals("")||testDay2.equals("")) {
 			    Calendar calendar = new GregorianCalendar(Locale.KOREA);
 			    int nYear = calendar.get(Calendar.YEAR);
 			    int nMonth = calendar.get(Calendar.MONTH) + 1;
-			    int nDay = calendar.get(Calendar.DAY_OF_MONTH);
-			    testDay = nYear + "-" + nMonth + "-" + nDay;
-			    List<ManagementList> managementList= dao.selectManagementDayList(testDay);
+			    if(nMonth < 10) {   	
+			    	int nDay = calendar.get(Calendar.DAY_OF_MONTH);				    
+				    if(nDay < 10) {
+				    	testDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		testDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
+			    } else {
+				    int nDay = calendar.get(Calendar.DAY_OF_MONTH);
+				    if(nDay < 10) {
+				    	testDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		testDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
+			    }
+			    List<ManagementList> managementList= dao.selectManagementDayList(testDay,testDay);
 			    model.addAttribute("managementList",managementList);
+			    model.addAttribute("test",test);
+			    model.addAttribute("testDay",testDay);
+			    model.addAttribute("testDay2",testDay);
+			} else {
+			    List<ManagementList> managementList= dao.selectManagementDayList(testDay,testDay2);
+			    model.addAttribute("managementList",managementList);
+			    model.addAttribute("test",test);
+			    model.addAttribute("testDay",testDay);
+			    model.addAttribute("testDay2",testDay2);
+			}
+		} else {
+			if(testDay.equals("")||testDay2.equals("")) {
+			    Calendar calendar = new GregorianCalendar(Locale.KOREA);
+			    int nYear = calendar.get(Calendar.YEAR);
+			    int nMonth = calendar.get(Calendar.MONTH) + 1;
+			    if(nMonth < 10) {   	
+			    	int nDay = calendar.get(Calendar.DAY_OF_MONTH);				    
+				    if(nDay < 10) {
+				    	testDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		testDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
+			    } else {
+				    int nDay = calendar.get(Calendar.DAY_OF_MONTH);
+				    if(nDay < 10) {
+				    	testDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		testDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
+			    }
+			    List<ManagementList> managementList= dao.selectManagementCategoryDayList(testDay,testDay,test);
+			    model.addAttribute("managementList",managementList);
+			    model.addAttribute("test",test);
+			    model.addAttribute("testDay",testDay);
+			    model.addAttribute("testDay2",testDay);
+			} else {
+			    List<ManagementList> managementList= dao.selectManagementCategoryDayList(testDay,testDay2,test);
+			    model.addAttribute("managementList",managementList);
+			    model.addAttribute("test",test);
+			    model.addAttribute("testDay",testDay);
+			    model.addAttribute("testDay2",testDay2);
 			}
 		}
 		return "Management/NewFile";
