@@ -28,13 +28,7 @@
 								<span class="input-group-addon" style="padding-top: 20px;">
 									<i class="material-icons">search</i>
 								</span>
-								<div class="col-md-2">
-									<select class="form-control " name="searchType">
-										<option selected value="">선택</option>
-										<option value="kidName">유아 이름</option>
-										<option value="className">반 이름</option>
-									</select>
-								</div>
+								
 								<div class="col-md-3">
 									<input type="text" class="form-control" name="searchVal" placeholder="검색어를 입력하세요">
 								</div>
@@ -57,7 +51,7 @@
 									<tbody>
 										<c:forEach items="${detailsList}" var="List">
 										<tr>
-											<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/EducationProjectLoad?'"> 
+											<td style="cursor:pointer;" onclick="location.href='${pageContext.request.contextPath}/ChildDevelopmentView?detailesNo=${List.detailesNo}'"> 
 												${List.developmentTitle}
 											</td>
 											<td>
@@ -67,6 +61,11 @@
 										</c:forEach>
 									</tbody>
 								</table>
+								<hr>
+								<c:if test="${pageNo >1 }">
+								<a href="${pageContext.request.contextPath}/ChildDevelopmentList?pageNo=${pageNo-1}&searchVal=${searchVal}&searchType=${searchType}&searchAge=${searchAge}">이전</a>
+							</c:if>
+								<a href="${pageContext.request.contextPath}/ChildDevelopmentList?pageNo=${pageNo+1}&searchVal=${searchVal}&searchType=${searchType}&searchAge=${searchAge}">다음</a>
 							</div>
 						</div>
 					</div>

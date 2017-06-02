@@ -33,12 +33,20 @@ public class ManagementController {
 			    Calendar calendar = new GregorianCalendar(Locale.KOREA);
 			    int nYear = calendar.get(Calendar.YEAR);
 			    int nMonth = calendar.get(Calendar.MONTH) + 1;
-			    if(nMonth < 10) {
-			    	int nDay = calendar.get(Calendar.DAY_OF_MONTH);
-				    testDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    if(nMonth < 10) {   	
+			    	int nDay = calendar.get(Calendar.DAY_OF_MONTH);				    
+				    if(nDay < 10) {
+				    	testDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		testDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
 			    } else {
 				    int nDay = calendar.get(Calendar.DAY_OF_MONTH);
-				    testDay = nYear + "-" + nMonth + "-" + nDay;
+				    if(nDay < 10) {
+				    	testDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		testDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
 			    }
 			    List<ManagementList> managementList= dao.selectManagementDayList(testDay,testDay);
 			    model.addAttribute("managementList",managementList);
@@ -57,12 +65,20 @@ public class ManagementController {
 			    Calendar calendar = new GregorianCalendar(Locale.KOREA);
 			    int nYear = calendar.get(Calendar.YEAR);
 			    int nMonth = calendar.get(Calendar.MONTH) + 1;
-			    if(nMonth < 10) {
-			    	int nDay = calendar.get(Calendar.DAY_OF_MONTH);
-				    testDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    if(nMonth < 10) {   	
+			    	int nDay = calendar.get(Calendar.DAY_OF_MONTH);				    
+				    if(nDay < 10) {
+				    	testDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		testDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
 			    } else {
 				    int nDay = calendar.get(Calendar.DAY_OF_MONTH);
-				    testDay = nYear + "-" + nMonth + "-" + nDay;
+				    if(nDay < 10) {
+				    	testDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		testDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
 			    }
 			    List<ManagementList> managementList= dao.selectManagementCategoryDayList(testDay,testDay,test);
 			    model.addAttribute("managementList",managementList);

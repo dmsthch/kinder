@@ -51,7 +51,7 @@
 
 	
 
-	    <div class="sidebar" data-color="red" >
+	    <div class="sidebar" data-color="green" >
 			<!--
 		        Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -67,7 +67,7 @@
 	    	<div class="sidebar-wrapper" style="overflow:visible;">
 	            <ul class="nav" style="overflow:visible;">
 	                <!-- <li class="active"> -->
-	                <li id="equipmentListNav" class="dropdown">
+	                <li id="managementEquipemntListNav" class="dropdown">
 	                    <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;" id="formManagement">
 	                        <i class="material-icons">dashboard</i>
 	                        <p>비품 예산<span class="caret"></span></p>
