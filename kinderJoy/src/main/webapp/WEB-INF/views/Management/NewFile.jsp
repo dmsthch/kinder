@@ -102,7 +102,7 @@ $(document).ready(function(){
 						</tbody>
 					</table>
 					<!--  -->
-					<div>총 구매금액</div>
+					<div>총 구매금액1</div>
 					<div id="totalValue">
 							  </div>
 	                        </div>
