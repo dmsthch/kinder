@@ -15,6 +15,12 @@ public class ChildDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	//발달평가 하나 보기
+	public  Map<String,Object> getDevelopmentDetailsOne(String detailesNo){
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getDevelopmentDetailsOne",detailesNo);
+	}
+	
+	
 	//발달목록 가져오기
 	public List<ChildDevelopmentDetails> getChildDevelopmentDetails(int pageNo,String searchVal,String searchType,String searchAge,String licenseKindergarten){
 		int onePageRow = 10;
