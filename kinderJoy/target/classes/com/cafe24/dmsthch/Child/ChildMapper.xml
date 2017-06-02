@@ -14,6 +14,7 @@
 			,k.kid_name AS kidName
 			,k.kid_gender AS kidGender
 			,t.teacher_name AS teacherName
+			,t.teacher_id AS teacherID
 			,c.class_name AS className
 			,c.class_age AS classAge
 			,o.opserve_content AS opserveContent

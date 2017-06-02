@@ -61,6 +61,11 @@
 										</c:forEach>
 									</tbody>
 								</table>
+								<hr>
+								<c:if test="${pageNo >1 }">
+								<a href="${pageContext.request.contextPath}/ChildDevelopmentList?pageNo=${pageNo-1}&searchVal=${searchVal}&searchType=${searchType}&searchAge=${searchAge}">이전</a>
+							</c:if>
+								<a href="${pageContext.request.contextPath}/ChildDevelopmentList?pageNo=${pageNo+1}&searchVal=${searchVal}&searchType=${searchType}&searchAge=${searchAge}">다음</a>
 							</div>
 						</div>
 					</div>
