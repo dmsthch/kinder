@@ -18,6 +18,11 @@
 	</style>
 	
 	<script>
+	$(document).ready(function(){
+		$('#ChildCommute').attr('class','active');
+
+		
+	})
 		$(document).ready(function(){
 			
 			if(${fn:length(resultAttendanceList) > 0 }){
@@ -132,29 +137,32 @@
 <div class="wrapper">
 	
 
-    <div class="main-panel">
-		
-		<div class="row">
-			<h1 class="text-center">${getChildClass.className}반 출석부</h1><br>
-			<div class="col-sm-10 col-sm-offset-1">
-			<h3 class="text-right">날짜 : <fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd"/> &nbsp</h3>
-			<div class="text-right">
-				<button id="btnAllCheckTrue" class="btn btn-default">전체선택</button>
-				<button id="btnAllCheckFalse" class="btn btn-default">전체해제</button>
-			</div>
-			
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<td>유아번호</td>
-							<td>이름</td>
-							<td>출석여부</td>
-							<td>특이사항종류</td>
-							<td>특이사항내용</td>
-						</tr>
-					</thead>
-					<tbody>
-						
+    <div class="col-md-10 col-sm-offset-2">
+ 			<div class="content">
+	            <div class="container-fluid">
+	                <div class="row">
+	                    <div class="col-md-12">
+	                        <div class="card">
+	                            <div class="card-header" data-background-color="green">
+	                                <h4 class="title""text-center">${getChildClass.className}반 출석부</h4>
+	                                <p class="category"></p>
+	                            </div>
+	                           <h4 class="text-right">날짜 : <fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd"/> &nbsp</h4>
+							   <div class="text-right">
+									<button id="btnAllCheckTrue" class="btn btn-default">전체선택</button>
+									<button id="btnAllCheckFalse" class="btn btn-default">전체해제</button>
+						       </div>
+  					 		  <table class="table table-striped">
+	                     		<thead class="text-primary">
+									<tr>
+	                                    <th>유아번호</th>
+                						<th>이름</th>
+		                				<th>출석여부</th>
+										<th>특이사항종류</th>
+										<th>특이사항내용</th>
+		                            </tr>    
+					     		</thead>
+	                          <tbody>
 						<c:forEach var="child" items="${childList}">
 							<tr>
 								<td class="tdKidNo">${child.kidNo}</td>

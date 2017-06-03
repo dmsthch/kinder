@@ -110,11 +110,11 @@ $(document).ready(function(){
 	                </li>
 
 	                <!-- 테스트 -->
-	                <li class="dropdown">
+	                <li class="dropdown" id="AllClass">
 	                	
 	                    <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
 	                        <i class="material-icons">content_paste</i>
-	                        <p>전체반보기테스트 <span class="caret"></span></p>
+	                        <p>전체반보기 <span class="caret"></span></p>
                         </a>
 						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
 						    	
@@ -129,7 +129,14 @@ $(document).ready(function(){
 						    	</c:forEach>
 						    </ul>
 	                </li>
-	                <!-- 테스트끝 -->
+	                <!-- 전체반보기 끝 -->
+	                <li id="ChildAdd">
+	                    <a href="${pageContext.request.contextPath}/ChildAdd">
+	                        <i class="material-icons">person</i>
+	                        <p>유아 등록</p>
+	                    </a>
+	                </li>
+	                
 	                <li id="ChildCommute">
 	                    <a href="${pageContext.request.contextPath}/ChildCommute">
 	                        <i class="material-icons">person</i>
@@ -144,7 +151,7 @@ $(document).ready(function(){
 	                    </a>
 	                </li>
 	                
-	                <li class="dropdown">
+	                <li class="dropdown" id="ChildDevelopement">
 	                	 <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
 	                        <i class="material-icons">content_paste</i>
 	                        <p>유아 발달평가 <span class="caret"></span></p>

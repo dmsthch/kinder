@@ -73,7 +73,7 @@ $(document).ready(function(){
     
     <div id="wrap" class="container">
     	       
-        <h4 id="with-data-options">With <code>data</code> options</h4>
+   
            <form id="testSelectForm" action="${pageContext.request.contextPath}/testTest01" method="POST">
             <div class="row">
                 <div class="col-xs-5">

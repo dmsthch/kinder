@@ -24,7 +24,7 @@
 	 	margin-top: 5%;
 	 }
  </style>
- <c:import url="../module/navbar.jsp"></c:import>
+<c:import url="../module/navbar.jsp"></c:import>
 <c:import url="../Child/nav/SideNav.jsp"></c:import>
  
 <script>
