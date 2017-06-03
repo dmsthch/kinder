@@ -17,20 +17,18 @@
 
 <title>Child Modify Form</title>
 
-<!-- CSS Link -->
-<c:import url="../module/importCSS.jsp"></c:import>
-<!-- JS Link -->
-<c:import url="../module/importJS.jsp"></c:import>
+
+<c:import url="../module/navbar.jsp"></c:import>
+<c:import url="../Child/nav/SideNav.jsp"></c:import>
 	
  <style>
 	 #body{
 	 	margin-top: 5%;
 	 }
  </style>
+  
 </head>
 <body id="body">
-<!-- navbar -->
-<c:import url="../module/navbar.jsp"></c:import>
 <div class="container">
     <form id="modifyForm" action="${pageContext.request.contextPath}/ChildModify" method="post">
         <div class="form-group">kid_no :
@@ -83,7 +81,6 @@
         </div>
     </form>
 </div>
-<!-- footer -->
-<c:import url="../module/footer.jsp"></c:import>
+
 </body>
 </html>
