@@ -94,6 +94,22 @@ public class TeacherController {
 		return "Teacher/TeacherAdd";
 	}
 	
+	//편성표 리스트 호출
+	@RequestMapping(value="/takeFormList", method=RequestMethod.GET)
+	public String takeFormList(HttpSession httpsession, Model model) {
+		System.out.println("호출확인");
+		
+		List<Teacher> takeT = TDao.takeT((String)httpsession.getAttribute("licenseKindergarten"));
+		List<ChildClass> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
+
+		//classNo classAge teacherNo teacherName
+		
+		model.addAttribute("takeTeacher" ,takeT);
+		model.addAttribute("takeClass"   ,takeC);
+		
+		return "Teacher/TeacherModify/takeFormList";
+	}
+	
 	//편성표폼 호출
 	@RequestMapping(value="/takeForm", method=RequestMethod.GET)
 	public String takeForm(HttpSession httpsession ,Model model) {
