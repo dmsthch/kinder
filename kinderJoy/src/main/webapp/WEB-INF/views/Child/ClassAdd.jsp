@@ -74,7 +74,6 @@
  </form>
 
 
-<!-- footer -->
-<c:import url="../module/footer.jsp"></c:import>
+
 </body>
 </html>

@@ -129,8 +129,10 @@ $(document).ready(function() {
 	
 		
 	//모달창열기!!!!!!!!!!!!!!
-	$('.callModal').click(function(){
+	$(document).on('click','.callModal',function(){
 		
+	/* $('.callModal').click(function(){ */
+		alert('callModal')
 		//id로 하면 일정이 일주일을 넘어서 다른줄로 넘어갈때 각 개체마다 id를 부여해버려서 안됨.
 		//그래서 scheduleNo를 클래스로 넣어버렸음. schedule_no_숫자  이렇게!
 		//그걸 가져와야함.
@@ -156,6 +158,7 @@ $(document).ready(function() {
 			//배열의 i번째 값을 가져옴
 			var getValue = getClassArray[resultIndex];
 			//값을 가져온것에서 아이디값만 남기고 자름.
+			//요기요기요기
 			var getScheduleNo = getValue.substring(getValue.length-1 , getValue.length);
 			console.log('값은!! :'+getScheduleNo);
 		}else{
@@ -170,7 +173,7 @@ $(document).ready(function() {
 	        dataType:'JSON',
 	        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 	        success:function(data){
-	            //alert("성공!")
+	            /* alert("성공!") */
 	            //alert(data.scheduleContent);
 	            $('.calendarModalTitle').text(data.scheduleTitle);
 	            $('.calendarModalBody').html(' 내용 : '+data.scheduleContent+'<br/>');

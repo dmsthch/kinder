@@ -12,6 +12,12 @@
 <c:import url="../module/navbar.jsp"></c:import>
 <script>
 $(document).ready(function(){
+	$('#ChildDevelopement').attr('class','active');
+
+	
+})
+
+$(document).ready(function(){
 	//맨처음분류 1~5까지 선택(신의사예자)하면 2번째 셀렉트에서 해당하는 내용만 보여주기
 	$(document).on('change','#questionSelect',function(){
 		var questionSelect = $('#questionSelect').val();

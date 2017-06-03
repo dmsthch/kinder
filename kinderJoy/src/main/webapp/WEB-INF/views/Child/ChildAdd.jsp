@@ -18,6 +18,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
  
  <script>
+	 $(document).ready(function(){
+			$('#ChildAdd').attr('class','active');
+	
+			
+		})
+		
  	$(document).ready(function(){
  		
  		$('#addButton').click(function(){
@@ -38,16 +44,27 @@
 <c:import url="../module/importCSS.jsp"></c:import>
 <!-- JS Link -->
 <c:import url="../module/importCSS.jsp"></c:import>
+<c:import url="../module/navbar.jsp"></c:import>
 
 	<style>
 		#body{
 			margin-top:5%;
 		}
 	</style>
-</head>
-<body id="body">
-<!-- navbar -->
 <c:import url="../module/navbar.jsp"></c:import>
+<c:import url="../Child/nav/SideNav.jsp"></c:import>
+</head>
+<body class="components-page">
+<div class="wrapper">
+<div class="main-panel">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header" data-background-color="green">
+							<h4 class="title">유아 등록</h4>
+						</div>
+
 <div class="container">
     
     <form id="addForm" action="${pageContext.request.contextPath}/ChildAdd" method="post">
@@ -82,10 +99,10 @@
         <div class="form-group">
             <label for="kid_gender">성별 :</label>
             <label class="radio-inline">
-		      <input type="radio" name="kidGender" value="1">남자
+		      <input type="radio" name="kidGender" value="남">남자
 		    </label>
 		    <label class="radio-inline">
-		      <input type="radio" name="kidGender" value="2">여자
+		      <input type="radio" name="kidGender" value="여">여자
 		    </label>
         </div>
          <div class="form-group">
@@ -99,7 +116,6 @@
         </div>
     </form>
 </div>
-<!-- footer -->
-<c:import url="../module/footer.jsp"></c:import>
+
 </body>
 </html>

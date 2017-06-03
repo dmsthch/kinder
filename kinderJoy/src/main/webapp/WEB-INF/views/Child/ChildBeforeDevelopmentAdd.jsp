@@ -9,6 +9,13 @@
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="./nav/SideNav.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
+<script>
+$(document).ready(function(){
+	$('#ChildDevelopement').attr('class','active');
+
+	
+})
+</script>
 </head>
 <body class="components-page">
 <div class="wrapper">
