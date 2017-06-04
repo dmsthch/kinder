@@ -14,6 +14,13 @@
 	<!-- 사이드메뉴바 BEGIN -->
 	<c:import url="./side.jsp"></c:import>
 
+
+	<style>
+	.rounded {
+	  background: black;
+	  border-radius: 5px;
+	}
+	</style>
 </head>
 
 <body>
@@ -34,54 +41,29 @@
 	                                <p class="category">편성된 표를 확인하세요.</p>
 	                            </div>                            
 	                            <div class="card-content table-responsive">
-	                                <forEach begin="3" end="5" var="age">
+                             <c:forEach begin="3" end="5" var="age">
 	                                
-	                                <table class="table">
-	                                    <thead class="text-primary">
-	                                    	<th>3살 반 이름</th>
-	                                    </thead>
-	                                    
-
-	                                    <tbody>
-	                                        <tr>
-	                                        	<td>편성된 선생명</td>
-	                                        	<td>추가</td>
-	                                        	<td>추가</td>
-	                                        <tr>
-	                                    </tbody>
-
-	                                </table>
-	                                </forEach>
-	                                
-	                                <table class="table">
-	                                    <thead class="text-primary">
-	                                    	<th>4살 반 이름</th>
-	                                    </thead>
-	                                    
-
-	                                    <tbody>
-	                                        <tr>
-	                                        	<td>편성된 선생명</td>
-	                                        	<td>추가</td>
-	                                        	<td>추가</td>
-	                                        <tr>
-	                                    </tbody>
-
-	                                </table>	                                <table class="table">
-	                                    <thead class="text-primary">
-	                                    	<th>5살 반 이름</th>
-	                                    </thead>
-	                                    
-
-	                                    <tbody>
-	                                        <tr>
-	                                        	<td>편성된 선생명</td>
-	                                        	<td>추가</td>
-	                                        	<td>추가</td>
-	                                        <tr>
-	                                    </tbody>
-
-	                                </table>
+		                         <table class="table">
+		                         
+									<h1>${age}살 편성</h1>
+									<c:forEach var="TC" items="${takeClass}" >
+									<div class="card-header style_card" data-background-color="blue" style=" border: 3px solid black;  float: left; height: auto; width: auto; margin: 10px; padding: 10px;" >
+									<c:if test="${TC.classAge == age}"> 
+									<%-- <c:if test="${TC.className == List.className}"> --%>
+<%-- 									<c:forEach var="List2" items="${List2}">
+									${List2.className}<<<<<<<<<<<<<<
+									</c:forEach> --%>
+									<h5 class="card card-stats">${TC.className}반</h5>
+									<%-- </c:if> --%>
+									</c:if>
+									<c:forEach var="List" items="${List}">
+									${List.teacherName}
+									</c:forEach>
+									</div>
+									</c:forEach>
+		                         </table>
+		                         
+                             </c:forEach>
 	                            </div>
 	                        </div>
 	                    </div>

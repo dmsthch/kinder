@@ -103,4 +103,14 @@ public class TeacherDao {
 	public int pyeonseong(TeacherFormation TF) {
 		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.pyeonseong", TF);
 	}
+	
+	//교원표!!!표! 차인표!
+	public List<Teacher> takeFormList(String string) {
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeFormList", string);
+	}
+	
+	//교원표!!!표! 차인표!
+	public List<ChildClass> takeFormList2(String string) {
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeFormList", string);
+	}
 }
