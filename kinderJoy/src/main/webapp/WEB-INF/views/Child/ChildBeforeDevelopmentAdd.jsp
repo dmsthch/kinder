@@ -11,7 +11,7 @@
 <c:import url="../module/navbar.jsp"></c:import>
 <script>
 $(document).ready(function(){
-	$('#ChildDevelopement').attr('class','active');
+	$('#ChildManagement').attr('class','active');
 
 	
 })
@@ -26,9 +26,7 @@ $(document).ready(function(){
 					<div class="card">
 						<div class="card-header" data-background-color="green">
 							<h4 class="title">발달평가 대상 선택</h4>
-							
-							
-								
+													
 						</div>
 						
 						<div class="card-content table-responsive ">

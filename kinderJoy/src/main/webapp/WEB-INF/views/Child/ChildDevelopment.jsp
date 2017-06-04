@@ -12,7 +12,7 @@
 <c:import url="../module/navbar.jsp"></c:import>
 <script>
 $(document).ready(function(){
-	$('#ChildDevelopement').attr('class','active');
+	$('#ChildManagement').attr('class','active');
 
 	
 })

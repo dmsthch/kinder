@@ -14,7 +14,7 @@
 </style>
 <script>
 $(document).ready(function(){
-	$('#ChildDevelopement').attr('class','active');
+	$('#ChildManagement').attr('class','active');
 
 	
 })

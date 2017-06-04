@@ -93,83 +93,95 @@ $(document).ready(function(){
 
 	    	<div class="sidebar-wrapper" style="overflow: visible;">
 	            <ul class="nav ">
-            	   <li class="navChildList" id="ChildHome">
+            	   <li class="navChildList" id="ChildList">
 	                   <a href="${pageContext.request.contextPath}/ChildList" class="smoothScroll">
 	                        <i class="material-icons">dashboard</i>
 	                        
-	                        <p>메인화면</p>
+	                        <p>우리 반 리스트</p>
 	                    </a>
 	                </li>
 	                
-	                <!-- <li class="active"> -->
-	                <li class="navChildClass" id="ChildClass">
-	                    <a href="${pageContext.request.contextPath}/ChildClass">
-	                        <i class="material-icons">person</i>
-	                        <p>전체 반</p>
-	                    </a>
-	                </li>
-
-	                <!-- 테스트 -->
-	                <li class="dropdown" id="AllClass">
-	                	
-	                    <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
+	                <li class="dropdown" id="ChildClassManagement">
+	                	 <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
 	                        <i class="material-icons">content_paste</i>
-	                        <p>전체반보기 <span class="caret"></span></p>
+	                        <p>반 관리 <span class="caret"></span></p>
                         </a>
 						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
-						    	
-						    	
+						    	 <!-- 전체 반 & 편성  -->
+							    	<li>
+						    		<a href="${pageContext.request.contextPath}/ChildClass"> 전체 반 & 편성 </a>
+								    </li>
+							    <!-- 전체 반 & 편성 끝 -->
+							    <!-- 반 별 보기-->
+					<li class="dropdown">
+	                	<a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
+	          	          <p>반 별 보기</p>
+                        </a>
+						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
 						    	<c:forEach begin="3" end="5" var="age"> <!-- 요놈!! -->
 							    	<li class="dropdown-submenu">
 							    		<a href="${pageContext.request.contextPath}/ChildSelectClass?age=${age}"> ${age}세 </a>
-								    	<ul class="dropdown-menu ${age}" style="margin-left:1%">
-								    		<!-- <li><a href="#" class="">test0001</a></li> -->
-								    	</ul>
+								    		<ul class="dropdown-menu ${age}" style="margin-left:1%">
+								    			<!-- <li><a href="#" class="">test0001</a></li> -->
+								    		</ul>
 							    	</li>
 						    	</c:forEach>
 						    </ul>
 	                </li>
-	                <!-- 전체반보기 끝 -->
-	                <li id="ChildAdd">
-	                    <a href="${pageContext.request.contextPath}/ChildAdd">
-	                        <i class="material-icons">person</i>
-	                        <p>유아 등록</p>
-	                    </a>
-	                </li>
-	                
-	                <li id="ChildCommute">
-	                    <a href="${pageContext.request.contextPath}/ChildCommute">
-	                        <i class="material-icons">person</i>
-	                        <p>유아 출석</p>
-	                    </a>
-	                </li>
-	                
-	                <li id="KidCommuteView">
-	                    <a href="${pageContext.request.contextPath}/KidCommuteView">
-	                        <i class="material-icons">person</i>
-	                        <p>유아 출석 보기</p>
-	                    </a>
-	                </li>
-	                
-	                <li class="dropdown" id="ChildDevelopement">
-	                	 <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
-	                        <i class="material-icons">content_paste</i>
-	                        <p>유아 발달평가 <span class="caret"></span></p>
-                        </a>
-						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
-						    	 <!-- 발달평가 등록!! -->
+							    <!-- 반별보기 끝 -->
+							    <!-- 반 생성하기 -->
 							    	<li>
-						    		<a href="${pageContext.request.contextPath}/ChildBeforeDevelopmentAdd"> 발달평가 등록 </a>
+						    		<a href="${pageContext.request.contextPath}/ClassAdd"> 반 생성하기 </a>
 								    </li>
-							    <!-- 발달평가등록끝 -->
-							    <!-- 발달평가 리스트 -->
-							    	<li>
-						    		<a href="${pageContext.request.contextPath}/ChildDevelopmentList"> 발달평가목록 </a>
-								    </li>
-							    
-							    <!-- 발달평가 리슽끝 -->
 						    </ul>
 	                </li>
+
+	                <!-- 반 관리 끝 -->
+	                <li class="dropdown" id="ChildManagement">
+	                	 <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
+	                        <i class="material-icons">content_paste</i>
+	                        <p>유아 관리 <span class="caret"></span></p>
+                         </a>
+						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
+						    	
+							    	<li>
+						    		<a href="${pageContext.request.contextPath}/ChildAdd"> 유아 등록 </a>
+								    </li>
+							   
+							    	<li>
+						    		<a href="${pageContext.request.contextPath}/ChildCommute"> 유아 출석 </a>
+								    </li>
+								    
+								    <li>
+						    		<a href="${pageContext.request.contextPath}/KidCommuteView"> 유아 출석 보기 </a>
+								    </li>
+								    
+								    <li class="dropdown" id="ChildManagement">
+					                	<a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
+					                       <p>유아 발달평가 <span class="caret"></span></p>
+				                        </a>
+						    				<ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
+									    	 <!-- 발달평가 등록!! -->
+										    	<li>
+									    		<a href="${pageContext.request.contextPath}/ChildBeforeDevelopmentAdd"> 발달평가 등록 </a>
+											    </li>
+										    <!-- 발달평가등록끝 -->
+										    <!-- 발달평가 리스트 -->
+										    	<li>
+									    		<a href="${pageContext.request.contextPath}/ChildDevelopmentList"> 발달평가목록 </a>
+											    </li>
+										    
+										    <!-- 발달평가 리슽끝 -->
+										    </ul>
+					                </li>
+						    </ul>
+	                </li>
+	             
+	                
+	      
+	                
+	               
+	               
 	            </ul>
 	    	</div>
 	    </div>
