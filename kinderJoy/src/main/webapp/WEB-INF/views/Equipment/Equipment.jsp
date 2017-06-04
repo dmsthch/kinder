@@ -17,21 +17,31 @@
 <c:import url="../module/navbar.jsp"></c:import>
 
 <style>
-@font-face{
-	font-family: 'koverwatch';
-	src: url(fonts/koverwatch.ttf) format('truetype');
-}
-body {
-	font-family: koverwatch
-}
 button {
 	background-color: white;
  }
+ 	#staticMenu { 
+		margin: 30pt; 
+		padding: 0pt;  
+		position: absolute; 
+		right: 0px; 
+		top: 0px;
+		position:absolute;
+		z-index:9999;
+		overflow:hidden;
+		border-radius: 13px;
+	}
 </style>
-
+<script src="js/KHS/RefreshStaticMenu.js"></script>
+<script src="js/KHS/hsCustom.js"></script>
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50" onload="InitializeStaticMenu();">
-
+<div id="staticMenu" class="text-center">
+	<div>
+		<br/>
+		<input class="btn btn-default dropdown-toggle" id="button" type="button" value="비품추가"/>
+	</div>
+</div>
  <div class="wrapper">
 	<div class="main-panel">
 		<div class="content">
@@ -41,7 +51,7 @@ button {
 		</div>
 	</div>
 </div>
-<br><br><br><br><br>
+
 
 
 </body>

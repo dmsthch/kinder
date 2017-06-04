@@ -73,58 +73,24 @@
 	                        <p>비품 예산<span class="caret"></span></p>
                         </a>
 						    <ul class="pull-right dropdown-menu" style="margin-right:-62%; margin-top:-20%" >
-						    	<li><a href="${pageContext.request.contextPath}/Management?test=6">전체</a></li>
-						    	<li><a href="${pageContext.request.contextPath}/Management?test=1">교제,교구</a></li>
-								<li><a href="${pageContext.request.contextPath}/Management?test=2">사무용품</a></li>
-								<li><a href="${pageContext.request.contextPath}/Management?test=3">체육용품</a></li>
-								<li><a href="${pageContext.request.contextPath}/Management?test=4">도서목록</a></li>
-								<li><a href="${pageContext.request.contextPath}/Management?test=5">기타</a></li>
+						    	<li><a href="${pageContext.request.contextPath}/Management?managementEquipmentPageValue=6">전체</a></li>
+						    	<li><a href="${pageContext.request.contextPath}/Management?managementEquipmentPageValue=1">교제,교구</a></li>
+								<li><a href="${pageContext.request.contextPath}/Management?managementEquipmentPageValue=2">사무용품</a></li>
+								<li><a href="${pageContext.request.contextPath}/Management?managementEquipmentPageValue=3">체육용품</a></li>
+								<li><a href="${pageContext.request.contextPath}/Management?managementEquipmentPageValue=4">도서목록</a></li>
+								<li><a href="${pageContext.request.contextPath}/Management?managementEquipmentPageValue=5">기타</a></li>
 						    </ul>
 	                </li>
-	               	<li class="dropdown">
-	                	
-	                    <a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
-	                        <i class="material-icons">content_paste</i>
-	                        <p>일일계획안 <span class="caret"></span></p>
-                        </a>
-						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
-						    	<li class="dropdown-submenu ">
-							    	<a href="#" > 일일계획안 작성 </a>
-							    	<ul class="dropdown-menu navFormLoad" style="margin-left:1%" id="navFormLoad">
-							    		<li><a href="${pageContext.request.contextPath}/EducationProjectAdd">빈 시트</a></li>
-							    	
-							    	</ul>
-							    </li>	
-						    	<li class="divider"></li>
-						    	<li><a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=4">일일계획안 전체 보기</a></li>
-						    	<li class="divider"></li>
-						    	
-						    	<c:forEach begin="3" end="5" var="age"> <!-- 요놈!! -->
-							    	<li class="dropdown-submenu">
-							    		<a href="${pageContext.request.contextPath}/EducationProjectList?categoryNo=4&age=${age}"> ${age}세 </a>
-								    	<ul class="dropdown-menu ${age}" style="margin-left:1%">
-								    		<!-- <li><a href="#" class="">test0001</a></li> -->
-								    	</ul>
-							    	</li>
-						    	</c:forEach>
-						    </ul>
-	                </li>
-	                <li id="equipmentSheetListNav">
-	                    <a href="${pageContext.request.contextPath}/SheetList">
+	                <li id="managementTeacherListNav">
+	                    <a href="#">
 	                        <i class="material-icons">person</i>
 	                        <p>직원 예산</p>
 	                    </a>
 	                </li>
-	                <li id="equipmentRequestNav">
-	                    <a href="${pageContext.request.contextPath}/test01">
+	                <li id="managementEducationProjectListNav">
+	                    <a href="#">
 	                        <i class="material-icons">content_paste</i>
 	                        <p>계획 예산</p>
-	                    </a>
-	                </li>
-	               	<li id="equipmnetRequestListNav">
-	                    <a href="${pageContext.request.contextPath}/testList">
-	                        <i class="material-icons">content_paste</i>
-	                        <p>임초롬님 탈세 용도 예산</p>
 	                    </a>
 	                </li>
 	            </ul>

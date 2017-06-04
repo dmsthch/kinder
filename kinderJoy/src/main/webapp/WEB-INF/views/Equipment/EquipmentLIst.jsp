@@ -129,37 +129,21 @@
 	input{
 		text-align: center;
 	}
-	#staticMenu { 
-		margin: 30pt; 
-		padding: 0pt;  
-		position: absolute; 
-		right: 0px; 
-		top: 0px;
-		position:absolute;
-		z-index:9999;
-		overflow:hidden;
-		border-radius: 13px;
-	}
-	#staticMenu div{
+
+/* 	#staticMenu div{
 	  height:100%;
 	  width:100%;
 	  color:#fff;
 	  background:rgba(153,153,153,0.3);
 	  padding:10px;
-	}
+	} */
 	#staticMenu p{
 	  color: black;
 	}
 </style>
-<script src="js/KHS/RefreshStaticMenu.js"></script>
-<script src="js/KHS/hsCustom.js"></script>
-<div id="staticMenu" class="text-center">
-	<div>
-		<br/>
-		<p>비품 추가하기</p>
-	</div>
-</div>
-<input class="btn btn-default dropdown-toggle" id="button" type="button" value="비품추가"/>
+
+
+
 <div class="row">
 	<div class="col-sm-1">카테고리</div>
 	<div class="col-sm-2">품명</div>
@@ -168,8 +152,9 @@
 	<div class="col-sm-1">개당단가</div>
 	<div class="col-sm-1">총단가</div>
 	<div class="col-sm-2">구입처</div>
-	<div class="col-sm-2">보관상태</div>
+	<div class="col-sm-1">보관상태</div>
 	<div class="col-sm-1">저장</div>
+	<div class="col-sm-1">비품 추가</div>
 </div>
 <div id="main">
 	<c:forEach var="plusMinus" items="${plusMinus}">
@@ -203,11 +188,14 @@
 				<div class="col-sm-2">
 					<input class="form-control equipmentCustomer" name="equipmentCustomer" type="text" value="${plusMinus.equipmentCustomer}" readonly/>
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-1">
 					<input class="form-control equipmentState" name="equipmentState" type="text" value="${plusMinus.equipmentState}" readonly/>
 				</div>
 				<div class="col-sm-1">
 					<input type="button" class="btn btn-default save" value="추가"/>
+				</div>
+				<div class="col-sm-1">
+
 				</div>
 			</form>
 		</div>
@@ -249,11 +237,14 @@
 			<div class="col-sm-2">
 				<input class="form-control equipmentCustomer" name="equipmentCustomer" type="text" readonly/>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-1">
 				<input class="form-control equipmentState" name="equipmentState" type="text" readonly/>
 			</div>
 			<div class="col-sm-1">
 				<input type="button" class="btn btn-default save" value="추가"/>
+			</div>
+			<div class="col-sm-1">
+
 			</div>
 		</form>
 	</div>
