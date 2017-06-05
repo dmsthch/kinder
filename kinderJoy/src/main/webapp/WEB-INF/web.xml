@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
- 
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>
@@ -11,9 +10,6 @@
       <param-value>UTF-8</param-value>
     </init-param>
   </filter>
-  
-  <!-- 필터안에 리스너가 있으면 리스너 사용 불가 등록 위치에 따라 달라지니까 잘 보고 글을 작성하자 -->
-
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
@@ -31,5 +27,14 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <description></description>
+    <display-name>HomeDao</display-name>
+    <servlet-name>HomeDao</servlet-name>
+    <servlet-class>com.cafe24.dmsthch.Home.HomeDao</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeDao</servlet-name>
+    <url-pattern>/HomeDao</url-pattern>
+  </servlet-mapping>
 </web-app>

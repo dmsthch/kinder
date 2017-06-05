@@ -129,7 +129,7 @@ $(document).ready(function(){
 						}
 						dataForSave[row][col] = val;
 // 						/* dataForSave[row][col] = val; */
-						dataValue=dataForSave;  
+						dataArray=dataForSave;  
 					}
 				}			
 		}

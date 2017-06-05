@@ -102,8 +102,11 @@ public class EquipmentController {
 	}
 	@RequestMapping(value = "sheet", method = RequestMethod.GET)
 	public String sheet(Model model
-						,@RequestParam(value="sheetNo") String sheetNo){
+						,@RequestParam(value="sheetNo") String sheetNo
+						,HttpSession session){
+		Sheet sheet = dao.selectEquipmentSheet(session, "기본 품의서", "0");
 		model.addAttribute("sheetNo",sheetNo);
+		model.addAttribute("sheet",sheet);
 		return "Equipment/sheet";
 	}
 /*	@RequestMapping(value = "test01", method = RequestMethod.GET)

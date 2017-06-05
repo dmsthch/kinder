@@ -33,7 +33,7 @@ $(document).ready(function(){
 						</div>
 							<h4 class="text-right">운영년도 : ${childClass.classYear}</h4>
 						<div class="col-sm-5 col-sm-offset-3 text-center">
-						    <table class="table table-hover ">
+						    <table class="table table-hover">
 						        <thead>
 						            <tr>
 						                <th style="text-align:center; font-size:20px;">아이 이름</th>

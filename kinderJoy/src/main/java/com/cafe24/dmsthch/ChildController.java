@@ -200,7 +200,8 @@ public class ChildController {
 		@RequestMapping(value="/ChildList" , method=RequestMethod.GET)
 		public String ChildList(Model model 
 								, @RequestParam(value="currentPage", required=false, defaultValue="1")int currentPage
-								, HttpSession session) {
+								, HttpSession session ) {
+			
 			
 			int teacherNo = 0;
 			String license = "";
