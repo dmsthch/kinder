@@ -37,6 +37,7 @@ function chageDate(date){
 
 $(document).ready(function() {
 	
+				
 		$('#calendar').fullCalendar({
 		//맨위에 나오는것들. 왼쪽에는 달 앞뒤로 넘기는거랑 오늘로가기,
 		//가운데는 제목, 오른쪽에는 달, 주, 일별로 보기
@@ -68,7 +69,8 @@ $(document).ready(function() {
 				console.log(start+"<<<start")//요상한 숫자 13자리?정도 나온다. 찾아보니 유닉스시간? 이것같은데..
 				console.log(end+"<<<end")
 				
-				$('#calendar').fullCalendar('renderEvent', eventData, true); // stick이 뭐지?
+				
+				/* $('#calendar').fullCalendar('renderEvent', eventData, true); // stick이 뭐지? */
 
 			var getStart = new Date(start);
 			/* //이걸 엔드에도 해야함.
@@ -87,7 +89,7 @@ $(document).ready(function() {
 			getStart = chageDate(getStart);
 			getEnd = chageDate(getEnd);
 			console.log(getStart);
-	
+	console.log('dd');
 		 	$('#start').val(getStart);
 			$('#end').val(getEnd); 
 			
@@ -125,14 +127,16 @@ $(document).ready(function() {
 /* 			{title : 'asdftest', start : '20170501', end : '20170501' },
 			{id: 999, title: 'Repeating Event', start: '2017-04-09T16:00:00'} */
 		]
-	});
+	
+
+		});
 	
 		
 	//모달창열기!!!!!!!!!!!!!!
 	$(document).on('click','.callModal',function(){
 		
 	/* $('.callModal').click(function(){ */
-		alert('callModal')
+		//alert('callModal')
 		//id로 하면 일정이 일주일을 넘어서 다른줄로 넘어갈때 각 개체마다 id를 부여해버려서 안됨.
 		//그래서 scheduleNo를 클래스로 넣어버렸음. schedule_no_숫자  이렇게!
 		//그걸 가져와야함.
@@ -159,7 +163,7 @@ $(document).ready(function() {
 			var getValue = getClassArray[resultIndex];
 			//값을 가져온것에서 아이디값만 남기고 자름.
 			//요기요기요기
-			var getScheduleNo = getValue.substring(getValue.length-1 , getValue.length);
+			var getScheduleNo = getValue.substring(12 , getValue.length);
 			console.log('값은!! :'+getScheduleNo);
 		}else{
 			console.log('Not Found');
@@ -175,10 +179,10 @@ $(document).ready(function() {
 	        success:function(data){
 	            /* alert("성공!") */
 	            //alert(data.scheduleContent);
-	            $('.calendarModalTitle').text(data.scheduleTitle);
-	            $('.calendarModalBody').html(' 내용 : '+data.scheduleContent+'<br/>');
-	            $('.calendarModalBody').append(' 일시 : '+data.scheduleStartDay+" ~ "+data.scheduleEndDay);
-	            $('.calendarModalFooter').html('<a href="${pageContext.request.contextPath}/deleteSchedule?scheduleNo='+data.scheduleNo+'"><button class="btn btn-default">삭제하기</button></a>');
+	            $('#calendarModal .calendarModalTitle').text(data.scheduleTitle);
+	            $('#calendarModal  .calendarModalBody').html(' 내용 : '+data.scheduleContent+'<br/>');
+	            $('#calendarModal  .calendarModalBody').append(' 일시 : '+data.scheduleStartDay+" ~ "+data.scheduleEndDay);
+	            $('#calendarModal  .calendarModalFooter').html('<a href="${pageContext.request.contextPath}/deleteSchedule?scheduleNo='+data.scheduleNo+'"><button class="btn btn-danger">삭제하기</button></a> <button class="btn btn-default" data-dismiss="modal">닫기</button>');
 	            $('#opneModal').trigger('click');
 	            
 	        },
@@ -191,6 +195,12 @@ $(document).ready(function() {
 
 	
 });
+	
+<!-- -->
+$(document).ready(function(){
+
+})
+	
 
 </script>
 <title>Insert title here</title>
@@ -223,8 +233,6 @@ $(document).ready(function() {
 		console.log(cat1.length);
 	</c:if> --%>
 	
-	
-
 	<!-- 모달버튼! -->
 <div style="display: none;">
 	<button type="button" id="opneModal" class="btn btn-info btn-lg" data-toggle="modal" data-target="#calendarModal">Open Modal</button>
@@ -289,12 +297,12 @@ $(document).ready(function() {
       	    		<option value="1"> 기관일정 </option>
       	    		<option value="2"> 개인일정 </option>
       	    	</select> 
-      	    </div>     
+      	    </div>    
       	</div>
       	<div class="modal-footer calendarModalFooter">
       	<!-- <input type="submit" class="btn btn-default" id="addButton" data-dismiss="modal" value="추가"> -->
 		<input type="submit" type="submit" value="test">
-        <input type="button" class="btn btn-default" data-dismiss="modal" value="close">
+        <input type="button" class="btn btn-default" data-dismiss="modal" value="close" id="closeAddModal">
       </div>
       </form>
       </div>
@@ -303,7 +311,6 @@ $(document).ready(function() {
 
   </div>
 </div>
-
 
 </body>
 </html>
