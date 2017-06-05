@@ -60,13 +60,13 @@
 	                    </a>
 	                </li>
 	                <li id="equipmentRequestNav">
-	                    <a href="${pageContext.request.contextPath}/test01">
+	                    <a href="${pageContext.request.contextPath}/EquipmentRequest">
 	                        <i class="material-icons">content_paste</i>
 	                        <p>비품 건의서</p>
 	                    </a>
 	                </li>
 	               	<li id="equipmnetRequestListNav">
-	                    <a href="${pageContext.request.contextPath}/testList">
+	                    <a href="${pageContext.request.contextPath}/EquipmentRequestList">
 	                        <i class="material-icons">content_paste</i>
 	                        <p>비품 건의 리스트</p>
 	                    </a>

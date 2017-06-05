@@ -39,34 +39,18 @@
 		<div class="content">
 			<div class="container-fluid">	
 			
-<!-- 	<div class="btn-group">
-	  <button type="button" class="btn btn-primary">:: 비품카테고리 ::</button>
-	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-	    <span class="caret"></span>
-	  </button>
-	  <ul class="dropdown-menu" role="menu">
-	    <li><a href="#">교재,교구</a></li>
-	    <li><a href="#">사무용품</a></li>
-	    <li><a href="#">체육용품</a></li>
-	    <li><a href="#">도서목록</a></li>
-	    <li><a href="#">기타</a></li>
-	  </ul>
-	</div> -->
-	<div class="input-group-btn search-panel">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100px;">
-			<span id="category">카테고리 </span><span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu">
-			<c:forEach var="a" items="${getCategory}">
-				<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
-			</c:forEach>
-		</ul>
-	</div>
-	<input type="hidden" name="boardCategoryNo" value="0" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
-	<button id="btTest">save</button>
-	<div>
-		제목 :
-		<input type="text" id="sheetName" value="${sheet.valueName}"/>
+
+	<input type="hidden" name="boardCategoryNo" value="${sheet.equipmentCategoryNo}" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
+	<div class="row">
+		<div class="col-sm-1">
+			<button id="btTest">save</button>
+		</div>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" id="sheetName" value="${sheet.valueName}"/>
+		</div>
+		<div class="col-sm-7">
+
+		</div>
 	</div>
 	<div class="wrapper" style="margin-top: 20px;">
 		<div id="example1"></div>

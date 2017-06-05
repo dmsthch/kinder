@@ -163,7 +163,7 @@
 				<div class="col-sm-1">
 					<c:forEach var="a" items="${getCategory}">
 						<c:if test="${a.categoryNo == plusMinus.categoryNo}">
-							<input type="text" value="${a.categoryName}" class="form-control " readonly/>
+							<input type="text" value="${a.categoryName}" class="form-control" readonly/>
 							<input type="hidden" name="boardCategoryNo" value="${a.categoryNo}" class="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
 						</c:if>
 					</c:forEach>

@@ -15,6 +15,41 @@ import org.springframework.stereotype.Repository;
 public class EquipmentDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	// select 값 있을 경우 업데이트
+	public int updateSheet(HttpSession session
+							,String mergeArray
+							,String dataArray
+							,String borderArray
+							,String countRow
+							,String countCol
+							,String sheetCategory
+							,String sheetName) {
+		System.out.println("updateSheet 내용 실행");
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		Sheet sheet = new Sheet();
+		sheet.setValueMerge(mergeArray);
+		sheet.setValueVal(dataArray);
+		sheet.setValueBorders(borderArray);
+		sheet.setValueRow(countRow);
+		sheet.setValueCols(countCol);
+		sheet.setLicenseKindergarten(licenseKindergarten);
+		sheet.setEquipmentCategoryNo(sheetCategory);
+		sheet.setValueName(sheetName);
+		return sqlSessionTemplate.update("com.cafe24.dmsthch.Equipment.EquipmentMapper.updateSheet", sheet);
+	}
+	// select sheet_value 확인하여 업데이트인지 인서트인지 확인
+	public int selectSheetValueNo(HttpSession session
+									,String equipmentCategoryNo
+									,String valueName) {
+		System.out.println("selectSheetValueNo 내용 실행");
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		Sheet sheet = new Sheet();
+		sheet.setLicenseKindergarten(licenseKindergarten);
+		sheet.setEquipmentCategoryNo(equipmentCategoryNo);
+		sheet.setValueName(valueName);
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectSheetValueNo", sheet);
+	}
+	
 	// test_equipment_value insert
 	public int addTestEquipmentValuePlus(int selectEquipemntNo
 									,String equipmentCost
