@@ -20,13 +20,13 @@
 <c:import url="../module/navbar.jsp"></c:import>
 
 <style>
-@font-face{
+/* @font-face{
 	font-family: 'koverwatch';
 	src: url(fonts/koverwatch.ttf) format('truetype');
-}
-body {
+} */
+/* body {
 	font-family: koverwatch
-}
+} */
 /* .form-control{
 	width:400px;
 } */

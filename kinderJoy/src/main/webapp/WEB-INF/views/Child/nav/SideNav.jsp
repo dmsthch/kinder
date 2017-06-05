@@ -66,15 +66,15 @@ $(document).ready(function(){
 		
 		
 		if(childClass[i].classAge == 3){
-			$('#day .3').append(classString);
+			$('#day1 .3').append(classString);
 			
 		}
 		if(childClass[i].classAge == 4){
-			$('#day .4').append(classString);
+			$('#day1 .4').append(classString);
 			
 		}
 		if(childClass[i].classAge == 5){
-			$('#day .5').append(classString);
+			$('#day1 .5').append(classString);
 			
 		}
 	}
@@ -108,31 +108,31 @@ $(document).ready(function(){
                         </a>
 						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
 						    	 <!-- 전체 반 & 편성  -->
-							    	<li>
-						    		<a href="${pageContext.request.contextPath}/ChildClass"> 전체 반 & 편성 </a>
-								    </li>
+						    	<li>
+					    		<a href="${pageContext.request.contextPath}/ChildClass"> 전체 반 & 편성 </a>
+							    </li>
 							    <!-- 전체 반 & 편성 끝 -->
 							    <!-- 반 별 보기-->
-					<li class="dropdown">
-	                	<a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
-	          	          <p>반 별 보기</p>
-                        </a>
-						    <ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >
-						    	<c:forEach begin="3" end="5" var="age"> <!-- 요놈!! -->
-							    	<li class="dropdown-submenu">
-							    		<a href="${pageContext.request.contextPath}/ChildSelectClass?age=${age}"> ${age}세 </a>
-								    		<ul class="dropdown-menu ${age}" style="margin-left:1%">
-								    			<!-- <li><a href="#" class="">test0001</a></li> -->
-								    		</ul>
-							    	</li>
-						    	</c:forEach>
-						    </ul>
-	                </li>
+								<li class="dropdown-submenu">
+				                	<a style="cursor:pointer;">
+				          	          반 별 보기
+			                        </a>
+									    <ul class="pull-right dropdown-menu navEducationProject" id="day1" style="margin-right:-62%; margin-top:-20%" >
+									    	<c:forEach begin="3" end="5" var="age"> <!-- 요놈!! -->
+										    	<li class="dropdown-submenu">
+										    		<a href="#"> ${age}세 </a>
+											    		<ul class="dropdown-menu ${age}" style="margin-left:1%">
+											    			<!-- <li><a href="#" class="">test0001</a></li> -->
+											    		</ul>
+										    	</li>
+									    	</c:forEach>
+									    </ul>
+				                </li>
 							    <!-- 반별보기 끝 -->
 							    <!-- 반 생성하기 -->
-							    	<li>
-						    		<a href="${pageContext.request.contextPath}/ClassAdd"> 반 생성하기 </a>
-								    </li>
+						    	<li>
+					    		<a href="${pageContext.request.contextPath}/ClassAdd"> 반 생성하기 </a>
+							    </li>
 						    </ul>
 	                </li>
 

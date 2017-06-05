@@ -15,13 +15,13 @@
 	text-align: right;
 	margin-right: 20px;
 	}
-	@font-face{
+/* 	@font-face{
 	font-family: 'koverwatch';
-	src: url(fonts/koverwatch.ttf) format('truetype');
+	src: url(fonts/koverwatch.ttf) format('truetype'); */
 }
-body {
+/* body {
 	font-family: koverwatch
-}
+} */
 </style>
 <script>
 $(document).ready(function(){
@@ -40,13 +40,13 @@ $(document).ready(function(){
 						<div class="col-lg-4 col-md-6 col-sm-6 ">
 						<div>
 							<div class="card card-stats">
-								<div class="card-header" data-background-color="green">
+								<div class="card-header" data-background-color="red">
 									<!-- <i class="material-icons">content_copy</i> -->
 									<h3 class="ageFont title">${getCategory.categoryName}</h3>
 								</div>
 								<div class="card-content">									
 									<p class="category"></p>
-									<h3 class="title"><a href="${pageContext.request.contextPath}/sheet">품의서작성하기</a></h3>
+									<h4 class="title"><a href="${pageContext.request.contextPath}/sheet">품의서작성하기</a></h4>
 								</div>
 								<div class="card-footer textRiht">
 									<div class="stats ">

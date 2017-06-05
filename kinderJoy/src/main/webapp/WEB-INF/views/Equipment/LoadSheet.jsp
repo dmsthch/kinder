@@ -120,7 +120,7 @@ $(document).ready(function(e){
 	  
 		hot = new Handsontable(container, {
  			data: dataValue,    //데이터 가져오기
-			colWidths: [47],
+//			colWidths: [47],
 
 			startRows: countRow,
 			startCols: countCol,
@@ -130,8 +130,8 @@ $(document).ready(function(e){
 			
 			minRows: countRow,
 			minCols: countCol,
-// 			manualRowResize : true,
-// 			manualColumnResize : true,
+ 			manualRowResize : true,
+ 			manualColumnResize : true,
 
 			mergeCells : true,
 			customBorders: true,
