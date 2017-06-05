@@ -50,6 +50,7 @@
 									      <label for="class_age">반 연령:</label>
 									      <input type="text" class="form-control" id="classAge" name="classAge" style="width:200px;">
 									    </div>
+								</div>
 									  <br><br>
 									    <div align ="center">
 									           <input class="btn btn-default" id="addButton" type="button" value="반입력"/>
