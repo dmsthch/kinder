@@ -34,6 +34,45 @@
 <script>
 $(document).ready(function(){
 	$('#equipmentRequestNav').attr('class','active');
+	$('#requestAmount').focusout(function(){
+		if(isNaN($('#requestAmount').val())) {
+			alert('숫자만 입력해주세요');
+			$('#requestAmount').val('');
+			$('#requestAmount').focus();
+		}
+	});
+	$('#requestPrice').focusout(function(){
+		if(isNaN($('#requestPrice').val())) {
+			alert('숫자만 입력해주세요');
+			$('#requestPrice').val('');
+			$('#requestPrice').focus();
+		}
+	});
+	 $('#request').click(function(){
+		var categoryNo = $('[name=categoryNo]:checked').val();
+		var requestAmount = $('#requestAmount').val();
+		var requestName = $('#requestName').val();
+		var requestPrice = $('#requestPrice').val();
+		var requestStant = $('#requestStant').val();
+		var requestReason = $('#requestReason').val();
+		if(categoryNo==undefined) {
+			alert('카테고리를 선택해주세요');
+		} else if(requestAmount=='') {
+			alert('수량을 입력해 주세요');
+		} else if(requestName=='') {
+			alert('품명을 입력해 주세요');
+		} else if(requestPrice=='') {
+			alert('금액을 입력해 주세요');
+		} else if(requestStant=='') {
+			alert('구입처를 입력해 주세요');
+		} else if(requestReason=='') {
+			alert('신청사유를 입력해 주세요');
+		} else if(categoryNo!=undefined&&requestAmount!=''&&requestName!=''&&requestPrice!=''&&requestStant!=''&&requestReason!='') {
+			$('#equipmnetRequestForm').submit();
+		}
+		
+	 });
+
 })
 </script>
 </head>
@@ -65,7 +104,7 @@ $(document).ready(function(){
 	                                        <div class="col-md-5">
 												<div class="form-group label-floating">
 													<label class="control-label">비품 카테고리</label>
-													<div class="radio" style="margin:0 auto" align="center">
+													<div id="categoryNo" class="radio" style="margin:0 auto" align="center">
 														<label>
 															<input type="radio" name="categoryNo" value="1">
 															교재,교구
@@ -92,7 +131,7 @@ $(document).ready(function(){
 	                                        <div class="col-md-4">
 												<div class="form-group label-floating">
 													<label class="control-label">수량</label>
-													<input type="text" name="requestAmount" class="form-control" >
+													<input type="text" id="requestAmount" name="requestAmount" class="form-control" >
 												</div>
 	                                        </div>
 	                                    </div>
@@ -101,7 +140,7 @@ $(document).ready(function(){
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">비품 신청 명</label>
-													<input type="text" name="requestName" class="form-control" >
+													<input type="text" id="requestName" name="requestName" class="form-control" >
 												</div>
 	                                        </div>
 	                                        <div class="col-md-6">
@@ -115,29 +154,28 @@ $(document).ready(function(){
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">예상 금액</label>
-													<input type="text" name="requestPrice" class="form-control" />
+													<input type="text" id="requestPrice" name="requestPrice" class="form-control" />
 												</div>
 	                                        </div>
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating">
 													<label class="control-label">예상 구입처</label>
-													<input type="text" name="requestStant" class="form-control" />
+													<input type="text" id="requestStant" name="requestStant" class="form-control" />
 												</div>
 	                                        </div>
 	                                    </div>
 	                                    <div class="row">
 	                                        <div class="col-md-12">
 	                                            <div class="form-group">
-	                                                <label>상세</label>
 													<div class="form-group label-floating">
 									    				<label class="control-label">신청사유</label>
-								    					<textarea class="form-control" name="requestReason" rows="5"></textarea>
+								    					<textarea class="form-control" id="requestReason" name="requestReason" rows="5"></textarea>
 		                        					</div>
 	                                            </div>
 	                                        </div>
 	                                    </div>
 
-	                                    <button type="submit" class="btn btn-default pull-right">신청하기</button>
+	                                    <button id="request" type="button" class="btn btn-default pull-right">신청하기</button>
 	                                    <div class="clearfix"></div>
 	                                </form>
 	                            </div>
