@@ -60,78 +60,82 @@
 		<div class="content">
 			<div class="container-fluid">
 			
-				<div class="row">
-					<div class="text-center"><h1>Search Page</h1></div>
-				</div><br/>
-											
-				<br/>
-				<div class="row"> <!-- 자료실 미리보기 -->
-					<div class="col-sm-12">
-							<div class="card card-nav-tabs">
-								<div class="card-header" data-background-color="purple">
-									<div class="nav-tabs-navigation">
-										<div class="nav-tabs-wrapper">
-											<span class="nav-tabs-title">자료실 :</span>
-											<ul class="nav nav-tabs" data-tabs="tabs">
-											
-												<c:forEach var="searchCat" items="${pageName }">
-												
-													<li class="">
-														<a href="${searchCat}" data-toggle="tab">
-															<i class="material-icons">code</i>
-															${fn:substringAfter(searchCat,'#')}
-														<div class="ripple-container"></div></a>
-													</li>
+				<div class="col-md-12">
+			        <div class="card">
+			        	<div class="card-header" data-background-color="purple">
+		                    <h4 class="title">Search Page</h4>
+		                    <p class="category">search</p>
+		            	</div>
+						
+						<div class="row"> <!-- 자료실 미리보기 -->
+							<div class="col-sm-12">
+									<div class="card card-nav-tabs">
+										<div class="card-header" data-background-color="purple">
+											<div class="nav-tabs-navigation">
+												<div class="nav-tabs-wrapper">
+													<span class="nav-tabs-title">자료실 :</span>
+													<ul class="nav nav-tabs" data-tabs="tabs">
+													
+														<c:forEach var="searchCat" items="${pageName }">
 														
-												</c:forEach>
-																				
-											</ul>
+															<li class="">
+																<a href="${searchCat}" data-toggle="tab">
+																	<i class="material-icons">code</i>
+																	${fn:substringAfter(searchCat,'#')}
+																<div class="ripple-container"></div></a>
+															</li>
+																
+														</c:forEach>
+																						
+													</ul>
+												</div>
+											</div>
 										</div>
+		
+										<div class="card-content">
+											<div class="tab-content">
+											
+												<c:forEach var="list" varStatus="status" items="${allList }">
+												
+													<div class="tab-pane" id="${fn:substringAfter(pageName[status.index],'#')}">
+														<table class="table table-hover">
+															<thead class="text-center">
+																<tr>
+																	 <th>No</th>
+																	 <th>제목</th>
+																	 <th>작성자</th>
+																	 <th>작성일</th>
+																</tr>
+															</thead>
+															<c:forEach var="board" items="${list}">
+																<tr>
+																	<td>${board.boardNo }</td>
+																	<td>
+																		<c:forEach var="category" items="${getCategory}">
+																			<c:if test="${category.categoryNo == board.boardCategoryNo}">${category.categoryName}</c:if>
+																		</c:forEach>	
+																	</td>
+																	<td><a href="${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}">${board.boardTitle }</a></td>
+																	<td>${board.teacherNo }</td>
+																	<td>${board.boardDay }</td>
+																</tr>
+															</c:forEach>
+														</table>
+													</div>
+												
+												</c:forEach>
+												
+											</div>
+										</div><!-- content End -->
+										
 									</div>
 								</div>
-
-								<div class="card-content">
-									<div class="tab-content">
-									
-										<c:forEach var="list" varStatus="status" items="${allList }">
-										
-											<div class="tab-pane" id="${fn:substringAfter(pageName[status.index],'#')}">
-												<table class="table table-hover">
-													<thead class="text-center">
-														<tr>
-															 <th>No</th>
-															 <th>제목</th>
-															 <th>작성자</th>
-															 <th>작성일</th>
-														</tr>
-													</thead>
-													<c:forEach var="board" items="${list}">
-														<tr>
-															<td>${board.boardNo }</td>
-															<td>
-																<c:forEach var="category" items="${getCategory}">
-																	<c:if test="${category.categoryNo == board.boardCategoryNo}">${category.categoryName}</c:if>
-																</c:forEach>	
-															</td>
-															<td><a href="${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}">${board.boardTitle }</a></td>
-															<td>${board.teacherNo }</td>
-															<td>${board.boardDay }</td>
-														</tr>
-													</c:forEach>
-												</table>
-											</div>
-										
-										</c:forEach>
-										
-									</div>
-								</div><!-- content End -->
-								
-							</div>
-						</div>
-				
-				
-				</div>  <!-- tab row End -->
-				
+						
+						
+						</div>  <!-- tab row End -->
+						
+					</div>
+				</div>
 				
 			</div>
 		</div>
