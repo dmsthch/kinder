@@ -16,6 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,6 +65,17 @@ public class TeacherController {
 		return "";
 	}
 	
+	//사이드 세션생성
+	@ResponseBody
+	@RequestMapping(value="/sideSession" , method = RequestMethod.GET)
+	public JSONObject sideSession (HttpSession session) {
+		JSONObject obj = new JSONObject();
+		String teacherLevel = (String)session.getAttribute("teacherLevel");
+		System.out.println(teacherLevel+ "<--------------");
+		obj.put("teacherLevel", teacherLevel);
+		return obj;
+	}
+	
 	//계정삭제 탈퇴
 	@RequestMapping(value="/deleteAccount", method = RequestMethod.POST)
 	public String delete(HttpSession httpsession ,SessionStatus sessionstatus) {
@@ -105,19 +118,10 @@ public class TeacherController {
 		System.out.println("호출확인");
 		
 		List<Teacher>List = TDao.takeFormList((String)httpsession.getAttribute("licenseKindergarten"));
-		List<ChildClass>List2 = TDao.takeFormList2((String)httpsession.getAttribute("licenseKindergarten"));
-		
-		List<Teacher> takeT = TDao.takeT((String)httpsession.getAttribute("licenseKindergarten"));
-		List<ChildClass> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
-
+	
 		//classNo classAge teacherNo teacherName
 		
 		model.addAttribute("List",List);
-		model.addAttribute("List2",List2);
-		
-		model.addAttribute("takeTeacher" ,takeT);
-		model.addAttribute("takeClass"   ,takeC);
-		
 		
 		return "Teacher/TeacherModify/takeFormList";
 	}

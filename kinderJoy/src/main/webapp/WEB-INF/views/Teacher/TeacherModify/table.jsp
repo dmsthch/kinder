@@ -5,7 +5,7 @@
 <html>
 
 <head>
-
+<title>교원 명단</title>
 	<!-- JS Link -->
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
 	<!-- CSS Link -->
@@ -18,7 +18,7 @@
 	<script>
 	$(document).ready(function(){
 		$('#kyotable').attr('class','active');
-		$('#sidekyotable').attr('style','background-color:orange');
+		$('#sidekyotable').attr('style','background-color:#3DB7CC');
 		
 	});
 	</script>
@@ -36,7 +36,7 @@
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card">
-	                            <div class="card-header" data-background-color="orange">
+	                            <div class="card-header" data-background-color="blue">
 	                                <h4 class="title">교원 명단</h4>
 	                                <p class="category">현재 활동중인 교직원 명단입니다.</p>
 	                            </div>                            
@@ -75,7 +75,7 @@
 
 	                    <div class="col-md-12">
 	                        <div class="card card-plain">
-	                            <div class="card-header" data-background-color="orange">
+	                            <div class="card-header" data-background-color="blue">
 	                                <h4 class="title">이직한 명단</h4>
 	                                <p class="category">이전에 있었던 교직원 명단입니다.</p>
 	                            </div>

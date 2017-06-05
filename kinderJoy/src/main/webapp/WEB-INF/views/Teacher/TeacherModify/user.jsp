@@ -5,7 +5,7 @@
 <html>
 
 <head>
-
+<title>내 프로필</title>
 	<!-- JS Link -->
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
 	<!-- CSS Link -->
@@ -88,7 +88,7 @@
 	                                        <div class="col-md-12">
 												<div class="form-group label-floating">
 													<label class="control-label">라이선스</label>
-													<input type="text" class="form-control" value="${kyoteacher.licenseKindergarten}" readonly>
+													<input type="text" class="form-control" value="${kyoteacher.licenseKindergarten}">
 												</div>
 	                                        </div>
 	                                    </div>
