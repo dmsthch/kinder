@@ -35,24 +35,27 @@ $(document).ready(function(){
 			<div class="container-fluid">
 				
 				<!-- 비품 품의서 리스트 -->
-				<div class="row">
+				
 					<c:forEach var ="getCategory" items="${getCategory}">
+						<div class="row">
 						<div class="col-lg-4 col-md-6 col-sm-6 ">
 						<div>
 							<div class="card card-stats">
 								<div class="card-header" data-background-color="red">
 									<!-- <i class="material-icons">content_copy</i> -->
-									<h3 class="ageFont title">${getCategory.categoryName}</h3>
+									<h5 class="ageFont title">${getCategory.categoryName}</h5>
 								</div>
 								<div class="card-content">									
 									<p class="category"></p>
-									<h4 class="title"><a href="${pageContext.request.contextPath}/sheet">품의서작성하기</a></h4>
+									<h4 class="title"><a href="${pageContext.request.contextPath}/sheet?sheetNo=${getCategory.categoryNo}">품의서작성하기</a></h4>
 								</div>
 								<div class="card-footer textRiht">
 									<div class="stats ">
  										<c:forEach var="sheet" items="${sheet}">
 											<c:if test="${sheet.equipmentCategoryNo == getCategory.categoryNo}">
-												<i class="material-icons" style="margin-left: 5px;">date_range</i><a href="${pageContext.request.contextPath}/reroad?sheetName=${sheet.valueName}&sheetCategoryNo=${getCategory.categoryNo}">${sheet.valueName}</a>
+												<h5>
+													<i class="material-icons" style="margin-left: 5px;">date_range</i><a href="${pageContext.request.contextPath}/reroad?sheetName=${sheet.valueName}&sheetCategoryNo=${getCategory.categoryNo}">${sheet.valueName}</a>
+												</h5>
 											</c:if>
 										</c:forEach>
 									</div>
@@ -61,8 +64,9 @@ $(document).ready(function(){
 						</div>
 						<br>
 						</div>
+						</div>
 					</c:forEach>	
-				</div>
+				
 				<!-- 비품 품의서 리스트  끝 -->
 
 			</div>
