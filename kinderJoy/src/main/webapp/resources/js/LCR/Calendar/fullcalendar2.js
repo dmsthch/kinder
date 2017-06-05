@@ -11353,7 +11353,7 @@ var Calendar = FC.Calendar = Class.extend({
 		this.renderView(viewName);
 	},
 
-
+//한달전 체크
 	prev: function() {
 		var prevInfo = this.view.buildPrevDateProfile(this.currentDate);
 

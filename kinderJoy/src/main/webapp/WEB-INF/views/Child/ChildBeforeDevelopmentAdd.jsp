@@ -9,6 +9,13 @@
 <c:import url="../module/importCSS.jsp"></c:import>
 <c:import url="./nav/SideNav.jsp"></c:import>
 <c:import url="../module/navbar.jsp"></c:import>
+<script>
+$(document).ready(function(){
+	$('#ChildManagement').attr('class','active');
+
+	
+})
+</script>
 </head>
 <body class="components-page">
 <div class="wrapper">
@@ -19,9 +26,7 @@
 					<div class="card">
 						<div class="card-header" data-background-color="green">
 							<h4 class="title">발달평가 대상 선택</h4>
-							
-							
-								
+													
 						</div>
 						
 						<div class="card-content table-responsive ">

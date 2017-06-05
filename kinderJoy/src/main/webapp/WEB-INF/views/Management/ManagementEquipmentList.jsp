@@ -29,13 +29,6 @@
     <script src="https://swisnl.github.io/jQuery-contextMenu/js/main.js" type="text/javascript"></script>
 
 <style>
-@font-face{
-	font-family: 'koverwatch';
-	src: url(fonts/koverwatch.ttf) format('truetype');
-}
-body {
-	font-family: koverwatch
-}
 button {
 	background-color: white;
  }
@@ -61,9 +54,9 @@ $(document).ready(function(){
 			<div class="container-fluid">
 			
 				<form action="${pageContext.request.contextPath}/Management">
-					<input type="hidden" name="test" value="${test}"/>
-					<input type="date" name="testDay" value="${testDay}"/>
-					<input type="date" name="testDay2" value="${testDay2}"/>
+					<input type="hidden" name="managementEquipmentPageValue" value="${managementEquipmentPageValue}"/>
+					<input type="date" name="startDay" value="${startDay}"/>
+					<input type="date" name="fanalDay" value="${fanalDay}"/>
 					<input type="submit" value="검색"/>
 				</form>
 				<div>
@@ -102,9 +95,8 @@ $(document).ready(function(){
 						</tbody>
 					</table>
 					<!--  -->
-					<div>총 구매금액1</div>
-					<div id="totalValue">
-							  </div>
+					<div>총 구매금액</div>
+					<div id="totalValue"></div>
 	                        </div>
 	                    </div>
 	                </div>

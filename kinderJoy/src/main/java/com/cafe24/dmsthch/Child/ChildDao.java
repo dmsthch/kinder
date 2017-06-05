@@ -190,7 +190,7 @@ public class ChildDao {
         return sqlSessionTemplate.insert("com.cafe24.dmsthch.Child.ChildMapper.insertClass", childclass);
     }
 	
-	//전체 리스ㅌ
+	//전체 리스트
 	public List<Child> getChildList(String license ,int currentPage, int pagePerRow) {
 	  	Map<String,Object> map = new  HashMap<String,Object>();
 
@@ -199,7 +199,7 @@ public class ChildDao {
 	   	map.put("pagePerRow", pagePerRow);
 	    return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getChildList",map);
 	}
-	//조건 ㅣㄹ;트스
+	//조건 리스트
 	public List<Child> getSeveralList(String license, int teacherNo, int currentPage, int pagePerRow ){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("license", license);

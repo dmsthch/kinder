@@ -63,7 +63,7 @@
 <body>
 	    <div class="main-panel">
 	        <div class="content">
-	            <div class="container-fluid">2
+	            <div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card">

@@ -6,24 +6,65 @@
 <head>
 <title>Insert title here</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+  	<!-- JS Link -->
+	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
+	<!-- CSS Link -->
+	<c:import url="/WEB-INF/views/module/importCSS.jsp"></c:import>
+	<!-- navbar -->
+	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
+	<!-- 사이드메뉴바 BEGIN -->
+	<c:import url="./side.jsp"></c:import>
+
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/license" method="post">
-	<div class="form-group">
-	<label class="control-label col-sm-2">라이센스 발급받기</label>
-      <div class="col-sm-10">              
-        <input type="submit" id="licensecheckbutton" value="라이선스"/>
-      </div>
-      
-      <c:if test="${null != licenseKey}">
-      <c:out value="발급된 라이선스 : ${licenseKey}"></c:out>
-      </c:if>      		
 
-    </div>
-	</form>
+
+
+
+<div class="wrapper">
+
+	    <div class="main-panel">
+
+	        <div class="content">
+	            <div class="container-fluid">
+	                <div class="row">
+	                    <div class="col-md-12">
+	                        <div class="card">
+	                            <div class="card-header" data-background-color="orange">
+	                                <h4 class="title">교원 명단</h4>
+	                                <p class="category">현재 활동중인 교직원 명단입니다.</p>
+	                            </div>                            
+	                            <div class="card-content table-responsive">
+	                                <table class="table">
+	                                    
+	                                    <form action="${pageContext.request.contextPath}/license" method="post">
+										<div class="form-group">
+										<label class="control-label col-sm-2">라이센스 발급받기</label>
+									      <div class="col-sm-10">              
+									        <input type="submit" id="licensecheckbutton" value="라이선스"/>
+									      </div>
+									      
+									      <c:if test="${null != licenseKey}">
+									      <c:out value="발급된 라이선스 : ${licenseKey}"></c:out>
+									      </c:if>      		
+									
+									    </div>
+										</form>
+	                                    
+	                                </table>
+
+	                            </div>
+	                        </div>
+	                    </div>
+
+	                </div>
+	            </div>
+	        </div>
+		
+		<c:import url="./footer.jsp"></c:import>
+
+	    </div>
+	</div>
+
 </body>
 </html>

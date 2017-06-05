@@ -14,6 +14,12 @@
 </style>
 <script>
 $(document).ready(function(){
+	$('#ChildManagement').attr('class','active');
+
+	
+})
+
+$(document).ready(function(){
 	var developmentGroup = ${result.developmentGroup};
 	console.log(developmentGroup);
 	$('#opserveReference'+developmentGroup).attr('checked',true);

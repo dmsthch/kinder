@@ -85,14 +85,14 @@ public class EquipmentController {
 		model.addAttribute("equipmentList",equipmentList);*/
 		return "Equipment/Equipment";
 	}
-	@RequestMapping(value = "test01", method = RequestMethod.GET)
+	@RequestMapping(value = "EquipmentRequest", method = RequestMethod.GET)
 	public String test05(HttpSession session
 						,Model model){
 		String teacherName = (String)session.getAttribute("teacherName");
 		int teacherNo = (Integer)session.getAttribute("teacherNo");
 		model.addAttribute("teacherName",teacherName);
 		model.addAttribute("teacherNo",teacherNo);
-		return "Equipment/NewFile";
+		return "Equipment/EquipmentRequest";
 	}
 	@RequestMapping(value = "testList", method = RequestMethod.GET)
 	public String test06(Model model){

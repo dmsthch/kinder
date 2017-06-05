@@ -3,6 +3,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cafe24.dmsthch.Teacher.TeacherMapper">
+<!-- 편성표!!!표!!! -->
+<!-- 티쳐포메이션의 넘버를  티쳐넘버에 = 연산자로 대입시키고 값이 여러개이기 때문에 파라미터타입과 리저트타입이 티쳐이다 -->
+<select id="takeFormList" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+
+SELECT
+ t.teacher_name AS teacherName
+ ,c.class_name AS className
+ 
+FROM
+teacher_formation a
+
+	INNER JOIN teacher t
+	ON t.teacher_no = a.teacher_no
+	
+	INNER JOIN kid_class c
+	ON c.class_no = a.class_no
+	
+where
+a.license_kindergarten = #{licenseKindergarten}
+
+</select>
 
 <update id="updateTeacher" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
 UPDATE teacher 
