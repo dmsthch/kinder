@@ -155,9 +155,8 @@ $(document).ready(function(){
 								    <li>
 						    		<a href="${pageContext.request.contextPath}/KidCommuteView"> 유아 출석 보기 </a>
 								    </li>
-								    
-								    <li class="dropdown" id="ChildManagement">
-					                	<a class="dropdown-toggle" type="button" data-toggle="dropdown" style="cursor:pointer;">
+								    <li class="dropdown-submenu">
+				                		<a style="cursor:pointer;">
 					                       <p>유아 발달평가 <span class="caret"></span></p>
 				                        </a>
 						    				<ul class="pull-right dropdown-menu navEducationProject" id="day" style="margin-right:-62%; margin-top:-20%" >

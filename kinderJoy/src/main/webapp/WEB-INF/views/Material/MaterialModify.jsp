@@ -51,74 +51,79 @@
     <div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
-			
-				<div class="row">
-					<div class="text-center"><h1>수정</h1></div>
-				</div><br/>
+				<div class="col-md-12">
+			        <div class="card">
+			        	<div class="card-header" data-background-color="purple">
+		                    <h4 class="title">수정</h4>
+		                    <p class="category">MaterialModify</p>
+		            	</div>
 				
-				<div class="row">
-					<form action="${pageContext.request.contextPath}/MaterialModify" method="post" enctype="multipart/form-data">
-						<div class="form-group">
-						    <div class="row">    
-						        <div class="col-xs-8 col-xs-offset-2">
-								    <div class="input-group">
-						                <div class="input-group-btn search-panel">
-						                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-						                    	<span id="category">카테고리 </span><span class="caret"></span>
-						                    </button>
-						                    <ul class="dropdown-menu" role="menu">
-							                    <c:forEach var="boardCategory" items="${boardCategoryList}">
-							                    	<li><a href="${boardCategory.categoryNo}">${boardCategory.categoryName}</a></li>
-							                    </c:forEach>
-						                    </ul>
-						                </div>
-						                <input type="text" name="boardTitle" value="${board.boardTitle}" class="form-control" placeholder="제목을 입력하세요 ...">
-						                <input type="hidden" name="licenseKindergarten" value="${board.licenseKindergarten }" id="licenseKindergarten" readonly>
-						                <input type="hidden" name="boardNo" value="${board.boardNo }" id="boardNo" readonly>
-						        		<input type="hidden" name="teacherNo" value="${board.teacherNo}" id="teacherNo" readonly>
-						        		<input type="hidden" name="boardCategoryNo" value="${board.boardCategoryNo }" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input --> 
-						                
-						            </div>
-						        </div>
-							</div>
+						<div class="row">
+							<form action="${pageContext.request.contextPath}/MaterialModify" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+								    <div class="row">    
+								        <div class="col-xs-8 col-xs-offset-2">
+										    <div class="input-group">
+								                <div class="input-group-btn search-panel">
+								                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								                    	<span id="category">카테고리 </span><span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu" role="menu">
+									                    <c:forEach var="boardCategory" items="${boardCategoryList}">
+									                    	<li><a href="${boardCategory.categoryNo}">${boardCategory.categoryName}</a></li>
+									                    </c:forEach>
+								                    </ul>
+								                </div>
+								                <input type="text" name="boardTitle" value="${board.boardTitle}" class="form-control" placeholder="제목을 입력하세요 ...">
+								                <input type="hidden" name="licenseKindergarten" value="${board.licenseKindergarten }" id="licenseKindergarten" readonly>
+								                <input type="hidden" name="boardNo" value="${board.boardNo }" id="boardNo" readonly>
+								        		<input type="hidden" name="teacherNo" value="${board.teacherNo}" id="teacherNo" readonly>
+								        		<input type="hidden" name="boardCategoryNo" value="${board.boardCategoryNo }" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input --> 
+								                
+								            </div>
+								        </div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="row">    
+								        <div class="col-xs-8 col-xs-offset-2">
+									    	<div class="input-group col-sm-12">
+								                <textarea name="boardContent" rows="15" class="form-control">${board.boardContent}</textarea>
+								            </div>
+								        </div>
+									</div>
+								</div>
+								
+								<!-- 파일 -->
+								<div class="form-group">
+									<div class="row">    
+								        <div class="col-xs-3 col-xs-offset-2">
+									    	<div class="input-group col-sm-12">
+								                <input type="text" value="file : ${originalName }" readonly >
+								            </div>
+								        </div>
+									</div>
+								</div>
+								 
+								<div class="form-group">
+									<div class="row">    
+								        <div class="col-xs-8 col-xs-offset-2">
+								        	<div class="col-sm-offset-4 col-sm-2">
+												<button type="reset" class="btn btn-warning">Reset</button>
+								        	</div>
+								        	<div class="col-sm-2">
+												<button type="submit" class="btn btn-success">Submit</button>
+								        	</div>
+								        </div>
+									</div>
+								</div>
+							</form>
+						
 						</div>
 						
-						<div class="form-group">
-							<div class="row">    
-						        <div class="col-xs-8 col-xs-offset-2">
-							    	<div class="input-group col-sm-12">
-						                <textarea name="boardContent" rows="15" class="form-control">${board.boardContent}</textarea>
-						            </div>
-						        </div>
-							</div>
-						</div>
-						
-						<!-- 파일 -->
-						<div class="form-group">
-							<div class="row">    
-						        <div class="col-xs-3 col-xs-offset-2">
-							    	<div class="input-group col-sm-12">
-						                <input type="text" value="file : ${originalName }" readonly >
-						            </div>
-						        </div>
-							</div>
-						</div>
-						 
-						<div class="form-group">
-							<div class="row">    
-						        <div class="col-xs-8 col-xs-offset-2">
-						        	<div class="col-sm-offset-4 col-sm-2">
-										<button type="reset" class="btn btn-warning">Reset</button>
-						        	</div>
-						        	<div class="col-sm-2">
-										<button type="submit" class="btn btn-success">Submit</button>
-						        	</div>
-						        </div>
-							</div>
-						</div>
-					</form>
-				
-				</div>							
+					</div>
+				</div>	<!-- card End -->				
 				
 			</div>
 		</div>

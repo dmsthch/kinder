@@ -27,6 +27,7 @@ public class EducationProjectDao {
 		eduForm.setFormCountCol(formCountCol);
 		eduForm.setFormTitle(formTitle);
 		String re = null;
+		
 		if(sqlSessionTemplate.insert("com.cafe24.dmsthch.EducationProject.EducationProjectMapper.formAdd", eduForm) == 1){
 			re = "입력완료.";
 		}else{
