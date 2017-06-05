@@ -49,10 +49,10 @@ public class EquipmentController {
 		
 		dao.addEquipmentRequest(teacherNo, categoryNo, requestAmount, requestName, requestDate, requestPrice, requestStant, requestReason, session);
 		
-		return "redirect:/test01";
+		return "redirect:/EquipmentRequest";
 	}
 	
-	@RequestMapping(value = "testListSave", method = RequestMethod.POST)
+	@RequestMapping(value = "EquipmentRequestListRemove", method = RequestMethod.POST)
 	@ResponseBody
 	public int testListSave(@RequestParam(value="textIP") String textIP
 								,HttpSession session){
@@ -85,26 +85,25 @@ public class EquipmentController {
 		model.addAttribute("equipmentList",equipmentList);*/
 		return "Equipment/Equipment";
 	}
-	@RequestMapping(value = "test01", method = RequestMethod.GET)
+	@RequestMapping(value = "EquipmentRequest", method = RequestMethod.GET)
 	public String test05(HttpSession session
 						,Model model){
 		String teacherName = (String)session.getAttribute("teacherName");
 		int teacherNo = (Integer)session.getAttribute("teacherNo");
 		model.addAttribute("teacherName",teacherName);
 		model.addAttribute("teacherNo",teacherNo);
-		return "Equipment/NewFile";
+		return "Equipment/EquipmentRequest";
 	}
-	@RequestMapping(value = "testList", method = RequestMethod.GET)
+	@RequestMapping(value = "EquipmentRequestList", method = RequestMethod.GET)
 	public String test06(Model model){
 		List<EquipmentRequest> equipmentRequest = dao.selectEqipmentRequest();
 		model.addAttribute("equipmentRequest",equipmentRequest);
-		return "Equipment/testList";
+		return "Equipment/EquipmentRequestList";
 	}
 	@RequestMapping(value = "sheet", method = RequestMethod.GET)
-	public String sheet(Model model){
-		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
-		System.out.println(getCategory + "getCategory »Æ¿Œ");
-		model.addAttribute("getCategory", getCategory);
+	public String sheet(Model model
+						,@RequestParam(value="sheetNo") String sheetNo){
+		model.addAttribute("sheetNo",sheetNo);
 		return "Equipment/sheet";
 	}
 /*	@RequestMapping(value = "test01", method = RequestMethod.GET)
@@ -146,8 +145,12 @@ public class EquipmentController {
 							, @RequestParam(value="sheetCategory") String sheetCategory
 							, HttpSession session){
 		
-		dao.addEquementSheet(dataArray, mergeArray, borderArray, countRow, countCol, sheetCategory, sheetName, session);
-		
+		int gategoryNoTest = dao.selectSheetValueNo(session, sheetCategory, sheetName);
+		if(gategoryNoTest == 0) {
+			dao.addEquementSheet(dataArray, mergeArray, borderArray, countRow, countCol, sheetCategory, sheetName, session);
+		} else {
+			dao.updateSheet(session, mergeArray, dataArray, borderArray, countRow, countCol, sheetCategory, sheetName);
+		}	
 		return "Equipment/sheet";
 	}
 	@RequestMapping(value = "reroad", method = RequestMethod.GET)

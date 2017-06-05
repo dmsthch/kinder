@@ -73,6 +73,7 @@ public class EducationProjectController {
 		System.out.println(formOrder + "<<<<<<formOrder");
 		String re = null;
 		if(formOrder==0){
+			System.out.println("üũ");
 			re = dao.formAdd(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten,formTitle);
 		}else{
 			re = dao.formUpdate(formVal, formMerge, formBorders, formCountRow, formCountCol, licenseKindergarten, formTitle, formOrder);

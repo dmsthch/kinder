@@ -44,7 +44,8 @@ $(document).ready(function() {
 		header: {
 			left: 'prev,next today',
 			center: 'title',
-			right: 'month'
+			/* right: 'month' */
+			right: 'test'
 			/* right: 'month,agendaWeek,agendaDay' */
 		},
 		//일이나 주 이름을 클릭해서 탐색할수있다. 

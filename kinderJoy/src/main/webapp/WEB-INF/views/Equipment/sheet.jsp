@@ -39,35 +39,20 @@
 		<div class="content">
 			<div class="container-fluid">	
 			
-<!-- 	<div class="btn-group">
-	  <button type="button" class="btn btn-primary">:: 비품카테고리 ::</button>
-	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-	    <span class="caret"></span>
-	  </button>
-	  <ul class="dropdown-menu" role="menu">
-	    <li><a href="#">교재,교구</a></li>
-	    <li><a href="#">사무용품</a></li>
-	    <li><a href="#">체육용품</a></li>
-	    <li><a href="#">도서목록</a></li>
-	    <li><a href="#">기타</a></li>
-	  </ul>
-	</div> -->
-	<div class="input-group-btn search-panel">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100px;">
-			<span id="category">카테고리 </span><span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu">
-			<c:forEach var="a" items="${getCategory}">
-				<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
-			</c:forEach>
-		</ul>
+	<input type="hidden" name="boardCategoryNo" value="${sheetNo}" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
+	<div class="row">
+		<div class="col-sm-1">
+			<button class="form-control" id="btTest">저장</button>
+		</div>
+		<div class="col-sm-3">
+		<input type="text" class="form-control" id="sheetName"/>
+		</div>
+		<div class="col-sm-8">
+
+		</div>
 	</div>
-	<input type="hidden" name="boardCategoryNo" value="0" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
-	<button id="btTest">save</button>
-	<div>
-		제목 :
-		<input type="text" id="sheetName"/>
-	</div>
+	
+
 	<div class="wrapper" style="margin-top: 20px;">
 		<div id="example1"></div>
 	</div>
@@ -76,18 +61,6 @@
 	
 	
 </div></div></div></div>
-<script>
-$(document).ready(function(e){
-    $('.search-panel .dropdown-menu').find('a').click(function(e) {
-		e.preventDefault();
-		var param = $(this).attr("href").replace("#",""); //해당 버튼의 href속성에서 #을 제거한 값
-		console.log(param + 'param값 확인');
-		var category = $(this).text(); //해당 버튼의 내용
-		$('.search-panel span#category').text(category); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
-		$('#boardCategoryNo').val(param);
-	});
-});
-</script>
 <script data-jsfiddle="example1">
 
 
@@ -100,7 +73,7 @@ $(document).ready(function(e){
 	  
 		hot = new Handsontable(container, {
 // 			data: testData,    //데이터 가져오기
-			colWidths: [47],
+//			colWidths: [47],
 
 			startRows: 30,
 			startCols: 20,
@@ -108,8 +81,8 @@ $(document).ready(function(e){
 			rowHeaders : true,
 			colHeaders : true,
 			
-// 			manualRowResize : true,
-// 			manualColumnResize : true,
+ 			manualRowResize : true,
+ 			manualColumnResize : true,
 
 			mergeCells : true,
 			customBorders: true,

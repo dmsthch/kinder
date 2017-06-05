@@ -20,13 +20,13 @@
 <c:import url="../module/navbar.jsp"></c:import>
 
 <style>
-@font-face{
+/* @font-face{
 	font-family: 'koverwatch';
 	src: url(fonts/koverwatch.ttf) format('truetype');
-}
-body {
+} */
+/* body {
 	font-family: koverwatch
-}
+} */
 /* .form-control{
 	width:400px;
 } */
@@ -48,7 +48,7 @@ $(document).ready(function(){
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card">
-	                            <div class="card-header" data-background-color="blue">
+	                            <div class="card-header" data-background-color="red">
 	                                <h4 class="title">비품 신청</h4>
 									<p class="category">EQUIPMENT REQUEST</p>
 	                            </div>
@@ -137,7 +137,7 @@ $(document).ready(function(){
 	                                        </div>
 	                                    </div>
 
-	                                    <button type="submit" class="btn btn-info pull-right">신청하기</button>
+	                                    <button type="submit" class="btn btn-default pull-right">신청하기</button>
 	                                    <div class="clearfix"></div>
 	                                </form>
 	                            </div>

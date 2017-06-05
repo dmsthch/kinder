@@ -84,6 +84,7 @@ public class ManagementController {
 			    model.addAttribute("managementList",managementList);
 			    model.addAttribute("managementEquipmentPageValue",managementEquipmentPageValue);
 			    model.addAttribute("startDay",startDay);
+			    model.addAttribute("fanalDay",startDay);
 			} else {
 			    List<ManagementList> managementList= dao.selectManagementCategoryDayList(startDay,fanalDay,managementEquipmentPageValue);
 			    model.addAttribute("managementList",managementList);

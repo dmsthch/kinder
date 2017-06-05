@@ -31,19 +31,8 @@
     <script src="js/KSS/jquery.ui.position.min.js" type="text/javascript"></script>
     <script src="https://swisnl.github.io/jQuery-contextMenu/js/main.js" type="text/javascript"></script>
 
-<!--  -->
-<style>
-@font-face{
-	font-family: 'koverwatch';
-	src: url(fonts/koverwatch.ttf) format('truetype');
-}
-body {
-	font-family: koverwatch
-}
-/* .form-control{
-	width:400px;
-} */
-</style>
+
+
 
 <script>
 
@@ -122,7 +111,7 @@ $(function(){
 				var textIP = $(this).find('.textIP').val();
 				console.log(textIP);
 		 	    jQuery.ajax({
-		 	        url: '${pageContext.request.contextPath}/testListSave',
+		 	        url: '${pageContext.request.contextPath}/EquipmentRequestListRemove',
 		 	        type: 'POST',
 		 	        data:{"textIP":textIP},
 		 	        contentType: 'application/x-www-form-urlencoded; charset=UTF-8', 
@@ -131,7 +120,7 @@ $(function(){
 		 	            if (result == 1){
 		 	                console.log('데이터 보내기 성공');
 		 	                alert('삭제되었습니다.');
-		 	               location.href="${pageContext.request.contextPath}/testList"
+		 	               location.href="${pageContext.request.contextPath}/EquipmentRequestList"
 		 	            }else{
 		 	            	alert('삭제에 실패하였습니다.');
 		 	            }
@@ -158,7 +147,7 @@ $(function(){
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card card-plain">
-	                            <div class="card-header" data-background-color="purple">
+	                            <div class="card-header" data-background-color="red">
 	                                <h4 class="title">비품 건의 리스트</h4>
 	                                <p class="category">EQUIPMENT REQUEST LIST</p>
 	                            </div>
