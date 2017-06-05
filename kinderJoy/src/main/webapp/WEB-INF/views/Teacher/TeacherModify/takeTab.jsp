@@ -4,7 +4,7 @@
 
 <html>
 <head>
-     
+     <title>교원 편성하기</title>
   	<!-- JS Link -->
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
 	<!-- CSS Link -->
@@ -33,6 +33,7 @@
  		var selectClassName = "?";
  		var selectTeacherName = "?";
  		
+ 		
  		$('.submit').click(function(){
  	 		/* var val = $("select option:selected").val();
  	 		alert(val+"<-선택값") */
@@ -57,6 +58,13 @@
 		
  	});
  	</script>
+ 	
+ 		<script>
+	$(document).ready(function(){
+		$('#takeForm').attr('class','active');
+		$('#sidetakeForm').attr('style','background-color:#3DB7CC');
+	});
+	</script>
 
 </head>
 
@@ -67,9 +75,9 @@
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card">
-	                            <div class="card-header" data-background-color="orange">
-	                                <h4 class="title">교원 명단</h4>
-	                                <p class="category">현재 활동중인 교직원 명단입니다.</p>
+	                            <div class="card-header" data-background-color="blue">
+	                                <h4 class="title">교원 편성하기</h4>
+	                                <p class="category">각 반에 선생님들을 편성해주세요.</p>
 	                            </div>                            
 									<c:forEach begin="3" end="5" var="age">
 										
@@ -102,7 +110,9 @@
 																	   <div class="selectcontrol">
 																	   <select class="jsel" name="teacherNo">
 																		   <c:forEach var="TT" items="${takeTeacher}">
-																		   <!--   -->       <option value="${TT.teacherNo}">${TT.teacherName}</option>
+																		   
+																		   <option value="${TT.teacherNo}">${TT.teacherName}</option>
+
 																		   </c:forEach>
 																	   </select>
 																	   </div>

@@ -205,6 +205,40 @@ $(document).ready(function(){
 			}, 3000);
 		}
 	});
+	var session;
+	var test;
+	$.ajax({
+		url : '${pageContext.request.contextPath}/sideSession',
+		type : 'GET',
+		dataType : 'JSON',
+		success : function(data){
+			session = data;
+			console.log(data.teacherLevel+"ddddd");
+			test = data.teacherLevel;
+			console.log(test+"<<<테스트중2");
+			
+			if(test == '원장'){
+				
+				var insertHtml = '<li id="takeForm">'
+                   			+ '<a id="sidetakeForm" href="${pageContext.request.contextPath}/takeForm">'
+                			+ '<i class="material-icons">people</i>'
+               				+'<p>교원 편성하기</p></a></li>';
+				
+				$('#kyotable').after(insertHtml);
+				/* 교원 리스트 다음에 교원 편성하기를 넣음 */
+			}
+			
+		},
+	    error : function(request, status, error) {
+			alert(status);
+			alert(error);
+		}
+		
+	});
+	console.log(test+"<<<테스트중1");
+	
+	
+	
 });	
 	</script>
 	
@@ -236,19 +270,20 @@ $(document).ready(function(){
 	                    </a>
 	                </li>
 	                
-	                <li id="takeForm">
-	                    <a id="sidetakeForm" href="${pageContext.request.contextPath}/takeForm">
-	                        <i class="material-icons">people</i>
-	                        <p>교원 편성하기</p>
-	                    </a>
-	                </li>
+	               
 	                
+	               	<li id="testRomi">
+	               		
+	               	</li>
+	                
+
 	                <li id="takeFormList">
-	                    <a id="sidetakeForm" href="${pageContext.request.contextPath}/takeFormList">
+	                    <a id="sidetakeFormList" href="${pageContext.request.contextPath}/takeFormList">
 	                        <i class="material-icons">people</i>
 	                        <p>교원 편성표</p>
 	                    </a>
 	                </li>
+
 	                
 	                <li id="license">
 	                    <a id="sideLicense" href="${pageContext.request.contextPath}/license">

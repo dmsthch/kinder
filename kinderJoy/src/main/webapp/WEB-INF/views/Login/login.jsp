@@ -130,8 +130,8 @@ div.tab button.active {
 			
 			<div class="modal-body">
 			<!-- 모달 바디  -->
-			<input type="text" id="teacherId" name="teacherId" value="test03">
-			<input type="password" name="teacherPw" value="test03">
+			<input type="text" id="teacherId" name="teacherId" value="test02">
+			<input type="password" name="teacherPw" value="test02">
 			<input type="submit" name="submit" value="로그인">`
 			<!-- 모달 바디 END -->
 			</div>
