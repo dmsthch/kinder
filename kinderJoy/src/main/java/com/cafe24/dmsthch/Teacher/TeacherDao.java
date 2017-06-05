@@ -98,4 +98,19 @@ public class TeacherDao {
 		System.out.println("수정확메서드호출_Dao");
 		return sql.update("com.cafe24.dmsthch.Teacher.TeacherMapper.updateTeacher", teacher);
 	}
+	
+	//교원 인서트
+	public int pyeonseong(TeacherFormation TF) {
+		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.pyeonseong", TF);
+	}
+	
+	//교원표!!!표! 차인표!
+	public List<Teacher> takeFormList(String string) {
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeFormList", string);
+	}
+	
+	//교원표!!!표! 차인표!
+	public List<ChildClass> takeFormList2(String string) {
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeFormList", string);
+	}
 }

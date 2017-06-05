@@ -21,24 +21,78 @@ import com.cafe24.dmsthch.Management.ManagementYesterDayEquipment;
 public class ManagementController {
 	@Autowired
 	ManagementDao dao;
-	@RequestMapping(value = "test11", method = RequestMethod.GET)
+	@RequestMapping(value = "Management", method = RequestMethod.GET)
 	public String test10(Model model
-						,@RequestParam(value="test", required=false, defaultValue="1") String test
-						,@RequestParam(value="testDay", required=false, defaultValue="") String testDay
-						,@RequestParam(value="testDay2", required=false, defaultValue="") String testDay2){
+						,@RequestParam(value="managementEquipmentPageValue", required=false, defaultValue="6") String managementEquipmentPageValue
+						,@RequestParam(value="startDay", required=false, defaultValue="") String startDay
+						,@RequestParam(value="fanalDay", required=false, defaultValue="") String fanalDay){
 		System.out.println("ManagementController test11 메서드 실행");
-		System.out.println(test);
-		if(test.equals("1")) {
-			if(testDay.equals("")) {
+		System.out.println(managementEquipmentPageValue);
+		if(managementEquipmentPageValue.equals("6")) {
+			if(startDay.equals("")||fanalDay.equals("")) {
 			    Calendar calendar = new GregorianCalendar(Locale.KOREA);
 			    int nYear = calendar.get(Calendar.YEAR);
 			    int nMonth = calendar.get(Calendar.MONTH) + 1;
-			    int nDay = calendar.get(Calendar.DAY_OF_MONTH);
-			    testDay = nYear + "-" + nMonth + "-" + nDay;
-			    List<ManagementList> managementList= dao.selectManagementDayList(testDay);
+			    if(nMonth < 10) {   	
+			    	int nDay = calendar.get(Calendar.DAY_OF_MONTH);				    
+				    if(nDay < 10) {
+				    	startDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		startDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
+			    } else {
+				    int nDay = calendar.get(Calendar.DAY_OF_MONTH);
+				    if(nDay < 10) {
+				    	startDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		startDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
+			    }
+			    List<ManagementList> managementList= dao.selectManagementDayList(startDay,startDay);
 			    model.addAttribute("managementList",managementList);
+			    model.addAttribute("managementEquipmentPageValue",managementEquipmentPageValue);
+			    model.addAttribute("startDay",startDay);
+			    model.addAttribute("fanalDay",startDay);
+			} else {
+			    List<ManagementList> managementList= dao.selectManagementDayList(startDay,fanalDay);
+			    model.addAttribute("managementList",managementList);
+			    model.addAttribute("managementEquipmentPageValue",managementEquipmentPageValue);
+			    model.addAttribute("startDay",startDay);
+			    model.addAttribute("fanalDay",fanalDay);
+			}
+		} else {
+			if(startDay.equals("")||fanalDay.equals("")) {
+			    Calendar calendar = new GregorianCalendar(Locale.KOREA);
+			    int nYear = calendar.get(Calendar.YEAR);
+			    int nMonth = calendar.get(Calendar.MONTH) + 1;
+			    if(nMonth < 10) {   	
+			    	int nDay = calendar.get(Calendar.DAY_OF_MONTH);				    
+				    if(nDay < 10) {
+				    	startDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		startDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
+			    } else {
+				    int nDay = calendar.get(Calendar.DAY_OF_MONTH);
+				    if(nDay < 10) {
+				    	startDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	} else {
+			    		startDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    	}
+			    }
+			    List<ManagementList> managementList= dao.selectManagementCategoryDayList(startDay,startDay,managementEquipmentPageValue);
+			    model.addAttribute("managementList",managementList);
+			    model.addAttribute("managementEquipmentPageValue",managementEquipmentPageValue);
+			    model.addAttribute("startDay",startDay);
+			    model.addAttribute("fanalDay",startDay);
+			} else {
+			    List<ManagementList> managementList= dao.selectManagementCategoryDayList(startDay,fanalDay,managementEquipmentPageValue);
+			    model.addAttribute("managementList",managementList);
+			    model.addAttribute("managementEquipmentPageValue",managementEquipmentPageValue);
+			    model.addAttribute("startDay",startDay);
+			    model.addAttribute("fanalDay",fanalDay);
 			}
 		}
-		return "Management/NewFile";
+		return "Management/ManagementEquipmentList";
 	}
 }

@@ -3,6 +3,81 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
+  
+  	<!-- 발달평가 하나 보기 -->
+  	<select id="getDevelopmentDetailsOne" resultType="java.util.Map" parameterType="java.lang.String">
+  		SELECT
+			d.development_group AS developmentGroup
+			,d.development_title AS developmentTitle
+			,d.development_case AS developmentCase
+			,d.development_day AS developmentDay
+			,k.kid_name AS kidName
+			,k.kid_gender AS kidGender
+			,t.teacher_name AS teacherName
+			,t.teacher_id AS teacherID
+			,c.class_name AS className
+			,c.class_age AS classAge
+			,o.opserve_content AS opserveContent
+			,o.opserve_reference_1 AS opserveReference1
+			,o.opserve_reference_2 AS opserveReference2
+			,o.opserve_reference_3 AS opserveReference3
+		FROM development_details d 
+		INNER JOIN development dev
+		ON dev.development_no = d.development_no
+		INNER JOIN kid_formation kf
+		ON kf.kid_formation_no = dev.kid_formation_no
+		INNER JOIN kid k
+		ON k.kid_no = kf.kid_no
+		INNER JOIN teacher_formation tf
+		ON tf.teacher_formation_no = dev.teacher_formation_no
+		INNER JOIN teacher t
+		ON t.teacher_no = tf.teacher_no
+		INNER JOIN kid_class c
+		ON c.class_no = kf.class_no
+		INNER JOIN development_opserve o
+		ON o.opserve_no = d.opserve_no
+		WHERE detailes_no = #{detailesNo}
+  	</select>
+  
+  	<!-- 발달평가 목록 -->
+  	<select id="getDevelopmentDetails" resultType="java.util.Map" parameterType="java.util.Map">
+  		SELECT 
+			d.detailes_no AS detailesNo
+			,d.development_title AS developmentTitle
+			,c.class_name AS className
+			,k.kid_no AS kidNo
+		FROM development_details d
+		INNER JOIN development dev
+		ON dev.development_no = d.development_no
+		INNER JOIN kid_formation f
+		ON f.kid_formation_no = dev.kid_formation_no
+		INNER JOIN kid_class c
+		ON c.class_no = f.class_no
+		INNER JOIN kid k
+		ON k.kid_no = f.kid_no
+		WHERE d.license_kindergarten = #{licenseKindergarten}
+		<if test="searchAge!=''">
+			AND c.class_age = #{searchAge}
+		</if>
+		<if test="searchType!='' ">
+			<if test="searchType.equals('kidName')">
+				 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') 
+			</if>
+			<if test="searchType.equals('className')">
+				AND c.class_name LIKE CONCAT('%',#{searchVal},'%')
+			</if>
+		</if>
+		<if test=" searchType == '' and searchVal != ''">
+			 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') OR c.class_name LIKE CONCAT('%',#{searchVal},'%')
+			 OR d.development_title LIKE CONCAT('%',#{searchVal},'%')
+		</if>
+
+	
+	ORDER by k.kid_name ASC
+	LIMIT #{startRow}, #{onePageRow};
+		
+  	</select>
+  
 	<!-- 발달평가 상세 입력하기 -->
 	<insert id="addDevelopmentDetails" parameterType="com.cafe24.dmsthch.Child.ChildDevelopmentDetails">
 		INSERT INTO development_details(

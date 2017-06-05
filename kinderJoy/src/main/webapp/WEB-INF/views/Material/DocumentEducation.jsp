@@ -58,11 +58,13 @@
     <div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
-			
-				<div class="row">
-					<div class="text-center"><h1>자료실</h1></div>
-				</div><br/>
-								
+				<div class="col-md-12">
+			        <div class="card">
+			        	<div class="card-header" data-background-color="purple">
+		                    <h4 class="title">자료실</h4>
+		                    <p class="category">DocumentEducation</p>
+		                </div>
+			        								
 				<div class="row">
 					<form action="${pageContext.request.contextPath}/MaterialSearch" method="post">
 						<div class="col-xs-8 col-xs-offset-2">
@@ -86,10 +88,8 @@
 				                </span>
 				            </div>
 				        </div>
-					</div>
-					</form>
-				</div><br/>
-				
+					</form>	
+				</div>			
 				<div class="row">
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<a href="${pageContext.request.contextPath}/MaterialDocumnetList?categoryNo=0">
@@ -157,7 +157,7 @@
 					</div>
 				
 				</div><!-- 바로가기 row End -->
-				
+				</div>
 				<br/>
 				<div class="row"> <!-- 자료실 미리보기 -->
 					<div class="col-sm-12">
@@ -189,89 +189,86 @@
 										</div>
 									</div>
 								</div>
-
-								<div class="card-content">
-									<div class="tab-content">
-									
-										<div class="tab-pane active" id="allList">
-											<table class="table table-hover">
-												<thead class="text-center">
-													<tr>
-														 <th>No</th>
-														 <th>제목</th>
-														 <th>작성자</th>
-														 <th>작성일</th>
-													</tr>
-												</thead>
-												<tbody>
-													<c:forEach var="board" items="${allList}">
-														<tr onClick="location.href='${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}'" style="cursor:pointer;">
-															<td>${board.boardNo }</td>
-															<td>${board.boardTitle }</td>
-															<td>${board.teacherNo }</td>
-															<td>${board.boardDay }</td>
-														</tr>
-													</c:forEach>												
-												</tbody>
-											</table>
-										</div>
-										
-										<div class="tab-pane" id="documentList">
-											<table class="table">
-												<thead class="text-center">
-													<tr>
-														 <th>No</th>
-														 <th>제목</th>
-														 <th>작성자</th>
-														 <th>작성일</th>
-													</tr>
-												</thead>
-												<tbody>
-													<c:forEach var="board" items="${documentList}">
-														<tr onClick="location.href='${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}'" style="cursor:pointer;">
-															<td>${board.boardNo }</td>
-															<td>${board.boardTitle }</td>
-															<td>${board.teacherNo }</td>
-															<td>${board.boardDay }</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
-										</div>
-										
-										<div class="tab-pane" id="educationList">
-											<table class="table">
-												<thead>
-													<tr>
-														 <th>No</th>
-														 <th>제목</th>
-														 <th>작성자</th>
-														 <th>작성일</th>
-													</tr>
-												</thead>
-												<tbody>
-													<c:forEach var="board" items="${educationList}">
-														<tr onClick="location.href='${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}'" style="cursor:pointer;">
-															<td>${board.boardNo }</td>
-															<td>${board.boardTitle }</td>
-															<td>${board.teacherNo }</td>
-															<td>${board.boardDay }</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-												
-											</table>
-										</div>
-										
-										
-									</div>
-								</div><!-- content End -->
-								
 							</div>
-						</div>
-				
-				
-				</div> <!-- 자료실 미리보기 row End -->
+							<div class="card-content">
+								<div class="tab-content">
+								
+									<div class="tab-pane active" id="allList">
+										<table class="table table-hover">
+											<thead class="text-center">
+												<tr>
+													 <th>No</th>
+													 <th>제목</th>
+													 <th>작성자</th>
+													 <th>작성일</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="board" items="${allList}">
+													<tr onClick="location.href='${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}'" style="cursor:pointer;">
+														<td>${board.boardNo }</td>
+														<td>${board.boardTitle }</td>
+														<td>${board.teacherNo }</td>
+														<td>${board.boardDay }</td>
+													</tr>
+												</c:forEach>												
+											</tbody>
+										</table>
+									</div>
+									
+									<div class="tab-pane" id="documentList">
+										<table class="table">
+											<thead class="text-center">
+												<tr>
+													 <th>No</th>
+													 <th>제목</th>
+													 <th>작성자</th>
+													 <th>작성일</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="board" items="${documentList}">
+													<tr onClick="location.href='${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}'" style="cursor:pointer;">
+														<td>${board.boardNo }</td>
+														<td>${board.boardTitle }</td>
+														<td>${board.teacherNo }</td>
+														<td>${board.boardDay }</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+									
+									<div class="tab-pane" id="educationList">
+										<table class="table">
+											<thead>
+												<tr>
+													 <th>No</th>
+													 <th>제목</th>
+													 <th>작성자</th>
+													 <th>작성일</th>
+												</tr>
+											</thead>
+											<tbody>
+												<c:forEach var="board" items="${educationList}">
+													<tr onClick="location.href='${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}'" style="cursor:pointer;">
+														<td>${board.boardNo }</td>
+														<td>${board.boardTitle }</td>
+														<td>${board.teacherNo }</td>
+														<td>${board.boardDay }</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+											
+										</table>
+									</div>
+									
+									
+								</div>
+							</div><!-- content End -->
+								
+					</div>
+				</div><!-- 자료실 미리보기 row End -->
 				
 				
 			</div>

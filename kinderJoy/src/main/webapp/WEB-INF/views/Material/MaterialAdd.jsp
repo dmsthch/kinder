@@ -56,69 +56,75 @@
     <div class="main-panel">
 		<div class="content">
 			<div class="container-fluid">
-			
-				<div class="row">
-					<div class="text-center"><h1>자료 추가</h1></div>
-				</div><br/>
+				<div class="col-md-12">
+			        <div class="card">
+			        	<div class="card-header" data-background-color="purple">
+		                    <h4 class="title">자료 추가</h4>
+		                    <p class="category">MaterialAdd</p>
+		                </div>
 				
-				<div class="row">
-					<form action="${pageContext.request.contextPath}/MaterialAdd" method="post" enctype="multipart/form-data">
+						<div class="row">
+							<form action="${pageContext.request.contextPath}/MaterialAdd" method="post" enctype="multipart/form-data">
+								
+								<div class="form-group">
+								    <div class="row">    
+								        <div class="col-xs-8 col-xs-offset-2">
+										    <div class="input-group">
+								                <div class="input-group-btn search-panel">
+								                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								                    	<span id="search_concept">카테고리 </span><span class="caret"></span>
+								                    </button>
+								                    <ul class="dropdown-menu" role="menu">
+										                  <c:forEach var="boardCategory" items="${boardCategoryList}">
+											             	 <li><a href="${boardCategory.categoryNo}">${boardCategory.categoryName}</a></li>
+											              </c:forEach>
+								                    </ul>
+								                </div>
+								                <input type="hidden" name="boardCategoryNo" value="0" id="search_param">  
+								                <input type="text" class="form-control" value="" name="boardTitle" placeholder="Title ..."><!-- 검색내용을 들고갈 input --> 
+								                
+								            </div>
+								        </div>
+									</div>
+								</div>
+								<hr/>
+								<div class="form-group">
+									<div class="row">    
+								        <div class="col-xs-8 col-xs-offset-2">
+									    	<div class="input-group col-sm-12">
+								                <textarea name="boardContent" rows="15" class="form-control"></textarea>
+								            </div>
+								        </div>
+									</div>
+								</div>
+								<!-- 파일 -->
+								<div class="row">    
+							        <div class="col-xs-8 col-xs-offset-2">
+								    	<div class="input-group col-sm-12">
+							                <input type="file" name="files">
+							            </div>
+							        </div>
+								</div>
+								 
+								<div class="form-group">
+									<div class="row">    
+								        <div class="col-xs-8 col-xs-offset-2">
+								        	<div class="col-sm-offset-4 col-sm-2">
+												<button type="reset" class="btn btn-default">Reset</button>
+								        	</div>
+								        	<div class="col-sm-2">
+												<button type="submit" class="btn btn-default">Submit</button>
+								        	</div>
+								        </div>
+									</div>
+								</div>
+							</form>
 						
-						<div class="form-group">
-						    <div class="row">    
-						        <div class="col-xs-8 col-xs-offset-2">
-								    <div class="input-group">
-						                <div class="input-group-btn search-panel">
-						                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-						                    	<span id="search_concept">카테고리 </span><span class="caret"></span>
-						                    </button>
-						                    <ul class="dropdown-menu" role="menu">
-								                  <c:forEach var="boardCategory" items="${boardCategoryList}">
-									             	 <li><a href="${boardCategory.categoryNo}">${boardCategory.categoryName}</a></li>
-									              </c:forEach>
-						                    </ul>
-						                </div>
-						                <input type="hidden" name="boardCategoryNo" value="0" id="search_param">  
-						                <input type="text" class="form-control" value="" name="boardTitle" placeholder="Title ..."><!-- 검색내용을 들고갈 input --> 
-						                
-						            </div>
-						        </div>
-							</div>
-						</div>
-						<hr/>
-						<div class="form-group">
-							<div class="row">    
-						        <div class="col-xs-8 col-xs-offset-2">
-							    	<div class="input-group col-sm-12">
-						                <textarea name="boardContent" rows="15" class="form-control"></textarea>
-						            </div>
-						        </div>
-							</div>
-						</div>
-						<!-- 파일 -->
-						<div class="row">    
-					        <div class="col-xs-8 col-xs-offset-2">
-						    	<div class="input-group col-sm-12">
-					                <input type="file" name="files">
-					            </div>
-					        </div>
-						</div>
-						 
-						<div class="form-group">
-							<div class="row">    
-						        <div class="col-xs-8 col-xs-offset-2">
-						        	<div class="col-sm-offset-4 col-sm-2">
-										<button type="reset" class="btn btn-default">Reset</button>
-						        	</div>
-						        	<div class="col-sm-2">
-										<button type="submit" class="btn btn-default">Submit</button>
-						        	</div>
-						        </div>
-							</div>
-						</div>
-					</form>
+						</div>							
 				
-				</div>							
+				
+		    		</div>
+			    </div>
 				
 			</div>
 		</div>

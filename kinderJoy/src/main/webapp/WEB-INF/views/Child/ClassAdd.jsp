@@ -4,19 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- bootstrap을 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
- 
-<!-- jquery를 사용하기위한 CDN주소 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
- 
-<!-- bootstrap javascript소스를 사용하기 위한 CDN주소 -->
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
- 
+<title>ClassAdd</title>
+<c:import url="../module/importCSS.jsp"></c:import>
+<c:import url="./nav/SideNav.jsp"></c:import>
+<c:import url="../module/navbar.jsp"></c:import>
 <script>
  	$(document).ready(function(){
  		
@@ -27,54 +18,53 @@
  		
  		
  	});
+ 	
+ 	$(document).ready(function(){
+ 		$('#ChildClassManagement').attr('class','active');
+
+ 		
+ 	})
+ 	
  
  </script>
-
-<title>ClassAdd</title>
-<!-- CSS Link -->
-<c:import url="../module/importCSS.jsp"></c:import>
-<!-- JS Link -->
-<c:import url="../module/importCSS.jsp"></c:import>
-
-	<style>
-		#body{
-			margin-top:5%;
-		}
-	</style>
 </head>
-<body id="body">
-<!-- navbar -->
-<c:import url="../module/navbar.jsp"></c:import>
-<c:import url="../Child/nav/SideNav.jsp"></c:import>
+<body class="components-page">
+<div class="wrapper">
+<div class="main-panel">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header" data-background-color="green">
+							<h4 class="title">반 생성하기</h4>
+						</div>
 
-
-<form id="addForm" action="${pageContext.request.contextPath}/ClassAdd" method="post">
-<div class="col-md-10">
-<div class="form-inline">
-	<div align="center" class="container">
-  		<form class="form-inline" action="/action_page.php">
-    	<div class="form-group">
-      	<label for="class_name">반 이름:</label>
-      	<input type="text" class="form-control" id="className" name="className" style="width:300px;">
-    </div>
-    <div class="form-group">
-      <label for="class_age">반 연령:</label>
-      <input type="text" class="form-control" id="classAge" name="classAge" style="width:300px;">
-    </div>
-  <br><br>
-    <div align ="center">
-           <input class="btn btn-default" id="addButton" type="button" value="반입력"/>
-           <input class="btn btn-default" type="reset" value="초기화"/>
-           <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildClass">목록</a>
-    </div>
-  		</form>
+						<div class="card-content table-responsive">
+							<form id="addForm" action="${pageContext.request.contextPath}/ClassAdd" method="post">
+								<div align="center">
+								    	<div class="form-group">
+									      	<label for="class_name">반 이름:</label>
+									      	<input type="text" class="form-control" id="className" name="className" style="width:200px;">
+									    </div>
+									    <div class="form-group">
+									      <label for="class_age">반 연령:</label>
+									      <input type="text" class="form-control" id="classAge" name="classAge" style="width:200px;">
+									    </div>
+									  <br><br>
+									    <div align ="center">
+									           <input class="btn btn-default" id="addButton" type="button" value="반입력"/>
+									           <input class="btn btn-default" type="reset" value="초기화"/>
+									           <a class="btn btn-default" href="${pageContext.request.contextPath}/ChildClass">목록</a>
+									    </div>
+	  								</form>
+  							</div>
+  						</div>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
   	</div>
   </div>
-  </div>
- </form>
 
-
-<!-- footer -->
-<c:import url="../module/footer.jsp"></c:import>
 </body>
 </html>

@@ -3,6 +3,27 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.cafe24.dmsthch.Teacher.TeacherMapper">
+<!-- 편성표!!!표!!! -->
+<!-- 티쳐포메이션의 넘버를  티쳐넘버에 = 연산자로 대입시키고 값이 여러개이기 때문에 파라미터타입과 리저트타입이 티쳐이다 -->
+<select id="takeFormList" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+
+SELECT
+ t.teacher_name AS teacherName
+ ,c.class_name AS className
+ 
+FROM
+teacher_formation a
+
+	INNER JOIN teacher t
+	ON t.teacher_no = a.teacher_no
+	
+	INNER JOIN kid_class c
+	ON c.class_no = a.class_no
+	
+where
+a.license_kindergarten = #{licenseKindergarten}
+
+</select>
 
 <update id="updateTeacher" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
 UPDATE teacher 
@@ -118,6 +139,23 @@ WHERE teacher_id = #{teacherId}
 
  </select>
 
+<!-- 교원 입력 -->
+<insert id="pyeonseong" parameterType="com.cafe24.dmsthch.Teacher.TeacherFormation">
+
+insert into teacher_formation
+	(
+	teacher_no
+	, class_no
+	, license_kindergarten
+	)
+VALUES	
+	(
+	#{teacherNo}
+	, #{classNo}
+	, #{licenseKindergarten}
+	);
+
+</insert>
 <!-- 전체 교원 조회 table list에 필요 -->
 <!-- 입력값은 라이선스 하나니까 String이고 리턴값은 여러개이니 Teacher인 오브젝트이다 -->
 <select id="tableList" parameterType="java.lang.String" resultType="com.cafe24.dmsthch.Teacher.Teacher">
@@ -179,13 +217,12 @@ VALUES (
 <!-- 세션의 값을 가져오는 것이니 = #{} 이 안에는 세션에 저장된 이름을 적어야 한다  -->
 <select id="takeTeacher" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
 SELECT 
-teacher_no 		AS teacherNo
-,teacher_name	AS teacherName
-from teacher
-where 
- license_kindergarten = #{licenseKindergarten} 
-AND
- teacher_level= '선생님';
+teacher.teacher_no AS teacherNo,
+teacher.teacher_name AS teacherName
+from teacher left join teacher_formation on teacher.teacher_no = teacher_formation.teacher_no
+where teacher.license_kindergarten = #{licenseKindergarten}
+and teacher.teacher_level = '선생님'
+and teacher_formation.teacher_formation_no is null
 </select>
 
 <!-- 입력값은 라이선스 하나니까 String이고 값이 여러개인 int니까 List<Integer>이다 -->

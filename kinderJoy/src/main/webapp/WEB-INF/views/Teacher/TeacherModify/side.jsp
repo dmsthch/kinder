@@ -225,35 +225,42 @@ $(document).ready(function(){
 	                <li id="kyo">
 	                    <a id="sidekyo"  href="${pageContext.request.contextPath}/kyo">
 	                        <i class="material-icons">person</i>
-	                        <p>User Profile</p>
+	                        <p>교원 프로필</p>
 	                    </a>
 	                </li>
 	                
 	                <li id="kyotable">
 	                    <a id="sidekyotable" href="${pageContext.request.contextPath}/kyotable">
 	                        <i class="material-icons">content_paste</i>
-	                        <p>Table List</p>
+	                        <p>교원 리스트</p>
 	                    </a>
 	                </li>
 	                
 	                <li id="takeForm">
 	                    <a id="sidetakeForm" href="${pageContext.request.contextPath}/takeForm">
 	                        <i class="material-icons">people</i>
-	                        <p>Take Form</p>
+	                        <p>교원 편성하기</p>
+	                    </a>
+	                </li>
+	                
+	                <li id="takeFormList">
+	                    <a id="sidetakeForm" href="${pageContext.request.contextPath}/takeFormList">
+	                        <i class="material-icons">people</i>
+	                        <p>교원 편성표</p>
 	                    </a>
 	                </li>
 	                
 	                <li id="license">
 	                    <a id="sideLicense" href="${pageContext.request.contextPath}/license">
 	                        <i class="material-icons">check</i>
-	                        <p>License</p>
+	                        <p>라이선스</p>
 	                    </a>
 	                </li>
 	                    
 	                <li id="delete" class="active-pro">
                         <a id="sideDelete" href="${pageContext.request.contextPath}/delete">
 	                        <i class="material-icons">delete</i>
-	                        <p>Delete_account</p>
+	                        <p>계정 삭제</p>
 	                    </a>
                     </li>      
 	            </ul>

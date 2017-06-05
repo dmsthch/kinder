@@ -15,6 +15,27 @@ public class ChildDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	//발달평가 하나 보기
+	public  Map<String,Object> getDevelopmentDetailsOne(String detailesNo){
+		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Child.ChildMapper.getDevelopmentDetailsOne",detailesNo);
+	}
+	
+	
+	//발달목록 가져오기
+	public List<ChildDevelopmentDetails> getChildDevelopmentDetails(int pageNo,String searchVal,String searchType,String searchAge,String licenseKindergarten){
+		int onePageRow = 10;
+		int startRow = (pageNo-1)*onePageRow;
+		Map<String,Object> map = new  HashMap<String,Object>();
+		map.put("licenseKindergarten", licenseKindergarten);
+		map.put("searchVal", searchVal);
+		map.put("searchAge", searchAge);
+		map.put("searchType",searchType );
+		map.put("startRow",startRow);
+		map.put("onePageRow",onePageRow);
+		return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getDevelopmentDetails",map);
+	}
+	
+	
 	//유아발달평가 상세 저장하기
 	public void addChildDevelopmentDetails(ChildDevelopmentDetails details , Child child){
 		//필요한것 -> 평가번호(완), 라이센스, 수준, 문항번호, 제목, 관찰사례, 관찰일
@@ -169,7 +190,7 @@ public class ChildDao {
         return sqlSessionTemplate.insert("com.cafe24.dmsthch.Child.ChildMapper.insertClass", childclass);
     }
 	
-	//전체 리스ㅌ
+	//전체 리스트
 	public List<Child> getChildList(String license ,int currentPage, int pagePerRow) {
 	  	Map<String,Object> map = new  HashMap<String,Object>();
 
@@ -178,7 +199,7 @@ public class ChildDao {
 	   	map.put("pagePerRow", pagePerRow);
 	    return sqlSessionTemplate.selectList("com.cafe24.dmsthch.Child.ChildMapper.getChildList",map);
 	}
-	//조건 ㅣㄹ;트스
+	//조건 리스트
 	public List<Child> getSeveralList(String license, int teacherNo, int currentPage, int pagePerRow ){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("license", license);

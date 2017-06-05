@@ -103,50 +103,54 @@
 		<div class="content">
 			<div class="container-fluid">
 			
-				<div class="row">
-					<div class="text-center">
-						<h1>
-							<c:if test="${categoryNo == 0}">All List</c:if>
-							<c:if test="${categoryNo == 1}">Document List</c:if>
-							<c:if test="${categoryNo == 2}">Material List</c:if>
-						</h1>
-					</div>
-				</div><br/>
-				
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2">
-						<table class="table table-hover">
-						
-							<thead>
-								<tr>
-									 <th>No</th>
-									 <th>카테고리</th>
-									 <th>제목</th>
-									 <th>작성자</th>
-									 <th>작성일</th>
-								</tr>
-							</thead>
+				<div class="col-md-12">
+			        <div class="card">
+						<div class="card-header" data-background-color="purple">
+		                    <h4 class="title">
+								<c:if test="${categoryNo == 0}">All List</c:if>
+								<c:if test="${categoryNo == 1}">Document List</c:if>
+								<c:if test="${categoryNo == 2}">Material List</c:if>
+							</h4>
+		                    <p class="category">List</p>
+		                </div>
+					
+					<div class="row">
+						<div class="col-sm-10 col-sm-offset-1">
+							<table class="table table-hover">
 							
-							<tbody>
-								<c:forEach var="board" items="${getList}">
+								<thead>
 									<tr>
-										<td>${board.boardNo }</td>
-										<td>
-											<c:forEach var="category" items="${category}">
-												<c:if test="${category.categoryNo == board.boardCategoryNo}">${category.categoryName}</c:if>
-											</c:forEach>	
-										</td>
-										<td><a href="${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}">${board.boardTitle }</a></td>
-										<td>${board.teacherNo }</td>
-										<td>${board.boardDay }</td>
+										 <th>No</th>
+										 <th>카테고리</th>
+										 <th>제목</th>
+										 <th>작성자</th>
+										 <th>작성일</th>
 									</tr>
-								</c:forEach>
-							</tbody>
-							
-						</table>
+								</thead>
+								
+								<tbody>
+									<c:forEach var="board" items="${getList}">
+										<tr>
+											<td>${board.boardNo }</td>
+											<td>
+												<c:forEach var="category" items="${category}">
+													<c:if test="${category.categoryNo == board.boardCategoryNo}">${category.categoryName}</c:if>
+												</c:forEach>	
+											</td>
+											<td><a href="${pageContext.request.contextPath}/MaterialSelect?boardNo=${board.boardNo}">${board.boardTitle }</a></td>
+											<td>${board.teacherNo }</td>
+											<td>${board.boardDay }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+								
+							</table>
+						</div>
+					
+					</div>							
+					
 					</div>
-				
-				</div>							
+	            </div> <!-- card End -->
 				
 			</div>
 		</div>

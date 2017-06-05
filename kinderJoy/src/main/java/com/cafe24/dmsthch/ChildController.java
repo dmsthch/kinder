@@ -31,6 +31,37 @@ public class ChildController {
 	private ChildDao childDao;
 	@Autowired
 	private ChildService childService;
+	
+	//발달평가 보기
+	@RequestMapping(value="/ChildDevelopmentView" , method=RequestMethod.GET)
+	public String ChildDevelopmentView(ChildDevelopmentDetails details
+										, Model model){
+		//디테일넘버를 받아서, 해당 번호의 평가번호를 알아낸후 발달평가 테이블에서 평가번호를 이용하여 교원편성번호와 반 편성번호를 이용해서 선생님과 유아 정보를 알아오고
+		//디테일넘버를 받아서, 해당 번호의 관찰문항 번호를 알아낸후 관찰문항, 준거 테이블에서 해당하는 관찰문항번호를 통해 내용과 문항, 해당하는 수준의 준거 그리고 나이를 표기한다
+		//그리고 남은 발달평가 상세에서 관찰 사례, 제목, 관찰일을 가져온다.
+		String detailesNo = details.getDetailesNo();
+		Map<String,Object> map = childDao.getDevelopmentDetailsOne(detailesNo);
+		model.addAttribute("result",map);
+		return "Child/ChildDevelopmentView";
+	}
+	
+	//발달평가목록
+	@RequestMapping(value="/ChildDevelopmentList" , method=RequestMethod.GET)
+	public String ChildDevelopmentList(HttpSession session
+										,Model model
+										,@RequestParam(value="pageNo", required=false, defaultValue="1")int pageNo
+										,@RequestParam(value="searchVal", required=false, defaultValue="")String searchVal
+										,@RequestParam(value="searchType", required=false, defaultValue="")String searchType
+										,@RequestParam(value="searchAge", required=false, defaultValue="")String searchAge){
+		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
+		List<ChildDevelopmentDetails> detailsList = childDao.getChildDevelopmentDetails(pageNo, searchVal, searchType, searchAge,licenseKindergarten);
+		model.addAttribute("detailsList", detailsList);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("searchVal",searchVal);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("searchAge",searchAge);
+		return "Child/ChildDevelopmentList";
+	}
 
 	//발달평가 저장하기
 	@RequestMapping(value="/ChildDevelopmentAdd" , method=RequestMethod.POST)

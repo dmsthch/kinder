@@ -3,15 +3,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.cafe24.dmsthch.Management.ManagementMapper">
-<!-- 예산 기본 오늘 날짜 셀렉트 -->
-<select id="selectManagementDayList" parameterType="String" resultType="com.cafe24.dmsthch.Management.ManagementList" >
+<!-- 예산 오늘 카테고리 받아 날짜 셀렉트 -->
+<select id="selectManagementCategoryDayList" parameterType="java.util.Map" resultType="com.cafe24.dmsthch.Management.ManagementList" >
 	SELECT
-	'minus' AS PM
-	,t.teacher_name AS teacherName
-	,e.equipment_name AS equipmentName
-	,m.equipment_cost AS equipmentCost
-	,m.equipment_amount AS equipmentAmount
-	,m.equipment_day AS equipmentDay
+		'minus' AS PM
+		,t.teacher_name AS teacherName
+		,e.equipment_name AS equipmentName
+		,m.equipment_cost AS equipmentCost
+		,m.equipment_amount AS equipmentAmount
+		,m.equipment_day AS equipmentDay
 	FROM
 		test_equipment e
 	INNER JOIN
@@ -21,7 +21,9 @@
 		test_equipment_value_minus m
 	ON m.equipment_no = e.equipment_no
 	WHERE
-		m.equipment_day BETWEEN #{testDay} AND DATE_ADD(#{testDay}, INTERVAL +1 DAY)
+		m.equipment_day BETWEEN #{testDay} AND DATE_ADD(#{testDay2}, INTERVAL +1 DAY)
+	AND
+		e.category_no = #{categoryNo}
 	UNION ALL
 	SELECT
 		'plus' AS PM
@@ -40,7 +42,50 @@
 		test_equipment_value_plus p
 	ON p.equipment_no = e.equipment_no
 	WHERE
-		p.equipment_day BETWEEN #{testDay} AND DATE_ADD(#{testDay}, INTERVAL +1 DAY)
+		p.equipment_day BETWEEN #{testDay} AND DATE_ADD(#{testDay2}, INTERVAL +1 DAY)
+	AND
+		e.category_no = #{categoryNo}
+	ORDER BY equipmentDay DESC; 
+		
+</select>
+<!-- 예산 기본 오늘 날짜 셀렉트 -->
+<select id="selectManagementDayList" parameterType="String" resultType="com.cafe24.dmsthch.Management.ManagementList" >
+	SELECT
+		'minus' AS PM
+		,t.teacher_name AS teacherName
+		,e.equipment_name AS equipmentName
+		,m.equipment_cost AS equipmentCost
+		,m.equipment_amount AS equipmentAmount
+		,m.equipment_day AS equipmentDay
+	FROM
+		test_equipment e
+	INNER JOIN
+		teacher t
+	ON t.teacher_no = e.teacher_no
+	INNER JOIN
+		test_equipment_value_minus m
+	ON m.equipment_no = e.equipment_no
+	WHERE
+		m.equipment_day BETWEEN #{testDay} AND DATE_ADD(#{testDay2}, INTERVAL +1 DAY)
+	UNION ALL
+	SELECT
+		'plus' AS PM
+		,t.teacher_name AS teacherName
+		,e.equipment_name AS equipmentName
+		,p.equipment_cost AS equipmentCost
+		,p.equipment_amount AS equipmentAmount
+		,p.equipment_day AS equipmentDay
+	FROM
+		test_equipment e
+	
+	INNER JOIN
+		teacher t
+	ON t.teacher_no = e.teacher_no
+	INNER JOIN
+		test_equipment_value_plus p
+	ON p.equipment_no = e.equipment_no
+	WHERE
+		p.equipment_day BETWEEN #{testDay} AND DATE_ADD(#{testDay2}, INTERVAL +1 DAY)
 	ORDER BY equipmentDay DESC; 
 		
 </select>
