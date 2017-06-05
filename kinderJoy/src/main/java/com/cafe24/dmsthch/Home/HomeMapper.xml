@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.cafe24.dmsthch.Home.HomeMapper">
+   <!-- 유치원 라이센스로 유치원명,라이센스 시작과 종료 일자 가져오기 -->
+	  <select id="getLicense" parameterType="java.lang.String" resultType="com.cafe24.dmsthch.Home.License">
+	  	SELECT
+		  	license_kindergarten_name AS licenseKindergartenName
+		  	, license_grant_day AS licenseGrantDay
+		  	, license_expiration_day AS licenseExpirationDay
+	  	FROM license
+	  	WHERE license_kindergarten = #{licenseKindergarten}
+	  
+	  </select>
+  
+  </mapper>

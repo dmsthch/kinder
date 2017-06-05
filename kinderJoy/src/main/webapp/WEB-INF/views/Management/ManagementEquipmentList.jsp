@@ -95,9 +95,8 @@ $(document).ready(function(){
 						</tbody>
 					</table>
 					<!--  -->
-					<div>총 구매금액1</div>
-					<div id="totalValue">
-							  </div>
+					<div>총 구매금액</div>
+					<div id="totalValue"></div>
 	                        </div>
 	                    </div>
 	                </div>
@@ -107,7 +106,6 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
-<br><br><br><br><br>
 
 
 </body>

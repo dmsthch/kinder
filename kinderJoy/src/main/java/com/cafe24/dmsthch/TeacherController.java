@@ -28,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import com.cafe24.dmsthch.Child.ChildClass;
+import com.cafe24.dmsthch.Home.HomeDao;
+import com.cafe24.dmsthch.Home.License;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 import com.cafe24.dmsthch.Teacher.TeacherFormation;
@@ -38,6 +40,9 @@ public class TeacherController {
 	
 	@Autowired
 	private TeacherDao TDao;
+	
+	@Autowired
+	HomeDao dao;
 	
 	//ErrorPage.jsp
 	@RequestMapping(value="/ErrorPage", method = RequestMethod.GET)
@@ -408,6 +413,10 @@ public class TeacherController {
 		System.out.println(teacher.getTeacherId() +"<-- 사용자가 입력한 아이디");
 		System.out.println(TDao+" <--TDao 동작 확인");
 
+		License result = dao.getLicense(saveSession.getLicenseKindergarten());
+		System.out.println(result.getLicenseKindergartenName()+"<<<");
+		model.addAttribute("result",result);
+
 		if(saveSession != null) {
 			if(session.getAttribute("teacherId") == null){
 				
@@ -445,6 +454,7 @@ public class TeacherController {
 				
 				return "/home";
 		}
+		
 		return "/home";
 	}
 	

@@ -48,6 +48,7 @@
                 <beans:value>classpath:com/cafe24/dmsthch/Equipment/EquipmentMapper.xml</beans:value>
                 <beans:value>classpath:com/cafe24/dmsthch/EducationProject/EducationProjectMapper.xml</beans:value>
                 <beans:value>classpath:com/cafe24/dmsthch/Management/ManagementMapper.xml</beans:value>
+                <beans:value>classpath:com/cafe24/dmsthch/Home/HomeMapper.xml</beans:value>
             </beans:list>
         </beans:property>
     </beans:bean>

@@ -39,34 +39,18 @@
 		<div class="content">
 			<div class="container-fluid">	
 			
-<!-- 	<div class="btn-group">
-	  <button type="button" class="btn btn-primary">:: 비품카테고리 ::</button>
-	  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-	    <span class="caret"></span>
-	  </button>
-	  <ul class="dropdown-menu" role="menu">
-	    <li><a href="#">교재,교구</a></li>
-	    <li><a href="#">사무용품</a></li>
-	    <li><a href="#">체육용품</a></li>
-	    <li><a href="#">도서목록</a></li>
-	    <li><a href="#">기타</a></li>
-	  </ul>
-	</div> -->
-	<div class="input-group-btn search-panel">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:100px;">
-			<span id="category">카테고리 </span><span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu">
-			<c:forEach var="a" items="${getCategory}">
-				<li><a href="${a.categoryNo}">${a.categoryName}</a></li>
-			</c:forEach>
-		</ul>
-	</div>
-	<input type="hidden" name="boardCategoryNo" value="0" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
-	<button id="btTest">save</button>
-	<div>
-		제목 :
-		<input type="text" id="sheetName" value="${sheet.valueName}"/>
+
+	<input type="hidden" name="boardCategoryNo" value="${sheet.equipmentCategoryNo}" id="boardCategoryNo" readonly>  <!-- 카테고리 들고갈 input -->
+	<div class="row">
+		<div class="col-sm-1">
+			<button id="btTest">save</button>
+		</div>
+		<div class="col-sm-4">
+			<input type="text" class="form-control" id="sheetName" value="${sheet.valueName}"/>
+		</div>
+		<div class="col-sm-7">
+
+		</div>
 	</div>
 	<div class="wrapper" style="margin-top: 20px;">
 		<div id="example1"></div>
@@ -74,49 +58,34 @@
 	
 	
 </div></div></div></div>
-<script>
-$(document).ready(function(e){
-    $('.search-panel .dropdown-menu').find('a').click(function(e) {
-		e.preventDefault();
-		var param = $(this).attr("href").replace("#",""); //해당 버튼의 href속성에서 #을 제거한 값
-		console.log(param + 'param값 확인');
-		var category = $(this).text(); //해당 버튼의 내용
-		$('.search-panel span#category').text(category); //선택 버튼의 내용을 클릭한 버튼의 내용으로 변경
-		$('#boardCategoryNo').val(param);
-	});
-});
-</script>
+
 <script data-jsfiddle="example1">
 
 
 	var container = document.getElementById('example1'),hot;
 	var dataArray;
 	var dataValue = ${sheet.valueVal};
-	console.log(dataValue);
 	var dataMerge = ${sheet.valueMerge};
-	console.log(dataMerge);
 	var dataBorders = ${sheet.valueBorders};
-	console.log(dataBorders);
 	var countRow = ${sheet.valueRow};
-	console.log(countRow);
 	var countCol = ${sheet.valueCols};
-	console.log(countCol);
 	var dataName = '${sheet.valueName}';
-	console.log(dataName);
 	var equipmentCategoryNo = ${sheet.equipmentCategoryNo};
-	console.log(equipmentCategoryNo);
+	var dataForSave = ${sheet.valueVal};
+	console.log('dataForSave');
+	console.log(dataForSave);
 //	var testData = [null,null,null,null,{"row":4,"col":7,"val":"1234"},{"row":5,"col":4,"val":"4321"},{"row":6,"col":10,"val":"2134"},null,null,null,{"row":10,"col":7,"val":"4321"},null,null,{"row":13,"col":6,"val":"1234"},{"mergedCellInfoCollection":[]}]; //데이터
 //	var testMerge = [{"row":5,"col":2,"rowspan":5,"colspan":3},{"row":10,"col":4,"rowspan":5,"colspan":5}];
 		for(j=0; j<dataValue.length;j++){
-		if(dataValue[j]==null){
-			dataValue[j]={ };
-			console.log(dataValue);
-			for(i=0 ; i<countCol; i++){
-				dataValue[j][i] ='';
-				console.log("ㅇㅅㅇ! ->> "+ i);
-			}
-		}	
-	}
+			if(dataValue[j]==null){
+				dataValue[j]={ };
+				//console.log(dataValue);
+				for(i=0 ; i<countCol; i++){
+					dataValue[j][i] ='';
+					//console.log("ㅇㅅㅇ! ->> "+ i);
+				}
+			}	
+		}
 	  
 		hot = new Handsontable(container, {
  			data: dataValue,    //데이터 가져오기
@@ -127,11 +96,15 @@ $(document).ready(function(e){
 
 			rowHeaders : true,
 			colHeaders : true,
-			
+			colWidths: 70,
+			rowHeights: 30,
+			manualColumnMove: true,
+		    manualRowMove: true,
+		    
 			minRows: countRow,
 			minCols: countCol,
-// 			manualRowResize : true,
-// 			manualColumnResize : true,
+ 			manualRowResize : true,
+ 			manualColumnResize : true,
 
 			mergeCells : true,
 			customBorders: true,
@@ -140,9 +113,9 @@ $(document).ready(function(e){
 			mergeCells: dataMerge, //셀병합 가져오기
 			minSpareRows: 1, //여유 행
 			
- 			contextMenuCopyPaste: {
+/*  			contextMenuCopyPaste: {
 			    swfPath: 'swf/ZeroClipboard.swf'
-			},
+			}, */
 			
 			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
 				console.log(data, type)
@@ -157,7 +130,6 @@ $(document).ready(function(e){
 					var row = data[0][0];
 					var col = data[0][1];
 					var val = data[0][3];
-
 					var meats = hot.getCellMeta(row,col);
 					
 					console.log('확인' + hot.mergeCells)
@@ -167,12 +139,15 @@ $(document).ready(function(e){
 
 					if(val !== null){
  						//console.log(row, col, val)
-
- 						if(dataArray[row] === undefined){
-							dataArray[row] = {};							
+						console.log('위치확인123');
+ 						if(dataForSave[row] == null && dataForSave[row] == undefined){
+ 							dataForSave[row] = {};
+ 							console.log('확인위치');
 						}
  						console.log(row + "row확인");
-						dataArray[row][col] = val;
+ 						dataForSave[row][col] = val;
+ 						dataArray=dataForSave; 
+ 						console.log();
 					}
 				}			
 		}
@@ -202,6 +177,7 @@ $(document).ready(function(e){
 				var countRow =hot.countRows(); 
 				var countCol =hot.countCols(); 
 				var sheetName = $('#sheetName').val();		
+				console.log(dataArray);
 			    $.ajax({
 			        url:"${pageContext.request.contextPath}/save",
 			        type:'POST',

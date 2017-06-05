@@ -41,11 +41,14 @@
 <section id="home">
 	<div class="container">
 	
-		<div class="row">
+		<div class="row"> 
 			<div class="col-md-12 col-sm-12">
 				<div class="test">
 				<h3>임초롬 / 김신삼 / 김한솔 / 양지연 / 전광철</h3>
 				<h1>Team. 햇병아리</h1>
+				<hr>
+				<h2>${result.licenseKindergartenName}</h2>
+				<h7>라이센스 유효기간 <br>${result.licenseGrantDay}~${result.licenseExpirationDay}</h7>
 				<hr>
 				<c:if test="${null eq teacherId}">
 					<a href="#" data-toggle="modal" data-target="#signIn" class="smoothScroll btn btn-danger">로그인</a>

@@ -1,8 +1,39 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
   <mapper namespace="com.cafe24.dmsthch.Equipment.EquipmentMapper">
+	<!--sheet에 값 있을경우 업데이트  -->
+	<update id="updateSheet" parameterType="com.cafe24.dmsthch.Equipment.Sheet">
+		UPDATE
+			sheet_value
+		SET
+			value_merge = #{valueMerge}
+			,value_val = #{valueVal}
+			,value_borders = #{valueBorders}
+			,value_row = #{valueRow}
+			,value_cols = #{valueCols}
+			,value_name = #{valueName}
+		WHERE
+			license_kindergarten = #{licenseKindergarten}
+		AND
+			equipment_category_no = #{equipmentCategoryNo}
+		AND
+			value_name = #{valueName};
+	</update>
+	<!-- sheet를 불러와서 다시 저장할 경우 -->
+	<select id="selectSheetValueNo" parameterType="com.cafe24.dmsthch.Equipment.Sheet" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			sheet_value
+		WHERE
+			license_kindergarten = #{licenseKindergarten}
+		AND
+			equipment_category_no = #{equipmentCategoryNo}
+		AND
+			value_name = #{valueName};
+	</select>
   	<!-- test_equipment_value(plus,minus) insert -->
    	<insert id="addTestEquipmentValueMinus" parameterType="com.cafe24.dmsthch.Equipment.EquipmentValue">
   		INSERT INTO test_equipment_value_minus(
