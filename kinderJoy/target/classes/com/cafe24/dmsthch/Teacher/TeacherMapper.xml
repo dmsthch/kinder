@@ -242,4 +242,27 @@ where license_kindergarten = #{licenseKindergarten};
 </select>
 <!-- 편성폼에 들어갈 쿼리 END -->
 
+
+<insert id="insertLicense" parameterType="com.cafe24.dmsthch.Home.License">
+<!-- values에 들어가는 내용은 form의 name값이다 -->
+
+INSERT INTO license(
+	license_kindergarten
+	,license_grant_day
+	,license_expiration_day
+	,license_kindergarten_name
+	,license_address 
+	,license_phone
+	,teacher_no)
+values(
+	UUID()
+	,now()
+	,(SELECT DATE_ADD(NOW(), interval 12 month))
+	,#{licenseKindergartenName}
+	,#{licenseAddress}
+	,#{licensePhone}
+	,#{teacherNo});
+
+</insert>
+
 </mapper>
