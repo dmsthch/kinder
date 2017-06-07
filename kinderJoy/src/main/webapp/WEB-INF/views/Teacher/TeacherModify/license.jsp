@@ -44,43 +44,41 @@
 	                            <div class="card-content table-responsive">
 	                                <table class="table">
 
-		<form action="${pageContext.request.contextPath}/licenseForm" method="POST">
-		<div class="form-group">
-		<input type="text" class="teacherName form-control" name="licenseKindergartenName" id="licenseKindergartenName" placeholder="유치원명을 입력하세요.">
-		</div>
-	
-	
-		<div class="form-group">
-		<input type="text" class="form-control" id="licenseAddress" name="licenseAddress" placeholder="주소를 입력하세요.">
-		</div>	
-		
-		<div class="form-group">
-		<input type="text" class="form-control" id="licensePhone" name="licensePhone" placeholder="유치원 연락처를 입력하세요">
-		</div>
-		
-		<div class="col-sm-10">
-		<input type="submit" value="작성 완료 후 클릭 시 라이선스가 부여됩니다.">
-		</div>
-		</form>
-
-										<div style="display:none">
-										<form action="${pageContext.request.contextPath}/license" method="post">
+										<!-- 값이 equal일 때 -->
+										<c:if test="${license eq null || license eq GUEST}">
+										<form action="${pageContext.request.contextPath}/licenseForm" method="POST">
+										
 										<div class="form-group">
-										<label class="control-label col-sm-2">발급된 라이선스 :</label>
-									      <div class="col-sm-10">              
-									        <input type="submit" id="licensecheckbutton" value="라이선스"/>
-									      </div>
-									      
-									      <c:if test="${null != licenseKey}">
-									      <c:out value="발급된 라이선스 : ${licenseKey}"></c:out>
-									      </c:if>      		
+										<input type="text" class="teacherName form-control" name="licenseKindergartenName" id="licenseKindergartenName" placeholder="유치원명을 입력하세요.">
+										</div>
 									
-									    </div>
+									
+										<div class="form-group">
+										<input type="text" class="form-control" id="licenseAddress" name="licenseAddress" placeholder="주소를 입력하세요.">
+										</div>	
+										
+										<div class="form-group">
+										<input type="text" class="form-control" id="licensePhone" name="licensePhone" placeholder="유치원 연락처를 입력하세요">
+										</div>
+										
+										<div class="col-sm-10">
+										<input type="submit" value="작성 완료 후 클릭 시 라이선스가 부여됩니다.">
+										</div>
 										</form>
-	                                    </div>
-	                                    
-	                                    
-	                                    
+									    </c:if>
+
+										<!-- 값이 not equal 일 때 -->
+										<c:if test="${license ne GUEST || license ne null}">
+										<div class="form-group">
+									     <div class="col-sm-10">  
+									     <!-- 값이 하나일 땐 점.을 안찍어야 잘 나온다 -->
+									     <!-- 계속 점을 찍어서 에러걸렸었다. -->
+									     <!-- 값이 여러 개 일때만 포문을 돌리고 var="변수" 선언 후 사용해야 한다.-->
+									     LICENSE : ${license}
+									     </div>
+									   </div>
+									   </c:if>
+
 	                                </table>
 
 	                            </div>

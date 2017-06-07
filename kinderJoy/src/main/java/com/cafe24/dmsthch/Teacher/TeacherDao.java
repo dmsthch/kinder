@@ -119,4 +119,15 @@ public class TeacherDao {
 	public int insertLicense(Object object) {
 		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.insertLicense", object);
 	}
+	
+	//발급받은 라이선스를 teacher에 업데이트
+	public int teacherLicenseUpdate(Object object) {
+		return sql.update("com.cafe24.dmsthch.Teacher.TeacherMapper.teacherLicenseUpdate",object);
+	}
+	
+	//view의 show/hide를 위한 메서드
+	public String selectLicense(int Int) {
+		System.out.println("호출확인");
+		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.selectLicense" ,Int);
+	}
 }

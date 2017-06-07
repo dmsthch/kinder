@@ -467,8 +467,13 @@ public class TeacherController {
 	
 	//라이센스 라이선스
 	@RequestMapping(value="/license", method=RequestMethod.GET)
-	public String chara() {
+	public String chara(HttpSession session ,License license ,Model model) {
 		System.out.println("라이선스 발급 페이지 호출");
+		
+		String aaa = TDao.selectLicense((Integer) session.getAttribute("teacherNo"));
+		System.out.println(aaa);
+		model.addAttribute("license", aaa);
+		
 		return "Teacher/TeacherModify/license";
 	}
 	
@@ -479,23 +484,33 @@ public class TeacherController {
 	@RequestMapping(value="/licenseForm", method=RequestMethod.POST)
 	public String licenseForm(HttpSession session ,License license) {
 		
-		String licenseKey = UUID.randomUUID().toString();
+		license.setLicenseKindergarten((String) session.getAttribute("licenseKindergarten"));
+		System.out.println(session.getAttribute("licenseKindergarten")+"<<<<<<<<<<현재 라이센스1");
+		license.setTeacherNo((Integer) session.getAttribute("teacherNo"));
+		System.out.println(session.getAttribute("teacherNo"));
+		int x = TDao.insertLicense(license);
 		
-		license.setLicenseKindergarten(licenseKey);
-		
-		int l = TDao.insertLicense(license);
-		
-		if(l == 1) {
+		int y = TDao.teacherLicenseUpdate(session.getAttribute("teacherNo"));
+		if(x == 1) {
 			System.out.println("성");
 		}else{
 			System.out.println("패");
 		}
 		
-		return "Teacher/TeacherModify/license";
+		if(y == 1) {
+			System.out.println("성");
+		}else{
+			System.out.println("패");
+		}
+		System.out.println(session.getAttribute("licenseKindergarten")+"<<<<<<<<<<현재 라이센스2");
+		return "redirect:/license";
+		//리다이렉트 시 요청주소를 적어야한다
+		//포워드 시 절대경로를 적어야 한다.
 	}
 	
+	//라이센스 발급 후 teacher 라이센스도 똑같이 업데이트 라이선스
 	//라이센스 라이선스 처리
-	@RequestMapping(value="/license", method=RequestMethod.POST)
+/*	@RequestMapping(value="/license", method=RequestMethod.POST)
 	public String uuid(Model model) throws Exception {
 		
 		//UUID에 대해 자세한 사항은 http://hyeonjae.github.io/uuid/2015/03/17/uuid.html 참고
@@ -507,5 +522,5 @@ public class TeacherController {
 		System.out.println(licenseKey +"<--생성된 UUID\n");
 		
 		return "Teacher/TeacherModify/license";
-	}
+	}*/
 }
