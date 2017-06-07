@@ -86,7 +86,7 @@ $(document).ready(function(){
 
 		/* var testData = [{},{"2":"esf"},{"2":"a","4":"ase"},{"5":"asdf"}]; //데이터 */
 	// {1:"", 2:"" }	
-		for(j=0; j<dataValue.length;j++){
+	/* 	for(j=0; j<dataValue.length;j++){
 			if(dataValue[j]==null){
 				dataValue[j]={ };
 				//console.log(dataValue);
@@ -95,6 +95,25 @@ $(document).ready(function(){
 					//console.log("ㅇㅅㅇ! ->> "+ i);
 				}
 			}	
+		}
+		 */
+		for(j=0; j<countRow;j++){
+			if(dataValue[j]==null){
+				dataValue[j]={ };
+				//console.log(dataValue);
+				for(i=0 ; i<countCol; i++){
+					dataValue[j][i] ='';
+					//console.log("ㅇㅅㅇ! ->> "+ i);
+				}
+			}
+			if(j==0){
+				for(i=0 ; i<countCol; i++){
+					if(dataValue[0][i] == null && dataValue[0][i] == undefined){
+						dataValue[0][i] ='';
+					}
+					//console.log("ㅇㅅㅇ! ->> "+ i);
+				}
+			}
 		}
 		
 		

@@ -43,29 +43,33 @@
 	                            </div>                            
 	                            <div class="card-content table-responsive">
 	                                <table class="table">
-	                                    
-	                                    <form action="${pageContext.request.contextPath}/license" method="post">
-		
-		
-		
-		
-		
+
+		이걸 hide
+		<form action="${pageContext.request.contextPath}/licenseForm" method="POST">
 		
 		<div class="form-group">
-		<input type="text" class="teacherName form-control" name="teacherName" id="teacherName" placeholder="유치원명을 입력하세요.">
+		<input type="text" class="teacherName form-control" name="licenseKindergartenName" id="licenseKindergartenName" placeholder="유치원명을 입력하세요.">
 		</div>
 	
 	
 		<div class="form-group">
-		<input type="text" class="form-control" id="teacher_ajax_id" name="teacherId" placeholder="주소를 입력하세요.">
+		<input type="text" class="form-control" id="licenseAddress" name="licenseAddress" placeholder="주소를 입력하세요.">
 		</div>	
 		
 		<div class="form-group">
-		<input type="text" class="form-control" id="teacherPhone" name="teacherPhone" placeholder="연락처를 입력하세요">
+		<input type="text" class="form-control" id="licensePhone" name="licensePhone" placeholder="유치원 연락처를 입력하세요">
 		</div>
+		
+		<div class="col-sm-10">
+		<input type="submit" value="작성 완료 후 클릭 시 라이선스가 부여됩니다.">
+		</div>
+		</form>
 
+										이걸 show
+										<div style="display:none">
+										
 										<div class="form-group">
-										<label class="control-label col-sm-2">라이센스 발급받기</label>
+										<label class="control-label col-sm-2">발급된 라이선스 :</label>
 									      <div class="col-sm-10">              
 									        <input type="submit" id="licensecheckbutton" value="라이선스"/>
 									      </div>
@@ -75,7 +79,9 @@
 									      </c:if>      		
 									
 									    </div>
-										</form>
+	                                    </div>
+	                                    
+	                                    
 	                                    
 	                                </table>
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cafe24.dmsthch.Child.ChildClass;
+import com.cafe24.dmsthch.Home.License;
 
 @Repository
 public class TeacherDao {
@@ -112,5 +113,15 @@ public class TeacherDao {
 	//교원표!!!표! 차인표!
 	public List<ChildClass> takeFormList2(String string) {
 		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeFormList", string);
+	}
+	
+	//라이선스 발급받기 위한 insert
+	public int insertLicense(Object object) {
+		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.insertLicense", object);
+	}
+	
+	//발급받은 라이선스를 teacher에 업데이트
+	public int teacherLicenseUpdate(Object object) {
+		return sql.update("com.cafe24.dmsthch.Teacher.TeacherMapper.teacherLicenseUpdate",object);
 	}
 }
