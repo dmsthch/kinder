@@ -221,8 +221,11 @@ $(document).ready(function(){
 				
 				var insertHtml = '<li id="takeForm">'
                    			+ '<a id="sidetakeForm" href="${pageContext.request.contextPath}/takeForm">'
+                   			+'<div class="data-block takeTabSide">'
                 			+ '<i class="material-icons">people</i>'
-               				+'<p>교원 편성하기</p></a></li>';
+               				+'<p>교원 편성하기</p>'
+               				+'</div>'
+               				+'</a></li>';
 				
 				$('#kyotable').after(insertHtml);
 				/* 교원 리스트 다음에 교원 편성하기를 넣음 */
@@ -258,29 +261,30 @@ $(document).ready(function(){
 				<ul class="nav" >
 	                <li id="kyo">
 	                    <a id="sidekyo"  href="${pageContext.request.contextPath}/kyo">
+						<div class="data-block userSide"> 
 	                        <i class="material-icons">person</i>
 	                        <p>교원 프로필</p>
+						</div><!-- user.jsp에서 side를 임포트 했기 때문에 가이드의 js와 css는  여기에 선언 할 필요가 없다. 
+		     단지 클래스이름만 정해주고 순번을 임포트 된 곳에 정의하면 된다.-->
 	                    </a>
 	                </li>
 	                
 	                <li id="kyotable">
 	                    <a id="sidekyotable" href="${pageContext.request.contextPath}/kyotable">
+	                    <div class="data-block tableSide">
 	                        <i class="material-icons">content_paste</i>
 	                        <p>교원 리스트</p>
+                        </div>
 	                    </a>
 	                </li>
-	                
-	               
-	                
-	               	<li id="testRomi">
-	               		
-	               	</li>
 	                
 
 	                <li id="takeFormList">
 	                    <a id="sidetakeFormList" href="${pageContext.request.contextPath}/takeFormList">
+	                    <div class="data-block takeFormListSide">
 	                        <i class="material-icons">people</i>
 	                        <p>교원 편성표</p>
+	                    </div>
 	                    </a>
 	                </li>
 
@@ -301,3 +305,4 @@ $(document).ready(function(){
 	            </ul>
 	    	</div>
 		</div>
+		

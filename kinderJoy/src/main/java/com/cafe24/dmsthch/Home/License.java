@@ -8,10 +8,10 @@ public class License {
 	private String licenseAddress;
 	private int licensePhone;
 	private int teacherNo;
-	public String getLicensKindergarten() {
+	public String getLicenseKindergarten() {
 		return licenseKindergarten;
 	}
-	public void setLicensKindergarten(String licenseKindergarten) {
+	public void setLicenseKindergarten(String licenseKindergarten) {
 		this.licenseKindergarten = licenseKindergarten;
 	}
 	public String getLicenseKindergartenName() {
@@ -50,5 +50,5 @@ public class License {
 	public void setTeacherNo(int teacherNo) {
 		this.teacherNo = teacherNo;
 	}
-	
+
 }

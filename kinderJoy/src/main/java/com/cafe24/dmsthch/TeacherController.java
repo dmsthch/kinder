@@ -58,13 +58,6 @@ public class TeacherController {
 	return "Teacher/TheAviator/index";
 	}
 	
-	//takeForm save메서드 호출
-	@RequestMapping(value="/save2", method = RequestMethod.POST)
-	public String save() {
-		System.out.println("호출확인 _TeacherController");
-		return "";
-	}
-	
 	//사이드 세션생성
 	@ResponseBody
 	@RequestMapping(value="/sideSession" , method = RequestMethod.GET)
@@ -414,7 +407,6 @@ public class TeacherController {
 		System.out.println(TDao+" <--TDao 동작 확인");
 
 		License result = dao.getLicense(saveSession.getLicenseKindergarten());
-		System.out.println(result.getLicenseKindergartenName()+"<<<");
 		model.addAttribute("result",result);
 
 		if(saveSession != null) {
@@ -475,13 +467,50 @@ public class TeacherController {
 	
 	//라이센스 라이선스
 	@RequestMapping(value="/license", method=RequestMethod.GET)
-	public String chara() {
+	public String chara(HttpSession session ,License license ,Model model) {
 		System.out.println("라이선스 발급 페이지 호출");
+		
+		String aaa = TDao.selectLicense((Integer) session.getAttribute("teacherNo"));
+		System.out.println(aaa);
+		model.addAttribute("license", aaa);
+		
 		return "Teacher/TeacherModify/license";
 	}
 	
+	//라이센스테이블에 insert시킬 유치원 정보 licenseForm 라이센스 라이선스 
+	//업데이트와 인서트는 별 반 다를 게 없는 것 같다.
+	//업데이트하려고 만든 코딩을 인서트로 변경해야 해서 맵퍼에서 sql을 고쳤는데
+	//여기 컨트롤러에선 하나도 안고쳐도 인서트가 되었다.
+	@RequestMapping(value="/licenseForm", method=RequestMethod.POST)
+	public String licenseForm(HttpSession session ,License license) {
+		
+		license.setLicenseKindergarten((String) session.getAttribute("licenseKindergarten"));
+		System.out.println(session.getAttribute("licenseKindergarten")+"<<<<<<<<<<현재 라이센스1");
+		license.setTeacherNo((Integer) session.getAttribute("teacherNo"));
+		System.out.println(session.getAttribute("teacherNo"));
+		int x = TDao.insertLicense(license);
+		
+		int y = TDao.teacherLicenseUpdate(session.getAttribute("teacherNo"));
+		if(x == 1) {
+			System.out.println("성");
+		}else{
+			System.out.println("패");
+		}
+		
+		if(y == 1) {
+			System.out.println("성");
+		}else{
+			System.out.println("패");
+		}
+		System.out.println(session.getAttribute("licenseKindergarten")+"<<<<<<<<<<현재 라이센스2");
+		return "redirect:/license";
+		//리다이렉트 시 요청주소를 적어야한다
+		//포워드 시 절대경로를 적어야 한다.
+	}
+	
+	//라이센스 발급 후 teacher 라이센스도 똑같이 업데이트 라이선스
 	//라이센스 라이선스 처리
-	@RequestMapping(value="/license", method=RequestMethod.POST)
+/*	@RequestMapping(value="/license", method=RequestMethod.POST)
 	public String uuid(Model model) throws Exception {
 		
 		//UUID에 대해 자세한 사항은 http://hyeonjae.github.io/uuid/2015/03/17/uuid.html 참고
@@ -493,5 +522,5 @@ public class TeacherController {
 		System.out.println(licenseKey +"<--생성된 UUID\n");
 		
 		return "Teacher/TeacherModify/license";
-	}
+	}*/
 }
