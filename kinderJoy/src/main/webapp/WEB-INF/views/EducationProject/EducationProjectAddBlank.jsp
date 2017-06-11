@@ -39,14 +39,17 @@ $(document).ready(function(){
 	
 	//연령선택하면 해당 반 보여주는것
 	$(document).on('change','#selectAge',function(){
-		var selectAge = $('#selectAge').val();
-		/* $('#selectClass').find().attr('class',3).remove(); */
-		//아이디가 selectClass인 셀렉트박스 내의 옵션중 class가 selectAge 셀렉트 박스에서 셀렉트한 값과 같은 것을 구해야 함.
-		$('select[name=selectClass] option[class!="'+selectAge+'"]').attr('style','display:none');
-		$('select[name=selectClass] option[class="'+selectAge+'"]').attr('style','display:""');
-		$("#selectClass option:first").prop("selected", true);
-		
-		$('#afterAge').attr('style','display:"";');
+		if(categoryNo==1){
+			$('#afterClass').attr('style','display:"";');
+		}else{
+			var selectAge = $('#selectAge').val();
+			/* $('#selectClass').find().attr('class',3).remove(); */
+			//아이디가 selectClass인 셀렉트박스 내의 옵션중 class가 selectAge 셀렉트 박스에서 셀렉트한 값과 같은 것을 구해야 함.
+			$('select[name=selectClass] option[class!="'+selectAge+'"]').attr('style','display:none');
+			$('select[name=selectClass] option[class="'+selectAge+'"]').attr('style','display:""');
+			$("#selectClass option:first").prop("selected", true);
+			$('#afterAge').attr('style','display:"";');
+		}
 		
 	})
 	
@@ -57,59 +60,57 @@ $(document).ready(function(){
 })
 </script>
 
-
+<!-- 스프레드 시트 관련 스크립트 -->
 <script data-jsfiddle="example1">
 $(document).ready(function(){
 	var container = document.getElementById('example1'),hot;
-	var dataArray;
-
-		hot = new Handsontable(container, {
- 			
-			startRows: 40,
-			startCols: 15,
-			rowHeaders : true,
-			colHeaders : true,
-			colWidths: 80,
-			rowHeights: 30,
-// 			manualRowResize : true,
-// 			manualColumnResize : true,
-			mergeCells : true,
-			customBorders: true,
-			contextMenu : true,
-			 manualColumnMove: true,
-			    manualRowMove: true,
-			contextMenuCopyPaste: {
-			    swfPath: 'swf/ZeroClipboard.swf'
-			},
+	var dataArray; //db에 보낼 값을 담는 변수
+		hot = new Handsontable(container, { // 뉴 시트
+		startRows: 40,
+		startCols: 18,
+		minRows: 40,
+		minCols: 18,
+		rowHeaders : true,
+		colHeaders : true,
+		colWidths: 80,
+		rowHeights: 30,
+		//manualRowResize : true,
+		//manualColumnResize : true,
+		mergeCells : true,
+		customBorders: true,
+		contextMenu : true,
+		manualColumnMove: true,
+		manualRowMove: true,
+		contextMenuCopyPaste: {
+		    swfPath: 'swf/ZeroClipboard.swf'
+		},
+		
+		//시트내부에서 값이 바뀌면 작동하는것. 바뀐것을 dataArray에 담는다. 
+		afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
 			
-			afterChange : function(data, type){ //data{열, 행, 이전값, 현재값} type="이벤트 종류"
-				//console.log(data, type);
+			if(dataArray === undefined){
+				dataArray = [];
+			}
+			
+			if(data !== undefined && data !== null){
+				var row = data[0][0];
+				var col = data[0][1];
+				var val = data[0][3];
+				var meats = hot.getCellMeta(row,col); //셀병합관련
 				
-				if(dataArray === undefined){
-					dataArray = [];
-				}
-				
-				if(data !== undefined && data !== null){
-					var row = data[0][0];
-					var col = data[0][1];
-					var val = data[0][3];
-					var meats = hot.getCellMeta(row,col);
-					
-					//console.log(meats.borders)
-
-					if(val !== null){
-						if(dataArray[row] === undefined){
-							dataArray[row] = {};							
-						}
-						dataArray[row][col] = val;
+				if(val !== null){
+					if(dataArray[row] === undefined){
+						dataArray[row] = {};							
 					}
-				}			
+					dataArray[row][col] = val;
+				}
+			}			
 		}
 	   
 	});
 		
 		
-	//입력후 유효성 경고창 띄우기
+	//(인풋)입력후 유효성 경고창 띄우기
 	$(document).on('change','.inspection',function(){
 		var $this=$(this)
 		var thisVal = $this.val();
@@ -128,7 +129,8 @@ $(document).ready(function(){
 			}
 		}
 	})
-		
+	
+	//저장
 	$('#save').click(function(){
 		//저장하기 전유효성검사
 				//검사할 항목 : 연령, 반, 날짜
@@ -243,8 +245,8 @@ $(document).ready(function(){
 				
 				}
 				
+				//saveOk가 1이면 저장가능! (유효성검사 통과함!)
 				if(saveOk==1){
-	
 					var jparse=JSON.stringify(dataArray);
 					var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
 					var inputDate = $('#date').val();
@@ -267,7 +269,7 @@ $(document).ready(function(){
 					var countCol =hot.countCols(); 
 			      
 					var categoryNo = ${categoryNo};
-					console.log(categoryNo+"<<categoryNo222")
+					//console.log(categoryNo+"<<categoryNo222")
 					var age = $('#selectAge').val();
 					var classNo = $('#selectClass').val();
 					
@@ -295,64 +297,95 @@ $(document).ready(function(){
 	<div class="wrapper">
 		<div class="main-panel">
 			<div class="content">
-				<div class="row">
-					<div class="col-sm-2">
-						<select class="form-control" id="selectAge" >
-						<option value="" disabled selected> 연령 선택  </option>
-						<option value="3" >3세</option>
-						<option value="4">4세</option>
-						<option value="5">5세</option>
-						
-						</select>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header" data-background-color="blue">
+									<c:choose>
+										<c:when test="${categoryNo == 4}">
+											<h3 class="title">일일계획안 작성</h3>
+										</c:when>
+										<c:when test="${categoryNo == 3}">
+											<h3 class="title">주간계획안 작성</h3>
+										</c:when>
+										<c:when test="${categoryNo == 2}">
+											<h3 class="title">월간계획안 작성</h3>
+										</c:when>
+										<c:when test="${categoryNo == 1}">
+											<h3 class="title">연간계획안 작성</h3>
+										</c:when>
+									</c:choose>
+								</div>
+								
+								<div class="card-content">
+									<div class="row">
+										<div class="col-sm-2" style="padding-top: 15px; text-align: center;"> 
+											<button name="save" id="save" class="btn btn-info">저장/수정</button>
+											
+										</div>
+										<div class="col-sm-2">
+											<select class="form-control" id="selectAge" >
+											<option value="" disabled selected> 연령 선택  </option>
+											<option value="3" >3세</option>
+											<option value="4">4세</option>
+											<option value="5">5세</option>
+											</select>
+										</div>
+										
+										<div class="col-sm-3" id="afterAge" style="display: none;">
+											<select class="form-control" id="selectClass" name="selectClass" >
+												<option value="" disabled selected> 반 선택  </option>
+												<c:forEach items="${listChildClass}" var="childClass">
+													<option value="${childClass.classNo}" class="${childClass.classAge}">${childClass.className}</option>
+												</c:forEach>
+											</select>
+										</div>
+										<!-- 일일계획안 -->
+										<c:if test="${categoryNo==4}">
+											<div class="col-sm-3" id="afterClass" style="display: none;">
+											<input class="form-control" type="date" id="projectDateInfo" >
+											</div>
+										</c:if>
+										<!-- 주간계획안 -->
+										<c:if test="${categoryNo==3}"> 
+											<div class="col-sm-3" id="afterClass" style="display: none;">
+												<div class="col-sm-4"> <input class="form-control inspection" type="text" id="projectDateInfoYear" placeholder="년 입력" > </div>
+												<div class="col-sm-3"> <input class="form-control inspection" type="text" id="projectDateInfoMonth" placeholder="월 입력" > </div>
+												<div class="col-sm-5"><select class="form-control" id="projectDateInfoWeek">
+																		<option value="" disabled selected>주 선택</option>
+																		<option value=1>1주</option>
+																		<option value=2>2주</option>
+																		<option value=3>3주</option>
+																		<option value=4>4주</option>
+																		<option value=5>5주</option>
+																		</select></div>
+											</div>
+										</c:if>
+										<!-- 월간계획안 -->
+										<c:if test="${categoryNo==2}">
+											<div class="col-sm-3" id="afterClass" style="display: none;">
+												<div class="col-sm-6"><input class="form-control inspection" type="text" id="projectDateInfoYear" placeholder="년 입력" ></div>
+												<div class="col-sm-6"><input class="form-control inspection" type="text" id="projectDateInfoMonth" placeholder="월 입력" ></div>
+											</div>
+										</c:if>
+										<!-- 연간계획안 -->
+										<c:if test="${categoryNo==1}">
+											<div class="col-sm-3" id="afterClass" style="display: none;">
+												<input class="form-control inspection" type="text" id="projectDateInfo" placeholder="년 입력" >
+											</div>
+										</c:if>
+										
+										
+									</div>
+									
+								</div>
+							</div>
+							<div class="wrapper" style="margin-top: 20px;">
+								<div id="example1"></div>
+							</div>
+						</div>
 					</div>
-					<div class="col-sm-3" id="afterAge" style="display: none;">
-						<select class="form-control" id="selectClass" name="selectClass" >
-							<option value="" disabled selected> 반 선택  </option>
-							<c:forEach items="${listChildClass}" var="childClass">
-								<option value="${childClass.classNo}" class="${childClass.classAge}">${childClass.className}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<!-- 일일계획안 -->
-					<c:if test="${categoryNo==4}">
-						<div class="col-sm-3" id="afterClass" style="display: none;">
-						<input class="form-control" type="date" id="projectDateInfo" >
-						</div>
-					</c:if>
-					<!-- 주간계획안 -->
-					<c:if test="${categoryNo==3}"> 
-						<div class="col-sm-3" id="afterClass" style="display: none;">
-							<div class="col-sm-4"> <input class="form-control inspection" type="text" id="projectDateInfoYear" placeholder="년 입력" > </div>
-							<div class="col-sm-3"> <input class="form-control inspection" type="text" id="projectDateInfoMonth" placeholder="월 입력" > </div>
-							<div class="col-sm-5"><select class="form-control" id="projectDateInfoWeek">
-													<option value="" disabled selected>주 선택</option>
-													<option value=1>1주</option>
-													<option value=2>2주</option>
-													<option value=3>3주</option>
-													<option value=4>4주</option>
-													<option value=5>5주</option>
-													</select></div>
-						</div>
-					</c:if>
-					<!-- 월간계획안 -->
-					<c:if test="${categoryNo==2}">
-						<div class="col-sm-3" id="afterClass" style="display: none;">
-						<div class="col-sm-6"><input class="form-control inspection" type="text" id="projectDateInfoYear" placeholder="년 입력" ></div>
-						<div class="col-sm-6"><input class="form-control inspection" type="text" id="projectDateInfoMonth" placeholder="월 입력" ></div>
-						</div>
-					</c:if>
-					<!-- 연간계획안 -->
-					<c:if test="${categoryNo==1}">
-						<div class="col-sm-3" id="afterClass" style="display: none;">
-						<input class="form-control inspection" type="text" id="projectDateInfo" placeholder="년 입력" >
-						</div>
-					</c:if>
-					
-				</div>
-				<button name="save" id="save">Save</button>
-				
-				<div class="wrapper" style="margin-top: 20px;">
-					<div id="example1"></div>
 				</div>
 			</div>
 		</div>

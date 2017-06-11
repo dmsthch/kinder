@@ -132,11 +132,24 @@ public class EducationProjectController {
 			model.addAttribute("categoryNo", categoryNo);
 			return "EducationProject/EducationProjectAdd";
 		}
-		
-		
-		
 		return "EducationProject/EducationProject";
+	}
+	
+	//폼 삭제
+	@RequestMapping(value = "/educationProjectFormDelete", method = RequestMethod.POST)
+	public String educationProjectFormDelete(EducationForm eduForm
+											,HttpSession session){
+		String licenseKindergarten = (String)session.getAttribute("licenseKindergarten");
+		eduForm.setLicenseKindergarten(licenseKindergarten);
+		int re = dao.educationProjectFormDelete(eduForm);
 		
+		System.out.println(re+"<<re");
+		if(re==0){
+			return "";
+		}else if(re == 1 ){
+			return "redirect:/educationProject";
+		}
+		return "";
 	}
 	
 	//저장된 양식 이름 가져오기
