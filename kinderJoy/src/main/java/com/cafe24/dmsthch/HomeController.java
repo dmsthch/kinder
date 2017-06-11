@@ -48,7 +48,8 @@ public class HomeController {
 		
 		String defaultUri = "/EducationSchedule/EducationScheduleForm";
 		
-		return "/home";
+		/*return "/home";*/
+		return "/every/home";
 	}
 	
 	@RequestMapping(value="/testFull", method=RequestMethod.GET)
