@@ -6,18 +6,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <jsp:useBean id="toDay" class="java.util.Date" />
 <head>
-	<meta charset="utf-8">
-	<title>Title</title>
-	
-	<!-- CSS Link -->
-	<c:import url="../module/importCSS.jsp"></c:import>
-	<!-- JS Link -->
-	<c:import url="../module/importJS.jsp"></c:import>
-
-	<style>
-	</style>
-	
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ChildCommute</title>
+<c:import url="../module/importCSS.jsp"></c:import>
+<c:import url="./nav/SideNav.jsp"></c:import>
+<c:import url="../module/navbar.jsp"></c:import>
 	<script>
+	$(document).ready(function(){
+		$('#ChildManagement').attr('class','active');
+
+		
+	})
 		$(document).ready(function(){
 			
 			if(${fn:length(resultAttendanceList) > 0 }){
@@ -121,40 +120,34 @@
 	
 </head>
 
-<body class="container-fluid" style="margin-top:5%;">
-
-
-	<!-- navbar -->
-	<c:import url="../module/navbar.jsp"></c:import>
-
-	<!-- sideNav -->
-	<c:import url="../Child/nav/SideNav.jsp"></c:import>
+<body class="components-page">
 <div class="wrapper">
-	
-
-    <div class="main-panel">
-		
-		<div class="row">
-			<h1 class="text-center">${getChildClass.className}반 출석부</h1><br>
-			<div class="col-sm-10 col-sm-offset-1">
-			<h3 class="text-right">날짜 : <fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd"/> &nbsp</h3>
-			<div class="text-right">
-				<button id="btnAllCheckTrue" class="btn btn-default">전체선택</button>
-				<button id="btnAllCheckFalse" class="btn btn-default">전체해제</button>
-			</div>
-			
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<td>유아번호</td>
-							<td>이름</td>
-							<td>출석여부</td>
-							<td>특이사항종류</td>
-							<td>특이사항내용</td>
-						</tr>
-					</thead>
-					<tbody>
-						
+	<div class="main-panel">
+ 			<div class="content">
+	            <div class="container-fluid">
+	                    <div class="col-md-12">
+	                        <div class="card">
+	                            <div class="card-header" data-background-color="green">
+	                                <h4 class="title">${getChildClass.className}반 출석부</h4>
+	                                <p class="category"></p>
+	                            </div>
+	                           <h4 class="text-right">날짜 : <fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd"/> &nbsp;</h4>
+							   <div class="text-right">
+									<button id="btnAllCheckTrue" class="btn btn-default">전체선택</button>
+									<button id="btnAllCheckFalse" class="btn btn-default">전체해제</button>
+						       </div>
+						       <div class="card-content table-responsive">
+  					 		  <table class="table table-hover table-striped">
+	                     		<thead class="text-second">
+									<tr>
+	                                    <th>유아번호</th>
+                						<th>이름</th>
+		                				<th>출석여부</th>
+										<th>특이사항종류</th>
+										<th>특이사항내용</th>
+		                            </tr>    
+					     		</thead>
+	                          <tbody>
 						<c:forEach var="child" items="${childList}">
 							<tr>
 								<td class="tdKidNo">${child.kidNo}</td>
@@ -175,6 +168,7 @@
 					</tbody>
 					
 				</table>
+				</div>
 				
 				<form id="resultForm" action="${pageContext.request.contextPath}/ChildCommute" method="post">
 					<div class="text-right">
@@ -208,6 +202,8 @@
 			
 	</div> <!-- main-panel End -->
 	
+</div>
+</div>
 </div>
 
 </body>

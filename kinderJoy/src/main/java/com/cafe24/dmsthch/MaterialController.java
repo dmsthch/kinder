@@ -89,7 +89,7 @@ public class MaterialController {
 		
 		String returnUrl = "redirect:/MaterialDocumnetList";
 		if(board.getBoardCategoryNo() == 0){
-			returnUrl = "Material/MaterialAdd";
+			returnUrl = "redirect:/MaterialAdd";
 			return returnUrl;
 		}
 		

@@ -7,27 +7,26 @@
 <!-- navigation -->
 
 <nav class="navbar navbar-transparent navbar-fixed-top navbar-color-on-scroll" >
-  <div class="container">
+  <div class="container" >
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
+    <div class="navbar-header" >
       <button id="menu-toggle" type="button" class="navbar-toggle">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar bar1"></span>
         <span class="icon-bar bar2"></span>
         <span class="icon-bar bar3"></span>
       </button>
-      <a href="http://www.creative-tim.com">
+      
            <div class="logo-container">
-                <div class="logo">
-                    <!-- <img src="../assets/img/new_logo.png" alt="Creative Tim Logo"> -->
-                </div>
+                <!-- <div class="logo">
+                    <img src="../assets/img/new_logo.png" alt="Creative Tim Logo">
+                </div> -->
                 <div class="brand">
-                  <p><a href="${pageContext.request.contextPath}/" class="navbar-brand">Team. 햇병아리</a></p>
+                  <p><a href="${pageContext.request.contextPath}/" class="navbar-brand" style="font-size: 25px;">유아 교육기관 평가 인증 대비 통합 관리시스템</a></p>
                 </div>
             </div>
       </a>
     </div>
-
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
 		<ul  class="nav navbar-nav navbar-right">
@@ -58,4 +57,3 @@
 <c:import url="/WEB-INF/views/Login/login.jsp"></c:import>
 <!-- ★★★★★로그아웃 모달 시작★★★★★ -->
 <c:import url="/WEB-INF/views/Login/logout.jsp"></c:import>
-

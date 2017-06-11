@@ -43,7 +43,6 @@ $(document).ready(function(){
 	var dataValue = ${resultData.val};
 	var dataMerge = ${resultData.merge};
 	var dataBorders = ${resultData.borders};
-	//
 	var countRow = ${resultData.countRow};
 	var countCol = ${resultData.countCol};
 	var addDate = ${resultData.addDate}
@@ -130,7 +129,7 @@ $(document).ready(function(){
 						}
 						dataForSave[row][col] = val;
 // 						/* dataForSave[row][col] = val; */
-						dataValue=dataForSave;  
+						dataArray=dataForSave;  
 					}
 				}			
 		}
@@ -142,6 +141,9 @@ $(document).ready(function(){
 	
 	$('#save').click(function(){
 		alert('test');
+		console.log("dataArray!!!!!시작!!!!!!!!!!!!!!!!!");
+		console.log(dataArray);
+		console.log("dataArray!!!!!끝!!!!!!!!!!!!!!!!!");
 		var jparse=JSON.stringify(dataArray);
 		var mergeparse = JSON.stringify(hot.mergeCells.mergedCellInfoCollection);
 		var inputDate = $('#date').val();

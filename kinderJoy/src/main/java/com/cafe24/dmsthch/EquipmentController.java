@@ -49,10 +49,10 @@ public class EquipmentController {
 		
 		dao.addEquipmentRequest(teacherNo, categoryNo, requestAmount, requestName, requestDate, requestPrice, requestStant, requestReason, session);
 		
-		return "redirect:/test01";
+		return "redirect:/EquipmentRequest";
 	}
 	
-	@RequestMapping(value = "testListSave", method = RequestMethod.POST)
+	@RequestMapping(value = "EquipmentRequestListRemove", method = RequestMethod.POST)
 	@ResponseBody
 	public int testListSave(@RequestParam(value="textIP") String textIP
 								,HttpSession session){
@@ -69,10 +69,11 @@ public class EquipmentController {
 		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
 		System.out.println(getCategory + "getCategory 확인");
 		model.addAttribute("getCategory", getCategory);
+	
 		List<EquipmentPlusMinus> plusMinus = dao.selectEquipmentPlusMinusList();
 		model.addAttribute("plusMinus",plusMinus);
 		
-		/*		Equipment equipmnet = new Equipment();
+/*		Equipment equipmnet = new Equipment();
 		String licenseKindergarten = (String) session.getAttribute("licenseKindergarten");
 		
 		equipmnet.setLicenseKindergarten(licenseKindergarten);
@@ -84,26 +85,28 @@ public class EquipmentController {
 		model.addAttribute("equipmentList",equipmentList);*/
 		return "Equipment/Equipment";
 	}
-	@RequestMapping(value = "test01", method = RequestMethod.GET)
+	@RequestMapping(value = "EquipmentRequest", method = RequestMethod.GET)
 	public String test05(HttpSession session
 						,Model model){
 		String teacherName = (String)session.getAttribute("teacherName");
 		int teacherNo = (Integer)session.getAttribute("teacherNo");
 		model.addAttribute("teacherName",teacherName);
 		model.addAttribute("teacherNo",teacherNo);
-		return "Equipment/NewFile";
+		return "Equipment/EquipmentRequest";
 	}
-	@RequestMapping(value = "testList", method = RequestMethod.GET)
+	@RequestMapping(value = "EquipmentRequestList", method = RequestMethod.GET)
 	public String test06(Model model){
 		List<EquipmentRequest> equipmentRequest = dao.selectEqipmentRequest();
 		model.addAttribute("equipmentRequest",equipmentRequest);
-		return "Equipment/testList";
+		return "Equipment/EquipmentRequestList";
 	}
 	@RequestMapping(value = "sheet", method = RequestMethod.GET)
-	public String sheet(Model model){
-		List<Map<String, Object>> getCategory = dao.selectSheetCategory();
-		System.out.println(getCategory + "getCategory 확인");
-		model.addAttribute("getCategory", getCategory);
+	public String sheet(Model model
+						,@RequestParam(value="sheetNo") String sheetNo
+						,HttpSession session){
+		Sheet sheet = dao.selectEquipmentSheet(session, "기본 품의서", "0");
+		model.addAttribute("sheetNo",sheetNo);
+		model.addAttribute("sheet",sheet);
 		return "Equipment/sheet";
 	}
 /*	@RequestMapping(value = "test01", method = RequestMethod.GET)
@@ -145,8 +148,12 @@ public class EquipmentController {
 							, @RequestParam(value="sheetCategory") String sheetCategory
 							, HttpSession session){
 		
-		dao.addEquementSheet(dataArray, mergeArray, borderArray, countRow, countCol, sheetCategory, sheetName, session);
-		
+		int gategoryNoTest = dao.selectSheetValueNo(session, sheetCategory, sheetName);
+		if(gategoryNoTest == 0) {
+			dao.addEquementSheet(dataArray, mergeArray, borderArray, countRow, countCol, sheetCategory, sheetName, session);
+		} else {
+			dao.updateSheet(session, mergeArray, dataArray, borderArray, countRow, countCol, sheetCategory, sheetName);
+		}	
 		return "Equipment/sheet";
 	}
 	@RequestMapping(value = "reroad", method = RequestMethod.GET)
@@ -168,35 +175,58 @@ public class EquipmentController {
 
 		return "Equipment/NewFile";
 	}
-	@RequestMapping(value = "testSave", method = RequestMethod.POST)
+	// 비품 한줄 저장
+	@RequestMapping(value = "equipmentListSave", method = RequestMethod.POST)
 	@ResponseBody
-	public int test03(@RequestParam(value="boardCategoryNo", required=false, defaultValue="") String equipmentCategorySelect
-						,@RequestParam(value="testCategoryNo", required=false, defaultValue="") String testCategoryNo
-						,@RequestParam(value="test1") String equipmentName
-						,@RequestParam(value="testPrice") String testPrice
-						,@RequestParam(value="testValue", required=false, defaultValue="") String testValue
+	public int test03(@RequestParam(value="boardCategoryNo") String boardCategoryNo
+						,@RequestParam(value="equipmentName") String equipmentName
+						,@RequestParam(value="equipmentAmount", required=false, defaultValue="") String equipmentAmount
 						,@RequestParam(value="updatePlusInput", required=false, defaultValue="") String updatePlusInput
 						,@RequestParam(value="updateMinusInput", required=false, defaultValue="") String updateMinusInput
-						,@RequestParam(value="testCustomer") String testCustomer
-						,@RequestParam(value="testState") String testState
+						,@RequestParam(value="equipmentCost", required=false, defaultValue="") String equipmentCost
+						,@RequestParam(value="equipmentTotalCost", required=false, defaultValue="PLUS") String equipmentTotalCost
+						,@RequestParam(value="equipmentCustomer") String equipmentCustomer
+						,@RequestParam(value="equipmentState") String equipmentState
 						,HttpSession session){
 		
 		System.out.println("비품 저장 메서드 실행");
-		System.out.println(testCategoryNo);
-		System.out.println(equipmentCategorySelect);
+		System.out.println(boardCategoryNo);
 		System.out.println(equipmentName);
-		System.out.println(testPrice);
-		System.out.println(testValue);
+		System.out.println(equipmentAmount);
 		System.out.println(updatePlusInput);
 		System.out.println(updateMinusInput);
-		System.out.println(testCustomer);
-		System.out.println(testState);
-
-	
-		dao.addTestEquipment(equipmentName, testCategoryNo, equipmentCategorySelect, testState, session);
-		
-		return 0;
+		System.out.println(equipmentCost);
+		System.out.println(equipmentTotalCost);
+		System.out.println(equipmentCustomer);
+		System.out.println(equipmentState);
+		int resultInsert;
+		Equipment equipment = new Equipment();;
+		equipment = dao.selectTestEquipment(equipmentName, session);
+		System.out.println(equipment + "equipment 확인");
+		if(equipment == null) {
+			dao.addTestEquipment(session, equipmentName, boardCategoryNo, equipmentState);
+			equipment = new Equipment();
+			equipment = dao.selectTestEquipment(equipmentName, session);
+			int selectEquipemntNo = equipment.getEquipmentNo();
+			if(updatePlusInput.equals("")) {
+				System.out.println("minus 확인");
+				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, equipmentCost, equipmentAmount, equipmentCustomer);
+			} else {
+				System.out.println("plus 확인");
+				dao.addTestEquipmentValueMinus(selectEquipemntNo, equipmentCost, "0", equipmentCustomer);
+				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, updatePlusInput, equipmentCost, equipmentCustomer);
+			}
+		} else {
+			int selectEquipemntNo = equipment.getEquipmentNo();
+			if(updatePlusInput.equals("")) {
+				resultInsert = dao.addTestEquipmentValueMinus(selectEquipemntNo, equipmentCost, updateMinusInput, equipmentCustomer);
+			} else {
+				resultInsert = dao.addTestEquipmentValuePlus(selectEquipemntNo, equipmentCost, updatePlusInput, equipmentCustomer);
+			}
+		}
+		return resultInsert;
 	}
+	// 스프레드 시트 실행
 	@RequestMapping(value = "SheetList", method = RequestMethod.GET)
 	public String sheetList(Model model
 							,HttpSession session){

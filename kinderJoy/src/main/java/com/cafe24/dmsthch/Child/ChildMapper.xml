@@ -4,6 +4,211 @@
   
   <mapper namespace="com.cafe24.dmsthch.Child.ChildMapper">
   
+  	<!-- 발달평가 하나 보기 -->
+  	<select id="getDevelopmentDetailsOne" resultType="java.util.Map" parameterType="java.lang.String">
+  		SELECT
+			d.development_group AS developmentGroup
+			,d.development_title AS developmentTitle
+			,d.development_case AS developmentCase
+			,d.development_day AS developmentDay
+			,k.kid_name AS kidName
+			,k.kid_gender AS kidGender
+			,t.teacher_name AS teacherName
+			,t.teacher_id AS teacherID
+			,c.class_name AS className
+			,c.class_age AS classAge
+			,o.opserve_content AS opserveContent
+			,o.opserve_reference_1 AS opserveReference1
+			,o.opserve_reference_2 AS opserveReference2
+			,o.opserve_reference_3 AS opserveReference3
+		FROM development_details d 
+		INNER JOIN development dev
+		ON dev.development_no = d.development_no
+		INNER JOIN kid_formation kf
+		ON kf.kid_formation_no = dev.kid_formation_no
+		INNER JOIN kid k
+		ON k.kid_no = kf.kid_no
+		INNER JOIN teacher_formation tf
+		ON tf.teacher_formation_no = dev.teacher_formation_no
+		INNER JOIN teacher t
+		ON t.teacher_no = tf.teacher_no
+		INNER JOIN kid_class c
+		ON c.class_no = kf.class_no
+		INNER JOIN development_opserve o
+		ON o.opserve_no = d.opserve_no
+		WHERE detailes_no = #{detailesNo}
+  	</select>
+  
+  	<!-- 발달평가 목록 -->
+  	<select id="getDevelopmentDetails" resultType="java.util.Map" parameterType="java.util.Map">
+  		SELECT 
+			d.detailes_no AS detailesNo
+			,d.development_title AS developmentTitle
+			,c.class_name AS className
+			,k.kid_no AS kidNo
+		FROM development_details d
+		INNER JOIN development dev
+		ON dev.development_no = d.development_no
+		INNER JOIN kid_formation f
+		ON f.kid_formation_no = dev.kid_formation_no
+		INNER JOIN kid_class c
+		ON c.class_no = f.class_no
+		INNER JOIN kid k
+		ON k.kid_no = f.kid_no
+		WHERE d.license_kindergarten = #{licenseKindergarten}
+		<if test="searchAge!=''">
+			AND c.class_age = #{searchAge}
+		</if>
+		<if test="searchType!='' ">
+			<if test="searchType.equals('kidName')">
+				 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') 
+			</if>
+			<if test="searchType.equals('className')">
+				AND c.class_name LIKE CONCAT('%',#{searchVal},'%')
+			</if>
+		</if>
+		<if test=" searchType == '' and searchVal != ''">
+			 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') OR c.class_name LIKE CONCAT('%',#{searchVal},'%')
+			 OR d.development_title LIKE CONCAT('%',#{searchVal},'%')
+		</if>
+
+	
+	ORDER by k.kid_name ASC
+	LIMIT #{startRow}, #{onePageRow};
+		
+  	</select>
+  
+	<!-- 발달평가 상세 입력하기 -->
+	<insert id="addDevelopmentDetails" parameterType="com.cafe24.dmsthch.Child.ChildDevelopmentDetails">
+		INSERT INTO development_details(
+			development_no
+			,license_kindergarten
+			,development_group
+			,opserve_no
+			,development_title
+			,development_case
+			,development_day
+		) VALUES (
+			#{developmentNo}
+			,#{licenseKindergarten}
+			,#{developmentGroup}
+			,#{opserveNo}
+			,#{developmentTitle}
+			,#{developmentCase}
+			,#{developmentDay}
+		)
+	</insert>
+	
+	<!-- 관찰문항 번호로 환찰내용 셀렉트 -->
+	<select id="getOpserveContent" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT opserve_content
+		FROM development_opserve
+		WHERE opserve_no = #{opserveNo}
+	</select>
+  
+  	<!-- 선생님넘버, 년도로 교원편성번호 찾기 -->
+  	<select id="getTeacherFormationNo" parameterType="java.util.Map" resultType="java.lang.String">
+	  	SELECT
+			t.teacher_formation_no
+		FROM teacher_formation t
+		INNER JOIN kid_class k
+		ON k.class_no = t.class_no
+		WHERE class_year = #{classYear}
+		AND t.teacher_no = #{teacherNo}
+  	</select>
+  
+  	<!-- 발달평가 입력 (반편성번호로 평가번호 셀렉트했는데 없을때) -->
+	<insert id="addChildDevelopment" parameterType="com.cafe24.dmsthch.Child.ChildDevelopment">
+		INSERT INTO development( 
+			teacher_formation_no
+			,kid_formation_no
+			,development_year
+		) VALUES (
+			#{teacherFormationNo}
+			,#{kidFormationNo}
+			,#{developmentYear}
+		)	
+	</insert>
+	
+	<!-- 반편성 번호로 발달평가 테이블의 평가번호 셀렉트 하기 -->
+	<select id="getChildDevelopment" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			development_no AS developmentNo
+		FROM development
+		WHERE kid_formation_no = #{kidFormationNo}
+	</select>
+  
+  <!-- 반편성 번호 하나로 아이 이름, 성별, 생년월일, 반이름 셀렉트 (발달평가할때 보여줄 정보)  -->
+  <select id="getChildInfoForDevelopment" parameterType="com.cafe24.dmsthch.Child.ChildFormation" resultType="java.util.Map">
+	  SELECT
+		k.kid_no AS kidNo
+		,k.kid_name AS kidName
+		,k.kid_birth AS kidBirth
+		,k.kid_gender AS kidGender
+	 	,c.class_name AS className
+	 	,c.class_age AS classAge
+	 	,f.kid_formation_no As kidFormationNo
+	FROM kid k
+	INNER JOIN kid_formation f
+	ON f.kid_no = k.kid_no
+	INNER JOIN kid_class c
+	ON c.class_no = f.class_no
+	WHERE f.kid_formation_no = ${kidFormationNo}
+  </select>
+  
+  <!-- 연령에 따른 opserve정보 셀렉트 하기 -->
+  <select id="getOpserve" parameterType="com.cafe24.dmsthch.Child.ChildClass" resultType="com.cafe24.dmsthch.Child.ChildDevelopmentOpserve">
+	SELECT 
+		opserve_no AS opserveNo
+		,opserve_question_no AS opserveQuestionNo
+		,opserve_content AS opserveContent
+		,opserve_question AS opserveQuestion
+		,opserve_reference_1 AS opserveReference1
+		,opserve_reference_2 AS opserveReference2
+		,opserve_reference_3 AS opserveReference3
+		,opserve_age AS opserveAge
+	FROM development_opserve
+	WHERE opserve_age = ${classAge}
+  </select>
+  
+  
+  <!-- 해당유치원의 반편성번호와 유아정보 가져오기 (발달평가를 위한 셀렉트) -->
+  <select id="ChildBeforeDevelopmentAdd" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT
+		f.kid_formation_no AS KidFormationNo
+		,k.kid_name AS kidName
+		,k.kid_birth AS kidBirth
+		,k.kid_gender AS kidGender
+		,c.class_name AS className
+		,c.class_age AS classAge
+	FROM kid_formation f
+	INNER JOIN kid k
+	ON k.kid_no = f.kid_no
+	INNER JOIN kid_class c
+	ON c.class_no = f.class_no
+	WHERE c.class_year = #{year}
+	AND c.license_kindergarten = #{licenseKindergarten}
+	<if test="searchAge!=''">
+		AND c.class_age = #{searchAge}
+	</if>
+	<if test="searchType!='' ">
+		<if test="searchType.equals('kidName')">
+			 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') 
+		</if>
+		<if test="searchType.equals('className')">
+			AND c.class_name LIKE CONCAT('%',#{searchVal},'%')
+		</if>
+	</if>
+	<if test=" searchType == '' and searchVal != ''">
+		 AND k.kid_name LIKE CONCAT('%',#{searchVal},'%') OR c.class_name LIKE CONCAT('%',#{searchVal},'%')
+		
+	</if>
+
+	
+	ORDER by k.kid_name ASC
+	LIMIT #{startRow}, #{onePageRow};
+  </select>
+  
   <!-- 유아번호로 오늘날짜 출석정보 가져오기 (특이사항 포함)-->
   <select id="getCommuteAll" parameterType="java.lang.Integer" resultType="com.cafe24.dmsthch.Child.ChildAttendance">
   	select 

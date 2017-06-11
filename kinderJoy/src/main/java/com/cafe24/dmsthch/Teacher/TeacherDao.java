@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cafe24.dmsthch.Child.ChildClass;
+import com.cafe24.dmsthch.Home.License;
 
 @Repository
 public class TeacherDao {
@@ -97,5 +98,36 @@ public class TeacherDao {
 	public int updateTeacher(Teacher teacher) {
 		System.out.println("수정확메서드호출_Dao");
 		return sql.update("com.cafe24.dmsthch.Teacher.TeacherMapper.updateTeacher", teacher);
+	}
+	
+	//교원 인서트
+	public int pyeonseong(TeacherFormation TF) {
+		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.pyeonseong", TF);
+	}
+	
+	//교원표!!!표! 차인표!
+	public List<Teacher> takeFormList(String string) {
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeFormList", string);
+	}
+	
+	//교원표!!!표! 차인표!
+	public List<ChildClass> takeFormList2(String string) {
+		return sql.selectList("com.cafe24.dmsthch.Teacher.TeacherMapper.takeFormList", string);
+	}
+	
+	//라이선스 발급받기 위한 insert
+	public int insertLicense(Object object) {
+		return sql.insert("com.cafe24.dmsthch.Teacher.TeacherMapper.insertLicense", object);
+	}
+	
+	//발급받은 라이선스를 teacher에 업데이트
+	public int teacherLicenseUpdate(Object object) {
+		return sql.update("com.cafe24.dmsthch.Teacher.TeacherMapper.teacherLicenseUpdate",object);
+	}
+	
+	//view의 show/hide를 위한 메서드
+	public String selectLicense(int Int) {
+		System.out.println("호출확인");
+		return sql.selectOne("com.cafe24.dmsthch.Teacher.TeacherMapper.selectLicense" ,Int);
 	}
 }

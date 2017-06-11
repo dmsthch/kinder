@@ -1,11 +1,23 @@
 package com.cafe24.dmsthch;
 
+import java.io.IOException;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.RSAPublicKeySpec;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import javax.crypto.Cipher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,19 +26,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
 import com.cafe24.dmsthch.Child.ChildClass;
+import com.cafe24.dmsthch.Home.HomeDao;
+import com.cafe24.dmsthch.Home.License;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
+import com.cafe24.dmsthch.Teacher.TeacherFormation;
 
 @Controller
-@SessionAttributes( { "teacherId", "teacherName", "teacherLevel", "licenseKindergarten", "teacherNo", "teacherTime" })
+
 public class TeacherController {
 	
 	@Autowired
 	private TeacherDao TDao;
+	
+	@Autowired
+	HomeDao dao;
 	
 	//ErrorPage.jsp
 	@RequestMapping(value="/ErrorPage", method = RequestMethod.GET)
@@ -42,14 +58,18 @@ public class TeacherController {
 	return "Teacher/TheAviator/index";
 	}
 	
-	//takeForm save메서드 호출
-	@RequestMapping(value="/save2", method = RequestMethod.POST)
-	public String save() {
-		System.out.println("호출확인 _TeacherController");
-		return "";
+	//사이드 세션생성
+	@ResponseBody
+	@RequestMapping(value="/sideSession" , method = RequestMethod.GET)
+	public JSONObject sideSession (HttpSession session) {
+		JSONObject obj = new JSONObject();
+		String teacherLevel = (String)session.getAttribute("teacherLevel");
+		System.out.println(teacherLevel+ "<--------------");
+		obj.put("teacherLevel", teacherLevel);
+		return obj;
 	}
 	
-	//계정삭제
+	//계정삭제 탈퇴
 	@RequestMapping(value="/deleteAccount", method = RequestMethod.POST)
 	public String delete(HttpSession httpsession ,SessionStatus sessionstatus) {
 		//현재 세션에 있는 아이디값을 가져와서 TDao에서 부른 메서드 안에 대입 후 쿼리 실행하면
@@ -67,7 +87,7 @@ public class TeacherController {
 
 		TDao.deleteANDinsert(map);
 		
-		sessionstatus.setComplete();
+		httpsession.invalidate();
 		return "redirect:/home";
 	}
 	
@@ -83,6 +103,20 @@ public class TeacherController {
 	public String Add() {
 		System.out.println("GET방식으로 TeacherAdd로 포워드\n");
 		return "Teacher/TeacherAdd";
+	}
+	
+	//편성표 리스트 호출 차인표 표 
+	@RequestMapping(value="/takeFormList", method=RequestMethod.GET)
+	public String takeFormList(HttpSession httpsession, Model model) {
+		System.out.println("호출확인");
+		
+		List<Teacher>List = TDao.takeFormList((String)httpsession.getAttribute("licenseKindergarten"));
+	
+		//classNo classAge teacherNo teacherName
+		
+		model.addAttribute("List",List);
+		
+		return "Teacher/TeacherModify/takeFormList";
 	}
 	
 	//편성표폼 호출
@@ -111,6 +145,26 @@ public class TeacherController {
 		return "Teacher/TeacherModify/takeTab";
 	}
 	
+	//편성표 입력폼
+	@RequestMapping(value="/pyeonseong", method=RequestMethod.POST)
+	public String kyowon(HttpServletRequest request ,TeacherFormation TF ,HttpSession httpsession ) {
+		
+/*		//원래는 이렇게 폼에서 보낸 값을 받아야 하는데
+		TF.setClassNo(TF.getClassNo());
+		TF.setTeacherNo(TF.getTeacherNo());
+		//스프링에서는 알아서 값을 가져와서 세팅해주기 때문에 생략가능하다
+*/		
+		TF.setLicenseKindergarten((String) httpsession.getAttribute("licenseKindergarten"));
+		
+		int pyeonSeong = TDao.pyeonseong(TF);
+		
+		if(pyeonSeong == 0) {
+			System.out.println("패");
+		}else{
+			System.out.println("성");
+		}
+		return "redirect:/takeForm";
+	}
 	
 	//교원 수정폼 호출 메서드 //User Profile
 	@RequestMapping(value="/kyo", method=RequestMethod.GET)
@@ -125,8 +179,7 @@ public class TeacherController {
 	//교원 수정하기 자기 정보 수정하기 
 	@RequestMapping(value="/teacherUpdate", method = RequestMethod.POST)
 	public String updateTeacher(Teacher teacher
-			, HttpSession httpsession
-			, Model model) {
+			, HttpSession httpsession) {
 		
 /*		
  		//기존 형식
@@ -145,8 +198,6 @@ public class TeacherController {
 		//조건절에 들어갈 아이디값을 가져와야 하는데 현재 세션에서 가져왔다
 		teacher.setTeacherId((String) httpsession.getAttribute("teacherId"));
 		
-		//값이 들어가야하는 부분엔 매개변수에 RequestParam으로 값을 자동으로 가져와서 teacher에 세팅해주었다
-		/*매개변수에 @RequestParam("value") String value; 넣으면 된다*/
 
 		int a = TDao.updateTeacher(teacher);
 		
@@ -229,6 +280,117 @@ public class TeacherController {
 		return check;
 	}
 	
+	//로그인 폼 호출
+	@RequestMapping(value="/testLogin", method=RequestMethod.GET)
+	public void Login(HttpServletRequest request ,HttpServletResponse response) throws Exception {
+		
+		
+		KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+		generator.initialize(1024);
+
+		KeyPair keyPair = generator.genKeyPair();
+		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+
+		PublicKey publicKey = keyPair.getPublic();
+		PrivateKey privateKey = keyPair.getPrivate();
+
+		HttpSession session = request.getSession();
+		// 세션에 공개키의 문자열을 키로하여 개인키를 저장한다.
+		session.setAttribute("__rsaPrivateKey__", privateKey);
+
+		// 공개키를 문자열로 변환하여 JavaScript RSA 라이브러리 넘겨준다.
+		RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
+
+		String publicKeyModulus = publicSpec.getModulus().toString(16);
+		String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
+
+		request.setAttribute("publicKeyModulus", publicKeyModulus);
+		request.setAttribute("publicKeyExponent", publicKeyExponent);
+		
+		request.getRequestDispatcher("/WEB-INF/views/Login/testLogin.jsp").forward(request, response);
+		
+	}
+	
+	
+	//로그인 암호화된 아이디 비밀번호를 복호화한다.
+	@RequestMapping(value="/loginTest", method=RequestMethod.POST)
+    protected void processRequest(
+    		HttpServletRequest request
+    		,Teacher teacher 
+    		, HttpServletResponse response
+    		, HttpSession session2
+    		, Model model)
+            throws ServletException, IOException {
+		String securedUsername = request.getParameter("securedUsername");
+        String securedPassword = request.getParameter("securedPassword");
+        
+        HttpSession session = request.getSession();
+        PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
+        session.removeAttribute("__rsaPrivateKey__"); // 키의 재사용을 막는다. 항상 새로운 키를 받도록 강제.
+
+        if (privateKey == null) {
+            throw new RuntimeException("암호화 비밀키 정보를 찾을 수 없습니다.");
+        }
+        try {
+            String username = decryptRsa(privateKey, securedUsername);
+            String password = decryptRsa(privateKey, securedPassword);
+           
+            
+  
+            session2.setAttribute("teacherId", username);
+            System.out.println(username);
+            if(session2.getAttribute("teacherId") != null) {
+            	/*Teacher saveSession = TDao.LoginTeacher(teacher);
+            	System.out.println("나오냐");
+                session2.setAttribute("teacherNo", saveSession.getTeacherNo());
+                System.out.println("나오냐2");
+                session2.setAttribute("licenseKindergarten", saveSession.getLicenseKindergarten());
+                session2.setAttribute("teacherLevel", saveSession.getTeacherLevel());
+                session2.setAttribute("teacherName", saveSession.getTeacherName());
+                System.out.println(saveSession.getTeacherName()+"<<<<<<<<<<<<<네임");*/
+            }
+
+            
+            
+            //넘버 라이 네임 레벨 아디
+            
+            System.out.println(username +"<--복호화한 아이디");
+            System.out.println(password +"<--복호화한 패스");
+
+            request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
+        } catch (Exception ex) {
+            throw new ServletException(ex.getMessage(), ex);
+        }
+    }
+
+    private String decryptRsa(PrivateKey privateKey, String securedValue) throws Exception {
+        System.out.println("해독할 정보 : " + securedValue);
+        Cipher cipher = Cipher.getInstance("RSA");
+        byte[] encryptedBytes = hexToByteArray(securedValue);
+        cipher.init(Cipher.DECRYPT_MODE, privateKey);
+        byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+        String decryptedValue = new String(decryptedBytes, "utf-8"); // 문자 인코딩 주의.
+        return decryptedValue;
+    }
+
+    /**
+     * 16진 문자열을 byte 배열로 변환한다.
+     */
+    public static byte[] hexToByteArray(String hex) {
+        if (hex == null || hex.length() % 2 != 0) {
+            return new byte[]{};
+        }
+
+        byte[] bytes = new byte[hex.length() / 2];
+        for (int i = 0; i < hex.length(); i += 2) {
+            byte value = (byte)Integer.parseInt(hex.substring(i, i + 2), 16);
+            bytes[(int) Math.floor(i / 2)] = value;
+        }
+        return bytes;
+}
+	
+	
+	
 	
 	//@RequestParam("클라이언트가 입력한 값") String 매개변수
 	//리퀘스트 파람을 쓰면 값을 알아서 넣어준다
@@ -244,10 +406,21 @@ public class TeacherController {
 		System.out.println(teacher.getTeacherId() +"<-- 사용자가 입력한 아이디");
 		System.out.println(TDao+" <--TDao 동작 확인");
 
+		License result = dao.getLicense(saveSession.getLicenseKindergarten());
+		model.addAttribute("result",result);
+
 		if(saveSession != null) {
 			if(session.getAttribute("teacherId") == null){
 				
-				model.addAttribute("teacherNo",saveSession.getTeacherNo());
+				session.setAttribute("teacherNo",saveSession.getTeacherNo());
+				session.setAttribute("licenseKindergarten",saveSession.getLicenseKindergarten());
+				session.setAttribute("teacherId", saveSession.getTeacherId());
+				session.setAttribute("teacherName", saveSession.getTeacherName());
+				session.setAttribute("teacherLevel" ,saveSession.getTeacherLevel());
+				
+				//왜 인지는 모르겠으나 모델객체에 값을 저장하면 주소창에 값이 모두 노출되었다
+				//그런데 세션에 저장하니 주소창에 값이 없어졌다 왜???
+				/*model.addAttribute("teacherNo",saveSession.getTeacherNo());
 				System.out.println(saveSession.getTeacherNo() +" <-- 세션에 저장될 넘버 값 세션");
 				
 				model.addAttribute("licenseKindergarten",saveSession.getLicenseKindergarten());
@@ -260,45 +433,84 @@ public class TeacherController {
 				System.out.println(saveSession.getTeacherName() + "<-- 세션에 저장될 네임값");
 				
 				model.addAttribute("teacherLevel" ,saveSession.getTeacherLevel());
-				System.out.println(saveSession.getTeacherLevel() + " <--세션에 저장될 레벨값");
+				System.out.println(saveSession.getTeacherLevel() + " <--세션에 저장될 레벨값");*/
 				
 				session.setMaxInactiveInterval(7200);
-
-				//시간설정을 모델객체안에 담음
-				model.addAttribute("teacherTime", session.getMaxInactiveInterval());
+				session.setAttribute("teacherTime", session.getMaxInactiveInterval());
 				System.out.println("세션의 유지 시간 : "+session.getMaxInactiveInterval()+"초");
-
 				}
-			} else {
+			
+			} else {				
 				model.addAttribute("nogin","로그인실패");
 				System.out.println("아이디나 비밀번호를 확인해주세요");
+				
 				return "/home";
 		}
-		return "redirect:/home";
+		
+		return "/home";
 	}
 	
 	//로그아웃 메서드
 	@RequestMapping(value="/logOut", method=RequestMethod.GET)
-	public String logOut(@ModelAttribute Teacher teacher ,SessionStatus sessionstatus){
+	public String logOut(@ModelAttribute Teacher teacher ,HttpSession session){
 
-		sessionstatus.setComplete();
+		//sessionstatus.setComplete();
+		session.invalidate();
+		System.out.println("세션 삭제");
 
 
 		
-		System.out.println(sessionstatus +"\n 로그아웃 SessionAttributes만 초기화");
+		//System.out.println(sessionstatus +"\n 로그아웃 SessionAttributes만 초기화");
 		System.out.println(" redirect:/home");
 		return "redirect:/home";
 	}
 	
 	//라이센스 라이선스
 	@RequestMapping(value="/license", method=RequestMethod.GET)
-	public String chara() {
+	public String chara(HttpSession session ,License license ,Model model) {
 		System.out.println("라이선스 발급 페이지 호출");
+		
+		String aaa = TDao.selectLicense((Integer) session.getAttribute("teacherNo"));
+		System.out.println(aaa);
+		model.addAttribute("license", aaa);
+		
 		return "Teacher/TeacherModify/license";
 	}
 	
+	//라이센스테이블에 insert시킬 유치원 정보 licenseForm 라이센스 라이선스 
+	//업데이트와 인서트는 별 반 다를 게 없는 것 같다.
+	//업데이트하려고 만든 코딩을 인서트로 변경해야 해서 맵퍼에서 sql을 고쳤는데
+	//여기 컨트롤러에선 하나도 안고쳐도 인서트가 되었다.
+	@RequestMapping(value="/licenseForm", method=RequestMethod.POST)
+	public String licenseForm(HttpSession session ,License license) {
+		
+		license.setLicenseKindergarten((String) session.getAttribute("licenseKindergarten"));
+		System.out.println(session.getAttribute("licenseKindergarten")+"<<<<<<<<<<현재 라이센스1");
+		license.setTeacherNo((Integer) session.getAttribute("teacherNo"));
+		System.out.println(session.getAttribute("teacherNo"));
+		int x = TDao.insertLicense(license);
+		
+		int y = TDao.teacherLicenseUpdate(session.getAttribute("teacherNo"));
+		if(x == 1) {
+			System.out.println("성");
+		}else{
+			System.out.println("패");
+		}
+		
+		if(y == 1) {
+			System.out.println("성");
+		}else{
+			System.out.println("패");
+		}
+		System.out.println(session.getAttribute("licenseKindergarten")+"<<<<<<<<<<현재 라이센스2");
+		return "redirect:/license";
+		//리다이렉트 시 요청주소를 적어야한다
+		//포워드 시 절대경로를 적어야 한다.
+	}
+	
+	//라이센스 발급 후 teacher 라이센스도 똑같이 업데이트 라이선스
 	//라이센스 라이선스 처리
-	@RequestMapping(value="/license", method=RequestMethod.POST)
+/*	@RequestMapping(value="/license", method=RequestMethod.POST)
 	public String uuid(Model model) throws Exception {
 		
 		//UUID에 대해 자세한 사항은 http://hyeonjae.github.io/uuid/2015/03/17/uuid.html 참고
@@ -310,5 +522,5 @@ public class TeacherController {
 		System.out.println(licenseKey +"<--생성된 UUID\n");
 		
 		return "Teacher/TeacherModify/license";
-	}
+	}*/
 }

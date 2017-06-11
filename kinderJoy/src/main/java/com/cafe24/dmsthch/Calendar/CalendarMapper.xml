@@ -13,7 +13,7 @@
   		,category_no as categoryNo
   		,schedule_content as scheduleContent
   		,schedule_start_day as scheduleStartDay
-  		,schedule_end_day as scheduleEndDay
+  		,DATE_ADD(schedule_end_day,INTERVAL +1 DAY) as scheduleEndDay
   		,schedule_title as scheduleTitle
   		,schedule_time as scheduleTime
   	FROM schedule
