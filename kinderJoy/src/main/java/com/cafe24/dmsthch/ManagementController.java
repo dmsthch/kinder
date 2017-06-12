@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.cafe24.dmsthch.Management.ManagementDao;
-import com.cafe24.dmsthch.Management.ManagementEquipment;
 import com.cafe24.dmsthch.Management.ManagementList;
 import com.cafe24.dmsthch.Management.ManagementPlusMinus;
-import com.cafe24.dmsthch.Management.ManagementYesterDayEquipment;
 
 @Controller
 public class ManagementController {

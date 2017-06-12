@@ -131,9 +131,6 @@
 	                </div>
 	            </div>
 	        </div>
-		
-		<c:import url="./footer.jsp"></c:import>
-
 	    </div>
 	    
 	    <ul id="tlyPageGuide" data-tourtitle="가이드를 시작하려면 클릭하세요.">
