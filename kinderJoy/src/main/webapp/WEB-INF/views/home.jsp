@@ -45,7 +45,7 @@
 			<div class="col-md-12 col-sm-12">
 				<div class="test">
 				<h3>임초롬 / 김신삼 / 김한솔 / 양지연 / 전광철</h3>
-				<h1>Team. 햇병아리</h1>
+				<h5>교육부지정 유아 교육기관 평가 인증 대비 통합 관리시스템</h5>
 				<hr>
 				<h2>${result.licenseKindergartenName}</h2>
 				<h7>라이센스 유효기간 <br>${result.licenseGrantDay}~${result.licenseExpirationDay}</h7>

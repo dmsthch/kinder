@@ -271,13 +271,13 @@ $(document).ready(function(){
     <div class="modal-content calendarModalContent">
       <div class="modal-header calendarModalHeader">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title calendarModalTitle">일정 추가(아직 추가 안됨!!)</h4>
+        <h4 class="modal-title calendarModalTitle">일정 추가</h4>
       </div>
       <div class="modal-body calendarModalBody">
       <form action="${pageContext.request.contextPath}/addShedule" method="post">
       	<div class="row" style="margin-bottom: 10px; text-align: center;">
       		<div class="col-sm-2"><label>제 목 :</label></div>
-      		<div class="col-sm-10"><input value="아직추가안됨!!" type="text" id="title" class="form-control" name="scheduleTitle"> </div>      	
+      		<div class="col-sm-10"><input type="text" id="title" class="form-control" name="scheduleTitle"> </div>      	
       	</div>
       	<div class="row" style="margin-bottom: 10px; text-align: center;">
       		<div class="col-sm-2"><label>내 용 :</label></div>
@@ -302,7 +302,7 @@ $(document).ready(function(){
       	</div>
       	<div class="modal-footer calendarModalFooter">
       	<!-- <input type="submit" class="btn btn-default" id="addButton" data-dismiss="modal" value="추가"> -->
-		<input type="submit" type="submit" value="test">
+		<input type="submit" class="btn btn-info" type="submit" value="추가하기">
         <input type="button" class="btn btn-default" data-dismiss="modal" value="close" id="closeAddModal">
       </div>
       </form>
