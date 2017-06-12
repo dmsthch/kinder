@@ -59,7 +59,7 @@
 					</li>
 					
 					<li>
-						<a href="#">
+						<a href="#" data-toggle="modal" data-target="#guide">
 							<img src="css/LCR/idea.png">
 							<h1 style="font-size: 20px;">사용 가이드 </h1>
 							<div class="clear"></div>
@@ -139,7 +139,8 @@
 			<hr>
 			4. 유아 관리 <br/>
 			유아정보를 등록하고 수정할 수 있으며 반 이름만 적으면 반 생성이 가능합니다. 또한 유아들의 반 편성또한 간편합니다.<br>
-			유아 출석을 할 수 있으며 특이사항(예를들어 지각, 조퇴 등)이 있을 경우 따로 기입이 가능하며 캘린더 형식으로 출석 현황을 확인할 수 있습니다.
+			유아 출석을 할 수 있으며 특이사항(예를들어 지각, 조퇴 등)이 있을 경우 따로 기입이 가능하며 캘린더 형식으로 출석 현황을 확인할 수 있습니다.<br>
+			유아 발달 평가도 시스템화 되어있어 간편하게 저장하고 관리할 수 있습니다. 
 			<hr>
 			5. 비품 관리 <br/>
 			비품의 수량, 단가, 구입처 등을 간편하게 입력하고 관리할 수 있습니다. 스프레드 시트 형식으로 품의서를 관리할 수 있습니다.<br>
@@ -207,6 +208,58 @@
 
 
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- 가이드 Modal -->
+<div id="guide" class="modal fade" role="dialog" >
+  <div class="modal-dialog" > 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title" >사용 가이드</h2> 
+      </div>
+      <div class="modal-body">
+<button class="btn btn-default" data-toggle="collapse" data-target="#demo1">1. 근태관리</button>
+<div id="demo1" class="collapse">
+출석하기 : 첫 화면 중앙의 출석부 클릭 -> 출근등록<br>
+퇴근하기 : 첫 화면 중앙의 출석부 클릭 -> 출근 이후 -> 퇴근하기 <br>
+외출 : 첫 화면 중앙의 출석부 클릭 -> 출근 이후 -> 외출/복귀 <br>
+</div>
+<hr>
+<button class="btn btn-default" data-toggle="collapse" data-target="#demo2">2. 일정관리</button>
+<div id="demo2" class="collapse">
+일정확인 : 상단 메뉴바에서 캘린더 클릭 -> 캘린더에서 보고싶은 일정 클릭<br>
+일정 추가 : 상단 메뉴바에서 캘린더 클릭 -> 원하는 날짜만큼 드래그 -> 내용 입력 후 일정 추가 버튼 클릭 <br>
+일정 삭제 : 상단 메뉴바에서 캘린더 클릭 -> 삭제하고 싶은 일정 클릭 -> 삭제버튼 클릭
+
+</div>
+<hr>
+<button class="btn btn-default" data-toggle="collapse" data-target="#demo3">3. 계획안관리</button>
+<div id="demo3" class="collapse">
+계획안 양식 추가 : 상단 메뉴바 계획안 클릭 -> 좌측 바에서 양식 관리 -> 양식 추가 <br>
+계획안 양식 보기, 수정 : 상단 메뉴바 계획안 클릭 -> 좌측 바에서 양식 관리 -> 양식 불러오기 -> 원하는 양식 클릭 <br>
+계획안 보기 : 상단 메뉴바 계획안 클릭 -> 계획안 메인 화면 혹은 좌측 메뉴바에서 원하는 계획안이나 반 클릭<br>
+계획안 작성 : 상단 메뉴바 계획안 클릭 -> 좌측바에서 원하는 계획안 클릭-> 계획안 작성 -> 빈 시트나 양식 클릭<br> 
+</div>
+<hr>
+<button class="btn btn-default" data-toggle="collapse" data-target="#demo4">4. 유아 관리</button>
+<div id="demo4" class="collapse">
+계획안 양식 추가 : 상단 메뉴바 계획안 클릭 -> 좌측 바에서 양식 관리 -> 양식 추가 <br>
+계획안 양식 보기, 수정 : 상단 메뉴바 계획안 클릭 -> 좌측 바에서 양식 관리 -> 양식 불러오기 -> 원하는 양식 클릭 <br>
+계획안 보기 : 상단 메뉴바 계획안 클릭 -> 계획안 메인 화면 혹은 좌측 메뉴바에서 원하는 계획안이나 반 클릭<br>
+계획안 작성 : 상단 메뉴바 계획안 클릭 -> 좌측바에서 원하는 계획안 클릭-> 계획안 작성 -> 빈 시트나 양식 클릭<br> 
+</div>
+<hr>
+
+</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
