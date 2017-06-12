@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Insert title here</title>
+<title>라이선스</title>
 
   	<!-- JS Link -->
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
@@ -15,6 +15,13 @@
 	<!-- 사이드메뉴바 BEGIN -->
 	<c:import url="./side.jsp"></c:import>
 
+	<script>
+	$(document).ready(function(){
+		$('#license').attr('class','active');
+		$('#sideLicense').attr('style','background-color:#3DB7CC');
+	});
+	</script>
+	
 </head>
 <body>
 
@@ -30,27 +37,48 @@
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card">
-	                            <div class="card-header" data-background-color="orange">
-	                                <h4 class="title">교원 명단</h4>
-	                                <p class="category">현재 활동중인 교직원 명단입니다.</p>
+	                            <div class="card-header" data-background-color="blue">
+	                                <h4 class="title">라이선스</h4>
+	                                <p class="category">라이선스를 발급받으세요!</p>
 	                            </div>                            
 	                            <div class="card-content table-responsive">
 	                                <table class="table">
-	                                    
-	                                    <form action="${pageContext.request.contextPath}/license" method="post">
+
+										<!-- 값이 equal일 때 -->
+										<c:if test="${license eq null || license eq GUEST}">
+										<form action="${pageContext.request.contextPath}/licenseForm" method="POST">
+										
 										<div class="form-group">
-										<label class="control-label col-sm-2">라이센스 발급받기</label>
-									      <div class="col-sm-10">              
-									        <input type="submit" id="licensecheckbutton" value="라이선스"/>
-									      </div>
-									      
-									      <c:if test="${null != licenseKey}">
-									      <c:out value="발급된 라이선스 : ${licenseKey}"></c:out>
-									      </c:if>      		
+										<input type="text" class="teacherName form-control" name="licenseKindergartenName" id="licenseKindergartenName" placeholder="유치원명을 입력하세요.">
+										</div>
 									
-									    </div>
+									
+										<div class="form-group">
+										<input type="text" class="form-control" id="licenseAddress" name="licenseAddress" placeholder="주소를 입력하세요.">
+										</div>	
+										
+										<div class="form-group">
+										<input type="text" class="form-control" id="licensePhone" name="licensePhone" placeholder="유치원 연락처를 입력하세요">
+										</div>
+										
+										<div class="col-sm-10">
+										<input type="submit" value="작성 완료 후 클릭 시 라이선스가 부여됩니다.">
+										</div>
 										</form>
-	                                    
+									    </c:if>
+
+										<!-- 값이 not equal 일 때 -->
+										<c:if test="${license ne GUEST || license ne null}">
+										<div class="form-group">
+									     <div class="col-sm-10">  
+									     <!-- 값이 하나일 땐 점.을 안찍어야 잘 나온다 -->
+									     <!-- 계속 점을 찍어서 에러걸렸었다. -->
+									     <!-- 값이 여러 개 일때만 포문을 돌리고 var="변수" 선언 후 사용해야 한다.-->
+									     LICENSE : ${license}
+									     </div>
+									   </div>
+									   </c:if>
+
 	                                </table>
 
 	                            </div>

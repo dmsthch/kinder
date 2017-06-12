@@ -5,11 +5,12 @@
 <mapper namespace="com.cafe24.dmsthch.Teacher.TeacherMapper">
 <!-- 편성표!!!표!!! -->
 <!-- 티쳐포메이션의 넘버를  티쳐넘버에 = 연산자로 대입시키고 값이 여러개이기 때문에 파라미터타입과 리저트타입이 티쳐이다 -->
-<select id="takeFormList" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="com.cafe24.dmsthch.Teacher.Teacher">
+<select id="takeFormList" parameterType="com.cafe24.dmsthch.Teacher.Teacher" resultType="java.util.Map">
 
 SELECT
  t.teacher_name AS teacherName
  ,c.class_name AS className
+ ,c.class_age AS classAge
  
 FROM
 teacher_formation a
@@ -240,5 +241,41 @@ from kid_class
 where license_kindergarten = #{licenseKindergarten};
 </select>
 <!-- 편성폼에 들어갈 쿼리 END -->
+
+<select id="selectLicense" parameterType="java.lang.Integer" resultType="java.lang.String">
+SELECT license_kindergarten AS licenseKindergarten
+FROM license 
+WHERE teacher_no = #{teacherNo};
+</select>
+
+<insert id="insertLicense" parameterType="com.cafe24.dmsthch.Home.License">
+<!-- values에 들어가는 내용은 form의 name값이다 -->
+<!-- 라이센스 라이선스 -->
+INSERT INTO license(
+	license_kindergarten
+	,license_grant_day
+	,license_expiration_day
+	,license_kindergarten_name
+	,license_address 
+	,license_phone
+	,teacher_no)
+values(
+	UUID()
+	,now()
+	,(SELECT DATE_ADD(NOW(), interval 12 month))
+	,#{licenseKindergartenName}
+	,#{licenseAddress}
+	,#{licensePhone}
+	,#{teacherNo});
+
+</insert>
+
+<update id="teacherLicenseUpdate" parameterType="com.cafe24.dmsthch.Teacher.Teacher">
+<!-- 파라미터타입은 조건절 -->
+UPDATE teacher ,license 
+SET teacher.license_kindergarten = license.license_kindergarten
+WHERE teacher.teacher_no = #{teacherNo};
+
+</update>
 
 </mapper>

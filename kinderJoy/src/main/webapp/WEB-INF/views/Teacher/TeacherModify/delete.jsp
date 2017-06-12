@@ -3,8 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
-
+	
 <head>
+<title>계정 삭제</title>
 	<!-- JS Link -->
 	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
 	<!-- CSS Link -->
@@ -13,6 +14,14 @@
 	<c:import url="/WEB-INF/views/module/navbar.jsp"></c:import>
 	<!-- 사이드메뉴바 BEGIN -->
 	<c:import url="./side.jsp"></c:import>
+	
+		<script>
+	$(document).ready(function(){
+		$('#delete').attr('class','active');
+		$('#sideDelete').attr('style','background-color:#3DB7CC');
+		
+	});
+	</script>
 </head>
 <body>
 <div class="wrapper">
@@ -24,7 +33,7 @@
 	                <div class="row">
 	                    <div class="col-md-12">
 	                        <div class="card">
-	                            <div class="card-header" data-background-color="orange">
+	                            <div class="card-header" data-background-color="blue">
 	                                <h4 class="title">계정 삭제</h4>
 	                            </div>                            
 	                            <div class="card-content table-responsive">

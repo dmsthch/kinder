@@ -27,6 +27,26 @@ public class CalendarController {
 		System.out.println("üũ");
 		String licenseKindergarten=(String)session.getAttribute("licenseKindergarten");
 		List<Schedule> allSchedule = calDao.selectAllSchedule(licenseKindergarten);
+		
+	/*	for(Schedule s : allSchedule){
+			
+			System.out.println("endDay : " + s.getScheduleEndDay());
+			
+			String endDay = s.getScheduleEndDay().substring(0,8);
+			int plusEndDay = Integer.parseInt(s.getScheduleEndDay().substring(8,10))+1;
+			
+			if(plusEndDay<10){
+				endDay += "0" + plusEndDay;
+			}else{
+				endDay += plusEndDay;				
+			}
+			
+			s.setScheduleEndDay(endDay);
+			
+			System.out.println(endDay);
+		}*/
+		
+		
 		System.out.println(allSchedule);
 		model.addAttribute("allSchedule",allSchedule);
 		

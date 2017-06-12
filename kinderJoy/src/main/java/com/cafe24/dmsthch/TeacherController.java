@@ -16,6 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import com.cafe24.dmsthch.Child.ChildClass;
+import com.cafe24.dmsthch.Home.HomeDao;
+import com.cafe24.dmsthch.Home.License;
 import com.cafe24.dmsthch.Teacher.Teacher;
 import com.cafe24.dmsthch.Teacher.TeacherDao;
 import com.cafe24.dmsthch.Teacher.TeacherFormation;
@@ -36,6 +40,9 @@ public class TeacherController {
 	
 	@Autowired
 	private TeacherDao TDao;
+	
+	@Autowired
+	HomeDao dao;
 	
 	//ErrorPage.jsp
 	@RequestMapping(value="/ErrorPage", method = RequestMethod.GET)
@@ -51,11 +58,15 @@ public class TeacherController {
 	return "Teacher/TheAviator/index";
 	}
 	
-	//takeForm save메서드 호출
-	@RequestMapping(value="/save2", method = RequestMethod.POST)
-	public String save() {
-		System.out.println("호출확인 _TeacherController");
-		return "";
+	//사이드 세션생성
+	@ResponseBody
+	@RequestMapping(value="/sideSession" , method = RequestMethod.GET)
+	public JSONObject sideSession (HttpSession session) {
+		JSONObject obj = new JSONObject();
+		String teacherLevel = (String)session.getAttribute("teacherLevel");
+		System.out.println(teacherLevel+ "<--------------");
+		obj.put("teacherLevel", teacherLevel);
+		return obj;
 	}
 	
 	//계정삭제 탈퇴
@@ -100,19 +111,10 @@ public class TeacherController {
 		System.out.println("호출확인");
 		
 		List<Teacher>List = TDao.takeFormList((String)httpsession.getAttribute("licenseKindergarten"));
-		List<ChildClass>List2 = TDao.takeFormList2((String)httpsession.getAttribute("licenseKindergarten"));
-		
-		List<Teacher> takeT = TDao.takeT((String)httpsession.getAttribute("licenseKindergarten"));
-		List<ChildClass> takeC = TDao.takeC((String) httpsession.getAttribute("licenseKindergarten"));
-
+	
 		//classNo classAge teacherNo teacherName
 		
 		model.addAttribute("List",List);
-		model.addAttribute("List2",List2);
-		
-		model.addAttribute("takeTeacher" ,takeT);
-		model.addAttribute("takeClass"   ,takeC);
-		
 		
 		return "Teacher/TeacherModify/takeFormList";
 	}
@@ -404,6 +406,9 @@ public class TeacherController {
 		System.out.println(teacher.getTeacherId() +"<-- 사용자가 입력한 아이디");
 		System.out.println(TDao+" <--TDao 동작 확인");
 
+		License result = dao.getLicense(saveSession.getLicenseKindergarten());
+		model.addAttribute("result",result);
+
 		if(saveSession != null) {
 			if(session.getAttribute("teacherId") == null){
 				
@@ -441,6 +446,7 @@ public class TeacherController {
 				
 				return "/home";
 		}
+		
 		return "/home";
 	}
 	
@@ -461,13 +467,50 @@ public class TeacherController {
 	
 	//라이센스 라이선스
 	@RequestMapping(value="/license", method=RequestMethod.GET)
-	public String chara() {
+	public String chara(HttpSession session ,License license ,Model model) {
 		System.out.println("라이선스 발급 페이지 호출");
+		
+		String aaa = TDao.selectLicense((Integer) session.getAttribute("teacherNo"));
+		System.out.println(aaa);
+		model.addAttribute("license", aaa);
+		
 		return "Teacher/TeacherModify/license";
 	}
 	
+	//라이센스테이블에 insert시킬 유치원 정보 licenseForm 라이센스 라이선스 
+	//업데이트와 인서트는 별 반 다를 게 없는 것 같다.
+	//업데이트하려고 만든 코딩을 인서트로 변경해야 해서 맵퍼에서 sql을 고쳤는데
+	//여기 컨트롤러에선 하나도 안고쳐도 인서트가 되었다.
+	@RequestMapping(value="/licenseForm", method=RequestMethod.POST)
+	public String licenseForm(HttpSession session ,License license) {
+		
+		license.setLicenseKindergarten((String) session.getAttribute("licenseKindergarten"));
+		System.out.println(session.getAttribute("licenseKindergarten")+"<<<<<<<<<<현재 라이센스1");
+		license.setTeacherNo((Integer) session.getAttribute("teacherNo"));
+		System.out.println(session.getAttribute("teacherNo"));
+		int x = TDao.insertLicense(license);
+		
+		int y = TDao.teacherLicenseUpdate(session.getAttribute("teacherNo"));
+		if(x == 1) {
+			System.out.println("성");
+		}else{
+			System.out.println("패");
+		}
+		
+		if(y == 1) {
+			System.out.println("성");
+		}else{
+			System.out.println("패");
+		}
+		System.out.println(session.getAttribute("licenseKindergarten")+"<<<<<<<<<<현재 라이센스2");
+		return "redirect:/license";
+		//리다이렉트 시 요청주소를 적어야한다
+		//포워드 시 절대경로를 적어야 한다.
+	}
+	
+	//라이센스 발급 후 teacher 라이센스도 똑같이 업데이트 라이선스
 	//라이센스 라이선스 처리
-	@RequestMapping(value="/license", method=RequestMethod.POST)
+/*	@RequestMapping(value="/license", method=RequestMethod.POST)
 	public String uuid(Model model) throws Exception {
 		
 		//UUID에 대해 자세한 사항은 http://hyeonjae.github.io/uuid/2015/03/17/uuid.html 참고
@@ -479,5 +522,5 @@ public class TeacherController {
 		System.out.println(licenseKey +"<--생성된 UUID\n");
 		
 		return "Teacher/TeacherModify/license";
-	}
+	}*/
 }

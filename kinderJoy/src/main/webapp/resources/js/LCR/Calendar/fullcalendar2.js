@@ -4246,6 +4246,7 @@ var Grid = FC.Grid = Class.extend(ListenerMixin, {
 		});
 
 		return dragListener;
+		
 	},
 
 

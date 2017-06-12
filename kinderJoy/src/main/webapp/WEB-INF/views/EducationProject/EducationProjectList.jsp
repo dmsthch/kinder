@@ -47,7 +47,6 @@ $(document).ready(function(){
 									</c:if>
 									<p class="category">전체 반</p>
 								</c:if>
-								
 						</div>
 						
 						<div class="card-content table-responsive">

@@ -13,7 +13,6 @@
 <script>
 $(document).ready(function(){
 	$('#ChildManagement').attr('class','active');
-
 	
 })
 </script>

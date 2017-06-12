@@ -14,7 +14,6 @@ public class CalendarDao {
 	//한 유치원의 모든 스케쥴 셀렉트
 	public List<Schedule> selectAllSchedule(String licenseKindergarten){
 		System.out.println(licenseKindergarten);
-		System.out.println(sqlSessionTemplate + "sql zzzzz");
 		return 	sqlSessionTemplate.selectList("com.cafe24.dmsthch.Calendar.CalendarMapper.selectAllSchedule",licenseKindergarten);		
 	}
 	
