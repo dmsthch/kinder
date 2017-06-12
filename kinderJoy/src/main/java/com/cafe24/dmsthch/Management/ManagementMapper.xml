@@ -13,12 +13,12 @@
 		,m.equipment_amount AS equipmentAmount
 		,m.equipment_day AS equipmentDay
 	FROM
-		test_equipment e
+		equipment e
 	INNER JOIN
 		teacher t
 	ON t.teacher_no = e.teacher_no
 	INNER JOIN
-		test_equipment_value_minus m
+		equipment_value_minus m
 	ON m.equipment_no = e.equipment_no
 	WHERE
 		m.equipment_day BETWEEN #{testDay} AND DATE_ADD(#{testDay2}, INTERVAL +1 DAY)
@@ -33,13 +33,13 @@
 		,p.equipment_amount AS equipmentAmount
 		,p.equipment_day AS equipmentDay
 	FROM
-		test_equipment e
+		equipment e
 	
 	INNER JOIN
 		teacher t
 	ON t.teacher_no = e.teacher_no
 	INNER JOIN
-		test_equipment_value_plus p
+		equipment_value_plus p
 	ON p.equipment_no = e.equipment_no
 	WHERE
 		p.equipment_day BETWEEN #{testDay} AND DATE_ADD(#{testDay2}, INTERVAL +1 DAY)
@@ -58,12 +58,12 @@
 		,m.equipment_amount AS equipmentAmount
 		,m.equipment_day AS equipmentDay
 	FROM
-		test_equipment e
+		equipment e
 	INNER JOIN
 		teacher t
 	ON t.teacher_no = e.teacher_no
 	INNER JOIN
-		test_equipment_value_minus m
+		equipment_value_minus m
 	ON m.equipment_no = e.equipment_no
 	WHERE
 		m.equipment_day BETWEEN #{testDay} AND DATE_ADD(#{testDay2}, INTERVAL +1 DAY)
@@ -76,13 +76,13 @@
 		,p.equipment_amount AS equipmentAmount
 		,p.equipment_day AS equipmentDay
 	FROM
-		test_equipment e
+		equipment e
 	
 	INNER JOIN
 		teacher t
 	ON t.teacher_no = e.teacher_no
 	INNER JOIN
-		test_equipment_value_plus p
+		equipment_value_plus p
 	ON p.equipment_no = e.equipment_no
 	WHERE
 		p.equipment_day BETWEEN #{testDay} AND DATE_ADD(#{testDay2}, INTERVAL +1 DAY)
@@ -107,12 +107,12 @@
 		 	,MAX(v.equipment_day) AS equipmentDay
 		 	,t.equipment_state AS equipmentState
 		FROM
-			test_equipment t
+			equipment t
 		INNER JOIN
-			test_equipment_value_plus v
+			equipment_value_plus v
 		ON v.equipment_no = t.equipment_no
 		INNER JOIN
-			test_equipment_value_minus m
+			equipment_value_minus m
 		ON m.equipment_no = t.equipment_no
 		GROUP BY t.equipment_no			
 	</select>

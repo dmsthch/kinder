@@ -50,7 +50,7 @@ public class EquipmentDao {
 		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectSheetValueNo", sheet);
 	}
 	
-	// test_equipment_value insert
+	// equipment_value insert
 	public int addTestEquipmentValuePlus(int selectEquipemntNo
 									,String equipmentCost
 									,String equipmentAmount
@@ -78,7 +78,7 @@ public class EquipmentDao {
 		equipmentValue.setEquipmentCustomer(equipmentCustomer);
 	return sqlSessionTemplate.insert("com.cafe24.dmsthch.Equipment.EquipmentMapper.addTestEquipmentValueMinus",equipmentValue);
 	}
-	// test_equipment select 및 중복검사
+	// equipment select 및 중복검사
 	public Equipment selectTestEquipment(String equipmentName
 										,HttpSession session) {
 		System.out.println("selectTestEquipment 내용 실행");
@@ -89,7 +89,7 @@ public class EquipmentDao {
 		System.out.println("중간점검");
 		return sqlSessionTemplate.selectOne("com.cafe24.dmsthch.Equipment.EquipmentMapper.selectTestEquipment",equipment);
 	}
-	// test_equipment insert
+	// equipment insert
 	public int addTestEquipment(HttpSession session
 								,String equipmentName
 								,String boardCategoryNo

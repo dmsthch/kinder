@@ -287,9 +287,9 @@ $(document).ready(function(){
 	                
 	                
 	                <!-- 테스트중!! -->
-	                <li>
+	               <!--  <li>
 	                	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#testModal">Open Modal</button>
-	                </li>
+	                </li> -->
 	                
 		                <!-- Modal -->
 						<div id="testModal" class="modal fade" role="dialog">

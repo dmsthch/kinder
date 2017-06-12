@@ -34,9 +34,9 @@
 		AND
 			value_name = #{valueName};
 	</select>
-  	<!-- test_equipment_value(plus,minus) insert -->
+  	<!-- equipment_value(plus,minus) insert -->
    	<insert id="addTestEquipmentValueMinus" parameterType="com.cafe24.dmsthch.Equipment.EquipmentValue">
-  		INSERT INTO test_equipment_value_minus(
+  		INSERT INTO equipment_value_minus(
 			 equipment_no
 			,equipment_cost
 			,equipment_amount
@@ -51,7 +51,7 @@
 		);
   	</insert>
   	<insert id="addTestEquipmentValuePlus" parameterType="com.cafe24.dmsthch.Equipment.EquipmentValue">
-  		INSERT INTO test_equipment_value_plus(
+  		INSERT INTO equipment_value_plus(
 			 equipment_no
 			,equipment_cost
 			,equipment_amount
@@ -65,21 +65,21 @@
 			,now()
 		);
   	</insert>
-  	<!-- test_equipment select -->
+  	<!-- equipment select -->
   	<select id="selectTestEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment" resultType="com.cafe24.dmsthch.Equipment.Equipment">
   		SELECT
 			 equipment_no AS equipmentNo
 			,equipment_name AS equipmentName
 		FROM
-			test_equipment
+			equipment
 		WHERE
 			equipment_name = #{equipmentName}
 		AND
 			license_kindergarten = #{licenseKindergarten};
   	</select>
-  	<!-- test_equipment insert -->
+  	<!-- equipment insert -->
   	<insert id="addTestEquipment" parameterType="com.cafe24.dmsthch.Equipment.Equipment">
-  		INSERT INTO test_equipment(
+  		INSERT INTO equipment(
 			 license_kindergarten
 			,equipment_name
 			,teacher_no
@@ -107,7 +107,7 @@
 			,MAX(v.equipment_day) AS equipmentDay
 		 	,t.equipment_state AS equipmentState
 		FROM
-			test_equipment t
+			equipment t
 		INNER JOIN
 			(select
 				equipment_no
@@ -115,7 +115,7 @@
 				,equipment_customer
 				,equipment_day
 				,sum(equipment_amount) AS equipment_amount
-				from test_equipment_value_plus
+				from equipment_value_plus
 				GROUP BY equipment_no
 			) v
 		ON v.equipment_no = t.equipment_no
@@ -123,7 +123,7 @@
 			(select
 				equipment_no,
 				sum(equipment_amount) AS equipment_amount
-				from test_equipment_value_minus
+				from equipment_value_minus
 				GROUP BY equipment_no
 			) m
 		ON m.equipment_no = t.equipment_no
@@ -140,7 +140,7 @@
 			,MAX(v.equipment_day) AS equipmentDay
 		 	,t.equipment_state AS equipmentState
 		FROM
-			test_equipment t
+			equipment t
 		INNER JOIN
 			(select
 				equipment_no
@@ -148,7 +148,7 @@
 				,equipment_customer
 				,equipment_day
 				,sum(equipment_amount) AS equipment_amount
-				from test_equipment_value_plus
+				from equipment_value_plus
 				GROUP BY equipment_no
 			) v
 		ON v.equipment_no = t.equipment_no
@@ -156,7 +156,7 @@
 			(select
 				equipment_no,
 				sum(equipment_amount) AS equipment_amount
-				from test_equipment_value_minus
+				from equipment_value_minus
 				GROUP BY equipment_no
 			) m
 		ON m.equipment_no = t.equipment_no

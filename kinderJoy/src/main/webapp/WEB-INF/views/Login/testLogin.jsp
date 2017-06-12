@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-		
+
 <!-- script 태그에서 가져오는 자바스크립트 파일의 순서에 주의해야한다! 순서가 틀릴경우 자바스크립트 오류가 발생한다. -->
         <script type="text/javascript" src="js/JKC/t/jsbn.js"></script>
         <script type="text/javascript" src="js/JKC/t/rsa.js"></script>
@@ -12,7 +12,7 @@
         <script type="text/javascript" src="js/JKC/t/login.js"></script>
        	<c:import url="/WEB-INF/views/module/importJS.jsp"></c:import>
        <script>
-       
+
        $(document).ready(function(){
        function validateEncryptedForm() {
     	    var username = $("#teacherId").val();
@@ -23,7 +23,7 @@
     	        alert("ID/PASSWORD.");
     	        return false;
     	    }
-
+		/* 여기까진 유효성 검사 */
     	    try {
     	        var rsaPublicKeyModulus = document.getElementById("rsaPublicKeyModulus").value;
     	        var rsaPublicKeyExponent = document.getElementById("rsaPublicKeyExponent").value;
@@ -57,8 +57,9 @@
     	});
        </script> 
 </head>
-    
+
 <body>
+
     <div>
         userID : <input type="text" id="username" name="teacherId" size="16"/>
             비밀번호 : <input type="password" id="password" name="teacherPw" size="16" />
@@ -66,12 +67,12 @@
         <input type="hidden" id="rsaPublicKeyExponent" value="${publicKeyExponent}" />
         <a href="<%=request.getContextPath()%>/loginFailure.jsp" onclick="validateEncryptedForm(); return false;">로그인</a>
     </div>
+
     <form id="securedLoginForm" name="securedLoginForm" action="${pageContext.request.contextPath}/loginTest" method="post" style="display: none;">
         <input type="hidden" name="securedUsername" id="securedUsername" value="" />
         <input type="hidden" name="securedPassword" id="securedPassword" value="" />
     </form>
+
 </body>
-
-
 
 </html>

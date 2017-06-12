@@ -117,39 +117,48 @@
 		<div class="content">
 			<div class="container-fluid">
 			
-				<div class="row">
-					<div class="calendar col-sm-10">
-					<div class="text-center"><h1 id="calTitle"></h1></div>
-						<header>		
-							<h2></h2>
-							<a class="btn-prev fontawesome-angle-left" id="otherMonth" href="#"></a>
-							<a class="btn-next fontawesome-angle-right" id="nextMonth" href="#"></a>
-						</header>
-						<table>
-							<thead>
-								<tr id="week">
-								
-								</tr>
-							</thead>
-			
-							<tbody id="day">
-								
-							</tbody>
-						</table>
-					</div> <!-- end calendar -->
+				<div class="col-md-12">
+			        <div class="card">
+			        	<div class="card-header" data-background-color="purple">
+		                    <h4 class="title">유아 출석 현황</h4>
+		                    <p class="category">KidCommuteView</p>
+		                </div>
+		                
+						<div class="row">
+							<div class="calendar col-sm-10">
+							<div class="text-center"><h1 id="calTitle"></h1></div>
+								<header>		
+									<h2></h2>
+									<a class="btn-prev fontawesome-angle-left" id="otherMonth" href="#"></a>
+									<a class="btn-next fontawesome-angle-right" id="nextMonth" href="#"></a>
+								</header>
+								<table>
+									<thead>
+										<tr id="week">
+										
+										</tr>
+									</thead>
 					
-					<div class="col-sm-2">
-						<br/><br/><br/><br/><br/><br/>
-						
-						<div class="panel-group" id="accordion">
-						
+									<tbody id="day">
+										
+									</tbody>
+								</table>
+							</div> <!-- end calendar -->
 							
+							<div class="col-sm-2">
+								<br/><br/><br/><br/><br/><br/>
+								
+								<div class="panel-group" id="accordion">
+								
+									
+									
+								</div> 
+							</div>
 							
-						</div> 
+						</div> <!-- end row -->
+						
 					</div>
-					
-				</div> <!-- end container -->
-				
+				</div>
 				
 			</div>
 		</div>

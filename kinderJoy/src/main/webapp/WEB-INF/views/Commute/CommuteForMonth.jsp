@@ -121,32 +121,36 @@
     
 		<div class="content">
 			<div class="container-fluid">
-			
-				<div class="row">
-					<div class="text-center"><h1 id="calTitle">월별 출석 현황</h1></div>
-				</div><br/>
+				<div class="col-md-12">
+			        <div class="card">
+			        	<div class="card-header" data-background-color="purple">
+		                    <h4 class="title">월별 출석 현황</h4>
+		                    <p class="category">CommuteForMonth</p>
+		                </div>
 				
-				<div class="row">
-					<div class="calendar col-sm-12">
-						<header>		
-							<h2>September</h2>
-							<a class="btn-prev fontawesome-angle-left" id="otherMonth" href="#"></a>
-							<a class="btn-next fontawesome-angle-right" id="nextMonth" href="#"></a>
-						</header>
-						<table>
-							<thead>
-								<tr id="week">
-								
-								</tr>
-							</thead>
-			
-							<tbody id="day">
-								
-							</tbody>
-						</table>
-					</div> <!-- end calendar -->
-				</div> <!-- end container -->
-							
+						<div class="row">
+							<div class="calendar col-sm-12">
+								<header>		
+									<h2>September</h2>
+									<a class="btn-prev fontawesome-angle-left" id="otherMonth" href="#"></a>
+									<a class="btn-next fontawesome-angle-right" id="nextMonth" href="#"></a>
+								</header>
+								<table>
+									<thead>
+										<tr id="week">
+										
+										</tr>
+									</thead>
+					
+									<tbody id="day">
+										
+									</tbody>
+								</table>
+							</div> <!-- end calendar -->
+						</div> <!-- end container -->
+						
+					</div>
+				</div>		
 				
 			</div>
 		</div>
