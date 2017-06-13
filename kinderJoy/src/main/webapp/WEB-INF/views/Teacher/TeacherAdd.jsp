@@ -490,9 +490,9 @@ $(document).ready(function(){
     	var SHA256PW = SHA256(pw);
     	
     	console.log(SHA256PW+"<-- 암호화된 비밀번호");
-    	
-/*     	document.getElementById('formName').submit(); */
-        return false;
+
+     	document.getElementById('formName').submit();
+        
 
 	});
 

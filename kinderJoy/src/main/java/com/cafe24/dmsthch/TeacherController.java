@@ -89,7 +89,7 @@ public class TeacherController {
 		TDao.deleteANDinsert(map);
 		
 		httpsession.invalidate();
-		return "redirect:/home";
+		return "redirect:/goHome";
 	}
 	
 	//계정삭제폼 호출
@@ -262,7 +262,7 @@ public class TeacherController {
 		System.out.println(TDao +" <--Dao 확인");
 		System.out.println("home로 리다이렉트\n\n");
 		
-		return "redirect:/home";
+		return "redirect:/goHome";
 	}
 	
 	
@@ -463,7 +463,7 @@ public class TeacherController {
 		
 		//System.out.println(sessionstatus +"\n 로그아웃 SessionAttributes만 초기화");
 		System.out.println(" redirect:/home");
-		return "redirect:/home";
+		return "redirect:/goHome";
 	}
 	
 	//라이센스 라이선스

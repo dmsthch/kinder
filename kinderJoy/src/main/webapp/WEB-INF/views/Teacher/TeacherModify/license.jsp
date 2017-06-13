@@ -22,8 +22,43 @@
 	});
 	</script>
 	
+	
+	<style type="text/css">
+	
+	#map {
+  	height: 100%;
+	}
+	/* Optional: Makes the sample page fill the window. */
+	html, body {
+	  height: 100%;
+	  margin: 0;
+	  padding: 0;
+	}
+	
+	</style>
+	
+	
 </head>
 <body>
+
+
+
+<div id="map"></div>
+    <script>
+      function initMap() {
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          scrollwheel: false,
+          zoom: 8
+        });
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsFyXwj7q398hPA8E5tvInqnQt4VFi1iE&callback=initMap"
+    async defer></script>
+    
+
 
 
 
