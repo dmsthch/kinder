@@ -40,12 +40,11 @@ $(document).ready(function(){
 				url  : "${pageContext.request.contextPath}/sign_up_id_check",
 				data : gogo,
 				success : function(data){
-					if (data == 0){
-						if($("#teacher_ajax_id").val().length > 5 || $("#teacher_ajax_id").val() == ""){
-						$("jeon").html("사용불가")
+					if (data == 1){
+						$("jeon").html("DB에 값이 있습니다.")
 						}else{
-						$("jeon").html("사용가능")
-						}
+						$("jeon").html("DB에 값이 없습니다.")
+						
 					}
 				}
 			})
@@ -537,11 +536,12 @@ $(document).ready(function(){
 		<span class="asterix">*</span>
 		<span class="cross">x</span>
 		<div class="alert alert-danger teacher-alert">
-			영어 소문자 3자이상으로 시작하여 숫자 3자 이상으로 끝나야합니다.  : abc123 사용가능여부 : <jeon />
+			영어 소문자 3자이상으로 시작하여 숫자 3자 이상으로 끝나야합니다.  : abc123 
 		</div>
 		<div class="alert alert-danger custom-alert">
 			아이디를 입력하세요.
 		</div>
+		중복여부 : <jeon />
 		</div>	
 		
 		
