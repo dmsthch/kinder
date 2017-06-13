@@ -23,7 +23,7 @@
 	</script>
 	
 	
-	<style type="text/css">
+<!-- 	<style type="text/css">
 	
 	#map {
   	height: 100%;
@@ -35,7 +35,7 @@
 	  padding: 0;
 	}
 	
-	</style>
+	</style> -->
 	
 	
 </head>

@@ -490,8 +490,8 @@ $(document).ready(function(){
     	var SHA256PW = SHA256(pw);
     	
     	console.log(SHA256PW+"<-- 암호화된 비밀번호");
-
-     	document.getElementById('formName').submit();
+    	
+    	$('.contact-form').submit();
         
 
 	});
@@ -515,7 +515,7 @@ $(document).ready(function(){
 <div class="container">
 <h2 class="text-center">회원가입</h2>
 		
-	<form action="${pageContext.request.contextPath}/insert" class="contact-form" method="post" id="formName" onsubmit="return check()"> 
+	<form action="${pageContext.request.contextPath}/insert" class="contact-form" method="post"> 
 	
 		
 		<div class="form-group">
