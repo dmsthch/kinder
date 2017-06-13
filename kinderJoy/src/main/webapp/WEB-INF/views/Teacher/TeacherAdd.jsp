@@ -61,7 +61,6 @@ $(document).ready(function(){
 
 body{
 	font-family: 'Raleway', sans-serif;
-	background: url(../img/body_bg.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -337,6 +336,8 @@ $(document).ready(function(){
 
 
 
+
+
 <script type="text/javascript">
     /**
     *
@@ -479,26 +480,31 @@ $(document).ready(function(){
       
     }
     
-    function teacherPw() {
-    	var form = document.formName;
-    	form.teacherHiddenPw.value = $('#teacherPw').val();
-    	alert(form.teacherHiddenPw.value)
-    	return false;
-    }
     
+    $('#SHA256button').click(function(){
+    	
+    	var pw = $('#teacherPw').val();
+    	
+    	console.log(pw+'<--사용자가 입력한 비밀번호');
+    	
+    	var SHA256PW = SHA256(pw);
+    	
+    	console.log(SHA256PW+"<-- 암호화된 비밀번호");
+    	
+/*     	document.getElementById('formName').submit(); */
+        return false;
+
+	});
+
 });
 
     
-    
-    var rsaPublicKeyModulus = document.getElementById("rsaPublicKeyModulus").value;
-    var id = $('#teacherPw').val();
-    
- 	var a = SHA256(id);
- 	alert(a)
-    // 암호화 확인
-    var a = console.log(SHA256("id"));
+
  
 </script>
+
+
+
 
 
 
@@ -509,7 +515,7 @@ $(document).ready(function(){
 <div class="container">
 <h2 class="text-center">회원가입</h2>
 		
-	<form action="${pageContext.request.contextPath}/insert" class="contact-form" method="post" name="formName" onsubmit="return check()"> 
+	<form action="${pageContext.request.contextPath}/insert" class="contact-form" method="post" id="formName" onsubmit="return check()"> 
 	
 		
 		<div class="form-group">
@@ -569,13 +575,14 @@ $(document).ready(function(){
 	 
 	
 		<div class="form-group">
-		<button type="submit" value="send" class="btn btn-success btn-block" id="submit">Submit</button>
+		<button type="button" id="SHA256button" value="send" class="btn btn-success btn-block" id="submit">Submit</button>
 		<i class="fa fa-paper-plane send-icon"></i>
 		</div>
 		
 		
 	</form>
 </div>
+
  	<!-- 아이디는 # 클래스는 . 태그는 태그명만 적으면 사용가능 -->		
 
 </body>
