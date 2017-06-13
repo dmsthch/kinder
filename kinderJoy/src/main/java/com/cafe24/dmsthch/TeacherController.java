@@ -462,7 +462,7 @@ public class TeacherController {
 		
 		//System.out.println(sessionstatus +"\n 로그아웃 SessionAttributes만 초기화");
 		System.out.println(" redirect:/home");
-		return "redirect:/home";
+		return "redirect:/goHome";
 	}
 	
 	//라이센스 라이선스
