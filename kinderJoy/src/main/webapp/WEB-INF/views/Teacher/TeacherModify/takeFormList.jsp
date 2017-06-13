@@ -104,15 +104,15 @@
 	    <!-- 가이드  -->
 	    <ul id="tlyPageGuide" data-tourtitle="가이드를 시작하려면 클릭하세요.">
               <li class="tlypageguide_top" data-tourtarget=".takeFormListSide">
-              사이드 편성표 차인표 설명
+              편성된 표를 볼 수 있습니다.
               </li>
               
               <li class="tlypageguide_top" data-tourtarget=".elementA">
-              바디 편성표 차인표 설명
+              몇 살인지 알 수 있습니다.
               </li>
               
               <li class="tlypageguide_top" data-tourtarget=".elementB">
-              바디 편성표 차인표 설명2
+              반과 반에 배정된 선생님의 이름을 알 수 있습니다.
               </li>              
 	    
 	</div>

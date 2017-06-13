@@ -79,7 +79,7 @@
 	                                        <div class="col-md-5">
 												<div class="form-group label-floating data-block elementA">
 													<label class="control-label">아이디</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacherId}" readonly>
+													<input type="text" class="form-control" value="${kyoteacher.teacherId}" readonly style="cursor:no-drop">
 												</div>
 	                                        </div>
     
@@ -88,7 +88,7 @@
 	                                        <div class="col-md-3">
 												<div class="form-group label-floating data-block elementB">
 													<label class="control-label">이름</label>
-													<input type="text" class="form-control" name="teacherName" value="${kyoteacher.teacherName}" >
+													<input type="text" class="form-control" name="teacherName" value="${kyoteacher.teacherName}" readonly style="cursor:no-drop">
 												</div>
 	                                        </div>
 	                                        <div class="col-md-4">
@@ -108,8 +108,8 @@
 	                                       </div>
 	                                        <div class="col-md-6">
 												<div class="form-group label-floating data-block elementE">
-													<label class="control-label">add</label>
-													<input type="text" class="form-control" value="${kyoteacher.teacherAddDay}" readonly>
+													<label class="control-label">가입일자</label>
+													<input type="text" class="form-control" value="${kyoteacher.teacherAddDay}" readonly style="cursor:no-drop">
 												</div>
 	                                        </div>
 	                                    </div>
@@ -118,7 +118,7 @@
 	                                        <div class="col-md-12">
 												<div class="form-group label-floating data-block elementF">
 													<label class="control-label">라이선스</label>
-													<input type="text" class="form-control" value="${kyoteacher.licenseKindergarten}">
+													<input type="text" class="form-control" value="${kyoteacher.licenseKindergarten}" readonly style="cursor:no-drop">
 												</div>
 	                                        </div>
 	                                    </div>
@@ -161,46 +161,32 @@
     	      
   
               <li class="tlypageguide_right" data-tourtarget=".userSide">
-                사이드 교원 프로필 설명
+                자신의 회원 정보를 수정할 수 있습니다. <br>클릭이 되지 않는 곳은 수정할 수 없습니다.
               </li>
-    	      
-    	      
-    	      
-              <li class="tlypageguide_TOP" data-tourtarget=".elementA">
-                바디 교원 프로필의 아이디 설명
-              </li>
-              
-              
-              <li class="tlypageguide_LEFT" data-tourtarget=".elementB">
-                바디 교원 프로필의 이름 설명
-              </li>
+
               
               <li class="tlypageguide_BOTTOM" data-tourtarget=".elementC">
-                바디 교원 프로필의 핸드폰 번호 설명
+                핸드폰 번호를 수정할 수 있습니다.
               </li>
               
               <li class="tlypageguide_right" data-tourtarget=".elementD">
-                바디 교원 프로필의 권한 설명
-              </li>
-              
-              <li class="tlypageguide_right" data-tourtarget=".elementE">
-                바디 교원 프로필의 생성일 설명
+                권한을 수정할 수 있습니다. [원장] [선생님] select 형식으로 추가하기
               </li>
               
               <li class="tlypageguide_right" data-tourtarget=".elementF">
-                바디 교원 프로필의 라이선스 설명
+                라이선스는 라이선스 탭에서 발급받으면 자동으로 생성됩니다.
               </li>
               
               <li class="tlypageguide_right" data-tourtarget=".elementG">
-                바디 교원 프로필의 은행 설명
+                은행을 수정할 수 있습니다.
               </li>
               
               <li class="tlypageguide_right" data-tourtarget=".elementH">
-                바디 교원 프로필의 계좌 설명
+                계좌를 수정할 수 있습니다.
               </li>
               
               <li class="tlypageguide_right" data-tourtarget=".elementI">
-                바디 교원 프로필의 호봉 설명
+                호봉을 수정할 수 있습니다.
               </li>
               
                           

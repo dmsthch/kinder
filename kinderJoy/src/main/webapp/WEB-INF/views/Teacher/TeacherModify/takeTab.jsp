@@ -172,20 +172,19 @@
 	    <!-- 가이드  -->
 	    <ul id="tlyPageGuide" data-tourtitle="가이드를 시작하려면 클릭하세요.">
               <li class="tlypageguide_top" data-tourtarget=".takeTabSide">
-              사이드 편성폼 설명
+		교원을 반에 배정시키는 곳 입니다.
               </li>
               
               <li class="tlypageguide_top" data-tourtarget=".elementA">
-              바디 편성폼 설명인데 포문을 돌려서 어떻게 할 지 고민...
+              제일 처음이 3살이고 아래로 4살 5살 순서입니다.<br> 
+		  기본적으로 원장은 배정시킬 수 없습니다.
               </li>
               
               
               <li class="tlypageguide_right" data-tourtarget=".elementB">
-              바디 편성폼 설명
-              </li>
-              
-              <li class="tlypageguide_bottom" data-tourtarget=".elementC">
-              바디 편성폼 설명
+              일반 선택을 클릭 시 배정되지 않은 선생님의 목록을 확인할 수 있습니다.<br>
+		  선생님 한 명을 클릭 후 저장하기를 누르면 교원 편성표에 교원이 편성됨을 확인할 수 있습니다.<br>
+		  모두 배정된 상태일 땐 선생님이 나타나지 않습니다.
               </li>
               
               
