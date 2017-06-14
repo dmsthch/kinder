@@ -2,13 +2,11 @@ package com.cafe24.dmsthch.Teacher;
 
 import java.util.List;
 import java.util.Map;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cafe24.dmsthch.Child.ChildClass;
-import com.cafe24.dmsthch.Home.License;
 
 @Repository
 public class TeacherDao {

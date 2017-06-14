@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.cafe24.dmsthch.Management.ManagementDao;
-import com.cafe24.dmsthch.Management.ManagementEquipment;
 import com.cafe24.dmsthch.Management.ManagementList;
 import com.cafe24.dmsthch.Management.ManagementPlusMinus;
-import com.cafe24.dmsthch.Management.ManagementYesterDayEquipment;
 
 @Controller
 public class ManagementController {
@@ -32,27 +30,32 @@ public class ManagementController {
 			if(startDay.equals("")||fanalDay.equals("")) {
 			    Calendar calendar = new GregorianCalendar(Locale.KOREA);
 			    int nYear = calendar.get(Calendar.YEAR);
+			    int yMonth = calendar.get(Calendar.MONTH);
 			    int nMonth = calendar.get(Calendar.MONTH) + 1;
 			    if(nMonth < 10) {   	
 			    	int nDay = calendar.get(Calendar.DAY_OF_MONTH);				    
-				    if(nDay < 10) {
-				    	startDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+			    	if(nDay < 10) {
+				    	startDay = nYear + "-" + "0" + yMonth + "-" + "0" + nDay;
+				    	fanalDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
 			    	} else {
-			    		startDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    		startDay = nYear + "-" + "0" + yMonth + "-" + nDay;
+			    		fanalDay = nYear + "-" + "0" + nMonth + "-" + nDay;
 			    	}
 			    } else {
 				    int nDay = calendar.get(Calendar.DAY_OF_MONTH);
 				    if(nDay < 10) {
-				    	startDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+				    	startDay = nYear + "-" + "0" + yMonth + "-" + "0" + nDay;
+				    	fanalDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
 			    	} else {
-			    		startDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    		startDay = nYear + "-" + "0" + yMonth + "-" + nDay;
+			    		fanalDay = nYear + "-" + "0" + nMonth + "-" + nDay;
 			    	}
 			    }
-			    List<ManagementList> managementList= dao.selectManagementDayList(startDay,startDay);
+			    List<ManagementList> managementList= dao.selectManagementDayList(startDay,fanalDay);
 			    model.addAttribute("managementList",managementList);
 			    model.addAttribute("managementEquipmentPageValue",managementEquipmentPageValue);
 			    model.addAttribute("startDay",startDay);
-			    model.addAttribute("fanalDay",startDay);
+			    model.addAttribute("fanalDay",fanalDay);
 			} else {
 			    List<ManagementList> managementList= dao.selectManagementDayList(startDay,fanalDay);
 			    model.addAttribute("managementList",managementList);
@@ -64,27 +67,32 @@ public class ManagementController {
 			if(startDay.equals("")||fanalDay.equals("")) {
 			    Calendar calendar = new GregorianCalendar(Locale.KOREA);
 			    int nYear = calendar.get(Calendar.YEAR);
+			    int yMonth = calendar.get(Calendar.MONTH);
 			    int nMonth = calendar.get(Calendar.MONTH) + 1;
 			    if(nMonth < 10) {   	
 			    	int nDay = calendar.get(Calendar.DAY_OF_MONTH);				    
 				    if(nDay < 10) {
-				    	startDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+				    	startDay = nYear + "-" + "0" + yMonth + "-" + "0" + nDay;
+				    	fanalDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
 			    	} else {
-			    		startDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    		startDay = nYear + "-" + "0" + yMonth + "-" + nDay;
+			    		fanalDay = nYear + "-" + "0" + nMonth + "-" + nDay;
 			    	}
 			    } else {
 				    int nDay = calendar.get(Calendar.DAY_OF_MONTH);
 				    if(nDay < 10) {
-				    	startDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
+				    	startDay = nYear + "-" + "0" + yMonth + "-" + "0" + nDay;
+				    	fanalDay = nYear + "-" + "0" + nMonth + "-" + "0" + nDay;
 			    	} else {
-			    		startDay = nYear + "-" + "0" + nMonth + "-" + nDay;
+			    		startDay = nYear + "-" + "0" + yMonth + "-" + nDay;
+			    		fanalDay = nYear + "-" + "0" + nMonth + "-" + nDay;
 			    	}
 			    }
-			    List<ManagementList> managementList= dao.selectManagementCategoryDayList(startDay,startDay,managementEquipmentPageValue);
+			    List<ManagementList> managementList= dao.selectManagementCategoryDayList(startDay,fanalDay,managementEquipmentPageValue);
 			    model.addAttribute("managementList",managementList);
 			    model.addAttribute("managementEquipmentPageValue",managementEquipmentPageValue);
 			    model.addAttribute("startDay",startDay);
-			    model.addAttribute("fanalDay",startDay);
+			    model.addAttribute("fanalDay",fanalDay);
 			} else {
 			    List<ManagementList> managementList= dao.selectManagementCategoryDayList(startDay,fanalDay,managementEquipmentPageValue);
 			    model.addAttribute("managementList",managementList);

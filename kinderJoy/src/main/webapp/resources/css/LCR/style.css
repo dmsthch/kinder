@@ -29,8 +29,8 @@ img{max-width:100%;}
 /*--end reset--*/
 body {
     font-family: 'Roboto Condensed', sans-serif;   
-	/* background: url(/dmsthch/resources/images/bg.jpg)no-repeat center; */
-	background-color : #c6c6c6;
+	background: url(/dmsthch/resources/images/ww_vol_3_65.jpg)no-repeat center;
+	/* background-color : #c6c6c6; */
 	-webkit-background-size: cover;
 	-moz-background-size: cover; 
     background-size: cover;
@@ -113,16 +113,16 @@ ul.report li:nth-child(2) a{
     display: block;
 	text-align: center;
 	padding: 1em;
-	background: #F44336;
+	background: #880000 ;
 }
 .weather-right ul li:nth-child(2){ 
-	background: #9C27B0;
+	background: #631870;
 }
 .weather-right ul li:nth-child(3){ 
-	background: #03A9F4;
+	background: #0278aa;
 }
 .weather-right ul li:nth-child(4){ 
-	background: #FFC107;
+	background: #d09c00;
 } 
 ul.report li:nth-child(2) a span {
     opacity:0;

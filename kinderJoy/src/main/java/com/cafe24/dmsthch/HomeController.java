@@ -32,7 +32,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/goHome", method = RequestMethod.GET)
 	public String home(Locale locale, Model model, HttpSession session) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -48,13 +48,13 @@ public class HomeController {
 		
 		String defaultUri = "/EducationSchedule/EducationScheduleForm";
 		
-		/*return "/home";*/
-		return "/every/home";
+		return "/home";
+		
 	}
 	
-	@RequestMapping(value="/testFull", method=RequestMethod.GET)
-	public String testView(){
-		return "/test";
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String projectGuide(){
+		return "/every/home";
 	}
 	
 }
