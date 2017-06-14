@@ -135,15 +135,15 @@
 	    
 	    <ul id="tlyPageGuide" data-tourtitle="가이드를 시작하려면 클릭하세요.">
               <li class="tlypageguide_top" data-tourtarget=".tableSide">
-              사이드 리스트 프로필 설명
+              전체 교원의 프로필을 볼 수 있습니다.
               </li>
               
               <li class="tlypageguide_left" data-tourtarget=".elementA">
-              바디 리스트 설명
+             현재 활동중인 교원 목록입니다.
               </li>
               
               <li class="tlypageguide_left" data-tourtarget=".elementB">
-		  바디 리스트 설명2
+		 예전에 있었던 교원목록입니다.
               </li>
         </ul>
 	    

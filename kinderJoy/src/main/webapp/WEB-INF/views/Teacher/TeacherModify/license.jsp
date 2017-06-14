@@ -42,6 +42,21 @@
 <body>
 
 
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+    <script>
+        function openDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분. 우편번호와 주소 정보를 해당 필드에 넣고, 커서를 상세주소 필드로 이동한다.
+                    document.getElementById("zip1").value = data.postcode1;
+                    document.getElementById("zip2").value = data.postcode2;
+                    document.getElementById("addr1").value = data.address;
+                    document.getElementById("addr2").focus();
+                }
+            }).open({q: '유치원'});
+        }
+    </script>
+    
 
 <div id="map"></div>
     <script>
@@ -86,8 +101,9 @@
 										<div class="form-group">
 										<input type="text" class="teacherName form-control" name="licenseKindergartenName" id="licenseKindergartenName" placeholder="유치원명을 입력하세요.">
 										</div>
-									
-									
+										
+										<input type="button" value="우편번호" class="btngray btn" onclick="openDaumPostcode()" />
+										
 										<div class="form-group">
 										<input type="text" class="form-control" id="licenseAddress" name="licenseAddress" placeholder="주소를 입력하세요.">
 										</div>	
