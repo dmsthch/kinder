@@ -1,22 +1,12 @@
 package com.cafe24.dmsthch;
 
-import java.io.IOException;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.spec.RSAPublicKeySpec;
+import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.crypto.Cipher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
-
 import com.cafe24.dmsthch.Child.ChildClass;
 import com.cafe24.dmsthch.Home.HomeDao;
 import com.cafe24.dmsthch.Home.License;
@@ -256,10 +245,26 @@ public class TeacherController {
 	
 	//입력 회원가입
 	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insert(Teacher teacher) {//매개변수는 전역변수이다
+	public String insert(Teacher teacher) throws Exception {//매개변수는 전역변수이다
+		
+		//회원가입에서 받은 값을 변수에 담는다.
+		String pw = teacher.getTeacherPw();
+
+		MessageDigest sh = MessageDigest.getInstance("SHA-256"); // 이 부분을 SHA-1으로 바꿔도 된다!
+        
+		//변수를 바이트로 변환시켰다.
+		sh.update(pw.getBytes()); 
+        byte byteData[] = sh.digest();
+        StringBuffer sb = new StringBuffer(); 
+        for(int i = 0 ; i < byteData.length ; i++){
+        sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
+        }
+		
+        String shaPw = sb.toString();
+        teacher.setTeacherPw(shaPw);
+        
 		TDao.insertTeacher(teacher);
-		System.out.println(teacher+" <--입력확인");
-		System.out.println(TDao +" <--Dao 확인");
+		
 		System.out.println("home로 리다이렉트\n\n");
 		
 		return "redirect:/goHome";
@@ -272,7 +277,9 @@ public class TeacherController {
 	public int loginIdCheck(HttpServletResponse response, @RequestParam("teacherId") String userid) {
 		System.out.println("로그인체크메서드 호출_Controller");
 		System.out.println("사용자가 입력한 아이디는? : " + userid);
+		
 		int check = TDao.loginIdcheck(userid);
+		
 		if(check == 1) {
 			System.out.println("아이디 있음_loginIdCheck_TeacherController");
 		} else {
@@ -280,118 +287,7 @@ public class TeacherController {
 		}
 		return check;
 	}
-	
-	//로그인 폼 호출
-	@RequestMapping(value="/testLogin", method=RequestMethod.GET)
-	public void Login(HttpServletRequest request ,HttpServletResponse response) throws Exception {
-		
-		
-		KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-		generator.initialize(1024);
 
-		KeyPair keyPair = generator.genKeyPair();
-		KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-
-		PublicKey publicKey = keyPair.getPublic();
-		PrivateKey privateKey = keyPair.getPrivate();
-
-		HttpSession session = request.getSession();
-		// 세션에 공개키의 문자열을 키로하여 개인키를 저장한다.
-		session.setAttribute("__rsaPrivateKey__", privateKey);
-
-		// 공개키를 문자열로 변환하여 JavaScript RSA 라이브러리 넘겨준다.
-		RSAPublicKeySpec publicSpec = (RSAPublicKeySpec) keyFactory.getKeySpec(publicKey, RSAPublicKeySpec.class);
-
-		String publicKeyModulus = publicSpec.getModulus().toString(16);
-		String publicKeyExponent = publicSpec.getPublicExponent().toString(16);
-
-		request.setAttribute("publicKeyModulus", publicKeyModulus);
-		request.setAttribute("publicKeyExponent", publicKeyExponent);
-		
-		request.getRequestDispatcher("/WEB-INF/views/Login/testLogin.jsp").forward(request, response);
-		
-	}
-	
-	
-	//로그인 암호화된 아이디 비밀번호를 복호화한다.
-	@RequestMapping(value="/loginTest", method=RequestMethod.POST)
-    protected void processRequest(
-    		HttpServletRequest request
-    		,Teacher teacher 
-    		, HttpServletResponse response
-    		, HttpSession session2
-    		, Model model)
-            throws ServletException, IOException {
-		String securedUsername = request.getParameter("securedUsername");
-        String securedPassword = request.getParameter("securedPassword");
-        
-        HttpSession session = request.getSession();
-        PrivateKey privateKey = (PrivateKey) session.getAttribute("__rsaPrivateKey__");
-        session.removeAttribute("__rsaPrivateKey__"); // 키의 재사용을 막는다. 항상 새로운 키를 받도록 강제.
-
-        if (privateKey == null) {
-            throw new RuntimeException("암호화 비밀키 정보를 찾을 수 없습니다.");
-        }
-        try {
-            String username = decryptRsa(privateKey, securedUsername);
-            String password = decryptRsa(privateKey, securedPassword);
-           
-            
-  
-            session2.setAttribute("teacherId", username);
-            System.out.println(username);
-            if(session2.getAttribute("teacherId") != null) {
-            	/*Teacher saveSession = TDao.LoginTeacher(teacher);
-            	System.out.println("나오냐");
-                session2.setAttribute("teacherNo", saveSession.getTeacherNo());
-                System.out.println("나오냐2");
-                session2.setAttribute("licenseKindergarten", saveSession.getLicenseKindergarten());
-                session2.setAttribute("teacherLevel", saveSession.getTeacherLevel());
-                session2.setAttribute("teacherName", saveSession.getTeacherName());
-                System.out.println(saveSession.getTeacherName()+"<<<<<<<<<<<<<네임");*/
-            }
-
-            
-            
-            //넘버 라이 네임 레벨 아디
-            
-            System.out.println(username +"<--복호화한 아이디");
-            System.out.println(password +"<--복호화한 패스");
-
-            request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
-        } catch (Exception ex) {
-            throw new ServletException(ex.getMessage(), ex);
-        }
-    }
-
-    private String decryptRsa(PrivateKey privateKey, String securedValue) throws Exception {
-        System.out.println("해독할 정보 : " + securedValue);
-        Cipher cipher = Cipher.getInstance("RSA");
-        byte[] encryptedBytes = hexToByteArray(securedValue);
-        cipher.init(Cipher.DECRYPT_MODE, privateKey);
-        byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
-        String decryptedValue = new String(decryptedBytes, "utf-8"); // 문자 인코딩 주의.
-        return decryptedValue;
-    }
-
-    /**
-     * 16진 문자열을 byte 배열로 변환한다.
-     */
-    public static byte[] hexToByteArray(String hex) {
-        if (hex == null || hex.length() % 2 != 0) {
-            return new byte[]{};
-        }
-
-        byte[] bytes = new byte[hex.length() / 2];
-        for (int i = 0; i < hex.length(); i += 2) {
-            byte value = (byte)Integer.parseInt(hex.substring(i, i + 2), 16);
-            bytes[(int) Math.floor(i / 2)] = value;
-        }
-        return bytes;
-}
-	
-	
-	
 	
 	//@RequestParam("클라이언트가 입력한 값") String 매개변수
 	//리퀘스트 파람을 쓰면 값을 알아서 넣어준다
@@ -403,7 +299,24 @@ public class TeacherController {
 			,HttpSession session ) throws Exception {
 		
 		System.out.println("Teacher 컨트롤러 로그인 메서드 확인");
+		//SHA256
+		String pw = teacher.getTeacherPw();
+
+		MessageDigest sh = MessageDigest.getInstance("SHA-256"); // 이 부분을 SHA-1으로 바꿔도 된다!
+        
+		//변수를 바이트로 변환시켰다.
+		sh.update(pw.getBytes()); 
+        byte byteData[] = sh.digest();
+        StringBuffer sb = new StringBuffer(); 
+        for(int i = 0 ; i < byteData.length ; i++){
+        sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
+        }
+		
+        String shaPw = sb.toString();
+        teacher.setTeacherPw(shaPw);
+		//SHA256
 		Teacher saveSession = TDao.LoginTeacher(teacher);
+		
 		System.out.println(teacher.getTeacherId() +"<-- 사용자가 입력한 아이디");
 		System.out.println(TDao+" <--TDao 동작 확인");
 
